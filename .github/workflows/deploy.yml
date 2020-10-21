@@ -69,6 +69,6 @@ jobs:
           USE_SSH: true
           GIT_USER: ${{ secrets.GH_PAGES_DEPLOY_NAME }}
         run: |
-          git config --global user.email "${{ secrets.GH_PAGES_DEPLOY_NAME }}"
-          git config --global user.name "${{ secrets.GH_PAGES_DEPLOY_EMAIL }}"
+          git config --global user.email "${{ secrets.GH_PAGES_DEPLOY_EMAIL }}"
+          git config --global user.name "${{ secrets.GH_PAGES_DEPLOY_NAME }}"
           yarn deploy
