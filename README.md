@@ -2,7 +2,7 @@
 <!-- markdownlint-disable-file MD041 -->
 
 <p align="center">
-  <img src="../static/logo.svg" width="256" alt="Chaos Mesh Logo" />
+  <img src="logo.svg" width="256" alt="Chaos Mesh Logo" />
 </p>
 <h1 align="center">Website</h1>
 <p align="center">
@@ -40,4 +40,4 @@ Mostly you only need to modify the content in the `docs/`, but if you want some 
 
 ## License
 
-Same as Chaos Mesh
+Same as [Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh).
