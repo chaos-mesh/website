@@ -49,11 +49,11 @@ module.exports = {
           items: [
             {
               label: 'Getting Started',
-              to: 'docs/installation/installation',
+              to: 'https://chaos-mesh.org/docs/get_started/installation',
             },
             {
               label: 'User Guides',
-              to: 'docs/user_guides/run_chaos_experiment',
+              to: 'https://chaos-mesh.org/docs/user_guides/experiment_scope',
             },
           ],
         },
