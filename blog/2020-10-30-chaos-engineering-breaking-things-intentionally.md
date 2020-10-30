@@ -4,7 +4,7 @@ title: Chaos Engineering - Breaking things Intentionally
 author: Manish Dangi
 author_url: https://www.linkedin.com/in/manishdangi/
 author_image_url: https://avatars1.githubusercontent.com/u/43807816?s=400
-image: /img/chaos-engineering2.ng
+image: /img/chaos-engineering2.png
 tags: [Chaos Engineering, Chaos Mesh, Open Source]
 ---
 ![Chaos-Engineering-Breaking-things-Intentionally](/img/chaos-engineering2.png)
@@ -33,7 +33,7 @@ Lots of people think that they are not as big compared to Netflix and other tech
 
 They are probably right, but over the period, Chaos engineering has evolved so much that it’s no longer limited to digital companies like Netflix. To ensure consistent performance and constant availability of their systems, more and more companies from different industries are implementing chaos experiments. 
 
-##Chaos-Mesh
+## Chaos-Mesh
 To test the resiliency and reliability of [TiDB](https://pingcap.com/products/tidb), engineers at [PingCAP](https://pingcap.com/) came up with a fantastic tool for Chaos testing called [Chaos Mesh](https://chaos-mesh.org/), a cloud-native Chaos Engineering platform that orchestrates chaos on Kubernetes environments. 
 Chaos Mesh takes into account the possible faults of a distributed system,   covering the pod, the network, system I/O, and the kernel. 
 
@@ -61,7 +61,7 @@ The recent [1.0 release](https://chaos-mesh.org/blog/chaos-mesh-1.0-chaos-engine
 
 In case you want to try Chaos Mesh in your browser, checkout [Katakoda interactive tutorial](https://chaos-mesh.org/interactiveTutorial/), where you can get your hands on  Chaos Mesh without even deploying it. To understand the design principles and how Chaos Mesh works, read [this blog](https://chaos-mesh.org/blog/chaos_mesh_your_chaos_engineering_solution) by the project's maintainer, [Cwen Yin](https://www.linkedin.com/in/cwen-yin-81985318b/).
 
-##Join the community 
+## Join the community 
 
 Anyone who wants to explore the area of chaos engineering or Chaos Mesh are welcomed  to join the Chaos Mesh community. Being a member of the Chaos Mesh community, I would like to say it is a lovely community where project maintainers love to engage and hear your views and suggestions for the improvement of the project and the community. 
 To join and learn more about Chaos Mesh, find the #project-chaos-mesh channel in [CNCF slack workspace](https://slack.cncf.io/).
