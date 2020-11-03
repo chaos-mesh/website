@@ -1,10 +1,6 @@
 module.exports = {
   docs: [
     {
-      type: 'doc',
-      id: 'overview/what_is_chaos_mesh',
-    },
-    {
       type: 'category',
       label: 'Overview',
       items: ['overview/what_is_chaos_mesh', 'overview/features', 'overview/architecture'],
@@ -12,19 +8,22 @@ module.exports = {
     {
       type: 'category',
       label: 'Concepts',
-      items: ['concepts/chaos_engineering','concepts/blast_radius'],
+      items: ['concepts/chaos_engineering', 'concepts/blast_radius'],
     },
     {
       type: 'category',
       label: 'Getting Started',
-      items: ['get_started/installation', 'get_started/get_started_on_kind', 'get_started/get_started_on_minikube','get_started/run_chaos_experiment']
+      items: [
+        'get_started/installation',
+        'get_started/get_started_on_kind',
+        'get_started/get_started_on_minikube',
+        'get_started/run_chaos_experiment',
+      ],
     },
     {
       type: 'category',
       label: 'User Guides',
-      items: [
-            'user_guides/experiment_scope',
-      ],
+      items: ['user_guides/experiment_scope'],
     },
     {
       type: 'category',
@@ -52,10 +51,7 @@ module.exports = {
         'development_guides/develop_a_new_chaos',
       ],
     },
-    {
-      type: 'doc',
-      id: 'faqs',
-    },
+    'faqs',
     {
       type: 'category',
       label: 'Releases',
