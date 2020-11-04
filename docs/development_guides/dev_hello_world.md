@@ -196,7 +196,7 @@ Now take the following steps to run chaos:
     customresourcedefinition.apiextensions.k8s.io/helloworldchaos.chaos-mesh.org created
     ```
 
-    And then you can get it as follows:
+    Now you can get the CRD using the command below:
 
     ```bash
     kubectl get crd helloworldchaos.chaos-mesh.org
