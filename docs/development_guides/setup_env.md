@@ -1,5 +1,5 @@
 ---
-id: set_up_the_development_environment 
+id: set_up_the_development_environment
 title: Set up the development environment
 sidebar_label: Set up the development environment
 ---
