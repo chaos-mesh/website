@@ -10,8 +10,7 @@ This guide covers the following steps:
 
 - [Add selector for HelloWorldChaos](#add-selector-for-helloworldChaos)
 - [Implement the gRPC interface](#implement-grpc-interface-for-chaos-request)
-
-And then we can [verify your chaos](#verify-your-chaos) to verify whether this chaos works well.
+- [Verify your chaos](#verify-your-chaos)
 
 ## Add selector for HelloWorldChaos
 
