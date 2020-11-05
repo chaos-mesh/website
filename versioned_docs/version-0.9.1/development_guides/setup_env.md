@@ -1,5 +1,5 @@
 ---
-id: set_up_the_development_environment 
+id: set_up_the_development_environment
 title: Set up the development environment
 sidebar_label: Set up the development environment
 ---
@@ -41,7 +41,7 @@ Make sure you have the above prerequisites met. Now follow the steps below to pr
     ```
 
     ```bash
-    source ~/. bash_profile
+    source ~/.bash_profile
     ```
 
 > **Note:**
@@ -64,7 +64,7 @@ With the toolchain ready, you still need a local Kubernetes cluster as the deplo
 hack/kind-cluster-build.sh
 ```
 
-The above script will create a Kubernetes cluster by kind. When you don't need this cluster, you can run the following command to delete it: 
+The above script will create a Kubernetes cluster by kind. When you don't need this cluster, you can run the following command to delete it:
 
 ```bash
 kind delete cluster --name=kind
