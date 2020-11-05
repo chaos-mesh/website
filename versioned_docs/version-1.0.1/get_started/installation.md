@@ -31,7 +31,7 @@ Before you start running a chaos experiment, verify if Chaos Mesh is installed c
 If you are using k3s or k3d, please also specify `--k3s` flag.
 
 <PickVersion className="language-bash">
-  curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh --k3s | bash
+  curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --k3s
 </PickVersion>
 
 ### Verify your installation
