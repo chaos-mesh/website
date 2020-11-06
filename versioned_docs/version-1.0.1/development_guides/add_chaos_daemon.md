@@ -298,4 +298,4 @@ Now you are all set. It's time to verify the chaos type you just created. Take t
     2020-09-09T09:13:36.070Z        INFO    chaos-daemon-server     cmd output      {"output": "hello busybox-0\n"}
     ```
 
-We can see the `chaos-daemon` prints `hello` to these two Pods.
+    We can see the `chaos-daemon` prints `hello` to these two Pods.
