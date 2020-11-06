@@ -268,7 +268,6 @@ Now you are all set. It's time to verify the chaos type you just created. Take t
     ```
 6. Verify your chaos. There are different logs to check to see whether your chaos works as expected:
 
-
     - Check the log of `chaos-controller-manager`:
 
         ```bash
@@ -280,7 +279,7 @@ Now you are all set. It's time to verify the chaos type you just created. Take t
         ```log
         2020-09-09T09:13:36.018Z        INFO    controllers.HelloWorldChaos     Reconciling helloworld chaos    {"reconciler": "helloworldchaos"}
         2020-09-09T09:13:36.018Z        INFO    controllers.HelloWorldChaos     Apply helloworld chaos  {"reconciler": "helloworldchaos"}
-         ```
+        ```
 
     - Check the log of `chaos-daemon`:
 
@@ -299,4 +298,4 @@ Now you are all set. It's time to verify the chaos type you just created. Take t
         2020-09-09T09:13:36.070Z        INFO    chaos-daemon-server     cmd output      {"output": "hello busybox-0\n"}
         ```
 
-    We can see the `chaos-daemon` prints `hello` to these two Pods.
+        We can see the `chaos-daemon` prints `hello` to these two Pods.
