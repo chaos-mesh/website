@@ -34,7 +34,14 @@ Make sure you have the above prerequisites met. Now follow the steps below to pr
 
 3. Make sure [Docker](https://docs.docker.com/install/) is installed and running on your local machine.
 
-4. Make sure `${GOPATH}/bin` is in your `PATH`.
+4. Make sure [Docker Regitry](https://docs.docker.com/registry/) is running. Set the environment variable `DOCKER_REGISTRY` with the registry address:
+
+    ```bash
+    echo 'export DOCKER_REGISTRY=localhost:5000' >> ~/.bash_profile
+    source ~/.bash_profile
+    ```
+
+5. Make sure `${GOPATH}/bin` is in your `PATH`.
 
     ```bash
     echo 'export PATH=$(go env GOPATH)/bin:${PATH}' >> ~/.bash_profile
@@ -64,7 +71,7 @@ With the toolchain ready, you still need a local Kubernetes cluster as the deplo
 hack/kind-cluster-build.sh
 ```
 
-The above script will create a Kubernetes cluster by kind. When you don't need this cluster, you can run the following command to delete it:
+The above script creates a Kubernetes cluster via Kind. When you are done with it, run the following command to delete it:
 
 ```bash
 kind delete cluster --name=kind

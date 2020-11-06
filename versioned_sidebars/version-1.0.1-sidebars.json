@@ -126,6 +126,10 @@
         {
           "type": "doc",
           "id": "version-1.0.1/development_guides/develop_a_new_chaos"
+        },
+        {
+          "type": "doc",
+          "id": "version-1.0.1/development_guides/add_facilities_to_chaos_daemon"
         }
       ]
     },
