@@ -268,34 +268,34 @@ Now you are all set. It's time to verify the chaos type you just created. Take t
     ```
 6. Verify your chaos. There are different logs to check to see whether your chaos works as expected:
 
-- Check the log of `chaos-controller-manager`:
+    - Check the log of `chaos-controller-manager`:
 
-    ```bash
-    kubectl logs chaos-controller-manager-{pod-post-fix} -n chaos-testing
-    ```
+        ```bash
+        kubectl logs chaos-controller-manager-{pod-post-fix} -n chaos-testing
+        ```
 
-    The log is as follows:
+        The log is as follows:
 
-    ```log
-    2020-09-09T09:13:36.018Z        INFO    controllers.HelloWorldChaos     Reconciling helloworld chaos    {"reconciler": "helloworldchaos"}
-    2020-09-09T09:13:36.018Z        INFO    controllers.HelloWorldChaos     Apply helloworld chaos  {"reconciler": "helloworldchaos"}
-    ```
+        ```log
+        2020-09-09T09:13:36.018Z        INFO    controllers.HelloWorldChaos     Reconciling helloworld chaos    {"reconciler": "helloworldchaos"}
+        2020-09-09T09:13:36.018Z        INFO    controllers.HelloWorldChaos     Apply helloworld chaos  {"reconciler": "helloworldchaos"}
+        ```
 
-- Check the log of `chaos-daemon`:
+    - Check the log of `chaos-daemon`:
 
-    ```bash
-    kubectl logs chaos-daemon-{pod-post-fix} -n chaos-testing
-    ```
+        ```bash
+        kubectl logs chaos-daemon-{pod-post-fix} -n chaos-testing
+        ```
 
-    The log is as follows:
+        The log is as follows:
 
-    ```log
-    2020-09-09T09:13:36.036Z        INFO    chaos-daemon-server     exec hello world chaos  {"request": "container_id:\"docker://8f2918ee05ed587f7074a923cede3bbe5886277faca95d989e513f7b7e831da5\" "}
-    2020-09-09T09:13:36.044Z        INFO    chaos-daemon-server     build command   {"command": "nsenter -u/proc/45664/ns/uts -- sh -c echo 'hello' `hostname`"}
-    2020-09-09T09:13:36.058Z        INFO    chaos-daemon-server     cmd output      {"output": "hello busybox-1\n"}
-    2020-09-09T09:13:36.064Z        INFO    chaos-daemon-server     exec hello world chaos  {"request": "container_id:\"docker://53e982ba5593fa87648edba665ba0f7da3f58df67f8b70a1354ca00447c00524\" "}
-    2020-09-09T09:13:36.066Z        INFO    chaos-daemon-server     build command   {"command": "nsenter -u/proc/45620/ns/uts -- sh -c echo 'hello' `hostname`"}
-    2020-09-09T09:13:36.070Z        INFO    chaos-daemon-server     cmd output      {"output": "hello busybox-0\n"}
-    ```
+        ```log
+        2020-09-09T09:13:36.036Z        INFO    chaos-daemon-server     exec hello world chaos  {"request": "container_id:\"docker://8f2918ee05ed587f7074a923cede3bbe5886277faca95d989e513f7b7e831da5\" "}
+        2020-09-09T09:13:36.044Z        INFO    chaos-daemon-server     build command   {"command": "nsenter -u/proc/45664/ns/uts -- sh -c echo 'hello' `hostname`"}
+        2020-09-09T09:13:36.058Z        INFO    chaos-daemon-server     cmd output      {"output": "hello busybox-1\n"}
+        2020-09-09T09:13:36.064Z        INFO    chaos-daemon-server     exec hello world chaos  {"request": "container_id:\"docker://53e982ba5593fa87648edba665ba0f7da3f58df67f8b70a1354ca00447c00524\" "}
+        2020-09-09T09:13:36.066Z        INFO    chaos-daemon-server     build command   {"command": "nsenter -u/proc/45620/ns/uts -- sh -c echo 'hello' `hostname`"}
+        2020-09-09T09:13:36.070Z        INFO    chaos-daemon-server     cmd output      {"output": "hello busybox-0\n"}
+        ```
 
-    We can see the `chaos-daemon` prints `hello` to these two Pods.
+        We can see the `chaos-daemon` prints `hello` to these two Pods.
