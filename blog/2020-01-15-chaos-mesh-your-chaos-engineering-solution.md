@@ -30,12 +30,13 @@ Chaos Mesh is a versatile Chaos Engineering platform that features all-around fa
 Here is an example of how we use Chaos Mesh to locate a TiDB system bug. In this example, we simulate Pod downtime with our distributed storage engine ([TiKV](https://pingcap.com/docs/stable/architecture/#tikv-server)) and observe changes in queries per second (QPS). Regularly, if one TiKV node is down, the QPS may experience a transient jitter before it returns to the level before the failure. This is how we guarantee high availability.
 
 ![Chaos Mesh discovers downtime recovery exceptions in TiKV](/img/chaos-mesh-discovers-downtime-recovery-exceptions-in-tikv.png)
+
 <div class="caption-center"> Chaos Mesh discovers downtime recovery exceptions in TiKV </div>
 
 As you can see from the dashboard:
 
-* During the first two downtimes, the QPS returns to normal after about 1 minute.
-* After the third downtime, however, the QPS takes much longer to recover—about 9 minutes. Such a long downtime is unexpected, and it would definitely impact online services.
+- During the first two downtimes, the QPS returns to normal after about 1 minute.
+- After the third downtime, however, the QPS takes much longer to recover—about 9 minutes. Such a long downtime is unexpected, and it would definitely impact online services.
 
 After some diagnosis, we found the TiDB cluster version under test (V3.0.1) had some tricky issues when handling TiKV downtimes. We resolved these issues in later versions.
 
@@ -59,17 +60,17 @@ We designed Chaos Mesh to be easy to use, scalable, and designed for Kubernetes.
 
 To be easy to use, Chaos Mesh must:
 
-* Require no special dependencies, so that it can be deployed directly on Kubernetes clusters, including [Minikube](https://github.com/kubernetes/minikube).
-* Require no modification to the deployment logic of the system under test (SUT), so that chaos experiments can be performed in a production environment.
-* Easily orchestrate fault injection behaviors in chaos experiments, and easily view experiment status and results. You should also be able to quickly rollback injected failures.
-* Hide underlying implementation details so that users can focus on orchestrating the chaos experiments.
+- Require no special dependencies, so that it can be deployed directly on Kubernetes clusters, including [Minikube](https://github.com/kubernetes/minikube).
+- Require no modification to the deployment logic of the system under test (SUT), so that chaos experiments can be performed in a production environment.
+- Easily orchestrate fault injection behaviors in chaos experiments, and easily view experiment status and results. You should also be able to quickly rollback injected failures.
+- Hide underlying implementation details so that users can focus on orchestrating the chaos experiments.
 
 ### Scalable
 
 Chaos Mesh should be scalable, so that we can "plug" new requirements into it conveniently without reinventing the wheel. Specifically, Chaos Mesh must:
 
-* Leverage existing implementations so that fault injection methods can be easily scaled.
-* Easily integrate with other testing frameworks.
+- Leverage existing implementations so that fault injection methods can be easily scaled.
+- Easily integrate with other testing frameworks.
 
 ### Designed for Kubernetes
 
@@ -104,9 +105,9 @@ spec:
 
 This code does the following:
 
-* The `action` attribute defines the specific error type to be injected. In this case, `pod-kill` kills Pods randomly.
-* The `selector` attribute limits the scope of chaos experiment to a specific scope. In this case, the scope is TiKV Pods for the TiDB cluster with the `tidb-cluster-demo` namespace.
-* The `scheduler` attribute defines the interval for each chaos fault action.
+- The `action` attribute defines the specific error type to be injected. In this case, `pod-kill` kills Pods randomly.
+- The `selector` attribute limits the scope of chaos experiment to a specific scope. In this case, the scope is TiKV Pods for the TiDB cluster with the `tidb-cluster-demo` namespace.
+- The `scheduler` attribute defines the interval for each chaos fault action.
 
 For more details on CRD objects such as NetworkChaos and IOChaos, see the [Chaos-mesh documentation](https://github.com/chaos-mesh/chaos-mesh).
 
@@ -116,17 +117,18 @@ With the CRD design settled, let's look at the big picture on how Chaos Mesh wor
 
 - **controller-manager**
 
-    Acts as the platform's "brain." It manages the life cycle of CRD objects and schedules chaos experiments. It has object controllers for scheduling CRD object instances, and the [admission-webhooks](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/) controller dynamically injects sidecar containers into Pods.
+  Acts as the platform's "brain." It manages the life cycle of CRD objects and schedules chaos experiments. It has object controllers for scheduling CRD object instances, and the [admission-webhooks](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/) controller dynamically injects sidecar containers into Pods.
 
 - **chaos-daemon**
 
-    Runs as a privileged daemonset that can operate network devices on the node and Cgroup.
+  Runs as a privileged daemonset that can operate network devices on the node and Cgroup.
 
 - **sidecar**
 
-    Runs as a special type of container that is dynamically injected into the target Pod by the admission-webhooks. For example, the `chaosfs` sidecar container runs a fuse-daemon to hijack the I/O operation of the application container.
+  Runs as a special type of container that is dynamically injected into the target Pod by the admission-webhooks. For example, the `chaosfs` sidecar container runs a fuse-daemon to hijack the I/O operation of the application container.
 
 ![Chaos Mesh workflow](/img/chaos-mesh-workflow.png)
+
 <div class="caption-center"> Chaos Mesh workflow </div>
 
 Here is how these components streamline a chaos experiment:
@@ -145,42 +147,42 @@ Chaos Mesh runs on Kubernetes v1.12 or later. Helm, a Kubernetes package managem
 
 1. Make sure you have a Kubernetes cluster. If you do, skip to step 2; otherwise, start one locally using the script provided by Chaos Mesh:
 
-    ```bash
-    // install kind
-    curl -Lo ./kind https://github.com/kubernetes-sigs/kind/releases/download/v0.6.1/kind-$(uname)-amd64
-    chmod +x ./kind
-    mv ./kind /some-dir-in-your-PATH/kind
+   ```bash
+   // install kind
+   curl -Lo ./kind https://github.com/kubernetes-sigs/kind/releases/download/v0.6.1/kind-$(uname)-amd64
+   chmod +x ./kind
+   mv ./kind /some-dir-in-your-PATH/kind
 
-    // get script
-    git clone https://github.com/chaos-mesh/chaos-mesh
-    cd chaos-mesh
-    // start cluster
-    hack/kind-cluster-build.sh
-    ```
+   // get script
+   git clone https://github.com/chaos-mesh/chaos-mesh
+   cd chaos-mesh
+   // start cluster
+   hack/kind-cluster-build.sh
+   ```
 
-    **Note:** Starting Kubernetes clusters locally affects network-related fault injections.
+   **Note:** Starting Kubernetes clusters locally affects network-related fault injections.
 
 2. If the Kubernetes cluster is ready, use [Helm](https://helm.sh/) and [Kubectl](https://kubernetes.io/docs/reference/kubectl/overview/) to deploy Chaos Mesh:
 
-    ```bash
-    git clone https://github.com/chaos-mesh/chaos-mesh.git
-    cd chaos-mesh
-    // create CRD resource
-    kubectl apply -f manifests/
-    // install chaos-mesh
-    helm install helm/chaos-mesh --name=chaos-mesh --namespace=chaos-testing
-    ```
+   ```bash
+   git clone https://github.com/chaos-mesh/chaos-mesh.git
+   cd chaos-mesh
+   // create CRD resource
+   kubectl apply -f manifests/
+   // install chaos-mesh
+   helm install helm/chaos-mesh --name=chaos-mesh --namespace=chaos-testing
+   ```
 
-    Wait until all components are installed, and check the installation status using:
+   Wait until all components are installed, and check the installation status using:
 
-    ``` bash
-    // check chaos-mesh status
-    kubectl get pods --namespace chaos-testing -l app.kubernetes.io/instance=chaos-mesh
-    ```
+   ```bash
+   // check chaos-mesh status
+   kubectl get pods --namespace chaos-testing -l app.kubernetes.io/instance=chaos-mesh
+   ```
 
-    If the installation is successful, you can see all pods up and running. Now, time to play.
+   If the installation is successful, you can see all pods up and running. Now, time to play.
 
-    You can run Chaos Mesh using a YAML definition or a Kubernetes API.
+   You can run Chaos Mesh using a YAML definition or a Kubernetes API.
 
 ### Running chaos using a YAML file
 
@@ -191,23 +193,23 @@ You can define your own chaos experiments through the YAML file method, which pr
 1. Deploy a TiDB cluster named `chaos-demo-1`. You can use [TiDB Operator](https://github.com/pingcap/tidb-operator) to deploy TiDB.
 2. Create the YAML file named `kill-tikv.yaml` and add the following content:
 
-    ```yml
-    apiVersion: chaos-mesh.org/v1alpha1
-    kind: PodChaos
-    metadata:
-      name: pod-kill-chaos-demo
-      namespace: chaos-testing
-    spec:
-      action: pod-kill
-      mode: one
-      selector:
-        namespaces:
-          - chaos-demo-1
-        labelSelectors:
-          "app.kubernetes.io/component": "tikv"
-      scheduler:
-        cron: "@every 1m"
-    ```
+   ```yml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: PodChaos
+   metadata:
+     name: pod-kill-chaos-demo
+     namespace: chaos-testing
+   spec:
+     action: pod-kill
+     mode: one
+     selector:
+       namespaces:
+         - chaos-demo-1
+       labelSelectors:
+         'app.kubernetes.io/component': 'tikv'
+     scheduler:
+       cron: '@every 1m'
+   ```
 
 3. Save the file.
 4. To start chaos, `kubectl apply -f kill-tikv.yaml`.
@@ -215,6 +217,7 @@ You can define your own chaos experiments through the YAML file method, which pr
 The following chaos experiment simulates the TiKV Pods being frequently killed in the `chaos-demo-1` cluster:
 
 ![Chaos experiment running](/img/chaos-experiment-running.gif)
+
 <div class="caption-center"> Chaos experiment running </div>
 
 We use a sysbench program to monitor the real-time QPS changes in the TiDB cluster. When errors are injected into the cluster, the QPS show a drastic jitter, which means a specific TiKV Pod has been deleted, and Kubernetes then re-creates a new TiKV Pod.
@@ -254,8 +257,8 @@ In this article, we introduced you to Chaos Mesh, our open source cloud-native C
 
 Open sourcing is just a starting point. In addition to the infrastructure-level chaos experiments introduced in previous sections, we are in the process of supporting a wider range of fault types of finer granularity, such as:
 
-* Injecting errors at the system call and kernel levels with the assistance of eBPF and other tools
-* Injecting specific error types into the application function and statement levels by integrating [failpoint](https://github.com/pingcap/failpoint), which will cover scenarios that are otherwise impossible with conventional injection methods
+- Injecting errors at the system call and kernel levels with the assistance of eBPF and other tools
+- Injecting specific error types into the application function and statement levels by integrating [failpoint](https://github.com/pingcap/failpoint), which will cover scenarios that are otherwise impossible with conventional injection methods
 
 Moving forward, we will continuously improve the Chaos Mesh Dashboard, so that users can easily see if and how their online businesses are impacted by fault injections. In addition, our roadmap includes an easy-to-use fault orchestration interface. We're planning other cool features, such as Chaos Mesh Verifier and Chaos Mesh Cloud.
 

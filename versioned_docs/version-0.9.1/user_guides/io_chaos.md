@@ -30,8 +30,8 @@ IOChaos needs to inject a sidecar container to user pods and the sidecar contain
 
 > **Note:**
 >
-> * While admission controllers are enabled by default, some Kubernetes distributions might disable them. In this case, follow the instructions to [turn on admission controllers](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#how-do-i-turn-on-an-admission-controller).
-> * [ValidatingAdmissionWebhooks](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#validatingadmissionwebhook) and [MutatingAdmissionWebhooks](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#mutatingadmissionwebhook) are required by IOChaos.
+> - While admission controllers are enabled by default, some Kubernetes distributions might disable them. In this case, follow the instructions to [turn on admission controllers](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#how-do-i-turn-on-an-admission-controller).
+> - [ValidatingAdmissionWebhooks](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#validatingadmissionwebhook) and [MutatingAdmissionWebhooks](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#mutatingadmissionwebhook) are required by IOChaos.
 
 ### Template Configuration
 
@@ -69,9 +69,9 @@ ARGS="--pd=${CLUSTER_NAME}-pd:2379 \
 
 > **Note:**
 >
-> * The default data directory of TiKV is not a subdirectory of `PersistentVolumes`.
-> * If you are testing a TiDB cluster, you need to modify it at [`_start_tikv.sh.tpl`](https://github.com/pingcap/tidb-operator/blob/master/charts/tidb-cluster/templates/scripts/_start_tikv.sh.tpl).
-> * PD has the same issue with TiKV. You need to modify the data directory of PD at [`_start_pd.sh.tpl`](https://github.com/pingcap/tidb-operator/blob/master/charts/tidb-cluster/templates/scripts/_start_pd.sh.tpl).
+> - The default data directory of TiKV is not a subdirectory of `PersistentVolumes`.
+> - If you are testing a TiDB cluster, you need to modify it at [`_start_tikv.sh.tpl`](https://github.com/pingcap/tidb-operator/blob/master/charts/tidb-cluster/templates/scripts/_start_tikv.sh.tpl).
+> - PD has the same issue with TiKV. You need to modify the data directory of PD at [`_start_pd.sh.tpl`](https://github.com/pingcap/tidb-operator/blob/master/charts/tidb-cluster/templates/scripts/_start_pd.sh.tpl).
 
 ## Injection configuration
 
@@ -98,33 +98,33 @@ metadata:
 spec:
   action: mixed
   mode: one
-  duration: "400s"
-  path: ""
+  duration: '400s'
+  path: ''
   selector:
     labelSelectors:
-      "app.kubernetes.io/component": "tikv"
-  layer: "fs"
-  percent: "50"
-  delay: "1ms"
+      'app.kubernetes.io/component': 'tikv'
+  layer: 'fs'
+  percent: '50'
+  delay: '1ms'
   scheduler:
-    cron: "@every 10m"
+    cron: '@every 10m'
 ```
 
 For more sample files, see [examples](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples). You can edit them as needed.
 
-| Field | Description | Sample Value |
-|:------|:------------------|:--------------|
-| **selector** | Selects pods that are used to inject chaos actions.|
-| **action** | Represents the IOChaos actions. Refer to [IOChaos available actions](#iochaos-available-actions) for more details. | `delay` / `errno` / `mixed` |
-| **mode** | Defines the mode to run chaos actions. | `one` / `all` / `fixed` / `fixed-percent` / `random-max-percent` |
-| **duration** | Represents the duration of a chaos action. The duration might be a string with the signed sequence of decimal numbers, each with optional fraction and a unit suffix. | `"300ms"`/ `"-1.5h"` / `"2h45m"`|
-| **delay** | Defines the value of IOChaos action delay. The duration might be a string with the signed sequence of decimal numbers, each with optional fraction and a unit suffix. Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", and "h". If `Delay` is empty, the operator will generate a value for it randomly.| `"300ms"`/ `"-1.5h"` / `"2h45m"` |
-| **errno** | Defines the error code that is returned by an IO action. This value and the [errno defined by Linux system](http://man7.org/linux/man-pages/man3/errno.3.html) are consistent. This field needs to be set when you choose an `errno` or `mixed` action. If `errno` is empty, the operator randomly generates an error code for it. See the [common Linux system errors](#common-linux-system-errors) for more Linux system error codes. | `"2"` |
-| **percent** | Defines the percentage of injection errors and provides a number from 0-100.| `100` (by default) |
-| **path** | Defines the path of files for injecting IOChaos actions. It should be a regular expression for the path which you want to inject errno or delay. If the path is `""` or not defined, the IOChaos action is injected into all files.| |
-| **methods** | Defines the IO methods for injecting IOChaos actions. It is an array of string, which sets the IO syscalls. | `open` / `read` See the [available methods](#available-methods) for more details. |
-| **addr** | Defines the sidecar HTTP server address for a sidecar container.| `":8080"` |
-| **layer** | Represents the layer of the IO action.| `fs` (by default). |
+| Field        | Description                                                                                                                                                                                                                                                                                                                                                                                                                             | Sample Value                                                                      |
+| :----------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- |
+| **selector** | Selects pods that are used to inject chaos actions.                                                                                                                                                                                                                                                                                                                                                                                     |
+| **action**   | Represents the IOChaos actions. Refer to [IOChaos available actions](#iochaos-available-actions) for more details.                                                                                                                                                                                                                                                                                                                      | `delay` / `errno` / `mixed`                                                       |
+| **mode**     | Defines the mode to run chaos actions.                                                                                                                                                                                                                                                                                                                                                                                                  | `one` / `all` / `fixed` / `fixed-percent` / `random-max-percent`                  |
+| **duration** | Represents the duration of a chaos action. The duration might be a string with the signed sequence of decimal numbers, each with optional fraction and a unit suffix.                                                                                                                                                                                                                                                                   | `"300ms"`/ `"-1.5h"` / `"2h45m"`                                                  |
+| **delay**    | Defines the value of IOChaos action delay. The duration might be a string with the signed sequence of decimal numbers, each with optional fraction and a unit suffix. Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", and "h". If `Delay` is empty, the operator will generate a value for it randomly.                                                                                                                      | `"300ms"`/ `"-1.5h"` / `"2h45m"`                                                  |
+| **errno**    | Defines the error code that is returned by an IO action. This value and the [errno defined by Linux system](http://man7.org/linux/man-pages/man3/errno.3.html) are consistent. This field needs to be set when you choose an `errno` or `mixed` action. If `errno` is empty, the operator randomly generates an error code for it. See the [common Linux system errors](#common-linux-system-errors) for more Linux system error codes. | `"2"`                                                                             |
+| **percent**  | Defines the percentage of injection errors and provides a number from 0-100.                                                                                                                                                                                                                                                                                                                                                            | `100` (by default)                                                                |
+| **path**     | Defines the path of files for injecting IOChaos actions. It should be a regular expression for the path which you want to inject errno or delay. If the path is `""` or not defined, the IOChaos action is injected into all files.                                                                                                                                                                                                     |                                                                                   |
+| **methods**  | Defines the IO methods for injecting IOChaos actions. It is an array of string, which sets the IO syscalls.                                                                                                                                                                                                                                                                                                                             | `open` / `read` See the [available methods](#available-methods) for more details. |
+| **addr**     | Defines the sidecar HTTP server address for a sidecar container.                                                                                                                                                                                                                                                                                                                                                                        | `":8080"`                                                                         |
+| **layer**    | Represents the layer of the IO action.                                                                                                                                                                                                                                                                                                                                                                                                  | `fs` (by default).                                                                |
 
 ## Usage
 
@@ -167,9 +167,9 @@ kubectl apply -f examples/io-mixed-example.yaml
 
 IOChaos currently supports the following actions:
 
-* **delay**: IO delay action. You can specify the latency before the IO operation returns a result.
-* **errno**: IO errno action. In this mode, read/write IO operations returns an error.
-* **mixed**: Both **delay** and **errno** actions.
+- **delay**: IO delay action. You can specify the latency before the IO operation returns a result.
+- **errno**: IO errno action. In this mode, read/write IO operations returns an error.
+- **mixed**: Both **delay** and **errno** actions.
 
 ### delay
 
@@ -178,7 +178,7 @@ If you are using the delay mode, you can edit spec as below:
 ```yaml
 spec:
   action: delay
-  delay: "1ms"
+  delay: '1ms'
 ```
 
 If `delay` is not specified, it is generated randomly on runtime.
@@ -190,7 +190,7 @@ If you are using the errno mode, you can edit spec as below:
 ```yaml
 spec:
   action: errno
-  errno: "32"
+  errno: '32'
 ```
 
 If `errno` is not specified, it is generated randomly on runtime.
@@ -199,12 +199,12 @@ If `errno` is not specified, it is generated randomly on runtime.
 
 If you are using the mixed mode, you can edit spec as below:
 
-````yaml
+```yaml
 spec:
   action: mixed
-  delay: "1ms"
-  errno: "32"
-````
+  delay: '1ms'
+  errno: '32'
+```
 
 The mix mode defines the **delay** and **errno** actions in one spec.
 
@@ -212,17 +212,17 @@ The mix mode defines the **delay** and **errno** actions in one spec.
 
 Common Linux system errors are as below:
 
-* `1`: Operation not permitted
-* `2`: No such file or directory
-* `5`: I/O error
-* `6`: No such device or address
-* `12`: Out of memory
-* `16`: Device or resource busy
-* `17`: File exists
-* `20`: Not a directory
-* `22`: Invalid argument
-* `24`: Too many open files
-* `28`: No space left on device
+- `1`: Operation not permitted
+- `2`: No such file or directory
+- `5`: I/O error
+- `6`: No such device or address
+- `12`: Out of memory
+- `16`: Device or resource busy
+- `17`: File exists
+- `20`: Not a directory
+- `22`: Invalid argument
+- `24`: Too many open files
+- `28`: No space left on device
 
 Refer to [Errors: Linux System Errors](https://www-numi.fnal.gov/offline_software/srt_public_context/WebDocs/Errors/unix_system_errors.html) for more.
 
@@ -230,34 +230,34 @@ Refer to [Errors: Linux System Errors](https://www-numi.fnal.gov/offline_softwar
 
 Available methods are as below:
 
-* `open`
-* `read`
-* `write`
-* `mkdir`
-* `rmdir`
-* `opendir`
-* `fsync`
-* `flush`
-* `release`
-* `truncate`
-* `getattr`
-* `chown`
-* `chmod`
-* `utimens`
-* `allocate`
-* `getlk`
-* `setlk`
-* `setlkw`
-* `statfs`
-* `readlink`
-* `symlink`
-* `create`
-* `access`
-* `link`
-* `mknod`
-* `rename`
-* `unlink`
-* `getxattr`
-* `listxattr`
-* `removexattr`
-* `setxattr`
+- `open`
+- `read`
+- `write`
+- `mkdir`
+- `rmdir`
+- `opendir`
+- `fsync`
+- `flush`
+- `release`
+- `truncate`
+- `getattr`
+- `chown`
+- `chmod`
+- `utimens`
+- `allocate`
+- `getlk`
+- `setlk`
+- `setlkw`
+- `statfs`
+- `readlink`
+- `symlink`
+- `create`
+- `access`
+- `link`
+- `mknod`
+- `rename`
+- `unlink`
+- `getxattr`
+- `listxattr`
+- `removexattr`
+- `setxattr`

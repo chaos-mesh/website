@@ -13,10 +13,10 @@ Chaos Mesh provides a variety of selectors, which you can use to define the scop
 Namespace selectors filter the chaos experiment targets by the namespace. Defined as a set of strings. The default namespace selector for Chaos Mesh is the chaos experiment object. For example:
 
 ```yaml
-spec: 
+spec:
   selector:
     namespaces:
-      - "app-ns"
+      - 'app-ns'
 ```
 
 ## Label selectors
@@ -24,10 +24,10 @@ spec:
 Label selectors filter chaos experiment targets by the label. Defined as a map of string keys and values. For example:
 
 ```yaml
-spec: 
+spec:
   selector:
     labelSelectors:
-      "app.kubernetes.io/component": "tikv"
+      'app.kubernetes.io/component': 'tikv'
 ```
 
 ## Annotation selectors
@@ -35,21 +35,21 @@ spec:
 Annotation selectors filter chaos experiment targets by the annotation. Defined as a map of string keys and values. For example:
 
 ```yaml
-spec: 
+spec:
   selector:
     annotationSelectors:
-      "example-annotation": "group-a"
+      'example-annotation': 'group-a'
 ```
 
-## Field selectors 
+## Field selectors
 
 Field selectors filter chaos experiment targets by the resource field. Defined as a map of string keys and values. For example:
 
 ```yaml
-spec: 
+spec:
   selector:
     fieldSelectors:
-      "metadata.name": "my-pod"
+      'metadata.name': 'my-pod'
 ```
 
 For more details about field selectors, refer to the [Kubernetes document](https://kubernetes.io/docs/concepts/overview/working-with-objects/field-selectors/).
@@ -59,10 +59,10 @@ For more details about field selectors, refer to the [Kubernetes document](https
 Pod Phase selectors filter chaos experiment targets by the condition. Defined as a set of string. Supported conditions: `Pending`, `Running`, `Succeeded`, `Failed`, `Unknown`. For example:
 
 ```yaml
-spec: 
+spec:
   selector:
     podPhaseSelectors:
-      - "Running"
+      - 'Running'
 ```
 
 ## Pod selectors
@@ -70,7 +70,7 @@ spec:
 Pod selectors filter chaos experiment targets by the pod. Defined as a map of string keys and values. The key in this map specifies the namespace which the pods belong to, and each value under the key is a pod. If this selector is not empty, these pod defined in this map are used directly and other defined selectors will be ignored. For example:
 
 ```yaml
-spec: 
+spec:
   selector:
     pods:
       tidb-cluster: # namespace of the target pods

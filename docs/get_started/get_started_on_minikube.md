@@ -21,9 +21,9 @@ Perform the following steps to set up the local Kubernetes environment:
    minikube start --kubernetes-version v1.15.0 --cpus 4 --memory "8192mb"
    ```
 
-    > **Note:**
-    >
-    > It is recommended to allocate enough RAM (more than 8192 MiB) to the Virtual Machine (VM) using the `--cpus` and `--memory` flag.
+   > **Note:**
+   >
+   > It is recommended to allocate enough RAM (more than 8192 MiB) to the Virtual Machine (VM) using the `--cpus` and `--memory` flag.
 
 2. Install helm:
 

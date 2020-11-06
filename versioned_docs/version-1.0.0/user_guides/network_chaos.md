@@ -27,31 +27,31 @@ spec:
   mode: one
   selector:
     labelSelectors:
-      "app.kubernetes.io/component": "tikv"
+      'app.kubernetes.io/component': 'tikv'
   direction: to
   target:
     selector:
       namespaces:
         - tidb-cluster-demo
       labelSelectors:
-        "app.kubernetes.io/component": "tikv"
+        'app.kubernetes.io/component': 'tikv'
     mode: one
-  duration: "10s"
+  duration: '10s'
   scheduler:
-    cron: "@every 15s"
+    cron: '@every 15s'
 ```
 
 For more sample files, see [examples](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples). You can edit them as needed.
 
 Description:
 
-* **action** defines the specific chaos action for the pod. In this case, it is network partition.
-* **mode** defines the mode to run chaos action.
-* **selector** specifies the target pods for chaos injection. For more details, see [Define the Scope of Chaos Experiment](experiment_scope.md).
-* **direction** specifies the partition direction. Supported directions are `from`, `to` and `both`.
-* **target** specifies the target for network partition.
-* **duration** defines the duration for each chaos experiment. In the sample file above, the network partition lasts for `10` seconds.
-* **scheduler** defines the scheduler rules for the running time of the chaos experiment. For more rule information, see [robfig/cron](https://godoc.org/github.com/robfig/cron).
+- **action** defines the specific chaos action for the pod. In this case, it is network partition.
+- **mode** defines the mode to run chaos action.
+- **selector** specifies the target pods for chaos injection. For more details, see [Define the Scope of Chaos Experiment](experiment_scope.md).
+- **direction** specifies the partition direction. Supported directions are `from`, `to` and `both`.
+- **target** specifies the target for network partition.
+- **duration** defines the duration for each chaos experiment. In the sample file above, the network partition lasts for `10` seconds.
+- **scheduler** defines the scheduler rules for the running time of the chaos experiment. For more rule information, see [robfig/cron](https://godoc.org/github.com/robfig/cron).
 
 ## Netem Chaos Actions
 
@@ -69,8 +69,8 @@ In this case, two action specific attributes are required - loss and correlation
 
 ```yaml
 loss:
-  loss: "25"
-  correlation: "25"
+  loss: '25'
+  correlation: '25'
 ```
 
 **loss** defines the percentage of packet loss.
@@ -85,9 +85,9 @@ In this case, three action specific attributes are required - correlation, jitte
 
 ```yaml
 delay:
-  latency: "90ms"
-  correlation: "25"
-  jitter: "90ms"
+  latency: '90ms'
+  correlation: '25'
+  jitter: '90ms'
 ```
 
 **latency** defines the delay time in sending packets.
@@ -106,8 +106,8 @@ In this case, two attributes are required - correlation and duplicate.
 
 ```yaml
 duplicate:
-  duplicate: "40"
-  correlation: "25"
+  duplicate: '40'
+  correlation: '25'
 ```
 
 **duplicate** indicates the percentage of packet duplication. In the above example, the duplication rate is 40%.
@@ -120,8 +120,8 @@ In this case, two action specific attributes are required - correlation and corr
 
 ```yaml
 corrupt:
-  corrupt: "40"
-  correlation: "25"
+  corrupt: '40'
+  correlation: '25'
 ```
 
 **corrupt** specifies the percentage of packet corruption.
@@ -137,10 +137,10 @@ Network Bandwidth Action is used to limit the network bandwidth. To add a Networ
 To inject Network Bandwidth fault, three action specific attributes are required - rate, buffer and limit.
 
 ```yaml
- bandwidth:
-   rate: 10 kbps
-   buffer: 1000
-   limit: 100
+bandwidth:
+  rate: 10 kbps
+  buffer: 1000
+  limit: 100
 ```
 
 **rate** allows "bps", "kbps", "mbps", "gbps", "tbps" unit. "bps" means bytes per second.

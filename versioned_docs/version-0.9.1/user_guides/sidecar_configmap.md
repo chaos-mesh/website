@@ -1,7 +1,7 @@
 ---
 id: sidecar_configmap
-title: Sidecar ConfigMap 
-sidebar_label: Sidecar ConfigMap 
+title: Sidecar ConfigMap
+sidebar_label: Sidecar ConfigMap
 ---
 
 This document guides you to define a specified sidecar ConfigMap for your application.
@@ -17,10 +17,10 @@ In sidecar container, fuse-daemon needs to mount the data directory of applicati
 Currently, Chaos Mesh supports two types of ConfigMaps:
 
 1. Template config. The skeleton of each sidecar config is similar, in order to fulfill different requirements and make the configuration simplified,
-Chaos Mesh supports creating common templates to be used by different applications. For the details of template configuration, please refer to [template config](sidecar_template.md).
+   Chaos Mesh supports creating common templates to be used by different applications. For the details of template configuration, please refer to [template config](sidecar_template.md).
 
-2. Injection config. This configuration will be combined with template config and finally generate a config to inject to the selected pods. 
-Since most applications use different data directories, volume name or container name, you can define different parameters based on the common template created in the first step.
+2. Injection config. This configuration will be combined with template config and finally generate a config to inject to the selected pods.
+   Since most applications use different data directories, volume name or container name, you can define different parameters based on the common template created in the first step.
 
 ## Injection Configuration
 
@@ -53,17 +53,14 @@ Injection config defines some injection arguments for different applications, an
 
 For fields defined in this config, we have some brief descriptions below:
 
-* **name**: injection config name, uniquely identifies a injection config in one namespace. 
+- **name**: injection config name, uniquely identifies a injection config in one namespace.
   However, you can have the same name in different namespaces so this is useful to implement multi-tenancy.
-* **selector**: is used to filter pods to inject sidecar.
-* **template**: the template config map name used to render the injection config. "chaosfs-sidecar" template is used for injecting fuse-server sidecar.
-* **arguments**: the arguments you should define to be used in the template.
+- **selector**: is used to filter pods to inject sidecar.
+- **template**: the template config map name used to render the injection config. "chaosfs-sidecar" template is used for injecting fuse-server sidecar.
+- **arguments**: the arguments you should define to be used in the template.
 
 For more sample ConfigMap files, see [examples](https://github.com/chaos-mesh/chaos-mesh/tree/release-0.9/examples/chaosfs-configmap).
-
 
 ## Usage
 
 See [IOChaos Document](io_chaos.md).
-
-

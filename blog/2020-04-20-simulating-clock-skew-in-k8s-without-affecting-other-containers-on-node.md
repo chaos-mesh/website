@@ -39,14 +39,14 @@ Then how are we supposed to tackle this problem? Well, the first thing that come
 
 This variable has two advantages:
 
-* We can call our own functions without being aware of the source code.
-* We can inject code into other programs to achieve specific purposes.
+- We can call our own functions without being aware of the source code.
+- We can inject code into other programs to achieve specific purposes.
 
 For some languages that use applications to call the time function in glibc, such as Rust and C, using `LD_PRELOAD` is enough to simulate clock skew. But things are trickier for Golang. Because languages such as Golang directly parse virtual Dynamic Shared Object ([vDSO](http://man7.org/linux/man-pages/man7/vdso.7.html)), a mechanism to speed up system calls. To obtain the time function address, we can't simply use `LD_PRELOAD` to intercept the glic interface. Therefore, `LD_PRELOAD` is not our solution.
 
 ### Use BPF to modify the return value of `clock_gettime` system call
 
-We also tried to filter the task [process identification number](http://www.linfo.org/pid.html ) (PID) with BPF. This way, we could simulate clock skew on a specified process and modify the return value of the `clock_gettime` system call.
+We also tried to filter the task [process identification number](http://www.linfo.org/pid.html) (PID) with BPF. This way, we could simulate clock skew on a specified process and modify the return value of the `clock_gettime` system call.
 
 This seemed like a good idea, but we also encountered a problem: in most cases, vDSO speeds up `clock_gettime`, but `clock_gettime` doesn't make a system call. This selection didn't work, either. Oops.
 
@@ -60,9 +60,9 @@ We figured out the cause; then what's the solution? Start from vDSO. If we can r
 
 Easier said than done. To achieve this goal, we must tackle the following problems:
 
-* Know the user-mode address used by vDSO
-* Know vDSO's kernel-mode address, if we want to modify the `clock_gettime` function in vDSO by any address in the kernel mode
-* Know how to modify vDSO data
+- Know the user-mode address used by vDSO
+- Know vDSO's kernel-mode address, if we want to modify the `clock_gettime` function in vDSO by any address in the kernel mode
+- Know how to modify vDSO data
 
 First, we need to peek inside vDSO. We can see the vDSO memory address in `/proc/pid/maps`.
 
@@ -87,6 +87,7 @@ ffffffffff700600  w  DF .text   0000000000000545  LINUX_2.6  clock_gettime
 We can see that the whole vDSO is like a `.so` file, so we can use an executable and linkable format (ELF) file to format it. With this information, a basic workflow for implementing TimeChaos starts to take shape:
 
 ![TimeChaos workflow](/img/timechaos-workflow.jpg)
+
 <div class="caption-center"> TimeChaos workflow </div>
 
 The chart above is the process of **TimeChaos**, an implementation of clock skew in Chaos Mesh.
@@ -164,12 +165,13 @@ Here's the log:
 
 From the log above, we see that every now and then, PD detects that the system time rolls back. This means:
 
-* TimeChaos successfully simulates clock skew.
-* PD can deal with the clock skew situation.
+- TimeChaos successfully simulates clock skew.
+- PD can deal with the clock skew situation.
 
 That's encouraging. But does TimeChaos affect services other than PD? We can check it out in the Chaos Dashboard:
 
 ![Chaos Dashboard](/img/chaos-dashboard.jpg)
+
 <div class="caption-center"> Chaos Dashboard </div>
 
 It's clear that in the monitor, TimeChaos was injected every 1 millisecond and the whole duration lasted 10 seconds. What's more, TiDB was not affected by that injection. The bank program ran normally, and performance was not affected.

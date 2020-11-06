@@ -1,6 +1,6 @@
 ---
 id: sidecar_template
-title: Sidecar Template 
+title: Sidecar Template
 sidebar_label: Sidecar Template
 ---
 
@@ -69,15 +69,15 @@ Template config defines some variables by [Go Template](https://golang.org/pkg/t
 
 For fields defined in this template, we have some brief descriptions below:
 
-* **initContainers**: defines the [initContainer](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) need to be injected.
-* **container**: defines the sidecar container need to be injected.
-* **volumeMounts**: defines the new volumeMounts or overwrite the old volumeMounts of each containers in target pods.
-* **volume**: defines the new volumes for the target pod or overwrite the old volumes in target pods.
-* **postStart**: called after a container is created first. If the handler fails, the containers will failed.
+- **initContainers**: defines the [initContainer](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) need to be injected.
+- **container**: defines the sidecar container need to be injected.
+- **volumeMounts**: defines the new volumeMounts or overwrite the old volumeMounts of each containers in target pods.
+- **volume**: defines the new volumes for the target pod or overwrite the old volumes in target pods.
+- **postStart**: called after a container is created first. If the handler fails, the containers will failed.
 
 > **Note:**
 >
-> Chaos controller-manager only watches template config map with the label selector specified by its flag `--template-labels`, by default this label 
+> Chaos controller-manager only watches template config map with the label selector specified by its flag `--template-labels`, by default this label
 > is `app.kubernetes.io/component=template` if your Chaos Mesh is deployed by helm.
 >
 > Each template config map should be deployed in the same namespace as Chaos Mesh, and it is identified by the name of the config map, which is `chaosfs-sidecar` in the above example.
@@ -130,31 +130,31 @@ More detail about `Mount propagation` can be found [here](https://kubernetes.io/
 
 ```yaml
 containers:
-- name: chaosfs
-  image: pingcap/chaos-fs
-  imagePullpolicy: Always
-  ports:
-  - containerPort: 65534
-  securityContext:
-    privileged: true
-  command:
-    - /usr/local/bin/chaosfs
-    - -addr=:65534
-    - -pidfile=/tmp/fuse/pid
-    - -original=/var/lib/tikv/fuse-data
-    - -mountpoint=/var/lib/tikv/data
-  volumeMounts:
-    - name: tikv
-      mountPath: /var/lib/tikv
-      mountPropagation: Bidirectional
+  - name: chaosfs
+    image: pingcap/chaos-fs
+    imagePullpolicy: Always
+    ports:
+      - containerPort: 65534
+    securityContext:
+      privileged: true
+    command:
+      - /usr/local/bin/chaosfs
+      - -addr=:65534
+      - -pidfile=/tmp/fuse/pid
+      - -original=/var/lib/tikv/fuse-data
+      - -mountpoint=/var/lib/tikv/data
+    volumeMounts:
+      - name: tikv
+        mountPath: /var/lib/tikv
+        mountPropagation: Bidirectional
 ```
 
 Description of `chaosfs`:
 
-* **addr**: defines the address of the grpc server, default value: ":65534".
-* **pidfile**: defines the pid file to record the pid of the `chaosfs` process.
-* **original**: defines the fuse directory. This directory is usually set to the same level directory as the application data directory.
-* **mountpoint**: defines the mountpoint to mount the original directory.
+- **addr**: defines the address of the grpc server, default value: ":65534".
+- **pidfile**: defines the pid file to record the pid of the `chaosfs` process.
+- **original**: defines the fuse directory. This directory is usually set to the same level directory as the application data directory.
+- **mountpoint**: defines the mountpoint to mount the original directory.
 
 This value should be set to the data directory of the target application.
 
@@ -179,7 +179,7 @@ initContainers:
   - name: inject-scripts
     image: pingcap/chaos-scripts:latest
     imagePullpolicy: Always
-    command: ["sh", "-c", "/scripts/init.sh -d /var/lib/tikv/data -f /var/lib/tikv/fuse-data"]
+    command: ['sh', '-c', '/scripts/init.sh -d /var/lib/tikv/data -f /var/lib/tikv/fuse-data']
 ```
 
 The usage of `init.sh`:

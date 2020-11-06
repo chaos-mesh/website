@@ -29,25 +29,25 @@ metadata:
 spec:
   action: pod-failure
   mode: one
-  value: ""
-  duration: "30s"
+  value: ''
+  duration: '30s'
   selector:
     labelSelectors:
-      "app.kubernetes.io/component": "tikv"
+      'app.kubernetes.io/component': 'tikv'
   scheduler:
-    cron: "@every 2m"
+    cron: '@every 2m'
 ```
 
 For more sample files, see [examples](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples). You can edit them as needed.
 
 Description:
 
-* **action** defines the specific chaos action for the Pod. In this case, it is a Pod failure.
-* **mode** defines the mode to run chaos action. Supported mode: `one` / `all` / `fixed` / `fixed-percent` / `random-max-percent`.
-* **value** depends on the value of `mode`. If `mode` is `one` or `all`, leave `value` empty. If `fixed`, provide an integer of pods to do chaos action. If `fixed-percent`, provide a number from 0 to 100 to specify the percent of pods the server can do chaos action. If `random-max-percent`, provide a number from 0 to 100 to specify the max percent of pods to do chaos action.
-* **selector** specifies the target pods for chaos injections. For more details, see [Define the Scope of Chaos Experiment](../user_guides/experiment_scope.md).
-* **duration** defines the duration for each chaos experiment. The default value is `30s`, which indicates that pod failure will last for 30 seconds.
-* **scheduler** defines the scheduler rules for the running time of the chaos experiment. For more rule information, see [robfig/cron](https://godoc.org/github.com/robfig/cron).
+- **action** defines the specific chaos action for the Pod. In this case, it is a Pod failure.
+- **mode** defines the mode to run chaos action. Supported mode: `one` / `all` / `fixed` / `fixed-percent` / `random-max-percent`.
+- **value** depends on the value of `mode`. If `mode` is `one` or `all`, leave `value` empty. If `fixed`, provide an integer of pods to do chaos action. If `fixed-percent`, provide a number from 0 to 100 to specify the percent of pods the server can do chaos action. If `random-max-percent`, provide a number from 0 to 100 to specify the max percent of pods to do chaos action.
+- **selector** specifies the target pods for chaos injections. For more details, see [Define the Scope of Chaos Experiment](../user_guides/experiment_scope.md).
+- **duration** defines the duration for each chaos experiment. The default value is `30s`, which indicates that pod failure will last for 30 seconds.
+- **scheduler** defines the scheduler rules for the running time of the chaos experiment. For more rule information, see [robfig/cron](https://godoc.org/github.com/robfig/cron).
 
 ## `pod-kill` configuration file
 
@@ -66,9 +66,9 @@ spec:
     namespaces:
       - tidb-cluster-demo
     labelSelectors:
-      "app.kubernetes.io/component": "tikv"
+      'app.kubernetes.io/component': 'tikv'
   scheduler:
-    cron: "@every 1m"
+    cron: '@every 1m'
 ```
 
 The detailed description of each field in the configuration template are consistent with that in [`pod-failure`](#pod-failure-configuration-file).

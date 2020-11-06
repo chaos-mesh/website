@@ -108,7 +108,7 @@ spec:
         - basic-tikv-0
         - basic-tikv-1
   delay:
-    latency: "1ms"
+    latency: '1ms'
   direction: to
   target:
     selector: # define the pods belong to dc-b and dc-c
@@ -142,7 +142,7 @@ spec:
         - basic-tikv-2
         - basic-tikv-3
   delay:
-    latency: "1ms"
+    latency: '1ms'
   direction: to
   target:
     selector: # define the pods belong to dc-c
@@ -173,7 +173,7 @@ spec:
         - basic-tikv-5
         - basic-tikv-6
   delay:
-    latency: "1ms"
+    latency: '1ms'
   direction: to
   target:
     selector: # define the pods belong to dc-a and dc-b

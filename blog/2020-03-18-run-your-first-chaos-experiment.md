@@ -26,6 +26,7 @@ Chaos experiments are similar to experiments we do in a science class. It's perf
 The following clip shows the process of installing Chaos Mesh, deploying web-show, and creating the chaos experiment within a few commands:
 
 ![The whole process of the chaos experiment](/img/whole-process-of-chaos-experiment.gif)
+
 <div class="caption-center"> The whole process of the chaos experiment </div>
 
 Now it's your turn! It's time to get your hands dirty.
@@ -40,43 +41,43 @@ Before moving forward, make sure you have [Git](https://git-scm.com/) and [Docke
 
 1. Get Chaos Mesh:
 
-    ```bash
-    git clone https://github.com/chaos-mesh/chaos-mesh.git
-    cd chaos-mesh/
-    ```
+   ```bash
+   git clone https://github.com/chaos-mesh/chaos-mesh.git
+   cd chaos-mesh/
+   ```
 
 2. Install Chaos Mesh with the `install.sh` script:
 
-    ```bash
-    ./install.sh --local kind
-    ```
+   ```bash
+   ./install.sh --local kind
+   ```
 
-    `install.sh` is an automated shell script that checks your environment, installs Kind, launches Kubernetes clusters locally, and deploys Chaos Mesh. To see the detailed description of `install.sh`, you can include the `--help` option.
+   `install.sh` is an automated shell script that checks your environment, installs Kind, launches Kubernetes clusters locally, and deploys Chaos Mesh. To see the detailed description of `install.sh`, you can include the `--help` option.
 
-    > **Note:**
-    >
-    > If your local computer cannot pull images from `docker.io` or `gcr.io`, use the local gcr.io mirror and execute `./install.sh --local kind --docker-mirror` instead.
+   > **Note:**
+   >
+   > If your local computer cannot pull images from `docker.io` or `gcr.io`, use the local gcr.io mirror and execute `./install.sh --local kind --docker-mirror` instead.
 
 3. Set the system environment variable:
 
-    ```bash
-    source ~/.bash_profile
-    ```
+   ```bash
+   source ~/.bash_profile
+   ```
 
 > **Note:**
 >
-> * Depending on your network, these steps might take a few minutes.
-> * If you see an error message like this:
+> - Depending on your network, these steps might take a few minutes.
+> - If you see an error message like this:
 >
->     ```bash
->     ERROR: failed to create cluster: failed to generate kubeadm config content: failed to get kubernetes version from node: failed to get file: command "docker exec --privileged kind-control-plane cat /kind/version" failed with error: exit status 1
->     ```
+>   ```bash
+>   ERROR: failed to create cluster: failed to generate kubeadm config content: failed to get kubernetes version from node: failed to get file: command "docker exec --privileged kind-control-plane cat /kind/version" failed with error: exit status 1
+>   ```
 >
->     increase the available resources for Docker on your local computer and execute the following command:
+>   increase the available resources for Docker on your local computer and execute the following command:
 >
->     ```bash
->     ./install.sh --local kind --force-local-kube
->     ```
+>   ```bash
+>   ./install.sh --local kind --force-local-kube
+>   ```
 
 When the process completes you will see a message indicating Chaos Mesh is successfully installed.
 
@@ -86,15 +87,15 @@ The next step is to deploy the application for testing. In our case here, we cho
 
 1. Deploy web-show with the `deploy.sh` script:
 
-    ```bash
-    # Make sure you are in the Chaos Mesh directory
-    cd examples/web-show &&
-    ./deploy.sh
-    ```
+   ```bash
+   # Make sure you are in the Chaos Mesh directory
+   cd examples/web-show &&
+   ./deploy.sh
+   ```
 
-    > **Note:**
-    >
-    > If your local computer cannot pull images from `docker.io`, use the `local gcr.io` mirror and execute `./deploy.sh --docker-mirror` instead.
+   > **Note:**
+   >
+   > If your local computer cannot pull images from `docker.io`, use the `local gcr.io` mirror and execute `./deploy.sh --docker-mirror` instead.
 
 2. Access the web-show application. From your web browser, go to `http://localhost:8081`.
 
@@ -130,24 +131,25 @@ spec:
 
 For detailed descriptions of NetworkChaos actions, see [Chaos Mesh wiki](https://github.com/chaos-mesh/chaos-mesh/wiki/Network-Chaos). Here, we just rephrase the configuration as:
 
-* target: `web-show`
-* mission: inject a `10ms` network delay every `60s`
-* attack duration: `30s` each time
+- target: `web-show`
+- mission: inject a `10ms` network delay every `60s`
+- attack duration: `30s` each time
 
 To start NetworkChaos, do the following:
 
 1. Run `network-delay.yaml`:
 
-    ```bash
-    # Make sure you are in the chaos-mesh/examples/web-show directory
-    kubectl apply -f network-delay.yaml
-    ```
+   ```bash
+   # Make sure you are in the chaos-mesh/examples/web-show directory
+   kubectl apply -f network-delay.yaml
+   ```
 
 2. Access the web-show application. In your web browser, go to `http://localhost:8081`.
 
-    From the line graph, you can tell that there is a 10 ms network delay every 60 seconds.
+   From the line graph, you can tell that there is a 10 ms network delay every 60 seconds.
 
 ![Using Chaos Mesh to insert delays in web-show](/img/using-chaos-mesh-to-insert-delays-in-web-show.png)
+
 <div class="caption-center"> Using Chaos Mesh to insert delays in web-show </div>
 
 Congratulations! You just stirred up a little bit of chaos. If you are intrigued and want to try out more chaos experiments with Chaos Mesh, check out [examples/web-show](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples/web-show).
@@ -158,16 +160,17 @@ Once you're finished testing, terminate the chaos experiment.
 
 1. Delete `network-delay.yaml`:
 
-    ```bash
-    # Make sure you are in the chaos-mesh/examples/web-show directory
-    kubectl delete -f network-delay.yaml
-    ```
+   ```bash
+   # Make sure you are in the chaos-mesh/examples/web-show directory
+   kubectl delete -f network-delay.yaml
+   ```
 
 2. Access the web-show application. From your web browser, go to `http://localhost:8081`.
 
 From the line graph, you can see the network latency level is back to normal.
 
 ![Network latency level is back to normal](/img/network-latency-level-is-back-to-normal.png)
+
 <div class="caption-center"> Network latency level is back to normal </div>
 
 ### Delete Kubernetes clusters
@@ -189,4 +192,3 @@ Congratulations on your first successful journey into Chaos Engineering. How doe
 If you find a bug or think something is missing, feel free to file an issue, open a pull request (PR), or join us on the #project-chaos-mesh channel in the [CNCF slack workspace](https://join.slack.com/t/cloud-native/shared_invite/zt-fyy3b8up-qHeDNVqbz1j8HDY6g1cY4w).
 
 GitHub: [https://github.com/chaos-mesh/chaos-mesh](https://github.com/chaos-mesh/chaos-mesh)
-

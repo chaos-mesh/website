@@ -20,19 +20,19 @@ Chaos Mesh is a powerful Chaos Engineering platform that orchestrates chaos expe
 
 Within only 7 months since it was open-sourced on December 31st, 2019, Chaos Mesh has already received 2000 GitHub stars, with 44 contributors from multiple organizations. As a young project, the adoption in production has been the key recognition and motivation that pushes us forward constantly. Here is a list of our adopters so far:
 
-* [PingCAP](http://www.pingcap.com)
-* [Xpeng Motor](https://en.xiaopeng.com/)
-* [NetEase Fuxi Lab](https://fuxi.163.com/en/about.html)
-* [JuiceFS](http://juicefs.com/?hl=en)
-* [Dailymotion](https://www.dailymotion.com/)
-* [Meituan-Dianping](https://about.meituan.com/en)
-* [Celo](https://celo.org/)
+- [PingCAP](http://www.pingcap.com)
+- [Xpeng Motor](https://en.xiaopeng.com/)
+- [NetEase Fuxi Lab](https://fuxi.163.com/en/about.html)
+- [JuiceFS](http://juicefs.com/?hl=en)
+- [Dailymotion](https://www.dailymotion.com/)
+- [Meituan-Dianping](https://about.meituan.com/en)
+- [Celo](https://celo.org/)
 
 Being a CNCF Sandbox project marks a major step forward for the project. It means that Chaos Mesh has become part of the great vendor-neutral cloud-native community. With the guidance and help from CNCF, Chaos Mesh will strive to develop a community with transparent, meritocracy-based governance for open communication and open collaboration, while driving the project forward, towards our ultimate goal of establishing the Chaos Engineering standards on Cloud.
 Currently, Chaos Mesh is in active development for 1.0 GA. Going forward, we will be focusing on the following aspects:
 
-* Lowering the bar of chaos engineering by improving Chaos Dashboard.
-* Extending chaos injection to application layers
-* Completing the full chaos engineering loop with status checking, reporting, and scenario defining, etc.
+- Lowering the bar of chaos engineering by improving Chaos Dashboard.
+- Extending chaos injection to application layers
+- Completing the full chaos engineering loop with status checking, reporting, and scenario defining, etc.
 
-If you are interested in the project, check out our [website](https://chaos-mesh.org/),  join our [Slack](https://cloud-native.slack.com/archives/C018JJ686BS) discussions, or attend our [monthly meeting](https://docs.google.com/document/d/1H8IfmhIJiJ1ltg-XLjqR_P_RaMHUGrl1CzvHnKM_9Sc/edit) to know more. Or better yet, become part of us.
+If you are interested in the project, check out our [website](https://chaos-mesh.org/), join our [Slack](https://cloud-native.slack.com/archives/C018JJ686BS) discussions, or attend our [monthly meeting](https://docs.google.com/document/d/1H8IfmhIJiJ1ltg-XLjqR_P_RaMHUGrl1CzvHnKM_9Sc/edit) to know more. Or better yet, become part of us.

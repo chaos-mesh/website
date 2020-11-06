@@ -36,7 +36,7 @@ If you are using k3s or k3d, please also specify `--k3s` flag.
 
 ### Verify your installation
 
-Verify if the chaos mesh is running (For the use of *kubectl*, you can refer to the [documentation](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).)
+Verify if the chaos mesh is running (For the use of _kubectl_, you can refer to the [documentation](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).)
 
 ```bash
 kubectl get pod -n chaos-testing
@@ -122,14 +122,14 @@ Depending on your environment, there are two methods of installing Chaos Mesh:
 
      Expected output:
 
-      ```bash
-      NAME                                        READY   STATUS    RESTARTS   AGE
-      chaos-controller-manager-6d6d95cd94-kl8gs   1/1     Running   0          3m40s
-      chaos-daemon-5shkv                          1/1     Running   0          3m40s
-      chaos-daemon-jpqhd                          1/1     Running   0          3m40s
-      chaos-daemon-n6mfq                          1/1     Running   0          3m40s
-      chaos-dashboard-d998856f6-vgrjs             1/1     Running   0          3m40s
-      ```
+     ```bash
+     NAME                                        READY   STATUS    RESTARTS   AGE
+     chaos-controller-manager-6d6d95cd94-kl8gs   1/1     Running   0          3m40s
+     chaos-daemon-5shkv                          1/1     Running   0          3m40s
+     chaos-daemon-jpqhd                          1/1     Running   0          3m40s
+     chaos-daemon-n6mfq                          1/1     Running   0          3m40s
+     chaos-dashboard-d998856f6-vgrjs             1/1     Running   0          3m40s
+     ```
 
 - Install in containerd environment (kind)
 

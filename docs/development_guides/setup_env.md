@@ -21,35 +21,35 @@ Make sure you have the above prerequisites met. Now follow the steps below to pr
 
 1. Clone the Chaos Mesh repo to your local machine.
 
-    ```bash
-    git clone https://github.com/chaos-mesh/chaos-mesh.git
-    cd chaos-mesh
-    ```
+   ```bash
+   git clone https://github.com/chaos-mesh/chaos-mesh.git
+   cd chaos-mesh
+   ```
 
 2. Install the Kubernetes API development framework - [kubebuilder](https://github.com/kubernetes-sigs/kubebuilder) and [kustomize](https://github.com/kubernetes-sigs/kustomize).
 
-    ```bash
-    make ensure-all
-    ```
+   ```bash
+   make ensure-all
+   ```
 
 3. Make sure [Docker](https://docs.docker.com/install/) is installed and running on your local machine.
 
 4. Make sure [Docker Regitry](https://docs.docker.com/registry/) is running. Set the environment variable `DOCKER_REGISTRY` with the registry address:
 
-    ```bash
-    echo 'export DOCKER_REGISTRY=localhost:5000' >> ~/.bash_profile
-    source ~/.bash_profile
-    ```
+   ```bash
+   echo 'export DOCKER_REGISTRY=localhost:5000' >> ~/.bash_profile
+   source ~/.bash_profile
+   ```
 
 5. Make sure `${GOPATH}/bin` is in your `PATH`.
 
-    ```bash
-    echo 'export PATH=$(go env GOPATH)/bin:${PATH}' >> ~/.bash_profile
-    ```
+   ```bash
+   echo 'export PATH=$(go env GOPATH)/bin:${PATH}' >> ~/.bash_profile
+   ```
 
-    ```bash
-    source ~/.bash_profile
-    ```
+   ```bash
+   source ~/.bash_profile
+   ```
 
 > **Note:**
 >
