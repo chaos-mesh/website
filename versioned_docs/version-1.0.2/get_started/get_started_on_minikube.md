@@ -47,7 +47,7 @@ Perform the following steps to set up the local Kubernetes environment:
 The above command installs all the CRDs, required service account configuration, and all components.
 Before you start running a chaos experiment, verify if Chaos Mesh is installed correctly.
 
-You also can use [helm](https://helm.sh/) to [install Chaos Mesh manually](installation.md#install-by-helm).
+You also can use [helm](https://helm.sh/) to [install Chaos Mesh manually](../user_guides/installation.md#install-by-helm).
 
 ### Verify your installation
 
@@ -65,6 +65,10 @@ chaos-controller-manager-6d6d95cd94-kl8gs   1/1     Running   0          3m40s
 chaos-daemon-5shkv                          1/1     Running   0          3m40s
 chaos-dashboard-d998856f6-vgrjs             1/1     Running   0          3m40s
 ```
+
+## Run Chaos experiment
+
+Now that you have deployed Chaos Mesh in your environment, it's time to use it for your chaos experiments. Follow the steps in [Run chaos experiment](../user_guides/run_chaos_experiment.md) to run a Chaos experiment and then observe it on Chaos Mesh Dashboard.
 
 ## Uninstallation
 
