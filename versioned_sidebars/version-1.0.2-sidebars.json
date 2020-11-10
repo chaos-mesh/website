@@ -41,19 +41,11 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-1.0.2/get_started/installation"
-        },
-        {
-          "type": "doc",
           "id": "version-1.0.2/get_started/get_started_on_kind"
         },
         {
           "type": "doc",
           "id": "version-1.0.2/get_started/get_started_on_minikube"
-        },
-        {
-          "type": "doc",
-          "id": "version-1.0.2/get_started/run_chaos_experiment"
         }
       ]
     },
@@ -64,7 +56,15 @@
       "items": [
         {
           "type": "doc",
+          "id": "version-1.0.2/user_guides/installation"
+        },
+        {
+          "type": "doc",
           "id": "version-1.0.2/user_guides/experiment_scope"
+        },
+        {
+          "type": "doc",
+          "id": "version-1.0.2/user_guides/run_chaos_experiment"
         }
       ]
     },
