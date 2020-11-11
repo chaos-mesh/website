@@ -7,6 +7,9 @@
       "pattern": ["^http://localhost"]
     },
     {
+      "pattern": ["^../"]
+    },
+    {
       "pattern": ["^https://github.com"]
     }
   ]
