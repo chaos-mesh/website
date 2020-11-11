@@ -61,17 +61,17 @@ kubectl apply -f examples/io-mixed-example.yaml
 
 IOChaos currently supports the following actions:
 
-- **delay**: IO delay action. You can specify the latency before the IO operation returns a result.
+- **latency**: IO latency action. You can specify the latency before the IO operation returns a result.
 - **fault**: IO fault action. In this mode, IO operations returns an error.
 - **attrOverride**: Override attributes of a file.
 
-### delay
+### latency
 
-If you are using the `delay` action, you can edit the specification as below:
+If you are using the `latency` action, you can edit the specification as below:
 
 ```yaml
 spec:
-  action: delay
+  action: latency
   delay: '1ms'
 ```
 
