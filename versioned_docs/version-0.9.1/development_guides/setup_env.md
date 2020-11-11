@@ -13,7 +13,7 @@ This document walks you through the environment setup process for Chaos Mesh dev
 - [gcc](https://gcc.gnu.org/)
 - [helm](https://helm.sh/) version >= v2.8.2
 - [kind](https://github.com/kubernetes-sigs/kind)
-- [yarn](https://yarnpkg.com/lang/en/) and [nodejs](https://nodejs.org/en/) (for Chaos Dashboard)
+- [nodejs](https://nodejs.org/en/) and [yarn](https://yarnpkg.com/lang/en/) (for Chaos Dashboard)
 
 ## Prepare the toolchain
 
@@ -44,9 +44,12 @@ Make sure you have the above prerequisites met. Now follow the steps below to pr
    source ~/.bash_profile
    ```
 
-> **Note:**
->
-> If your yarn is newly installed, you might need to restart the terminal to make it available.
+5. Check nodejs related environment.
+
+   ```bash
+    node -v
+    yarn -v
+   ```
 
 Now you can test the toolchain by running:
 
@@ -69,6 +72,14 @@ The above script will create a Kubernetes cluster by kind. When you don't need t
 ```bash
 kind delete cluster --name=kind
 ```
+
+> Bootstrap Chaos Dashboard. (Optional)
+>
+> ```bash
+> cd ui && yarn
+> # Run it
+> REACT_APP_API_URL=http://localhost:2333 yarn start
+> ```
 
 ## Next step
 
