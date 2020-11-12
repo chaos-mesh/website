@@ -210,10 +210,11 @@ Now you are all set. It's time to verify the chaos type you just created. Take t
 
 1. Make the Docker image. Refer to [Make the Docker image](dev_hello_world.md#make-the-docker-image).
 
-2. Upgrade Chaos Mesh. Since we have already installed Chaos Mesh in [Develop a New Chaos](dev_hello_world.md#run-chaos), we only need to upgrade it:
+2. Upgrade Chaos Mesh. Since we have already installed Chaos Mesh in [Develop a New Chaos](dev_hello_world.md#run-chaos), we only need to restart it with the latest image:
 
    ```bash
-   helm upgrade chaos-mesh helm/chaos-mesh --namespace=chaos-testing --set controllerManager. imagePullPolicy=Always --set chaosDaemon.imagePullPolicy=Always
+   kubectl rollout restart deployment chaos-controller-manager -n chaos-testing
+   kubectl rollout restart daemonset chaos-daemon -n chaos-testing
    ```
 
 3. Deploy the Pods for test:
