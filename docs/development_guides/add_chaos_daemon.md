@@ -144,60 +144,59 @@ In order for `chaos-daemon` to accept requests from `chaos-controller-manager`, 
 
    // Apply applies helloworld chaos
    func (r *endpoint) Apply(ctx context.Context, req ctrl.Request, chaos v1alpha1.InnerObject) error {
-      r.Log.Info("Apply helloworld chaos")
-      helloworldchaos, ok := chaos.(*v1alpha1.HelloWorldChaos)
-      if !ok {
-       return errors.New("chaos is not helloworldchaos")
-      }
+       r.Log.Info("Apply helloworld chaos")
+       helloworldchaos, ok := chaos.(*v1alpha1.HelloWorldChaos)
+       if !ok {
+           return errors.New("chaos is not helloworldchaos")
+       }
 
-      pods, err := utils.SelectPods(ctx, r.Client, r.Reader, helloworldchaos.Spec.GetSelector())
-      if err != nil {
-       return err
-      }
-
-      for _, pod := range pods {
-       daemonClient, err := utils.NewChaosDaemonClient(ctx, r.Client,
-        &pod, common.ControllerCfg.ChaosDaemonPort)
+       pods, err := utils.SelectPods(ctx, r.Client, r.Reader, helloworldchaos.Spec.GetSelector())
        if err != nil {
-        r.Log.Error(err, "get chaos daemon client")
-        return err
-       }
-       defer daemonClient.Close()
-       if len(pod.Status.ContainerStatuses) == 0 {
-        return fmt.Errorf("%s %s can't get the state of container", pod.Namespace, pod.Name)
+           return err
        }
 
-       containerID := pod.Status.ContainerStatuses[0].ContainerID
+       for _, pod := range pods {
+           daemonClient, err := utils.NewChaosDaemonClient(ctx, r.Client, &pod, common.ControllerCfg.ChaosDaemonPort)
+           if err != nil {
+               r.Log.Error(err, "get chaos daemon client")
+               return err
+           }
+           defer daemonClient.Close()
+           if len(pod.Status.ContainerStatuses) == 0 {
+               return fmt.Errorf("%s %s can't get the state of container", pod.Namespace, pod.Name)
+           }
 
-       _, err = daemonClient.ExecHelloWorldChaos(ctx, &pb.ExecHelloWorldRequest{
-        ContainerId: containerID,
-       })
-       if err != nil {
-        return err
+           containerID := pod.Status.ContainerStatuses[0].ContainerID
+
+           _, err = daemonClient.ExecHelloWorldChaos(ctx, &pb.ExecHelloWorldRequest{
+               ContainerId: containerID,
+           })
+           if err != nil {
+               return err
+           }
        }
-      }
 
-      return nil
+       return nil
    }
 
    // Recover means the reconciler recovers the chaos action
    func (r *endpoint) Recover(ctx context.Context, req ctrl.Request, chaos v1alpha1.InnerObject) error {
-      return nil
+       return nil
    }
 
    // Object would return the instance of chaos
    func (r *endpoint) Object() v1alpha1.InnerObject {
-      return &v1alpha1.HelloWorldChaos{}
+       return &v1alpha1.HelloWorldChaos{}
    }
 
    func init() {
-      router.Register("helloworldchaos", &v1alpha1.HelloWorldChaos{}, func(obj runtime.Object) bool {
-       return true
-      }, func(ctx ctx.Context) end.Endpoint {
-       return &endpoint{
-        Context: ctx,
-       }
-      })
+       router.Register("helloworldchaos", &v1alpha1.HelloWorldChaos{}, func(obj runtime.Object) bool {
+           return true
+       }, func(ctx ctx.Context) end.Endpoint {
+           return &endpoint{
+               Context: ctx,
+           }
+       })
    }
    ```
 
