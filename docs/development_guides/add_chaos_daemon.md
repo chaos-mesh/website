@@ -73,40 +73,40 @@ In order for `chaos-daemon` to accept requests from `chaos-controller-manager`, 
    Add a new file named `helloworld_server.go` under [chaosdaemon](https://github.com/chaos-mesh/chaos-mesh/tree/master/pkg/chaosdaemon), with the content as below:
 
    ```golang
-    package chaosdaemon
+   package chaosdaemon
 
-    import (
-	    "context"
-	    "fmt"
+   import (
+       "context"
+       "fmt"
 
-        "github.com/golang/protobuf/ptypes/empty"
+       "github.com/golang/protobuf/ptypes/empty"
 
-	    "github.com/chaos-mesh/chaos-mesh/pkg/bpm"
-	    pb "github.com/chaos-mesh/chaos-mesh/pkg/chaosdaemon/pb"
-    )
+       "github.com/chaos-mesh/chaos-mesh/pkg/bpm"
+       pb "github.com/chaos-mesh/chaos-mesh/pkg/chaosdaemon/pb"
+   )
 
-    func (s *daemonServer) ExecHelloWorldChaos(ctx context.Context, req *pb.   ExecHelloWorldRequest) (*empty.Empty, error) {
-	    log.Info("ExecHelloWorldChaos", "request", req)
+   func (s *daemonServer) ExecHelloWorldChaos(ctx context.Context, req *pb.   ExecHelloWorldRequest) (*empty.Empty, error) {
+       log.Info("ExecHelloWorldChaos", "request", req)
 
-	    pid, err := s.crClient.GetPidFromContainerID(ctx, req.ContainerId)
-	    if err != nil {
+       pid, err := s.crClient.GetPidFromContainerID(ctx, req.ContainerId)
+       if err != nil {
             return nil, err
-	    }
+       }
 
-	    cmd := bpm.DefaultProcessBuilder("sh", "-c", fmt.Sprintf("echo 'hello' `hostname`")).
-		    SetNS(pid, bpm.UtsNS).
-		    SetContext(ctx).
-		    Build()
-	    out, err := cmd.Output()
-	    if err != nil {
-		    return nil, err
-	    }
-	    if len(out) != 0 {
-		    log.Info("cmd output", "output", string(out))
-	    }
+       cmd := bpm.DefaultProcessBuilder("sh", "-c", fmt.Sprintf("echo 'hello' `hostname`")).
+           SetNS(pid, bpm.UtsNS).
+           SetContext(ctx).
+           Build()
+       out, err := cmd.Output()
+       if err != nil {
+           return nil, err
+       }
+       if len(out) != 0 {
+           log.Info("cmd output", "output", string(out))
+       }
 
-	    return &empty.Empty{}, nil
-    }
+       return &empty.Empty{}, nil
+   }
    ```
 
    After `chaos-daemon` receives the `ExecHelloWorldChaos` request, `chaos-daemon` will print `hello` to this container's hostname.
@@ -117,89 +117,89 @@ In order for `chaos-daemon` to accept requests from `chaos-controller-manager`, 
 
    For `HelloworldChaos`, `chaos-controller-manager` needs to send chaos request to `chaos-daemon` in `reconcile`. To do this, we need to update the file `controllers/helloworldchaos/types.go` created in [Develop a New Chaos](./dev_hello_world.md) with the content as below:
 
-      ```golang
-      package helloworldchaos
+   ```golang
+   package helloworldchaos
 
-      import (
-	      "context"
-	      "errors"
-	      "fmt"
+   import (
+      "context"
+      "errors"
+      "fmt"
 
-	      "k8s.io/apimachinery/pkg/runtime"
-	      ctrl "sigs.k8s.io/controller-runtime"
+      "k8s.io/apimachinery/pkg/runtime"
+      ctrl "sigs.k8s.io/controller-runtime"
 
-	      "github.com/chaos-mesh/chaos-mesh/api/v1alpha1"
-	      "github.com/chaos-mesh/chaos-mesh/controllers/common"
-	      pb "github.com/chaos-mesh/chaos-mesh/pkg/chaosdaemon/pb"
-	      "github.com/chaos-mesh/chaos-mesh/pkg/router"
-	      ctx "github.com/chaos-mesh/chaos-mesh/pkg/router/context"
-	      end "github.com/chaos-mesh/chaos-mesh/pkg/router/endpoint"
-	      "github.com/chaos-mesh/chaos-mesh/pkg/utils"
-      )
+      "github.com/chaos-mesh/chaos-mesh/api/v1alpha1"
+      "github.com/chaos-mesh/chaos-mesh/controllers/common"
+      pb "github.com/chaos-mesh/chaos-mesh/pkg/chaosdaemon/pb"
+      "github.com/chaos-mesh/chaos-mesh/pkg/router"
+      ctx "github.com/chaos-mesh/chaos-mesh/pkg/router/context"
+      end "github.com/chaos-mesh/chaos-mesh/pkg/router/endpoint"
+      "github.com/chaos-mesh/chaos-mesh/pkg/utils"
+   )
 
-      // endpoint is dns-chaos reconciler
-      type endpoint struct {
-	      ctx.Context
+   // endpoint is dns-chaos reconciler
+   type endpoint struct {
+      ctx.Context
+   }
+
+   // Apply applies helloworld chaos
+   func (r *endpoint) Apply(ctx context.Context, req ctrl.Request, chaos v1alpha1.InnerObject) error {
+      r.Log.Info("Apply helloworld chaos")
+      helloworldchaos, ok := chaos.(*v1alpha1.HelloWorldChaos)
+      if !ok {
+       return errors.New("chaos is not helloworldchaos")
       }
 
-      // Apply applies helloworld chaos
-      func (r *endpoint) Apply(ctx context.Context, req ctrl.Request, chaos v1alpha1.InnerObject) error {
-	      r.Log.Info("Apply helloworld chaos")
-	      helloworldchaos, ok := chaos.(*v1alpha1.HelloWorldChaos)
-	      if !ok {
-		      return errors.New("chaos is not helloworldchaos")
-	      }
-
-	      pods, err := utils.SelectPods(ctx, r.Client, r.Reader, helloworldchaos.Spec.GetSelector())
-	      if err != nil {
-		      return err
-	      }
-
-	      for _, pod := range pods {
-		      daemonClient, err := utils.NewChaosDaemonClient(ctx, r.Client,
-			      &pod, common.ControllerCfg.ChaosDaemonPort)
-		      if err != nil {
-			      r.Log.Error(err, "get chaos daemon client")
-			      return err
-		      }
-		      defer daemonClient.Close()
-		      if len(pod.Status.ContainerStatuses) == 0 {
-			      return fmt.Errorf("%s %s can't get the state of container", pod.Namespace, pod.Name)
-		      }
-
-		      containerID := pod.Status.ContainerStatuses[0].ContainerID
-
-		      _, err = daemonClient.ExecHelloWorldChaos(ctx, &pb.ExecHelloWorldRequest{
-			      ContainerId: containerID,
-		      })
-		      if err != nil {
-			      return err
-		      }
-	      }
-
-	      return nil
+      pods, err := utils.SelectPods(ctx, r.Client, r.Reader, helloworldchaos.Spec.GetSelector())
+      if err != nil {
+       return err
       }
 
-      // Recover means the reconciler recovers the chaos action
-      func (r *endpoint) Recover(ctx context.Context, req ctrl.Request, chaos v1alpha1.InnerObject) error {
-	      return nil
+      for _, pod := range pods {
+       daemonClient, err := utils.NewChaosDaemonClient(ctx, r.Client,
+        &pod, common.ControllerCfg.ChaosDaemonPort)
+       if err != nil {
+        r.Log.Error(err, "get chaos daemon client")
+        return err
+       }
+       defer daemonClient.Close()
+       if len(pod.Status.ContainerStatuses) == 0 {
+        return fmt.Errorf("%s %s can't get the state of container", pod.Namespace, pod.Name)
+       }
+
+       containerID := pod.Status.ContainerStatuses[0].ContainerID
+
+       _, err = daemonClient.ExecHelloWorldChaos(ctx, &pb.ExecHelloWorldRequest{
+        ContainerId: containerID,
+       })
+       if err != nil {
+        return err
+       }
       }
 
-      // Object would return the instance of chaos
-      func (r *endpoint) Object() v1alpha1.InnerObject {
-	      return &v1alpha1.HelloWorldChaos{}
-      }
+      return nil
+   }
 
-      func init() {
-	      router.Register("helloworldchaos", &v1alpha1.HelloWorldChaos{}, func(obj runtime.Object) bool {
-		      return true
-	      }, func(ctx ctx.Context) end.Endpoint {
-		      return &endpoint{
-			      Context: ctx,
-		      }
-	      })
-      }
-      ```
+   // Recover means the reconciler recovers the chaos action
+   func (r *endpoint) Recover(ctx context.Context, req ctrl.Request, chaos v1alpha1.InnerObject) error {
+      return nil
+   }
+
+   // Object would return the instance of chaos
+   func (r *endpoint) Object() v1alpha1.InnerObject {
+      return &v1alpha1.HelloWorldChaos{}
+   }
+
+   func init() {
+      router.Register("helloworldchaos", &v1alpha1.HelloWorldChaos{}, func(obj runtime.Object) bool {
+       return true
+      }, func(ctx ctx.Context) end.Endpoint {
+       return &endpoint{
+        Context: ctx,
+       }
+      })
+   }
+   ```
 
    > **Notes:**
    >

@@ -247,9 +247,7 @@ Now take the following steps to run chaos:
    kubectl get HelloWorldChaos -n chaos-testing
    ```
 
-   Now you should be able to check the `Hello World!` result in the log:
-
-   Now you can check the log of `chaos-controller-manager`:
+   Now you should be able to check the `Hello World!` result in the log of of `chaos-controller-manager`:
 
    ```bash
    kubectl logs chaos-controller-manager-{pod-post-fix} -n chaos-testing
