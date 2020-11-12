@@ -148,6 +148,14 @@ Then push it to your registry:
 make docker-push
 ```
 
+If your Kubernetes cluster is deployed by Kind, you need to load images to Kind:
+
+```bash
+kind load docker-image localhost:5000/pingcap/chaos-mesh:latest
+kind load docker-image localhost:5000/pingcap/chaos-daemon:latest
+kind load docker-image localhost:5000/pingcap/chaos-dashboard:latest
+```
+
 ## Run chaos
 
 You are almost there. In this step, you will pull the image and apply it for testing.
