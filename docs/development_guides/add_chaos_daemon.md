@@ -85,12 +85,12 @@ In order for `chaos-daemon` to accept requests from `chaos-controller-manager`, 
        pb "github.com/chaos-mesh/chaos-mesh/pkg/chaosdaemon/pb"
    )
 
-   func (s *daemonServer) ExecHelloWorldChaos(ctx context.Context, req *pb.   ExecHelloWorldRequest) (*empty.Empty, error) {
+   func (s *daemonServer) ExecHelloWorldChaos(ctx context.Context, req *pb.ExecHelloWorldRequest) (*empty.Empty, error) {
        log.Info("ExecHelloWorldChaos", "request", req)
 
        pid, err := s.crClient.GetPidFromContainerID(ctx, req.ContainerId)
        if err != nil {
-            return nil, err
+           return nil, err
        }
 
        cmd := bpm.DefaultProcessBuilder("sh", "-c", fmt.Sprintf("echo 'hello' `hostname`")).
