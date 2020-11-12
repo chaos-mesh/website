@@ -14,7 +14,7 @@ After [preparing the development environment](setup_env.md), let's develop a new
 
 ## Define the schema type
 
-To define the schema type for the new chaos object, add `helloworldchaos_types.go` in the api directory [`/api/v1alpha1`](https://github.com/chaos-mesh/chaos-mesh/tree/master/api/v1alpha1) and fill it with the following content:
+To define the schema type for the new chaos object, add `helloworldchaos_types.go` in the api directory [`api/v1alpha1`](https://github.com/chaos-mesh/chaos-mesh/tree/master/api/v1alpha1) and fill it with the following content:
 
 ```go
 package v1alpha1
@@ -73,7 +73,7 @@ status:
 
 ## Register the CRD
 
-The HelloWorldChaos object is a custom resource object in Kubernetes. This means you need to register the corresponding CRD in the Kubernetes API. Run `make yaml`, then the CRD will be generated in `/config/crd/bases/chaos-mesh.org_helloworldchaos.yaml`. In order to combine all these YAML file into `/manifests/crd.yaml`, modify [kustomization.yaml](https://github.com/chaos-mesh/chaos-mesh/blob/master/config/crd/kustomization.yaml) by adding the corresponding line as shown below:
+The HelloWorldChaos object is a custom resource object in Kubernetes. This means you need to register the corresponding CRD in the Kubernetes API. Run `make yaml`, then the CRD will be generated in `config/crd/bases/chaos-mesh.org_helloworldchaos.yaml`. In order to combine all these YAML file into `manifests/crd.yaml`, modify [kustomization.yaml](https://github.com/chaos-mesh/chaos-mesh/blob/master/config/crd/kustomization.yaml) by adding the corresponding line as shown below:
 
 ```yaml
 resources:
@@ -83,11 +83,11 @@ resources:
   - bases/chaos-mesh.org_helloworldchaos.yaml # this is the new line
 ```
 
-Then the definition of HelloWorldChaos will show in `/manifests/crd.yaml`. You can check it through `git diff`
+Run `make yaml` again, and the definition of HelloWorldChaos will show in `manifests/crd.yaml`. You can check it through `git diff`
 
 ## Register the handler for this chaos object
 
-Create file `/controllers/helloworldchaos/endpoint.go` and fill it with following codes:
+Create file `controllers/helloworldchaos/types.go` and fill it with following codes:
 
 ```go
 package helloworldchaos
@@ -132,7 +132,7 @@ func init() {
 }
 ```
 
-We should also import `github.com/chaos-mesh/chaos-mesh/controllers/helloworldchaos` in the `/cmd/controller-manager/main.go`, then it will register on the route table when the controller starts up.
+We should also import `github.com/chaos-mesh/chaos-mesh/controllers/helloworldchaos` in the `cmd/controller-manager/main.go`, then it will register on the route table when the controller starts up.
 
 ## Make the Docker image
 
@@ -146,6 +146,14 @@ Then push it to your registry:
 
 ```bash
 make docker-push
+```
+
+If your Kubernetes cluster is deployed by Kind, you need to load images to Kind:
+
+```bash
+kind load docker-image localhost:5000/pingcap/chaos-mesh:latest
+kind load docker-image localhost:5000/pingcap/chaos-daemon:latest
+kind load docker-image localhost:5000/pingcap/chaos-dashboard:latest
 ```
 
 ## Run chaos
@@ -247,9 +255,7 @@ Now take the following steps to run chaos:
    kubectl get HelloWorldChaos -n chaos-testing
    ```
 
-   Now you should be able to check the `Hello World!` result in the log:
-
-   Now you can check the log of `chaos-controller-manager`:
+   Now you should be able to check the `Hello World!` result in the log of of `chaos-controller-manager`:
 
    ```bash
    kubectl logs chaos-controller-manager-{pod-post-fix} -n chaos-testing
