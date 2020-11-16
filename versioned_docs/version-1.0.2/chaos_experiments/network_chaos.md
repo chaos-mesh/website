@@ -92,11 +92,13 @@ delay:
 
 **latency** defines the delay time in sending packets.
 
-**jitter** specifies the jitter of the delay time. Default is `0ms`.
+**jitter** specifies the jitter of the delay time. Default is `0ms`. Jitter is also referred technically as packet delay variation.
 
 **correlation** specifies the correlation of the jitter. Default is `0`.
 
 In the above example, the network latency is 90ms ± 90ms with 25% correlation.
+
+For a better understaning of Jitter, Latency and Network Delay, you can read [this article](https://www.speedcheck.org/wiki/jitter/).
 
 ### Network Duplicate
 
