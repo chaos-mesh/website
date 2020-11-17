@@ -6,6 +6,8 @@ sidebar_label: DNSChaos Experiment
 
 This document describes how to create DNSChaos experiments in Chaos Mesh.
 
+DNSChaos allows you to simulate response for DNS requests, include errors or random IP addresses.
+
 ## Deploy DNS service for chaos
 
 To create DNSChaos experiments in Chaos Mesh, need to deploy a DNS service in Chaos Mesh by executing the command below:
