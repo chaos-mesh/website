@@ -6,23 +6,23 @@ sidebar_label: DNSChaos Experiment
 
 This document describes how to create DNSChaos experiments in Chaos Mesh.
 
-DNSChaos allows you to simulate response for DNS requests, include errors or random IP addresses.
+DNSChaos allows you to simulate DNS responses in fault situations including DNS errors or random IP addresses.
 
 ## Deploy DNS service for chaos
 
-To create DNSChaos experiments in Chaos Mesh, need to deploy a DNS service in Chaos Mesh by executing the command below:
+To create DNSChaos experiments in Chaos Mesh, you need to deploy a DNS service in Chaos Mesh by executing the command below:
 
 ```bash
 helm upgrade chaos-mesh helm/chaos-mesh --namespace=chaos-testing --set dnsServer.create=true
 ```
 
-Then check the status of this DNS service:
+When the deployment finishes, check the status of this DNS service:
 
 ```bash
 kubectl get pods -n chaos-testing -l app.kubernetes.io/component=chaos-dns-server
 ```
 
-Make sure the pod's `STATUS` is `Running`.
+Make sure the Pod's `STATUS` is `Running`.
 
 ## Configuration file
 
@@ -63,10 +63,9 @@ For more sample files, see [examples](https://github.com/chaos-mesh/chaos-mesh/t
 
 ## Notes
 
-- Now DNS chaos only supports record type `A` and `AAAA`.
-- Chaos DNS Service runs coredns with plugin [k8s_dns_chaos](https://github.com/chaos-mesh/k8s_dns_chaos), If the coredns service in your K8s cluster contains some special configurations, you can edit configMap `dns-server-config` to make the configuration of chaos DNS service consistent with the K8s coredns service:
+- Currently, DNSChaos only supports record types `A` and `AAAA`.
+- The Chaos DNS service runs CoreDNS with the  [k8s_dns_chaos](https://github.com/chaos-mesh/k8s_dns_chaos) plugin, If the CoreDNS service in your Kubernetes cluster contains some special configurations, you can edit configMap `dns-server-config` to make the configuration of the chaos DNS service consistent with the K8s CoreDNS service:
 
     ```bash
     kubectl edit configmap dns-server-config -n chaos-testing
     ```
-
