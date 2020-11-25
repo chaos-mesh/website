@@ -6,7 +6,7 @@ sidebar_label: DNSChaos Experiment
 
 This document describes how to create DNSChaos experiments in Chaos Mesh.
 
-DNSChaos allows you to simulate DNS responses in fault situations including DNS errors or random IP addresses.
+DNSChaos allows you to simulate fault DNS responses such as a DNS error or a random IP address after a request is sent.
 
 ## Deploy DNS service for chaos
 
@@ -58,13 +58,13 @@ For more sample files, see [examples](https://github.com/chaos-mesh/chaos-mesh/t
     - `inner`- DNS chaos only works on inner hosts of the Kubernetes cluster
     - `all` - DNS chaos works on all hosts.
 
-* **selector** specifies the target pods for chaos injection. For more details, see [Define the Scope of Chaos Experiment](../user_guides/experiment_scope.md).
+* **selector** Specifies the target pods for chaos injection. For more details, see [Define the Scope of Chaos Experiment](../user_guides/experiment_scope.md).
 
 
 ## Notes
 
 - Currently, DNSChaos only supports record types `A` and `AAAA`.
-- The Chaos DNS service runs CoreDNS with the  [k8s_dns_chaos](https://github.com/chaos-mesh/k8s_dns_chaos) plugin, If the CoreDNS service in your Kubernetes cluster contains some special configurations, you can edit configMap `dns-server-config` to make the configuration of the chaos DNS service consistent with the K8s CoreDNS service:
+- The chaos DNS service runs CoreDNS with the  [k8s_dns_chaos](https://github.com/chaos-mesh/k8s_dns_chaos) plugin. If the CoreDNS service in your Kubernetes cluster contains some special configurations, you can edit configMap `dns-server-config` to make the configuration of the chaos DNS service consistent with that of the K8s CoreDNS service as shown below:
 
     ```bash
     kubectl edit configmap dns-server-config -n chaos-testing
