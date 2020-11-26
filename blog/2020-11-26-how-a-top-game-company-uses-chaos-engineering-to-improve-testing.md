@@ -6,7 +6,7 @@ image: /img/fuxi-case-banner.jpg
 tags: [Chaos Mesh, Chaos Engineering]
 ---
 
-![How-a-Top-Game-Company-Uses-Chaos-Engineering-to-Improve-Testing](/img/fuxi-case-banner.png)
+![How-a-Top-Game-Company-Uses-Chaos-Engineering-to-Improve-Testing](/img/fuxi-case-banner.jpg)
 
 NetEase Fuxi AI Lab is China’s first professional game AI research institution. In their search for a Chaos Engineering tool to test their Kubernetes-based AI training platform, they chose Chaos Mesh and have improved their system resiliency ever since.
 
