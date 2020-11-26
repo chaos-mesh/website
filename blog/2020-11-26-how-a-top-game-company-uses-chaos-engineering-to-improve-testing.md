@@ -40,7 +40,7 @@ In 2019, when Chaos Mesh, a Chaos Engineering platform for Kubernetes was open-s
 
 Chaos Mesh has helped us find several important bugs. For example, it detected a brain-split issue in [rabbitMQ](https://www.rabbitmq.com/), the open-source message-queueing software for Danlu. According to [Wikipedia](https://en.wikipedia.org/wiki/Split-brain), “a split-brain condition indicates data or availability inconsistencies originating from the maintenance of two separate data sets with overlap in scope.” When a rabbitMQ cluster has a brain split error, there will be data write conflicts or errors, which cause more serious problems such as data inconsistencies in the messaging service. As shown in our architecture below, when brain split happens, consumers do not function normally and keep reporting server exceptions.
 
-![Architecture of a RabbitMQ cluster](//img/architecture-of-a-rabbitmq-cluster.png)
+![Architecture of a RabbitMQ cluster](/img/architecture-of-a-rabbitmq-cluster.png)
 
 With Chaos Mesh, we could stably reproduce this issue by injecting `pod-kill` faults into our container instances cloud.
 
