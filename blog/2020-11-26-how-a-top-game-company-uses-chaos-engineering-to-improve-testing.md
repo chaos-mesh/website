@@ -66,6 +66,6 @@ However, Chaos Engineering is a big area to work on. In the future, we’d like 
 
 * Standard test cases for general components such as MySQL, Redis, and Kafka
 
-We’ve discussed these features with those who maintain Chaos Mesh, and they said these features are on the Chaos Mesh 2.0 roadmap. 
+We’ve discussed these features with those who maintain Chaos Mesh, and they said these features are on the Chaos Mesh 2.0 roadmap.
 
 If you are interested, join the Chaos Mesh community via [Slack](https://join.slack.com/t/cloud-native/shared_invite/zt-fyy3b8up-qHeDNVqbz1j8HDY6g1cY4w) (#project-chaos-mesh) or [GitHub](https://github.com/chaos-mesh/chaos-mesh).
