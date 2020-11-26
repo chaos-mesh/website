@@ -66,4 +66,4 @@ In case you want to try Chaos Mesh in your browser, checkout [Katakoda interacti
 ## Join the community
 
 Anyone who wants to explore the area of chaos engineering or Chaos Mesh are welcomed to join the Chaos Mesh community. Being a member of the Chaos Mesh community, I would like to say it is a lovely community where project maintainers love to engage and hear your views and suggestions for the improvement of the project and the community.
-To join and learn more about Chaos Mesh, find the #project-chaos-mesh channel in [CNCF slack workspace](https://slack.cncf.io/).
+To join and learn more about Chaos Mesh, find the #project-chaos-mesh channel in [CNCF slack workspace](https://cloud-native.slack.com/).

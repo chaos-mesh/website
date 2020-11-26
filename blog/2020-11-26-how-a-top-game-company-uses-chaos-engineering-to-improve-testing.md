@@ -20,17 +20,17 @@ In this article, I’ll discuss one of our most valuable testing tools, [Chaos M
 
 We started our search for a Chaos Engineering tool in 2018. We were looking for a tool with:
 
-* Cloud-native support. Kubernetes is practically the de facto standard for service orchestration and scheduling, and the application runtime has been fully standardized. For applications that run entirely on K8s, cloud-native support is a must for any tools that go with them.
+- Cloud-native support. Kubernetes is practically the de facto standard for service orchestration and scheduling, and the application runtime has been fully standardized. For applications that run entirely on K8s, cloud-native support is a must for any tools that go with them.
 
-* Sufficient fault injection types. For stateful services, network failure simulation is particularly important. The platform must be able to simulate failures at different levels, such as Pods, network, and I/O.
+- Sufficient fault injection types. For stateful services, network failure simulation is particularly important. The platform must be able to simulate failures at different levels, such as Pods, network, and I/O.
 
-* Good observability. Knowing when a fault is injected and when it can be recovered is vital for us to tell whether there is an abnormality in the application.
+- Good observability. Knowing when a fault is injected and when it can be recovered is vital for us to tell whether there is an abnormality in the application.
 
-* Active community support. We want to use an open-source project that is thoroughly tested and consistently maintained. That’s why we value sustained and timely community support.
+- Active community support. We want to use an open-source project that is thoroughly tested and consistently maintained. That’s why we value sustained and timely community support.
 
-* No intrusion on existing applications, with no domain knowledge required.
+- No intrusion on existing applications, with no domain knowledge required.
 
-* Actual use cases for us to evaluate and build upon.
+- Actual use cases for us to evaluate and build upon.
 
 In 2019, when Chaos Mesh, a Chaos Engineering platform for Kubernetes was open-sourced, we found the tool we were looking for. It was still in its early stage; however, we were immediately struck with the richness of fault types it supported. This was a big advantage over other chaos engineering tools, because, to a certain degree, it determines the number of issues that we can locate in the system. We instantly realized that Chaos Mesh met our expectations in almost every way.
 
@@ -58,14 +58,14 @@ Chaos Mesh is constantly updated and improved. When we first adopted it, it hadn
 
 It’s amazing to see how much Chaos Mesh has grown and how much traction it’s gaining. We’re also happy with what we have achieved with it.
 
-However, Chaos Engineering is a big area to work on. In the future, we’d like to see the following features: 
+However, Chaos Engineering is a big area to work on. In the future, we’d like to see the following features:
 
-* Atomic fault injection
+- Atomic fault injection
 
-* Unattended fault inject that combines customized fault types with standardized methods to validate experimental objects
+- Unattended fault inject that combines customized fault types with standardized methods to validate experimental objects
 
-* Standard test cases for general components such as MySQL, Redis, and Kafka
+- Standard test cases for general components such as MySQL, Redis, and Kafka
 
 We’ve discussed these features with those who maintain Chaos Mesh, and they said these features are on the Chaos Mesh 2.0 roadmap.
 
-If you are interested, join the Chaos Mesh community via [Slack](https://join.slack.com/t/cloud-native/shared_invite/zt-fyy3b8up-qHeDNVqbz1j8HDY6g1cY4w) (#project-chaos-mesh) or [GitHub](https://github.com/chaos-mesh/chaos-mesh).
+If you are interested, join the Chaos Mesh community via [Slack](https://cloud-native.slack.com/) (#project-chaos-mesh) or [GitHub](https://github.com/chaos-mesh/chaos-mesh).
