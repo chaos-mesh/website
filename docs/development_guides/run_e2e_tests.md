@@ -4,6 +4,14 @@ title: Run E2E Tests
 sidebar_label: Run E2E Tests
 ---
 
+## Overview
+
+When developers contribute codes, here is a check for PR called "E2E tests" before PR could be merged.
+
+E2E means "endpoint to endpoint", it tests chaos-mesh on a real Kubernetes from start to end, for keeping software's correctness and ensuring end-users experience.
+
+Contributors could run e2e tests on a PR by commenting `/run-e2e-tests`, but it will take a long time for waiting until it's finished. If you want to run e2e on other specific kubernetes cluster, or you only want to focus on part of e2e tests, this document will help you.
+
 We build our e2e framework based on [kubetest2](https://github.com/kubernetes-sigs/kubetest2) and [ginkgo](https://onsi.github.io/ginkgo/). There are several ways to run e2e tests.
 
 ## Run e2e tests on your local-machine
@@ -51,3 +59,35 @@ After that, you could execute e2e tests by
 make e2e-build
 ./test/image/e2e/bin/ginkgo ./test/image/e2e/bin/e2e.test
 ```
+
+> "KUBECONFIG" environment variable must be set before run e2e tests, you could also claim it like `KUBECONFIG=/path/to/your/kube/config./test/image/e2e/bin/ginkgo ./test/image/e2e/bin/e2e.test`
+
+## Run specific part of e2e tests
+
+Our e2e tests are built on [ginkgo](https://onsi.github.io/ginkgo/), we could use `--focus` for running part of e2e tests.
+
+All e2e test cases are described like:
+
+```go
+ginkgo.Describe("[Basic]", func() {
+  ginkgo.Context("[PodChaos]", func() {
+    ginkgo.Context("[PodFailure]", func() {
+      ginkgo.It("[Schedule]", func() {
+        // test cases
+      })
+      ginkgo.It("[Pause]", func() {
+        // test cases
+      })
+    })
+  })
+  ginkgo.Context("[NetworkChaos]", func() {
+    ginkgo.Context("[NetworkPartition]", func() {
+      ginkgo.It("[Schedule]", func() {
+        // test cases
+      })
+    })
+  })
+})
+```
+
+We could use `./test/image/e2e/bin/ginkgo -focus="NetworkPartition" ./test/image/e2e/bin/e2e.test` for only running "NetworkPartition" e2e test case.
