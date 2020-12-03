@@ -104,7 +104,7 @@ Then the permission of selected files will be overridden with 110 in octal, whic
 
 > **Note**:
 >
-> Attributes could be cached by Linux kernel, so it might have no effect if your program had accessed it before.\*\*
+> Attributes could be cached by Linux kernel, so it might have no effect if your program had accessed it before.
 
 ## Common Linux system errors
 
