@@ -102,7 +102,7 @@ spec:
 
 Then the permission of selected files will be overridden with 110 in octal, which means the files cannot be read or modified (without CAP_DAC_OVERRIDE). See [available attributes](#available-attributes) for a list of all possible attributes to override.
 
-> \*\*Note:
+> **Note**:
 >
 > Attributes could be cached by Linux kernel, so it might have no effect if your program had accessed it before.\*\*
 
