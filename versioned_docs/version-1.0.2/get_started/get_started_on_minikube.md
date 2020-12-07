@@ -28,14 +28,9 @@ Perform the following steps to set up the local Kubernetes environment:
 2. Install helm:
 
    ```bash
-   curl https://raw.githubusercontent.com/helm/helm/master/scripts/get | bash
-   helm init
-   ```
-
-3. Check whether the helm tiller pod is running:
-
-   ```bash
-   kubectl -n kube-system get pods -l app=helm
+   curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+   chmod 700 get_helm.sh
+   ./get_helm.sh
    ```
 
 ## Step 2: Install Chaos Mesh
