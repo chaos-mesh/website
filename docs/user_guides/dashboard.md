@@ -166,11 +166,11 @@ Then create `ServiceAccount`, and bind the `ServiceAccount` with `Role`. Refer t
 
 #### Get the Token
 
-Get the token of `ServiceAccount` created above, refer to [creating-sample-user](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md) for more details.
+Get the token of `ServiceAccount` created above, refer to [getting-a-bearer-token](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md#getting-a-bearer-token) for more details.
 
 #### Login With Name and Token
 
- The Name can be any Name used to identify the Token, and a meaningful Name is suggested, such as `Clutser-Manager`, to indicate that the Token has permissions managed chaos experiment in the cluster.
+ The `Name` can be any string used to identify the `Token`, and a meaningful `Name` is suggested, such as `Cluster-Manager`, to indicate that the `Token` has permissions managed chaos experiments in the cluster.
 
 ![dashboard-login](/img/dashboard-login.png)
 
