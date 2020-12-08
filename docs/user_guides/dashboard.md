@@ -1,5 +1,5 @@
 ---
-id: Dashboard
+id: dashboard
 title: Dashboard
 ---
 
