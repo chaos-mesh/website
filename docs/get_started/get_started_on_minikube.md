@@ -42,7 +42,7 @@ You also can use [helm](https://helm.sh/) to [install Chaos Mesh manually](../us
 
 ### Verify your installation
 
-Verify if the chaos mesh is running
+Verify if Chaos Mesh is running
 
 ```bash
 kubectl get pod -n chaos-testing

@@ -34,9 +34,13 @@ If you are using k3s or k3d, please also specify `--k3s` flag.
   curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --k3s
 </PickVersion>
 
+**Note:**
+>
+> `install.sh` is suitable for trying Chaos Mesh out. If you want to use Chaos Mesh in production or other serious scenarios, Helm is the recommended deployment method.
+
 ### Verify your installation
 
-Verify if the chaos mesh is running (For the use of _kubectl_, you can refer to the [documentation](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).)
+Verify if Chaos Mesh is running (For the use of _kubectl_, you can refer to the [documentation](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).)
 
 ```bash
 kubectl get pod -n chaos-testing
