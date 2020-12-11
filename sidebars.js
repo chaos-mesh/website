@@ -52,6 +52,7 @@ module.exports = {
         'development_guides/set_up_the_development_environment',
         'development_guides/develop_a_new_chaos',
         'development_guides/add_facilities_to_chaos_daemon',
+        'development_guides/run_e2e_tests',
       ],
     },
     'faqs',
