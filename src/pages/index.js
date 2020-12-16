@@ -71,7 +71,7 @@ function Home() {
               {whoIsUsing.map((w) => (
                 <div key={w.name} className="col col--3">
                   <div className={styles.logoWrapper}>
-                    <img src={useBaseUrl(w.img)} alt={w.name} />
+                    <img style={w.style} src={useBaseUrl(w.img)} alt={w.name} />
                   </div>
                 </div>
               ))}
