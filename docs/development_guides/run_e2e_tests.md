@@ -22,7 +22,7 @@ It will take about 20~30 minutes to finish all the test cases.
 
 ## Run e2e tests on an existing cluster
 
-If you just want to run apart of test cases, or want to run it on an existing cluster, that's a common requirement during developing e2e tests or testing compatible between chaos-mesh and cloud-provided kubernetes cluster.
+If you want to run e2e tests on an existing cluster, that's a common requirement during developing e2e tests or testing compatible between chaos-mesh and cloud-provided kubernetes cluster.
 
 It supposes that chaos-mesh is already installed on your cluster, you could follow this [document](https://chaos-mesh.org/docs/user_guides/installation) to install chaos-mesh.
 
