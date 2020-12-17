@@ -35,7 +35,7 @@ If you are using k3s or k3d, please also specify `--k3s` flag.
 </PickVersion>
 
 **Note:**
->
+
 > `install.sh` is suitable for trying Chaos Mesh out. If you want to use Chaos Mesh in production or other serious scenarios, Helm is the recommended deployment method.
 
 ### Verify your installation
@@ -86,6 +86,12 @@ To use Chaos Mesh, you must create the related custom resource type first.
 
 <PickVersion className="language-bash">
   curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl apply -f -
+</PickVersion>
+
+For kuberentes < 1.15, `--validate=false` is needed to ignore the unexpected fields
+
+<PickVersion className="language-bash">
+  curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl apply --validate=false -f -
 </PickVersion>
 
 ### Step 3: Install Chaos Mesh
