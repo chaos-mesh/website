@@ -6,11 +6,11 @@ sidebar_label: Run E2E Tests
 
 ## Overview
 
-To ensure the correctness of code contributions, we use  "endpoint to endpoint" (e2e) testing to test Chaos Mesh on a real Kubernetes cluster. This document walks you through how to run e2e tests for each code contribution that you make. 
+To ensure the correctness of code contributions, we use "endpoint to endpoint" (e2e) testing to test Chaos Mesh on a real Kubernetes cluster. This document walks you through how to run e2e tests for each code contribution that you make.
 
 ## Run e2e tests on your local-machine
 
-You could run  full e2e tests on your local machine by executing `./hack/e2e.sh`. It requires docker to be installed locally.
+You could run full e2e tests on your local machine by executing `./hack/e2e.sh`. It requires docker to be installed locally.
 
 It generally takes about 20~30 minutes to finish all the test cases. Therefore, we do not recommend this method.
 
@@ -20,20 +20,13 @@ For common requirements such as developing e2e test cases or testing compatibili
 
 **Note:** Please make sure that Chaos Mesh is already installed on your local.
 
-1. Get the required images as listed below
-
-    - pingcap/e2e-helper:latest
-    - nginx:latest
-    ```
-
-2. Build e2e-helper docker images by executing:
+1. Build e2e-helper docker images by executing:
 
 ```shell
 DOCKER_REGISTRY="" make image-e2e-helper
 ```
 
-3. Load this docker image to all nodes in the cluster by executing:
-:
+2. Load this docker image to all nodes in the cluster by executing:
 
 ```shell
 minikube cache add pingcap/e2e-helper:latest
@@ -45,7 +38,7 @@ or
 kind load docker-image pingcap/e2e-helper:latest
 ```
 
-4. Now you should be able to execute e2e tests by executing:
+3. Now you should be able to execute e2e tests by executing:
 
 ```shell
 make e2e-build
