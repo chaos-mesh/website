@@ -49,7 +49,7 @@ make e2e-build
 
 ## Run specific part of e2e tests
 
-Our e2e tests are built on [ginkgo](https://onsi.github.io/ginkgo/), we could use `--focus` for running part of e2e tests.
+After you write new e2e test cases, or make changes on certain module, you do not need run full e2e tests. Our e2e tests are built on [ginkgo](https://onsi.github.io/ginkgo/), we could use `--focus` for running part of e2e tests.
 
 All e2e test cases are described like:
 
