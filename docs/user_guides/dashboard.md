@@ -31,7 +31,7 @@ helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --set da
 
 **Note:**
 >
-> 1. The security mode can be turned off only in test scenarios, and it is strongly recommended to turn it on in other cases.
+> 1. For actual testing scenarios, we strongly recommend that you enable the security mode.
 > 2. The security mode is disabled if you install Chaos Mesh by `install.sh`, which is suitable for trying Chaos Mesh out.
 
 ## Access Chaos Dashboard
