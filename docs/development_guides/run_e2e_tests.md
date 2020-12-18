@@ -6,42 +6,34 @@ sidebar_label: Run E2E Tests
 
 ## Overview
 
-When developers contribute codes, here is a check for PR called "E2E tests" before PR could be merged.
-
-E2E means "endpoint to endpoint", it tests chaos-mesh on a real Kubernetes from start to end, for keeping software's correctness and ensuring end-users experience.
-
-Contributors could run e2e tests on a PR by commenting `/run-e2e-tests`, but it will take a long time for waiting until it's finished. If you want to run e2e on other specific kubernetes cluster, or you only want to focus on part of e2e tests, this document will help you.
-
-We build our e2e framework based on [kubetest2](https://github.com/kubernetes-sigs/kubetest2) and [ginkgo](https://onsi.github.io/ginkgo/). There are several ways to run e2e tests.
+To ensure the correctness of code contributions, we use  "endpoint to endpoint" (e2e) testing to test Chaos Mesh on a real Kubernetes cluster. This document walks you through how to run e2e tests for each code contribution that you make. 
 
 ## Run e2e tests on your local-machine
 
-You could run full e2e tests on your local machine, just execute `./hack/e2e.sh`. It only needs docker installed on your machine.
+You could run  full e2e tests on your local machine by executing `./hack/e2e.sh`. It requires docker to be installed locally.
 
-It will take about 20~30 minutes to finish all the test cases.
+It generally takes about 20~30 minutes to finish all the test cases. Therefore, we do not recommend this method.
 
 ## Run e2e tests on an existing cluster
 
-If you want to run e2e tests on an existing cluster, that's a common requirement during developing e2e tests or testing compatible between chaos-mesh and cloud-provided kubernetes cluster.
+For common requirements such as developing e2e test cases or testing compatibilities between Chaos Mesh and Kubernetes clusters on the cloud, you would normally need to run 22e tests on an existing cluster. Take the following steps:
 
-It supposes that chaos-mesh is already installed on your cluster, you could follow this [document](https://chaos-mesh.org/docs/user_guides/installation) to install chaos-mesh.
+**Note:** Please make sure that Chaos Mesh is already installed on your local.
 
-There are several images needed by e2e tests, for example:
+1. Get the required images as listed below
 
-- pingcap/e2e-helper:latest
-- nginx:latest
+    - pingcap/e2e-helper:latest
+    - nginx:latest
+    ```
 
-Some of them are public docker images like `nginx:latest`, kubernetes will pull it from docker registry, so they could be ignored.
-
-Others are private or already changed with your changes, so you need manually preparing these images.
-
-You could build e2e-helper docker images by
+2. Build e2e-helper docker images by executing:
 
 ```shell
 DOCKER_REGISTRY="" make image-e2e-helper
 ```
 
-Then you should load this docker image to all nodes in the cluster. You could do this with
+3. Load this docker image to all nodes in the cluster by executing:
+:
 
 ```shell
 minikube cache add pingcap/e2e-helper:latest
@@ -53,7 +45,7 @@ or
 kind load docker-image pingcap/e2e-helper:latest
 ```
 
-After that, you could execute e2e tests by
+4. Now you should be able to execute e2e tests by executing:
 
 ```shell
 make e2e-build
