@@ -47,8 +47,7 @@ Now you should be able to access [`http://localhost:2333`](http://localhost:2333
 
 ## Log In
 
-If the Dashboard is installed with security mode, you need to fill in `Name` and `Token` when you open Dashboard in the browser. Otherwise, you can skip this section.
-
+By default, the security mode is enabled when using helm to install Chaos Mesh, and you will need to log in Chaos Dashboard with an account `Name` and `Token`. This section introduces how to create the account and the token. You can skip this step if you have disabled the security mode.
 
 ### Create the account
 
@@ -176,7 +175,7 @@ Refer to [getting-a-bearer-token](https://github.com/kubernetes/dashboard/blob/m
 
 ### Sign in
 
- The `Name` can be any string used to identify the `Token`, and a meaningful `Name` is suggested, such as `Cluster-Manager`, to indicate that the `Token` has permissions managed chaos experiments in the cluster.
+Now you have the token generated, you need to identify it with a `Name`. A meaningful name is suggested, for example, `Cluster-Manager`, to indicate that the token has permissions managed chaos experiments in the cluster.
 
 ![dashboard-login](/img/dashboard-login.png)
 
