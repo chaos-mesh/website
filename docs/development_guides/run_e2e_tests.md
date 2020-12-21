@@ -16,7 +16,7 @@ It generally takes about 20~30 minutes to finish all the test cases. Therefore, 
 
 ## Run e2e tests on an existing cluster
 
-For common requirements such as developing e2e test cases or testing compatibilities between Chaos Mesh and Kubernetes clusters on the cloud, you would normally need to run 22e tests on an existing cluster. Take the following steps:
+For common requirements such as developing e2e test cases or testing compatibilities between Chaos Mesh and Kubernetes clusters on the cloud, you would normally need to run e2e tests on an existing cluster. Take the following steps:
 
 **Note:** Please make sure that Chaos Mesh is already installed on your local.
 
@@ -49,7 +49,7 @@ make e2e-build
 
 ## Run specific part of e2e tests
 
-After you write new e2e test cases or make changes on a certain module, you do not need to run full e2e tests. Our e2e tests are built on [ginkgo](https://onsi.github.io/ginkgo/), so you can use `--focus` to run part of e2e tests. 
+After you write new e2e test cases or make changes on a certain module, you do not need to run full e2e tests. Our e2e tests are built on [ginkgo](https://onsi.github.io/ginkgo/), so you can use `--focus` to run part of e2e tests.
 
 For example, you have your full e2e tests as described below:
 
