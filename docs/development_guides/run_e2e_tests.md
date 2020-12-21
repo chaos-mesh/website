@@ -49,9 +49,9 @@ make e2e-build
 
 ## Run specific part of e2e tests
 
-After you write new e2e test cases, or make changes on certain module, you do not need run full e2e tests. Our e2e tests are built on [ginkgo](https://onsi.github.io/ginkgo/), we could use `--focus` for running part of e2e tests.
+After you write new e2e test cases or make changes on a certain module, you do not need to run full e2e tests. Our e2e tests are built on [ginkgo](https://onsi.github.io/ginkgo/), so you can use `--focus` to run part of e2e tests. 
 
-All e2e test cases are described like:
+For example, you have your full e2e tests as described below:
 
 ```go
 ginkgo.Describe("[Basic]", func() {
@@ -75,4 +75,4 @@ ginkgo.Describe("[Basic]", func() {
 })
 ```
 
-We could use `./test/image/e2e/bin/ginkgo -focus="NetworkPartition" ./test/image/e2e/bin/e2e.test` for only running "NetworkPartition" e2e test case.
+You can use `./test/image/e2e/bin/ginkgo -focus="NetworkPartition" ./test/image/e2e/bin/e2e.test` to run only the "NetworkPartition" e2e test case.
