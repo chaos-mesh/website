@@ -175,7 +175,7 @@ Refer to [getting-a-bearer-token](https://github.com/kubernetes/dashboard/blob/m
 
 ### Sign in
 
-Now you have the token generated, you need to identify it with a `Name`. A meaningful name is suggested, for example, `Cluster-Manager`, to indicate that the token has permissions managed chaos experiments in the cluster.
+With the token generated, you need to identify it with a `Name`. A meaningful name is recommended, for example, `Cluster-Manager`, to indicate that the token has permissions managed chaos experiments in the cluster.
 
 Sign in Chaos Dashboard with `Name` and `Token`:
 
