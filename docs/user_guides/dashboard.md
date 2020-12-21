@@ -55,7 +55,7 @@ Chaos Dashboard supports Role-Based Access Control (RBAC). To create the account
 
 1. Create the `Role`. Here are sample role configurations that you can choose from and edit to meet your specific requirement.
 
-- Cluster Manager
+  - Cluster Manager
 
     This role has administrative permissions on chaos experiments under all namespaces in the Kubernetes cluster, including creating, updating, archiving, and viewing chaos experiments.
 
@@ -83,7 +83,7 @@ Chaos Dashboard supports Role-Based Access Control (RBAC). To create the account
       - watch
     ```
 
-- Cluster Viewer
+  - Cluster Viewer
 
     This role has permission to view chaos experiments under all namespaces in the Kubernetes cluster.
 
@@ -107,7 +107,7 @@ Chaos Dashboard supports Role-Based Access Control (RBAC). To create the account
       - watch
     ```
 
-- Namespace Manager
+  - Namespace Manager
 
     This role has administrative permissions on chaos experiments under a specified namespace in the Kubernetes cluster, including creating, updating, archiving, and viewing chaos experiments.
 
@@ -136,7 +136,7 @@ Chaos Dashboard supports Role-Based Access Control (RBAC). To create the account
       - watch
     ```
 
-- Namespace Viewer
+  - Namespace Viewer
 
     This role has access to the chaos experiment under a specified namespace in the Kubernetes cluster.
 
