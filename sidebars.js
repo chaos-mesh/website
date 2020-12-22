@@ -25,6 +25,7 @@ module.exports = {
         'user_guides/installation',
         'user_guides/experiment_scope',
         'user_guides/run_chaos_experiment',
+        'user_guides/dashboard',
       ],
     },
     {
