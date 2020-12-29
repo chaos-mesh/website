@@ -23,6 +23,13 @@ const whoisUsing = [
     img: 'img/logos/juicefs.svg',
   },
   {
+    name: 'KingNet',
+    img: 'img/logos/kingnet.png',
+    style: {
+      marginBottom: '1rem',
+    },
+  },
+  {
     name: 'Meituan Dianping',
     img: 'img/logos/meituandianping.png',
   },
@@ -37,6 +44,21 @@ const whoisUsing = [
   {
     name: 'Qiniu Cloud',
     img: 'img/logos/qiniucloud.png',
+  },
+  {
+    name: 'Tencent',
+    img: 'img/logos/tencent.png',
+  },
+  {
+    name: 'Vald',
+    img: 'img/logos/vald.svg',
+    style: {
+      height: '40%',
+    },
+  },
+  {
+    name: 'WeBank',
+    img: 'img/logos/webank.png',
   },
   {
     name: 'Xpeng',
