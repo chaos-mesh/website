@@ -42,6 +42,10 @@ const whoisUsing = [
     img: 'img/logos/pulsar.svg',
   },
   {
+    name: 'Qihoo 360',
+    img: 'img/logos/qihoo360.png',
+  },
+  {
     name: 'Qiniu Cloud',
     img: 'img/logos/qiniucloud.png',
   },
