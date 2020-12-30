@@ -96,10 +96,6 @@
         {
           "type": "doc",
           "id": "version-1.0.3/chaos_experiments/kernelchaos_experiment"
-        },
-        {
-          "type": "doc",
-          "id": "version-1.0.3/chaos_experiments/dnschaos_experiment"
         }
       ]
     },
