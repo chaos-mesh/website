@@ -57,7 +57,7 @@ const whoisUsing = [
     name: 'Vald',
     img: 'img/logos/vald.svg',
     style: {
-      height: '40%',
+      height: '50%',
     },
   },
   {
