@@ -1,9 +1,9 @@
 ---
 id: dashboard
-title: Dashboard
+title: Chaos Dashboard
 ---
 
-Chaos Dashboard is a one-stop web UI for managing, designing, and monitoring chaos experiments on Chaos Mesh. This document provides a step-by-step introduction on how to use Chaos Dashboard.
+Chaos Dashboard is a one-step web UI for managing, designing, and monitoring chaos experiments on Chaos Mesh. This document provides a step-by-step introduction on how to use Chaos Dashboard.
 
 ## Install Chaos Dashboard
 
@@ -30,7 +30,7 @@ helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --set da
 ```
 
 **Note:**
->
+
 > - For actual testing scenarios, we strongly recommend that you enable the security mode.
 > - The security mode is disabled if you install Chaos Mesh by `install.sh`, which is suitable for trying Chaos Mesh out.
 
@@ -44,7 +44,6 @@ kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333
 
 Now you should be able to access [`http://localhost:2333`](http://localhost:2333) in the browser.
 
-
 ## Log In
 
 By default, the security mode is enabled when using helm to install Chaos Mesh, and you will need to log in Chaos Dashboard with an account `Name` and `Token`. This section introduces how to create the account and the token. You can skip this step if you have disabled the security mode.
@@ -55,111 +54,111 @@ Chaos Dashboard supports Role-Based Access Control (RBAC). To create the account
 
 1. Create the `Role`. Here are sample role configurations that you can choose from and edit to meet your specific requirement.
 
-  - Cluster Manager
+   - **Cluster Manager**
 
-    This role has administrative permissions on chaos experiments under all namespaces in the Kubernetes cluster, including creating, updating, archiving, and viewing chaos experiments.
+     This role has administrative permissions on chaos experiments under all namespaces in the Kubernetes cluster, including creating, updating, archiving, and viewing chaos experiments.
 
-    Sample configuration file:
+     Sample configuration file:
 
-    ```yaml
-    kind: ClusterRole
-    apiVersion: rbac.authorization.k8s.io/v1
-    metadata:
-      name: cluster-role-manager
-    rules:
-    - apiGroups: [""]
-      resources: ["pods", "namespaces"]
-      verbs: ["get", "watch", "list"]
-    - apiGroups:
-      - chaos-mesh.org
-      resources: [ "*" ]
-      verbs:
-      - create
-      - delete
-      - get
-      - list
-      - patch
-      - update
-      - watch
-    ```
+     ```yaml
+     kind: ClusterRole
+     apiVersion: rbac.authorization.k8s.io/v1
+     metadata:
+       name: cluster-role-manager
+     rules:
+       - apiGroups: ['']
+         resources: ['pods', 'namespaces']
+         verbs: ['get', 'list', 'watch']
+       - apiGroups:
+           - chaos-mesh.org
+         resources: ['*']
+         verbs:
+           - get
+           - list
+           - watch
+           - create
+           - update
+           - patch
+           - delete
+     ```
 
-  - Cluster Viewer
+   - **Cluster Viewer**
 
-    This role has permission to view chaos experiments under all namespaces in the Kubernetes cluster.
+     This role has permission to view chaos experiments under all namespaces in the Kubernetes cluster.
 
-    Sample configuration file:
+     Sample configuration file:
 
-    ```yaml
-    kind: ClusterRole
-    apiVersion: rbac.authorization.k8s.io/v1
-    metadata:
-      name: cluster-role-reader
-    rules:
-    - apiGroups: [""]
-      resources: ["pods", "namespaces"]
-      verbs: ["get", "watch", "list"]
-    - apiGroups:
-      - chaos-mesh.org
-      resources: [ "*" ]
-      verbs:
-      - get
-      - list
-      - watch
-    ```
+     ```yaml
+     kind: ClusterRole
+     apiVersion: rbac.authorization.k8s.io/v1
+     metadata:
+       name: cluster-role-reader
+     rules:
+       - apiGroups: ['']
+         resources: ['pods', 'namespaces']
+         verbs: ['get', 'list', 'watch']
+       - apiGroups:
+           - chaos-mesh.org
+         resources: ['*']
+         verbs:
+           - get
+           - list
+           - watch
+     ```
 
-  - Namespace Manager
+   - **Namespace Manager**
 
-    This role has administrative permissions on chaos experiments under a specified namespace in the Kubernetes cluster, including creating, updating, archiving, and viewing chaos experiments.
+     This role has administrative permissions on chaos experiments under a specified namespace in the Kubernetes cluster, including creating, updating, archiving, and viewing chaos experiments.
 
-    The sample configuration file is as follows:
+     The sample configuration file is as follows:
 
-    ```yaml
-    kind: Role
-    apiVersion: rbac.authorization.k8s.io/v1
-    metadata:
-      namespace: namespace-test
-      name: role-test-manager
-    rules:
-    - apiGroups: [""]
-      resources: ["pods", "namespaces"]
-      verbs: ["get", "watch", "list"]
-    - apiGroups:
-      - chaos-mesh.org
-      resources: [ "*" ]
-      verbs:
-      - create
-      - delete
-      - get
-      - list
-      - patch
-      - update
-      - watch
-    ```
+     ```yaml
+     kind: Role
+     apiVersion: rbac.authorization.k8s.io/v1
+     metadata:
+       name: namespace-test-role-manager
+       namespace: test
+     rules:
+       - apiGroups: ['']
+         resources: ['pods', 'namespaces']
+         verbs: ['get', 'list', 'watch']
+       - apiGroups:
+           - chaos-mesh.org
+         resources: ['*']
+         verbs:
+           - get
+           - list
+           - watch
+           - create
+           - update
+           - patch
+           - delete
+     ```
 
-  - Namespace Viewer
+   - Namespace Viewer
 
-    This role has access to the chaos experiment under a specified namespace in the Kubernetes cluster.
+     This role has access to the chaos experiment under a specified namespace in the Kubernetes cluster.
 
-    Sample configuration file:
+     Sample configuration file:
 
-    ```yaml
-    kind: Role
-    apiVersion: rbac.authorization.k8s.io/v1
-    metadata:
-      namespace: namespace-test
-      name: role-test-reader
-    rules:
-    - apiGroups: [""]
-      resources: ["pods", "namespaces"]
-      verbs: ["get", "watch", "list"]
-    - apiGroups:
-      - chaos-mesh.org
-      resources: [ "*" ]
-      verbs:
-      - get
-      - list
-      - watch
-    ```
+     ```yaml
+     kind: Role
+     apiVersion: rbac.authorization.k8s.io/v1
+     metadata:
+       name: namespace-test-role-reader
+       namespace: test
+     rules:
+       - apiGroups: ['']
+         resources: ['pods', 'namespaces']
+         verbs: ['get', 'list', 'watch']
+       - apiGroups:
+           - chaos-mesh.org
+         resources: ['*']
+         verbs:
+           - get
+           - list
+           - watch
+     ```
 
 2. Create a `ServiceAccount`, and bind it with a specific `Role`. Refer to [RBAC](https://kubernetes.io/zh/docs/reference/access-authn-authz/rbac/) for more details.
 
@@ -173,13 +172,13 @@ kubectl -n ${namespace} describe secret $(kubectl -n ${namespace} get secret | g
 
 Refer to [getting-a-bearer-token](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md#getting-a-bearer-token) for more details.
 
-### Sign in
+### Fill in
 
 With the token generated, you need to identify it with a `Name`. A meaningful name is recommended, for example, `Cluster-Manager`, to indicate that the token has permissions managed chaos experiments in the cluster.
 
-Sign in Chaos Dashboard with `Name` and `Token`:
+Fill in the form with `Name` and `Token`:
 
-![dashboard-login](/img/dashboard-login.png)
+![dashboard-login](/img/user_guides/dashboard-login.png)
 
 ## Create a chaos experiment
 
@@ -187,20 +186,38 @@ To create a chaos experiment on Chaos Dashboard:
 
 1. Click the **NEW EXPERIMENT** button to create a new chaos experiment:
 
-![dashboard-new-experiment](/img/dashboard-new-experiment.png)
+   ![dashboard-new-experiment](/img/user_guides/dashboard-new-exp.png)
 
-2. Configure the chaos experiment, including the experiment name, type, scheduling information, etc.
+2. Configure the chaos experiment, including the experiment type, name, scheduling information, etc.
 
-![dashboard-chaos-config](/img/dashboard-chaos-config.png)
+   ![dashboard-fill-experiment](/img/user_guides/dashboard-fill-exp.png)
 
 ## Manage a chaos experiment
 
 To manage a specific chaos experiment:
 
- 1. Click the **Experiments** button to view all the chaos experiments.
+1. Click the **Experiments** button to view all the chaos experiments.
 
-![dashboard-experiments](/img/dashboard-experiments.png)
+   ![dashboard-experiments](/img/user_guides/dashboard-experiments.png)
 
-2. Choose the target experiment to view the details, pause, archive, or update.
+2. Choose the target experiment to view the detail, archive, pause or update.
 
-![dashboard-chaos-manage](/img/dashboard-chaos-manage.png)
+   ![dashboard-experiment-detail](/img/user_guides/dashboard-exp-detail.png)
+
+## Homepage
+
+To observe all chaos status, enter the homepage:
+
+![dashboard-home](/img/user_guides/dashboard-home.png)
+
+Through the steps just now, you already know how to create an experiment and view its detail. But this is only one of the main features of the dashboard.
+
+Next, you can click the **TUTORIAL** button on the page to learn about all the features of the dashboard.
+
+## Settings
+
+Create and manage existing tokens on the settings page:
+
+![dashboard-settings](/img/user_guides/dashboard-settings.png)
+
+In addition, you can also choose a different theme or language.
