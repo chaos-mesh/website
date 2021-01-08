@@ -168,38 +168,9 @@ To create the account:
 
 2. Create a `ServiceAccount`, and bind it with a specific `Role`. Refer to [RBAC](https://kubernetes.io/zh/docs/reference/access-authn-authz/rbac/) for more details. Here are sample configurations that you can choose from and edit to meet your specific requirement. You need to save the configuration to an YAML file, and then use `kubectl apply -f {YAML-File}` to create it.
 
-   - **Create a ServiceAccount and bind namespace role**
-
-     Create a ServiceAccount and bind it with the role `Namespace Manager` or `Namespace Viewer`.
-
-     Sample configuration file:
-
-     ```yaml
-     kind: ServiceAccount
-     apiVersion: v1
-     metadata:
-     namespace: namespace-test
-     name: account-namespace-test-manager # use "account-namespace-test-viewer" for viewer
-
-     ---
-     apiVersion: rbac.authorization.k8s.io/v1
-     kind: RoleBinding
-     metadata:
-       name: bind-namespace-test-manager # use "bind-namespace-test-viewer" for viewer
-       namespace: namespace-test
-     subjects:
-       - kind: ServiceAccount
-         name: account-namespace-test-manager # use "account-namespace-test-viewer" for viewer
-         namespace: namespace-test
-     roleRef:
-       kind: Role
-       name: role-namespace-test-manager # use "role-namespace-test-viewer" for viewer
-       apiGroup: rbac.authorization.k8s.io
-     ```
-
    - **Create a ServiceAccount and bind cluster role**
 
-     Create a ServiceAccount and bind it with the role `Namespace Manager` or `Namespace Viewer`.
+     Create a ServiceAccount and bind it with the role `Cluster Manager` or `Cluster Viewer`.
 
      Sample configuration file:
 
@@ -217,11 +188,40 @@ To create the account:
        name: bind-cluster-manager # use "bind-cluster-viewer" for viewer
      subjects:
        - kind: ServiceAccount
-         name: account-cluster-manager # # use "account-cluster-viewer" for viewer
+         name: account-cluster-manager # use "account-cluster-viewer" for viewer
          namespace: chaos-testing
      roleRef:
        kind: ClusterRole
        name: cluster-role-manager # use "cluster-role-viewer" for viewer
+       apiGroup: rbac.authorization.k8s.io
+     ```
+
+   - **Create a ServiceAccount and bind namespace role**
+
+     Create a ServiceAccount and bind it with the role `Namespace Manager` or `Namespace Viewer`.
+
+     Sample configuration file:
+
+     ```yaml
+     kind: ServiceAccount
+     apiVersion: v1
+     metadata:
+       name: account-namespace-test-manager # use "account-namespace-test-viewer" for viewer
+       namespace: test
+
+     ---
+     apiVersion: rbac.authorization.k8s.io/v1
+     kind: RoleBinding
+     metadata:
+       name: bind-namespace-test-manager # use "bind-namespace-test-viewer" for viewer
+       namespace: test
+     subjects:
+       - kind: ServiceAccount
+         name: account-namespace-test-manager # use "account-namespace-test-viewer" for viewer
+         namespace: test
+     roleRef:
+       kind: Role
+       name: namespace-test-role-manager # use "namespace-test-role-viewer" for viewer
        apiGroup: rbac.authorization.k8s.io
      ```
 
@@ -284,3 +284,7 @@ Next, you can click the **TUTORIAL** button on the homepage to learn about all t
 To create and manage existing tokens:
 
 ![dashboard-settings](/img/user_guides/dashboard-settings.png)
+
+**Note:**
+
+> If `dashboard.securityMode=false` is set, This section be invisible.
