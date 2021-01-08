@@ -1,0 +1,22 @@
+{
+  "ignorePatterns": [
+    {
+      "pattern": "^/img/"
+    },
+    {
+      "pattern": "^http://localhost"
+    },
+    {
+      "pattern": "^../"
+    },
+    {
+      "pattern": "^https://github.com"
+    },
+    {
+      "pattern": "^https://www.linkedin.com"
+    },
+    {
+      "pattern": "https://hacktoberfest.digitalocean.com/login"
+    }
+  ]
+}
