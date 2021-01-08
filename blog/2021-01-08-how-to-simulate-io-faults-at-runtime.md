@@ -4,7 +4,7 @@ title: 'How to Simulate I/O Faults at Runtime?'
 author: Keao Yang
 author_title: Maintainer of Chaos Mesh
 author_url: https://github.com/YangKeao
-author_image_url: https://avatars2.githubusercontent.com/u/5244316?s=400&u=8bebc3f1abbd1add616638177ae874babe47f293&v=4
+author_image_url: https://avatars2.githubusercontent.com/u/5244316
 image: /img/how-to-simulate-io-faults-at-runtime.jpg
 tags: [Chaos Mesh, Chaos Engineering, Fault Injection]
 ---
@@ -25,29 +25,29 @@ Chaos Mesh 1.0 has changed all this. Now, we can use IOChaos to inject faults to
 
 To simulate I/O faults at runtime, we need to inject faults into a filesystem after the program starts [system calls](https://man7.org/linux/man-pages/man2/syscall.2.html) (such as reads and writes) but before the call requests arrive at the target filesystem. We can do that in one of two ways:
 
-+ Use Berkeley Packet Filter (BPF); however, it [cannot be used to inject delay](https://github.com/iovisor/bcc/issues/2336).
-+ Add a filesystem layer called ChaosFS before the target filesystem. ChaosFS uses the target filesystem as the backend and receives requests from the operating system. The entire call link is **target program syscall** -> **Linux kernel** -> **ChaosFS** -> **target filesystem**. Because ChaosFS is customizable, we can inject delays and errors as we want. Therefore, ChaosFS is our choice.
+- Use Berkeley Packet Filter (BPF); however, it [cannot be used to inject delay](https://github.com/iovisor/bcc/issues/2336).
+- Add a filesystem layer called ChaosFS before the target filesystem. ChaosFS uses the target filesystem as the backend and receives requests from the operating system. The entire call link is **target program syscall** -> **Linux kernel** -> **ChaosFS** -> **target filesystem**. Because ChaosFS is customizable, we can inject delays and errors as we want. Therefore, ChaosFS is our choice.
 
 But ChaosFS has several problems:
 
-+ If ChaosFS reads and writes files in the target filesystem, we need to [mount](https://man7.org/linux/man-pages/man2/mount.2.html) ChaosFS to a different path than the target path specified in the Pod configuration. ChaosFS **cannot** be mounted to the path of the target directory.
-+ We need to mount ChaosFS **before** the target program starts running. This is because the newly-mounted ChaosFS takes effect only on files that are newly opened by the program in the target filesystem.
-+ We need to mount ChaosFS to the target containter's `mnt` namespace. For details, see [mount_namespaces(7) — Linux manual page](https://man7.org/linux/man-pages/man7/mount_namespaces.7.html).
+- If ChaosFS reads and writes files in the target filesystem, we need to [mount](https://man7.org/linux/man-pages/man2/mount.2.html) ChaosFS to a different path than the target path specified in the Pod configuration. ChaosFS **cannot** be mounted to the path of the target directory.
+- We need to mount ChaosFS **before** the target program starts running. This is because the newly-mounted ChaosFS takes effect only on files that are newly opened by the program in the target filesystem.
+- We need to mount ChaosFS to the target containter's `mnt` namespace. For details, see [mount_namespaces(7) — Linux manual page](https://man7.org/linux/man-pages/man7/mount_namespaces.7.html).
 
 Before Chaos Mesh 1.0, we used the [mutating admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/) to implement IOChaos. This technique addressed the three problems lists above and allowed us to:
 
-+ Run scripts in the target container. This action changed the target directory of the ChaosFS's backend filesystem (for example, from `/mnt/a` to `/mnt/a_bak`) so that we could mount ChaosFS to the target path (`/mnt/a`).
-Modify the command that starts the Pod. For example, we could modify the original command `/app` to `/waitfs.sh /app`.
-+ The `waitfs.sh` script kept checking whether the filesystem was successfully mounted. If it was mounted, `/app` was started.
-+ Add a new container in the Pod to run ChaosFS. This container needed to share a volume with the target container (for example, `/mnt`), and then we mounted this volume to the target directory (for example, `/mnt/a`). We also properly enabled [mount propagation](https://kubernetes.io/docs/concepts/storage/volumes/#mount-propagation) for this volume's mount to penetrate the share to host and then penetrate slave to the target.
+- Run scripts in the target container. This action changed the target directory of the ChaosFS's backend filesystem (for example, from `/mnt/a` to `/mnt/a_bak`) so that we could mount ChaosFS to the target path (`/mnt/a`).
+  Modify the command that starts the Pod. For example, we could modify the original command `/app` to `/waitfs.sh /app`.
+- The `waitfs.sh` script kept checking whether the filesystem was successfully mounted. If it was mounted, `/app` was started.
+- Add a new container in the Pod to run ChaosFS. This container needed to share a volume with the target container (for example, `/mnt`), and then we mounted this volume to the target directory (for example, `/mnt/a`). We also properly enabled [mount propagation](https://kubernetes.io/docs/concepts/storage/volumes/#mount-propagation) for this volume's mount to penetrate the share to host and then penetrate slave to the target.
 
 These three approaches allowed us to inject I/O faults while the program was running. However, the injection was far from convenient:
 
-+ We could only inject faults into a volume subdirectory, not into the entire volume. The workaround was to replace `mv` (rename) with `mount move` to move the mount point of the target volume.
-+ We had to explicitly write commands in the Pod rather than implicitly use the image commands. Otherwise, the `/waitfs.sh` script could not properly start the program after the filesystem was mounted.
-+ The corresponding container needed to have a proper configuration for mount propagation. Due to potential privacy and security issues, we **could not** modify the configuration via the mutating admission webhook.
-+ The injection configuration was troublesome. Worse still, we had to create a new Pod after the configuration was able to inject faults.
-+ We could not withdraw ChaosFS while the program was running. Even if no fault or error was injected, the performance was greatly affected.
+- We could only inject faults into a volume subdirectory, not into the entire volume. The workaround was to replace `mv` (rename) with `mount move` to move the mount point of the target volume.
+- We had to explicitly write commands in the Pod rather than implicitly use the image commands. Otherwise, the `/waitfs.sh` script could not properly start the program after the filesystem was mounted.
+- The corresponding container needed to have a proper configuration for mount propagation. Due to potential privacy and security issues, we **could not** modify the configuration via the mutating admission webhook.
+- The injection configuration was troublesome. Worse still, we had to create a new Pod after the configuration was able to inject faults.
+- We could not withdraw ChaosFS while the program was running. Even if no fault or error was injected, the performance was greatly affected.
 
 ## Inject I/O faults without the mutating admission webhook
 
@@ -61,8 +61,8 @@ In fact, there is another solution. Instead of adding containers to the Pod, we 
 
 After the process is finished, the target container will open, read, and write the files in `/mnt` through ChaosFS. In this way, delays or faults are injected much more easily. However, there are still two questions to answer:
 
-+ How do you handle the files that are already opened by the target process?
-+ How do you recover the process given that we cannot unmount the filesystem when files are opened?
+- How do you handle the files that are already opened by the target process?
+- How do you recover the process given that we cannot unmount the filesystem when files are opened?
 
 ### Dynamically replace file descriptors
 
@@ -75,7 +75,7 @@ After the process is finished, the target container will open, read, and write t
 > **Note:**
 >
 > In the [x86_64 architecture](https://en.wikipedia.org/wiki/X86_assembly_language), the RIP register (also called an instruction pointer) always points to the memory address at which the next directive is run.
-To load the program into the target process memory spaces:
+> To load the program into the target process memory spaces:
 
 1. Use ptrace to call mmap in the target program to allocate the needed memory.
 2. Write the binary program to the newly allocated memory and make the RIP register point to it.
@@ -100,7 +100,7 @@ For example, the current process opens `/var/run/__chaosfs__test__/a` whose FD i
 
 After the process is finished, FD `1` of the current process points to `/var/run/test/a`. So that we can inject faults, any subsequent operations on the target file go through the [Filesystem in Userspace](https://en.wikipedia.org/wiki/Filesystem_in_Userspace) (FUSE). FUSE is a software interface for Unix and Unix-like computer operating systems that lets non-privileged users create their own file systems without editing kernel code.
 
-#### Write a program to make the target process replace its own file descriptor 
+#### Write a program to make the target process replace its own file descriptor
 
 The combined functionality of ptrace and dup2 make it possible for the tracer to make the tracee replace the opened FD by itself. Now, we need to write a binary program and make the target process run it:
 
@@ -108,22 +108,23 @@ The combined functionality of ptrace and dup2 make it possible for the tracer to
 >
 > In the implementation above, we assume that:
 >
-> + The threads of the target process are POSIX threads and share the opened files.
-> + When the target process creates threads using the `clone` function, the `CLONE_FILES` parameter is passed.
+> - The threads of the target process are POSIX threads and share the opened files.
+> - When the target process creates threads using the `clone` function, the `CLONE_FILES` parameter is passed.
 >
 > Therefore, Chaos Mesh only replaces the FD of the first thread in the thread group.
+
 1. Write a piece of assembly code according to the two sections above and the usage of syscall directives. [Here](https://github.com/chaos-mesh/toda/blob/1d73871d8ab72b8d1eace55f5222b01957193531/src/replacer/fd_replacer.rs#L133) is an example of the assembly code.
 2. Use an assembler to translate the code into a binary program. We use [dynasm-rs](https://github.com/CensoredUsername/dynasm-rs) as the assembler.
 3. Use ptrace to make the target process run this program.
-
-When the program runs, the FD is replaced at runtime.
+   When the program runs, the FD is replaced at runtime.
 
 ### Overall fault injection process
 
 The following diagram illustrates the overall I/O fault injection process:
 
 ![Fault injection process](/img/fault-injection-process.jpg)
-<div class="caption-center"> Fault injection process </div>
+
+<div style="margin: 1rem 0; font-style: italic; text-align: center;"> Fault injection process </div>
 
 In this diagram, each horizontal line corresponds to a thread that runs in the direction of the arrows. The **Mount/Umount Filesystem** and **Replace FD** tasks are carefully arranged in sequence. Given the process above, this arrangement makes a lot of sense.
 
@@ -131,9 +132,9 @@ In this diagram, each horizontal line corresponds to a thread that runs in the d
 
 I've discussed how we implement fault injection to simulate I/O faults at runtime (see [chaos-mesh/toda](https://github.com/chaos-mesh/toda)). However, the current implementation is far from perfect:
 
-+ Generation numbers are not supported.
-+ ioctl is not supported.
-+ Chaos Mesh does not immediately determine whether a filesystem is successfully mounted. It does so only after one second.
+- Generation numbers are not supported.
+- ioctl is not supported.
+- Chaos Mesh does not immediately determine whether a filesystem is successfully mounted. It does so only after one second.
 
 If you are interested in Chaos Mesh and would like to help us improve it, you're welcome to join [our Slack channel](https://cloud-native.slack.com/join/shared_invite/zt-fyy3b8up-qHeDNVqbz1j8HDY6g1cY4w#/) or submit your pull requests or issues to our [GitHub repository](https://github.com/chaos-mesh/chaos-mesh).
 
