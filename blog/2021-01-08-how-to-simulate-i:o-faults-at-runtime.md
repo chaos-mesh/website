@@ -4,7 +4,7 @@ title: 'How to Simulate I/O Faults at Runtime?'
 author: Keao Yang
 author_title: Maintainer of Chaos Mesh
 author_url: https://github.com/YangKeao
-author_image_url: https://avatars2.githubusercontent.com/u/5244316?s=400&u=8bebc3f1abbd1add616638177ae874babe47f293&v=4
+author_image_url: https://avatars2.githubusercontent.com/u/5244316
 image: /img/how-to-simulate-io-faults-at-runtime.jpg
 tags: [Chaos Mesh, Chaos Engineering, Fault Injection]
 ---
