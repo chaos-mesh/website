@@ -23,6 +23,13 @@
   transform: translateX(-50%);
 }
 
+@media screen and (max-width: 768px) {
+  .heroLogoWrapper {
+    width: 192px;
+    height: 192px;
+  }
+}
+
 .heroLogo {
   width: 80%;
   height: 80%;
@@ -60,6 +67,7 @@
 
 @media screen and (max-width: 768px) {
   .featureImage {
+    height: 192px;
     margin-bottom: 1.5rem;
   }
 }
@@ -73,6 +81,13 @@
   margin-top: 3rem;
   background: #fff;
   border-radius: 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .whiteboard {
+    width: 80%;
+    margin: 3rem auto 0;
+  }
 }
 
 .logoWrapper {

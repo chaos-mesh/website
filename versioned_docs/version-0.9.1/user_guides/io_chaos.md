@@ -151,7 +151,7 @@ kubectl annotate ns app-ns admission-webhook.chaos-mesh.org/init-request=chaosfs
 
 Then, you can start your application and define YAML file to start your chaos experiment.
 
-> **Note:**
+> **Note**:
 >
 > The value of the annotation in the above examples, `chaos-tikv` is the name field in your injection config.
 

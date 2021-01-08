@@ -4,15 +4,20 @@ import React from 'react'
 import { usePluginData } from '@docusaurus/useGlobalData'
 
 export const usePickVersion = () => {
-  const locationHref = window.location.href
-  const { versions } = usePluginData('docusaurus-plugin-content-docs')
+  const pathname = window.location.pathname
 
-  const latestStableVersion = versions.filter((d) => d.isLast)[0].name
-  let activeVersion = versions.filter((d) => locationHref.includes(d.name)).map((d) => d.name)[0]
-
-  if (locationHref.includes('/docs/next')) {
-    activeVersion = 'latest'
+  let preferred = window.localStorage.getItem('docs-preferred-version-default')
+  if (pathname === '/' && preferred) {
+    return preferred === 'current' ? 'latest' : preferred
   }
+
+  if (pathname.includes('/docs/next')) {
+    return 'latest'
+  }
+
+  const { versions } = usePluginData('docusaurus-plugin-content-docs')
+  const latestStableVersion = versions.filter((d) => d.isLast)[0].name
+  const activeVersion = versions.filter((d) => pathname.includes(d.name)).map((d) => d.name)[0]
 
   return activeVersion || latestStableVersion
 }

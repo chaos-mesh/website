@@ -1,22 +1,36 @@
 const whoisUsing = [
   {
-    name: 'celo',
+    name: 'APISIX',
+    img: 'img/logos/apisix.svg',
+    style: {
+      height: '80%',
+    },
+  },
+  {
+    name: 'Celo',
     img: 'img/logos/celo.png',
   },
   {
-    name: 'dailymotion',
+    name: 'Dailymotion',
     img: 'img/logos/dailymotion.svg',
   },
   {
-    name: 'fuxilab',
+    name: 'Fuxi Lab',
     img: 'img/logos/fuxilab.png',
   },
   {
-    name: 'juicefs',
+    name: 'juiceFS',
     img: 'img/logos/juicefs.svg',
   },
   {
-    name: 'meituandianping',
+    name: 'KingNet',
+    img: 'img/logos/kingnet.png',
+    style: {
+      marginBottom: '1rem',
+    },
+  },
+  {
+    name: 'Meituan Dianping',
     img: 'img/logos/meituandianping.png',
   },
   {
@@ -24,15 +38,34 @@ const whoisUsing = [
     img: 'img/logos/pingcap.svg',
   },
   {
-    name: 'pulsar',
+    name: 'Pulsar',
     img: 'img/logos/pulsar.svg',
   },
   {
-    name: 'qiniucloud',
+    name: 'Qihoo 360',
+    img: 'img/logos/qihoo360.png',
+  },
+  {
+    name: 'Qiniu Cloud',
     img: 'img/logos/qiniucloud.png',
   },
   {
-    name: 'xpeng',
+    name: 'Tencent',
+    img: 'img/logos/tencent.png',
+  },
+  {
+    name: 'Vald',
+    img: 'img/logos/vald.svg',
+    style: {
+      height: '50%',
+    },
+  },
+  {
+    name: 'WeBank',
+    img: 'img/logos/webank.png',
+  },
+  {
+    name: 'Xpeng',
     img: 'img/logos/xpeng.png',
   },
 ]

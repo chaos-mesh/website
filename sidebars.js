@@ -25,6 +25,7 @@ module.exports = {
         'user_guides/installation',
         'user_guides/experiment_scope',
         'user_guides/run_chaos_experiment',
+        'user_guides/dashboard',
       ],
     },
     {
@@ -37,6 +38,7 @@ module.exports = {
         'chaos_experiments/timechaos_experiment',
         'chaos_experiments/iochaos_experiment',
         'chaos_experiments/kernelchaos_experiment',
+        'chaos_experiments/dnschaos_experiment',
       ],
     },
     {

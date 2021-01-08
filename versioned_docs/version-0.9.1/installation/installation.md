@@ -34,9 +34,13 @@ If you are using k3s or k3d, please also specify `--k3s` flag.
   curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --k3s
 </PickVersion>
 
+**Note:**
+>
+> `install.sh` is suitable for trying Chaos Mesh out. If you want to use Chaos Mesh in production or other serious scenarios, Helm is the recommended deployment method.
+
 ### Verify your installation
 
-Verify if the chaos mesh is running (For the use of _kubectl_, you can refer to the [documentation](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).)
+Verify if Chaos Mesh is running (For the use of _kubectl_, you can refer to the [documentation](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).)
 
 ```bash
 kubectl get pod -n chaos-testing
@@ -207,6 +211,6 @@ Depending on your environment, there are two methods of installing Chaos Mesh:
 
 > **Note:**
 >
-> Currently, Chaos Dashboard is not installed by default. If you want to try it out, add `--set dashboard.create=true` in the helm commands above. Refer to [Configuration](https://github.com/chaos-mesh/chaos-mesh/tree/master/helm/chaos-mesh#configuration) for more information.
+> Currently, Chaos Dashboard is not installed by default. If you want to try it out, add `--set dashboard.create=true` in the `helm install` commands above. Refer to [Configuration](https://github.com/chaos-mesh/chaos-mesh/tree/master/helm/chaos-mesh#configuration) for more information.
 
 After executing the above commands, you should be able to see the output indicating that all Chaos Mesh pods are up and running. Otherwise, check the current environment according to the prompt message or create an [issue](https://github.com/chaos-mesh/chaos-mesh/issues) for help.

@@ -34,9 +34,13 @@ If you are using k3s or k3d, please also specify `--k3s` flag.
   curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --k3s
 </PickVersion>
 
+**Note:**
+
+> `install.sh` is suitable for trying Chaos Mesh out. If you want to use Chaos Mesh in production or other serious scenarios, Helm is the recommended deployment method.
+
 ### Verify your installation
 
-Verify if the chaos mesh is running (For the use of _kubectl_, you can refer to the [documentation](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).)
+Verify if Chaos Mesh is running (For the use of _kubectl_, you can refer to the [documentation](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands).)
 
 ```bash
 kubectl get pod -n chaos-testing
@@ -84,11 +88,17 @@ To use Chaos Mesh, you must create the related custom resource type first.
   curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl apply -f -
 </PickVersion>
 
+For kuberentes < 1.15, `--validate=false` is needed to ignore the unexpected fields
+
+<PickVersion className="language-bash">
+  curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl apply --validate=false -f -
+</PickVersion>
+
 ### Step 3: Install Chaos Mesh
 
 > **Note:**
 >
-> Currently, Chaos Dashboard is not installed by default. If you want to try it out, add `--set dashboard.create=true` in the helm commands above. Refer to [Configuration](https://github.com/chaos-mesh/chaos-mesh/tree/master/helm/chaos-mesh#configuration) for more information.
+> Currently, Chaos Dashboard is not installed by default. If you want to try it out, add `--set dashboard.create=true` in the `helm install` commands below. Refer to [Configuration](https://github.com/chaos-mesh/chaos-mesh/tree/master/helm/chaos-mesh#configuration) for more information.
 
 Depending on your environment, there are two methods of installing Chaos Mesh:
 
