@@ -287,4 +287,4 @@ To create and manage existing tokens:
 
 **Note:**
 
-> If `dashboard.securityMode=false` is set, This section be invisible.
+> If `dashboard.securityMode=false` is set, this section will be invisible.
