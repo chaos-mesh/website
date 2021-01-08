@@ -1,5 +1,5 @@
 ---
-slug: /how-to-simulate-i/o-faults-at-runtime
+slug: /how-to-simulate-io-faults-at-runtime
 title: 'How to Simulate I/O Faults at Runtime?'
 author: Keao Yang
 author_title: Maintainer of Chaos Mesh
