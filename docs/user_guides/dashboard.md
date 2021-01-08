@@ -194,7 +194,7 @@ To create the account:
        namespace: namespace-test
      roleRef:
        kind: Role
-       name: role-namespace-test-manager # use "arole-namespace-test-viewer" for viewer
+       name: role-namespace-test-manager # use "role-namespace-test-viewer" for viewer
        apiGroup: rbac.authorization.k8s.io
      ```
 
@@ -223,7 +223,7 @@ To create the account:
        namespace: chaos-testing
      roleRef:
        kind: ClusterRole
-       name: cluster-role-manager # use "account-cluster-viewer" for viewer
+       name: cluster-role-manager # use "cluster-role-viewer" for viewer
        apiGroup: rbac.authorization.k8s.io
      ```
 
