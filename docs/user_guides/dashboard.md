@@ -166,7 +166,7 @@ To create the account:
            - watch
      ```
 
-2. Create a `ServiceAccount`, and bind it with a specific `Role`. Refer to [RBAC](https://kubernetes.io/zh/docs/reference/access-authn-authz/rbac/) for more details. Here are sample configurations that you can choose from and edit to meet your specific requirement. You need to save the configuration to an YAML file, and then use `kubectl apply -f {YAML-File}` to create it. 
+2. Create a `ServiceAccount`, and bind it with a specific `Role`. Refer to [RBAC](https://kubernetes.io/zh/docs/reference/access-authn-authz/rbac/) for more details. Here are sample configurations that you can choose from and edit to meet your specific requirement. You need to save the configuration to an YAML file, and then use `kubectl apply -f {YAML-File}` to create it.
 
    - **Create a ServiceAccount and bind namespace role**
 
@@ -182,16 +182,15 @@ To create the account:
      name: account-namespace-test-manager # use "account-namespace-test-viewer" for viewer
 
      ---
-
      apiVersion: rbac.authorization.k8s.io/v1
      kind: RoleBinding
      metadata:
        name: bind-namespace-test-manager # use "bind-namespace-test-viewer" for viewer
        namespace: namespace-test
      subjects:
-     - kind: ServiceAccount
-       name: account-namespace-test-manager # use "account-namespace-test-viewer" for viewer
-       namespace: namespace-test
+       - kind: ServiceAccount
+         name: account-namespace-test-manager # use "account-namespace-test-viewer" for viewer
+         namespace: namespace-test
      roleRef:
        kind: Role
        name: role-namespace-test-manager # use "role-namespace-test-viewer" for viewer
@@ -201,7 +200,7 @@ To create the account:
    - **Create a ServiceAccount and bind cluster role**
 
      Create a ServiceAccount and bind it with the role `Namespace Manager` or `Namespace Viewer`.
-     
+
      Sample configuration file:
 
      ```yaml
@@ -212,15 +211,14 @@ To create the account:
        namespace: chaos-testing
 
      ---
-
      apiVersion: rbac.authorization.k8s.io/v1
      kind: ClusterRoleBinding
      metadata:
        name: bind-cluster-manager # use "bind-cluster-viewer" for viewer
      subjects:
-     - kind: ServiceAccount
-       name: account-cluster-manager # # use "account-cluster-viewer" for viewer
-       namespace: chaos-testing
+       - kind: ServiceAccount
+         name: account-cluster-manager # # use "account-cluster-viewer" for viewer
+         namespace: chaos-testing
      roleRef:
        kind: ClusterRole
        name: cluster-role-manager # use "cluster-role-viewer" for viewer
@@ -273,20 +271,16 @@ To manage a specific chaos experiment:
 
    ![dashboard-experiment-detail](/img/user_guides/dashboard-exp-detail.png)
 
-## Homepage
-
-To observe all chaos status, enter the homepage:
-
-![dashboard-home](/img/user_guides/dashboard-home.png)
+## Quick glance
 
 Through the steps just now, you already know how to create an experiment and view its detail. But this is only one of the main features of the dashboard.
 
-Next, you can click the **TUTORIAL** button on the page to learn about all the features of the dashboard.
+Next, you can click the **TUTORIAL** button on the homepage to learn about all the features of the dashboard.
 
-## Settings
+![dashboard-home](/img/user_guides/dashboard-home.png)
 
-Create and manage existing tokens on the settings page:
+## Manage existing tokens
+
+To create and manage existing tokens:
 
 ![dashboard-settings](/img/user_guides/dashboard-settings.png)
-
-In addition, you can also choose a different theme or language.
