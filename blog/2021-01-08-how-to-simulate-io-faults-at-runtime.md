@@ -124,7 +124,7 @@ The following diagram illustrates the overall I/O fault injection process:
 
 ![Fault injection process](/img/fault-injection-process.jpg)
 
-<div style="margin: 1rem 0; font-style: italic; text-align: center;"> Fault injection process </div>
+<div style={{ margin: '1rem 0', font-style: 'italic', textAlign: 'center' }}> Fault injection process </div>
 
 In this diagram, each horizontal line corresponds to a thread that runs in the direction of the arrows. The **Mount/Umount Filesystem** and **Replace FD** tasks are carefully arranged in sequence. Given the process above, this arrangement makes a lot of sense.
 
