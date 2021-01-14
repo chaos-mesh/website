@@ -40,7 +40,8 @@
 #banner {
   min-height: 56px;
   padding: 1rem;
-  background: var(--ifm-color-primary);
+  background: var(--ifm-color-primary-lighter);
+  font-size: 1.125rem;
   text-align: center;
 }
 
@@ -50,7 +51,7 @@
 }
 
 :root[data-theme='dark'] #banner {
-  background: var(--ifm-color-primary-darkest);
+  background: var(--ifm-color-primary-darker);
 }
 
 .cncf-logo {
