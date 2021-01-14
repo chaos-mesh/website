@@ -37,6 +37,23 @@
   }
 }
 
+#banner {
+  min-height: 56px;
+  padding: 1rem;
+  background: var(--ifm-color-primary-lighter);
+  font-size: 1.125rem;
+  text-align: center;
+}
+
+#banner a {
+  color: var(--ifm-background-surface-color);
+  text-decoration: underline;
+}
+
+:root[data-theme='dark'] #banner {
+  background: var(--ifm-color-primary-darker);
+}
+
 .cncf-logo {
   background: center no-repeat url('/img/logos/cncf-color.svg');
 }

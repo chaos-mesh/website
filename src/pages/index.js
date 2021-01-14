@@ -7,6 +7,7 @@ import styles from './index.module.css'
 import useBaseUrl from '@docusaurus/useBaseUrl'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import whoIsUsing from '../data/whoIsUsing'
+import Banner from '../components/Banner'
 
 function Feature({ imgUrl, title, description, reverse }) {
   return (
@@ -88,6 +89,8 @@ function Home() {
           <div className={clsx('cncf-logo', styles.cncfLogo)} />
         </div>
       </div>
+
+      <Banner />
     </Layout>
   )
 }
