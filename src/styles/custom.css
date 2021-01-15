@@ -38,6 +38,7 @@
 }
 
 #banner {
+  position: relative;
   min-height: 56px;
   padding: 1rem;
   background: var(--ifm-color-primary-lighter);
@@ -48,6 +49,19 @@
 #banner a {
   color: var(--ifm-background-surface-color);
   text-decoration: underline;
+}
+
+#banner .close {
+  position: absolute;
+  right: 0;
+  margin: 0 1rem;
+  padding: 0;
+}
+
+@media screen and (max-width: 768px) {
+  #banner .close {
+    display: none;
+  }
 }
 
 :root[data-theme='dark'] #banner {
