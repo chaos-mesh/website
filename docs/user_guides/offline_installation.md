@@ -140,7 +140,7 @@ You can choose to push these images to Docker Registry or Docker Hub.
    docker push $CHAOS_DASHBOARD_IMAGE
    ```
 
-### Install
+### Installation
 
    1. Unzip the repo archive files:
 
