@@ -70,7 +70,7 @@ Specify the version you are going to install in the offline environment:
 export CHAOS_MESH_VERSION="v1.1.0"
 ```
 
-### Load images
+### Load and push images
 
 Load the image from archive files:
 
@@ -79,8 +79,6 @@ docker load -i ./image-chaos-mesh
 docker load -i ./image-chaos-daemon
 docker load -i ./image-chaos-dashboard
 ```
-
-### Push images
 
 You can choose to push these images to Docker Registry or Docker Hub.
 
@@ -110,6 +108,10 @@ You can choose to push these images to Docker Registry or Docker Hub.
    docker push $CHAOS_DAEMON_IMAGE
    docker push $CHAOS_DASHBOARD_IMAGE
    ```
+
+   > **Note:**
+   >
+   > If the Docker Registry can only work locally, you need to load and push these images on each K8s node.
 
 - Push images to Docker Hub
 
