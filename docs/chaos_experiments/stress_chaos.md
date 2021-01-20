@@ -23,7 +23,6 @@ A StressChaos shares common configurations like other chaos, such as how to sele
      | Option    | Type    | Required | Description                                                                                                                                                                                          |
      | --------- | ------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
      | `workers` | Integer | True     | Specifies concurrent stressing instance.                                                                                                                                                             |
-     | `size`    | String  | False    | Specifies memory size consumed per worker, default is the total available memory. One can also specify the size as _%_ of total available memory or in units of _B, KB/KiB, MB/MiB, GB/GiB, TB/TiB_. |
 
   2. `cpu`
 
