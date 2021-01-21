@@ -3,7 +3,7 @@ id: offline_installation
 title: Offline Installation
 ---
 
-This document describes how to install Chaos Mesh under an offline environment, which means can not connect to the internet.
+This document describes how to install Chaos Mesh in an offline environment. 
 
 ## Prerequisites
 
@@ -15,7 +15,7 @@ Before deploying Chaos Mesh, make sure the following items have been installed:
 
 ## Prepare the installation file
 
-You need to prepare the installation file with a computer connected to the internet. Make sure Docker is installed on this computer.
+You need to prepare the installation file with a computer connected to the internet. 
 
 You can specify which version you want to install:
 
@@ -23,7 +23,7 @@ You can specify which version you want to install:
 export CHAOS_MESH_VERSION="v1.1.0"
 ```
 
-It is recommended to use the release version, or you can set it to `latest` if you want to experience the latest unstable version.
+It is recommended that you use a stable release, or you can set the version to `latest` if you want to experience the latest features that are under development. 
 
 ### Archive docker images
 
