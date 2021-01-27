@@ -1,3 +1,4 @@
+import Banner from '../components/Banner'
 import Layout from '@theme/Layout'
 import PickVersion from '../components/PickVersion'
 import React from 'react'
@@ -7,7 +8,6 @@ import styles from './index.module.css'
 import useBaseUrl from '@docusaurus/useBaseUrl'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import whoIsUsing from '../data/whoIsUsing'
-import Banner from '../components/Banner'
 
 function Feature({ imgUrl, title, description, reverse }) {
   return (
@@ -70,7 +70,7 @@ function Home() {
           <div className={styles.whiteboard}>
             <div className="row">
               {whoIsUsing.map((w) => (
-                <div key={w.name} className="col col--3">
+                <div key={w.name} className={clsx('col col--3', styles.whiteboardCol)}>
                   <div className={styles.logoWrapper}>
                     <img style={w.style} src={useBaseUrl(w.img)} alt={w.name} />
                   </div>

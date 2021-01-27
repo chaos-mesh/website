@@ -90,6 +90,24 @@
   }
 }
 
+@media (min-width: 512px) and (max-width: 768px) {
+  .whiteboardCol {
+    --ifm-col-width: calc(6 / 12 * 100%) !important;
+
+    flex: 0 0 var(--ifm-col-width) !important;
+    max-width: var(--ifm-col-width) !important;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .whiteboardCol {
+    --ifm-col-width: calc(4 / 12 * 100%) !important;
+
+    flex: 0 0 var(--ifm-col-width) !important;
+    max-width: var(--ifm-col-width) !important;
+  }
+}
+
 .logoWrapper {
   display: flex;
   justify-content: center;
