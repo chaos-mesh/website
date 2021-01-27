@@ -49,7 +49,8 @@ Description:
 - **mode** defines the mode to run chaos action.
 - **selector** specifies the target pods for chaos injection. For more details, see [Define the Scope of Chaos Experiment](../user_guides/experiment_scope.md).
 - **direction** specifies the partition direction. Supported directions are `from`, `to` and `both`.
-- **target** specifies the target for network partition.
+- **target** specifies the target for network chaos action.
+- **externalTargets** specifies the targets outside the Kubernetes cluster for network chaos action.
 - **duration** defines the duration for each chaos experiment. In the sample file above, the network partition lasts for `10` seconds.
 - **scheduler** defines the scheduler rules for the running time of the chaos experiment. For more rule information, see [robfig/cron](https://godoc.org/github.com/robfig/cron).
 
