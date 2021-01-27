@@ -18,7 +18,7 @@ In Chaos Mesh, we have defined the `spec.selector` field to specify the scope of
 
 1. Add the `Spec` field in `HelloWorldChaos`:
 
-   ```golang
+   ```go
    // HelloWorldChaos is the Schema for the helloworldchaos API
    type HelloWorldChaos struct {
        metav1.TypeMeta   `json:",inline"`
@@ -72,7 +72,7 @@ In order for `chaos-daemon` to accept requests from `chaos-controller-manager`, 
 
    Add a new file named `helloworld_server.go` under [chaosdaemon](https://github.com/chaos-mesh/chaos-mesh/tree/master/pkg/chaosdaemon), with the content as below:
 
-   ```golang
+   ```go
    package chaosdaemon
 
    import (
@@ -117,29 +117,29 @@ In order for `chaos-daemon` to accept requests from `chaos-controller-manager`, 
 
    For `HelloworldChaos`, `chaos-controller-manager` needs to send chaos request to `chaos-daemon` in `reconcile`. To do this, we need to update the file `controllers/helloworldchaos/types.go` created in [Develop a New Chaos](./dev_hello_world.md) with the content as below:
 
-   ```golang
+   ```go
    package helloworldchaos
 
    import (
-      "context"
-      "errors"
-      "fmt"
+       "context"
+       "errors"
+       "fmt"
 
-      "k8s.io/apimachinery/pkg/runtime"
-      ctrl "sigs.k8s.io/controller-runtime"
+       "k8s.io/apimachinery/pkg/runtime"
+       ctrl "sigs.k8s.io/controller-runtime"
 
-      "github.com/chaos-mesh/chaos-mesh/api/v1alpha1"
-      "github.com/chaos-mesh/chaos-mesh/controllers/common"
-      pb "github.com/chaos-mesh/chaos-mesh/pkg/chaosdaemon/pb"
-      "github.com/chaos-mesh/chaos-mesh/pkg/router"
-      ctx "github.com/chaos-mesh/chaos-mesh/pkg/router/context"
-      end "github.com/chaos-mesh/chaos-mesh/pkg/router/endpoint"
-      "github.com/chaos-mesh/chaos-mesh/pkg/utils"
+       "github.com/chaos-mesh/chaos-mesh/api/v1alpha1"
+       "github.com/chaos-mesh/chaos-mesh/controllers/common"
+       pb "github.com/chaos-mesh/chaos-mesh/pkg/chaosdaemon/pb"
+       "github.com/chaos-mesh/chaos-mesh/pkg/router"
+       ctx "github.com/chaos-mesh/chaos-mesh/pkg/router/context"
+       end "github.com/chaos-mesh/chaos-mesh/pkg/router/endpoint"
+       "github.com/chaos-mesh/chaos-mesh/pkg/utils"
    )
 
    // endpoint is dns-chaos reconciler
    type endpoint struct {
-      ctx.Context
+       ctx.Context
    }
 
    // Apply applies helloworld chaos
