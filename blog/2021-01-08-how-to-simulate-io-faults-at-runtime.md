@@ -102,7 +102,7 @@ After the process is finished, FD `1` of the current process points to `/var/run
 
 #### Write a program to make the target process replace its own file descriptor
 
-The combined functionality of ptrace and dup2 make it possible for the tracer to make the tracee replace the opened FD by itself. Now, we need to write a binary program and make the target process run it:
+The combined functionality of ptrace and dup2 makes it possible for the tracer to make the tracee replace the opened FD by itself. Now, we need to write a binary program and make the target process run it:
 
 > **Note:**
 >
