@@ -90,7 +90,7 @@ function Home() {
         </div>
       </div>
 
-      <Banner />
+      {/* <Banner /> */}
     </Layout>
   )
 }

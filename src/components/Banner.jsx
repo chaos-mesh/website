@@ -1,8 +1,7 @@
 import { useEffect } from 'react'
 
 const Banner = () => {
-  const content =
-    '🙋‍♀️ 🙋‍♂️ Contributors & adopters, take the&nbsp;<a href="https://bit.ly/3i3v2Vr" target="_blank">community survey</a>&nbsp;and claim your Chaos Mesh anniversary swag!'
+  const content = ''
 
   useEffect(() => {
     if (document.body.contains(document.querySelector('#banner')) || window.closeBanner) {
