@@ -8,11 +8,9 @@ tags: [Chaos Mesh, Chaos Engineering]
 
 ![How-a-Top-Game-Company-Uses-Chaos-Engineering-to-Improve-Testing](/img/fuxi-case-banner.jpg)
 
-NetEase Fuxi AI Lab is China’s first professional game AI research institution. In their search for a Chaos Engineering tool to test their Kubernetes-based AI training platform, they chose Chaos Mesh and have improved their system resiliency ever since.
+NetEase Fuxi AI Lab is China’s first professional game AI research institution. Researchers use our Kubernetes-based Danlu platform for algorithm development, training and tuning, and online publishing. Thanks to the integration with Kubernetes, our platform is much more efficient. However, due to Kubernetes- and microservices-related issues, we are constantly testing and improving our platform to make it more stable.
 
 <!--truncate-->
-
-NetEase Fuxi AI Lab is China’s first professional game AI research institution. Researchers use our Kubernetes-based Danlu platform for algorithm development, training and tuning, and online publishing. Thanks to the integration with Kubernetes, our platform is much more efficient. However, due to Kubernetes- and microservices-related issues, we are constantly testing and improving our platform to make it more stable.
 
 In this article, I’ll discuss one of our most valuable testing tools, [Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh). Chaos Mesh is an open-source Chaos Engineering tool that provides a wide range of fault injections and excellent fault monitoring through its Dashboard.
 
