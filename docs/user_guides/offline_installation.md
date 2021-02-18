@@ -15,9 +15,9 @@ Before deploying Chaos Mesh, make sure the following items have been installed:
 
 ## Prepare the installation file
 
-You need to prepare the installation file with a computer connected to the internet. 
+To install Chaos Mesh offline,  you need to get the installation images via an internet connection. Take the steps below:
 
-You can specify which version you want to install:
+1. Specify the version you want to install:
 
 ```bash
 export CHAOS_MESH_VERSION="v1.1.0"
@@ -25,11 +25,10 @@ export CHAOS_MESH_VERSION="v1.1.0"
 
 It is recommended that you use a stable release, or you can set the version to `latest` if you want to experience the latest features that are under development. 
 
-### Archive docker images
+2. Archive the docker images of Chaos Mesh:
 
-First, you need to pull images of Chaos Mesh:
 
-```bash
+```bash  #pull images of Chaos Mesh
 docker pull pingcap/chaos-mesh:${CHAOS_MESH_VERSION}
 docker pull pingcap/chaos-daemon:${CHAOS_MESH_VERSION}
 docker pull pingcap/chaos-dashboard:${CHAOS_MESH_VERSION}
@@ -43,9 +42,8 @@ docker save -o ./image-chaos-daemon pingcap/chaos-daemon:${CHAOS_MESH_VERSION}
 docker save -o ./image-chaos-dashboard pingcap/chaos-dashboard:${CHAOS_MESH_VERSION}
 ```
 
-### Download Chaos Mesh repo
+3. Download the Chaos Mesh repository to your local:
 
-Download Chaos Mesh repo with release version:
 
 ```bash
 wget "https://github.com/chaos-mesh/chaos-mesh/archive/${CHAOS_MESH_VERSION}.zip"
@@ -57,13 +55,12 @@ Or you can download the latest unstable version:
 wget https://github.com/chaos-mesh/chaos-mesh/archive/master.zip
 ```
 
-### Copy image and repo archive files
+4. Copy the ./image-chaos-mesh`, `./image-chaos-daemon`, `./image-chaos-dashboard` and `{CHAOS_MESH_VERSION}.zip` into the offline environment.
 
-Copy the file `./image-chaos-mesh`, `./image-chaos-daemon`, `./image-chaos-dashboard` and `{CHAOS_MESH_VERSION}.zip` into the offline environment.
 
 ## Install Chaos Mesh
 
-Now you already have the image and repo archive files in the offline environment, you can use them to install Chaos Mesh.
+Now that you already have the image and repo archive files in the offline environment, start installing Chaos Mesh.
 
 Specify the version you are going to install in the offline environment:
 ```bash
