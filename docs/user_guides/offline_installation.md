@@ -58,7 +58,7 @@ wget https://github.com/chaos-mesh/chaos-mesh/archive/master.zip
 4. Copy the ./image-chaos-mesh`, `./image-chaos-daemon`, `./image-chaos-dashboard` and `{CHAOS_MESH_VERSION}.zip` into the offline environment.
 
 
-## Install Chaos Mesh
+## Install Chaos Mesh offline
 
 Now that you already have the image and repo archive files in the offline environment, start installing Chaos Mesh.
 
