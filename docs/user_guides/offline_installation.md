@@ -23,7 +23,9 @@ To install Chaos Mesh offline,  you need to get the installation images via an i
 export CHAOS_MESH_VERSION="v1.1.0"
 ```
 
-It is recommended that you use a stable release, or you can set the version to `latest` if you want to experience the latest features that are under development. 
+> **Note:**
+>
+> It is recommended that you use a stable release, or you can set the version to `latest` if you want to experience the latest features that are under development.
 
 2. Archive the docker images of Chaos Mesh:
 
@@ -36,14 +38,13 @@ docker pull pingcap/chaos-dashboard:${CHAOS_MESH_VERSION}
 
 Then save these images to tar archives:
 
-```bash
+```bash #save images of Chaos Mesh to files
 docker save -o ./image-chaos-mesh pingcap/chaos-mesh:${CHAOS_MESH_VERSION}
 docker save -o ./image-chaos-daemon pingcap/chaos-daemon:${CHAOS_MESH_VERSION}
 docker save -o ./image-chaos-dashboard pingcap/chaos-dashboard:${CHAOS_MESH_VERSION}
 ```
 
 3. Download the Chaos Mesh repository to your local:
-
 
 ```bash
 wget "https://github.com/chaos-mesh/chaos-mesh/archive/${CHAOS_MESH_VERSION}.zip"
@@ -71,7 +72,7 @@ export CHAOS_MESH_VERSION="v1.1.0"
 
 Load the image from archive files:
 
-```bash
+```bash #load images of Chaos Mesh
 docker load -i ./image-chaos-mesh
 docker load -i ./image-chaos-daemon
 docker load -i ./image-chaos-dashboard
@@ -120,7 +121,7 @@ You can choose to push these images to Docker Registry or Docker Hub.
 
    Tag these images with `$DOCKER_REGISTRY`:
 
-   ```bash
+   ```bash #tag images of Chaos Mesh
    export CHAOS_MESH_IMAGE=$DOCKER_HUB/chaos-mesh:${CHAOS_MESH_VERSION}
    export CHAOS_DAEMON_IMAGE=$DOCKER_HUB/chaos-daemon:${CHAOS_MESH_VERSION}
    export CHAOS_DASHBOARD_IMAGE=$DOCKER_HUB/chaos-dashboard:${CHAOS_MESH_VERSION}
