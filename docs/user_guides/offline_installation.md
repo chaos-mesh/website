@@ -19,7 +19,7 @@ To install Chaos Mesh offline,  you need to get the installation images via an i
 
 1. Specify the version you want to install:
 
-```bash
+```bash #specify the version you are going to install
 export CHAOS_MESH_VERSION="v1.1.0"
 ```
 
@@ -64,7 +64,8 @@ wget https://github.com/chaos-mesh/chaos-mesh/archive/master.zip
 Now that you already have the image and repo archive files in the offline environment, start installing Chaos Mesh.
 
 Specify the version you are going to install in the offline environment:
-```bash
+
+```bash #specify the version you are going to install
 export CHAOS_MESH_VERSION="v1.1.0"
 ```
 
@@ -84,13 +85,13 @@ You can choose to push these images to Docker Registry or Docker Hub.
 
    Set the Docker Registry variable, for example:
 
-   ```bash
+   ```bash #set the Docker Registry variable
    export DOCKER_REGISTRY=localhost:5000
    ```
 
    Tag these images with `$DOCKER_REGISTRY`:
 
-   ```bash
+   ```bash #tag images of Chaos Mesh with $DOCKER_REGISTRY
    export CHAOS_MESH_IMAGE=$DOCKER_REGISTRY/pingcap/chaos-mesh:${CHAOS_MESH_VERSION}
    export CHAOS_DAEMON_IMAGE=$DOCKER_REGISTRY/pingcap/chaos-daemon:${CHAOS_MESH_VERSION}
    export CHAOS_DASHBOARD_IMAGE=$DOCKER_REGISTRY/pingcap/chaos-dashboard:${CHAOS_MESH_VERSION}
@@ -101,7 +102,7 @@ You can choose to push these images to Docker Registry or Docker Hub.
 
    Then push these images to Docker Registry:
 
-   ```bash
+   ```bash #push tags of Chaos Mesh to Docker Registry
    docker push $CHAOS_MESH_IMAGE
    docker push $CHAOS_DAEMON_IMAGE
    docker push $CHAOS_DASHBOARD_IMAGE
@@ -132,7 +133,7 @@ You can choose to push these images to Docker Registry or Docker Hub.
 
    Then push these images to Docker Registry:
 
-   ```bash
+   ```bash #push tags of Chaos Mesh to Docker hub
    docker push $CHAOS_MESH_IMAGE
    docker push $CHAOS_DAEMON_IMAGE
    docker push $CHAOS_DASHBOARD_IMAGE
@@ -142,7 +143,7 @@ You can choose to push these images to Docker Registry or Docker Hub.
 
    1. Unzip the repo archive files:
 
-   ```bash
+   ```bash #unzip archive file of repo
    unzip {CHAOS_MESH_VERSION}.zip chaos-mesh
    ```
 
@@ -150,13 +151,13 @@ You can choose to push these images to Docker Registry or Docker Hub.
 
    2. Create a namespace for install Chaos Mesh:
 
-   ```bash
+   ```bash #create a namespace for install Chaos Mesh
    kubectl create namespace chaos-testing
    ```
 
    3. Install Chaos Mesh by helm:
 
-   ```bash
+   ```bash #install Chaos Mesh by helm
    helm install chaos-mesh helm/chaos-mesh --namespace=chaos-testing \
       --set dashboard.create=true \
       --set chaosDaemon.image=$CHAOS_DAEMON_IMAGE \
@@ -166,13 +167,13 @@ You can choose to push these images to Docker Registry or Docker Hub.
 
    4. Check whether Chaos Mesh pods are installed:
 
-     ```bash
+     ```bash #get pods of Chaos Mesh
      kubectl get pods --namespace chaos-testing -l app.kubernetes.io/instance=chaos-mesh
      ```
 
      Expected output:
 
-     ```bash
+     ```bash #the output of kubectl
      NAME                                        READY   STATUS    RESTARTS   AGE
      chaos-controller-manager-6d6d95cd94-kl8gs   1/1     Running   0          3m40s
      chaos-daemon-5shkv                          1/1     Running   0          3m40s
