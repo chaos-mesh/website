@@ -43,4 +43,4 @@ How can you participate? It could not be easier with the following steps:
 
 In the spirit of open source and Hacktoberfest, we welcome all contributions and honor only valid PRs. However, we would not encourage or tolerate spammy contributions, which would not only cause waste to our maintainer’s time but also hurt the feelings and the integrity of the entire open source community. Spammy PRs will be labeled as "invalid" or "spam", and will be closed as invalid.
 
-Happy hacking! But don’t hack alone. Join #project-chaos-mesh in the [CNCF Slack](https://join.slack.com/t/cloud-native/shared_invite/zt-fyy3b8up-qHeDNVqbz1j8HDY6g1cY4w) to share your experience, provide your feedback on your experience, or let us help with any problem you have.
+Happy hacking! But don’t hack alone. Join #project-chaos-mesh in the [CNCF Slack](https://cloud-native.slack.com/join/shared_invite/zt-lo88vmyc-9e3jSdUXf3dLP2yKql4A0Q#/) to share your experience, provide your feedback on your experience, or let us help with any problem you have.

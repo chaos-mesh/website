@@ -55,7 +55,7 @@ Execute `kubectl describe` to check the specified chaos experiment resource.
   kubectl get pods -n yourNamespace --show-labels
   ```
 
-If the above steps cannot solve the problem or you encounter other related errors in controller's log, [file an issue](https://github.com/chaos-mesh/chaos-mesh/issues) or message us in the #project-chaos-mesh channel in the [CNCF Slack](https://join.slack.com/t/cloud-native/shared_invite/zt-fyy3b8up-qHeDNVqbz1j8HDY6g1cY4w) workspace.
+If the above steps cannot solve the problem or you encounter other related errors in controller's log, [file an issue](https://github.com/chaos-mesh/chaos-mesh/issues) or message us in the #project-chaos-mesh channel in the [CNCF Slack](https://cloud-native.slack.com/join/shared_invite/zt-lo88vmyc-9e3jSdUXf3dLP2yKql4A0Q#/) workspace.
 
 ## IOChaos
 
