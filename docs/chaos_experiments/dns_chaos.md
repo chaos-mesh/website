@@ -56,7 +56,7 @@ For more sample files, see [examples](https://github.com/chaos-mesh/chaos-mesh/t
     - `error` - Get an error when sending the DNS request
     - `random` - Get a random IP when sending the DNS request
 
-* **patterns**: Choose which domain names to take effect, support the placeholder ? and wildcard *, or the Specified domain name.
+* **patterns**: Choose which domain names to take effect, support the placeholder ? and wildcard *, or the specified domain name.
   - The wildcard * must be at the end of the string. For example, chaos-*.org is invalid.
   - If the patterns is empty, will take effect on all the domain names.
 
