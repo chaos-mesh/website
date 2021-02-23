@@ -137,7 +137,7 @@ Now that you already have the image and repo archive files in the offline enviro
    docker push $CHAOS_DASHBOARD_IMAGE
    ```
 
-2. Install Chaos Mesh offline with the following steps:
+4. Install Chaos Mesh offline with the following steps:
 
    a. Unzip the repo archive files to a path:
 
