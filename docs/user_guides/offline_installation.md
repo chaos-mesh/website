@@ -77,15 +77,15 @@ Now that you already have the image and repo archive files in the offline enviro
 
 3. Push the Chaos Mesh images. You can choose to push them to Docker Registry or Docker Hub.
 
-- Push images to Docker Registry
+   - Push images to Docker Registry
 
-   a. Set the Docker Registry variable, for example:
+      a. Set the Docker Registry variable, for example:
 
       ```bash
       export DOCKER_REGISTRY=localhost:5000
       ```
 
-   b. Tag these images with `$DOCKER_REGISTRY`:
+      b. Tag these images with `$DOCKER_REGISTRY`:
 
       ```bash
       export CHAOS_MESH_IMAGE=$DOCKER_REGISTRY/pingcap/chaos-mesh:${CHAOS_MESH_VERSION}
@@ -96,7 +96,7 @@ Now that you already have the image and repo archive files in the offline enviro
       docker image tag pingcap/chaos-dashboard:${CHAOS_MESH_VERSION} $CHAOS_DASHBOARD_IMAGE
       ```
 
-   c. Push these images to Docker Registry:
+      c. Push these images to Docker Registry:
 
       ```bash
       docker push $CHAOS_MESH_IMAGE
@@ -106,17 +106,17 @@ Now that you already have the image and repo archive files in the offline enviro
 
       > **Note:**
       >
-      > If the Docker Registry can only work locally, you need to load and push these images on each K8s node.
+      >  If the Docker Registry can only work locally, you need to load and push these images on each K8s node.
 
-- Push images to Docker Hub
+   - Push images to Docker Hub
 
-   a. Set the Docker Hub variable, for example:
+      a. Set the Docker Hub variable, for example:
 
       ```bash
       export DOCKER_HUB=hub
       ```
 
-   b. Tag these images with `$DOCKER_REGISTRY`:
+      b. Tag these images with `$DOCKER_REGISTRY`:
 
       ```bash
       export CHAOS_MESH_IMAGE=$DOCKER_HUB/chaos-mesh:${CHAOS_MESH_VERSION}
@@ -127,7 +127,7 @@ Now that you already have the image and repo archive files in the offline enviro
       docker image tag pingcap/chaos-dashboard:${CHAOS_MESH_VERSION} $CHAOS_DASHBOARD_IMAGE
       ```
 
-   c. Push these images to Docker Registry:
+      c. Push these images to Docker Registry:
 
       ```bash
       docker push $CHAOS_MESH_IMAGE
@@ -139,39 +139,39 @@ Now that you already have the image and repo archive files in the offline enviro
 
    a. Unzip the repo archive files to a path:
 
-      ```bash
-      unzip {CHAOS_MESH_VERSION}.zip chaos-mesh && cd chaos-mesh/*/
-      ```
+   ```bash
+   unzip {CHAOS_MESH_VERSION}.zip chaos-mesh && cd chaos-mesh/*/
+   ```
 
    b. Create a namespace for installing Chaos Mesh:
 
-      ```bash  
-      kubectl create namespace chaos-testing
-      ```
+   ```bash  
+   kubectl create namespace chaos-testing
+   ```
 
    c. Install Chaos Mesh by helm:
 
-      ```bash
-      helm install chaos-mesh helm/chaos-mesh  --namespace=chaos-testing \
-         --set dashboard.create=true \
-         --set chaosDaemon.image=$CHAOS_DAEMON_IMAGE \
-         --set controllerManager.image=$CHAOS_MESH_IMAGE \
-         --set dashboard.image=$CHAOS_DASHBOARD_IMAGE
-      ```
+   ```bash
+   helm install chaos-mesh helm/chaos-mesh  --namespace=chaos-testing \
+      --set dashboard.create=true \
+      --set chaosDaemon.image=$CHAOS_DAEMON_IMAGE \
+      --set controllerManager.image=$CHAOS_MESH_IMAGE \
+      --set dashboard.image=$CHAOS_DASHBOARD_IMAGE
+   ```
 
    d. Check whether Chaos Mesh pods are installed:
 
-      ```bash #get pods of Chaos Mesh
-      kubectl get pods --namespace chaos-testing -l app.kubernetes.io/instance=chaos-mesh
-      ```
+   ```bash #get pods of Chaos Mesh
+   kubectl get pods --namespace chaos-testing -l app.kubernetes.io/instance=chaos-mesh
+   ```
 
-      Expected output:
+   Expected output:
 
-      ```bash
-      NAME                                        READY   STATUS    RESTARTS   AGE
-      chaos-controller-manager-6d6d95cd94-kl8gs   1/1     Running   0          3m40s
-      chaos-daemon-5shkv                          1/1     Running   0          3m40s
-      chaos-dashboard-d998856f6-vgrjs             1/1     Running   0          3m40s
-      ```
+   ```bash
+   NAME                                        READY   STATUS    RESTARTS   AGE
+   chaos-controller-manager-6d6d95cd94-kl8gs   1/1     Running   0          3m40s
+   chaos-daemon-5shkv                          1/1     Running   0          3m40s
+   chaos-dashboard-d998856f6-vgrjs             1/1     Running   0          3m40s
+   ```
 
-      After executing the above commands, you should be able to see the output indicating that all Chaos Mesh pods are up and running. Otherwise, check the current environment according to the prompt message or create an [issue](https://github.com/chaos-mesh/chaos-mesh/issues) for help.
+   After executing the above commands, you should be able to see the output indicating that all Chaos Mesh pods are up and running. Otherwise, check the current environment according to the prompt message or create an [issue](https://github.com/chaos-mesh/chaos-mesh/issues) for help.
