@@ -36,7 +36,6 @@ docker pull pingcap/chaos-daemon:${CHAOS_MESH_VERSION}
 docker pull pingcap/chaos-dashboard:${CHAOS_MESH_VERSION}
 ```
 
-Then save these images to tar archives:
 
 ```bash #save images of Chaos Mesh to files
 docker save -o ./image-chaos-mesh pingcap/chaos-mesh:${CHAOS_MESH_VERSION}
@@ -63,23 +62,22 @@ wget https://github.com/chaos-mesh/chaos-mesh/archive/master.zip
 
 Now that you already have the image and repo archive files in the offline environment, start installing Chaos Mesh.
 
-Specify the version you are going to install in the offline environment:
+1. Specify the version you are going to install in the offline environment:
 
-```bash #specify the version you are going to install
-export CHAOS_MESH_VERSION="v1.1.0"
+    ```bash #specify the version you are going to install
+    export CHAOS_MESH_VERSION="v1.1.0"
 ```
 
-1. Load and push images
+2. Load the image from the archive files:
 
-Load the image from archive files:
 
-```bash #load images of Chaos Mesh
-docker load -i ./image-chaos-mesh
-docker load -i ./image-chaos-daemon
-docker load -i ./image-chaos-dashboard
-```
+    ```bash #load images of Chaos Mesh
+    docker load -i ./image-chaos-mesh
+    docker load -i ./image-chaos-daemon
+    docker load -i ./image-chaos-dashboard
+    ```
 
-You can choose to push these images to Docker Registry or Docker Hub.
+3. Push the Chaos Mesh images. You can choose to push them to Docker Registry or Docker Hub.
 
 - Push images to Docker Registry
 
@@ -139,9 +137,9 @@ You can choose to push these images to Docker Registry or Docker Hub.
    docker push $CHAOS_DASHBOARD_IMAGE
    ```
 
-2. Installation
+2. Install Chaos Mesh offline with the following steps:
 
-   a. Unzip the repo archive files:
+   a. Unzip the repo archive files to a path:
 
    ```bash #unzip archive file of repo
    unzip {CHAOS_MESH_VERSION}.zip chaos-mesh
@@ -149,9 +147,9 @@ You can choose to push these images to Docker Registry or Docker Hub.
 
    And then enter the directory.
 
-   b. Create a namespace for install Chaos Mesh:
+   b. Create a namespace for installing Chaos Mesh:
 
-   ```bash #create a namespace for install Chaos Mesh
+   ```bash  
    kubectl create namespace chaos-testing
    ```
 
