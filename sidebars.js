@@ -23,6 +23,7 @@ module.exports = {
       label: 'User Guides',
       items: [
         'user_guides/installation',
+        'user_guides/offline_installation',
         'user_guides/experiment_scope',
         'user_guides/run_chaos_experiment',
         'user_guides/dashboard',
