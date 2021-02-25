@@ -35,7 +35,10 @@ metadata:
   name: busybox-dns-chaos
 spec:
   action: random
-  scope: inner
+  patterns:
+    - google.com
+    - chaos-mesh.*
+    - github.?om
   mode: all
   selector:
     namespaces:
@@ -53,10 +56,9 @@ For more sample files, see [examples](https://github.com/chaos-mesh/chaos-mesh/t
     - `error` - Get an error when sending the DNS request
     - `random` - Get a random IP when sending the DNS request
 
-* **scope**: Defines the scope of the DNS chaos. Supported scopes are:
-    - `outer` - DNS chaos only works on outer hosts of the Kubernetes cluster
-    - `inner`- DNS chaos only works on inner hosts of the Kubernetes cluster
-    - `all` - DNS chaos works on all hosts.
+* **patterns**: Choose which domain names to take effect, support the placeholder ? and wildcard *, or the specified domain name.
+  - The wildcard * must be at the end of the string. For example, chaos-*.org is invalid.
+  - If the patterns is empty, will take effect on all the domain names.
 
 * **selector**: Specifies the target pods for chaos injection. For more details, see [Define the Scope of Chaos Experiment](../user_guides/experiment_scope.md).
 
