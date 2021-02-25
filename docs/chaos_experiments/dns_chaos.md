@@ -43,9 +43,9 @@ spec:
   selector:
     namespaces:
       - busybox
-  duration: "90s"
+  duration: '90s'
   scheduler:
-    cron: "@every 100s"
+    cron: '@every 100s'
 ```
 
 For more sample files, see [examples](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples). You can edit them as needed.
@@ -53,21 +53,22 @@ For more sample files, see [examples](https://github.com/chaos-mesh/chaos-mesh/t
 ## Fields description
 
 - **action**: Defines the chaos action for DNS chaos. Supported actions are:
-    - `error` - Get an error when sending the DNS request
-    - `random` - Get a random IP when sending the DNS request
 
-* **patterns**: Choose which domain names to take effect, support the placeholder ? and wildcard *, or the specified domain name.
-  - The wildcard * must be at the end of the string. For example, chaos-*.org is invalid.
+  - `error` - Get an error when sending the DNS request
+  - `random` - Get a random IP when sending the DNS request
+
+- **patterns**: Choose which domain names to take effect, support the placeholder ? and wildcard \*, or the specified domain name.
+
+  - The wildcard `_` must be at the end of the string. For example, `chaos-_.org` is invalid.
   - If the patterns is empty, will take effect on all the domain names.
 
-* **selector**: Specifies the target pods for chaos injection. For more details, see [Define the Scope of Chaos Experiment](../user_guides/experiment_scope.md).
-
+- **selector**: Specifies the target pods for chaos injection. For more details, see [Define the Scope of Chaos Experiment](../user_guides/experiment_scope.md).
 
 ## Notes
 
 - Currently, DNSChaos only supports record types `A` and `AAAA`.
-- The chaos DNS service runs CoreDNS with the  [k8s_dns_chaos](https://github.com/chaos-mesh/k8s_dns_chaos) plugin. If the CoreDNS service in your Kubernetes cluster contains some special configurations, you can edit configMap `dns-server-config` to make the configuration of the chaos DNS service consistent with that of the K8s CoreDNS service as shown below:
+- The chaos DNS service runs CoreDNS with the [k8s_dns_chaos](https://github.com/chaos-mesh/k8s_dns_chaos) plugin. If the CoreDNS service in your Kubernetes cluster contains some special configurations, you can edit configMap `dns-server-config` to make the configuration of the chaos DNS service consistent with that of the K8s CoreDNS service as shown below:
 
-    ```bash
-    kubectl edit configmap dns-server-config -n chaos-testing
-    ```
+  ```bash
+  kubectl edit configmap dns-server-config -n chaos-testing
+  ```

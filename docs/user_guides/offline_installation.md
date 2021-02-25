@@ -3,7 +3,7 @@ id: offline_installation
 title: Offline Installation
 ---
 
-This document describes how to install Chaos Mesh in an offline environment. 
+This document describes how to install Chaos Mesh in an offline environment.
 
 ## Prerequisites
 
@@ -15,7 +15,7 @@ Before deploying Chaos Mesh, make sure the following items have been installed:
 
 ## Prepare the installation file
 
-To install Chaos Mesh offline,  you need to get the installation images via an internet connection. Take the steps below:
+To install Chaos Mesh offline, you need to get the installation images via an internet connection. Take the steps below:
 
 1. Specify the version you want to install:
 
@@ -29,7 +29,7 @@ To install Chaos Mesh offline,  you need to get the installation images via an i
 
 2. Archive the docker images of Chaos Mesh:
 
-   ```bash  #pull images of Chaos Mesh
+   ```bash #pull images of Chaos Mesh
    docker pull pingcap/chaos-mesh:${CHAOS_MESH_VERSION}
    docker pull pingcap/chaos-daemon:${CHAOS_MESH_VERSION}
    docker pull pingcap/chaos-dashboard:${CHAOS_MESH_VERSION}
@@ -53,8 +53,7 @@ To install Chaos Mesh offline,  you need to get the installation images via an i
    wget https://github.com/chaos-mesh/chaos-mesh/archive/master.zip
    ```
 
-4. Copy the ./image-chaos-mesh`, `./image-chaos-daemon`, `./image-chaos-dashboard` and `{CHAOS_MESH_VERSION}.zip` into the offline environment.
-
+4. Copy the ./image-chaos-mesh`, `./image-chaos-daemon`, `./image-chaos-dashboard`and`{CHAOS_MESH_VERSION}.zip` into the offline environment.
 
 ## Install Chaos Mesh offline
 
@@ -74,66 +73,65 @@ Now that you already have the image and repo archive files in the offline enviro
    docker load -i ./image-chaos-dashboard
    ```
 
-
 3. Push the Chaos Mesh images. You can choose to push them to Docker Registry or Docker Hub.
 
    - Push images to Docker Registry
 
-      a. Set the Docker Registry variable, for example:
+     a. Set the Docker Registry variable, for example:
 
-      ```bash
-      export DOCKER_REGISTRY=localhost:5000
-      ```
+     ```bash
+     export DOCKER_REGISTRY=localhost:5000
+     ```
 
-      b. Tag these images with `$DOCKER_REGISTRY`:
+     b. Tag these images with `$DOCKER_REGISTRY`:
 
-      ```bash
-      export CHAOS_MESH_IMAGE=$DOCKER_REGISTRY/pingcap/chaos-mesh:${CHAOS_MESH_VERSION}
-      export CHAOS_DAEMON_IMAGE=$DOCKER_REGISTRY/pingcap/chaos-daemon:${CHAOS_MESH_VERSION}
-      export CHAOS_DASHBOARD_IMAGE=$DOCKER_REGISTRY/pingcap/chaos-dashboard:${CHAOS_MESH_VERSION}
-      docker image tag pingcap/chaos-mesh:${CHAOS_MESH_VERSION} $CHAOS_MESH_IMAGE
-      docker image tag pingcap/chaos-daemon:${CHAOS_MESH_VERSION} $CHAOS_DAEMON_IMAGE
-      docker image tag pingcap/chaos-dashboard:${CHAOS_MESH_VERSION} $CHAOS_DASHBOARD_IMAGE
-      ```
+     ```bash
+     export CHAOS_MESH_IMAGE=$DOCKER_REGISTRY/pingcap/chaos-mesh:${CHAOS_MESH_VERSION}
+     export CHAOS_DAEMON_IMAGE=$DOCKER_REGISTRY/pingcap/chaos-daemon:${CHAOS_MESH_VERSION}
+     export CHAOS_DASHBOARD_IMAGE=$DOCKER_REGISTRY/pingcap/chaos-dashboard:${CHAOS_MESH_VERSION}
+     docker image tag pingcap/chaos-mesh:${CHAOS_MESH_VERSION} $CHAOS_MESH_IMAGE
+     docker image tag pingcap/chaos-daemon:${CHAOS_MESH_VERSION} $CHAOS_DAEMON_IMAGE
+     docker image tag pingcap/chaos-dashboard:${CHAOS_MESH_VERSION} $CHAOS_DASHBOARD_IMAGE
+     ```
 
-      c. Push these images to Docker Registry:
+     c. Push these images to Docker Registry:
 
-      ```bash
-      docker push $CHAOS_MESH_IMAGE
-      docker push $CHAOS_DAEMON_IMAGE
-      docker push $CHAOS_DASHBOARD_IMAGE
-      ```
+     ```bash
+     docker push $CHAOS_MESH_IMAGE
+     docker push $CHAOS_DAEMON_IMAGE
+     docker push $CHAOS_DASHBOARD_IMAGE
+     ```
 
-      > **Note:**
-      >
-      >  If the Docker Registry can only work locally, you need to load and push these images on each K8s node.
+     > **Note:**
+     >
+     > If the Docker Registry can only work locally, you need to load and push these images on each K8s node.
 
    - Push images to Docker Hub
 
-      a. Set the Docker Hub variable, for example:
+     a. Set the Docker Hub variable, for example:
 
-      ```bash
-      export DOCKER_HUB=hub
-      ```
+     ```bash
+     export DOCKER_HUB=hub
+     ```
 
-      b. Tag these images with `$DOCKER_REGISTRY`:
+     b. Tag these images with `$DOCKER_REGISTRY`:
 
-      ```bash
-      export CHAOS_MESH_IMAGE=$DOCKER_HUB/chaos-mesh:${CHAOS_MESH_VERSION}
-      export CHAOS_DAEMON_IMAGE=$DOCKER_HUB/chaos-daemon:${CHAOS_MESH_VERSION}
-      export CHAOS_DASHBOARD_IMAGE=$DOCKER_HUB/chaos-dashboard:${CHAOS_MESH_VERSION}
-      docker image tag pingcap/chaos-mesh:${CHAOS_MESH_VERSION} $CHAOS_MESH_IMAGE
-      docker image tag pingcap/chaos-daemon:${CHAOS_MESH_VERSION} $CHAOS_DAEMON_IMAGE
-      docker image tag pingcap/chaos-dashboard:${CHAOS_MESH_VERSION} $CHAOS_DASHBOARD_IMAGE
-      ```
+     ```bash
+     export CHAOS_MESH_IMAGE=$DOCKER_HUB/chaos-mesh:${CHAOS_MESH_VERSION}
+     export CHAOS_DAEMON_IMAGE=$DOCKER_HUB/chaos-daemon:${CHAOS_MESH_VERSION}
+     export CHAOS_DASHBOARD_IMAGE=$DOCKER_HUB/chaos-dashboard:${CHAOS_MESH_VERSION}
+     docker image tag pingcap/chaos-mesh:${CHAOS_MESH_VERSION} $CHAOS_MESH_IMAGE
+     docker image tag pingcap/chaos-daemon:${CHAOS_MESH_VERSION} $CHAOS_DAEMON_IMAGE
+     docker image tag pingcap/chaos-dashboard:${CHAOS_MESH_VERSION} $CHAOS_DASHBOARD_IMAGE
+     ```
 
-      c. Push these images to Docker Registry:
+     c. Push these images to Docker Registry:
 
-      ```bash
-      docker push $CHAOS_MESH_IMAGE
-      docker push $CHAOS_DAEMON_IMAGE
-      docker push $CHAOS_DASHBOARD_IMAGE
-      ```
+     ```bash
+     docker push $CHAOS_MESH_IMAGE
+     docker push $CHAOS_DAEMON_IMAGE
+     docker push $CHAOS_DASHBOARD_IMAGE
+     ```
 
 4. Install Chaos Mesh offline with the following steps:
 
@@ -145,7 +143,7 @@ Now that you already have the image and repo archive files in the offline enviro
 
    b. Create a namespace for installing Chaos Mesh:
 
-   ```bash  
+   ```bash
    kubectl create namespace chaos-testing
    ```
 
