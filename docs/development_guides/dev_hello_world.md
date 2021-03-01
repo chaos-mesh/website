@@ -73,7 +73,7 @@ status:
 
 ## Register the CRD
 
-The HelloWorldChaos object is a custom resource object in Kubernetes. This means you need to register the corresponding CRD in the Kubernetes API. Run `make yaml`, then the CRD will be generated in `config/crd/bases/chaos-mesh.org_helloworldchaos.yaml`. In order to combine all these YAML file into `manifests/crd.yaml`, modify [kustomization.yaml](https://github.com/chaos-mesh/chaos-mesh/blob/master/config/crd/kustomization.yaml) by adding the corresponding line as shown below:
+The HelloWorldChaos object is a custom resource object in Kubernetes. This means you need to register the corresponding CRD in the Kubernetes API. Run `make yaml`, then the CRD will be generated in `config/crd/bases/chaos-mesh.org_helloworldchaos.yaml`. In order to combine all these YAML file into `manifests/crd.yaml`, modify [`kustomization.yaml`](https://github.com/chaos-mesh/chaos-mesh/blob/master/config/crd/kustomization.yaml) by adding the corresponding line as shown below:
 
 ```yaml
 resources:
@@ -160,7 +160,7 @@ kind load docker-image localhost:5000/pingcap/chaos-dashboard:latest
 
 You are almost there. In this step, you will pull the image and apply it for testing.
 
-Before you pull any image for Chaos Mesh (using `helm install` or `helm upgrade`), modify [values.yaml](https://github.com/chaos-mesh/chaos-mesh/blob/master/helm/chaos-mesh/values.yaml) of the helm template to replace the default image with what you just pushed to your local registry.
+Before you pull any image for Chaos Mesh (using `helm install` or `helm upgrade`), modify [`values.yaml`](https://github.com/chaos-mesh/chaos-mesh/blob/master/helm/chaos-mesh/values.yaml) of the helm template to replace the default image with what you just pushed to your local registry.
 
 In this case, the template uses `pingcap/chaos-mesh:latest` as the default target registry, so you need to replace it with the environment variable `DOCKER_REGISTRY`'s value(default `localhost:5000`), as shown below:
 
