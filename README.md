@@ -34,7 +34,7 @@ This command generates static content into the `build` directory and can be serv
 yarn docusaurus docs:version x.x.x
 ```
 
-The versions of the all docs split into two parts, one is the **latest (in docs/)** and the others are **versioned (in versioned_docs/)**. When a version has been released, the current latest docs will be copied into versioned_docs (by running the command above).
+The versions of the all docs split into two parts, one is the **latest (in `docs/`)** and the others are **versioned (in `versioned_docs/`)**. When a version has been released, the current latest `docs/` will be copied into `versioned_docs/` (by running the command above).
 
 ## How to contribute
 
