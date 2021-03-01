@@ -19,7 +19,7 @@ After executing the above command, you can access [`http://localhost:8081`](http
 
 > **Note:**
 >
-> If the web-show is deployed on the server, you need to use the host ip to access the application.
+> If the web-show is deployed on the server, you need to use the host IP to access the application.
 
 ## Step 2: Define the experiment configuration file
 

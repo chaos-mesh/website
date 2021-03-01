@@ -88,7 +88,7 @@ To use Chaos Mesh, you must create the related custom resource type first.
   curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl apply -f -
 </PickVersion>
 
-For kuberentes < 1.15, `--validate=false` is needed to ignore the unexpected fields
+For Kuberentes < 1.15, `--validate=false` is needed to ignore the unexpected fields
 
 <PickVersion className="language-bash">
   curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl apply --validate=false -f -
