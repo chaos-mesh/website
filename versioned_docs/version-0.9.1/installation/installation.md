@@ -34,7 +34,7 @@ If you are using k3s or k3d, please also specify `--k3s` flag.
   curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --k3s
 </PickVersion>
 
-**Note:**
+> **Note:**
 >
 > `install.sh` is suitable for trying Chaos Mesh out. If you want to use Chaos Mesh in production or other serious scenarios, Helm is the recommended deployment method.
 

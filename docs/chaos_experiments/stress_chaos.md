@@ -20,9 +20,9 @@ A StressChaos shares common configurations like other chaos, such as how to sele
 
      A `memory` stressor will continuously stress virtual memory out.
 
-     | Option    | Type    | Required | Description                                                                                                                                                                                          |
-     | --------- | ------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-     | `workers` | Integer | True     | Specifies concurrent stressing instance.                                                                                                                                                             |
+     | Option    | Type    | Required | Description                              |
+     | --------- | ------- | -------- | ---------------------------------------- |
+     | `workers` | Integer | True     | Specifies concurrent stressing instance. |
 
   2. `cpu`
 
