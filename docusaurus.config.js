@@ -66,7 +66,7 @@ module.exports = {
             },
             {
               label: 'Slack (#project-chaos-mesh)',
-              href: 'https://cloud-native.slack.com/join/shared_invite/zt-lo88vmyc-9e3jSdUXf3dLP2yKql4A0Q#/',
+              href: 'https://slack.cncf.io/',
             },
           ],
         },

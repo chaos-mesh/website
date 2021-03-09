@@ -35,4 +35,4 @@ Currently, Chaos Mesh is in active development for 1.0 GA. Going forward, we wil
 - Extending chaos injection to application layers
 - Completing the full chaos engineering loop with status checking, reporting, and scenario defining, etc.
 
-If you are interested in the project, check out our [website](https://chaos-mesh.org/), join our [Slack](https://cloud-native.slack.com/join/shared_invite/zt-lo88vmyc-9e3jSdUXf3dLP2yKql4A0Q#/) discussions, or attend our [monthly meeting](https://docs.google.com/document/d/1H8IfmhIJiJ1ltg-XLjqR_P_RaMHUGrl1CzvHnKM_9Sc/edit) to know more. Or better yet, become part of us.
+If you are interested in the project, check out our [website](https://chaos-mesh.org/), join our [Slack](https://slack.cncf.io/) discussions, or attend our [monthly meeting](https://docs.google.com/document/d/1H8IfmhIJiJ1ltg-XLjqR_P_RaMHUGrl1CzvHnKM_9Sc/edit) to know more. Or better yet, become part of us.
