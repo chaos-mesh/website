@@ -66,4 +66,4 @@ However, Chaos Engineering is a big area to work on. In the future, we’d like 
 
 We’ve discussed these features with those who maintain Chaos Mesh, and they said these features are on the Chaos Mesh 2.0 roadmap.
 
-If you are interested, join the Chaos Mesh community via [Slack](https://cloud-native.slack.com/join/shared_invite/zt-lo88vmyc-9e3jSdUXf3dLP2yKql4A0Q#/) (#project-chaos-mesh) or [GitHub](https://github.com/chaos-mesh/chaos-mesh).
+If you are interested, join the Chaos Mesh community via [Slack](https://slack.cncf.io/) (#project-chaos-mesh) or [GitHub](https://github.com/chaos-mesh/chaos-mesh).
