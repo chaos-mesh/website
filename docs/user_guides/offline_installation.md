@@ -147,7 +147,7 @@ Now that you already have the image and repo archive files in the offline enviro
    a. Unzip the repo archive files to a path:
 
    ```bash
-   unzip ${CHAOS_MESH_VERSION}.zip -d chaos-mesh  && cd chaos-mesh/*/
+   unzip ${CHAOS_MESH_VERSION}.zip -d chaos-mesh && cd chaos-mesh/*/
    ```
 
    b. Create a namespace for installing Chaos Mesh:
