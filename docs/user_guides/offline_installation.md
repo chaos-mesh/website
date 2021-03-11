@@ -33,12 +33,14 @@ To install Chaos Mesh offline, you need to get the installation images via an in
    docker pull pingcap/chaos-mesh:${CHAOS_MESH_VERSION}
    docker pull pingcap/chaos-daemon:${CHAOS_MESH_VERSION}
    docker pull pingcap/chaos-dashboard:${CHAOS_MESH_VERSION}
+   docker pull pingcap/coredns:v0.2.0
    ```
 
    ```bash #save images of Chaos Mesh to files
    docker save -o ./image-chaos-mesh pingcap/chaos-mesh:${CHAOS_MESH_VERSION}
    docker save -o ./image-chaos-daemon pingcap/chaos-daemon:${CHAOS_MESH_VERSION}
    docker save -o ./image-chaos-dashboard pingcap/chaos-dashboard:${CHAOS_MESH_VERSION}
+   docker save -o ./image-chaos-coredns pingcap/coredns:v0.2.0
    ```
 
 3. Download the Chaos Mesh repository to your local:
@@ -53,7 +55,7 @@ To install Chaos Mesh offline, you need to get the installation images via an in
    wget https://github.com/chaos-mesh/chaos-mesh/archive/master.zip
    ```
 
-4. Copy the ./image-chaos-mesh`, `./image-chaos-daemon`, `./image-chaos-dashboard`and`{CHAOS_MESH_VERSION}.zip` into the offline environment.
+4. Copy the `./image-chaos-mesh`, `./image-chaos-daemon`, `./image-chaos-dashboard`and`{CHAOS_MESH_VERSION}.zip` into the offline environment.
 
 ## Install Chaos Mesh offline
 
@@ -71,6 +73,7 @@ Now that you already have the image and repo archive files in the offline enviro
    docker load -i ./image-chaos-mesh
    docker load -i ./image-chaos-daemon
    docker load -i ./image-chaos-dashboard
+   docker load -i ./image-chaos-coredns
    ```
 
 3. Push the Chaos Mesh images. You can choose to push them to Docker Registry or Docker Hub.
@@ -89,9 +92,11 @@ Now that you already have the image and repo archive files in the offline enviro
      export CHAOS_MESH_IMAGE=$DOCKER_REGISTRY/pingcap/chaos-mesh:${CHAOS_MESH_VERSION}
      export CHAOS_DAEMON_IMAGE=$DOCKER_REGISTRY/pingcap/chaos-daemon:${CHAOS_MESH_VERSION}
      export CHAOS_DASHBOARD_IMAGE=$DOCKER_REGISTRY/pingcap/chaos-dashboard:${CHAOS_MESH_VERSION}
+     export CHAOS_COREDNS_IMAGE=$DOCKER_REGISTRY/pingcap/coredns:v0.2.0
      docker image tag pingcap/chaos-mesh:${CHAOS_MESH_VERSION} $CHAOS_MESH_IMAGE
      docker image tag pingcap/chaos-daemon:${CHAOS_MESH_VERSION} $CHAOS_DAEMON_IMAGE
      docker image tag pingcap/chaos-dashboard:${CHAOS_MESH_VERSION} $CHAOS_DASHBOARD_IMAGE
+     docker image tag pingcap/coredns:v0.2.0 $CHAOS_COREDNS_IMAGE
      ```
 
      c. Push these images to Docker Registry:
@@ -100,6 +105,7 @@ Now that you already have the image and repo archive files in the offline enviro
      docker push $CHAOS_MESH_IMAGE
      docker push $CHAOS_DAEMON_IMAGE
      docker push $CHAOS_DASHBOARD_IMAGE
+     docker push $CHAOS_COREDNS_IMAGE
      ```
 
      > **Note:**
@@ -120,9 +126,11 @@ Now that you already have the image and repo archive files in the offline enviro
      export CHAOS_MESH_IMAGE=$DOCKER_HUB/chaos-mesh:${CHAOS_MESH_VERSION}
      export CHAOS_DAEMON_IMAGE=$DOCKER_HUB/chaos-daemon:${CHAOS_MESH_VERSION}
      export CHAOS_DASHBOARD_IMAGE=$DOCKER_HUB/chaos-dashboard:${CHAOS_MESH_VERSION}
+     export CHAOS_COREDNS_IMAGE=$DOCKER_HUB/coredns:v0.2.0
      docker image tag pingcap/chaos-mesh:${CHAOS_MESH_VERSION} $CHAOS_MESH_IMAGE
      docker image tag pingcap/chaos-daemon:${CHAOS_MESH_VERSION} $CHAOS_DAEMON_IMAGE
      docker image tag pingcap/chaos-dashboard:${CHAOS_MESH_VERSION} $CHAOS_DASHBOARD_IMAGE
+     docker image tag pingcap/coredns:v0.2.0 $CHAOS_COREDNS_IMAGE
      ```
 
      c. Push these images to Docker Registry:
@@ -131,6 +139,7 @@ Now that you already have the image and repo archive files in the offline enviro
      docker push $CHAOS_MESH_IMAGE
      docker push $CHAOS_DAEMON_IMAGE
      docker push $CHAOS_DASHBOARD_IMAGE
+     docker push $CHAOS_COREDNS_IMAGE
      ```
 
 4. Install Chaos Mesh offline with the following steps:
@@ -138,7 +147,7 @@ Now that you already have the image and repo archive files in the offline enviro
    a. Unzip the repo archive files to a path:
 
    ```bash
-   unzip {CHAOS_MESH_VERSION}.zip chaos-mesh && cd chaos-mesh/*/
+   unzip ${CHAOS_MESH_VERSION}.zip -d chaos-mesh  && cd chaos-mesh/*/
    ```
 
    b. Create a namespace for installing Chaos Mesh:
@@ -152,9 +161,11 @@ Now that you already have the image and repo archive files in the offline enviro
    ```bash
    helm install chaos-mesh helm/chaos-mesh  --namespace=chaos-testing \
       --set dashboard.create=true \
+      --set dnsServer.create=true \
       --set chaosDaemon.image=$CHAOS_DAEMON_IMAGE \
       --set controllerManager.image=$CHAOS_MESH_IMAGE \
-      --set dashboard.image=$CHAOS_DASHBOARD_IMAGE
+      --set dashboard.image=$CHAOS_DASHBOARD_IMAGE \
+      --set dnsServer.image=${CHAOS_COREDNS_IMAGE}
    ```
 
    d. Check whether Chaos Mesh pods are installed:
