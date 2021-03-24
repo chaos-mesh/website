@@ -40,6 +40,11 @@ module.exports = {
           position: 'right',
         },
         { to: 'blog', activeBasePath: 'blog', label: 'Blog', position: 'right' },
+        {
+          href: 'https://community.cncf.io/chaos-mesh-community/',
+          label: 'Events',
+          position: 'right',
+        },
       ],
     },
     footer: {
@@ -67,6 +72,10 @@ module.exports = {
             {
               label: 'Slack (#project-chaos-mesh)',
               href: 'https://slack.cncf.io/',
+            },
+            {
+              label: 'Events',
+              href: 'https://community.cncf.io/chaos-mesh-community/',
             },
           ],
         },
