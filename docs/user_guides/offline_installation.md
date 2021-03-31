@@ -55,7 +55,7 @@ To install Chaos Mesh offline, you need to get the installation images via an in
    wget https://github.com/chaos-mesh/chaos-mesh/archive/master.zip
    ```
 
-4. Copy the `./image-chaos-mesh`, `./image-chaos-daemon`, `./image-chaos-dashboard`and`{CHAOS_MESH_VERSION}.zip` into the offline environment.
+4. Copy the `./image-chaos-mesh`, `./image-chaos-daemon`, `./image-chaos-dashboard`, and `{CHAOS_MESH_VERSION}.zip` into the offline environment.
 
 ## Install Chaos Mesh offline
 
