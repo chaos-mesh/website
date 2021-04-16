@@ -42,7 +42,7 @@ spec:
 
 For more sample files, see [examples](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples). You can edit them as needed.
 
-For a detailed description of each field in the configuration template, see [`Field description`](#fields-description).
+For a detailed description of each field in the configuration template, see [`Fields description`](#fields-description).
 
 ## `pod-kill` configuration file
 
@@ -66,7 +66,7 @@ spec:
     cron: '@every 1m'
 ```
 
-For a detailed description of each field in the configuration template, see [`Field description`](#fields-description).
+For a detailed description of each field in the configuration template, see [`Fields description`](#fields-description).
 
 ## `container-kill` configuration file
 
@@ -89,7 +89,7 @@ spec:
     cron: '@every 30s'
 ```
 
-For a detailed description of each field in the configuration template, see [`Field description`](#fields-description).
+For a detailed description of each field in the configuration template, see [`Fields description`](#fields-description).
 
 ## Fields description
 

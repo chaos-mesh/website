@@ -49,17 +49,17 @@ metadata:
   namespace: chaos-testing
 spec:
   action: ec2-stop
-  secretName: "cloud-key-secret"
-  awsRegion: "us-east-2"
-  ec2Instance: "your-ec2-instance-id"
-  duration: "5m"
+  secretName: 'cloud-key-secret'
+  awsRegion: 'us-east-2'
+  ec2Instance: 'your-ec2-instance-id'
+  duration: '5m'
   scheduler:
-    cron: "@every 10m"
+    cron: '@every 10m'
 ```
 
 For more details about stopping ec2 instance, see [docs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html).
 
-For a detailed description of each field in the configuration template, see [`Field description`](#fields-description).
+For a detailed description of each field in the configuration template, see [`Fields description`](#fields-description).
 
 ## `ec2-restart` configuration file
 
@@ -73,17 +73,17 @@ metadata:
   namespace: chaos-testing
 spec:
   action: ec2-restart
-  secretName: "cloud-key-secret"
-  awsRegion: "us-east-2"
-  ec2Instance: "your-ec2-instance-id"
-  duration: "5m"
+  secretName: 'cloud-key-secret'
+  awsRegion: 'us-east-2'
+  ec2Instance: 'your-ec2-instance-id'
+  duration: '5m'
   scheduler:
-    cron: "@every 10m"
+    cron: '@every 10m'
 ```
 
 For more details about rebooting ec2 instance, see [docs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-reboot.html).
 
-For a detailed description of each field in the configuration template, see [`Field description`](#fields-description).
+For a detailed description of each field in the configuration template, see [`Fields description`](#fields-description).
 
 ## `detach-volume` configuration file
 
@@ -97,14 +97,14 @@ metadata:
   namespace: chaos-testing
 spec:
   action: ec2-stop
-  secretName: "cloud-key-secret"
-  awsRegion: "us-east-2"
-  ec2Instance: "your-ec2-instance-id"
-  volumeID: "your-volume-id"
-  deviceName: "/dev/sdf"
-  duration: "5m"
+  secretName: 'cloud-key-secret'
+  awsRegion: 'us-east-2'
+  ec2Instance: 'your-ec2-instance-id'
+  volumeID: 'your-volume-id'
+  deviceName: '/dev/sdf'
+  duration: '5m'
   scheduler:
-    cron: "@every 10m"
+    cron: '@every 10m'
 ```
 
 For more details about detaching an Amazon EBS volume, see [docs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-detaching-volume.html).
