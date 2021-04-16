@@ -113,7 +113,7 @@ For a detailed description of each field in the configuration template, see [`Fi
 
 ## Fields description
 
-- **action** defines the specific chaos action for the AWS instance. Supported action: `ec2-stop` / `ec2-restart` / 'detach-volume'.
+- **action** defines the specific chaos action for the AWS instance. Supported action: `ec2-stop` / `ec2-restart` / `detach-volume`.
 - **secretName** defines the kubernetes secret name used to store AWS information.
 - **awsRegion** defines the AWS region.
 - **ec2Instance** indicates the ID of the ec2 instance.
