@@ -7,13 +7,20 @@ Chaos Dashboard is a one-step web UI for managing, designing, and monitoring cha
 
 ## Install Chaos Dashboard
 
-You can install Chaos Mesh with Chaos Dashboard by executing the command below:
+Chaos Dashboard is installed by default after v1.2.0. You cna run the following command to check the status of Chaos Dashboard Pod:
 
 ```bash
-helm install chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --set dashboard.create=true
+# chaos-testing: chaos-testing: the default namespace where installing chaos mesh
+kubectl get pod -n chaos-testing -l app.kubernetes.io/component=chaos-dashboard
 ```
 
-If you have already installed Chaos Mesh, upgrade it by executing:
+Expect output:
+
+```bash
+chaos-dashboard-b8767fbcd-46cnd   1/1     Running   0          31m
+```
+
+If you don't get the Chaos Dashboard pod, you can upgrade Chaos Mesh by executing:
 
 ```bash
 helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --set dashboard.create=true
