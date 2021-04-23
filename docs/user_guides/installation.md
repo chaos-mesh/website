@@ -80,25 +80,7 @@ After adding the repository successfully, you can search available version by th
 helm search repo chaos-mesh
 ```
 
-### Step 2: Create custom resource type
-
-To use Chaos Mesh, you must create the related custom resource type first.
-
-<PickVersion className="language-bash">
-  curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl apply -f -
-</PickVersion>
-
-For Kubernetes < 1.15, `--validate=false` is needed to ignore the unexpected fields
-
-<PickVersion className="language-bash">
-  curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl apply --validate=false -f -
-</PickVersion>
-
-### Step 3: Install Chaos Mesh
-
-> **Note:**
->
-> Currently, Chaos Dashboard is not installed by default. If you want to try it out, add `--set dashboard.create=true` in the `helm install` commands below. Refer to [Configuration](https://github.com/chaos-mesh/chaos-mesh/tree/master/helm/chaos-mesh#configuration) for more information.
+### Step 2: Install Chaos Mesh
 
 Depending on your environment, there are two methods of installing Chaos Mesh:
 
