@@ -7,7 +7,7 @@ Chaos Dashboard is a one-step web UI for managing, designing, and monitoring cha
 
 ## Install Chaos Dashboard
 
-Chaos Dashboard is installed by default after v1.2.0. You cna run the following command to check the status of Chaos Dashboard Pod:
+Chaos Dashboard is installed by default after v1.2.0. You can run the following command to check the status of Chaos Dashboard Pod:
 
 ```bash
 # chaos-testing: chaos-testing: the default namespace where installing chaos mesh
