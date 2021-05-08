@@ -33,7 +33,7 @@ module.exports = {
           activeBasePath: 'docs',
           label: 'Documentation',
         },
-        { to: 'interactiveTutorial', label: 'Interactive Tutorial' },
+        { to: 'interactive-tutorial', label: 'Interactive Tutorial' },
         {
           href: 'https://github.com/chaos-mesh/chaos-mesh',
           label: 'GitHub',
@@ -53,12 +53,12 @@ module.exports = {
           title: 'Documentation',
           items: [
             {
-              label: 'Getting Started',
-              to: 'https://chaos-mesh.org/docs/get_started/get_started_on_kind',
+              label: 'Get Started',
+              to: 'docs/get_started/get_started_on_kind',
             },
             {
               label: 'User Guides',
-              to: 'https://chaos-mesh.org/docs/user_guides/installation',
+              to: 'docs/user_guides/installation',
             },
           ],
         },
