@@ -84,7 +84,11 @@ function Home() {
       <div className={clsx('hero', styles.hero)}>
         <div className="container text--center">
           <h2 className="hero__subtitle">
-            Chaos Mesh® is a <a href="https://cncf.io/">Cloud Native Computing Foundation</a> sandbox project
+            Chaos Mesh® is a{' '}
+            <a href="https://cncf.io/" target="_blank">
+              Cloud Native Computing Foundation
+            </a>{' '}
+            sandbox project
           </h2>
           <div className={clsx('cncf-logo', styles.cncfLogo)} />
         </div>
