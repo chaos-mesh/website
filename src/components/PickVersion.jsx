@@ -1,13 +1,15 @@
 import BrowserOnly from '@docusaurus/BrowserOnly'
 import CodeBlock from '../theme/CodeBlock'
 import React from 'react'
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import { usePluginData } from '@docusaurus/useGlobalData'
 
 export const usePickVersion = () => {
+  const { siteConfig } = useDocusaurusContext()
   const pathname = window.location.pathname
 
   let preferred = window.localStorage.getItem('docs-preferred-version-default')
-  if (pathname === '/' && preferred) {
+  if (pathname === siteConfig.baseUrl && preferred) {
     return preferred === 'current' ? 'latest' : preferred
   }
 

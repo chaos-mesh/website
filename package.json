@@ -1,6 +1,6 @@
 {
   "name": "chaos-mesh-website",
-  "version": "1.0.2",
+  "version": "1.2.0",
   "private": true,
   "scripts": {
     "start": "docusaurus start",

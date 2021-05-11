@@ -40,6 +40,7 @@ module.exports = {
         'chaos_experiments/iochaos_experiment',
         'chaos_experiments/kernelchaos_experiment',
         'chaos_experiments/dnschaos_experiment',
+        'chaos_experiments/awschaos_experiment',
       ],
     },
     {
