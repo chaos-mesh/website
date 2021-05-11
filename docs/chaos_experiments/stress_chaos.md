@@ -22,7 +22,7 @@ A StressChaos shares common configurations like other chaos, such as how to sele
 
      | Option    | Type    | Required | Description                                                                           |
      | --------- | ------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------|
-     | `workers` | Integer | True     | Start  N workers that grow their heaps by reallocating memory. For more details refer `--bigheap` option on `stress-ng` man page. |
+     | `workers` | Integer | True     | start N workers continuously calling mmap/munmap and writing to the allocated memory. For more details refer `--vm` option on `stress-ng` man page. |
 
   2. `cpu`
 
