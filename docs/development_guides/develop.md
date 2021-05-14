@@ -1,7 +1,7 @@
 ---
 id: development_overview
 title: Development Guide
-sidebar_label: Development Overview
+sidebar_label: Development Overview 
 ---
 
 This guide prepares you for the development of Chaos Mesh from scratch. Before you get started, it is recommended to get familiar with the project through the following materials:
