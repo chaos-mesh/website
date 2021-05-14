@@ -61,7 +61,7 @@ Chaos Mesh mainly focuses on the simplicity of how all chaos tests are done quic
 
 The recent [1.0 release](https://chaos-mesh.org/blog/chaos-mesh-1.0-chaos-engineering-on-kubernetes-made-easier/) provides the general availability of Chaos Dashboard, which Chaos simplifies the complexities of chaos experiment. With a few mouse clicks, you can define the Chaos experiment's scope, specify the type of chaos injection, define scheduling rules, and observe the chaos experiment results- all in the dashboard of Chaos Mesh.
 
-In case you want to try Chaos Mesh in your browser, checkout [Katakoda interactive tutorial](https://chaos-mesh.org/interactiveTutorial/), where you can get your hands on Chaos Mesh without even deploying it. To understand the design principles and how Chaos Mesh works, read [this blog](https://chaos-mesh.org/blog/chaos_mesh_your_chaos_engineering_solution) by the project's maintainer, [Cwen Yin](https://www.linkedin.com/in/cwen-yin-81985318b/).
+In case you want to try Chaos Mesh in your browser, checkout [Katakoda interactive tutorial](https://chaos-mesh.org/interactive-tutorial), where you can get your hands on Chaos Mesh without even deploying it. To understand the design principles and how Chaos Mesh works, read [this blog](https://chaos-mesh.org/blog/chaos_mesh_your_chaos_engineering_solution) by the project's maintainer, [Cwen Yin](https://www.linkedin.com/in/cwen-yin-81985318b/).
 
 ## Join the community
 
