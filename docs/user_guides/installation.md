@@ -108,8 +108,8 @@ Depending on your environment, there are two methods of installing Chaos Mesh:
 
      > **Note:**
      >
-     > Sometimes we might need to change the default values based on Kubernetes editions.
-     > Example, Docker socket path is different in PKS Kubernetes clusters (VMware K8s Enterprise editions).
+     >Depending on your Kubernetes edition, you may have to change the default values.
+     > For example, the Docker socket path is different in PKS Kubernetes clusters (VMware K8s Enterprise edition).
 
      ```bash
      helm install chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --set chaosDaemon.socketPath=/var/vcap/sys/run/docker/docker.sock
