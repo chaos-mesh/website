@@ -75,6 +75,21 @@ github.com/go-logr/zapr.(*zapLogger).Error
 ```bash
 kubectl patch pv <your-pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Delete"}}'
 ```
+## DNSChaos
+
+### Q: While trying to run DNSChaos in OpenShift, tripped over problems regarding authorization.
+
+Message most looked like this:
+
+```bash
+Error creating: pods "chaos-dns-server-123aa56123-" is forbidden: unable to validate against any security context constraint: [spec.containers[0].securityContext.capabilities.add: Invalid value: "NET_BIND_SERVICE": capability may not be added]
+```
+
+You need to add privileged scc to default.
+
+```bash
+oc adm policy add-scc-to-user privileged -n chaos-testing -z chaos-dns-server
+```
 
 ## Install
 
