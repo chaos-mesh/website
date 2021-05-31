@@ -90,7 +90,7 @@ chaos-dashboard-98c4c5f97-tx5ds             1/1     Running   0          2d5h
 
 If your actual outputs match the expected outputs, Chaos Mesh is installed successfully.
 
-::note Note
+:::note
 
 If the `STATUS` of your actual outputs is not `Running`, then execute the following command to check the Pod details, and troubleshoot issues according to the error information.
 
