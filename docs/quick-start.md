@@ -7,7 +7,7 @@ import PickVersion from '@site/src/components/PickVersion'
 
 This document describes how to quickly start Chaos Mesh in a test or local environment.
 
-::note Note
+:::note
 
 **In this document, the Chaos Mesh installation is a script installation for quick trial only.**
 
@@ -33,7 +33,7 @@ To install Chaos Mesh in a test environment, run the following script:
 curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash
 </PickVersion>
 
-::note Note
+:::note
 
 - If the current environment is [kind](https://kind.sigs.k8s.io/), add the `--local kind` parameter at the end of the script.
 
@@ -61,7 +61,7 @@ curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash
 
 :::
 
-:::tip Tips
+:::tip
 
 To speed up the image pulling process, users in the Chinese mainland can add the `--docker-mirror` parameter at the end of the script. After adding this parameter, the `install.sh` script pulls images from `dockerhub.azk8s.cn` and `gcr.azk8s.cn`.
 
