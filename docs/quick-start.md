@@ -55,7 +55,7 @@ curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash
 
 - If the current environment is [Microk8s](https://microk8s.io/), add the `--microk8s` parameter at the end of the script.
 
-<PickVersion className="language-bash">
+  <PickVersion className="language-bash">
   curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --microk8s
   </PickVersion>
 
