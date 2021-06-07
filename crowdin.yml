@@ -1,0 +1,3 @@
+files:
+  - source: '*md'
+    translation: '%original_file_name%/%original_path%'
