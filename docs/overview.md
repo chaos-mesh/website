@@ -30,7 +30,7 @@ Chaos Mesh is built on Kubernetes CRD (Custom Resource Definition). To manage di
 
 - **Chaos Dashboard**: The visualization component of Chaos Mesh. Chaos Dashboard offers a set of user-friendly web interfaces through which users can manipulate and observe Chaos experiments. At the same time, Chaos Dashboard also provides an RBAC permission management mechanism.
 - **Chaos Controller Manager**: The core logical component of Chaos Mesh. Chaos Controller Manager is primarily responsible for the scheduling and management of Chaos experiments. This component contains several CRD Controllers, such as Workflow Controller, Scheduler Controller, and Controllers of various fault types.
-- **Chaos Daemon**: The main executive component. Chaos Daemon runs in the [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) mode and has the Privileged permission by default (which can be disabled). This component mainly interferes with specific network devices, file systems, kernels, etc. by hacking into the target Pod Namespace.
+- **Chaos Daemon**: The main executive component. Chaos Daemon runs in the [DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) mode and has the Privileged permission by default (which can be disabled). This component mainly interferes with specific network devices, file systems, kernels by hacking into the target Pod Namespace.
 
 ![Architecture](img/architecture.png)
 
