@@ -8,8 +8,6 @@ author_image_url: https://avatars.githubusercontent.com/u/50622005?v=4
 image: /img/mentorship_experience.png
 tags: [Chaos Mesh, Chaos Engineering, LFX Mentorship, AWS Chaos]
 ---
-
-
 ![LFX Mentorship Experience](https://github.com/Debanitrkl/website/blob/master/static/img/mentorship_blog.jpeg)
 
 ## About Me
@@ -17,6 +15,8 @@ tags: [Chaos Mesh, Chaos Engineering, LFX Mentorship, AWS Chaos]
 [I’m](https://mentorship.lfx.linuxfoundation.org/mentee/6a0bf7de-9e18-4acb-9a66-f5fecdbeb42e) a junior undergraduate majoring in Biomedical Engineering in the Department of Biotechnology and Medical Engineering at the [National Institute of Technology Rourkela](https://nitrkl.ac.in/), India. For someone who started to code only because I was fascinated by it, it was all a journey of self-learning, filled with various adversities. But when I started with open-source contributions, it was all very beginner-friendly and I came across a lot of people who helped me learn the tech stack better.
 
 ![img1](https://github.com/Debanitrkl/website/blob/master/static/img/mentroship_blog1.png)
+
+<!--truncate-->
 
 ## The journey through the application
 
@@ -54,16 +54,16 @@ Another part is the definition of the AWS Chaos and its [controller](https://git
 
 ## Other opportunities
 
-I was invited to one of the [community meetings](https://www.youtube.com/watch?v=ElG0pHRoXwI&t=2s) of Chaos Mesh where I showcased my project.
+I was invited to one of the Chaos Mesh [community meetings](https://www.youtube.com/watch?v=ElG0pHRoXwI&t=2s) towards the end of the mentorship where I showcased my project.
 
 Afterwards, I applied for the CFP for [Kubernetes Community Days Bangalore](https://community.cncf.io/events/details/cncf-kcd-bengaluru-presents-kubernetes-community-days-bengaluru/), scheduled virtually from June 25–26, 2021, and was selected as a speaker and now I’m all set to present my talk there.
 
 ## Graduation and Next steps
 
-Yayyyy!! So finally I graduated from the program, thanks to my mentor [Zhou Zhiqiang](https://mentorship.lfx.linuxfoundation.org/mentor/e78b3177-160c-4566-9f3d-8fc9b2ec3cea), without whom, this wouldn’t have been possible.
+Yayyyy!! After 12 weeks, I successfully graduated from the program, thanks to my mentor [Zhou Zhiqiang](https://mentorship.lfx.linuxfoundation.org/mentor/e78b3177-160c-4566-9f3d-8fc9b2ec3cea) and his guidance, because without whom, this wouldn’t have been possible.
 
 I had an amazing time with the Chaos Mesh community, with the amazing members supporting and helping me throughout the journey. I look forward to contributing more to this project and being more active in the community.
 
-## Join us
+## Join the Chaos Mesh community
 
 To join and learn more about Chaos Mesh, find the #project-chaos-mesh channel in [CNCF slack workspace](https://slack.cncf.io/) or their [GitHub](https://github.com/chaos-mesh/chaos-mesh).
