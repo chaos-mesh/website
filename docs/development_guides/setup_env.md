@@ -29,7 +29,7 @@ Make sure you have the above prerequisites met. Now follow the steps below to pr
 2. Install the Kubernetes API development framework - [kubebuilder](https://github.com/kubernetes-sigs/kubebuilder) and [kustomize](https://github.com/kubernetes-sigs/kustomize).
 
    ```bash
-   make all
+   make ensure-all
    ```
 
 3. Make sure [Docker](https://docs.docker.com/install/) is installed and running on your local machine.
