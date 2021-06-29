@@ -223,7 +223,7 @@ Generally, if you create a Pod with precisely-specified resource requests, it is
 
 So that's all for the tour. Our suggestion is that `free` and `top` should not be used to assess memory in containers. Be careful when you assign resource limits to your Pod and select the right QoS. In the future, we’ll create a more detailed StressChaos document.
 
-## Deeper dive into kubernetes memory management
+## Deeper dive into Kubernetes memory management
 
 Kubernetes tries to evict Pods that use too much memory (but not more memory than their limits). Kubernetes gets your Pod memory usage from `/sys/fs/cgroup/memory/memory.usage_in_bytes` and subtracts it by the `total_inactive_file` line in `memory.stat`.
 
