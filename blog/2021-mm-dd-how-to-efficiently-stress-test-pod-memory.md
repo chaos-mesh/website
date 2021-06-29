@@ -1,8 +1,17 @@
-# How to efficiently stress test Pod memory
+---
+slug: /how-to-efficiently-stress-test-pod-memory
+title: 'How to efficiently stress test Pod memory'
+author: Yinghao Wang
+author_title: Contributor of Chaos Mesh
+author_url: https://github.com/AsterNighT
+author_image_url: https://avatars.githubusercontent.com/u/22937027?v=4
+image: /img/how-to-efficiently-stress-test-pod-memory-banner.jpg
+tags:  [Chaos Mesh, Chaos Engineering, StressChaos, Stress Testing]
+---
 
-![img](../static/img/how-to-efficiently-stress-test-pod-memory-banner.jpg)
+![banner](/img/how-to-efficiently-stress-test-pod-memory-banner.jpg)
 
-[Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh) includes the StressChaos tool, which allows you to inject CPU and memory stress into your Pod. This tool can be very useful when you test or benchmark a CPU-sensitive or memory-sensitive program and want to know its behavior under pressure. 
+[Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh) includes the StressChaos tool, which allows you to inject CPU and memory stress into your Pod. This tool can be very useful when you test or benchmark a CPU-sensitive or memory-sensitive program and want to know its behavior under pressure.
 
 However, as we tested and used StressChaos, we found some issues with usability and performance. For example, why does StressChaos use far less memory than we configured? To correct these issues, we developed a new set of tests. In this article, I'll describe how we troubleshooted these issues and corrected them. This information will enable you to get the most out of StressChaos.
 
@@ -20,7 +29,7 @@ code deploy/helm/hello-kubernetes/values.yaml # or whichever editor you prefer
 Find the resources line, and change it into:
 
 ```yaml
-  resources: 
+  resources:
     requests:
       memory: "200Mi"
     limits:
@@ -44,8 +53,8 @@ As you can see from the output below, the Pod is consuming 4,269 MB of memory.
 
 ```sh
 /usr/src/app $ free -m
-              used 
-Mem:          4269 
+              used
+Mem:          4269
 Swap:            0
 
 /usr/src/app $ top
@@ -57,7 +66,7 @@ Mem: 12742432K used
    36    29 node     R     1568   0%   3   0% top
 ```
 
-That doesn’t seem right. We’ve limited its memory usage to 500 MiBs, and now the Pod seems to be using several GBs of memory. If we total the amount of process memory being used, it doesn’t equal 500 MiB. However, top and free at least give similar answers. 
+That doesn’t seem right. We’ve limited its memory usage to 500 MiBs, and now the Pod seems to be using several GBs of memory. If we total the amount of process memory being used, it doesn’t equal 500 MiB. However, top and free at least give similar answers.
 
 We will run a StressChaos on the Pod and see what happens. Here's the yaml we’ll use:
 
@@ -70,7 +79,7 @@ metadata:
 spec:
   mode: all
   selector:
-    namespaces: 
+    namespaces:
       - hello-kubernetes
   stressors:
     memory:
@@ -90,9 +99,9 @@ stresschaos.chaos-mesh.org/mem-stress created
 Now, let's check the memory usage again.
 
 ```sh
-              used 
+              used
 Mem:          4332
-Swap:            0 
+Swap:            0
 
 Mem: 12805568K used
   PID  PPID USER     STAT   VSZ %VSZ CPU %CPU COMMAND
@@ -135,14 +144,14 @@ We've been making a mistake since the very beginning. free and top are not "cgro
 To get the cgrouped memory usage, enter:
 
 ```sh
-/usr/src/app $ cat /sys/fs/cgroup/memory/memory.usage_in_bytes 
+/usr/src/app $ cat /sys/fs/cgroup/memory/memory.usage_in_bytes
 39821312
 ```
 
 Applying the 50 MiB StressChaos, yields the following:
 
 ```sh
-/usr/src/app $ cat /sys/fs/cgroup/memory/memory.usage_in_bytes 
+/usr/src/app $ cat /sys/fs/cgroup/memory/memory.usage_in_bytes
 93577216
 ```
 
@@ -151,7 +160,7 @@ That is about 51 MiB more memory usage than without StressChaos.
 Next, why did our shell exit? Exit code 137 indicates "failure as container received SIGKILL." That leads us to check the Pod. Pay attention to the Pod state and events.
 
 ```bash
-~ kubectl describe pods -n hello-kubernetes                                                                
+~ kubectl describe pods -n hello-kubernetes
 ......
     Last State:     Terminated
       Reason:       Error
@@ -208,7 +217,7 @@ It’s clear from the output that the `stress-ng-vm` processes are being killed 
 
 If processes can’t get the memory they want, things get tricky. They are very likely to fail. Rather than wait for processes to crash, it’s better if you kill some of them to get more memory. The OOM killer stops processes by an order and tries to recover the most memory while causing the least trouble. For detailed information on this process, see [this introduction](https://lwn.net/Articles/391222/) to OOM killer.
 
-Looking at the output above, you can see that `node`, which is our application process that should never be terminated, has an `oom_score_adj` of 988. That is quite dangerous since it is the process with the highest score to get killed. But there is a simple way to stop the OOM killer from killing a specific process. When you create a Pod, it is assigned a Quality of Service (QoS) class. For detailed information, see [Configure Quality of Service for Pods](https://kubernetes.io/docs/tasks/configure-pod-container/quality-service-pod/). 
+Looking at the output above, you can see that `node`, which is our application process that should never be terminated, has an `oom_score_adj` of 988. That is quite dangerous since it is the process with the highest score to get killed. But there is a simple way to stop the OOM killer from killing a specific process. When you create a Pod, it is assigned a Quality of Service (QoS) class. For detailed information, see [Configure Quality of Service for Pods](https://kubernetes.io/docs/tasks/configure-pod-container/quality-service-pod/).
 
 Generally, if you create a Pod with precisely-specified resource requests, it is classified as a `Guaranteed` Pod. OOM killers do not kill containers in a `Guaranteed` Pod if there are other things to kill. These entities include non-`Guaranteed` Pods and stress-ng workers. A Pod with no resource requests is marked as `BestEffort`, and the OOM killer stops it first.
 
@@ -228,6 +237,6 @@ Another thing worth mentioning is the kernel memory. Since `v1.9`, Kubernetes’
 
 ## How we implement StressChaos
 
-StressChaos is a simple way to test your container's behavior when it is low on memory. StressChaos utilizes a powerful tool named `stress-ng` to allocate memory and continue writing to the allocated memory. Because containers have memory limits and container limits are bound to a cgroup, we must find a way to run `stress-ng` in a specific cgroup. Luckily, this part is easy. With enough privileges, we can assign any process to any cgroup by writing to files in `/sys/fs/cgroup/`. 
+StressChaos is a simple way to test your container's behavior when it is low on memory. StressChaos utilizes a powerful tool named `stress-ng` to allocate memory and continue writing to the allocated memory. Because containers have memory limits and container limits are bound to a cgroup, we must find a way to run `stress-ng` in a specific cgroup. Luckily, this part is easy. With enough privileges, we can assign any process to any cgroup by writing to files in `/sys/fs/cgroup/`.
 
 If you are interested in Chaos Mesh and would like to help us improve it, you're welcome to join our [Slack channel](https://slack.cncf.io/) (#project-chaos-mesh)! Or submit your pull requests or issues to our [GitHub repository](https://github.com/chaos-mesh/chaos-mesh).
