@@ -15,6 +15,8 @@ tags:  [Chaos Mesh, Chaos Engineering, StressChaos, Stress Testing]
 
 However, as we tested and used StressChaos, we found some issues with usability and performance. For example, why does StressChaos use far less memory than we configured? To correct these issues, we developed a new set of tests. In this article, I'll describe how we troubleshooted these issues and corrected them. This information will enable you to get the most out of StressChaos.
 
+<!--truncate-->
+
 Before you continue, you need to install Chaos Mesh in your cluster. You can find detailed instructions on our [website](https://chaos-mesh.org/docs/user_guides/installation).
 
 ## Injecting stress into a target
