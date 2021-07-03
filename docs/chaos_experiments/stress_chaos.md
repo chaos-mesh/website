@@ -14,15 +14,15 @@ A StressChaos shares common configurations like other chaos, such as how to sele
 
 - `stressors`
 
-  `Stressors` defines a plenty of stressors supported to stress system components out. You can use one or more of them to make up various kinds of stresses. At least one of the stressors should be specified. The following is supported stressors for now:
+  `Stressors` defines a plenty of stressors supported to stress system components out. You can use one or more of them to make up various kinds of stresses. At least one of the stressors should be specified. Under the hood it uses `stress-ng`. The following is supported stressors for now:
 
   1. `memory`
 
      A `memory` stressor will continuously stress virtual memory out.
 
-     | Option    | Type    | Required | Description                              |
-     | --------- | ------- | -------- | ---------------------------------------- |
-     | `workers` | Integer | True     | Specifies concurrent stressing instance. |
+     | Option    | Type    | Required | Description                                                                           |
+     | --------- | ------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------|
+     | `workers` | Integer | True     | start N workers continuously calling mmap/munmap and writing to the allocated memory. For more details refer `--vm` option on `stress-ng` man page. |
 
   2. `cpu`
 
@@ -30,8 +30,8 @@ A StressChaos shares common configurations like other chaos, such as how to sele
 
      | Option    | Type    | Required | Description                                                                                                                |
      | --------- | ------- | -------- | -------------------------------------------------------------------------------------------------------------------------- |
-     | `workers` | Integer | True     | Specifies concurrent stressing instance. Actually it specifies how many CPUs to stress when it's less than available CPUs. |
-     | `load`    | Integer | False    | Specifies percent loading per worker. 0 is effectively a sleep (no load) and 100 is full loading.                          |
+     | `workers` | Integer | True     | Start  N  workers  exercising  the  CPU  by  sequentially  working  through all the different CPU stress methods. For more details refer `--cpu` option on `stress-ng` man page. |
+     | `load`    | Integer | False    | Specifies percent loading per worker. 0 is effectively a sleep (no load) and 100 is full loading. For more details refer `--cpu-load` option on `stress-ng` man page. |
 
 - `stressngStressors`
 

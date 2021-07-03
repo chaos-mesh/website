@@ -1,5 +1,5 @@
 {
-  "version-1.2.1/docs": [
+  "version-1.2.2/docs": [
     {
       "collapsed": true,
       "type": "category",
@@ -7,15 +7,15 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-1.2.1/overview/what_is_chaos_mesh"
+          "id": "version-1.2.2/overview/what_is_chaos_mesh"
         },
         {
           "type": "doc",
-          "id": "version-1.2.1/overview/features"
+          "id": "version-1.2.2/overview/features"
         },
         {
           "type": "doc",
-          "id": "version-1.2.1/overview/architecture"
+          "id": "version-1.2.2/overview/architecture"
         }
       ]
     },
@@ -26,11 +26,11 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-1.2.1/concepts/chaos_engineering"
+          "id": "version-1.2.2/concepts/chaos_engineering"
         },
         {
           "type": "doc",
-          "id": "version-1.2.1/concepts/blast_radius"
+          "id": "version-1.2.2/concepts/blast_radius"
         }
       ]
     },
@@ -41,11 +41,11 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-1.2.1/get_started/get_started_on_kind"
+          "id": "version-1.2.2/get_started/get_started_on_kind"
         },
         {
           "type": "doc",
-          "id": "version-1.2.1/get_started/get_started_on_minikube"
+          "id": "version-1.2.2/get_started/get_started_on_minikube"
         }
       ]
     },
@@ -56,23 +56,23 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-1.2.1/user_guides/installation"
+          "id": "version-1.2.2/user_guides/installation"
         },
         {
           "type": "doc",
-          "id": "version-1.2.1/user_guides/offline_installation"
+          "id": "version-1.2.2/user_guides/offline_installation"
         },
         {
           "type": "doc",
-          "id": "version-1.2.1/user_guides/experiment_scope"
+          "id": "version-1.2.2/user_guides/experiment_scope"
         },
         {
           "type": "doc",
-          "id": "version-1.2.1/user_guides/run_chaos_experiment"
+          "id": "version-1.2.2/user_guides/run_chaos_experiment"
         },
         {
           "type": "doc",
-          "id": "version-1.2.1/user_guides/dashboard"
+          "id": "version-1.2.2/user_guides/dashboard"
         }
       ]
     },
@@ -83,35 +83,35 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-1.2.1/chaos_experiments/podchaos_experiment"
+          "id": "version-1.2.2/chaos_experiments/podchaos_experiment"
         },
         {
           "type": "doc",
-          "id": "version-1.2.1/chaos_experiments/networkchaos_experiment"
+          "id": "version-1.2.2/chaos_experiments/networkchaos_experiment"
         },
         {
           "type": "doc",
-          "id": "version-1.2.1/chaos_experiments/stresschaos_experiment"
+          "id": "version-1.2.2/chaos_experiments/stresschaos_experiment"
         },
         {
           "type": "doc",
-          "id": "version-1.2.1/chaos_experiments/timechaos_experiment"
+          "id": "version-1.2.2/chaos_experiments/timechaos_experiment"
         },
         {
           "type": "doc",
-          "id": "version-1.2.1/chaos_experiments/iochaos_experiment"
+          "id": "version-1.2.2/chaos_experiments/iochaos_experiment"
         },
         {
           "type": "doc",
-          "id": "version-1.2.1/chaos_experiments/kernelchaos_experiment"
+          "id": "version-1.2.2/chaos_experiments/kernelchaos_experiment"
         },
         {
           "type": "doc",
-          "id": "version-1.2.1/chaos_experiments/dnschaos_experiment"
+          "id": "version-1.2.2/chaos_experiments/dnschaos_experiment"
         },
         {
           "type": "doc",
-          "id": "version-1.2.1/chaos_experiments/awschaos_experiment"
+          "id": "version-1.2.2/chaos_experiments/awschaos_experiment"
         }
       ]
     },
@@ -122,7 +122,7 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-1.2.1/use_cases/multi_data_centers"
+          "id": "version-1.2.2/use_cases/multi_data_centers"
         }
       ]
     },
@@ -133,25 +133,25 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-1.2.1/development_guides/development_overview"
+          "id": "version-1.2.2/development_guides/development_overview"
         },
         {
           "type": "doc",
-          "id": "version-1.2.1/development_guides/set_up_the_development_environment"
+          "id": "version-1.2.2/development_guides/set_up_the_development_environment"
         },
         {
           "type": "doc",
-          "id": "version-1.2.1/development_guides/develop_a_new_chaos"
+          "id": "version-1.2.2/development_guides/develop_a_new_chaos"
         },
         {
           "type": "doc",
-          "id": "version-1.2.1/development_guides/add_facilities_to_chaos_daemon"
+          "id": "version-1.2.2/development_guides/add_facilities_to_chaos_daemon"
         }
       ]
     },
     {
       "type": "doc",
-      "id": "version-1.2.1/faqs"
+      "id": "version-1.2.2/faqs"
     },
     {
       "collapsed": true,
@@ -160,15 +160,15 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-1.2.1/releases/v1.0.0"
+          "id": "version-1.2.2/releases/v1.0.0"
         },
         {
           "type": "doc",
-          "id": "version-1.2.1/releases/v0.9.0"
+          "id": "version-1.2.2/releases/v0.9.0"
         },
         {
           "type": "doc",
-          "id": "version-1.2.1/releases/v0.8.0"
+          "id": "version-1.2.2/releases/v0.8.0"
         }
       ]
     }

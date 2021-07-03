@@ -75,6 +75,7 @@ github.com/go-logr/zapr.(*zapLogger).Error
 ```bash
 kubectl patch pv <your-pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Delete"}}'
 ```
+
 ## DNSChaos
 
 ### Q: While trying to run DNSChaos in OpenShift, tripped over problems regarding authorization.
