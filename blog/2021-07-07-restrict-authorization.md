@@ -9,7 +9,7 @@ image: /img/chaos-engineering-tools-as-a-service.jpeg
 tags: [Chaos Mesh, Chaos Engineering]
 ---
 
-![Chaos engineering tools](/img/chaos mesh restrict authorization.jpeg)
+![Chaos engineering tools](/img/chaos-mesh-restrict-authorization.jpeg)
 
 # Cluster multi-tenancy
 
