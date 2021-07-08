@@ -21,11 +21,13 @@ Big thanks to the more than 200 of you who joined us! We received so many great 
 
 **Q: Is Chaos Mesh compatible with Service Meshes, such as Istio?** 
 
-**A:** Yes, you can use Chaos Mesh in the Service Mesh environment. At one of our [previous community meetings](https://www.youtube.com/watch?v=paIgJYOhdGw), Sergio Méndez and Jossie Castrillo from the University of San Carlos of Guatemala shared how they used Linkerd and Chaos Mesh to conduct chaos experiments for their project, “[COVID-19 Realtime Vaccinated People Visualizer](https://github.com/sergioarmgpl/operating-systems-usac-course/blob/master/lang/en/projects/project1v3/project1.md).”
+**A:** Yes, you can use Chaos Mesh in the Service Mesh environment. At one of our [previous community meetings](https://www.youtube.com/watch?v=paIgJYOhdGw), Sergio Méndez and Jossie Castrillo from the University of San Carlos of Guatemala shared how they used Linkerd and Chaos Mesh to conduct chaos experiments for their project, “[COVID-19 Realtime Vaccinated People Visualizer](https://github.com/sergioarmgpl/operating-systems-usac-course/blob/master/lang/en/projects/project1v3/project1.md)”.
 
 ![Project Architecture](/img/chaos-mesh-linkerd-architecture.png)
 
 <div class="caption-center"> Project Architecture </div>
+
+<br/>
 
 **Q: Can I use Chaos Mesh on-premises or do I need Amazon Web Services (AWS) or Google Cloud Platform (GCP)?**
 
