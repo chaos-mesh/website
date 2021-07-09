@@ -4,7 +4,8 @@ title: Install Chaos Mesh using Helm (Recommended for Production Environments)
 
 import PickVersion from '@site/src/components/PickVersion'
 
-Import Verify Installation from '/common/verify-installation.md' import QuickRun from './common/quick-run.md'
+import VerifyInstallation from './common/verify-installation.md'
+import QuickRun from './common/quick-run.md'
 
 This document describes how to install Chaos Mesh in the production environment.
 
@@ -101,39 +102,11 @@ To install Chaos Mesh of a specific version, add the `--version xxx` parameter a
 
 ## Verify the installation
 
-To check the performance of Chaos Mesh, execute the following command:
-
-```sh
-kubectl get po -n chaos-testing
-```
-
-The expected output is as follows:
-
-```sh
-NAME                                        READY   STATUS    RESTARTS   AGE
-chaos-controller-manager-69fd5c46c8-xlqpc   1/1     Running   0          2d5h
-chaos-daemon-jb8xh                          1/1     Running   0          2d5h
-chaos-dashboard-98c4c5f97-tx5ds             1/1     Running   0          2d5h
-```
-
-If your actual output is similar to the expected output with `Version`, `GitCommit`, `GitTreeState`, and `GoVersion`, it means that Helm is installed successfully.
-
-:::note
-
-If the `STATUS` of your actual output is not `Running`, then execute the following command to check the Pod details, and troubleshoot issues according to the error information.
-
-```sh
-# Take the chaos-controller as an example
-kubectl describe po -n chaos-testing chaos-controller-manager-69fd5c46c8-xlqpc
-```
-
-:::
+<VerifyInstallation />
 
 ## Run Chaos experiments
 
-After checking that the installation is complete, you can run a Chaos experiment to experience the features of Chaos Mesh.
-
-For the method to run the experiment, it is recommended to refer to [Run a Chaos experiment](run-a-chaos-experiment.md). After successfully creating the experiment, you can observe the running status of the experiment on the Chaos Dashboard.
+<QuickRun />
 
 ## Upgrade Chaos Mesh
 

@@ -5,6 +5,9 @@ sidebar_label: Quick Start (Test Recommended)
 
 import PickVersion from '@site/src/components/PickVersion'
 
+import VerifyInstallationAndRun from './common/verify-installation.md'
+import QuickRun from './common/quick-run.md'
+
 This document describes how to quickly start Chaos Mesh in a test or local environment.
 
 :::note
@@ -71,41 +74,13 @@ After running this script, Chaos Mesh automatically installs the CustomResourceD
 
 For more installation details, refer to the source code of the [`install.sh`](https://github.com/chaos-mesh/chaos-mesh/blob/master/install.sh).
 
-## Check the installation
+## Verify the installation
 
-To check the performance of Chaos Mesh, execute the following command:
-
-```sh
-kubectl get po -n chaos-testing
-```
-
-The expected outputs are as follows:
-
-```sh
-NAME                                        READY   STATUS    RESTARTS   AGE
-chaos-controller-manager-69fd5c46c8-xlqpc   1/1     Running   0          2d5h
-chaos-daemon-jb8xh                          1/1     Running   0          2d5h
-chaos-dashboard-98c4c5f97-tx5ds             1/1     Running   0          2d5h
-```
-
-If your actual outputs match the expected outputs, Chaos Mesh is installed successfully.
-
-:::note
-
-If the `STATUS` of your actual outputs is not `Running`, then execute the following command to check the Pod details, and troubleshoot issues according to the error information.
-
-```sh
-# Take the chaos-controller as an example
-kubectl describe po -n chaos-testing chaos-controller-manager-69fd5c46c8-xlqpc
-```
-
-:::
+<VerifyInstallation />
 
 ## Run Chaos experiments
 
-After checking that the installation is complete, you can run a Chaos experiment to experience the features of Chaos Mesh.
-
-For the method to run the experiment, it is recommended to refer to [Simulate Pod failure](simulate-pod-chaos-on-kubernetes.md). After successfully creating the experiment, you can observe the running status of the experiment on the Chaos Dashboard.
+<QuickRun />
 
 ## Uninstall Chaos Mesh
 
