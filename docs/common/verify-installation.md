@@ -1,4 +1,4 @@
-To check the performance of Chaos Mesh, execute the following command:
+To check the running status of Chaos Mesh, execute the following command:
 
 ```sh
 kubectl get po -n chaos-testing
@@ -13,7 +13,7 @@ chaos-daemon-jb8xh                          1/1     Running   0          2d5h
 chaos-dashboard-98c4c5f97-tx5ds             1/1     Running   0          2d5h
 ```
 
-If your actual output is similar to the expected output with `Version`, `GitCommit`, `GitTreeState`, and `GoVersion`, it means that Helm is installed successfully.
+If your actual output is similar to the expected output with `NAME`, `READY`, `STATUS`, `RESTARTS`, and `AGE`, it means that Helm is installed successfully.
 
 :::note
 
