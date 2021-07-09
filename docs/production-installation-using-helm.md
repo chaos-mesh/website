@@ -40,7 +40,7 @@ In this document, Helm v3 is used in commands to make operations on Chaos Mesh. 
 Add the Chaos Mesh repository to the Helm repository:
 
 ```bash
-help repo add chaos-mesh https://charts.chaos-mesh.org
+helm repo add chaos-mesh https://charts.chaos-mesh.org
 ```
 
 ### Step 2: View the installable versions of Chaos Mesh
@@ -85,7 +85,7 @@ helm install chaos-mesh chaos-mesh/chaos-mesh-n=chaos-testing
 #### Containerd
 
 ```bash
-help install chaos-mesh chaos-mesh-mesh-n=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock
+helm install chaos-mesh chaos-mesh-mesh-n=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock
 ```
 
 #### K3s
@@ -162,7 +162,7 @@ helm uninstall chaos-mesh -n chaos-testing
 
 ### How can I install the latest version of Chaos Mesh?
 
-The `helm/chaos-mesh/values.yaml` file defines the image of the latest version (the master branch).To install the latest version of Chaos Mesh, execute the following command:
+The `helm/chaos-mesh/values.yaml` file defines the image of the latest version (the master branch). To install the latest version of Chaos Mesh, execute the following command:
 
 ```bash
 # Clone repository
@@ -177,5 +177,5 @@ helm install chaos-mesh helm/chaos-mesh -n=chaos-teting
 The safe mode is enabled by default. To disable the safe mode, specify `dashboard.securityMode` as `false` during the installation or upgrade:
 
 ```bash
-help install chaos-mesh helm/chaos-mesh -n=chaos-testing --set dashboard.securityMode=false
+helm install chaos-mesh helm/chaos-mesh -n=chaos-testing --set dashboard.securityMode=false
 ```
