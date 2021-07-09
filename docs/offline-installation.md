@@ -19,7 +19,7 @@ Before installing Chaos Mesh, make sure that Docker is installed and the Kuberne
 
 ## Prepare installation files
 
-Before you install Chaos Mosh offline, you need to download all Chaos Mesh images and repository compressed packages from machines with external network connections, and then copy the downloaded files into your offline environment.
+Before you install Chaos Mesh offline, you need to download all Chaos Mesh images and repository compression packages from the machines with external network connection, and then copy the downloaded files into your offline environment.
 
 ### Specify version number
 
@@ -31,7 +31,7 @@ export CHAOS_MESH_VERSION=latest
 
 ### Download Chaos Mesh images
 
-On the machine connected to the external network, pull images using the version number that has been set:
+On the machine connected to external network, pull images using the version number that has been set:
 
 ```bash
 docker pull pingcap/chaos-mesh:${CHAOS_MESH_VERSION}
@@ -103,7 +103,7 @@ Before pushing images to Registry, make sure that Registry has been deployed in 
 Set the Chaos Mesh version and the Registry address as the environment variable:
 
 <PickVersion className="language-bash">
-export CHAOS_MESH_VERSION=; export DOCKER_REGISTRY=localhost:5000
+export CHAOS_MESH_VERSION=latest; export DOCKER_REGISTRY=localhost:5000
 </PickVersion>
 
 Mark the images so that the images point to the Registry:
@@ -139,7 +139,7 @@ Create the namespace:
 kubectl create ns chaos-testing
 ```
 
-Execute the installation command.  When executing the installation command, you need to specify the namespace of Chaos Mesh and the image value of each component:
+Execute the installation command. When executing the installation command, you need to specify the namespace of Chaos Mesh and the image value of each component:
 
 ```bash
 helm install chaos-mesh helm/chaos-mesh -n=chaos-testing \
