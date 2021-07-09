@@ -24,7 +24,7 @@ The expected output is as follows:
 version.BuildInfo{Version:"v3.5.4", GitCommit:"1b5edb69df3d3a08df77c9902dc17af864ff05d1", GitTreeState:"dirty", GoVersion: "go1.16.3"}
 ```
 
-If your actual outputs are similar to the expected outputs with `Version`, `GitCommit`, `GitTreeState` and `GoVersion`, it means that Helm is installed successfully.
+If your actual output is similar to the expected output with `Version`, `GitCommit`, `GitTreeState`, and `GoVersion`, it means that Helm is installed successfully.
 
 :::note
 
@@ -107,7 +107,7 @@ To check the performance of Chaos Mesh, execute the following command:
 kubectl get po -n chaos-testing
 ```
 
-The expected outputs are as follows:
+The expected output is as follows:
 
 ```sh
 NAME                                        READY   STATUS    RESTARTS   AGE
@@ -116,11 +116,11 @@ chaos-daemon-jb8xh                          1/1     Running   0          2d5h
 chaos-dashboard-98c4c5f97-tx5ds             1/1     Running   0          2d5h
 ```
 
-If your actual outputs match the expected outputs, Chaos Mesh is installed successfully.
+If your actual output is similar to the expected output with `Version`, `GitCommit`, `GitTreeState`, and `GoVersion`, it means that Helm is installed successfully.
 
 :::note
 
-If the `STATUS` of your actual outputs is not `Running`, then execute the following command to check the Pod details, and troubleshoot issues according to the error information.
+If the `STATUS` of your actual output is not `Running`, then execute the following command to check the Pod details, and troubleshoot issues according to the error information.
 
 ```sh
 # Take the chaos-controller as an example
@@ -189,7 +189,7 @@ helm uninstall chaos-mesh -n chaos-testing
 
 ### How can I install the latest version of Chaos Mesh?
 
-The `helm/chaos-mesh/values.yaml` file defines the mirror of the latest version (the master branch).To install the latest version of Chaos Mesh, execute the following command:
+The `helm/chaos-mesh/values.yaml` file defines the image of the latest version (the master branch).To install the latest version of Chaos Mesh, execute the following command:
 
 ```bash
 # Clone repository
