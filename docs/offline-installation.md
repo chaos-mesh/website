@@ -143,7 +143,7 @@ Execute the installation command. When executing the installation command, you n
 
 ```bash
 helm install chaos-mesh helm/chaos-mesh -n=chaos-testing \
-  --set chaosDaemon.image=$CHAOS_DAEMON_IMAGE
+  --set chaosDaemon.image=$CHAOS_DAEMON_IMAGE \
   --set controllerManager.image=$CHAOS_MESH_IMAGE \
   --set dashboard.image=$CHAOS_DASHBOARD_IMAGE
 ```
