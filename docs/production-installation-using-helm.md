@@ -79,7 +79,7 @@ Because socket paths are listened to by the daemons of different running contain
 
 ```bash
 # Default to /var/run/docker.sock
-helm install chaos-mesh chaos-mesh/chaos-mesh-n=chaos-testing
+helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing
 ```
 
 #### Containerd
@@ -131,7 +131,7 @@ If you have upgraded Chaos Mesh in a non-Docker environment, you need to add the
 To modify the configuration, set different values according to your need. For example, execute the following command to upgrade and uninstall `chaos-dashboard`:
 
 ```bash
-helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set dashboard.cree=false
+helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set dashboard.create=false
 ```
 
 :::note
@@ -145,7 +145,7 @@ For more values and their usages, refer to [all values](https://github.com/chaos
 Currently, the latest CustomResourceDefinition (CRD) is not applied during the Helm upgrading, which might cause errors. To avoid this situation, you can apply the latest CRD manually:
 
 <PickVersion className="language-bash">
-curl-sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl apply -f -
+curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl apply -f -
 </PickVersion>
 
 :::
@@ -166,7 +166,7 @@ The `helm/chaos-mesh/values.yaml` file defines the image of the latest version (
 
 ```bash
 # Clone repository
-git clone https://github.com/chaos-mesh/chaos-messh.git
+git clone https://github.com/chaos-mesh/chaos-mesh.git
 cd chaos-mesh
 
 helm install chaos-mesh helm/chaos-mesh -n=chaos-teting
