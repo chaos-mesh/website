@@ -15,7 +15,7 @@ If Chaos Mesh is installed using Helm, permission authentication is enabled by d
 
 ### Create user accounts and bind permissions
 
-You can create user accounts and bind permissions directly through the Chaos Mesh Dashboard interface. When you access the Dashboard, a login window pops up. Click the link **"Click here to generate"**:
+You can create user accounts and bind permissions directly through the Chaos Mesh Dashboard interface. When you access the Dashboard, a login window pops up. Click the link **Click here to generate**:
 
 ![Dashboard Token Login](img/dashboard_login1.png)
 
@@ -27,7 +27,7 @@ The steps to create user accounts and bind permissions are as follows. You need 
 
 1. Choose the permission scope
 
-   If you want to give the account the appropriate permissions for all Chaos experiments in Kubernetes, check the **Cluster scoped** box. If you specify a namespace in the**Namespace**dropdown option box, the account only has permissions in that specified namespace.
+   If you want to give the account the appropriate permissions for all Chaos experiments in Kubernetes, check the **Cluster scoped** box. If you specify a namespace in the **Namespace** dropdown option box, the account only has permissions in that specified namespace.
 
 2. Choose the user role
 
@@ -140,7 +140,7 @@ In the right part of this page, you can add new tokens in the **Add token** wind
 
 ### Enable or disable permission authentication
 
-If Chaos Mesh is installed using Helm, the permission authentication feature is enabled by default.For production environments and other scenarios with high security requirements, it is recommended to keep the permission authentication feature enabled.If you just want to give Chaos Mesh a try and quickly create Chaos experiments with the permission authentication feature disabled, you can set `--set dashboard.securityMode=false`  in a Helm command. The command is as follows:
+If Chaos Mesh is installed using Helm, the permission authentication feature is enabled by default.For production environments and other scenarios with high security requirements, it is recommended to keep the permission authentication feature enabled.If you just want to give Chaos Mesh a try and quickly create Chaos experiments with the permission authentication feature disabled, you can set `--set dashboard.securityMode=false` in a Helm command. The command is as follows:
 
 ```bash
 helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --set dashboard.securityMode=false
