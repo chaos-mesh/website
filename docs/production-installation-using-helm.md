@@ -91,7 +91,7 @@ helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set chaosDaemon
 #### K3s
 
 ```bash
-helm install chaos-mesh chaos-mesh-n=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock
+helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock
 ```
 
 :::note
