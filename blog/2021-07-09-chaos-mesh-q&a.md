@@ -31,7 +31,7 @@ Big thanks to the more than 200 of you who joined us! We received so many great 
 
 **Q: Can I use Chaos Mesh on-premises or do I need Amazon Web Services (AWS) or Google Cloud Platform (GCP)?**
 
-**A:** You can do either approach! You can deploy Chaos Mesh on your Kubernetes® cluster, so it does not matter whether you manage it yourself or have it hosted on AWS or GCP. However, if you would like to use it in a Kubernetes environment, you need to [set relevant parameters](https://chaos-mesh.org/docs/user_guides/installation) during installation.
+**A:** You can do either! You can deploy Chaos Mesh on your Kubernetes cluster, so it does not matter whether you manage it yourself or have it hosted on AWS or GCP. However, if you would like to use it in a Kubernetes environment, you need to [set relevant parameters](https://chaos-mesh.org/docs/user_guides/installation) during installation.
 
 **Q: How do "chaos actions" work?**
 
@@ -39,15 +39,15 @@ Big thanks to the more than 200 of you who joined us! We received so many great 
 
 **Q: Are you going to add probe support to Chaos Mesh for steady state detection and experiment validation?**
 
-**A:**  Currently, there is no plan to add this support. These monitors are necessary if an application is ready for production. Chaos Mesh itself does not monitor related work, but provides an interface to access existing monitoring systems or the status interface of the application to achieve the application’s steady state.
+**A:**  Currently, there is no plan to add this support. Steady state detection and experiment validation are necessary if an application is ready for production. Chaos Mesh itself does not monitor related work, but provides an interface to access existing monitoring systems or the status interface of the application to monitor and detect the application’s steady state.
 
 **Q: What elevated privileges do the Chaos Mesh pods need?** 
 
-**A:** By default, the Chaos Daemon components in Chaos Mesh run in `privileged` mode. If your Kubernetes cluster version is v3.11 or higher, you can replace `privileged` mode by configuring `capabilities`.
+**A:** By default, the Chaos Daemon components in Chaos Mesh run in the `privileged` mode. If your Kubernetes cluster version is v3.11 or higher, you can replace `privileged` mode by configuring `capabilities`.
 
 **Q: Can I implement Chaos Mesh inside build pipelines to log specific test results?** 
 
-**A:** Yes, that’s easy to do. You can integrate Chaos Mesh with pipeline systems such as Argo, Jenkins®, GitHub Action, and Spanner. Chaos Mesh uses Kubernetes CRDs to manage chaos experiments. To inject chaos, you only need to create the chaos CRD object you want in the pipeline. You can obtain the running status of an experiment through its status structure and event.
+**A:** Yes, that’s easy to do. You can integrate Chaos Mesh with pipeline systems such as Argo, Jenkins, GitHub Action, and Spanner. Chaos Mesh uses Kubernetes CRDs to manage chaos experiments. To inject chaos, you only need to create the chaos CRD object you want in the pipeline. You can obtain the running status of an experiment through its status structure and event.
 
 **Q: What can we expect from the 2.0 release? Can you share some updates on HTTPChaos?**
 
