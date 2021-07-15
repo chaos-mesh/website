@@ -10,7 +10,6 @@ tags: [Chaos Mesh, Chaos Engineering, LFX Mentorship, AWS Chaos]
 ---
 ![LFX Mentorship Experience](/img/mentorship_blog.jpeg)
 
-## About Me
 
 [I’m](https://mentorship.lfx.linuxfoundation.org/mentee/6a0bf7de-9e18-4acb-9a66-f5fecdbeb42e) a junior undergraduate majoring in Biomedical Engineering in the Department of Biotechnology and Medical Engineering at the [National Institute of Technology Rourkela](https://nitrkl.ac.in/), India. For someone who started to code only because I was fascinated by it, it was all a journey of self-learning, filled with various adversities. But when I started with open-source contributions, it was all very beginner-friendly and I came across a lot of people who helped me learn the tech stack better.
 
