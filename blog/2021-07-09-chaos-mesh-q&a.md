@@ -57,9 +57,3 @@ Big thanks to the more than 200 of you who joined us! We received so many great 
 ## Join the Chaos Mesh community
 
 If you are interested in Chaos Mesh and would like to help us improve it, you're welcome to join [our Slack channel](https://slack.cncf.io/) or submit your pull requests or issues to our [GitHub repository](https://github.com/chaos-mesh/chaos-mesh).
-
-
-
-
-
-_Jenkins® is a registered trademark of LF Charities Inc._
