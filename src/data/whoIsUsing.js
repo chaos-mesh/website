@@ -7,6 +7,10 @@ const whoisUsing = [
     },
   },
   {
+    name: 'ByteDance',
+    img: 'img/logos/bytedance.svg',
+  },
+  {
     name: 'Celo',
     img: 'img/logos/celo.png',
   },
@@ -48,6 +52,13 @@ const whoisUsing = [
   {
     name: 'Qiniu Cloud',
     img: 'img/logos/qiniucloud.png',
+  },
+  {
+    name: 'S.J. Distributors',
+    img: 'img/logos/sj.png',
+    style: {
+      width: '40%',
+    },
   },
   {
     name: 'Tencent',
