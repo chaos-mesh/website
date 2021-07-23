@@ -45,6 +45,11 @@ module.exports = {
           label: 'Events',
           position: 'right',
         },
+        {
+          href: 'https://chaos-mesh.org/website-zh',
+          label: '中文',
+          position: 'right',
+        },
       ],
     },
     footer: {
