@@ -93,7 +93,7 @@ The steps to create user accounts and bind permissions are as follows. You need 
    Copy the command shown in the third step on the Token generator page and run the command in your terminal. The following is an example command:
 
    ```bash
-   kubtl descripbe - n busybox secrets account-busybox-manager-zcbaf
+   kubectl describe - n busybox secrets account-busybox-manager-zcbaf
    ```
 
    The output is as follows:
