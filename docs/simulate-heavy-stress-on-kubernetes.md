@@ -13,7 +13,7 @@ You can create experiments using either Chaos Dashboard or the YAML configuratio
 
 1. Open Chaos Dashboard, and click **NEW EXPERIMENT** on the page to create a new experiment:
 
-   ![Create Experiment](./img/create-new-exp.jpeg)
+   ![Create Experiment](./img/create-new-exp.png)
 
 2. In the **Choose a Target** area, choose **STRESS TEST** and fill out the experiment information. For specific configuration fields, refer to the description in [Configuration Description](#fields description).
 
