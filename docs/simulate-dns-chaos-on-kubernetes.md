@@ -29,7 +29,7 @@ Make sure that the Pod status is `Running`.
 
 1. Currently, DNSChaos only supports record types `A` and `AAAA`.
 
-2. The chaos DNS service runs CoreDNS with the [k8s_dns_chaos](https://github.com/chaos-mesh/k8s_dns_chaos) plugin.If the CoreDNS service in your Kubernetes cluster contains some special configurations, you can edit configMap `dns-server-config` to make the configuration of the chaos DNS service consistent with that of the K8s CoreDNS service using the following command:
+2. The chaos DNS service runs CoreDNS with the [k8s_dns_chaos](https://github.com/chaos-mesh/k8s_dns_chaos) plugin. If the CoreDNS service in your Kubernetes cluster contains some special configurations, you can edit configMap `dns-server-config` to make the configuration of the chaos DNS service consistent with that of the K8s CoreDNS service using the following command:
 
    ```bash
    kubectl edit configmap dns-server-config -n chaos-testing
@@ -41,7 +41,7 @@ Make sure that the Pod status is `Running`.
 
    ![Create Experiment](./img/create-new-exp.jpeg)
 
-2. In the "**Choose a Target**" area, choose **DNS FAULT** and select a specific behavior, such as **ERROR**. Then fill out the matching rules.
+2. In the **Choose a Target** area, choose **DNS FAULT** and select a specific behavior, such as **ERROR**. Then fill out the matching rules.
 
    ![DNSChaos Experiment](./img/dnschaos-exp.png)
 
@@ -75,7 +75,7 @@ Make sure that the Pod status is `Running`.
          - busybox
    ```
 
-   This configuration can take effect for domains including `google.com`, `chaos-mesh.org`, and `github.com`, which means that an IP address will be returned when a DNS request is sent to these three domains.For specific matching rules, refer to the `patterns` description in [Configuration Description](#configuration-description).
+   This configuration can take effect for domains including `google.com`, `chaos-mesh.org`, and `github.com`, which means that an IP address will be returned when a DNS request is sent to these three domains. For specific matching rules, refer to the `patterns` description in [Configuration Description](#configuration-description.md).
 
 2. After the configuration file is prepared, use `kubectl` to create an experiment:
 
@@ -90,8 +90,8 @@ Make sure that the Pod status is `Running`.
 | action    | string       | Defines the behavior of DNS fault. The value can be `random` or `error`.When the value is `random`, DNS service will return a random IP address; when the value is `error`, DNS service will return an error.                                                                                                                                                               | None          | Yes      | `random` or `error`                          |
 | patterns  | String array | Selects a domain template that matches faults. Placeholder `?` and wildcard are supported. `*`                                                                                                                                                                                                                                                                              | []            | No       | `google.com`, `chaos-mesh.org`, `github.com` |
 | mode      | string       | Specifies the mode of the experiment. The mode options include `one` (selecting a random Pod), `all` (selecting all eligible Pods), `fixed` (selecting a specified number of eligible Pods), `fixed-percent` (selecting a specified percentage of Pods from the eligible Pods), and `random-max-percent` (selecting the maximum percentage of Pods from the eligible Pods). | None          | Yes      | `1`                                          |
-| value     | string       | Provides parameters for the `mode` configuration, depending on `mode`.For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods.                                                                                                                                                                                                         | None          | No       | 2                                            |
-| selector  | struct       | Specifies the target Pod. For details, refer to [Define the experiment scope](./define-chaos-experiment-scope.md).                                                                                                                                                                                                                                                          | None          | Yes      |                                              |
+| value     | string       | Provides parameters for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods.                                                                                                                                                                                                         | None          | No       | 2                                            |
+| selector  | struct       | Specifies the target Pod. For details, refer to [Define the Scope of Chaos Experiments](docs/define-chaos-experiment-scope.md).                                                                                                                                                                                                                                                          | None          | Yes      |                                              |
 
 :::note
 
