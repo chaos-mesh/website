@@ -45,13 +45,13 @@ To create a one-time Chaos experiment, you can use one of the following methods:
 
 2. Execute the following command to create and run this Chaos experiment.
 
-   ```yaml
+   ```sh
    kubectl apply -f network-delay.yaml
    ```
 
 3. To view the running status of the Chaos experiment after it begins, use the following `kubectl describe` command to check the `status` or `event` of this experiment object.
 
-   ```yaml
+   ```sh
    kubectl describe networkchaos network-delay
    ```
 
@@ -100,13 +100,13 @@ To create this type of Chaos experiments, take the following steps:
 
 2. Execute the following command to create and run this Chaos experiment.
 
-   ```yaml
+   ```sh
    kubectl apply -f schedule-delay-example.yaml
    ```
 
 3. To view the running status of the Chaos experiment after it begins, use the following `kubectl describe` command to check the `status` or `event` of this experiment object.
 
-   ```yaml
+   ```sh
    kubectl describe networkchaos schedule-delay-example
    ```
 
@@ -120,13 +120,13 @@ For a running Chaos experiment, you can pause the experiment by setting a pause 
 
 For example, you can use the following command to pause a Chaos experiment named `network-delay` in the default namespace:
 
-```yaml
+```sh
 kubectl annoate networkchaos network-delay experiment.chaos-mesh.org/pause=true
 ```
 
 After this command is executed, Chaos Mesh restores the injected faults immediately. If you want to resume this Chaos experiment from the pause state to the normal running state, use the following command:
 
-```yaml
+```sh
 kubectl annotate networkchaos network-delay experiment.chaos-mesh.org/pause-
 ```
 
@@ -153,14 +153,14 @@ If you need to update a Chaos experiment after it is created, you can edit the c
 
 If you manage Chaos experiments using YAML files, you can use the following commands to update the Chaos experiments:
 
-```yaml
+```sh
 vim network-delay.yaml # modify network-delay.yaml to what you want
 kubectl apply -f network-delay.yaml
 ```
 
-You can also use the following `kubectl patch`  command to update a specific configuration parameter:
+You can also use the following `kubectl patch` command to update a specific configuration parameter:
 
-```yaml
+```sh
 kubectl patch networchaos network-delay -p '{"spec":{"duration":"30s"}}'
 ```
 
@@ -180,15 +180,15 @@ If you want to update a Chaos experiment with the Dashboard, you can click the c
 
 After a Chaos experiment finishes, you can delete the experiment using the following `kubectl delete` command. Once you delete the Chaos experiment, the injected fault will be restored immediately:
 
-```yaml
+```sh
 kubectl delete -f network-delay.yaml
-## or delete the chaos object directly
+# or delete the chaos object directly
 kubectl delete networkchaos network-delay
 ```
 
 If the delete operation is blocked, this means that some fault behaviors of the target object cannot be restored. You can check the Chaos Mesh logs for troubleshooting or directly create a [GitHub issue](https://github.com/pingcap/chaos-mesh/issues) to report this problem to the Chaos Mesh team. Besides, you can forcibly delete the Chaos experiment with the following command:
 
-```yaml
+```sh
 kubectl annotate networkchaos web-show-network-delay chaos-mesh.chaos-mesh.org/cleanFinalizer=forced
 ```
 
