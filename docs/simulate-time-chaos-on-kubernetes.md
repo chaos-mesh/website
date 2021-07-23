@@ -11,11 +11,11 @@ You can create experiments in Chaos Dashboard or using the YAML configuration fi
 
 ## Create experiments using Chaos Dashboard
 
-1. Open Chaos Dashboard, and click the "**NEW EXPERIMENT**" button on the page to create a new experiment:
+1. Open Chaos Dashboard, and click **NEW EXPERIMENT** on the page to create a new experiment:
 
    ![Create Experiment](./img/create-new-exp.png)
 
-2. In the "**Choose a Target**" area, choose "**CLOCK SCREW**" and fill out the Clock ID and time offset.
+2. In the **Choose a Target** area, choose **CLOCK SCREW** and fill out the Clock ID and time offset.
 
    ![TimeChaos Experiments](./img/timechaos-exp.png)
 
