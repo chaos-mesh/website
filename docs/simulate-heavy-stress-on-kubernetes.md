@@ -5,7 +5,7 @@ sidebar_label: Simulate Stress Scenarios
 
 ## StressChaos Introduction
 
-Chaos Mesh provides StresChaos experiments to simulate stress scenarios inside containers.This document describes how to create StressChaos experiments and how to prepare the corresponding configuration file.
+Chaos Mesh provides StresChaos experiments to simulate stress scenarios inside containers. This document describes how to create StressChaos experiments and how to prepare the corresponding configuration file.
 
 You can create experiments using either Chaos Dashboard or the YAML configuration files.
 
@@ -27,7 +27,7 @@ You can create experiments using either Chaos Dashboard or the YAML configuratio
 
 ## Create experiments using the YAML file
 
-1. Write the experiment configuration to the YAML configuration file.In the following example, the `memory-stress.yaml` file is used.
+1. Write the experiment configuration to the YAML configuration file. In the following example, the `memory-stress.yaml` file is used.
 
    ```yaml
    apiVersion: chaos-mesh.org/v1alpha1
