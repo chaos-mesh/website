@@ -39,13 +39,13 @@ Make sure that the Pod status is `Running`.
 
 1. Open Chaos Dashboard, and click **NEW EXPERIMENT** on the page to create a new experiment:
 
-   ![Create Experiment](./img/create-new-exp.jpeg)
+   ![Create Experiment](./img/create-new-exp.png)
 
 2. In the **Choose a Target** area, choose **DNS FAULT** and select a specific behavior, such as **ERROR**. Then fill out the matching rules.
 
    ![DNSChaos Experiment](./img/dnschaos-exp.png)
 
-   According to the matching rules configured in the screenshot, the DNS FAULT takes effect for domains including `google.com`, `chaos-mesh.org`, and `github.com`, which means that an error will be returned when a DNS request is sent to these three domains. For details of specific matching rules, refer to the description of the `patterns` field in [Configuration Description](#configuration description).
+   According to the matching rules configured in the screenshot, the DNS FAULT takes effect for domains including `google.com`, `chaos-mesh.org`, and `github.com`, which means that an error will be returned when a DNS request is sent to these three domains. For details of specific matching rules, refer to the description of the `patterns` field in [Configuration Description](#configuration-description).
 
 3. Fill out the experiment information, and specify the experiment scope and the scheduled experiment duration:
 
@@ -75,7 +75,7 @@ Make sure that the Pod status is `Running`.
          - busybox
    ```
 
-   This configuration can take effect for domains including `google.com`, `chaos-mesh.org`, and `github.com`, which means that an IP address will be returned when a DNS request is sent to these three domains. For specific matching rules, refer to the `patterns` description in [Configuration Description](#configuration-description.md).
+   This configuration can take effect for domains including `google.com`, `chaos-mesh.org`, and `github.com`, which means that an IP address will be returned when a DNS request is sent to these three domains. For specific matching rules, refer to the `patterns` description in [Configuration Description](#configuration-description).
 
 2. After the configuration file is prepared, use `kubectl` to create an experiment:
 
