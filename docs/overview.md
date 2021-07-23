@@ -17,7 +17,7 @@ As the industry's leading Chaos testing platform, Chaos Mesh has the following c
 - Stable core capabilities: Chaos Mesh originated from the core testing platform of [TiDB](https://github.com/pingcap/tidb), and inherited a lot of TiDB's existing test experience from its initial release.
 - Fully authenticated: Chaos Mesh is used in numerous companies and organizations, such as Tencent and Meituan; It is also used in the testing systems of many well-known distributed systems, such as Apache APISIX and RabbitMQ.
 - An easy-to-use system: Chaos Mesh makes full use of automation with graphical operations and Kubernetes-based usage.
-- Cloud-native: Chaos Mesh supports Kubernetes environment with its powerful automation ability.
+- Cloud Native: Chaos Mesh supports Kubernetes environment with its powerful automation ability.
 - Various fault simulation scenarios: Chaos Mesh covers most of the scenarios of basic fault simulation in the distributed testing system.
 - Flexible experiment orchestration capabilities: You can design your own Chaos experiment scenarios on the platform, including multiple mixing experiments and application status checks.
 - High security: Chaos Mesh is designed with multiple layers of security control and provides high security.
