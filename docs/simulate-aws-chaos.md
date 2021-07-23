@@ -9,9 +9,9 @@ This document describes how to use Chaos Mesh to simulate AWS faults.
 
 AwsChaos can help you simulate fault scenarios on the specified AWS instance. Currently, AwsChaos supports the following fault types:
 
-- **Ec2 Stop**: Stops the specified EC2 instance.
-- **Ec2 Restart**: Restarts the specified EC2 instance.
-- **Detach Volume**: Uninstalls the storage volume from the specified EC2 instance.
+- **Ec2 Stop**: stops the specified EC2 instance.
+- **Ec2 Restart**: restarts the specified EC2 instance.
+- **Detach Volume**: uninstalls the storage volume from the specified EC2 instance.
 
 ## `Secret` file
 
@@ -53,13 +53,13 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
 
 :::
 
-1. Open Chaos Dashboard, and click the "**NEW EXPERIMENT**" button on the page to create a new experiment:
+1. Open Chaos Dashboard, and click **NEW EXPERIMENT** on the page to create a new experiment:
 
     ![img](./img/create-new-exp.png)
 
 2. In the "**Choose a Target**" area, choose **AWS FAULT** and select a specific behavior, such as **STOP EC2**.
 
-3. Fill out the experiment information, and specify the experiment scope and the scheduled experiment duration:
+3. Fill out the experiment information, and specify the experiment scope and the scheduled experiment duration.
 
 4. Submit the experiment information.
 
@@ -154,7 +154,7 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
 
 The following table shows the fields in the YAML configuration file.
 
-| Parameter   | Type   | Note                                                                                                                                                                                                                                                                                                                                                                        | Default value | Required | Example              |
+| Parameter   | Type   | Description                                                                                                                                                                                                                                                                                                                                                                        | Default value | Required | Example              |
 | ----------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | -------- | -------------------- |
 | action      | string | Indicates the specific type of faults. Only ec2-stop, ec2-restore, and detain-volume are supported.                                                                                                                                                                                                                                                                         | ec2-stop      | Yes      | ec2-stop             |
 | mode        | string | Specifies the mode of the experiment. The mode options include `one` (selecting a random Pod), `all` (selecting all eligible Pods), `fixed` (selecting a specified number of eligible Pods), `fixed-percent` (selecting a specified percentage of Pods from the eligible Pods), and `random-max-percent` (selecting the maximum percentage of Pods from the eligible Pods). | None          | Yes      | `1`                  |
