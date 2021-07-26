@@ -7,7 +7,7 @@ This document describes how to use KernelChaos to simulate Linux kernel faults. 
 
 Although you can set the injection target of KernelChaos to one or several Pods, the performance of other Pods on the host will be affected, because all Pods share the same kernel.
 
-::: warning
+:::warning
 
 The simulation of Linux kernel faults is disabled by default. Do not use this feature in a production environment.
 
