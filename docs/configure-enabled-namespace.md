@@ -72,7 +72,7 @@ You can list all the namespaces that allows Chaos experiments using the followin
 kubectl get ns -o jsonpath='{.items[?(@.metadata.annotations.chaos-mesh\.org/inject=="enabled")].metadata.name}'
 ```
 
-This command outputs all the namespaces with the `chaos-mesh.org/input=enabled` annotation.For example:
+This command outputs all the namespaces with the `chaos-mesh.org/input=enabled` annotation. For example:
 
 ```bash
 default
