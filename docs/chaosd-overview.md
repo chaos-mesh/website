@@ -3,7 +3,7 @@ title: Chaosd Introduction
 sidebar_label: Chaosd
 ---
 
-## Chaosd Introduction
+## Chaosd introduction
 
 [Chaosd](https://github.com/chaos-mesh/chaosd) is a Chaos Engineering testing tool provided by Chaos Mesh. You need to download and deploy it separately (see [Download and deploy](#download-and-deploy)). It is used to inject faults into physical machine environments and also recover faults.
 
