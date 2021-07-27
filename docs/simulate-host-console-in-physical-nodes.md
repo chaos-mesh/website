@@ -36,7 +36,7 @@ To create a host shutdown experiment, run the following command:
 chaosd attack host shutdown
 ```
 
-The output is as follows:
+The example output is as follows:
 
 ```bash
 chaosd attack host shutdown
