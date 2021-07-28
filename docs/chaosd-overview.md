@@ -3,9 +3,9 @@ title: Chaosd Introduction
 sidebar_label: Chaosd
 ---
 
-## Chaosd Introduction
+## Chaosd introduction
 
-[Chaosd](https://github.com/chaos-mesh/chaosd) is a Chaos Engineering testing tool provided by Chaos Mesh. It is used to inject faults into physical machine environments and also recover faults.
+[Chaosd](https://github.com/chaos-mesh/chaosd) is a Chaos Engineering testing tool provided by Chaos Mesh. You need to download and deploy it separately (see [Download and deploy](#download-and-deploy)). It is used to inject faults into physical machine environments and also recover faults.
 
 Chaosd has the following core strengths:
 
@@ -24,6 +24,44 @@ You can use Chaosd to simulate the following fault types:
 - Host: Injects faults into the physical machine. Operations such as shutdown the physical machine are supported.
 
 For details about the introduction and usage of each fault type, refer to the related documentation.
+
+### Operating environment
+
+Your Linux kernel version must be v2.17 or later.
+
+### Download and deploy
+
+1. Set the version of Chaosd to be downloaded as the environment variable. For example, v1.0.0:
+
+   ```bash
+   export CHAOSD_VERSION=v1.0.0
+   ```
+
+   To view all released versions of Chaosd, refer to [releases](https://github.com/chaos-mesh/chaosd/releases).
+
+   To download the latest version (not stable), use `latest`:
+
+   ```bash
+   export CHAOSD_VERSION=latest
+   ```
+
+2. Download Chaosd:
+
+   ```bash
+   curl -fsSL -o chaosd-$CHAOSD_VERSION-linux-amd64.tar.gz https://mirrors.chaos-mesh.org/chaosd-$CHAOSD_VERSION-linux-amd64.tar.gz
+   ```
+
+3. Unzip the Chaosd file and move it to the `/usr/local` directory:
+
+   ```bash
+   tar zxvf chaosd-$CHAOSD_VERSION-linux-amd64.tar.gz && sudo mv chaosd-$CHAOSD_VERSION-linux-amd64 /usr/local/
+   ```
+
+4. Add the Chaosd directory to the `PATH` environment variable:
+
+   ```bash
+   export PATH=/usr/local/chaosd-$CHAOSD_VERSION-linux-amd64:$PATH
+   ```
 
 ### Work modes
 
