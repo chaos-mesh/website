@@ -13,8 +13,8 @@ Currently, Chaos Mesh Workflow supports the following features:
 
 - Serial Orchestration
 - Parallel Orchestration
-- Customized tasks (work in progress)
-- Conditional branch (work in progress)
+- Customized tasks
+- Conditional branch
 
 Typical user scenarios:
 
@@ -148,7 +148,7 @@ It is flexible to create a workflow using a YAML file and `kubectl`. You can nes
 | deadline            | string              | The duration of the template.                                                                                                                                                                                               | None          | No       | '5m30s'                                            |
 | children            | []string            | Declares the subtasks under this template. You need to configure this field when the type is `Serial` or `Parallel`.                                                                                                        | None          | No       | ["any-chaos-1", "another-serial-2", "any-shcedue"] |
 | task                | Task                | Configures the customized task. You need to configure this field when the type is `Task`. See the [Task field description](#task-field-description) for details.                                                            | None          | No       |                                                    |
-| conditionalBranches | []ConditionalBranch | Configures the conditional branch after the task is customized. You need to configure this field when the type is `Task`. See the [Conditional branch field description](#conditionalbranch-field-description) for details. | None          | No       |                                                    |
+| conditionalBranches | []ConditionalBranch | Configures the conditional branch which executes after customized task. You need to configure this field when the type is `Task`. See the [Conditional branch field description](#conditionalbranch-field-description) for details. | None          | No       |                                                    |
 | awsChaos            | object              | Configures AwsChaos. You need to configure this field when the type is `AwsChaos`. See the [Simulate AWS Faults](simulate-aws-chaos.md) document for details.                                                               | None          | No       |                                                    |
 | dnsChaos            | object              | Configures DNS Chaos. You need to configure this field when the type is `DNSChaos`. See the [Simulate DNS Faults](simulate-dns-chaos-on-kubernetes.md) document for details.                                                | None          | No       |                                                    |
 | gcpChaos            | object              | Configures GcpChaos. You need to configure this field when the type is `GcpChaos`.See the [Simulation GCP Faults](simulate-gcp-chaos.md) document for details.                                                              | None          | No       |                                                    |
@@ -185,7 +185,7 @@ When creating a Chaos with a duration in the workflow, you need to fill the dura
 Currently, two context variables are provided in `expression`:
 
 - `exitCode` means the exit code for a customized task.
-- `stdout` indicates the standard output for a custom task.
+- `stdout` indicates the standard output for a customized task.
 
 > More context variables will be added in later releases.
 
