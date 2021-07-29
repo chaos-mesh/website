@@ -22,7 +22,7 @@ helm install chaos-mesh chaos-mesh/chaos-mesh -n chaos-testing --set controllerM
 
 :::note
 
-When you use Helm for installation, commands and parameters differ for different containers. Refer to[Install Chaos Mesh using Helm](production-installation-using-helm.md)for more information.
+When you use Helm for installation, commands and parameters differ for different containers. Refer to [Install Chaos Mesh using Helm](production-installation-using-helm.md) for more information.
 
 :::
 
@@ -34,7 +34,7 @@ helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n chaos-testing --set controllerM
 
 For `helm upgrade`, you can set multiple parameters by adding multiple `--set` in the command. Later settings override previous settings. For example, if you add `--set controllerManager.enableFilterNamespace=false -set controllerManager.enableFilterNamespace=true`  in the command, it still enables this feature.
 
-You can also specify a YAML file using the `-f` parameter to describe the configuration. Refer to [Helm upgrade ](https://helm.sh/zh/docs/helm/helm_upgrade/#%E7%AE%80%E4%BB%8B) for more information.
+You can also specify a YAML file using the `-f` parameter to describe the configuration. Refer to [Helm upgrade](https://helm.sh/zh/docs/helm/helm_upgrade/#%E7%AE%80%E4%BB%8B) for more information.
 
 ## Add annotations to namespaces for Chaos experiments
 
@@ -46,7 +46,7 @@ You can add the annotation for a `namespace` using the following `kubectl` comma
 kubectl annotate ns $NAMESPACE chaos-mesh.org/inject=enabled
 ```
 
-In the above command, `$NAMESPACE` refers to the name of the namespace, for example, `default`.If the annotation is successfully added, the output is as follows:
+In the above command, `$NAMESPACE` refers to the name of the namespace, for example, `default`. If the annotation is successfully added, the output is as follows:
 
 ```bash
 namespace/$NAMESPACE annotated
