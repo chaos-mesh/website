@@ -175,7 +175,7 @@ For the meaning of the value of action, refer to:
 | return | Modifies the return value                                       |
 | script | Writes groovy and Java implement scenarios                      |
 | cfl    | Java CPU usage overload                                         |
-| oom    | Out of memory, supporting oom of heap, stack, metaspace         |
+| oom    | Out of memory, supporting oom of heap, stack, and metaspaces    |
 | ccf    | JVM code cache fill                                             |
 | tce    | Throw custom exceptions                                         |
 | cpf    | Connection pool full                                            |
