@@ -7,14 +7,14 @@ This document describes how to create IOChaos experiments in Chaos Mesh.
 
 ## IOChaos introduction
 
-IOChaos is a type of fault in Chaos Mesh. By creating an IOChaos experiment, you can simulate a scenario of file system fault.  Currently, IOChaos supports the following fault types:
+IOChaos is a type of fault in Chaos Mesh. By creating an IOChaos experiment, you can simulate a scenario of file system fault. Currently, IOChaos supports the following fault types:
 
 - latency: delays file system calls
 - fault: returns an error for filesystem calls
 - attrOverride: modifies file properties
 - mistake: makes the file read or write a wrong value
 
-For specific features, refer to [ Create experiments using the YAML files](#create-experiments-using-the-yaml-file).
+For specific features, refer to [Create experiments using the YAML files](#create-experiments-using-the-yaml-file).
 
 ## Notes
 
@@ -26,21 +26,17 @@ For specific features, refer to [ Create experiments using the YAML files](#crea
 
 1. Open Chaos Dashboard, and click **NEW EXPERIMENT** on the page to create a new experiment:
 
-   ![Create a New Experiment](../static/img/create-io-chaos-on-dashborad-1.jpg)
+   ![Create a New Experiment](./img/create-new-exp.png)
 
 2. In the **Choose a Target** area, choose **FILE SYSTEM INJECTION** and select a specific fault type, such as **LATENCY**.
 
-   ![Set Experiment Type](../static/img/create-io-chaos-on-dashborad-2.jpg)
+   ![ioChaos Experiments](./img/iochaos-exp.png)
 
 3. Fill out the experiment information, and specify the experiment scope and the scheduled experiment duration.
 
-   ![Set Experiment Content](../static/img/create-io-chaos-on-dashborad-3.jpg)
-
-   ![Set Target and Run Time](../static/img/create-io-chaos-on-dashborad-4.jpg)
+   ![Experiment Information](./img/exp-info.png)
 
 4. Submit the experiment information.
-
-   ![Submit the Experiment Information](../static/img/create-io-chaos-on-dashborad-5.jpg)
 
 ## Create experiments using the YAML files
 
@@ -67,7 +63,7 @@ For specific features, refer to [ Create experiments using the YAML files](#crea
     duration: '400s'
   ```
 
-  In this configuration example, Chaos Mesh injects a delay into the directory `/var/run/etcd` and causes latency of 100 milliseconds to all file system operations (including read, writing, list contents and so on) in this directory.
+  In this configuration example, Chaos Mesh injects a delay into the directory `/var/run/etcd` and causes latency of 100 milliseconds to all file system operations (including read, writing, list contents, and so on) in this directory.
 
 2. After the configuration file is prepared, use `kubectl` to create an experiment:
 
