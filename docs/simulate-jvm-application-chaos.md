@@ -172,14 +172,14 @@ For the meaning of the value of action, refer to:
 | Name   | Meaning                                                         |
 | ------ | --------------------------------------------------------------- |
 | delay  | Specifies method call delay                                     |
-| return | Writes groovy and Java implement scenarios                      |
+| return | Modifies the return value                                       |
 | script | Writes groovy and Java implement scenarios                      |
 | cfl    | Java CPU usage overload                                         |
-| oom    | Out of memory, supporting oom of heap, stack, metaspace |
+| oom    | Out of memory, supporting oom of heap, stack, metaspace         |
 | ccf    | JVM code cache fill                                             |
 | tce    | Throw custom exceptions                                         |
-| cpf    | Connection pool full                                               |
-| tde    | Throw the first exception of method declare                          |
+| cpf    | Connection pool full                                            |
+| tde    | Throw the first exception of method declare                     |
 | tpf    | Thread pool full                                                |
 
 For the details of action, refer to [chaos blade document](https://chaosblade-io.gitbook.io/chaosblade-help-zh-cn/blade-create-jvm).
