@@ -5,9 +5,9 @@ sidebar_label: Simulate AWS Faults
 
 This document describes how to use Chaos Mesh to simulate AWS faults.
 
-## AwsChaos introduction
+## AWSChaos introduction
 
-AwsChaos can help you simulate fault scenarios on the specified AWS instance. Currently, AwsChaos supports the following fault types:
+AWSChaos can help you simulate fault scenarios on the specified AWS instance. Currently, AWSChaos supports the following fault types:
 
 - **Ec2 Stop**: stops the specified EC2 instance.
 - **Ec2 Restart**: restarts the specified EC2 instance.
@@ -71,7 +71,7 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
 
     ```yaml
     apiVersion: chaos-mesh.org/v1alpha1
-    kind: AwsChaos
+    kind: AWSChaos
     metadata:
     name: ec2-stop-example
     namespace: chaos-testing
@@ -99,7 +99,7 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
 
     ```yaml
     apiVersion: chaos-mesh.org/v1alpha1
-    kind: AwsChaos
+    kind: AWSChaos
     metadata:
     name: ec2-restart-example
     namespace: chaos-testing
@@ -126,7 +126,7 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
 
     ```yaml
     apiVersion: chaos-mesh.org/v1alpha1
-    kind: AwsChaos
+    kind: AWSChaos
     metadata:
     name: ec2-detach-volume-example
     namespace: chaos-testing
