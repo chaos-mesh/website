@@ -5,7 +5,7 @@ sidebar_label: Simulate JVM Application Faults
 
 ## JVMChaos introduction
 
-JVMChaos can inject faults into JVM of the target container, which can be applied for any application that uses JVM as the runtime environment.Currently, JVMChaos uses [chaosblade-exec-jvm](https://github.com/chaosblade-io/chaosblade-exec-jvm) to inject faults into the JVM. JVMChaos supports the following fault types:
+JVMChaos can inject faults into JVM of the target container, which can be applied for any application that uses JVM as the runtime environment. Currently, JVMChaos uses [chaosblade-exec-jvm](https://github.com/chaosblade-io/chaosblade-exec-jvm) to inject faults into the JVM. JVMChaos supports the following fault types:
 
 - Specify return value
 - Method Delay
@@ -17,17 +17,17 @@ JVMChaos can inject faults into JVM of the target container, which can be applie
 
 ## Usage restrictions
 
-Currently, Chaos Mesh uses [MutatingAdmissionWebhook](https://kubernetes.io/zh/docs/reference/access-authn-authz/admission-controllers/#mutatingadmissionwebhook) to modify the Pod definition and loads Java agent using [Init Containers](https://kubernetes.io/zh/docs/concepts/workloads/pods/init-containers/) instead of using the runtime environment. Therefore, there are some restrictions when you use JVMChaos:
+Currently, Chaos Mesh uses [MutatingAdmissionWebhook](https://kubernetes.io/zh/docs/reference/access-authn-authz/admission-controllers/#mutatingadmissionwebhook) to modify the Pod definition and loads Java agent using [Init Containers](https://kubernetes.io/zh/docs/concepts/workloads/pods/init-containers/) instead of loading java agent at runtime. Therefore, there are some restrictions when you use JVMChaos:
 
 - The Webhook support needs to be enabled in Kubernetes.
 - For Pods that exist before you configure [MutatingAdmissionWebhook](https://kubernetes.io/zh/docs/reference/access-authn-authz/admission-controllers/#mutatingadmissionwebhook) for the namespace, they will not be affected by JVMChaos.
-- JVM in all containers under namespace will load Java agent at the startup stage, and VMChaos will not unmount Java agent after being deleted. If you hope to clean up the Java agent considering the impact that Java agent may have on program behaviors or performance, you can move the work load out of the namespace.
+- JVM in all containers under namespace will load Java agent at the startup stage, and JVMChaos will not unload Java agent after being deleted. If you hope to clean up the Java agent considering the impact that Java agent may have on program behaviors or performance, you can move the workload out of the namespace.
 
 In addition, creating JVMChaos using Chaos Dashboard is not supported currently.
 
 ## Create experiments using YAML files
 
-The following example shows you the methods and effects of JVMChaos with a specified return value. The YAML files referred in the following steps can be found in [examples/jvm](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples/jvm). The default work path for the following steps is in `examples/jvm`. The default namespace installed by Chaos Mesh is `chaos-testing`.
+The following example shows you the methods and effects of JVMChaos with a specified return value. The YAML files referred in the following steps can be found in [examples/jvm](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples/jvm). The default work directory for the following steps is in `examples/jvm`. The default namespace installed by Chaos Mesh is `chaos-testing`.
 
 ### 1. Create a namespace and configure MutatingAdmissionWebhook
 
@@ -52,7 +52,7 @@ kubectl apply -f sidecar.yaml
 
 ### 2. Create tested applications
 
-[jvm-chaos-demo](https://github.com/chaos-mesh/jvm-chaos-demo) is a simple Spring Boot application and here serves as a tested application. A tested application is defined in `example/jvm/app.yaml` as follows:
+[jvm-chaos-demo](https://github.com/chaos-mesh/jvm-chaos-demo) is a simple Spring Boot application and here serves as a target application. A tested application is defined in `example/jvm/app.yaml` as follows:
 
 ```yaml
 apiVersion: apps/v1
@@ -160,7 +160,7 @@ hello chaos mesh!
 
 | Parameter | Type              | Description                                                                                                                                                                                         | Default value | Required | Example |
 | --------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | -------- | ------- |
-| action    | string            | Indicates the specific fault type. The supported fault types include return, script, cfl, oom, ccf, tce, tcf, cpf, tde, and tpf.                                                                    | None          | Yes      | return  |
+| action    | string            | Indicates the specific fault type. The available fault types include return, script, cfl, oom, ccf, tce, tcf, cpf, tde, and tpf.                                                                    | None          | Yes      | return  |
 | mode      | string            | Indicates how to select Pod. The supported modes include one, all, fixed, fixed-percent, and random-max-percent.                                                                                    | None          | Yes      | 1       |
 | value     | string            | Provides parameters for the `mode` configuration, depending on `mode`.                                                                                                                              | None          | No       | 2       |
 | target    | string            | Indicates the parameter passed to `chaosblade-exec-jvm`, representing JVMChaos targets, supporting servlet, psql, jvm, jedis, http, dubbo, rocketmq, tars, mysql, ruid, redisson, rabbitmq, monodb. | None          | Yes      | jvm     |
@@ -175,13 +175,13 @@ For the meaning of the value of action, refer to:
 | return | Writes groovy and Java implement scenarios                      |
 | script | Writes groovy and Java implement scenarios                      |
 | cfl    | Java CPU usage overload                                         |
-| oom    | Out of memory, supporting oom of piles, stacks, metaspace areas |
+| oom    | Out of memory, supporting oom of heap, stack, metaspace |
 | ccf    | JVM code cache fill                                             |
 | tce    | Throw custom exceptions                                         |
-| cpf    | Connect pool full                                               |
-| tde    | The first exception in a throw method                           |
+| cpf    | Connection pool full                                               |
+| tde    | Throw the first exception of method declare                          |
 | tpf    | Thread pool full                                                |
 
 For the details of action, refer to [chaos blade document](https://chaosblade-io.gitbook.io/chaosblade-help-zh-cn/blade-create-jvm).
 
-For the parameters passed to `chaosblade-exec-jvm`, Chaos Mesh will merge all fields in `flags` and `matchers` as a request body and then send it to `chaosblade-exec-jvm`. For details, refer to [chaosblade-exec-jvm/Agreements](https://github.com/chaosblade-io/chaosblade-dev-doc/blob/a7074ab656de469f7dfaa19227723d0967c590ae/zh-cn/chaosblade-exec-jvm/%E5%8D%8F%E8%AE%AE%E7%AF%87.md).
+For the parameters passed to `chaosblade-exec-jvm`, Chaos Mesh will merge all fields in `flags` and `matchers` as a request body and then send it to `chaosblade-exec-jvm`. For details, refer to [chaosblade-exec-jvm/Protocol](https://github.com/chaosblade-io/chaosblade-dev-doc/blob/a7074ab656de469f7dfaa19227723d0967c590ae/zh-cn/chaosblade-exec-jvm/%E5%8D%8F%E8%AE%AE%E7%AF%87.md).
