@@ -110,8 +110,6 @@ Currently, Chaos Mesh only supports using YAML configuration files to create HTT
 
 Common fields are meaningful when the `target` of fault injuection is `Request` or `Response`.
 
-Specifies whether the target of fault injuection is `Request` or `Response`. The [target-related fields ](#Description for target-related fields) should be configured at the same time.</td> 
-
 | Parameter          | Type           | Descpription      | Default value      | Required	 | Example      |
 | ------------------ | ------------------- | --------------------------------------------------------------------------------------------------- | ------------------ | -------- | -------------------------------- |
 | mode             | string            | Specifies the mode of the experiment. The mode options include `one` (selecting a random pod), `all` (selecting all eligible pods), `fixed` (selecting a specified number of eligible pods), `fixed-percent` (selecting a specified percentage of Pods from the eligible pods), and `random-max-percent` (selecting the maximum percentage of Pods from the eligible pods).|                    | yes       | one                            |
