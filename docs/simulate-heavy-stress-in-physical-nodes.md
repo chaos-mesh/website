@@ -68,7 +68,7 @@ Global Flags:
 
 #### Configuration description of simulating CPU stress
 
-| Configuration Item | Abbreviation | Descpription                                                                                           | Value                                    |
+| Configuration item | Abbreviation | Descpription                                                                                           | Value                                    |
 |:------------------ |:------------ |:------------------------------------------------------------------------------------------------------ |:---------------------------------------- |
 | load               | l            | Specifies the percentage of CPU load per CPU worker. 0 means no CPU load, and 100 means full CPU load. | int; range: 0 to 100; default value: 10. |
 | workers            | w            | Specifies the number of workers used to create CPU stress.                                             | int; default value: 1.                   |
@@ -118,7 +118,7 @@ Global Flags:
 
 #### Configuration description of simulating memory stress
 
-| Configuration Item | Abbreviation | Description                                                  | Value                                                                                                                  |
+| Configuration item | Abbreviation | Description                                                  | Value                                                                                                                  |
 |:------------------ |:------------ |:------------------------------------------------------------ |:---------------------------------------------------------------------------------------------------------------------- |
 | size               | s            | Specifies the size of memory per VM worker.                  | the memory size in B, KB/KiB, MB/MiB, GB/GiB, TB/TiB. If the size is not set, all available memory is used by default. |
 | workers            | w            | Specify the number of workers used to create memory stress.  | int; default value: 1                                                                                                  |
