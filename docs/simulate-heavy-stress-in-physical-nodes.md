@@ -3,7 +3,7 @@ title: Simulate Stress Scenarios
 sidebar_label: Simulate Stress Scenarios
 ---
 
-This document describes how to use Chaosd to simulate stress scenarios. This feature generates CPU or memory sress on the host using [stress-ng](https://wiki.ubuntu.com/Kernel/Reference/stress-ng). You can create stress experiments either in command-line or service mode.
+This document describes how to use Chaosd to simulate stress scenarios. This feature generates CPU or memory stress on the host using [stress-ng](https://wiki.ubuntu.com/Kernel/Reference/stress-ng). You can create stress experiments either in command-line or service mode.
 
 ## Create stress experiments in command-line mode
 
@@ -138,7 +138,7 @@ The result is as follows:
 Attack stress mem successfully, uid: c2bff2f5-3aac-4ace-b7a6-322946ae6f13
 ```
 
-When running the experiment, you need to save the uid information of the experiment.When a stress simulation is not needed, you can use `recover` to terminate the uid-related experiment:：
+When running the experiment, you need to save the uid information of the experiment. When a stress simulation is not needed, you can use `recover` to terminate the uid-related experiment:：
 
 ```bash
 chaosd recover c2bff2f5-3aac-4ace-b7a6-322946ae6f13
