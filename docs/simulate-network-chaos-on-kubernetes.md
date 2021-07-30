@@ -193,16 +193,16 @@ Setting `action` to `reorder` means simulating network packet reordering fault. 
 | ----------- | ------ | --------------------------------------------------------------------------------------------------------------- | ------------- | -------- | ------- |
 | reorder     | string | Indicates the probability to reorder                                                                            | 0             | No       | 0.5     |
 | correlation | string | Indicates the correlation between this time's length of delay time and the previous time's length of delay time | 0             | No       | 0.5     |
-| gap         | int    | Indicates the range of the length of network delay time                                                         | 0             | No       | 5       |
+| gap         | int    | Indicates the gap before and after packet reordering                                                            | 0             | No       | 5       |
 
 #### loss
 
 Setting `action` to `loss` means simualting packet loss fault. You can also configure the following parameters.
 
-| Parameter   | Type   | Description                                                                                                                | Default value | Required | Example |
-| ----------- | ------ | -------------------------------------------------------------------------------------------------------------------------- | ------------- | -------- | ------- |
-| loss        | string | Indicates the probability to reorder                                                                                       | 0             | No       | 0.5     |
-| correlation | string | Indicates the correlation between the probability of current packet duplicating and the previous time's packet duplicating | 0             | No       | 0.5     |
+| Parameter   | Type   | Description                                                                                                  | Default value | Required | Example |
+| ----------- | ------ | ------------------------------------------------------------------------------------------------------------ | ------------- | -------- | ------- |
+| loss        | string | Indicates the probability of packet loss                                                                     | 0             | No       | 0.5     |
+| correlation | string | Indicates the correlation between the probability of current packet loss and the previous time's packet loss | 0             | No       | 0.5     |
 
 #### duplicate
 
@@ -222,11 +222,11 @@ Setting `action` to `corrupt` means simulating package corruption fault. You can
 | corrupt     | string | Indicates the probability of packet corruption                                                                           | 0             | No       | 0.5     |
 | correlation | string | Indicates the correlation between the probability of current packet corruption and the previous time's packet corruption | 0             | No       | 0.5     |
 
-For `reorder`, `loss`, `duplicate`, and `corrupt`, the `correlation` is more complicated. For specific model description, refer to [NetemCLG](http://web.archive.org/web/20200120162102/http://netgroup.uniroma2.it/twiki/bin/view.cgi/Main/NetemCLG).
+For occasional events such as `reorder`, `loss`, `duplicate`, and `corrupt`, the `correlation` is more complicated. For specific model description, refer to [NetemCLG](http://web.archive.org/web/20200120162102/http://netgroup.uniroma2.it/twiki/bin/view.cgi/Main/NetemCLG).
 
 #### bandwidth
 
-Setting `action` to `bandwidth` means simulating bandwidth limit fault. You can also configure the following parameters.
+Setting `action` to `bandwidth` means simulating bandwidth limit fault. You also need to configure the following parameters.
 
 | Parameter   | Type   | Description                                                            | Default value | Required | Example |
 | ----------- | ------ | ---------------------------------------------------------------------- | ------------- | -------- | ------- |
@@ -236,4 +236,4 @@ Setting `action` to `bandwidth` means simulating bandwidth limit fault. You can 
 | peakrate    | uint64 | Indicates the maximum consumption of `bucket` (usually not set)        |               | No       | 1       |
 | minburst    | uint32 | Indicates the size of `peakrate bucket` (usually not set)              |               | No       | 1       |
 
-For more specific meaning of these fields, you can refer to [tc-tbf document](https://man7.org/linux/man-pages/man8/tc-tbf.8.html).
+For more details of these fields, you can refer to [tc-tbf document](https://man7.org/linux/man-pages/man8/tc-tbf.8.html).
