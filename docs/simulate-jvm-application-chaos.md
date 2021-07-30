@@ -50,9 +50,9 @@ kubectl apply -f sidecar-template.yaml
 kubectl apply -f sidecar.yaml
 ```
 
-### 2. Create tested applications
+### 2. Create target applications
 
-[jvm-chaos-demo](https://github.com/chaos-mesh/jvm-chaos-demo) is a simple Spring Boot application and here serves as a target application. A tested application is defined in `example/jvm/app.yaml` as follows:
+[jvm-chaos-demo](https://github.com/chaos-mesh/jvm-chaos-demo) is a simple Spring Boot application and here serves as a target application. A target application is defined in `example/jvm/app.yaml` as follows:
 
 ```yaml
 apiVersion: apps/v1
