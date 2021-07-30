@@ -9,8 +9,8 @@ This document describes how to use Chaos Mesh to simulate AWS faults.
 
 AWSChaos can help you simulate fault scenarios on the specified AWS instance. Currently, AWSChaos supports the following fault types:
 
-- **Ec2 Stop**: stops the specified EC2 instance.
-- **Ec2 Restart**: restarts the specified EC2 instance.
+- **EC2 Stop**: stops the specified EC2 instance.
+- **EC2 Restart**: restarts the specified EC2 instance.
 - **Detach Volume**: uninstalls the storage volume from the specified EC2 instance.
 
 ## `Secret` file
