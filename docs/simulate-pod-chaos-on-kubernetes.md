@@ -7,7 +7,7 @@ This document describes how to use Chaos Mesh to inject faults into Kubernetes P
 
 ## PodChaos introduction
 
-PodChaos is a fault type in Chaos Mesh. By creating a PodChaos experiment, you can simulate fault scenarios of the specified Pods or containers.Currently, PodChaos supports the following fault types:
+PodChaos is a fault type in Chaos Mesh. By creating a PodChaos experiment, you can simulate fault scenarios of the specified Pods or containers. Currently, PodChaos supports the following fault types:
 
 - Pod Failure: injects fault into a specified Pod to make the Pod unavailable for a period of time.
 - Pod Kill: kills a specified Pod.To ensure that the Pod can be successfully restarted, you need to configure ReplicaSet or similar mechanisms.
@@ -15,7 +15,7 @@ PodChaos is a fault type in Chaos Mesh. By creating a PodChaos experiment, you c
 
 ## Usage restrictions
 
-Currently, Chaos Mesh only supports fault injection to certain types of Pod, such as Deployment, Statefulset, and Daemonset.Chaos Mesh does not support injecting faults into an independent Pod. An independent Pod means a Pod that is not bound to ReplicaSet or Deployment Pod.
+Currently, Chaos Mesh only supports fault injection to certain types of Pod, such as Deployment, Statefulset, and Daemonset. Chaos Mesh does not support injecting faults into an independent Pod. An independent Pod means a Pod that is not bound to ReplicaSet or Deployment Pod.
 
 ## Notes
 
@@ -31,13 +31,13 @@ Before creating PodChaos experiments, ensure the following:
 Before create experiments using Chaos Dashboard, ensure the following:
 
 - Chaos Dashboard is installed.
-- If Chaos Dashboard is already installed, you can run `kubectl port-forward` to access Dashboard: `bash kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333` Then you can enter [`http://localhost:2333`](http://localhost:2333) to access Chaos Dashboard.
+- If Chaos Dashboard is already installed, you can run `kubectl port-forward` to access Dashboard: `bash kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333`. Then you can enter [`http://localhost:2333`](http://localhost:2333) to access Chaos Dashboard.
 
 :::
 
 1. Open Chaos Dashboard, and click **NEW EXPERIMENT** on the page to create a new experiment.
 
-![img](./img/create-pod-chaos-on-dashborad-1.jpg)
+![Create a New Experiment](./img/create-new-exp.png)
 
 2. In the **Choose a Target** area, choose **POD FAULT** and select a specific behavior, such as **POD FAILURE**.
 
