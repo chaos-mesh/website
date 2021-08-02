@@ -134,7 +134,7 @@ Common fields are meaningful when the `target` of fault injuection is `Request` 
 
 
 
-### `Request`-related fields
+#### `Request`-related fields
 
 The `Request` field is a meaningful when the `target` set to `Request` during the fault injection.
 
@@ -148,7 +148,7 @@ The `Request` field is a meaningful when the `target` set to `Request` during th
 
 
 
-### `Respond`-related fields
+#### `Respond`-related fields
 
 The `Response` is a meaningful when the `target` set to `Response` during the fault injection.
 
