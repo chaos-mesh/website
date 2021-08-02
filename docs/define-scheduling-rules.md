@@ -1,6 +1,5 @@
 ---
 title: Define Scheduling Rules
-sidebar_label: Define Scheduling Rules
 ---
 
 ## Schedule overview

@@ -1,6 +1,5 @@
 ---
 title: Define the Scope of Chaos Experiments
-sidebar_label: Define the Scope of Chaos Experiments
 ---
 
 This document describes how to define the scope of a single Chaos experiment, which helps you accurately control the fault's explosion radius.

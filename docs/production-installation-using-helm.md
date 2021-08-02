@@ -1,5 +1,6 @@
 ---
 title: Install Chaos Mesh using Helm (Recommended for Production Environments)
+sidebar_label: Install Chaos Mesh using Helm
 ---
 
 import PickVersion from '@site/src/components/PickVersion'

@@ -1,6 +1,5 @@
 ---
 title: Check Workflow Status
-sidebar_label: Check Workflow Status
 ---
 
 ## Check workflow status using Chaos Dashboard

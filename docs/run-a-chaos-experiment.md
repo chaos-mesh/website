@@ -1,6 +1,5 @@
 ---
-title: Run Chaos Experiments
-sidebar_label: Run Chaos Experiments
+title: Run a Chaos Experiment
 ---
 
 This document describes how to create, run, view, pause, update, and delete Chaos experiments in Chaos Mesh.

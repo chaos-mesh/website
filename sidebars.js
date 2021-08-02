@@ -2,55 +2,50 @@ module.exports = {
   docs: [
     {
       type: 'category',
-      label: '关于 Chaos Mesh',
+      label: 'About Chaos Mesh',
       items: ['overview', 'basic-features'],
     },
     {
       type: 'category',
-      label: '开始使用',
+      label: 'Getting Started',
       collapsed: false,
       items: [
         {
           type: 'category',
-          label: '安装部署',
+          label: 'Installation and Deployment',
           collapsed: false,
           items: ['quick-start', 'production-installation-using-helm', 'offline-installation'],
         },
         {
           type: 'category',
-          label: '管理权限',
-          items: ['manage-roles', 'configure-protected-namespace'],
+          label: 'Manage Roles',
+          items: ['manage-user-permissions', 'configure-protected-namespace'],
         },
         {
           type: 'category',
-          label: '运行单个混沌实验',
+          label: 'Run a Single Chaos Experiment',
           items: [
             'define-chaos-experiment-scope',
             'define-scheduling-rules',
             'run-a-chaos-experiment',
-            'inspect-chaos-experiment',
-            'clean-up-chaos-experiment',
+            'inspect-chaos-experiments',
+            'clean-up-chaos-experiments',
           ],
         },
         {
           type: 'category',
-          label: '编排多个混沌实验',
-          items: [
-            'create-chaos-mesh-workflow',
-            'define-workflow-scheduling-rules',
-            'run-chaos-experiments-in-parallel-or-concurrently',
-            'inspect-chaos-mesh-workflow',
-          ],
+          label: ' Orchestrate Multiple Chaos Experiments',
+          items: ['create-chaos-mesh-workflow', 'run-chaos-experiments-in-serial-or-parallel', 'check-workflow-status'],
         },
       ],
     },
     {
       type: 'category',
-      label: '混沌实验类型',
+      label: 'Types of Chaos Experiments',
       items: [
         {
           type: 'category',
-          label: 'Kubernetes 环境',
+          label: 'Kubernetes',
           items: [
             'simulate-pod-chaos-on-kubernetes',
             'simulate-network-chaos-on-kubernetes',
@@ -67,7 +62,7 @@ module.exports = {
         },
         {
           type: 'category',
-          label: '物理机环境',
+          label: 'Physical Nodes',
           items: [
             'chaosd-overview',
             'simulate-process-chaos-in-physical-nodes',
@@ -78,50 +73,50 @@ module.exports = {
         },
       ],
     },
-    {
-      type: 'category',
-      label: '使用案例',
-      items: ['multi-data-center-scenario'],
-    },
-    {
-      type: 'category',
-      label: '工具整合',
-      items: [
-        'integrate-chaos-mesh-into-github-actions',
-        'use-argo-to-orchestrate-chaos-experiments',
-        'use-grafana-to-inspect-chaos-experiments',
-      ],
-    },
-    {
-      type: 'category',
-      label: '开发指南',
-      items: [
-        'developer-guide-overview',
-        'configure-development-environment',
-        'add-new-chaos-experiment-type',
-        'extend-chaos-daemon-interface',
-        'extend-chaosd',
-        {
-          type: 'category',
-          label: '客户端',
-          items: ['go-client', 'rust-client', 'java-client', 'python-client'],
-        },
-      ],
-    },
-    {
-      type: 'category',
-      label: '参考指南',
-      items: ['architecture', 'chaos-engineering-principles', 'chaosctl-tool', 'glossary'],
-    },
-    {
-      type: 'category',
-      label: '常见问题与故障',
-      items: ['faqs', 'troubleshooting-guide'],
-    },
-    {
-      type: 'category',
-      label: '版本发布历史',
-      items: ['release-2.0.0', 'release-1.0.0', 'release-0.0.9', 'release-0.0.8'],
-    },
+    // {
+    //   type: 'category',
+    //   label: 'Use Cases',
+    //   items: ['multi-data-center-scenario'],
+    // },
+    // {
+    //   type: 'category',
+    //   label: 'Tools Integration',
+    //   items: [
+    //     'integrate-chaos-mesh-into-github-actions',
+    //     'use-argo-to-orchestrate-chaos-experiments',
+    //     'use-grafana-to-inspect-chaos-experiments',
+    //   ],
+    // },
+    // {
+    //   type: 'category',
+    //   label: 'Development Guides',
+    //   items: [
+    //     'developer-guide-overview',
+    //     'configure-development-environment',
+    //     'add-new-chaos-experiment-type',
+    //     'extend-chaos-daemon-interface',
+    //     'extend-chaosd',
+    //     {
+    //       type: 'category',
+    //       label: 'Clients',
+    //       items: ['go-client', 'rust-client', 'java-client', 'python-client'],
+    //     },
+    //   ],
+    // },
+    // {
+    //   type: 'category',
+    //   label: 'Reference Guides',
+    //   items: ['architecture', 'chaos-engineering-principles', 'chaosctl-tool', 'glossary'],
+    // },
+    // {
+    //   type: 'category',
+    //   label: 'FAQs and Troubleshooting',
+    //   items: ['faqs', 'troubleshooting-guide'],
+    // },
+    // {
+    //   type: 'category',
+    //   label: 'Release Notes',
+    //   items: ['release-2.0.0', 'release-1.0.0', 'release-0.0.9', 'release-0.0.8'],
+    // },
   ],
 }

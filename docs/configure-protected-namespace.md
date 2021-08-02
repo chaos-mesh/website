@@ -1,6 +1,6 @@
 ---
-title: 配置受保护的命名空间
-sidebar_label: 配置受保护的命名空间
+title: Configure namespaces that allow chaos experiments
+sidebar_label: Configure Protected Namespaces
 ---
 
 ## TODO
