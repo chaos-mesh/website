@@ -54,7 +54,7 @@ To create a one-time Chaos experiment, you can use one of the following methods:
    kubectl describe networkchaos network-delay
    ```
 
-   For detailed steps to check the result of the Chaos experiment, refer to [Inspect Chaos experiments](inspect-chaos-experiment.md).
+   For detailed steps to check the result of the Chaos experiment, refer to [Inspect Chaos experiments](inspect-chaos-experiments.md).
 
 ### Scheduled or cyclic Chaos experiments
 
@@ -109,7 +109,7 @@ To create this type of Chaos experiments, take the following steps:
    kubectl describe networkchaos schedule-delay-example
    ```
 
-   For detailed steps to check the result of the Chaos experiment, refer to [Inspect Chaos experiments](inspect-chaos-experiment.md).
+   For detailed steps to check the result of the Chaos experiment, refer to [Inspect Chaos experiments](inspect-chaos-experiments.md).
 
 ## Pause Chaos experiments
 
