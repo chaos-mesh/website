@@ -14,7 +14,7 @@ To simplify the upgrade process, Chaos Mesh 2.0 provides the following upgrade t
 - `migrate.sh`: used to automatically export and upgrade the YAML files, upgrade CRD, import upgraded YAML files.
 - `schedule-migration`: used to update the earlier YAML files to the latest YAML files.
 
-To get the upgrade tools, it is recommended to clone the Chaos Mesh project to your local repository and then execute the command `make schedule-migration.tar.gz`. Or you can download the project from [https://mirrors.chaos-mesh.org/v2.0.0.0/schedule-migration.tar.gz](https://mirrors.chaos-mesh.org/v2.0.0.0/schedule-migration.tar.gz). After the `tar.gz` package is downloaded, execute the following command and you can get the above two upgrade tools:
+To get the upgrade tools, it is recommended to clone the Chaos Mesh project to your local repository and then execute the command `make schedule-migration.tar.gz`. Or you can download the project from [https://mirrors.chaos-mesh.org/v2.0.0/schedule-migration.tar.gz](https://mirrors.chaos-mesh.org/v2.0.0/schedule-migration.tar.gz). After the `tar.gz` package is downloaded, execute the following command and you can get the above two upgrade tools:
 
 ```bash
 tar xvf ./schedule-migration.tar.gz
