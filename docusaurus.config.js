@@ -24,25 +24,22 @@ module.exports = {
         srcDark: 'img/logos/logo-mini-white.svg',
       },
       items: [
-        {
-          type: 'docsVersionDropdown',
-          position: 'left',
-        },
-        {
-          to: 'docs',
-          activeBasePath: 'docs',
-          label: 'Documentation',
-        },
+        { type: 'docsVersionDropdown' },
+        { to: 'docs', label: 'Documentation' },
         { to: 'interactive-tutorial', label: 'Interactive Tutorial' },
         {
-          href: 'https://github.com/chaos-mesh/chaos-mesh',
-          label: 'GitHub',
+          to: 'blog',
+          label: 'Blog',
           position: 'right',
         },
-        { to: 'blog', activeBasePath: 'blog', label: 'Blog', position: 'right' },
         {
           href: 'https://community.cncf.io/chaos-mesh-community/',
           label: 'Events',
+          position: 'right',
+        },
+        {
+          href: 'https://github.com/chaos-mesh/chaos-mesh',
+          label: 'GitHub',
           position: 'right',
         },
         {
@@ -101,8 +98,7 @@ module.exports = {
           title: 'Others',
           items: [
             {
-              html:
-                '<a href="https://www.netlify.com"><img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" /></a>',
+              html: '<a href="https://www.netlify.com"><img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" /></a>',
             },
           ],
         },
