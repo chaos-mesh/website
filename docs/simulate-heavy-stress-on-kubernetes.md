@@ -5,7 +5,7 @@ sidebar_label: Simulate Stress Scenarios
 
 ## StressChaos Introduction
 
-Chaos Mesh provides StresChaos experiments to simulate stress scenarios inside containers. This document describes how to create StressChaos experiments and how to prepare the corresponding configuration file.
+Chaos Mesh provides StressChaos experiments to simulate stress scenarios inside containers. This document describes how to create StressChaos experiments and how to prepare the corresponding configuration file.
 
 You can create experiments using either Chaos Dashboard or the YAML configuration files.
 
@@ -84,7 +84,7 @@ The fields in the YAML configuration file are described in the following table:
 
 ##### CPUStressor
 
-| Parameter | Type | Descpription                                                                           | Default value | Required | Example |
+| Parameter | Type | Description                                                                           | Default value | Required | Example |
 | --------- | ---- | -------------------------------------------------------------------------------------- | ------------- | -------- | ------- |
 | workers   | int  | Specifies the number of threads that apply memory stress                               |               | Yes      | `1`     |
 | load      | int  | Specifies the percentage of CPU occupied0 means sleep and no load; 100 means full load |               | No       | `50`    |

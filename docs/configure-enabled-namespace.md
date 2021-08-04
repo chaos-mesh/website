@@ -7,7 +7,7 @@ This chapter walks you through how to configure Chaos experiments to only take e
 
 ## Control the scope where the Chaos experiment takes effect
 
-Chaos Mesh offers two ways to control the scope of the Chaos experiment to take effect：
+Chaos Mesh offers two ways to control the scope of the Chaos experiment to take effect:
 
 - To configure Chaos experiments to only take effect in the specified namespace, you need to enable the FilterNamespace feature (which is off by default). This feature takes effect on a global scope. After this feature is enabled, you can add annotations to the namespace in which Chaos experiments are allowed to take effect. Other namespaces without annotations are protected against fault injection.
 - To specify the scope for a single Chaos experiment to take effect, refer to [Define the scope of a Chaos experiment](define-chaos-experiment-scope.md).
