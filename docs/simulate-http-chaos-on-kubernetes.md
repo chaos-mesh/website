@@ -9,10 +9,10 @@ This document describes how to simulate HTTP faults by creating HTTPChaos experi
 
 HTTPChaos is a fault type provided by Chaos Mesh. By creating HTTPChaos experiments, you can simulate the fault scenarios of the HTTP server during the HTTP request and response processing. Currently, HTTPChaos supports simulating the following fault types:
 
-- `abort`：interrupts server connection.
-- `delay`：injects latency into the target process.
-- `replace`： replaces part of content in HTTP request or response messages.
-- `patch`：adds additional content to HTTP request or response messages.
+- `abort`: interrupts server connection.
+- `delay`: injects latency into the target process.
+- `replace`: replaces part of content in HTTP request or response messages.
+- `patch`: adds additional content to HTTP request or response messages.
 
 HTTPChaos supports combinations of different fault types. If you have configured multiple HTTP fault types at the same time when creating HTTPChaos experiments, the order set to inject the faults when the experiments start running is `abort` -> `delay` -> `replace` -> `patch`. When the `abort` fault cause short circuits, the connection will be directly interrupted.
 
