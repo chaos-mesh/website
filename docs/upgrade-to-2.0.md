@@ -26,7 +26,7 @@ The `schedule-migration` tool in this package applies only to the Linux x86_64 p
 
 You can use the upgrade tool `migrate.sh` to automatically export and upgrade the experiment. Before running, make sure you have enough permissions to access the cluster.
 
-If `migrate.sh` is in the current directory, place the `schedule-migration` tool in this directory and rename it to "main". Then execute the following command to export and upgrade the experiment:
+If `migrate.sh` is in the current directory, place the `schedule-migration` tool in this directory. Then execute the following command to export and upgrade the experiment:
 
 ```bash
 bash migrate.sh -e
@@ -42,7 +42,7 @@ In addition, you can use the `schedule-migration` tool to upgrade the specified 
 
 In the YAML file path you have specified, you can get upgraded YAML files. After deleting the old resources, reapply the new YAML files to complete the update process.
 
-## Step 2：Upgrade CRD
+## Step 2: Upgrade CRD
 
 Before upgrading Chaos Mesh using Helm, to increase the success rate of the upgrade, execute the following command to manually upgrade CRD:
 
