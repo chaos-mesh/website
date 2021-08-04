@@ -1,0 +1,212 @@
+{
+  "version-2.0.0/docs": [
+    {
+      "type": "category",
+      "label": "About Chaos Mesh",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-2.0.0/overview"
+        },
+        {
+          "type": "doc",
+          "id": "version-2.0.0/basic-features"
+        }
+      ],
+      "collapsible": true,
+      "collapsed": true
+    },
+    {
+      "type": "category",
+      "label": "Getting Started",
+      "collapsed": false,
+      "items": [
+        {
+          "type": "category",
+          "label": "Installation and Deployment",
+          "collapsed": false,
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-2.0.0/quick-start"
+            },
+            {
+              "type": "doc",
+              "id": "version-2.0.0/production-installation-using-helm"
+            },
+            {
+              "type": "doc",
+              "id": "version-2.0.0/offline-installation"
+            }
+          ],
+          "collapsible": true
+        },
+        {
+          "type": "category",
+          "label": "Manage Roles",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-2.0.0/manage-user-permissions"
+            },
+            {
+              "type": "doc",
+              "id": "version-2.0.0/configure-protected-namespace"
+            }
+          ],
+          "collapsible": true,
+          "collapsed": true
+        },
+        {
+          "type": "category",
+          "label": "Run a Single Chaos Experiment",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-2.0.0/define-chaos-experiment-scope"
+            },
+            {
+              "type": "doc",
+              "id": "version-2.0.0/define-scheduling-rules"
+            },
+            {
+              "type": "doc",
+              "id": "version-2.0.0/run-a-chaos-experiment"
+            },
+            {
+              "type": "doc",
+              "id": "version-2.0.0/inspect-chaos-experiments"
+            },
+            {
+              "type": "doc",
+              "id": "version-2.0.0/clean-up-chaos-experiments"
+            }
+          ],
+          "collapsible": true,
+          "collapsed": true
+        },
+        {
+          "type": "category",
+          "label": " Orchestrate Multiple Chaos Experiments",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-2.0.0/create-chaos-mesh-workflow"
+            },
+            {
+              "type": "doc",
+              "id": "version-2.0.0/run-chaos-experiments-in-serial-or-parallel"
+            },
+            {
+              "type": "doc",
+              "id": "version-2.0.0/check-workflow-status"
+            }
+          ],
+          "collapsible": true,
+          "collapsed": true
+        }
+      ],
+      "collapsible": true
+    },
+    {
+      "type": "category",
+      "label": "Types of Chaos Experiments",
+      "items": [
+        {
+          "type": "category",
+          "label": "Kubernetes",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-2.0.0/simulate-pod-chaos-on-kubernetes"
+            },
+            {
+              "type": "doc",
+              "id": "version-2.0.0/simulate-network-chaos-on-kubernetes"
+            },
+            {
+              "type": "doc",
+              "id": "version-2.0.0/simulate-heavy-stress-on-kubernetes"
+            },
+            {
+              "type": "doc",
+              "id": "version-2.0.0/simulate-io-chaos-on-kubernetes"
+            },
+            {
+              "type": "doc",
+              "id": "version-2.0.0/simulate-dns-chaos-on-kubernetes"
+            },
+            {
+              "type": "doc",
+              "id": "version-2.0.0/simulate-time-chaos-on-kubernetes"
+            },
+            {
+              "type": "doc",
+              "id": "version-2.0.0/simulate-jvm-application-chaos"
+            },
+            {
+              "type": "doc",
+              "id": "version-2.0.0/simulate-kernel-chaos-on-kubernetes"
+            },
+            {
+              "type": "doc",
+              "id": "version-2.0.0/simulate-aws-chaos"
+            },
+            {
+              "type": "doc",
+              "id": "version-2.0.0/simulate-gcp-chaos"
+            },
+            {
+              "type": "doc",
+              "id": "version-2.0.0/simulate-http-chaos-on-kubernetes"
+            }
+          ],
+          "collapsible": true,
+          "collapsed": true
+        },
+        {
+          "type": "category",
+          "label": "Physical Nodes",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-2.0.0/chaosd-overview"
+            },
+            {
+              "type": "doc",
+              "id": "version-2.0.0/simulate-process-chaos-in-physical-nodes"
+            },
+            {
+              "type": "doc",
+              "id": "version-2.0.0/simulate-network-chaos-in-physical-nodes"
+            },
+            {
+              "type": "doc",
+              "id": "version-2.0.0/simulate-host-console-in-physical-nodes"
+            },
+            {
+              "type": "doc",
+              "id": "version-2.0.0/simulate-heavy-stress-in-physical-nodes"
+            }
+          ],
+          "collapsible": true,
+          "collapsed": true
+        }
+      ],
+      "collapsible": true,
+      "collapsed": true
+    },
+    {
+      "type": "category",
+      "label": "FAQs and Troubleshooting",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-2.0.0/upgrade-to-2.0"
+        }
+      ],
+      "collapsible": true,
+      "collapsed": true
+    }
+  ]
+}

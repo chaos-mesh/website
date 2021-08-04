@@ -108,11 +108,15 @@ module.exports = {
     //   label: 'Reference Guides',
     //   items: ['architecture', 'chaos-engineering-principles', 'chaosctl-tool', 'glossary'],
     // },
-    // {
-    //   type: 'category',
-    //   label: 'FAQs and Troubleshooting',
-    //   items: ['faqs', 'troubleshooting-guide'],
-    // },
+    {
+      type: 'category',
+      label: 'FAQs and Troubleshooting',
+      items: [
+        // 'faqs',
+        // 'troubleshooting-guide',
+        'upgrade-to-2.0',
+      ],
+    },
     // {
     //   type: 'category',
     //   label: 'Release Notes',
