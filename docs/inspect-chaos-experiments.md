@@ -20,11 +20,11 @@ You can check the running steps of chaos experiments on any of the following pag
 
 - List of chaos experiments:
 
-  ![Experimental Status](docs/img/list_chaos_status.png)
+  ![Experimental Status](img/list_chaos_status.png)
 
 - Details of chaos experiments:
 
-  ![Experimental Status](docs/img/chaos_detail_status.png)
+  ![Experimental Status](img/chaos_detail_status.png)
 
 :::Note
 
