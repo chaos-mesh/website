@@ -90,3 +90,9 @@ html[data-theme='dark'] .cncf-logo {
   width: 100%;
   height: 100%;
 }
+
+.caption-center {
+  color: grey;
+  font-style: italic;
+  text-align: center;
+}
