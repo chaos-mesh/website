@@ -5,7 +5,7 @@ sidebar_label: Simulate Stress Scenarios
 
 ## StressChaos Introduction
 
-Chaos Mesh provides StresChaos experiments to simulate stress scenarios inside containers. This document describes how to create StressChaos experiments and how to prepare the corresponding configuration file.
+Chaos Mesh provides StressChaos experiments to simulate stress scenarios inside containers. This document describes how to create StressChaos experiments and how to prepare the corresponding configuration file.
 
 You can create experiments using either Chaos Dashboard or the YAML configuration files.
 
@@ -62,7 +62,7 @@ The fields in the YAML configuration file are described in the following table:
 | ----------------- | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | -------- | ----------- |
 | duration          | string                  | Specifies the duration of the experiment.                                                                                                                                                                                                                                                                                                                                   | None          | Yes      | `30s`       |
 | stressors         | [Stressors](#stressors) | Specifies the stress of CPU or memory                                                                                                                                                                                                                                                                                                                                       | None          | No       |             |
-| stressngStressors | string                  | Specifies the stres-ng parameter to reach richer stress injection                                                                                                                                                                                                                                                                                                           | None          | No       | `--clone 2` |
+| stressngStressors | string                  | Specifies the stress-ng parameter to reach richer stress injection                                                                                                                                                                                                                                                                                                           | None          | No       | `--clone 2` |
 | mode              | string                  | Specifies the mode of the experiment. The mode options include `one` (selecting a random Pod), `all` (selecting all eligible Pods), `fixed` (selecting a specified number of eligible Pods), `fixed-percent` (selecting a specified percentage of Pods from the eligible Pods), and `random-max-percent` (selecting the maximum percentage of Pods from the eligible Pods). | None          | Yes      | `1`         |
 | value             | string                  | Provides a parameter for the `mode` configuration, depending on `mode`.For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods.                                                                                                                                                                                                        | None          | No       | `2`         |
 | containerNames    | []string                | Specifies the name of the container into which the fault is injected.                                                                                                                                                                                                                                                                                                       | None          | No       | `["nginx"]` |
@@ -84,7 +84,7 @@ The fields in the YAML configuration file are described in the following table:
 
 ##### CPUStressor
 
-| Parameter | Type | Descpription                                                                           | Default value | Required | Example |
+| Parameter | Type | Description                                                                           | Default value | Required | Example |
 | --------- | ---- | -------------------------------------------------------------------------------------- | ------------- | -------- | ------- |
 | workers   | int  | Specifies the number of threads that apply memory stress                               |               | Yes      | `1`     |
 | load      | int  | Specifies the percentage of CPU occupied0 means sleep and no load; 100 means full load |               | No       | `50`    |

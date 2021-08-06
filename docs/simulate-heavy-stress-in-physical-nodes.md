@@ -9,7 +9,7 @@ This document describes how to use Chaosd to simulate stress scenarios. This fea
 
 This section describes how to create stress experiments in command-line mode.
 
-Before creating stress experiments, you can run the following command to view the stress experiment types supported by Chaosd：
+Before creating stress experiments, you can run the following command to view the stress experiment types supported by Chaosd:
 
 ```bash
 chaosd attack stress --help
@@ -68,7 +68,7 @@ Global Flags:
 
 #### Configuration description of simulating CPU stress
 
-| Configuration item | Abbreviation | Descpription                                                                                           | Value                                    |
+| Configuration item | Abbreviation | Description                                                                                           | Value                                    |
 | :----------------- | :----------- | :----------------------------------------------------------------------------------------------------- | :--------------------------------------- |
 | load               | l            | Specifies the percentage of CPU load per CPU worker. 0 means no CPU load, and 100 means full CPU load. | int; range: 0 to 100; default value: 10. |
 | workers            | w            | Specifies the number of workers used to create CPU stress.                                             | int; default value: 1.                   |
@@ -138,7 +138,7 @@ The result is as follows:
 Attack stress mem successfully, uid: c2bff2f5-3aac-4ace-b7a6-322946ae6f13
 ```
 
-When running the experiment, you need to save the uid information of the experiment. When a stress simulation is not needed, you can use `recover` to terminate the uid-related experiment:：
+When running the experiment, you need to save the uid information of the experiment. When a stress simulation is not needed, you can use `recover` to terminate the uid-related experiment::
 
 ```bash
 chaosd recover c2bff2f5-3aac-4ace-b7a6-322946ae6f13
