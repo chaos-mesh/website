@@ -87,22 +87,22 @@ module.exports = {
     //     'use-grafana-to-inspect-chaos-experiments',
     //   ],
     // },
-    // {
-    //   type: 'category',
-    //   label: 'Development Guides',
-    //   items: [
-    //     'developer-guide-overview',
-    //     'configure-development-environment',
-    //     'add-new-chaos-experiment-type',
-    //     'extend-chaos-daemon-interface',
-    //     'extend-chaosd',
-    //     {
-    //       type: 'category',
-    //       label: 'Clients',
-    //       items: ['go-client', 'rust-client', 'java-client', 'python-client'],
-    //     },
-    //   ],
-    // },
+    {
+      type: 'category',
+      label: 'Development Guides',
+      items: [
+        'developer-guide-overview',
+        'configure-development-environment',
+        'add-new-chaos-experiment-type',
+        'extend-chaos-daemon-interface',
+        'extend-chaosd',
+        // {
+        //   type: 'category',
+        //   label: 'Clients',
+        //   items: ['go-client', 'rust-client', 'java-client', 'python-client'],
+        // },
+      ],
+    },
     // {
     //   type: 'category',
     //   label: 'Reference Guides',
