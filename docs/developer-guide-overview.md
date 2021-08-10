@@ -1,6 +1,5 @@
 ---
 title: Developer Guide Overview
-sidebar_label: Developer Guide Overview
 ---
 
 This document describes how to develop Chaos Mesh. Before you start, it is recommended to first read the following documents:
