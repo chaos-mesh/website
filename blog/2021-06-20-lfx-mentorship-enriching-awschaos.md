@@ -8,8 +8,8 @@ author_image_url: https://avatars.githubusercontent.com/u/50622005?v=4
 image: /img/mentorship_experience.png
 tags: [Chaos Mesh, Chaos Engineering, LFX Mentorship, AWS Chaos]
 ---
-![LFX Mentorship Experience](/img/mentorship_blog.jpeg)
 
+![LFX Mentorship Experience](/img/mentorship_blog.jpeg)
 
 [I’m](https://mentorship.lfx.linuxfoundation.org/mentee/6a0bf7de-9e18-4acb-9a66-f5fecdbeb42e) a junior undergraduate majoring in Biomedical Engineering in the Department of Biotechnology and Medical Engineering at the [National Institute of Technology Rourkela](https://nitrkl.ac.in/), India. For someone who started to code only because I was fascinated by it, it was all a journey of self-learning, filled with various adversities. But when I started with open-source contributions, it was all very beginner-friendly and I came across a lot of people who helped me learn the tech stack better.
 
@@ -35,7 +35,7 @@ I distinctly remember the day when I received an email from my mentor regarding 
 
 Along with my mentor, we decided on our mode of communication: through Slack. He also enquired about my knowledge of Kubernetes and GOlang, as I didn’t have much knowledge about either of them. He suggested a few resources and gave me 2 weeks to go through them. In the meantime, he also planned a few experiments for me to get acquainted with all these technologies.
 
-As I was getting more comfortable with Kubernetes, I started exploring Chaos Mesh and completed the interactive [tutorial](https://chaos-mesh.org/interactive-tutorial), which gave me a clearer idea about the usage of Chaos Mesh. I then implemented the [hello-world chaos](https://chaos-mesh.org/docs/development_guides/develop_a_new_chaos), which helped me to know more about controllers and CRDs, considered to be the most important part of Chaos Mesh. Also, I got to know about the boilerplate codes, the [kube-builder client](https://github.com/kubernetes-sigs/kubebuilder), and how to use them for scaffolding, followed by writing our own controllers.
+As I was getting more comfortable with Kubernetes, I started exploring Chaos Mesh and completed the interactive [tutorial](https://chaos-mesh.org/interactive-tutorial), which gave me a clearer idea about the usage of Chaos Mesh. I then implemented the [hello-world chaos](https://chaos-mesh.org/docs/1.2.3/development_guides/develop_a_new_chaos), which helped me to know more about controllers and CRDs, considered to be the most important part of Chaos Mesh. Also, I got to know about the boilerplate codes, the [kube-builder client](https://github.com/kubernetes-sigs/kubebuilder), and how to use them for scaffolding, followed by writing our own controllers.
 
 After the initial days of experimenting and getting to know the project better, I started with solving a few good first issues to get acquainted with upstream contributions to Chaos Mesh.
 

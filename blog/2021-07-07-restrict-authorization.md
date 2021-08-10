@@ -15,14 +15,14 @@ A [multi-tenant](https://cloud.google.com/kubernetes-engine/docs/concepts/multit
 
 <!--truncate-->
 
-# Cluster multi-tenancy
+## Cluster multi-tenancy
 
 When you plan a multi-tenant architecture, you should consider the layers of resource isolation in Kubernetes: cluster, namespace, node, Pod, and container.
 
 Although Kubernetes cannot guarantee perfectly secure isolation between tenants, it does offer features that may be sufficient for specific use cases. You can separate each tenant and their Kubernetes resources into their own [namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/).
 Kubernetes supports multiple virtual clusters backed by the same physical cluster. These virtual clusters are called namespaces. [Namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) are intended for use in environments with many users spread across multiple teams, or projects.
 
-# Cluster having Chaos Mesh
+## Cluster having Chaos Mesh
 
 You designed your Kubernetes cluster to have multiple tenant services. You followed the best security practices for Kubernetes: each tenant service is running in its own namespaces, users of these tenant services have appropriate access that also only for their respective namespaces, etc.
 
@@ -67,8 +67,10 @@ tidb-cluster-demo
 
 Please note, if the user has required rights on tidb-cluster-demo namespace as well, then there will be no such error.
 
-# For more tutorials
+## For more tutorials
+
 In case you want to enforce that no user should be allowed to create chaos across namespaces, you can check out my previous blog: [Securing tenant services while using chaos mesh using OPA](https://anuragpaliwal-93749.medium.com/securing-tenant-services-while-using-chaos-mesh-using-opa-3ae80c7f4b85).
 
-# Last but not least
+## Last but not least
+
 If you are interested in Chaos Mesh and would like to learn more, you're welcome to join the [Slack channel](https://slack.cncf.io/) or submit your pull requests or issues to its [GitHub repository](https://github.com/chaos-mesh/chaos-mesh).
