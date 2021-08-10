@@ -11,7 +11,7 @@ GCPChaos is a fault type in Chaos Mesh. By creating a GCPChaos experiment, you c
 
 - **Node Stop**: stops the specified GCP instance.
 - **Node Reset**: reboots the specified GCP instance.
-- **Disk Loss**: uninstalls the storage volume from the specified EC2 instance.
+- **Disk Loss**: uninstalls the storage volume from the specified GCP instance.
 
 ## `Secret` file
 
