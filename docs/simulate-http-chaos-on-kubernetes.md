@@ -9,10 +9,10 @@ This document describes how to simulate HTTP faults by creating HTTPChaos experi
 
 HTTPChaos is a fault type provided by Chaos Mesh. By creating HTTPChaos experiments, you can simulate the fault scenarios of the HTTP server during the HTTP request and response processing. Currently, HTTPChaos supports simulating the following fault types:
 
-- `abort`: interrupts server connection.
-- `delay`: injects latency into the target process.
-- `replace`: replaces part of content in HTTP request or response messages.
-- `patch`: adds additional content to HTTP request or response messages.
+- `abort`: interrupts server connection
+- `delay`: injects latency into the target process
+- `replace`: replaces part of content in HTTP request or response messages
+- `patch`: adds additional content to HTTP request or response messages
 
 HTTPChaos supports combinations of different fault types. If you have configured multiple HTTP fault types at the same time when creating HTTPChaos experiments, the order set to inject the faults when the experiments start running is `abort` -> `delay` -> `replace` -> `patch`. When the `abort` fault cause short circuits, the connection will be directly interrupted.
 
@@ -28,11 +28,11 @@ Before injecting the faults supported by HTTPChaos, note the followings:
 
 ## Create experiments
 
-Currently, Chaos Mesh only supports using YAML configuration files to create HTTPChaos experiments. In the YAML files, you can simulate either one HTTP fault type or a comination of different HTTP fault types.
+Currently, Chaos Mesh only supports using YAML configuration files to create HTTPChaos experiments. In the YAML files, you can simulate either one HTTP fault type or a combination of different HTTP fault types.
 
 ### Example of `abort`
 
-1. Write the experimental configuration to the `http-abort-failure.yaml` file as the example below：
+1. Write the experimental configuration to the `http-abort-failure.yaml` file as the example below:
 
 ```yaml
 apiVersion: chaos-mesh.org/v1alpha1
@@ -64,7 +64,7 @@ kubectl apply -f ./http-abort-failure.yaml
 
 ### Example of fault combinations
 
-1. Write the experimental configuration to `http-failure.yaml` file as the example below：
+1. Write the experimental configuration to `http-failure.yaml` file as the example below:
 
 ```yaml
 apiVersion: chaos-mesh.org/v1alpha1
@@ -108,9 +108,9 @@ kubectl apply -f ./http-failure.yaml
 
 ### Description for common fields
 
-Common fields are meaningful when the `target` of fault injuection is `Request` or `Response`.
+Common fields are meaningful when the `target` of fault injection is `Request` or `Response`.
 
-| Parameter        | Type              | Descpription                                                                                                                                                                                                                                                                                                                                                                | Default value                             | Required | Example                        |
+| Parameter        | Type              | Description                                                                                                                                                                                                                                                                                                                                                                | Default value                             | Required | Example                        |
 | ---------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- | -------- | ------------------------------ |
 | mode             | string            | Specifies the mode of the experiment. The mode options include `one` (selecting a random pod), `all` (selecting all eligible pods), `fixed` (selecting a specified number of eligible pods), `fixed-percent` (selecting a specified percentage of Pods from the eligible pods), and `random-max-percent` (selecting the maximum percentage of Pods from the eligible pods). |                                           | yes      | one                            |
 | value            | string            | Provides parameters for the `mode` configuration depending on the value of `mode`.                                                                                                                                                                                                                                                                                          |                                           | no       | 2                              |
@@ -138,9 +138,9 @@ The `Request` field is a meaningful when the `target` set to `Request` during th
 | Parameter        | Type              | Description                                                         | Default value | Required | Example      |
 | ---------------- | ----------------- | ------------------------------------------------------------------- | ------------- | -------- | ------------ |
 | replace.path     | string            | Specifies the URI path used to replace content.                     |               | no       | /api/v2/     |
-| replace.method`  | string            | Specifies the replaced content of the HTTP request method.          |               | no       | DELETE       |
-| replace.queries` | map[string]string | Specifies the replaced key pair of the URI query.                   |               | no       | foo: bar     |
-| patch.queries`   | [][]string        | Specifies the attached key pair of the URI query with patch faults. |               | no       | - [foo, bar] |
+| replace.method   | string            | Specifies the replaced content of the HTTP request method.          |               | no       | DELETE       |
+| replace.queries  | map[string]string | Specifies the replaced key pair of the URI query.                   |               | no       | foo: bar     |
+| patch.queries    | [][]string        | Specifies the attached key pair of the URI query with patch faults. |               | no       | - [foo, bar] |
 
 #### `Respond`-related fields
 

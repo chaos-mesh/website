@@ -9,12 +9,12 @@ This document describes how to create IOChaos experiments in Chaos Mesh.
 
 IOChaos is a type of fault in Chaos Mesh. By creating an IOChaos experiment, you can simulate a scenario of file system fault. Currently, IOChaos supports the following fault types:
 
-- latency: delays file system calls
-- fault: returns an error for filesystem calls
-- attrOverride: modifies file properties
-- mistake: makes the file read or write a wrong value
+- `latency`: delays file system calls
+- `fault`: returns an error for filesystem calls
+- `attrOverride`: modifies file properties
+- `mistake`: makes the file read or write a wrong value
 
-For specific features, refer to [Create experiments using the YAML files](#create-experiments-using-the-yaml-file).
+For specific features, refer to [Create experiments using the YAML files](#create-experiments-using-the-yaml-files).
 
 ## Notes
 
@@ -141,20 +141,20 @@ kubectl apply -f ./io-attr.yaml
 ```yaml
 apiVersion: chaos-mesh. rg/v1alpha1
 ind: IOChaos
-metaada:
+metadata:
   name: io-mistake-example
   namespace: chaos-testing
 special:
   action: mistake
   mode: one
   selector:
-    labelselectors:
+    labelSelectors:
       app: etcd
   volumePath: /var/run/etcd
   path: /var/run/etcd/**/*
   mistake:
     filling: zero
-    maxOccarences: 1
+    maxOccurrences: 1
     maxLength: 10
   methods:
     - READ

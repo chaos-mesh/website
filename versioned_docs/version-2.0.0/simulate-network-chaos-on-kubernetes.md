@@ -9,7 +9,7 @@ This document describes how to simulate network faults using NetworkChaos in Cha
 
 NetworkChaos is a fault type in Chaos Mesh. By creating a NetworkChaos experiment, you can simulate a network fault scenario for a cluster. Currently, NetworkChaos supports the following fault types:
 
-- **Partition**：network disconnection and partition.
+- **Partition**: network disconnection and partition.
 - **Net Emulation**: poor network conditions, such as high delays, high packet loss rate, packet reordering, and so on.
 - **Bandwidth**: limit the communication bandwidth between nodes.
 
@@ -63,7 +63,7 @@ Before creating NetworkChaos experiments, ensure the following:
        jitter: '0ms'
    ```
 
-This configuration causes a latency of 10 milliseconds in the network connections of the target Pods. In addition to latency injection, Chaos Mesh supports packet loss and packet reordering injection. For details, see [field description](#字段说明).
+This configuration causes a latency of 10 milliseconds in the network connections of the target Pods. In addition to latency injection, Chaos Mesh supports packet loss and packet reordering injection. For details, see [field description](#field-description).
 
 2. After the configuration file is prepared, use `kubectl` to create an experiment:
 

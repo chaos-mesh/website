@@ -17,6 +17,9 @@
     },
     {
       "pattern": "https://hacktoberfest.digitalocean.com/login"
+    },
+    {
+      "pattern": "run-a-chaos-experiment.md"
     }
   ]
 }
