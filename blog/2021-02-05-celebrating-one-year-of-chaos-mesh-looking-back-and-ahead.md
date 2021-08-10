@@ -23,19 +23,19 @@ In this past year, Chaos Mesh has grown at an impressive speed with the joint ef
 
 ### Functionality
 
-When first open-sourced, Chaos Mesh supported only three fault types: PodChaos, NetworkChaos, and IOChaos. Within only a year,  Chaos Mesh can perform all around fault injections into the network, system clock, JVM applications, filesystems, operating systems, and so on.
+When first open-sourced, Chaos Mesh supported only three fault types: PodChaos, NetworkChaos, and IOChaos. Within only a year, Chaos Mesh can perform all around fault injections into the network, system clock, JVM applications, filesystems, operating systems, and so on.
 
 ![Chaos Tests](/img/chaos-tests.png)
 
 After continuous optimization, Chaos Mesh now provides a flexible scheduling mechanism, which enables users to better design their own chaos experiments. This laid the foundation for chaos orchestration.
 
-In the meantime, we are happy to see that a number of users have started to [test Chaos Mesh on major cloud platforms](https://github.com/chaos-mesh/chaos-mesh/issues/1182), such as Amazon Web Services (AWS), Google Kubernetes Engine (GKE), Alibaba Cloud, and Tencent Cloud.  We have continuously conducted compatibility testing and adaptations, in order to support [fault injection for specific cloud platforms](https://github.com/chaos-mesh/chaos-mesh/pull/1330).
+In the meantime, we are happy to see that a number of users have started to [test Chaos Mesh on major cloud platforms](https://github.com/chaos-mesh/chaos-mesh/issues/1182), such as Amazon Web Services (AWS), Google Kubernetes Engine (GKE), Alibaba Cloud, and Tencent Cloud. We have continuously conducted compatibility testing and adaptations, in order to support [fault injection for specific cloud platforms](https://github.com/chaos-mesh/chaos-mesh/pull/1330).
 
 To better support Kubernetes native components and node-level failures, we developed [Chaosd](https://github.com/chaos-mesh/chaosd), which provides physical node-level fault injection. We're extensively testing and refining this feature for release within the next few months.
 
 ### Ease of use
 
-Ease of use has been one of the guiding principles of Chaos Mesh development since day one.  You can deploy Chaos Mesh with a single command line. The V1.0 release brought the long-awaited Chaos Dashboard, a one-stop web interface for users to orchestrate chaos experiments. You can define the scope of the chaos experiment, specify the type of chaos injection, define scheduling rules, and observe the results of the chaos experiment—all in the same web interface with only a few clicks.
+Ease of use has been one of the guiding principles of Chaos Mesh development since day one. You can deploy Chaos Mesh with a single command line. The V1.0 release brought the long-awaited Chaos Dashboard, a one-stop web interface for users to orchestrate chaos experiments. You can define the scope of the chaos experiment, specify the type of chaos injection, define scheduling rules, and observe the results of the chaos experiment—all in the same web interface with only a few clicks.
 
 ![Chaos Dashboard](/img/chaos-dashboard1.png)
 
@@ -43,7 +43,7 @@ Prior to V1.0, many users reported being blocked by various configuration proble
 
 ### Security
 
-We have improved the security of Chaos Mesh. It now provides a comprehensive set of selectors to control the scope of the experiments, and supports setting specific namespaces to protect important applications. What’s more, the support  of namespace permissions allows users to limit the “explosion radius” of a chaos experiment to  a specific namespace.
+We have improved the security of Chaos Mesh. It now provides a comprehensive set of selectors to control the scope of the experiments, and supports setting specific namespaces to protect important applications. What’s more, the support of namespace permissions allows users to limit the “explosion radius” of a chaos experiment to a specific namespace.
 
 In addition, Chaos Mesh directly reuses Kubernetes’ native permission mechanism and supports verification on the Chaos Dashboard. This protects you from other users’ errors, which can cause chaos experiments to fail or become uncontrollable.
 
@@ -61,7 +61,7 @@ To enable users to run chaos experiments even during the development phase, we d
 
 ### TiPocket
 
-[TiPocket](https://github.com/pingcap/tipocket) is an automated test platform that integrates Chaos Mesh and Argo, a workflow engine designed for Kubernetes. TiPocket is designed to be a fully automated chaos engineering testing loop for TiDB, a distributed database. There are a number of steps when we conduct chaos experiments, including deploying applications, running workloads, injecting exceptions, and business checks. To fully automate these steps,  Argo was integrated into TiPocket. Chaos Mesh provides rich fault injection, while Argo provides flexible orchestration and scheduling.
+[TiPocket](https://github.com/pingcap/tipocket) is an automated test platform that integrates Chaos Mesh and Argo, a workflow engine designed for Kubernetes. TiPocket is designed to be a fully automated chaos engineering testing loop for TiDB, a distributed database. There are a number of steps when we conduct chaos experiments, including deploying applications, running workloads, injecting exceptions, and business checks. To fully automate these steps, Argo was integrated into TiPocket. Chaos Mesh provides rich fault injection, while Argo provides flexible orchestration and scheduling.
 
 ![TiPocket](/img/tipocket.png)
 
@@ -77,23 +77,22 @@ Cloud native has been in the DNA of Chaos Mesh since the very beginning. Joining
   Collaborations with other projects and various cloud native community activities such as Kubernetes Meetup and KubeCon have presented us great opportunities to communicate with the community. We are amazed how the high-quality content produced by the community has also played a positive and far-reaching role in promoting Chaos Mesh.
 
 - A more complete and open community framework.
-  CNCF provides a rather mature framework for open-source community operations. Under CNCF’s  guidance, we established our basic community framework, including a Code of Conduct, Contributing Guide, and Roadmap. We’ve also created our own channel, #project-chaos-mesh, under CNCF’s Slack.
+  CNCF provides a rather mature framework for open-source community operations. Under CNCF’s guidance, we established our basic community framework, including a Code of Conduct, Contributing Guide, and Roadmap. We’ve also created our own channel, #project-chaos-mesh, under CNCF’s Slack.
 
 ### A friendly and supportive community
 
 The quality of the open source community determines whether our adopters and contributors are willing to stick around and get involved in the community for the long run. In this regard, we’ve been working hard on:
 
-- Continuously enriching documentation and optimizing its structure. So far, we have developed a complete set of documentation for different groups of audiences, including [a user guide](https://chaos-mesh.org/docs/user_guides/installation/) and [developer guide](https://chaos-mesh.org/docs/development_guides/development_overview), [quick start guides](https://chaos-mesh.org/docs/get_started/get_started_on_kind), [use cases](https://chaos-mesh.org/docs/use_cases/multi_data_centers), and [a contributing guide](https://github.com/chaos-mesh/chaos-mesh/blob/master/CONTRIBUTING.md). All are constantly updated per each release.
+- Continuously enriching documentation and optimizing its structure. So far, we have developed a complete set of documentation for different groups of audiences, including [a user guide](https://chaos-mesh.org/docs/1.2.3/user_guides/installation) and [developer guide](https://chaos-mesh.org/docs/1.2.3/development_guides/development_overview), [quick start guides](https://chaos-mesh.org/docs/1.2.3/get_started/get_started_on_kind), [use cases](https://chaos-mesh.org/docs/1.2.3/use_cases/multi_data_centers), and [a contributing guide](https://github.com/chaos-mesh/chaos-mesh/blob/master/CONTRIBUTING.md). All are constantly updated per each release.
 
-- Working with the community to publish blog posts,  tutorials, use cases, and chaos engineering practices. So far, we’ve produced 26 Chaos Mesh related articles. Among them is [an interactive tutorial](https://chaos-mesh.org/interactive-tutorial), published on O’Reilly’s Katakoda site. These materials make a great complement to the documentation.
+- Working with the community to publish blog posts, tutorials, use cases, and chaos engineering practices. So far, we’ve produced 26 Chaos Mesh related articles. Among them is [an interactive tutorial](https://chaos-mesh.org/interactive-tutorial), published on O’Reilly’s Katakoda site. These materials make a great complement to the documentation.
 
-- Repurposing and amplifying videos and tutorials generated in community meetings, webinars, and meetups.
-Valuing and responding to community feedback and queries.
+- Repurposing and amplifying videos and tutorials generated in community meetings, webinars, and meetups. Valuing and responding to community feedback and queries.
 
 ## Looking ahead
 
 Google’s recent global outage reminded us of the importance of system reliability, and it highlighted the importance of chaos engineering. Liz Rice, CNCF TOC Chair, shared [The 5 technologies to watch in 2021](https://twitter.com/CloudNativeFdn/status/1329863326428499971), and chaos engineering is on top of the list. We boldly predict that chaos engineering is about to enter a new stage in the near future.
-Chaos Mesh 2.0 is now in active development,  and it includes community requirements such as an embedded workflow engine to support the definition and management of more flexible chaos scenarios, application state checking mechanisms, and more detailed experiments reports.  Follow along through the project [roadmap](https://github.com/chaos-mesh/chaos-mesh/blob/master/ROADMAP.md).
+Chaos Mesh 2.0 is now in active development, and it includes community requirements such as an embedded workflow engine to support the definition and management of more flexible chaos scenarios, application state checking mechanisms, and more detailed experiments reports. Follow along through the project [roadmap](https://github.com/chaos-mesh/chaos-mesh/blob/master/ROADMAP.md).
 
 ## Last but not least
 

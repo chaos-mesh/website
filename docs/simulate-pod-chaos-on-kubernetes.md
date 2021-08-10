@@ -9,13 +9,13 @@ This document describes how to use Chaos Mesh to inject faults into Kubernetes P
 
 PodChaos is a fault type in Chaos Mesh. By creating a PodChaos experiment, you can simulate fault scenarios of the specified Pods or containers. Currently, PodChaos supports the following fault types:
 
-- Pod Failure: injects fault into a specified Pod to make the Pod unavailable for a period of time.
-- Pod Kill: kills a specified Pod.To ensure that the Pod can be successfully restarted, you need to configure ReplicaSet or similar mechanisms.
-- Container Kill: kills the specified container in the target Pod.
+- **Pod Failure**: injects fault into a specified Pod to make the Pod unavailable for a period of time.
+- **Pod Kill**: kills a specified Pod.To ensure that the Pod can be successfully restarted, you need to configure ReplicaSet or similar mechanisms.
+- **Container Kill**: kills the specified container in the target Pod.
 
 ## Usage restrictions
 
-Currently, Chaos Mesh only supports fault injection to certain types of Pod, such as Deployment, Statefulset, and Daemonset. Chaos Mesh does not support injecting faults into an independent Pod. An independent Pod means a Pod that is not bound to ReplicaSet or Deployment Pod.
+Currently, Chaos Mesh only supports fault injection to certain types of Pod, such as Deployment, StatefulSet, and DaemonSet. Chaos Mesh does not support injecting faults into an independent Pod. An independent Pod means a Pod that is not bound to ReplicaSet or Deployment Pod.
 
 ## Notes
 

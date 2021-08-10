@@ -75,7 +75,7 @@ Global Flags:
       --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
 ```
 
-The related configuration items are described as follows：
+The related configuration items are described as follows:
 
 | Configuration item | Abbreviation | Description                                                                                                                 | Value                                                                                                                     |
 | :----------------- | :----------- | :-------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------ |
@@ -119,7 +119,7 @@ Global Flags:
       --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
 ```
 
-The related configuration items are described as follows：
+The related configuration items are described as follows:
 
 | Configuration item | Abbreviation | Description                                                                                                                 | Value                                                                                                                     |
 | :----------------- | :----------- | :-------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------ |
@@ -128,8 +128,8 @@ The related configuration items are described as follows：
 | egress-port        | e            | The egress traffic which only impact specific destination ports. It can only be configured when the protocol is TCP or UDP. | String. You need to use a ',' to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
 | hostname           | H            | The host name impacted by traffic.                                                                                          | String, such as "chaos-mesh.org".                                                                                         |
 | ip                 | i            | The IP address impacted by egress traffic.                                                                                  | String, such as "123.123.123.123".                                                                                        |
-| jitter             | j            | Range of the length of network delay time.                                                                                  | String. The time units can be：ns, us (µs), ms, s, m, h, such as "1ms".                                                   |
-| latency            | l            | Length of network delay time.                                                                                               | String. The time units can be：ns, us (μs), ms, s, m, h, such as "1ms".                                                   |
+| jitter             | j            | Range of the length of network delay time.                                                                                  | String. The time units can be: ns, us (µs), ms, s, m, h, such as "1ms".                                                   |
+| latency            | l            | Length of network delay time.                                                                                               | String. The time units can be: ns, us (μs), ms, s, m, h, such as "1ms".                                                   |
 | protocol           | p            | The IP protocol impacted by traffic.                                                                                        | String. It supports the following protocol types: tcp, udp, icmp, all (all network protocols).                            |
 | source-port        | s            | The egress traffic that only impacts specified source ports. It can only be configured when the protocol is TCP or UDP.     | String. You need to use a ',' to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
 
@@ -164,7 +164,7 @@ Global Flags:
       --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
 ```
 
-The related configuration items are described as follows：
+The related configuration items are described as follows:
 
 | Configuration item | Abbreviation | Description                                                                                                                  | Value                                                                                                                     |
 | :----------------- | :----------- | :--------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------ |
@@ -208,9 +208,9 @@ Global Flags:
       --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
 ```
 
-The related configuration items are described as follows：
+The related configuration items are described as follows:
 
-| Configuration item | Abbreviation | Descpription                                                                                                                 | Value                                                                                                                     |
+| Configuration item | Abbreviation | Description                                                                                                                 | Value                                                                                                                     |
 | :----------------- | :----------- | :--------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------ |
 | correlation        | c            | The correlation between the percentage of the current network loss and the previous one.                                     | Int. It is a percentage which range is 0 to 100 (10 is 10%) (default "0").                                                |
 | device             | d            | Name of the impacted network interface card.                                                                                 | String, such as “eth0”. The value is required.                                                                            |
@@ -223,7 +223,7 @@ The related configuration items are described as follows：
 
 ### Examples
 
-Simulate network corruption：
+Simulate network corruption:
 
 ```bash
 chaosd attack network corrupt -d eth0 -i 172.16.4.4 --percent 50
@@ -235,7 +235,7 @@ The output is as follows:
 Attack network successfully, uid: 4eab1e62-8d60-45cb-ac85-3c17b8ac4825
 ```
 
-Simulate network latency：
+Simulate network latency:
 
 ```bash
 chaosd attack network delay -d eth0 -i 172.16.4.4 -l 10ms
@@ -247,7 +247,7 @@ The output is as follows:
 Attack network successfully, uid: 4b23a0b5-e193-4b27-90a7-3e04235f32ab
 ```
 
-Simulate network duplication：
+Simulate network duplication:
 
 ```bash
 chaosd attack network duplicate -d eth0 -i 172.16.4.4 --percent 50
@@ -259,7 +259,7 @@ The output is as follows:
 Attack network successfully, uid: 7bcb74ee-9101-4ae4-82f0-e44c8a7f113c
 ```
 
-Simulate network loss：
+Simulate network loss:
 
 ```bash
 chaosd attack network loss -d eth0 -i 172.16.4.4 --percent 50
@@ -271,7 +271,7 @@ The output is as follows:
 Attack network successfully, uid: 1e818adf-3942-4de4-949b-c8499f120265
 ```
 
-When running the experiments, remember to save the uid of the experiments. To end a network fault simulation, use `recover`：
+When running the experiments, remember to save the uid of the experiments. To end a network fault simulation, use `recover`:
 
 ```bash
 chaosd recover 1e818adf-3942-4de4-949b-c8499f120265

@@ -120,7 +120,7 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
    kubectl apply -f awschaos-ec2-restart.yaml
    ```
 
-### A `detail-volume` configuration example
+### A `detach-volume` configuration example
 
 1. Write the experiment configuration to the `awschaos-detach-volume.yaml` file:
 
