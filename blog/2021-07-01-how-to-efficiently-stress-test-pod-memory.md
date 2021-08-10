@@ -141,7 +141,7 @@ The output is displayed in bytes and translates to `500 * 1024 * 1024`.
 
 Requests are used only for scheduling where to place the Pod. The Pod does not have a memory limit or request, but it can be seen as the sum of all its containers.
 
-We've been making a mistake since the very beginning. free and top are not "cgrouped." They rely on `/proc/meminfo` (procfs) for data. Unfortunately, `/proc/meminfo` is old, so old it predates cgroup. It will provide you with _host_ memory information instead of your container. Let's start from the beginning and see what memory usage we get this time.
+We've been making a mistake since the very beginning. free and top are not "cgrouped." They rely on `/proc/meminfo` (procfs) for data. Unfortunately, `/proc/meminfo` is old, so old it predates cgroup. It will provide you with **host** memory information instead of your container. Let's start from the beginning and see what memory usage we get this time.
 
 To get the cgrouped memory usage, enter:
 
