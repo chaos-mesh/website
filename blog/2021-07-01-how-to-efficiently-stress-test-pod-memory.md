@@ -6,7 +6,7 @@ author_title: Contributor of Chaos Mesh
 author_url: https://github.com/AsterNighT
 author_image_url: https://avatars.githubusercontent.com/u/22937027?v=4
 image: /img/how-to-efficiently-stress-test-pod-memory-banner.jpg
-tags:  [Chaos Mesh, Chaos Engineering, StressChaos, Stress Testing]
+tags: [Chaos Mesh, Chaos Engineering, StressChaos, Stress Testing]
 ---
 
 ![banner](/img/how-to-efficiently-stress-test-pod-memory-banner.jpg)
@@ -17,7 +17,7 @@ However, as we tested and used StressChaos, we found some issues with usability 
 
 <!--truncate-->
 
-Before you continue, you need to install Chaos Mesh in your cluster. You can find detailed instructions on our [website](https://chaos-mesh.org/docs/user_guides/installation).
+Before you continue, you need to install Chaos Mesh in your cluster. You can find detailed instructions on our [website](https://chaos-mesh.org/docs/quick-start).
 
 ## Injecting stress into a target
 
@@ -31,11 +31,11 @@ code deploy/helm/hello-kubernetes/values.yaml # or whichever editor you prefer
 Find the resources line, and change it into:
 
 ```yaml
-  resources:
-    requests:
-      memory: "200Mi"
-    limits:
-      memory: "500Mi"
+resources:
+  requests:
+    memory: '200Mi'
+  limits:
+    memory: '500Mi'
 ```
 
 However, before we inject anything, let's see how much memory the target is consuming. Go into the Pod and start a shell. Enter the following, substituting the name of your Pod for the one in the example:
@@ -87,8 +87,8 @@ spec:
     memory:
       workers: 4
       size: 50MiB
-      options: [""]
-  duration: "1h"
+      options: ['']
+  duration: '1h'
 ```
 
 Save the yaml to a file. I named it `memory.yaml`. To apply the chaos, run
@@ -122,7 +122,7 @@ Mem: 12805568K used
    48    29 node     R     1568   0%   1   0% top
 ```
 
-You can see that stress-ng instances are being injected into the Pod. There is a 60 MiB rise in the Pod, which we didn’t expect. The [documentation](https://manpages.ubuntu.com/manpages/artful/man1/stress-ng.1.html#:~:text=is%20not%20available.-,--vm-bytes%20N,-mmap%20N%20bytes) indicates that the increase should 200 MiB (4 * 50 MiB).
+You can see that stress-ng instances are being injected into the Pod. There is a 60 MiB rise in the Pod, which we didn’t expect. The [documentation](https://manpages.ubuntu.com/manpages/artful/man1/stress-ng.1.html#:~:text=is%20not%20available.-,--vm-bytes%20N,-mmap%20N%20bytes) indicates that the increase should 200 MiB (4 \* 50 MiB).
 
 Let's increase the stress by changing the memory stress from 50 MiB to 3,000 MiB. This should break the Pod’s memory limit. I’ll delete the chaos, modify the size, and reapply it.
 
@@ -141,7 +141,7 @@ The output is displayed in bytes and translates to `500 * 1024 * 1024`.
 
 Requests are used only for scheduling where to place the Pod. The Pod does not have a memory limit or request, but it can be seen as the sum of all its containers.
 
-We've been making a mistake since the very beginning. free and top are not "cgrouped." They rely on `/proc/meminfo` (procfs) for data. Unfortunately, `/proc/meminfo` is old, so old it predates cgroup. It will provide you with *host* memory information instead of your container. Let's start from the beginning and see what memory usage we get this time.
+We've been making a mistake since the very beginning. free and top are not "cgrouped." They rely on `/proc/meminfo` (procfs) for data. Unfortunately, `/proc/meminfo` is old, so old it predates cgroup. It will provide you with _host_ memory information instead of your container. Let's start from the beginning and see what memory usage we get this time.
 
 To get the cgrouped memory usage, enter:
 
