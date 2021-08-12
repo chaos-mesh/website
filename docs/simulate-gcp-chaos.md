@@ -117,7 +117,7 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
 
   Based on this configuration example, Chaos Mesh will inject `node-reset` fault into the specified GCP instance so that the GCP instance will be reset.
 
-  For more information about reseting GCP instances, refer to [Resetting an GCP instance](https://cloud.google.com/compute/docs/instances/stop-start-instance#resetting_an_instance).
+  For more information about resetting GCP instances, refer to [Resetting a GCP instance](https://cloud.google.com/compute/docs/instances/stop-start-instance#resetting_an_instance).
 
 2. After the configuration file is prepared, use `kubectl`  to create an experiment:
 
