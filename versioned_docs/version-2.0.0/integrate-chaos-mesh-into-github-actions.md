@@ -1,6 +1,5 @@
 ---
 title: Integrate Chaos Mesh to GitHub Actions
-sidebar_label: Integrate Chaos Mesh to GitHub Actions
 ---
 
 This document describes how to integrate Chaos Mesh to customize the continuous integration (CI) using chaos-mesh-action. This helps you identify issues that have been introduced into system development before product releases.

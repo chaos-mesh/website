@@ -87,7 +87,7 @@ Build application deployment:
 kubectl apply -f app.yaml
 ```
 
-Execute `kubectl -n app get pods`, and then you can find `1` Pod with a name like `springboot-jvmchaos-demo-777d94c5b9-7t7l2` under the namespace `app`. Wait for `READY` changes to `1/1` and then execute the following comands:
+Execute `kubectl -n app get pods`, and then you can find `1` Pod with a name like `springboot-jvmchaos-demo-777d94c5b9-7t7l2` under the namespace `app`. Wait for `READY` changes to `1/1` and then execute the following commands:
 
 ```shell
 kubectl -n app get pods

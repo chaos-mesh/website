@@ -1,6 +1,5 @@
 ---
 title: Configure the Development Environment
-sidebar_label: Configure the Development Environment
 ---
 
 This document describes how to configure a development environment for Chaos Mesh.
