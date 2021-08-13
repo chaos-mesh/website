@@ -144,4 +144,4 @@ This is the complete TiPocket workflow. .
 
 ## Join us
 
-[Chaos Mesh](https://github.com/pingcap/chaos-mesh) and [TiPocket](https://github.com/pingcap/tipocket) are both in active iterations. We have donated Chaos Mesh donated to [CNCF](https://github.com/cncf/toc/pull/367), and we look forward to more community members joining us in building a complete Chaos Engineering ecosystem. If this sounds interesting to you, check out our [website](https://chaos-mesh.org/), or join #chaos-mesh in [Slack](hthttps://slack.cncf.io/).
+[Chaos Mesh](https://github.com/pingcap/chaos-mesh) and [TiPocket](https://github.com/pingcap/tipocket) are both in active iterations. We have donated Chaos Mesh to [CNCF](https://github.com/cncf/toc/pull/367), and we look forward to more community members joining us in building a complete Chaos Engineering ecosystem. If this sounds interesting to you, check out our [website](https://chaos-mesh.org/), or join #project-chaos-mesh in the [CNCF Slack](hthttps://slack.cncf.io/).
