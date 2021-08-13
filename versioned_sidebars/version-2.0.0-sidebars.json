@@ -198,6 +198,16 @@
     },
     {
       "type": "category",
+      "label": "Tools Integration",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-2.0.0/integrate-chaos-mesh-into-github-actions"
+        }
+      ]
+    },
+    {
+      "type": "category",
       "label": "Development Guides",
       "items": [
         {

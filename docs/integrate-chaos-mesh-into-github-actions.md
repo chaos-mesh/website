@@ -1,6 +1,5 @@
 ---
 title: Integrate Chaos Mesh to GitHub Actions
-sidebar_label: Integrate Chaos Mesh to GitHub Actions
 ---
 
 This document describes how to integrate Chaos Mesh to customize the continuous integration (CI) using chaos-mesh-action. This helps you identify issues that have been introduced into system development before product releases.
@@ -156,26 +155,26 @@ In essence, workflow is a sequentially automated job configuration. Note that th
 
 ### Step 3: Run workflow
 
-  Once a workflow is created, you can trigger it by creating a pull request to a master branch. Once the workflow completes its running process, the output of the job verification is similar to the one below:
+Once a workflow is created, you can trigger it by creating a pull request to a master branch. Once the workflow completes its running process, the output of the job verification is similar to the one below:
 
-  ```log
-  do some verification
-  Unable to use a TTY - input is not a terminal or the right kind of file
-  PING busybox-1.busybox.busybox.svc (10.244.0.6): 56 data bytes
-  64 bytes from 10.244.0.6: seq=0 ttl=63 time=0.069 ms
-  64 bytes from 10.244.0.6: seq=1 ttl=63 time=10.136 ms
-  64 bytes from 10.244.0.6: seq=2 ttl=63 time=10.192 ms
-  64 bytes from 10.244.0.6: seq=3 ttl=63 time=10.129 ms
-  64 bytes from 10.244.0.6: seq=4 ttl=63 time=10.120 ms
-  64 bytes from 10.244.0.6: seq=5 ttl=63 time=0.070 ms
-  64 bytes from 10.244.0.6: seq=6 ttl=63 time=0.073 ms
-  64 bytes from 10.244.0.6: seq=7 ttl=63 time=0.111 ms
-  64 bytes from 10.244.0.6: seq=8 ttl=63 time=0.070 ms
-  64 bytes from 10.244.0.6: seq=9 ttl=63 time=0.077 ms
-  ……
-  ```
+```log
+do some verification
+Unable to use a TTY - input is not a terminal or the right kind of file
+PING busybox-1.busybox.busybox.svc (10.244.0.6): 56 data bytes
+64 bytes from 10.244.0.6: seq=0 ttl=63 time=0.069 ms
+64 bytes from 10.244.0.6: seq=1 ttl=63 time=10.136 ms
+64 bytes from 10.244.0.6: seq=2 ttl=63 time=10.192 ms
+64 bytes from 10.244.0.6: seq=3 ttl=63 time=10.129 ms
+64 bytes from 10.244.0.6: seq=4 ttl=63 time=10.120 ms
+64 bytes from 10.244.0.6: seq=5 ttl=63 time=0.070 ms
+64 bytes from 10.244.0.6: seq=6 ttl=63 time=0.073 ms
+64 bytes from 10.244.0.6: seq=7 ttl=63 time=0.111 ms
+64 bytes from 10.244.0.6: seq=8 ttl=63 time=0.070 ms
+64 bytes from 10.244.0.6: seq=9 ttl=63 time=0.077 ms
+……
+```
 
-  The output shows a series of 10-milliseconds delays, and each delay lasts for 5 seconds (which is 5 times). This is consistent with the configuration of chaos experiments that are injected using chaos-mesh-action.
+The output shows a series of 10-milliseconds delays, and each delay lasts for 5 seconds (which is 5 times). This is consistent with the configuration of chaos experiments that are injected using chaos-mesh-action.
 
 ## What's next
 
