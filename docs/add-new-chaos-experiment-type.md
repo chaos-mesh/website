@@ -1,6 +1,5 @@
 ---
-title: 新增混沌实验类型
-sidebar_label: 新增混沌实验类型
+title: Add New Chaos Experiment Type
 ---
 
 ## TODO

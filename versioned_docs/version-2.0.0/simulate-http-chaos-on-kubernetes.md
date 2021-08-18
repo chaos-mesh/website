@@ -9,14 +9,14 @@ This document describes how to simulate HTTP faults by creating HTTPChaos experi
 
 HTTPChaos is a fault type provided by Chaos Mesh. By creating HTTPChaos experiments, you can simulate the fault scenarios of the HTTP server during the HTTP request and response processing. Currently, HTTPChaos supports simulating the following fault types:
 
-- `abort`: interrupts server connection.
-- `delay`: injects latency into the target process.
-- `replace`: replaces part of content in HTTP request or response messages.
-- `patch`: adds additional content to HTTP request or response messages.
+- `abort`: interrupts server connection
+- `delay`: injects latency into the target process
+- `replace`: replaces part of content in HTTP request or response messages
+- `patch`: adds additional content to HTTP request or response messages
 
 HTTPChaos supports combinations of different fault types. If you have configured multiple HTTP fault types at the same time when creating HTTPChaos experiments, the order set to inject the faults when the experiments start running is `abort` -> `delay` -> `replace` -> `patch`. When the `abort` fault cause short circuits, the connection will be directly interrupted.
 
-For the detailed description of HTTPChaos configuration, see [Field description](#field-description) below.
+For the detailed description of HTTPChaos configuration, see [Field description](#Field-description) below.
 
 ## Notes
 
@@ -28,7 +28,7 @@ Before injecting the faults supported by HTTPChaos, note the followings:
 
 ## Create experiments
 
-Currently, Chaos Mesh only supports using YAML configuration files to create HTTPChaos experiments. In the YAML files, you can simulate either one HTTP fault type or a communication of different HTTP fault types.
+Currently, Chaos Mesh only supports using YAML configuration files to create HTTPChaos experiments. In the YAML files, you can simulate either one HTTP fault type or a combination of different HTTP fault types.
 
 ### Example of `abort`
 
@@ -110,11 +110,11 @@ kubectl apply -f ./http-failure.yaml
 
 Common fields are meaningful when the `target` of fault injection is `Request` or `Response`.
 
-| Parameter        | Type              | Description                                                                                                                                                                                                                                                                                                                                                                | Default value                             | Required | Example                        |
+| Parameter        | Type              | Description                                                                                                                                                                                                                                                                                                                                                                 | Default value                             | Required | Example                        |
 | ---------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- | -------- | ------------------------------ |
 | mode             | string            | Specifies the mode of the experiment. The mode options include `one` (selecting a random pod), `all` (selecting all eligible pods), `fixed` (selecting a specified number of eligible pods), `fixed-percent` (selecting a specified percentage of Pods from the eligible pods), and `random-max-percent` (selecting the maximum percentage of Pods from the eligible pods). |                                           | yes      | one                            |
 | value            | string            | Provides parameters for the `mode` configuration depending on the value of `mode`.                                                                                                                                                                                                                                                                                          |                                           | no       | 2                              |
-| target           | string            | Specifies whether the target of fault injection is `Request` or `Response`. The [`target`-related fields](#Description-for-`target`-related-fields) should be configured at the same time.                                                                                                                                                                                 |                                           | yes      | Request                        |
+| target           | string            | Specifies whether the target of fault injuection is `Request` or `Response`. The [`target`-related fields](#Description-for-`target`-related-fields) should be configured at the same time.                                                                                                                                                                                 |                                           | yes      | Request                        |
 | port             | int32             | The TCP port that the target service listens on.                                                                                                                                                                                                                                                                                                                            |                                           | yes      | 80                             |
 | method           | string            | The HTTP method of the target request method.                                                                                                                                                                                                                                                                                                                               | Takes effect for all methods by default.  | no       | GET                            |
 | path             | string            | The URI path of the target request which supports [Matching wildcards](https://www.wikiwand.com/en/Matching_wildcards).                                                                                                                                                                                                                                                     | Takes effect on all paths by default.     | no       | /api/\*                        |
@@ -135,12 +135,12 @@ Common fields are meaningful when the `target` of fault injection is `Request` o
 
 The `Request` field is a meaningful when the `target` set to `Request` during the fault injection.
 
-| Parameter        | Type              | Description                                                         | Default value | Required | Example      |
-| ---------------- | ----------------- | ------------------------------------------------------------------- | ------------- | -------- | ------------ |
-| replace.path     | string            | Specifies the URI path used to replace content.                     |               | no       | /api/v2/     |
-| replace.method`  | string            | Specifies the replaced content of the HTTP request method.          |               | no       | DELETE       |
-| replace.queries` | map[string]string | Specifies the replaced key pair of the URI query.                   |               | no       | foo: bar     |
-| patch.queries`   | [][]string        | Specifies the attached key pair of the URI query with patch faults. |               | no       | - [foo, bar] |
+| Parameter       | Type              | Description                                                         | Default value | Required | Example      |
+| --------------- | ----------------- | ------------------------------------------------------------------- | ------------- | -------- | ------------ |
+| replace.path    | string            | Specifies the URI path used to replace content.                     |               | no       | /api/v2/     |
+| replace.method  | string            | Specifies the replaced content of the HTTP request method.          |               | no       | DELETE       |
+| replace.queries | map[string]string | Specifies the replaced key pair of the URI query.                   |               | no       | foo: bar     |
+| patch.queries   | [][]string        | Specifies the attached key pair of the URI query with patch faults. |               | no       | - [foo, bar] |
 
 #### `Respond`-related fields
 

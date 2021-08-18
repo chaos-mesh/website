@@ -198,6 +198,42 @@
     },
     {
       "type": "category",
+      "label": "Tools Integration",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-2.0.0/integrate-chaos-mesh-into-github-actions"
+        }
+      ]
+    },
+    {
+      "type": "category",
+      "label": "Development Guides",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-2.0.0/developer-guide-overview"
+        },
+        {
+          "type": "doc",
+          "id": "version-2.0.0/configure-development-environment"
+        },
+        {
+          "type": "doc",
+          "id": "version-2.0.0/add-new-chaos-experiment-type"
+        },
+        {
+          "type": "doc",
+          "id": "version-2.0.0/extend-chaos-daemon-interface"
+        },
+        {
+          "type": "doc",
+          "id": "version-2.0.0/extend-chaosd"
+        }
+      ]
+    },
+    {
+      "type": "category",
       "label": "FAQs and Troubleshooting",
       "items": [
         {

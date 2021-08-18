@@ -197,7 +197,7 @@ Setting `action` to `reorder` means simulating network packet reordering fault. 
 
 #### loss
 
-Setting `action` to `loss` means simualting packet loss fault. You can also configure the following parameters.
+Setting `action` to `loss` means simulating packet loss fault. You can also configure the following parameters.
 
 | Parameter   | Type   | Description                                                                                                  | Default value | Required | Example |
 | ----------- | ------ | ------------------------------------------------------------------------------------------------------------ | ------------- | -------- | ------- |

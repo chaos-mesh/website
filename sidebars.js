@@ -78,31 +78,31 @@ module.exports = {
     //   label: 'Use Cases',
     //   items: ['multi-data-center-scenario'],
     // },
-    // {
-    //   type: 'category',
-    //   label: 'Tools Integration',
-    //   items: [
-    //     'integrate-chaos-mesh-into-github-actions',
-    //     'use-argo-to-orchestrate-chaos-experiments',
-    //     'use-grafana-to-inspect-chaos-experiments',
-    //   ],
-    // },
-    // {
-    //   type: 'category',
-    //   label: 'Development Guides',
-    //   items: [
-    //     'developer-guide-overview',
-    //     'configure-development-environment',
-    //     'add-new-chaos-experiment-type',
-    //     'extend-chaos-daemon-interface',
-    //     'extend-chaosd',
-    //     {
-    //       type: 'category',
-    //       label: 'Clients',
-    //       items: ['go-client', 'rust-client', 'java-client', 'python-client'],
-    //     },
-    //   ],
-    // },
+    {
+      type: 'category',
+      label: 'Tools Integration',
+      items: [
+        'integrate-chaos-mesh-into-github-actions',
+        // 'use-argo-to-orchestrate-chaos-experiments',
+        // 'use-grafana-to-inspect-chaos-experiments',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Development Guides',
+      items: [
+        'developer-guide-overview',
+        'configure-development-environment',
+        'add-new-chaos-experiment-type',
+        'extend-chaos-daemon-interface',
+        'extend-chaosd',
+        // {
+        //   type: 'category',
+        //   label: 'Clients',
+        //   items: ['go-client', 'rust-client', 'java-client', 'python-client'],
+        // },
+      ],
+    },
     // {
     //   type: 'category',
     //   label: 'Reference Guides',

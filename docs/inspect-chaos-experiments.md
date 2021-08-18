@@ -1,6 +1,5 @@
 ---
 title: Inspect Results of Chaos Experiments
-sidebar_label: Inspect Results of Chaos Experiments
 ---
 
 This document describes how to use Chaos Mesh to check running status and results of chaos experiments.
@@ -90,14 +89,14 @@ The above output contains two parts:
   - `AllInjected`: indicates the faults have been successfully injected to all target pods.
   - `AllRecoverd`: indicates the injected faults have been succesfully restored from all target pods.
 
-  The actual running status of current chaos experiments can be inferred from these four types of status records.  For example:
+  The actual running status of current chaos experiments can be inferred from these four types of status records. For example:
 
-  - When  `Paused`、`Selected`、`AllRecoverd` is  `True`  and `AllInjected` is `False`, it indicates the current chaos experiment is paused.
+  - When `Paused`、`Selected`、`AllRecoverd` is `True` and `AllInjected` is `False`, it indicates the current chaos experiment is paused.
   - When `Paused` is `True`, it indicates the current chaos experiment is paused. However, if the `Selected` is `False` at the same time, then it means the current experiment cannot select the target pods where to inject chaos actions.
 
   :::Note
 
-  You can get more information from the combination of the above status records, for example, when `Paused`  is  `True`, it indicates the experiment is paused, but if the `Selected` is `False` at the same time, then it means the current experiment cannot select the target pods where to inject chaos actions.
+  You can get more information from the combination of the above status records, for example, when `Paused` is `True`, it indicates the experiment is paused, but if the `Selected` is `False` at the same time, then it means the current experiment cannot select the target pods where to inject chaos actions.
 
   :::
 
