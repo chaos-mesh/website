@@ -44,7 +44,7 @@ Although this is an achievement worth celebrating, we know that there is still a
 
 Another goal of ours is to continue building a more diverse and engaging community— there is no barrier to being part of the Chaos Mesh community and becoming a Chaos Mesh contributor, as contributions are not limited to coding: writing documentation, offering ideas for features, posting issues, writing blogs, answering community questions, or sharing cases are all part of the contribution journey.
 
-# To sum up
+## To sum up
 
 From the bottom of our hearts, thank you! We hope that we can keep up the good work and continue to build up this not-so-little community of ours, and continue to contribute to the CNCF and the chaos engineering ecology.
 
