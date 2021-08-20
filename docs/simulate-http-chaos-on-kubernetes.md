@@ -7,7 +7,7 @@ This document describes how to simulate HTTP faults by creating HTTPChaos experi
 
 ## HTTPChaos introduction
 
-HTTPChaos is a fault type provided by Chaos Mesh. By creating HTTPChaos experiments, you can simulate the fault scenarios of the HTTP server during the HTTP request and response processing. Currently, HTTPChaos supports simulating the following fault types:
+HTTPChaos is a fault type provided by Chaos Mesh. By creating HTTPChaos experiments, you can simulate the fault scenarios of the **HTTP server** during the HTTP request and response processing. Currently, HTTPChaos supports simulating the following fault types:
 
 - `abort`: interrupts server connection
 - `delay`: injects latency into the target process
