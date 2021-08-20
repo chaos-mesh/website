@@ -23,6 +23,7 @@ For the detailed description of HTTPChaos configuration, see [Field description]
 Before injecting the faults supported by HTTPChaos, note the followings:
 
 - There is no control manager of Chaos Mesh running on the target Pod.
+- HTTPS accesses should be disabled, because injecting HTTPS connections is not supported currently. 
 - For HTTPChaos injection to take effect, the client should avoid reusing TCP socket. This is because HTTPChaos does not affect the HTTP requests that are sent via TCP socket before the fault injection.
 - Use non-idempotent requests (such as most of the POST requests) with caution in production environments. If such requests are used, the target service may not return to normal status by repeating requests after the fault injection.
 
