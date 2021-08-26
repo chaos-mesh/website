@@ -49,8 +49,7 @@ IEG officially launched its chaos engineering project over a year ago. We wanted
 
 
 > Note: 
-
-> This comparison is outdated and is intended simply to compare fault injection features supported by Chaos Mesh with other well-known chaos engineering platforms. It is not intended to favor or position one project over another. Any corrections are welcome. 
+This comparison is outdated and is intended simply to compare fault injection features supported by Chaos Mesh with other well-known chaos engineering platforms. It is not intended to favor or position one project over another. Any corrections are welcome. 
 
 
 ## Build a chaos testing platform
