@@ -63,7 +63,7 @@ Global Flags:
 
 #### Configuration description of simulating a process being killed
 
-| Configuration item | Abbreviation | Description                                                  | Value                                                                                     |
+| Configuration item | Abbreviation | Description                                                   | Value                                                                                     |
 | :----------------- | :----------- | :------------------------------------------------------------ | :---------------------------------------------------------------------------------------- |
 | process            | p            | The name or identifier of the process that needs to be killed | string; the default value is "".                                                          |
 | signal             | s            | The provided value of the process signal                      | int; the default value is 9. Currently, only SIGKILL, SIGTERM, and SIGSTOP are supported. |
