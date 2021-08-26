@@ -5,7 +5,7 @@ sidebar_label: Extend Chaos Daemon Interface
 
 In [Add new chaos experiment type](add-new-chaos-experiment-type.md), you have added HelloWorldChaos, which can print `Hello World!` in the logs of Chaos Controller Manager. To enable the HelloWorldChaos to inject some faults into the target Pod, you need to extend interface for Chaos Daemon.
 
-:::note
+:::Note
 It's recommended to read [Chaos Mesh architecture](architecture.md) before you go forward.
 :::
 
@@ -40,7 +40,7 @@ func (obj *HelloWorldChaos) GetSelectorSpecs() map[string]interface{} {
 }
 ```
 
-In Chaos Mesh, Selector is used to define the scope of chaos experiment, the target namespace, annotation, label, etc. Selector can also be some more specific values (for example, AWSSelector in AWSChaos). Usually, each chaos experiment requires only one Selector, with exceptions such as NetworkChaos because it sometimes needs two Selectors as two objects for network partition.
+In Chaos Mesh, Selector is used to define the scope of a chaos experiment, the target namespace, annotation, label, etc. Selector can also be some more specific values (for example, AWSSelector in AWSChaos). Usually, each chaos experiment requires only one Selector, with exceptions such as NetworkChaos because it sometimes needs two Selectors as two objects for network partition.
 
 ## Implement the gRPC interface
 
@@ -68,7 +68,7 @@ To allow Chaos Daemon to accept the requests from Chaos Controller Manager, you 
 
 2. Implement gRPC services in Chaos Daemon.
 
-    In the `pkg/chaosdaemon` directory, create a file named as `helloworld_server.go` with the following content:
+    In the `pkg/chaosdaemon` directory, create a file named `helloworld_server.go` with the following contents:
 
     ```go
     package chaosdaemon
@@ -107,7 +107,7 @@ To allow Chaos Daemon to accept the requests from Chaos Controller Manager, you 
     }
     ```
 
-    After `chaos-daemon` receives the `ExecHelloWorldChaos` request, you will see a list of processes in the current container.
+    After `chaos-daemon` receives the `ExecHelloWorldChaos` request, you can see a list of processes in the current container.
 
 3. Send a gRPC request when applying the chaos experiment.
 
@@ -274,8 +274,8 @@ To verify the experiment, perform the following steps.
 
 ## Next steps
 
-If you encounter any problems in this process, raise an [issue](https://github.com/pingcap/chaos-mesh/issues) in the Chaos Mesh repository.
+If you encounter any problems in this process, create an [issue](https://github.com/pingcap/chaos-mesh/issues) in the Chaos Mesh repository.
 
-You may be curious about how all of this comes into effect.Try reading the README files of different `controllers` in the `controller` directory to learn their functionalities. For example, [controllers/common/README.md](https://github.com/chaos-mesh/chaos-mesh/blob/master/controllers/common/README.md).
+If you are curious about how all of these come into effect, you can read the README files of different `controllers` in the `controller` directory to learn their functionalities. For example, [controllers/common/README.md](https://github.com/chaos-mesh/chaos-mesh/blob/master/controllers/common/README.md).
 
-Now you are ready to become a Chaos Mesh developer! Go to the [Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh) repository to find a [good first issue](https://github.com/chaos-mesh/chaos-mesh/labels/good%20first%20issue) and get started!Will delete this sentence.
+Now you are ready to become a Chaos Mesh developer! You are welcome to visit the [Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh) repository to find a [good first issue](https://github.com/chaos-mesh/chaos-mesh/labels/good%20first%20issue) and get started!
