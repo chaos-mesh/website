@@ -19,6 +19,10 @@ const whoisUsing = [
     img: 'img/logos/dailymotion.svg',
   },
   {
+    name: 'DataStax',
+    img: 'img/logos/datastax.svg',
+  },
+  {
     name: 'Fuxi Lab',
     img: 'img/logos/fuxilab.png',
   },
