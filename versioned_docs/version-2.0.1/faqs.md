@@ -8,7 +8,7 @@ sidebar_label: FAQs
 
 ### Q: If I do not have deployed Kubernetes clusters, can I use Chaos Mesh to create chaos experiments?
 
-No, you cannot use Chaos Mesh in this case. But you still can run chaos experiments using command lines. For more details, see [Command Line Usages of Chaos](https://github.com/pingcap/tipocket/blob/master/doc/command_line_chaos.md).
+No. Instead, you could use [`chaosd`](https://github.com/chaos-mesh/chaosd/) to inject failures to a physical node.
 
 ### Q: I have deployed Chaos Mesh and created PodChaos experiments successfully, but I still failed in creating NetworkChaos/TimeChaos Experiment. The log is shown as below:
 
@@ -19,13 +19,12 @@ No, you cannot use Chaos Mesh in this case. But you still can run chaos experime
 You can use the `hostNetwork` parameter to fix this issue as follows:
 
 ```
-# vim helm/chaos-mesh/values.yaml, change hostNetwork from false to true
-hostNetwork: true
+helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n chaos-testing --set chaosDaemon.hostNetwork=true
 ```
 
 ### Q: The default administrator Google Cloud user account is forbidden to create chaos experiments. How to fix it?
 
-The default administrator Google Cloud user cannot be checked by `AdmissionReview`. So you have to create a administrator role and bind it to the account to grant it the priviledge to create chaos experiments. For example:
+The default administrator Google Cloud user cannot be checked by `AdmissionReview`. You need to create an administrator role and assign the role to your account to grant the privilege of creating chaos experiments to it. For example:
 
 ```yaml
 kind: ClusterRole
@@ -60,25 +59,25 @@ The `USER_ACCOUNT` above should be your Google Cloud user email.
 
 ## DNSChaos
 
-### Q: While trying to run DNSChaos in OpenShift, tripped over problems regarding authorization.
+### Q: While trying to run DNSChaos in OpenShift, the problems regarding authorization blocked the process.
 
-Message most looked like this:
+If the error message is similar to the following:
 
 ```bash
 Error creating: pods "chaos-dns-server-123aa56123-" is forbidden: unable to validate against any security context constraint: [spec.containers[0].securityContext.capabilities.add: Invalid value: "NET_BIND_SERVICE": capability may not be added]
 ```
 
-You need to add privileged scc to default.
+You need to add the privileged Security Context Constraints (SCC) to the `chaos-dns-server`.
 
 ```bash
 oc adm policy add-scc-to-user privileged -n chaos-testing -z chaos-dns-server
 ```
 
-## Install
+## Installation
 
-### Q: While trying to install chaos-mesh in OpenShift, tripped over problems regarding authorization.
+### Q: While trying to install Chaos Mesh in OpenShift, the problems regarding authorization blocked the installation process.
 
-Message most looked like this:
+If the error message is similar to the following:
 
 ```bash
 Error creating: pods "chaos-daemon-" is forbidden: unable
