@@ -6,6 +6,7 @@ module.exports = {
   favicon: 'img/favicon.ico',
   organizationName: 'chaos-mesh', // Usually your GitHub org/user name.
   projectName: 'chaos-mesh.github.io', // Usually your repo name.
+  trailingSlash: true,
   themeConfig: {
     image: 'img/logos/logo-mini.svg',
     algolia: {

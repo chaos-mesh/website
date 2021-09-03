@@ -25,12 +25,11 @@ You can check the running steps of chaos experiments on any of the following pag
 
   ![Experimental Status](img/chaos_detail_status.png)
 
-:::Note
+:::note
 
 - If the **"Injecting"** step lasts for a long time, it may be due to some anomalies in the chaos experiment (e.g. the configured selectors have not selected target pods where to inject chaos actions). In this case, you can check **`Events`** to find the cause of the exceptions and check the configuration of the chaos experiment.
 - Chaos Dashboard only displays [main steps of a chaos experiment](#Introduction-to-steps-of-a-Chaos-experiment). For more detailed information about experiment status and results, run the `kubectl` command.
-
-:::
+  :::
 
 ## Check results using the `kubectl` command
 
@@ -94,10 +93,8 @@ The above output contains two parts:
   - When `Paused`、`Selected`、`AllRecoverd` is `True` and `AllInjected` is `False`, it indicates the current chaos experiment is paused.
   - When `Paused` is `True`, it indicates the current chaos experiment is paused. However, if the `Selected` is `False` at the same time, then it means the current experiment cannot select the target pods where to inject chaos actions.
 
-  :::Note
-
+  :::note
   You can get more information from the combination of the above status records, for example, when `Paused` is `True`, it indicates the experiment is paused, but if the `Selected` is `False` at the same time, then it means the current experiment cannot select the target pods where to inject chaos actions.
-
   :::
 
 - `Events`
