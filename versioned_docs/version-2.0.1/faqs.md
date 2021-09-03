@@ -4,34 +4,24 @@ title: FAQs
 sidebar_label: FAQs
 ---
 
-## Question
+## Questions
 
-### Q: If I do not have Kubernetes clusters deployed, can I use Chaos Mesh to create chaos experiments?
+### Q: If I do not have deployed Kubernetes clusters, can I use Chaos Mesh to create chaos experiments?
 
-No, you can not use Chaos Mesh in this case. But still you can run chaos experiments using command line. Refer to [Command Line Usages of Chaos](https://github.com/pingcap/tipocket/blob/master/doc/command_line_chaos.md) for details.
+No, you cannot use Chaos Mesh in this case. But you still can run chaos experiments using command lines. For more details, see [Command Line Usages of Chaos](https://github.com/pingcap/tipocket/blob/master/doc/command_line_chaos.md).
 
-### Q: I have deployed Chaos Mesh and created PodChaos experiments successfully, but I still failed in creating NetworkChaos/TimeChaos Experiment. The log is shown below:
+### Q: I have deployed Chaos Mesh and created PodChaos experiments successfully, but I still failed in creating NetworkChaos/TimeChaos Experiment. The log is shown as below:
 
 ```
 2020-06-18T01:05:26.207Z	ERROR	controllers.TimeChaos	failed to apply chaos on all pods	{"reconciler": "timechaos", "error": "rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial tcp xx.xx.xx.xx:xxxxx: connect: connection refused\""}
 ```
 
-You can try using the parameter: `hostNetwork`, as shown below:
+You can use the `hostNetwork` parameter to fix this issue as follows:
 
 ```
 # vim helm/chaos-mesh/values.yaml, change hostNetwork from false to true
 hostNetwork: true
 ```
-
-### Q: I just saw `ERROR: failed to get cluster internal kubeconfig: command "docker exec --privileged kind-control-plane cat /etc/kubernetes/admin.conf" failed with error: exit status 1` when installing Chaos Mesh with kind. How to fix it?
-
-You can try the following command to fix it:
-
-```
-kind delete cluster
-```
-
-then deploy again.
 
 ### Q: The default administrator Google Cloud user account is forbidden to create chaos experiments. How to fix it?
 
