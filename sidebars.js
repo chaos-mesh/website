@@ -112,7 +112,7 @@ module.exports = {
       type: 'category',
       label: 'FAQs and Troubleshooting',
       items: [
-        // 'faqs',
+        'faqs',
         // 'troubleshooting-guide',
         'upgrade-to-2.0',
       ],

@@ -42,6 +42,10 @@ const whoisUsing = [
     img: 'img/logos/meituandianping.png',
   },
   {
+    name: 'Percona',
+    img: 'img/logos/percona.jpeg',
+  },
+  {
     name: 'PingCAP',
     img: 'img/logos/pingcap.svg',
   },

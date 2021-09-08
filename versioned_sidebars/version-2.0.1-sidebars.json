@@ -238,6 +238,10 @@
       "items": [
         {
           "type": "doc",
+          "id": "version-2.0.1/faqs"
+        },
+        {
+          "type": "doc",
           "id": "version-2.0.1/upgrade-to-2.0"
         }
       ],
