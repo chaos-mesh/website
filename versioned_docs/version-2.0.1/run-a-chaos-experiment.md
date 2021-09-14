@@ -120,7 +120,7 @@ For a running Chaos experiment, you can pause the experiment by setting a pause 
 For example, you can use the following command to pause a Chaos experiment named `network-delay` in the default namespace:
 
 ```sh
-kubectl annoate networkchaos network-delay experiment.chaos-mesh.org/pause=true
+kubectl annotate networkchaos network-delay experiment.chaos-mesh.org/pause=true
 ```
 
 After this command is executed, Chaos Mesh restores the injected faults immediately. If you want to resume this Chaos experiment from the pause state to the normal running state, use the following command:
