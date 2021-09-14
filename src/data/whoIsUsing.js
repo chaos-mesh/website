@@ -42,6 +42,10 @@ const whoisUsing = [
     img: 'img/logos/meituandianping.png',
   },
   {
+    name: 'NETSTARS',
+    img: 'img/logos/netstars.png'
+  },
+  {
     name: 'Percona',
     img: 'img/logos/percona.jpeg',
   },
