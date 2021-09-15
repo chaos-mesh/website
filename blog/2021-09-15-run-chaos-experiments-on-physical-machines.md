@@ -5,11 +5,11 @@ author: Xiang Wang
 author_title: Chaos Mesh Committer
 author_url: https://github.com/WangXiangUSTC
 author_image_url: https://avatars.githubusercontent.com/u/5793595?v=4
-image: /img/chaosd-banner.jpeg
+image: /img/chaosd-banner.png
 tags: [Chaos Mesh, Chaos Engineering, chaosd]
 ---
 
-![How to run chaos experiments on your physical machine](/img/chaosd-banner.jpeg)
+![How to run chaos experiments on your physical machine](/img/chaosd-banner.png)
 
 [Chaos Mesh®](https://github.com/chaos-mesh/chaos-mesh) is a cloud-native Chaos Engineering platform that orchestrates chaos in Kubernetes environments. With Chaos Mesh, you can simulate a variety of failures, and use Chaos Dashboard, a web UI, to manage chaos experiments directly. Since it was open-sourced, Chaos Mesh has been adopted by many companies to ensure their systems’ resilience and robustness. But over the past year, we have frequently heard requests from the community asking how to run chaos experiments when the services are not deployed on Kubernetes.
 
