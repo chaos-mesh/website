@@ -80,7 +80,7 @@ Because socket paths are listened to by the daemons of different running contain
 
 ```bash
 # Default to /var/run/docker.sock
-helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing
+helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --version v2.0.1
 ```
 
 #### Containerd

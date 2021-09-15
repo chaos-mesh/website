@@ -10,13 +10,13 @@ Chaos Dashboard is a one-step web UI for managing, designing, and monitoring cha
 You can install Chaos Mesh with Chaos Dashboard by executing the command below:
 
 ```bash
-helm install chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --set dashboard.create=true
+helm install chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --version v0.4.4 --set dashboard.create=true
 ```
 
 If you have already installed Chaos Mesh, upgrade it by executing:
 
 ```bash
-helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --set dashboard.create=true
+helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --version v0.4.4 --set dashboard.create=true
 ```
 
 ## Enable/Disable security mode
