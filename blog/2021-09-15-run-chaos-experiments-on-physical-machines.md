@@ -19,7 +19,6 @@ tags: [Chaos Mesh, Chaos Engineering, chaosd]
 
 To meet the growing needs of chaos testing on physical machines, we are excited to present an enhanced toolkit called chaosd. You might find the name familiar. That’s because it evolved from `chaos-daemon`, a key component in Chaos Mesh. At TiDB Hackathon 2020, we [refactored chaosd to make it more than a command-line tool](https://en.pingcap.com/blog/chaos-mesh-remake-one-step-closer-toward-chaos-as-a-service#refactor-chaosd). Now with [chaosd v1.0.1](https://github.com/chaos-mesh/chaosd/releases/tag/v1.0.1), you can simulate specific errors that target physical machines, and then, undo the chaos experiments like nothing had happened. 
 
-
 ## Benefits of chaosd
 
 chaosd has the following advantages:
@@ -39,9 +38,7 @@ In this section, I will walk you through how to inject a network fault with chao
 To download chaosd, run the following command:
 
 ```bash
-
 curl -fsSL -o chaosd-v1.0.1-linux-amd64.tar.gz https://mirrors.chaos-mesh.org/chaosd-v1.0.1-linux-amd64.tar.gz
-
 ```
 
 Unzip the file. It contains two file folders: 
@@ -56,34 +53,26 @@ In this chaos experiment, the server will be unable to access chaos-mesh.org.
 Run the following command:
 
 ```bash
-
 sudo ./chaosd attack network loss --percent 100 --hostname chaos-mesh.org --device ens33
-
 ```
 
 Example output:
 
 ```bash
-
 Attack network successfully, uid: c55a84c5-c181-426b-ae31-99c8d4615dbe
-
 ```
 
 In this simulation, the ens33 network interface card cannot send network packets to or receive packets from [chaos-mesh.org](http://chaos-mesh.org). The reason why you have to use `sudo` commands is that the chaos experiment modifies network rules, which require root privileges.
 
 Also, don’t forget to save the `uid` of the chaos experiment. You’ll be entering that later as part of the recovery process. 
 
-
 ### 3. Verify the results
 
 Use the `ping` command to see if the server can access chaos-mesh.org:
 
 ```bash
-
 ping chaos-mesh.org
-
 PING chaos-mesh.org (185.199.109.153) 56(84) bytes of data. 
-
 ```
 
 When you execute the command, it’s very likely that the site won’t respond. Press `CTRL`+`C` to stop the ping process. You should be able to see the statistics of the `ping` command: `100% packet loss`.
@@ -91,9 +80,7 @@ When you execute the command, it’s very likely that the site won’t respond. 
 Example output:
 
 ```bash
-
 2 packets transmitted, 0 received, 100% packet loss, time 1021ms
-
 ```
 
 ### 4. Recover the experiment
@@ -101,21 +88,16 @@ Example output:
 To recover the experiment, run the following command:
 
 ```bash
-
 sudo ./chaosd recover c55a84c5-c181-426b-ae31-99c8d4615dbe
-
 ```
 
 Example output:
 
 ```bash
-
 Recover c55a84c5-c181-426b-ae31-99c8d4615dbe successfully
-
 ```
 
 In this step, you also need to use `sudo` commands because root privileges are required. When you finish recovering the experiment, try to ping chaos-mesh.org again to verify the connection.
-
 
 ## Next steps
 
@@ -125,21 +107,16 @@ As you can see, chaosd is fairly easy to use. But we can make it easier—a dash
 
 We will continue to enhance its usability and implement more functionalities such as managing chaos experiments run with chaosd as well as those run with Chaos Mesh. This will provide a consistent and unified user experience for chaos testing on Kubernetes and physical machines. The architecture below is just a simple example:
 
-
 ![Chaos Mesh's optimized architecture](/img/chaos-mesh-optimized-architecture.png)
 <p class="caption-center">Chaos Mesh's optimized architecture</p>
 
-
-
 For more, check out [Chaos Mesh's optimized architecture](https://en.pingcap.com/blog/chaos-mesh-remake-one-step-closer-toward-chaos-as-a-service#developing-chaos-mesh-towards-caas).
-
 
 ### Add more fault injection types
 
 Currently, chaosd provides six fault injection types. We plan to develop more types that have been supported by Chaos Mesh, including HTTPChaos and IOChaos.
 
 If you are interested in helping us improve chaosd, you are welcome to [pick an issue](https://github.com/chaos-mesh/chaosd/labels/help%20wanted) and get started! 
-
 
 ## Try it out!
 
