@@ -4,6 +4,7 @@ title: Installation
 ---
 
 import PickVersion from '@site/src/components/PickVersion'
+import PickHelmVersion from '@site/src/components/PickHelmVersion'
 
 This document describes how to install Chaos Mesh to perform chaos experiments against your application in Kubernetes.
 
@@ -96,15 +97,11 @@ Depending on your environment, there are two methods of installing Chaos Mesh:
 
      - For helm 2.X
 
-     ```bash
-     helm install chaos-mesh/chaos-mesh --name=chaos-mesh --namespace=chaos-testing --version v0.5.3
-     ```
+     <PickHelmVersion className="language-bash">{`helm install chaos-mesh/chaos-mesh --name=chaos-mesh --namespace=chaos-testing --version latest`}</PickHelmVersion>
 
      - For helm 3.X
 
-     ```bash
-     helm install chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --version v0.5.3
-     ```
+     <PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --version latest`}</PickHelmVersion>
 
   3. Check whether Chaos Mesh pods are installed:
 
@@ -135,15 +132,11 @@ Depending on your environment, there are two methods of installing Chaos Mesh:
 
      - for helm 2.X
 
-     ```bash
-     helm install chaos-mesh/chaos-mesh --name=chaos-mesh --namespace=chaos-testing --version v0.5.3 --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock
-     ```
+     <PickHelmVersion className="language-bash">{`helm install chaos-mesh/chaos-mesh --name=chaos-mesh --namespace=chaos-testing --version latest --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock`}</PickHelmVersion>
 
      - for helm 3.X
 
-     ```bash
-     helm install chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --version v0.5.3 --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock
-     ```
+     <PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --version latest --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock`}</PickHelmVersion>
 
   3. Check whether Chaos Mesh pods are installed:
 
@@ -174,15 +167,11 @@ Depending on your environment, there are two methods of installing Chaos Mesh:
 
      - for helm 2.X
 
-     ```bash
-     helm install chaos-mesh/chaos-mesh --name=chaos-mesh --namespace=chaos-testing --version v0.5.3 --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock
-     ```
+     <PickHelmVersion className="language-bash">{`helm install chaos-mesh/chaos-mesh --name=chaos-mesh --namespace=chaos-testing --version latest --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock`}</PickHelmVersion>
 
      - for helm 3.X
 
-     ```bash
-     helm install chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --version v0.5.3 --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock
-     ```
+     <PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --version latest --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock`}</PickHelmVersion>
 
   3. Check whether Chaos Mesh pods are installed:
 

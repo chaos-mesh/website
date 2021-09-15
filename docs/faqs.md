@@ -18,9 +18,7 @@ No. Instead, you could use [`chaosd`](https://github.com/chaos-mesh/chaosd/) to 
 
 You can use the `hostNetwork` parameter to fix this issue as follows:
 
-```
-helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n chaos-testing --set chaosDaemon.hostNetwork=true
-```
+<PickHelmVersion className="language-bash">{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n chaos-testing --version latest --set chaosDaemon.hostNetwork=true`}</PickHelmVersion>
 
 ### Q: The default administrator Google Cloud user account is forbidden to create chaos experiments. How to fix it?
 
@@ -32,13 +30,13 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: role-cluster-manager-pdmas
 rules:
-- apiGroups: [""]
-  resources: ["pods", "namespaces"]
-  verbs: ["get", "watch", "list"]
-- apiGroups:
-  - chaos-mesh.org
-  resources: [ "*" ]
-  verbs: ["get", "list", "watch", "create", "delete", "patch", "update"]
+  - apiGroups: ['']
+    resources: ['pods', 'namespaces']
+    verbs: ['get', 'watch', 'list']
+  - apiGroups:
+      - chaos-mesh.org
+    resources: ['*']
+    verbs: ['get', 'list', 'watch', 'create', 'delete', 'patch', 'update']
 ---
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
@@ -46,9 +44,9 @@ metadata:
   name: cluster-manager-binding
   namespace: chaos-testing
 subjects:
-# Google Cloud user account
-- kind: User
-  name: USER_ACCOUNT
+  # Google Cloud user account
+  - kind: User
+    name: USER_ACCOUNT
 roleRef:
   kind: ClusterRole
   name: role-cluster-manager-pdmas
@@ -97,4 +95,3 @@ You need to add privileged scc to default.
 ```bash
 oc adm policy add-scc-to-user privileged -n chaos-testing -z chaos-daemon
 ```
-

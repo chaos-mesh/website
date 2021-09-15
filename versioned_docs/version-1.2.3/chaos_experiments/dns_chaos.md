@@ -12,9 +12,7 @@ DNSChaos allows you to simulate fault DNS responses such as a DNS error or a ran
 
 To create DNSChaos experiments in Chaos Mesh, you need to deploy a DNS service in Chaos Mesh by executing the command below:
 
-```bash
-helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --set dnsServer.create=true
-```
+<PickHelmVersion className="language-bash">{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --version latest --set dnsServer.create=true`}</PickHelmVersion>
 
 When the deployment finishes, check the status of this DNS service:
 
