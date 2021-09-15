@@ -4,6 +4,8 @@ title: DNSChaos Experiment
 sidebar_label: DNSChaos Experiment
 ---
 
+import PickHelmVersion from '@site/src/components/PickHelmVersion'
+
 This document describes how to create DNSChaos experiments in Chaos Mesh.
 
 DNSChaos allows you to simulate fault DNS responses such as a DNS error or a random IP address after a request is sent.

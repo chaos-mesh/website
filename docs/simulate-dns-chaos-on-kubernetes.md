@@ -3,6 +3,8 @@ title: Simulate DNS Faults
 sidebar_label: Simulate DNS Faults
 ---
 
+import PickHelmVersion from '@site/src/components/PickHelmVersion'
+
 This document describes how to create DNSChaos experiments in Chaos Mesh to simulate DNS faults.
 
 ## DNSChaos Introduction

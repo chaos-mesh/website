@@ -4,6 +4,8 @@ title: FAQs
 sidebar_label: FAQs
 ---
 
+import PickHelmVersion from '@site/src/components/PickHelmVersion'
+
 ## Questions
 
 ### Q: If I do not have deployed Kubernetes clusters, can I use Chaos Mesh to create chaos experiments?

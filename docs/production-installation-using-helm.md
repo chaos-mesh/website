@@ -79,11 +79,8 @@ Because socket paths are listened to by the daemons of different running contain
 
 #### Docker
 
-<PickHelmVersion className="language-bash">
-\# Default to /var/run/docker.sock
-
-helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --version latest
-</PickHelmVersion>
+<PickHelmVersion className="language-bash">{`\# Default to /var/run/docker.sock
+helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --version latest`}</PickHelmVersion>
 
 #### Containerd
 

@@ -3,6 +3,8 @@ id: dashboard
 title: Chaos Dashboard
 ---
 
+import PickHelmVersion from '@site/src/components/PickHelmVersion'
+
 Chaos Dashboard is a one-step web UI for managing, designing, and monitoring chaos experiments on Chaos Mesh. This document provides a step-by-step introduction on how to use Chaos Dashboard.
 
 ## Install Chaos Dashboard

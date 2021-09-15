@@ -160,7 +160,15 @@ Now that you already have the image and repo archive files in the offline enviro
 
    c. Install Chaos Mesh by helm:
 
-   <PickHelmVersion className="language-bash">{`helm install chaos-mesh helm/chaos-mesh --namespace=chaos-testing \ --set dashboard.create=true \ --set dnsServer.create=true \ --set chaosDaemon.image=$CHAOS_DAEMON_IMAGE \ --set controllerManager.image=$CHAOS_MESH_IMAGE \ --set dashboard.image=$CHAOS_DASHBOARD_IMAGE \ --set dnsServer.image=${CHAOS_COREDNS_IMAGE} \ --version latest`}</PickHelmVersion>
+   <PickHelmVersion className="language-bash">{`
+   helm install chaos-mesh helm/chaos-mesh --namespace=chaos-testing
+      --set dashboard.create=true
+      --set dnsServer.create=true
+      --set chaosDaemon.image=$CHAOS_DAEMON_IMAGE
+      --set controllerManager.image=$CHAOS_MESH_IMAGE
+      --set dashboard.image=$CHAOS_DASHBOARD_IMAGE
+      --set dnsServer.image=$CHAOS_COREDNS_IMAGE
+      --version latest`}</PickHelmVersion>
 
    d. Check whether Chaos Mesh pods are installed:
 
