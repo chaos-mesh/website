@@ -1,11 +1,10 @@
 import BrowserOnly from '@docusaurus/BrowserOnly'
-import CodeBlock from '../theme/CodeBlock'
+import CodeBlock from '@theme/CodeBlock'
 import React from 'react'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import { usePluginData } from '@docusaurus/useGlobalData'
 
-export const usePickVersion = () => {
-  const { siteConfig } = useDocusaurusContext()
+export const usePickVersion = (siteConfig, versions) => {
   const pathname = window.location.pathname
 
   let preferred = window.localStorage.getItem('docs-preferred-version-default')
@@ -17,7 +16,6 @@ export const usePickVersion = () => {
     return 'latest'
   }
 
-  const { versions } = usePluginData('docusaurus-plugin-content-docs')
   const latestStableVersion = versions.filter((d) => d.isLast)[0].name
   const activeVersion = versions.filter((d) => pathname.includes(d.name)).map((d) => d.name)[0]
 
@@ -25,12 +23,15 @@ export const usePickVersion = () => {
 }
 
 const PickVersion = ({ children, className }) => {
-  const version = usePickVersion()
-  const rendered = version === 'latest' ? children : children.replace('latest', 'v' + version)
+  const { siteConfig } = useDocusaurusContext()
+  const { versions } = usePluginData('docusaurus-plugin-content-docs')
 
   return (
     <BrowserOnly>
       {() => {
+        const version = usePickVersion(siteConfig, versions)
+        const rendered = version === 'latest' ? children : children.replace('latest', 'v' + version)
+
         return <CodeBlock className={className}>{rendered}</CodeBlock>
       }}
     </BrowserOnly>

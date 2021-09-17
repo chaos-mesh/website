@@ -5,7 +5,7 @@ sidebar_label: Quick Start
 
 import PickVersion from '@site/src/components/PickVersion'
 
-import VerifyInstallationAndRun from './common/verify-installation.md'
+import VerifyInstallation from './common/verify-installation.md'
 import QuickRun from './common/quick-run.md'
 
 This document describes how to quickly start Chaos Mesh in a test or local environment.
