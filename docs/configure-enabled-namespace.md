@@ -3,6 +3,8 @@ title: Configure namespace for Chaos experiments
 sidebar_label: Configure namespace for Chaos experiments
 ---
 
+import PickHelmVersion from '@site/src/components/PickHelmVersion'
+
 This chapter walks you through how to configure Chaos experiments to only take effect in the specified namespace, and protect other unspecified namespaces against fault injection.
 
 ## Control the scope where the Chaos experiment takes effect
@@ -16,9 +18,7 @@ Chaos Mesh offers two ways to control the scope of the Chaos experiment to take 
 
 If you have not installed Chaos Mesh yet, you can enable this feature during installation by adding `--set controllerManager.enableFilterNamespace=true` to the command when installing using Helm. The following is a command example in the Docker container:
 
-```bash
-helm install chaos-mesh chaos-mesh/chaos-mesh -n chaos-testing --set controllerManager.enableFilterNamespace=true
-```
+<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n chaos-testing --set controllerManager.enableFilterNamespace=true --version latest`}</PickHelmVersion>
 
 :::note
 
@@ -28,9 +28,7 @@ When you use Helm for installation, commands and parameters differ for different
 
 If you have installed Chaos Mesh using Helm, you can enable this feature by upgrading the configuration with the `helm upgrade` command. For example:
 
-```bash
-helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n chaos-testing --set controllerManager.enableFilterNamespace=true
-```
+<PickHelmVersion className="language-bash">{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n chaos-testing --version latest --set controllerManager.enableFilterNamespace=true`}</PickHelmVersion>
 
 For `helm upgrade`, you can set multiple parameters by adding multiple `--set` in the command. Later settings override previous settings. For example, if you add `--set controllerManager.enableFilterNamespace=false -set controllerManager.enableFilterNamespace=true` in the command, it still enables this feature.
 

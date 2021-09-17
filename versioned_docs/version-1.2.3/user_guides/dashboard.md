@@ -3,6 +3,8 @@ id: dashboard
 title: Chaos Dashboard
 ---
 
+import PickHelmVersion from '@site/src/components/PickHelmVersion'
+
 Chaos Dashboard is a one-step web UI for managing, designing, and monitoring chaos experiments on Chaos Mesh. This document provides a step-by-step introduction on how to use Chaos Dashboard.
 
 ## Install Chaos Dashboard
@@ -22,9 +24,7 @@ chaos-dashboard-b8767fbcd-46cnd   1/1     Running   0          31m
 
 If you don't get the Chaos Dashboard pod, you can add it by executing:
 
-```bash
-helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --set dashboard.create=true
-```
+<PickHelmVersion className="language-bash">{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --version latest --set dashboard.create=true`}</PickHelmVersion>
 
 ## Enable/Disable security mode
 
@@ -32,9 +32,7 @@ Chaos Dashboard supports a security mode, which requires users to login with a t
 
 The security mode is enabled by default if you install via Helm. You can disable it by executing:
 
-```bash
-helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --set dashboard.securityMode=false
-```
+<PickHelmVersion className="language-bash">{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --version latest --set dashboard.securityMode=false`}</PickHelmVersion>
 
 **Note:**
 

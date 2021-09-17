@@ -4,13 +4,16 @@ title: Develop a New Chaos
 sidebar_label: Develop a New Chaos
 ---
 
+import PickHelmVersion from '@site/src/components/PickHelmVersion'
+
 After [preparing the development environment](setup_env.md), let's develop a new type of chaos, HelloWorldChaos, which only prints a "Hello World!" message to the log. Generally, to add a new chaos type for Chaos Mesh, you need to take the following steps:
 
-1. [Add the chaos object in controller](#add-the-chaos-object-in-controller)
-2. [Register the CRD](#register-the-crd)
-3. [Implement the schema type](#implement-the-schema-type)
-4. [Make the Docker image](#make-the-docker-image)
-5. [Run chaos](#run-chaos)
+- [Add the chaos object in controller](#add-the-chaos-object-in-controller)
+- [Register the CRD](#register-the-crd)
+- [Implement the schema type](#implement-the-schema-type)
+- [Make the Docker image](#make-the-docker-image)
+- [Run chaos](#run-chaos)
+- [Next steps](#next-steps)
 
 ## Add the chaos object in controller
 
@@ -191,10 +194,7 @@ Now take the following steps to run chaos:
 
 2. Install Chaos Mesh:
 
-   ```bash
-   helm install helm/chaos-mesh --name=chaos-mesh --namespace=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock
-   kubectl get pods --namespace chaos-testing -l app.kubernetes.io/instance=chaos-mesh
-   ```
+   <PickHelmVersion className="language-bash">{`helm install helm/chaos-mesh --name=chaos-mesh --namespace=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --version latest kubectl get pods --namespace chaos-testing -l app.kubernetes.io/instance=chaos-mesh`}</PickHelmVersion>
 
    The arguments `--set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock` is used to to support network chaos on kind.
 

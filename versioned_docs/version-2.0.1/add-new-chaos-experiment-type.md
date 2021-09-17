@@ -3,6 +3,8 @@ title: Add New Chaos Experiment Type
 sidebar_label: Add New Chaos Experiment Type
 ---
 
+import PickHelmVersion from '@site/src/components/PickHelmVersion'
+
 This document describes how to add a new chaos experiment type.
 
 The following walks you through an example of HelloWorldChaos, a new chaos experiment type that prints `Hello World!` to the log. The steps include:
@@ -259,9 +261,7 @@ After you update the template, try running HelloWorldChaos.
 
 2. Deploy Chaos Mesh:
 
-   ```bash
-   helm install chaos-mesh helm/chaos-mesh --namespace=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock
-   ```
+   <PickHelmVersion className="language-bash">{`helm install chaos-mesh helm/chaos-mesh --namespace=chaos-testing --version latest --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock`}</PickHelmVersion>
 
    To verify the deployment is successful, you can check all Pods in the `chaos-testing` namespace:
 

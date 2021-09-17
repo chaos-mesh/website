@@ -4,6 +4,7 @@ sidebar_label: Install Chaos Mesh using Helm
 ---
 
 import PickVersion from '@site/src/components/PickVersion'
+import PickHelmVersion from '@site/src/components/PickHelmVersion'
 
 import VerifyInstallation from './common/verify-installation.md'
 import QuickRun from './common/quick-run.md'
@@ -78,22 +79,16 @@ Because socket paths are listened to by the daemons of different running contain
 
 #### Docker
 
-```bash
-# Default to /var/run/docker.sock
-helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing
-```
+<PickHelmVersion className="language-bash">{`\# Default to /var/run/docker.sock
+helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --version latest`}</PickHelmVersion>
 
 #### Containerd
 
-```bash
-helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock
-```
+<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --version latest`}</PickHelmVersion>
 
 #### K3s
 
-```bash
-helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock
-```
+<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock --version latest`}</PickHelmVersion>
 
 :::note
 
@@ -131,9 +126,7 @@ If you have upgraded Chaos Mesh in a non-Docker environment, you need to add the
 
 To modify the configuration, set different values according to your need. For example, execute the following command to upgrade and uninstall `chaos-dashboard`:
 
-```bash
-helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set dashboard.create=false
-```
+<PickHelmVersion className="language-bash">{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --version latest --set dashboard.create=false`}</PickHelmVersion>
 
 :::note
 
@@ -177,6 +170,4 @@ helm install chaos-mesh helm/chaos-mesh -n=chaos-teting
 
 The safe mode is enabled by default. To disable the safe mode, specify `dashboard.securityMode` as `false` during the installation or upgrade:
 
-```bash
-helm install chaos-mesh helm/chaos-mesh -n=chaos-testing --set dashboard.securityMode=false
-```
+<PickHelmVersion className="language-bash">{`helm install chaos-mesh helm/chaos-mesh -n=chaos-testing --set dashboard.securityMode=false --version latest`}</PickHelmVersion>

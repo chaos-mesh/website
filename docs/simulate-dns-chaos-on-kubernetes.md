@@ -3,6 +3,8 @@ title: Simulate DNS Faults
 sidebar_label: Simulate DNS Faults
 ---
 
+import PickHelmVersion from '@site/src/components/PickHelmVersion'
+
 This document describes how to create DNSChaos experiments in Chaos Mesh to simulate DNS faults.
 
 ## DNSChaos Introduction
@@ -13,9 +15,7 @@ DNSChaos is used to simulate wrong DNS responses. For example, DNSChaos can retu
 
 Before creating a DNSChaos experiment using Chaos Mesh, you need to deploy a special DNS service to inject faults:
 
-```bash
-helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --set dnsServer.create=true
-```
+<PickHelmVersion className="language-bash">{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --version latest --set dnsServer.create=true`}</PickHelmVersion>
 
 After executing the above commands, check if the DNS service status is normal:
 

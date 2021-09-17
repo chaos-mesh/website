@@ -3,6 +3,8 @@ title: Extend Chaos Daemon Interface
 sidebar_label: Extend Chaos Daemon Interface
 ---
 
+import PickHelmVersion from '@site/src/components/PickHelmVersion'
+
 In [Add new chaos experiment type](add-new-chaos-experiment-type.md), you have added HelloWorldChaos, which can print `Hello World!` in the logs of Chaos Controller Manager. To enable the HelloWorldChaos to inject some faults into the target Pod, you need to extend interface for Chaos Daemon.
 
 :::note
@@ -203,9 +205,7 @@ To verify the experiment, perform the following steps.
 
 2. Update Chaos Mesh:
 
-   ```bash
-   helm upgrade chaos-mesh helm/chaos-mesh --namespace=chaos-testing
-   ```
+   <PickHelmVersion className="language-bash">{`helm upgrade chaos-mesh helm/chaos-mesh --namespace=chaos-testing --version latest`}</PickHelmVersion>
 
 3. Deploy the target Pod for testing. Skip this step if you have already deployed this Pod:
 

@@ -2,6 +2,8 @@
 title: Manage User Permissions
 ---
 
+import PickHelmVersion from '@site/src/components/PickHelmVersion'
+
 This document describes how to manage user permissions in Chaos Mesh, including creating user account of different roles, binding permissions for users, managing tokens, and enable or disable permission authentication.
 
 Chaos Mesh uses the native [RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) features in Kubernetes to manage user roles and permissions. To create, view and manage Chaos experiments, users need to have the corresponding permissions in the `apiGroups` of `chaos-mesh.org` to customize resources of Chaos experiments.
@@ -141,8 +143,6 @@ In the right part of this page, you can add new tokens in the **Add token** wind
 
 If Chaos Mesh is installed using Helm, the permission authentication feature is enabled by default.For production environments and other scenarios with high security requirements, it is recommended to keep the permission authentication feature enabled.If you just want to give Chaos Mesh a try and quickly create Chaos experiments with the permission authentication feature disabled, you can set `--set dashboard.securityMode=false` in a Helm command. The command is as follows:
 
-```bash
-helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --set dashboard.securityMode=false
-```
+<PickHelmVersion className="language-bash">{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --version latest --set dashboard.securityMode=false`}</PickHelmVersion>
 
 If you want to enable the permission authentication feature again, then reset `--set dashboard.securityMode=true` in a Helm command.

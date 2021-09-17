@@ -4,13 +4,16 @@ title: Develop a New Chaos
 sidebar_label: Develop a New Chaos
 ---
 
+import PickHelmVersion from '@site/src/components/PickHelmVersion'
+
 After [preparing the development environment](setup_env.md), let's develop a new type of chaos, HelloWorldChaos, which only prints a "Hello World!" message to the log. Generally, to add a new chaos type for Chaos Mesh, you need to take the following steps:
 
-1. [Define the schema type](#define-the-schema-type)
-2. [Register the CRD](#register-the-crd)
-3. [Register the handler for this chaos object](#register-the-handler-for-this-chaos-object)
-4. [Make the Docker image](#make-the-docker-image)
-5. [Run chaos](#run-chaos)
+- [Define the schema type](#define-the-schema-type)
+- [Register the CRD](#register-the-crd)
+- [Register the handler for this chaos object](#register-the-handler-for-this-chaos-object)
+- [Make the Docker image](#make-the-docker-image)
+- [Run chaos](#run-chaos)
+- [Next steps](#next-steps)
 
 ## Define the schema type
 
@@ -214,15 +217,11 @@ Now take the following steps to run chaos:
 
    - For helm 3.X
 
-     ```bash
-     helm install chaos-mesh helm/chaos-mesh --namespace=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock
-     ```
+     <PickHelmVersion className="language-bash">{`helm install chaos-mesh helm/chaos-mesh --namespace=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --version latest`}</PickHelmVersion>
 
    - For helm 2.X
 
-     ```bash
-     helm install helm/chaos-mesh --name=chaos-mesh --namespace=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock
-     ```
+     <PickHelmVersion className="language-bash">{`helm install helm/chaos-mesh --name=chaos-mesh --namespace=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --version latest`}</PickHelmVersion>
 
    To verify your installation, get pods from the `chaos-testing` namespace:
 
