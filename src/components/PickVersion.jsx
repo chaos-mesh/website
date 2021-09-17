@@ -25,19 +25,13 @@ export const usePickVersion = () => {
 }
 
 const PickVersion = ({ children, className }) => {
-  const Result = ({ children }) => (
-    <div style={{ marginBottom: '1.25rem' }}>
-      <CodeBlock className={className}>{children}</CodeBlock>
-    </div>
-  )
+  const version = usePickVersion()
+  const rendered = version === 'latest' ? children : children.replace('latest', 'v' + version)
 
   return (
-    <BrowserOnly fallback={<Result>{children}</Result>}>
+    <BrowserOnly>
       {() => {
-        const version = usePickVersion()
-        const rendered = version === 'latest' ? children : children.replace('latest', 'v' + version)
-
-        return <Result>{rendered}</Result>
+        return <CodeBlock className={className}>{rendered}</CodeBlock>
       }}
     </BrowserOnly>
   )
