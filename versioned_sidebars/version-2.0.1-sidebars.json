@@ -42,20 +42,12 @@
           "collapsible": true
         },
         {
-          "type": "category",
-          "label": "Manage Roles",
-          "items": [
-            {
-              "type": "doc",
-              "id": "version-2.0.1/manage-user-permissions"
-            },
-            {
-              "type": "doc",
-              "id": "version-2.0.1/configure-protected-namespace"
-            }
-          ],
-          "collapsible": true,
-          "collapsed": true
+          "type": "doc",
+          "id": "version-2.0.1/manage-user-permissions"
+        },
+        {
+          "type": "doc",
+          "id": "version-2.0.1/configure-enabled-namespace"
         },
         {
           "type": "category",

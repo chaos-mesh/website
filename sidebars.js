@@ -16,11 +16,8 @@ module.exports = {
           collapsed: false,
           items: ['quick-start', 'production-installation-using-helm', 'offline-installation'],
         },
-        {
-          type: 'category',
-          label: 'Manage Roles',
-          items: ['manage-user-permissions', 'configure-protected-namespace'],
-        },
+        'manage-user-permissions',
+        'configure-enabled-namespace',
         {
           type: 'category',
           label: 'Run a Single Chaos Experiment',

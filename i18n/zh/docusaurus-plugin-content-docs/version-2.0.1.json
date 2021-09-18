@@ -15,10 +15,6 @@
     "message": "安装部署",
     "description": "The label for category Installation and Deployment in sidebar docs"
   },
-  "sidebar.docs.category.Manage Roles": {
-    "message": "管理权限",
-    "description": "The label for category Manage Roles in sidebar docs"
-  },
   "sidebar.docs.category.Run a Single Chaos Experiment": {
     "message": "运行单个混沌实验",
     "description": "The label for category Run a Single Chaos Experiment in sidebar docs"
