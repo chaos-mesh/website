@@ -4,7 +4,7 @@ title: 快速试用（测试推荐）
 
 import PickVersion from '@site/src/components/PickVersion'
 
-import VerifyInstallationAndRun from './common/verify-installation.md'
+import VerifyInstallation from './common/verify-installation.md'
 import QuickRun from './common/quick-run.md'
 
 本篇文档描述如何在测试环境或本机环境快速试用 Chaos Mesh。

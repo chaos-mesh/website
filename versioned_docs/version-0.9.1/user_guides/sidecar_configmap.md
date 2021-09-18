@@ -61,4 +61,4 @@ For more sample ConfigMap files, see [examples](https://github.com/chaos-mesh/ch
 
 ## Usage
 
-See [IOChaos Document](io_chaos.md).
+See [IOChaos Document](iochaos.md).
