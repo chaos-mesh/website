@@ -1,4 +1,8 @@
 module.exports = {
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'zh'],
+  },
   title: 'Chaos Mesh®',
   tagline: 'A Powerful Chaos Engineering Platform for Kubernetes',
   url: 'https://chaos-mesh.org',
@@ -8,7 +12,7 @@ module.exports = {
   projectName: 'chaos-mesh.github.io', // Usually your repo name.
   trailingSlash: true,
   themeConfig: {
-    image: 'img/logos/logo-mini.svg',
+    image: 'chaos-mesh-social-preview.png',
     algolia: {
       apiKey: '49739571d4f89670b12f39d5ad135f5a',
       indexName: 'chaos-mesh',
@@ -16,11 +20,15 @@ module.exports = {
     googleAnalytics: {
       trackingID: 'UA-90760217-2',
     },
+    // announcementBar: {
+    //   content: '',
+    //   backgroundColor: '#10a6fa',
+    // },
     navbar: {
       hideOnScroll: true,
       title: 'Chaos Mesh®',
       logo: {
-        alt: 'Chaos Mesh Logo',
+        alt: 'Chaos Mesh',
         src: 'img/logos/logo-mini.svg',
         srcDark: 'img/logos/logo-mini-white.svg',
       },
@@ -39,13 +47,13 @@ module.exports = {
           position: 'right',
         },
         {
-          href: 'https://github.com/chaos-mesh/chaos-mesh',
-          label: 'GitHub',
+          type: 'localeDropdown',
           position: 'right',
         },
         {
-          href: 'https://chaos-mesh.org/website-zh',
-          label: '中文',
+          href: 'https://github.com/chaos-mesh/chaos-mesh',
+          className: 'header-github-link',
+          'aria-label': 'GitHub',
           position: 'right',
         },
       ],
@@ -56,12 +64,20 @@ module.exports = {
           title: 'Documentation',
           items: [
             {
-              label: 'Get Started',
-              to: 'docs/get_started/get_started_on_kind',
+              label: 'Quick Start',
+              to: 'docs/quick_start',
             },
             {
-              label: 'User Guides',
-              to: 'docs/user_guides/installation',
+              label: 'Run a Chaos Experiment',
+              to: 'docs/run-a-chaos-experiment',
+            },
+            {
+              label: 'Developer Guide Overview',
+              to: 'docs/developer-guide-overview',
+            },
+            {
+              label: 'FAQs',
+              to: 'docs/faqs',
             },
           ],
         },

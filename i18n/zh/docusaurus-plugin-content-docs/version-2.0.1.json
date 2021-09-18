@@ -1,0 +1,54 @@
+{
+  "version.label": {
+    "message": "2.0.1",
+    "description": "The label for version 2.0.1"
+  },
+  "sidebar.docs.category.About Chaos Mesh": {
+    "message": "About Chaos Mesh",
+    "description": "The label for category About Chaos Mesh in sidebar docs"
+  },
+  "sidebar.docs.category.Getting Started": {
+    "message": "Getting Started",
+    "description": "The label for category Getting Started in sidebar docs"
+  },
+  "sidebar.docs.category.Installation and Deployment": {
+    "message": "Installation and Deployment",
+    "description": "The label for category Installation and Deployment in sidebar docs"
+  },
+  "sidebar.docs.category.Manage Roles": {
+    "message": "Manage Roles",
+    "description": "The label for category Manage Roles in sidebar docs"
+  },
+  "sidebar.docs.category.Run a Single Chaos Experiment": {
+    "message": "Run a Single Chaos Experiment",
+    "description": "The label for category Run a Single Chaos Experiment in sidebar docs"
+  },
+  "sidebar.docs.category. Orchestrate Multiple Chaos Experiments": {
+    "message": " Orchestrate Multiple Chaos Experiments",
+    "description": "The label for category  Orchestrate Multiple Chaos Experiments in sidebar docs"
+  },
+  "sidebar.docs.category.Types of Chaos Experiments": {
+    "message": "Types of Chaos Experiments",
+    "description": "The label for category Types of Chaos Experiments in sidebar docs"
+  },
+  "sidebar.docs.category.Kubernetes": {
+    "message": "Kubernetes",
+    "description": "The label for category Kubernetes in sidebar docs"
+  },
+  "sidebar.docs.category.Physical Nodes": {
+    "message": "Physical Nodes",
+    "description": "The label for category Physical Nodes in sidebar docs"
+  },
+  "sidebar.docs.category.Tools Integration": {
+    "message": "Tools Integration",
+    "description": "The label for category Tools Integration in sidebar docs"
+  },
+  "sidebar.docs.category.Development Guides": {
+    "message": "Development Guides",
+    "description": "The label for category Development Guides in sidebar docs"
+  },
+  "sidebar.docs.category.FAQs and Troubleshooting": {
+    "message": "FAQs and Troubleshooting",
+    "description": "The label for category FAQs and Troubleshooting in sidebar docs"
+  }
+}
