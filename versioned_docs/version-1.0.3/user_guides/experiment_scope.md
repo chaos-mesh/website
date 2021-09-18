@@ -1,7 +1,5 @@
 ---
-id: experiment_scope
 title: Define the Scope of Chaos Experiment
-sidebar_label: Define the Scope of Chaos Experiment
 ---
 
 This document describes how to define the scope of a chaos experiment.

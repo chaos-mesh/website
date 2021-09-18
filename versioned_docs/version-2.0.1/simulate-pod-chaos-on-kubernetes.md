@@ -1,6 +1,5 @@
 ---
 title: Simulate Pod Faults
-sidebar_label: Simulate Pod Faults
 ---
 
 This document describes how to use Chaos Mesh to inject faults into Kubernetes Pod to simulate Pod or container faults. Chaos Dashboard and YAML files are provided to create PodChaos experiments.

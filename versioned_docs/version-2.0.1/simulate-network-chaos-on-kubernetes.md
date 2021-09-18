@@ -1,6 +1,5 @@
 ---
 title: Simulate Network Faults
-sidebar_label: Simulate Network Faults
 ---
 
 This document describes how to simulate network faults using NetworkChaos in Chaos Mesh.
@@ -230,12 +229,12 @@ For occasional events such as `reorder`, `loss`, `duplicate`, and `corrupt`, the
 
 Setting `action` to `bandwidth` means simulating bandwidth limit fault. You also need to configure the following parameters.
 
-| Parameter   | Type   | Description                                                            | Default value | Required | Example |
-| ----------- | ------ | ---------------------------------------------------------------------- | ------------- | -------- | ------- |
-| rate        | string | Indicates the rate of bandwidth limit                                  |               | Yes      | 1mbps   |
-| limit | string | Indicates the number of bytes waiting in queue                         |               | Yes      | 1       |
-| buffer      | uint32 | Indicates the maximum number of bytes that can be sent instantaneously |               | Yes      | 1       |
-| peakrate    | uint64 | Indicates the maximum consumption of `bucket` (usually not set)        |               | No       | 1       |
-| minburst    | uint32 | Indicates the size of `peakrate bucket` (usually not set)              |               | No       | 1       |
+| Parameter | Type   | Description                                                            | Default value | Required | Example |
+| --------- | ------ | ---------------------------------------------------------------------- | ------------- | -------- | ------- |
+| rate      | string | Indicates the rate of bandwidth limit                                  |               | Yes      | 1mbps   |
+| limit     | string | Indicates the number of bytes waiting in queue                         |               | Yes      | 1       |
+| buffer    | uint32 | Indicates the maximum number of bytes that can be sent instantaneously |               | Yes      | 1       |
+| peakrate  | uint64 | Indicates the maximum consumption of `bucket` (usually not set)        |               | No       | 1       |
+| minburst  | uint32 | Indicates the size of `peakrate bucket` (usually not set)              |               | No       | 1       |
 
 For more details of these fields, you can refer to [tc-tbf document](https://man7.org/linux/man-pages/man8/tc-tbf.8.html).

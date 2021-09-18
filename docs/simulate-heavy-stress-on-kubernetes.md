@@ -1,6 +1,5 @@
 ---
 title: Simulate Stress Scenarios
-sidebar_label: Simulate Stress Scenarios
 ---
 
 ## StressChaos Introduction
@@ -84,7 +83,7 @@ The fields in the YAML configuration file are described in the following table:
 
 ##### CPUStressor
 
-| Parameter | Type | Description                                                                           | Default value | Required | Example |
+| Parameter | Type | Description                                                                            | Default value | Required | Example |
 | --------- | ---- | -------------------------------------------------------------------------------------- | ------------- | -------- | ------- |
 | workers   | int  | Specifies the number of threads that apply memory stress                               |               | Yes      | `1`     |
 | load      | int  | Specifies the percentage of CPU occupied0 means sleep and no load; 100 means full load |               | No       | `50`    |

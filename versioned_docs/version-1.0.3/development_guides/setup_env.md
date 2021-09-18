@@ -1,7 +1,5 @@
 ---
-id: set_up_the_development_environment
-title: Set up the development environment
-sidebar_label: Set up the development environment
+title: Setup the development environment
 ---
 
 This document walks you through the environment setup process for Chaos Mesh development.
@@ -92,5 +90,5 @@ kind delete cluster --name=kind
 
 Congratulations! You are now all set up for Chaos Mesh development. Try the following tasks:
 
-- [Develop a New Chaos Type](dev_hello_world.md)
-- [Add facilities to chaos daemon](add_chaos_daemon.md)
+- [Develop a New Chaos Type](develop_a_new_chaos.md)
+- [Add facilities to chaos daemon](add_facilities_to_chaos_daemon.md)

@@ -1,7 +1,5 @@
 ---
-id: multi_data_centers
 title: Network latency simulation across multiple data centers
-sidebar_label: Network latency simulation across multiple data centers
 ---
 
 This document helps you simulate multiple data centers scenarios.
@@ -70,7 +68,7 @@ basic-tikv-6                       1/1     Running   0          29m
 
 ### Design injection rules
 
-Chaos Mesh provides [`NetworkChaos`](../user_guides/network_chaos.md) to inject network latency,
+Chaos Mesh provides [`NetworkChaos`](../user_guides/networkchaos.md) to inject network latency,
 so we can use it to simulate the latency between three data centers.
 
 At present, `NetworkChaos` has a limitation that each target pod only has one configuration of `netem` in effect.

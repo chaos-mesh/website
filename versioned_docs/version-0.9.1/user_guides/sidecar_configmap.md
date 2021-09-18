@@ -1,7 +1,5 @@
 ---
-id: sidecar_configmap
 title: Sidecar ConfigMap
-sidebar_label: Sidecar ConfigMap
 ---
 
 This document guides you to define a specified sidecar ConfigMap for your application.

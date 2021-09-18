@@ -1,6 +1,5 @@
 ---
 title: Simulate GCP Faults
-sidebar_label: Simulate GCP Faults
 ---
 
 This document describes how to use Chaos Mesh to inject faults into GCP Pod. Chaos Dashboard and YAML files are provided to create GCPChaos experiments.

@@ -1,6 +1,5 @@
 ---
 title: Simulate Stress Scenarios
-sidebar_label: Simulate Stress Scenarios
 ---
 
 This document describes how to use Chaosd to simulate stress scenarios. This feature generates CPU or memory stress on the host using [stress-ng](https://wiki.ubuntu.com/Kernel/Reference/stress-ng). You can create stress experiments either in command-line or service mode.
@@ -68,7 +67,7 @@ Global Flags:
 
 #### Configuration description of simulating CPU stress
 
-| Configuration item | Abbreviation | Description                                                                                           | Value                                    |
+| Configuration item | Abbreviation | Description                                                                                            | Value                                    |
 | :----------------- | :----------- | :----------------------------------------------------------------------------------------------------- | :--------------------------------------- |
 | load               | l            | Specifies the percentage of CPU load per CPU worker. 0 means no CPU load, and 100 means full CPU load. | int; range: 0 to 100; default value: 10. |
 | workers            | w            | Specifies the number of workers used to create CPU stress.                                             | int; default value: 1.                   |

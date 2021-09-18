@@ -20,10 +20,11 @@ module.exports = {
     googleAnalytics: {
       trackingID: 'UA-90760217-2',
     },
-    // announcementBar: {
-    //   content: '',
-    //   backgroundColor: '#10a6fa',
-    // },
+    announcementBar: {
+      content:
+        'Chaos Mesh 2.0 was released in July, 2021, see what\'s new in <a href="/blog/chaos-mesh-2.0-to-a-chaos-engineering-ecology">Chaos Mesh 2.0</a>!',
+      backgroundColor: '#37b5fb',
+    },
     navbar: {
       hideOnScroll: true,
       title: 'Chaos Mesh®',

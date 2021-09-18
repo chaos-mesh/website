@@ -1,6 +1,5 @@
 ---
 title: Simulate Network Faults
-sidebar_label: Simulate Network Faults
 ---
 
 This document introduces how to use Chaosd to simulate network faults. The simulations can be completed by modifying network routing and traffic flow control using iptables, ipsets, tc, etc.
@@ -210,7 +209,7 @@ Global Flags:
 
 The related configuration items are described as follows:
 
-| Configuration item | Abbreviation | Description                                                                                                                 | Value                                                                                                                     |
+| Configuration item | Abbreviation | Description                                                                                                                  | Value                                                                                                                     |
 | :----------------- | :----------- | :--------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------ |
 | correlation        | c            | The correlation between the percentage of the current network loss and the previous one.                                     | Int. It is a percentage which range is 0 to 100 (10 is 10%) (default "0").                                                |
 | device             | d            | Name of the impacted network interface card.                                                                                 | String, such as “eth0”. The value is required.                                                                            |

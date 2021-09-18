@@ -1,8 +1,6 @@
 ---
 slug: /
-id: overview
 title: Chaos Mesh
-sidebar_label: Overview
 ---
 
 Welcome to the Chaos Mesh documentation!

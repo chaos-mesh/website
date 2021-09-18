@@ -1,6 +1,5 @@
 ---
 title: Simulate JVM Application Faults
-sidebar_label: Simulate JVM Application Faults
 ---
 
 ## JVMChaos introduction

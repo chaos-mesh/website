@@ -1,6 +1,5 @@
 ---
 title: Basic Features
-sidebar_label: Basic Features
 ---
 
 This document describes the basic features of Chaos Mesh, including [fault injection](#fault-injection), [Chaos experiment scenarios](#chaos-experiment-scenarios), [visualized operations](#visualized-operations), and [security guarantees](#security-guarantees).

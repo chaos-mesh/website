@@ -1,6 +1,5 @@
 ---
 title: Simulate GCP Faults
-sidebar_label: Simulate GCP Faults
 ---
 
 This document describes how to use Chaos Mesh to inject faults into GCP Pod. Chaos Dashboard and YAML files are provided to create GCPChaos experiments.
@@ -71,89 +70,89 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
 
 1. Write the experiment configuration to the `gcpchaos-node-stop.yaml`， as shown below:
 
-  ```yaml
-  apiVersion: chaos-mesh.org/v1alpha1
-  kind: GCPChaos
-  metadata:
-    name: node-stop-example
-    namespace: chaos-testing
-  spec:
-    action: node-stop
-    secretName: 'cloud-key-secret'
-    project: 'your-project'
-    zone: 'your-zone'
-    instance: 'your-instance'
-    duration: '5m'
-  ```
+```yaml
+apiVersion: chaos-mesh.org/v1alpha1
+kind: GCPChaos
+metadata:
+  name: node-stop-example
+  namespace: chaos-testing
+spec:
+  action: node-stop
+  secretName: 'cloud-key-secret'
+  project: 'your-project'
+  zone: 'your-zone'
+  instance: 'your-instance'
+  duration: '5m'
+```
 
-  Based on this configuration example, Chaos Mesh will inject the `node-stop` fault into the specified GCP instance so that the GCP instance will be unavailable in 5 minutes.
+Based on this configuration example, Chaos Mesh will inject the `node-stop` fault into the specified GCP instance so that the GCP instance will be unavailable in 5 minutes.
 
-  For more information about stopping GCP instances, refer to [Stop GCP instance](https://cloud.google.com/compute/docs/instances/stop-start-instance).
+For more information about stopping GCP instances, refer to [Stop GCP instance](https://cloud.google.com/compute/docs/instances/stop-start-instance).
 
-2. After the configuration file is prepared, use `kubectl`  to create an experiment:
+2. After the configuration file is prepared, use `kubectl` to create an experiment:
 
-  ```bash
-    kubectl apply -f gcpchaos-node-stop.yaml
-  ```
+```bash
+  kubectl apply -f gcpchaos-node-stop.yaml
+```
 
 ### A `node-reset` configuration example
 
 1. Write the experiment configuration to the `gcpchaos-node-reset.yaml`, as shown below:
 
-  ```yaml
-  apiVersion: chaos-mesh.org/v1alpha1
-  kind: GCPChaos
-  metadata:
-    name: node-reset-example
-    namespace: chaos-testing
-  spec:
-    action: node-reset
-    secretName: 'cloud-key-secret'
-    project: 'your-project'
-    zone: 'your-zone'
-    instance: 'your-instance'
-    duration: '5m'
-  ```
+```yaml
+apiVersion: chaos-mesh.org/v1alpha1
+kind: GCPChaos
+metadata:
+  name: node-reset-example
+  namespace: chaos-testing
+spec:
+  action: node-reset
+  secretName: 'cloud-key-secret'
+  project: 'your-project'
+  zone: 'your-zone'
+  instance: 'your-instance'
+  duration: '5m'
+```
 
-  Based on this configuration example, Chaos Mesh will inject `node-reset` fault into the specified GCP instance so that the GCP instance will be reset.
+Based on this configuration example, Chaos Mesh will inject `node-reset` fault into the specified GCP instance so that the GCP instance will be reset.
 
-  For more information about resetting GCP instances, refer to [Resetting a GCP instance](https://cloud.google.com/compute/docs/instances/stop-start-instance#resetting_an_instance).
+For more information about resetting GCP instances, refer to [Resetting a GCP instance](https://cloud.google.com/compute/docs/instances/stop-start-instance#resetting_an_instance).
 
-2. After the configuration file is prepared, use `kubectl`  to create an experiment:
+2. After the configuration file is prepared, use `kubectl` to create an experiment:
 
-  ```bash
-    kubectl apply -f gcpchaos-node-reset.yaml
-  ```
+```bash
+  kubectl apply -f gcpchaos-node-reset.yaml
+```
 
 ### A `disk-loss` configuration example
 
 1. Write the experiment configuration to the `gcpchaos-disk-loss.yaml`, as shown below:
 
-  ```yaml
-  apiVersion: chaos-mesh.org/v1alpha1
-  kind: GCPChaos
-  metadata:
-    name: disk-loss-example
-    namespace: chaos-testing
-  spec:
-    action: disk-loss
-    secretName: 'cloud-key-secret'
-    project: 'your-project'
-    zone: 'your-zone'
-    instance: 'your-instance'
-    deviceNames: ['disk-name']
-    duration: '5m'
-  ```
+```yaml
+apiVersion: chaos-mesh.org/v1alpha1
+kind: GCPChaos
+metadata:
+  name: disk-loss-example
+  namespace: chaos-testing
+spec:
+  action: disk-loss
+  secretName: 'cloud-key-secret'
+  project: 'your-project'
+  zone: 'your-zone'
+  instance: 'your-instance'
+  deviceNames: ['disk-name']
+  duration: '5m'
+```
 
-  Based on this configuration example, Chaos Mesh will inject a ` disk-loss` fault into the specified GCP instance so that the GCP instance is detached from the specified storage volume within 5 minutes.
+Based on this configuration example, Chaos Mesh will inject a ` disk-loss` fault into the specified GCP instance so that the GCP instance is detached from the specified storage volume within 5 minutes.
 
-  For more information about detaching GCP instances, refer to [Detach GCP storage](https://cloud.google.com/compute/docs/reference/rest/v1/instances/detachDisk).
+For more information about detaching GCP instances, refer to [Detach GCP storage](https://cloud.google.com/compute/docs/reference/rest/v1/instances/detachDisk).
 
-2. After the configuration file is prepared, use `kubectl`  to create an experiment:
+2. After the configuration file is prepared, use `kubectl` to create an experiment:
 
-  ```bash
-    kubectl apply -f gcpchaos-disk-loss.yaml
-  ```
+```bash
+  kubectl apply -f gcpchaos-disk-loss.yaml
+```
 
 ### Field description
 
@@ -162,7 +161,7 @@ The following table shows the fields in the YAML configuration file.
 | Parameter   | Type     | Descpription                                                                                                                                                                                                                                                                                                                                               | Default value | Required | Example              |
 | ----------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | -------- | -------------------- |
 | action      | string   | Indicates the specific type of faults. The available fault types include node-stop, node-reset, and disk-loss.                                                                                                                                                                                                                                             | node-stop     | Yes      | node-stop            |
-| mode        | string   | Indicates the mode of the experiment. The mode options include `one` (selecting a Pod at random), `all` (selecting all eligible Pods), `fixed` (selecting a specified number of eligible Pods), `fixed-percent` (selecting a specified percentage of the eligible Pods), and `random-max-percent` (selecting the maximum percentage of the eligible Pods). | None          | Yes      | `one`            |
+| mode        | string   | Indicates the mode of the experiment. The mode options include `one` (selecting a Pod at random), `all` (selecting all eligible Pods), `fixed` (selecting a specified number of eligible Pods), `fixed-percent` (selecting a specified percentage of the eligible Pods), and `random-max-percent` (selecting the maximum percentage of the eligible Pods). | None          | Yes      | `one`                |
 | value       | string   | Provides parameters for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of pods.                                                                                                                                                                                       | None          | No       | 2                    |
 | secretName  | string   | Indicates the name of the Kubernetes secret that stores the GCP authentication information.                                                                                                                                                                                                                                                                | None          | No       | cloud-key-secret     |
 | project     | string   | Indicates the name of GCP project.                                                                                                                                                                                                                                                                                                                         | None          | Yes      | your-project         |

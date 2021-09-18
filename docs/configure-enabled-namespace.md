@@ -1,6 +1,5 @@
 ---
 title: Configure namespace for Chaos experiments
-sidebar_label: Configure namespace for Chaos experiments
 ---
 
 import PickHelmVersion from '@site/src/components/PickHelmVersion'

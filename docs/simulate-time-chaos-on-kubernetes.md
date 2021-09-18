@@ -1,6 +1,5 @@
 ---
 title: Simulate Time Faults
-sidebar_label: Simulate Time Faults
 ---
 
 ## TimeChaos Introduction

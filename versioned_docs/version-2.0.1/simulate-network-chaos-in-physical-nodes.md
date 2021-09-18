@@ -1,6 +1,5 @@
 ---
 title: Simulate Network Faults
-sidebar_label: Simulate Network Faults
 ---
 
 This document introduces how to use Chaosd to simulate network faults. The simulations can be completed by modifying network routing and traffic flow control using iptables, ipsets, tc, etc.

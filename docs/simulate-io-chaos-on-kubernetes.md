@@ -1,6 +1,5 @@
 ---
 title: Simulate File I/O Faults
-sidebar_label: Simulate File I/O Faults
 ---
 
 This document describes how to create IOChaos experiments in Chaos Mesh.

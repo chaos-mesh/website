@@ -1,6 +1,5 @@
 ---
 title: Quick Start (Test Recommended)
-sidebar_label: Quick Start
 ---
 
 import PickVersion from '@site/src/components/PickVersion'

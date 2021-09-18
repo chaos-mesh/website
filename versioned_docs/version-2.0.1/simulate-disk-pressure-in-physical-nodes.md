@@ -1,6 +1,5 @@
 ---
 title: Simulate Disk Faults
-sidebar_label: Simulate Disk Faults
 ---
 
 This document describes how to use Chaosd to simulate disk faults. This feature helps you simulate disk read/write load (via [dd](https://man7.org/linux/man-pages/man1/dd.1.html)) or disk fill (via [dd](https://man7.org/linux/man-pages/man1/dd.1.html) or [fallocate](https://man7.org/linux/man-pages/man1/fallocate.1.html)).

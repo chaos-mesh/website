@@ -1,6 +1,5 @@
 ---
 title: Simulate DNS Faults
-sidebar_label: Simulate DNS Faults
 ---
 
 import PickHelmVersion from '@site/src/components/PickHelmVersion'

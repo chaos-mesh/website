@@ -1,6 +1,5 @@
 ---
 title: Configure namespace for Chaos experiments
-sidebar_label: Configure namespace for Chaos experiments
 ---
 
 import PickHelmVersion from '@site/src/components/PickHelmVersion'
@@ -18,7 +17,7 @@ Chaos Mesh offers two ways to control the scope of the Chaos experiment to take 
 
 If you have not installed Chaos Mesh yet, you can enable this feature during installation by adding `--set controllerManager.enableFilterNamespace=true` to the command when installing using Helm. The following is a command example in the Docker container:
 
-<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n chaos-testing --version latest --set controllerManager.enableFilterNamespace=true`}</PickHelmVersion>
+<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n chaos-testing --set controllerManager.enableFilterNamespace=true --version latest`}</PickHelmVersion>
 
 :::note
 

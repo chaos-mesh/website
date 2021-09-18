@@ -1,6 +1,5 @@
 ---
 title: Simulate Stress Scenarios
-sidebar_label: Simulate Stress Scenarios
 ---
 
 This document describes how to use Chaosd to simulate stress scenarios. This feature generates CPU or memory stress on the host using [stress-ng](https://wiki.ubuntu.com/Kernel/Reference/stress-ng). You can create stress experiments either in command-line or service mode.

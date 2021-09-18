@@ -87,7 +87,7 @@
         },
         {
           "type": "category",
-          "label": " Orchestrate Multiple Chaos Experiments",
+          "label": "Orchestrate Multiple Chaos Experiments",
           "items": [
             {
               "type": "doc",
@@ -204,7 +204,9 @@
           "type": "doc",
           "id": "version-2.0.1/integrate-chaos-mesh-into-github-actions"
         }
-      ]
+      ],
+      "collapsible": true,
+      "collapsed": true
     },
     {
       "type": "category",
@@ -230,7 +232,9 @@
           "type": "doc",
           "id": "version-2.0.1/extend-chaosd"
         }
-      ]
+      ],
+      "collapsible": true,
+      "collapsed": true
     },
     {
       "type": "category",

@@ -1,6 +1,5 @@
 ---
 title: Create Chaos Mesh Workflow
-sidebar_label: Create Chaos Mesh Workflow
 ---
 
 ## Introduction to Chaos Mesh Workflow

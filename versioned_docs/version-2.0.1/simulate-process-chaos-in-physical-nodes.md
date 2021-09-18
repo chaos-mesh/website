@@ -1,6 +1,5 @@
 ---
 title: Simulate Process Faults
-sidebar_label: Simulate Process Faults
 ---
 
 This document describes how to use Chaosd to simulate process faults. The process faults use the Golang interface of the kill command to simulate the scenarios that the process is killed or stopped. You can create experiments either in command-line mode or service mode.
@@ -71,13 +70,12 @@ Global Flags:
 #### Example simulating that a process is killed
 
 ```bash
-chaosd attack process kill python
+chaosd attack process kill -p python
 ```
 
 The output is as follows:
 
 ```bash
-chaosd attack process kill -p python
 Attack process python successfully, uid: 10e633ac-0a37-41ba-8b4a-cd5ab92099f9
 ```
 
@@ -114,13 +112,12 @@ Global Flags:
 #### Example simulating that a process is stopped
 
 ```bash
-chaosd attack process stop python
+chaosd attack process stop -p python
 ```
 
 The output is as follows:
 
 ```bash
-chaosd attack process stop -p python
 Attack process python successfully, uid: 9cb6b3be-4f5b-4ecb-ae05-51050fcd0010
 ```
 

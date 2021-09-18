@@ -1,10 +1,6 @@
 ---
-id: faqs
 title: FAQs
-sidebar_label: FAQs
 ---
-
-## Question
 
 ### Q: If I do not have Kubernetes clusters deployed, can I use Chaos Mesh to create chaos experiments?
 

@@ -1,5 +1,4 @@
 ---
-id: get_started_on_kind
 title: Get started on kind
 ---
 

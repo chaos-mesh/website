@@ -1,6 +1,5 @@
 ---
 title: Add New Chaos Experiment Type
-sidebar_label: Add New Chaos Experiment Type
 ---
 
 import PickHelmVersion from '@site/src/components/PickHelmVersion'

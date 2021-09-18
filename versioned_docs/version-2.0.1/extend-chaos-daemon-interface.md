@@ -1,6 +1,5 @@
 ---
 title: Extend Chaos Daemon Interface
-sidebar_label: Extend Chaos Daemon Interface
 ---
 
 import PickHelmVersion from '@site/src/components/PickHelmVersion'
@@ -16,7 +15,6 @@ This document covers:
 - [Selector](#selector)
 - [Implement the gRPC interface](#implement-the-grpc-interface)
 - [Verify the experiment](#verify-the-experiment)
-- [Next steps](#next-steps)
 
 ## Selector
 

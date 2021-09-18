@@ -1,6 +1,5 @@
 ---
 title: Simulate Host Faults
-sidebar_label: Simulate Host Faults
 ---
 
 This document introduces how to simulate host shutdown faults using Chaosd.

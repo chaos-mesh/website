@@ -1,6 +1,5 @@
 ---
 title: Add New Chaos Experiment Type
-sidebar_label: Add New Chaos Experiment Type
 ---
 
 import PickHelmVersion from '@site/src/components/PickHelmVersion'
@@ -261,7 +260,7 @@ After you update the template, try running HelloWorldChaos.
 
 2. Deploy Chaos Mesh:
 
-   <PickHelmVersion className="language-bash">{`helm install chaos-mesh helm/chaos-mesh --namespace=chaos-testing --version latest --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock`}</PickHelmVersion>
+   <PickHelmVersion className="language-bash">{`helm install chaos-mesh helm/chaos-mesh --namespace=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --version latest`}</PickHelmVersion>
 
    To verify the deployment is successful, you can check all Pods in the `chaos-testing` namespace:
 

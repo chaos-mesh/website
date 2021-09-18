@@ -1,7 +1,5 @@
 ---
-id: faqs
 title: FAQs
-sidebar_label: FAQs
 ---
 
 import PickHelmVersion from '@site/src/components/PickHelmVersion'
