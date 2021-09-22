@@ -41,26 +41,28 @@ stringData:
 
 1. 已安装 Dashboard。
 2. 可以通过 **kubectl port-forward** 方式访问 Dashboard：
+
    ```bash
-    kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333
+   kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333
    ```
+
    接着你可以在浏览器通过[`http://localhost:2333`](http://localhost:2333)访问 Dashboard 。
 
 :::
 
 1. 单击实验页面中的**新的实验**按钮创建实验。
 
-![img](./img/create-pod-chaos-on-dashborad-1_zh.jpg)
+   ![img](./img/create-pod-chaos-on-dashborad-1_zh.jpg)
 
 2. 在**选择目标**处选择 **GCP 故障**，并选择具体行为，例如 **STOP NODE**。
 
-![img](./img/create-gcp-chaos-on-dashborad-2_zh.jpg)
+   ![img](./img/create-gcp-chaos-on-dashborad-2_zh.jpg)
 
 3. 填写实验信息，指定实验范围以及实验计划运行时间。
 
-![img](./img/create-gcp-chaos-on-dashborad-3_zh.jpg)
+   ![img](./img/create-gcp-chaos-on-dashborad-3_zh.jpg)
 
-![img](./img/create-gcp-chaos-on-dashborad-4_zh.jpg)
+   ![img](./img/create-gcp-chaos-on-dashborad-4_zh.jpg)
 
 4. 提交实验。
 
@@ -70,89 +72,89 @@ stringData:
 
 1. 将实验配置写入到文件 `gcpchaos-node-stop.yaml` 中，内容如下所示：
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: GCPChaos
-metadata:
-  name: node-stop-example
-  namespace: chaos-testing
-spec:
-  action: node-stop
-  secretName: 'cloud-key-secret'
-  project: 'your-project'
-  zone: 'your-zone'
-  instance: 'your-instance'
-  duration: '5m'
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: GCPChaos
+   metadata:
+     name: node-stop-example
+     namespace: chaos-testing
+   spec:
+     action: node-stop
+     secretName: 'cloud-key-secret'
+     project: 'your-project'
+     zone: 'your-zone'
+     instance: 'your-instance'
+     duration: '5m'
+   ```
 
-依据此配置示例，Chaos Mesh 将向指定的 GCP 实例中注入 node-stop 故障，使该 GCP 实例在 5 分钟时间内处于不可用的状态。
+   依据此配置示例，Chaos Mesh 将向指定的 GCP 实例中注入 node-stop 故障，使该 GCP 实例在 5 分钟时间内处于不可用的状态。
 
-更多关于停止 GCP 实例的信息，请参考[停止 GCP 实例](https://cloud.google.com/compute/docs/instances/stop-start-instance)。
+   更多关于停止 GCP 实例的信息，请参考[停止 GCP 实例](https://cloud.google.com/compute/docs/instances/stop-start-instance)。
 
 2. 使用 kubectl 创建实验，命令如下：
 
-```bash
-  kubectl apply -f gcpchaos-node-stop.yaml
-```
+   ```bash
+   kubectl apply -f gcpchaos-node-stop.yaml
+   ```
 
 ### node-reset 示例
 
 1. 将实验配置写入到文件 `gcpchaos-node-reset.yaml` 中，内容如下所示：
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: GCPChaos
-metadata:
-  name: node-reset-example
-  namespace: chaos-testing
-spec:
-  action: node-reset
-  secretName: 'cloud-key-secret'
-  project: 'your-project'
-  zone: 'your-zone'
-  instance: 'your-instance'
-  duration: '5m'
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: GCPChaos
+   metadata:
+     name: node-reset-example
+     namespace: chaos-testing
+   spec:
+     action: node-reset
+     secretName: 'cloud-key-secret'
+     project: 'your-project'
+     zone: 'your-zone'
+     instance: 'your-instance'
+     duration: '5m'
+   ```
 
-依据此配置示例，Chaos Mesh 将向指定的 GCP 实例中注入 node-reset 故障，使该 GCP 实例重置一次。
+   依据此配置示例，Chaos Mesh 将向指定的 GCP 实例中注入 node-reset 故障，使该 GCP 实例重置一次。
 
-更多关于重置 GCP 实例的信息，请参考[重置 GCP 实例](https://cloud.google.com/compute/docs/instances/stop-start-instance#resetting_an_instance)。
+   更多关于重置 GCP 实例的信息，请参考[重置 GCP 实例](https://cloud.google.com/compute/docs/instances/stop-start-instance#resetting_an_instance)。
 
 2. 使用 kubectl 创建实验，命令如下：
 
-```bash
-  kubectl apply -f gcpchaos-node-reset.yaml
-```
+   ```bash
+   kubectl apply -f gcpchaos-node-reset.yaml
+   ```
 
 ### disk-loss 示例
 
 1. 将实验配置写入到文件 `gcpchaos-disk-loss.yaml` 中，内容如下所示：
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: GCPChaos
-metadata:
-  name: disk-loss-example
-  namespace: chaos-testing
-spec:
-  action: disk-loss
-  secretName: 'cloud-key-secret'
-  project: 'your-project'
-  zone: 'your-zone'
-  instance: 'your-instance'
-  deviceNames: ['disk-name']
-  duration: '5m'
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: GCPChaos
+   metadata:
+     name: disk-loss-example
+     namespace: chaos-testing
+   spec:
+     action: disk-loss
+     secretName: 'cloud-key-secret'
+     project: 'your-project'
+     zone: 'your-zone'
+     instance: 'your-instance'
+     deviceNames: ['disk-name']
+     duration: '5m'
+   ```
 
-依据此配置示例，Chaos Mesh 将向指定的 GCP 实例中注入 disk-loss 故障，使该 GCP 实例在 5 分钟内与指定存储设备分离。
+   依据此配置示例，Chaos Mesh 将向指定的 GCP 实例中注入 disk-loss 故障，使该 GCP 实例在 5 分钟内与指定存储设备分离。
 
-更多关于分离 GCP 存储设备的信息，请参考 [分离 GCP 存储](https://cloud.google.com/compute/docs/reference/rest/v1/instances/detachDisk)。
+   更多关于分离 GCP 存储设备的信息，请参考 [分离 GCP 存储](https://cloud.google.com/compute/docs/reference/rest/v1/instances/detachDisk)。
 
 2. 使用 kubectl 创建实验，命令如下：
 
-```bash
-  kubectl apply -f gcpchaos-disk-loss.yaml
-```
+   ```bash
+   kubectl apply -f gcpchaos-disk-loss.yaml
+   ```
 
 ### 字段说明
 
