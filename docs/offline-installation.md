@@ -141,7 +141,7 @@ kubectl create ns chaos-testing
 
 Execute the installation command. When executing the installation command, you need to specify the namespace of Chaos Mesh and the image value of each component:
 
-<PickHelmVersion className="language-bash">{` helm install chaos-mesh helm/chaos-mesh -n=chaos-testing --set chaosDaemon.image=$CHAOS_DAEMON_IMAGE --set controllerManager.image=$CHAOS_MESH_IMAGE --set dashboard.image=$CHAOS_DASHBOARD_IMAGE --version latest`}</PickHelmVersion>
+<PickHelmVersion className="language-bash">{`helm install chaos-mesh helm/chaos-mesh -n=chaos-testing --set chaosDaemon.image=$CHAOS_DAEMON_IMAGE --set controllerManager.image=$CHAOS_MESH_IMAGE --set dashboard.image=$CHAOS_DASHBOARD_IMAGE --version latest`}</PickHelmVersion>
 
 ## Verify the installation
 

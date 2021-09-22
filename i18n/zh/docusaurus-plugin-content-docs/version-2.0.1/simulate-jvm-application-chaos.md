@@ -148,7 +148,7 @@ JVMChaos 将 `hello` 方法的返回值修改为字符串 `hello chaos mesh!`。
 kubectl apply -f ./jvm-return-example.yaml
 ```
 
-使用 curl 或者直接使用浏览器访问 http://localhost:8080/hello，预期返回 `hello chaos mesh!`：
+使用 curl 或者直接使用浏览器访问 <http://localhost:8080/hello>，预期返回 `hello chaos mesh!`：
 
 ```shell
 curl http://localhost:8080/hello

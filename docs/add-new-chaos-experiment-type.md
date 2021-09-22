@@ -167,34 +167,34 @@ You need to register the CRD (Custom Resource Definition) of HelloWorldChaos to 
        helloworldchaos.Module //Add a new line. Make sure you have imported HelloWorldChaos to this file first.
    ```
 
-In `controllers/types/types.go`, add the following content:
+   In `controllers/types/types.go`, add the following content:
 
-    ```go
-        ...
-        fx.Annotated{
-            Group: "objs",
-            Target: Object{
-                Name:   "timechaos",
-                Object: &v1alpha1.TimeChaos{},
-            },
-        },
+   ```go
+       ...
+       fx.Annotated{
+           Group: "objs",
+           Target: Object{
+               Name:   "timechaos",
+               Object: &v1alpha1.TimeChaos{},
+           },
+       },
 
-        fx.Annotated{
-            Group: "objs",
-            Target: Object{
-                Name:   "gcpchaos",
-                Object: &v1alpha1.GCPChaos{},
-            },
-        },
+       fx.Annotated{
+           Group: "objs",
+           Target: Object{
+               Name:   "gcpchaos",
+               Object: &v1alpha1.GCPChaos{},
+           },
+       },
 
-        fx.Annotated{
-            Group: "objs",
-            Target: Object{
-                Name:   "helloworldchaos",
-                Object: &v1alpha1.HelloWorldChaos{},
-            },
-        },
-    ```
+       fx.Annotated{
+           Group: "objs",
+           Target: Object{
+               Name:   "helloworldchaos",
+               Object: &v1alpha1.HelloWorldChaos{},
+           },
+       },
+   ```
 
 ## Step 4: Build the Docker image
 

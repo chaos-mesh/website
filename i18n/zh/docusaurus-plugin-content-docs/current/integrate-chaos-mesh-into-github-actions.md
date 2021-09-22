@@ -139,7 +139,7 @@ workflow 本质上是按顺序自动进行的作业配置。 请注意，以下�
   使用以下命令获取上述混沌实验配置文件的 Base64 值：
 
   ```bash
-  $ base64 chaos.yaml
+  base64 chaos.yaml
   ```
 
 - 验证系统正确性

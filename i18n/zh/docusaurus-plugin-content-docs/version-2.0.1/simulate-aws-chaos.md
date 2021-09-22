@@ -43,16 +43,18 @@ stringData:
 
 1. 已经安装了 Dashboard。
 2. 可以通过 **kubectl port-forward** 方式访问 Dashboard：
+
    ```bash
     kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333
    ```
+
    接着你可以在浏览器通过 [`http://localhost:2333`](http://localhost:2333)访问 Dashboard 。
 
 :::
 
 1. 单击实验页面中的**新的实验**按钮进行创建实验。
 
-![img](./img/create-pod-chaos-on-dashborad-1_zh.jpg)
+   ![img](./img/create-pod-chaos-on-dashborad-1_zh.jpg)
 
 2. 在**选择目标**处选择 **Aws 故障**，并选择具体行为，例如 **Ec2 Stop**。
 
@@ -66,86 +68,86 @@ stringData:
 
 1. 将实验配置写入到文件 `awschaos-ec2-stop.yaml` 中，内容如下所示：
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: AWSChaos
-metadata:
-  name: ec2-stop-example
-  namespace: chaos-testing
-spec:
-  action: ec2-stop
-  secretName: 'cloud-key-secret'
-  awsRegion: 'us-east-2'
-  ec2Instance: 'your-ec2-instance-id'
-  duration: '5m'
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: AWSChaos
+   metadata:
+     name: ec2-stop-example
+     namespace: chaos-testing
+   spec:
+     action: ec2-stop
+     secretName: 'cloud-key-secret'
+     awsRegion: 'us-east-2'
+     ec2Instance: 'your-ec2-instance-id'
+     duration: '5m'
+   ```
 
-依据此配置示例，Chaos Mesh 将向指定的 EC2 实例中注入 ec2-stop 故障，使该 EC2 实例将在 5 分钟时间内处于不可用的状态。
+   依据此配置示例，Chaos Mesh 将向指定的 EC2 实例中注入 ec2-stop 故障，使该 EC2 实例将在 5 分钟时间内处于不可用的状态。
 
-如需查看更多关于停止 EC2 实例的信息，可以参考 [停止和启动 EC2 实例](https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/Stop_Start.html)。
+   如需查看更多关于停止 EC2 实例的信息，可以参考 [停止和启动 EC2 实例](https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/Stop_Start.html)。
 
 2. 使用 kubectl 创建实验，命令如下：
 
-```bash
+   ```bash
    kubectl apply -f awschaos-ec2-stop.yaml
-```
+   ```
 
 ### ec2-restart 配置文件示例
 
 1. 将实验配置写入到文件 `awschaos-ec2-restart.yaml` 中，内容如下所示：
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: AWSChaos
-metadata:
-  name: ec2-restart-example
-  namespace: chaos-testing
-spec:
-  action: ec2-restart
-  secretName: 'cloud-key-secret'
-  awsRegion: 'us-east-2'
-  ec2Instance: 'your-ec2-instance-id'
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: AWSChaos
+   metadata:
+     name: ec2-restart-example
+     namespace: chaos-testing
+   spec:
+     action: ec2-restart
+     secretName: 'cloud-key-secret'
+     awsRegion: 'us-east-2'
+     ec2Instance: 'your-ec2-instance-id'
+   ```
 
-依据此配置示例，Chaos Mesh 将向指定的 EC2 实例中注入 ec2-restart 故障，使该 EC2 实例将重启一次。
+   依据此配置示例，Chaos Mesh 将向指定的 EC2 实例中注入 ec2-restart 故障，使该 EC2 实例将重启一次。
 
-如需查看更多关于重启 EC2 实例的信息，可以参考[重启实例](https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/ec2-instance-reboot.html)。
+   如需查看更多关于重启 EC2 实例的信息，可以参考[重启实例](https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/ec2-instance-reboot.html)。
 
 2. 使用 kubectl 创建实验，命令如下：
 
-```bash
+   ```bash
    kubectl apply -f awschaos-ec2-restart.yaml
-```
+   ```
 
 ### detach-volume 配置文件示例
 
 1. 将实验配置写入到文件 `awschaos-detach-volume.yaml` 中，内容如下所示：
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: AWSChaos
-metadata:
-  name: ec2-detach-volume-example
-  namespace: chaos-testing
-spec:
-  action: ec2-stop
-  secretName: 'cloud-key-secret'
-  awsRegion: 'us-east-2'
-  ec2Instance: 'your-ec2-instance-id'
-  volumeID: 'your-volume-id'
-  deviceName: '/dev/sdf'
-  duration: '5m'
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: AWSChaos
+   metadata:
+     name: ec2-detach-volume-example
+     namespace: chaos-testing
+   spec:
+     action: ec2-stop
+     secretName: 'cloud-key-secret'
+     awsRegion: 'us-east-2'
+     ec2Instance: 'your-ec2-instance-id'
+     volumeID: 'your-volume-id'
+     deviceName: '/dev/sdf'
+     duration: '5m'
+   ```
 
-依据此配置示例，Chaos Mesh 将向指定的 EC2 实例中注入 detach-volume 故障，使该 EC2 实例在 5 分钟内与指定存储卷分离。
+   依据此配置示例，Chaos Mesh 将向指定的 EC2 实例中注入 detach-volume 故障，使该 EC2 实例在 5 分钟内与指定存储卷分离。
 
-查看更多关于分离 Amazon EBS 卷的消息, 可以参考[分离 Amazon EBS 卷](https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/ebs-detaching-volume.html)。
+   查看更多关于分离 Amazon EBS 卷的消息, 可以参考[分离 Amazon EBS 卷](https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/ebs-detaching-volume.html)。
 
 2. 使用 kubectl 创建实验，命令如下：
 
-```bash
+   ```bash
    kubectl apply -f awschaos-detach-volume.yaml
-```
+   ```
 
 ### 字段说明
 

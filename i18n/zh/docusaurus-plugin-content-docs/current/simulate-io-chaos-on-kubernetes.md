@@ -47,132 +47,132 @@ IOChaos 是 Chaos Mesh 中的一种故障类型。通过创建 IOChaos 类型的
 
 1. 将实验配置写入到文件中 `io-latency.yaml`，内容示例如下：
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: IOChaos
-metadata:
-  name: io-latency-example
-  namespace: chaos-testing
-spec:
-  action: latency
-  mode: one
-  selector:
-    labelSelectors:
-      app: etcd
-  volumePath: /var/run/etcd
-  path: '/var/run/etcd/**/*'
-  delay: '100ms'
-  percent: 50
-  duration: '400s'
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: IOChaos
+   metadata:
+     name: io-latency-example
+     namespace: chaos-testing
+   spec:
+     action: latency
+     mode: one
+     selector:
+       labelSelectors:
+         app: etcd
+     volumePath: /var/run/etcd
+     path: '/var/run/etcd/**/*'
+     delay: '100ms'
+     percent: 50
+     duration: '400s'
+   ```
 
-依据此配置示例，Chaos Mesh 将向 `/var/run/etcd` 目录注入延迟故障，使该目录下的所有文件系统操作（包括读，写，列出目录内容等）产生 100 毫秒延迟。
+   依据此配置示例，Chaos Mesh 将向 `/var/run/etcd` 目录注入延迟故障，使该目录下的所有文件系统操作（包括读，写，列出目录内容等）产生 100 毫秒延迟。
 
 2. 使用 `kubectl` 创建实验，命令如下：
 
-```bash
-kubectl apply -f ./io-latency.yaml
-```
+   ```bash
+   kubectl apply -f ./io-latency.yaml
+   ```
 
 ### fault 示例
 
 1. 将实验配置写入到文件中 `io-fault.yaml`，内容示例如下：
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: IOChaos
-metadata:
-  name: io-fault-example
-  namespace: chaos-testing
-spec:
-  action: fault
-  mode: one
-  selector:
-    labelSelectors:
-      app: etcd
-  volumePath: /var/run/etcd
-  path: /var/run/etcd/**/*
-  errno: 5
-  percent: 50
-  duration: '400s'
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: IOChaos
+   metadata:
+     name: io-fault-example
+     namespace: chaos-testing
+   spec:
+     action: fault
+     mode: one
+     selector:
+       labelSelectors:
+         app: etcd
+     volumePath: /var/run/etcd
+     path: /var/run/etcd/**/*
+     errno: 5
+     percent: 50
+     duration: '400s'
+   ```
 
-依据此配置示例，Chaos Mesh 将向 `/var/run/etcd` 目录注入文件错误故障，使该目录下的所有文件系统操作有 50% 的概率发生错误，并返回错误码 5 (Input/output error)。
+   依据此配置示例，Chaos Mesh 将向 `/var/run/etcd` 目录注入文件错误故障，使该目录下的所有文件系统操作有 50% 的概率发生错误，并返回错误码 5 (Input/output error)。
 
 2. 使用 `kubectl` 创建实验，命令如下：
 
-```bash
-kubectl apply -f ./io-fault.yaml
-```
+   ```bash
+   kubectl apply -f ./io-fault.yaml
+   ```
 
 ### attrOverride 示例
 
 1. 将实验配置写入到文件中 `io-attr.yaml`，内容示例如下：
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: IOChaos
-metadata:
-  name: io-attr-example
-  namespace: chaos-testing
-spec:
-  action: attrOverride
-  mode: one
-  selector:
-    labelSelectors:
-      app: etcd
-  volumePath: /var/run/etcd
-  path: /var/run/etcd/**/*
-  attr:
-    perm: 72
-  percent: 10
-  duration: '400s'
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: IOChaos
+   metadata:
+     name: io-attr-example
+     namespace: chaos-testing
+   spec:
+     action: attrOverride
+     mode: one
+     selector:
+       labelSelectors:
+         app: etcd
+     volumePath: /var/run/etcd
+     path: /var/run/etcd/**/*
+     attr:
+       perm: 72
+     percent: 10
+     duration: '400s'
+   ```
 
-依据此配置示例，Chaos Mesh 将向 `/var/run/etcd` 目录注入 `attrOverride` 故障，使该目录下的所有文件系统操作将有 10% 的概率使目标文件的权限变为 72（即八进制下的 110），这将使得文件只能由拥有者与其所在的组执行，无权进行其他操作。
+   依据此配置示例，Chaos Mesh 将向 `/var/run/etcd` 目录注入 `attrOverride` 故障，使该目录下的所有文件系统操作将有 10% 的概率使目标文件的权限变为 72（即八进制下的 110），这将使得文件只能由拥有者与其所在的组执行，无权进行其他操作。
 
 2. 使用 `kubectl` 创建实验，命令如下：
 
-```bash
-kubectl apply -f ./io-attr.yaml
-```
+   ```bash
+   kubectl apply -f ./io-attr.yaml
+   ```
 
 ### mistake 示例
 
 1. 将实验配置写入到文件中 `io-mistake.yaml`，内容示例如下：
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: IOChaos
-metadata:
-  name: io-mistake-example
-  namespace: chaos-testing
-spec:
-  action: mistake
-  mode: one
-  selector:
-    labelSelectors:
-      app: etcd
-  volumePath: /var/run/etcd
-  path: /var/run/etcd/**/*
-  mistake:
-    filling: zero
-    maxOccurrences: 1
-    maxLength: 10
-  methods:
-    - READ
-    - WRITE
-  percent: 10
-  duration: '400s'
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: IOChaos
+   metadata:
+     name: io-mistake-example
+     namespace: chaos-testing
+   spec:
+     action: mistake
+     mode: one
+     selector:
+       labelSelectors:
+         app: etcd
+     volumePath: /var/run/etcd
+     path: /var/run/etcd/**/*
+     mistake:
+       filling: zero
+       maxOccurrences: 1
+       maxLength: 10
+     methods:
+       - READ
+       - WRITE
+     percent: 10
+     duration: '400s'
+   ```
 
-依据此配置示例，Chaos Mesh 将向 `/var/run/etcd` 目录注入读写错误故障，使该目录下的读写操作将有 10% 的概率将发生错误。其中以字节为单位，最大长度为 10 的 1 处随机位置将被替换为 0。
+   依据此配置示例，Chaos Mesh 将向 `/var/run/etcd` 目录注入读写错误故障，使该目录下的读写操作将有 10% 的概率将发生错误。其中以字节为单位，最大长度为 10 的 1 处随机位置将被替换为 0。
 
 2. 使用 `kubectl` 创建实验，命令如下：
 
-```bash
-kubectl apply -f ./io-mistake.yaml
-```
+   ```bash
+   kubectl apply -f ./io-mistake.yaml
+   ```
 
 ### 字段说明
 

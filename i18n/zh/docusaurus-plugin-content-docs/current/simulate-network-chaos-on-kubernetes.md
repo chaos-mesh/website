@@ -41,98 +41,98 @@ NetworkChaos 用于模拟集群中网络故障的场景，目前支持以下几�
 
 1. 将实验配置写入到文件中 `network-delay.yaml`，内容示例如下：
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: NetworkChaos
-metadata:
-  name: delay
-spec:
-  action: delay
-  mode: one
-  selector:
-    namespaces:
-      - default
-    labelSelectors:
-      'app': 'web-show'
-  delay:
-    latency: '10ms'
-    correlation: '100'
-    jitter: '0ms'
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: NetworkChaos
+   metadata:
+     name: delay
+   spec:
+     action: delay
+     mode: one
+     selector:
+       namespaces:
+         - default
+       labelSelectors:
+         'app': 'web-show'
+     delay:
+       latency: '10ms'
+       correlation: '100'
+       jitter: '0ms'
+   ```
 
-该配置将令选中 Pod 内的网络连接产生 10 毫秒的延迟。除了注入延迟以外，Chaos Mesh 还支持注入丢包、乱序等功能，详见[字段说明](#字段说明)
+   该配置将令选中 Pod 内的网络连接产生 10 毫秒的延迟。除了注入延迟以外，Chaos Mesh 还支持注入丢包、乱序等功能，详见[字段说明](#字段说明)
 
 2. 使用 `kubectl` 创建实验，命令如下：
 
-```bash
-kubectl apply -f ./network-delay.yaml
-```
+   ```bash
+   kubectl apply -f ./network-delay.yaml
+   ```
 
 ### Partition 示例
 
 1. 将实验配置写入到文件中 `network-partition.yaml`，内容示例如下：
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: NetworkChaos
-metadata:
-  name: partition
-spec:
-  action: partition
-  mode: all
-  selector:
-    namespaces:
-      - default
-    labelSelectors:
-      'app': 'app1'
-  direction: to
-  target:
-    mode: all
-    selector:
-      namespaces:
-        - default
-      labelSelectors:
-        'app': 'app2'
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: NetworkChaos
+   metadata:
+     name: partition
+   spec:
+     action: partition
+     mode: all
+     selector:
+       namespaces:
+         - default
+       labelSelectors:
+         'app': 'app1'
+     direction: to
+     target:
+       mode: all
+       selector:
+         namespaces:
+           - default
+         labelSelectors:
+           'app': 'app2'
+   ```
 
-该配置将阻止从 `app1` 向 `app2` 建立的连接。`direction` 字段的值可以选择 `to`，`from` 及 `both`，详见[字段说明](#字段说明)。
+   该配置将阻止从 `app1` 向 `app2` 建立的连接。`direction` 字段的值可以选择 `to`，`from` 及 `both`，详见[字段说明](#字段说明)。
 
 2. 使用 `kubectl` 创建实验，命令如下：
 
-```bash
-kubectl apply -f ./network-partition.yaml
-```
+   ```bash
+   kubectl apply -f ./network-partition.yaml
+   ```
 
 ### Bandwidth 示例
 
 1. 将实验配置写入到文件中 `network-bandwidth.yaml`，内容示例如下：
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: NetworkChaos
-metadata:
-  name: bandwidth
-spec:
-  action: bandwidth
-  mode: all
-  selector:
-    namespaces:
-      - default
-    labelSelectors:
-      'app': 'app1'
-  bandwidth:
-    rate: '1mbps'
-    limit: 100
-    buffer: 10000
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: NetworkChaos
+   metadata:
+     name: bandwidth
+   spec:
+     action: bandwidth
+     mode: all
+     selector:
+       namespaces:
+         - default
+       labelSelectors:
+         'app': 'app1'
+     bandwidth:
+       rate: '1mbps'
+       limit: 100
+       buffer: 10000
+   ```
 
-该配置将限制 `app1` 的带宽为 1 mbps。
+   该配置将限制 `app1` 的带宽为 1 mbps。
 
 2. 使用 `kubectl` 创建实验，命令如下：
 
-```bash
-kubectl apply -f ./network-bandwidth.yaml
-```
+   ```bash
+   kubectl apply -f ./network-bandwidth.yaml
+   ```
 
 ### 字段说明
 
@@ -170,19 +170,19 @@ kubectl apply -f ./network-bandwidth.yaml
 
 1. 首先生成一个分布与上一个值有关的随机数：
 
-```c
-rnd = value * (1-corr) + last_rnd * corr
-```
+   ```c
+   rnd = value * (1-corr) + last_rnd * corr
+   ```
 
-其中 `rnd` 为这一随机数。`corr` 为填写的 `correlation`。
+   其中 `rnd` 为这一随机数。`corr` 为填写的 `correlation`。
 
 2. 使用这一随机数决定当前包的延迟：
 
-```c
-((rnd % (2 * sigma)) + mu) - sigma
-```
+   ```c
+   ((rnd % (2 * sigma)) + mu) - sigma
+   ```
 
-其中 `sigma` 为 `jitter`，`mu` 为 `latency`。
+   其中 `sigma` 为 `jitter`，`mu` 为 `latency`。
 
 ##### Reorder
 

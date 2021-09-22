@@ -31,14 +31,18 @@ PodChaos 是 Chaos Mesh 中的一种故障类型，通过创建 PodChaos 类型�
 
 - 确保已经安装了 Chaos Dashboard。
 - 如果已安装 Chaos Dashboard，你可以通过运行 `kubectl port-forward` 命令的方式访问 Dashboard：
-  `bash kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333 `
+
+  ```bash
+  kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333
+  ```
+
   然后可以在浏览器中输入 [`http://localhost:2333`](http://localhost:2333) 访问 Chaos Dashboard。
 
 :::
 
 1. 单击实验页面中的**新的实验**按钮创建实验。
 
-![img](./img/create-pod-chaos-on-dashborad-1_zh.jpg)
+   ![img](./img/create-pod-chaos-on-dashborad-1_zh.jpg)
 
 2. 在**选择目标**处选择 **POD 故障**，并选择具体行为，例如 **POD FAILURE**。
 
@@ -67,7 +71,7 @@ PodChaos 是 Chaos Mesh 中的一种故障类型，通过创建 PodChaos 类型�
          'app.kubernetes.io/component': 'tikv'
    ```
 
-依据此配置示例，Chaos Mesh 将向指定的 Pod 中注入 `pod-failure` 故障，将使该 Pod 在 30 秒内处于不可用的状态。
+   依据此配置示例，Chaos Mesh 将向指定的 Pod 中注入 `pod-failure` 故障，将使该 Pod 在 30 秒内处于不可用的状态。
 
 2. 使用 `kubectl` 创建实验，命令如下：
 
@@ -95,7 +99,7 @@ PodChaos 是 Chaos Mesh 中的一种故障类型，通过创建 PodChaos 类型�
          'app.kubernetes.io/component': 'tikv'
    ```
 
-依据此配置示例，Chaos Mesh 将向指定的 Pod 中注入 `pod-kill` 故障，将使该 Pod 被杀死一次。
+   依据此配置示例，Chaos Mesh 将向指定的 Pod 中注入 `pod-kill` 故障，将使该 Pod 被杀死一次。
 
 2. 使用 `kubectl` 创建实验，命令如下：
 
@@ -122,7 +126,7 @@ PodChaos 是 Chaos Mesh 中的一种故障类型，通过创建 PodChaos 类型�
          'app.kubernetes.io/component': 'monitor'
    ```
 
-依据此配置示例，Chaos Mesh 将向指定的 Container 中注入 `container-kill` 故障，将使该 Container 被杀死一次。
+   依据此配置示例，Chaos Mesh 将向指定的 Container 中注入 `container-kill` 故障，将使该 Container 被杀死一次。
 
 2. 使用 `kubectl` 创建实验，命令如下：
 

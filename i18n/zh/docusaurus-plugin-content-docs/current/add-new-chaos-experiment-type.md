@@ -59,20 +59,20 @@ title: 新增混沌实验类型
    }
    ```
 
-这个文件定义了 HelloWorldChaos 的结构类型，它可以用一个 YAML 文件描述:
+   这个文件定义了 HelloWorldChaos 的结构类型，它可以用一个 YAML 文件描述:
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: HelloWorldChaos
-metadata:
-  name: <资源名>
-  namespace: <命名空间名>
-spec:
-  duration: <持续时间>
-status:
-  experiment: <实验状态>
-  ...
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: HelloWorldChaos
+   metadata:
+     name: <资源名>
+     namespace: <命名空间名>
+   spec:
+     duration: <持续时间>
+   status:
+     experiment: <实验状态>
+     ...
+   ```
 
 2. 在 Chaos Mesh 根目录下运行 `make generate`，为 HelloWorldChaos 生成一些用于编译 Chaos Mesh 的辅助代码。
 
@@ -82,17 +82,17 @@ status:
 
 1. 在根目录下运行 `make yaml`。
 
-生成的 YAML 文件位于 `config/crd/bases/chaos-mesh.org_helloworldchaos.yaml`。
+   生成的 YAML 文件位于 `config/crd/bases/chaos-mesh.org_helloworldchaos.yaml`。
 
 2. 为将这个 YAML 文件合并入 `manifests/crd.yaml` 中，修改 `config/crd/kustomization.yaml`，在其中加入新的一行:
 
-```yaml
-resources:
-  - bases/chaos-mesh.org_podchaos.yaml
-  - bases/chaos-mesh.org_networkchaos.yaml
-  - bases/chaos-mesh.org_iochaos.yaml
-  - bases/chaos-mesh.org_helloworldchaos.yaml # 新增一行
-```
+   ```yaml
+   resources:
+     - bases/chaos-mesh.org_podchaos.yaml
+     - bases/chaos-mesh.org_networkchaos.yaml
+     - bases/chaos-mesh.org_iochaos.yaml
+     - bases/chaos-mesh.org_helloworldchaos.yaml # 新增一行
+   ```
 
 3. 再次运行 `make yaml`，HelloWorldChaos 的定义就会出现在 `manifests/crd.yaml` 里。 如需确认，你可以使用 `git diff` 命令。
 
@@ -167,56 +167,56 @@ resources:
        helloworldchaos.Module // 新增一行，注意处理 import
    ```
 
-以及在 `controllers/types/types.go` 中加入：
+   以及在 `controllers/types/types.go` 中加入：
 
-    ```go
-        ...
-        fx.Annotated{
-            Group: "objs",
-            Target: Object{
-                Name:   "timechaos",
-                Object: &v1alpha1.TimeChaos{},
-            },
-        },
+   ```go
+       ...
+       fx.Annotated{
+           Group: "objs",
+           Target: Object{
+               Name:   "timechaos",
+               Object: &v1alpha1.TimeChaos{},
+           },
+       },
 
-        fx.Annotated{
-            Group: "objs",
-            Target: Object{
-                Name:   "gcpchaos",
-                Object: &v1alpha1.GCPChaos{},
-            },
-        },
+       fx.Annotated{
+           Group: "objs",
+           Target: Object{
+               Name:   "gcpchaos",
+               Object: &v1alpha1.GCPChaos{},
+           },
+       },
 
-        fx.Annotated{
-            Group: "objs",
-            Target: Object{
-                Name:   "helloworldchaos",
-                Object: &v1alpha1.HelloWorldChaos{},
-            },
-        },
-    ```
+       fx.Annotated{
+           Group: "objs",
+           Target: Object{
+               Name:   "helloworldchaos",
+               Object: &v1alpha1.HelloWorldChaos{},
+           },
+       },
+   ```
 
 ## 第 4 步：编译 Docker 镜像
 
 1. 在完成了前面所有步骤后，你可以尝试编译镜像：
 
-```bash
-make
-```
+   ```bash
+   make
+   ```
 
 2. 将镜像推送到本地的 Docker Registry 中：
 
-```bash
-make docker-push
-```
+   ```bash
+   make docker-push
+   ```
 
 3. 如果你的 Kubernetes 集群部署在 kind 上，则还需要将镜像加载进 kind 中：
 
-```bash
-kind load docker-image localhost:5000/pingcap/chaos-mesh:latest
-kind load docker-image localhost:5000/pingcap/chaos-daemon:latest
-kind load docker-image localhost:5000/pingcap/chaos-dashboard:latest
-```
+   ```bash
+   kind load docker-image localhost:5000/pingcap/chaos-mesh:latest
+   kind load docker-image localhost:5000/pingcap/chaos-daemon:latest
+   kind load docker-image localhost:5000/pingcap/chaos-dashboard:latest
+   ```
 
 ## 第 5 步：运行混沌实验
 

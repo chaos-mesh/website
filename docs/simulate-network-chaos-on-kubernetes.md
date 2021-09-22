@@ -62,7 +62,7 @@ Before creating NetworkChaos experiments, ensure the following:
        jitter: '0ms'
    ```
 
-This configuration causes a latency of 10 milliseconds in the network connections of the target Pods. In addition to latency injection, Chaos Mesh supports packet loss and packet reordering injection. For details, see [field description](#field-description).
+   This configuration causes a latency of 10 milliseconds in the network connections of the target Pods. In addition to latency injection, Chaos Mesh supports packet loss and packet reordering injection. For details, see [field description](#field-description).
 
 2. After the configuration file is prepared, use `kubectl` to create an experiment:
 
@@ -97,7 +97,7 @@ This configuration causes a latency of 10 milliseconds in the network connection
            'app': 'app2'
    ```
 
-This configuration blocks the connection created from `app1` to `app2`. The value for the `direction` field can be `to`, `from` or `both`. For details, refer to [Field description](#field-description).
+   This configuration blocks the connection created from `app1` to `app2`. The value for the `direction` field can be `to`, `from` or `both`. For details, refer to [Field description](#field-description).
 
 2. After the configuration file is prepared, use `kubectl` to create the experiment:
 
@@ -128,7 +128,7 @@ This configuration blocks the connection created from `app1` to `app2`. The valu
        buffer: 10000
    ```
 
-This configuration limits the bandwidth of `app1` to 1 mbps.
+   This configuration limits the bandwidth of `app1` to 1 mbps.
 
 2. After the configuration file is prepared, use `kubectl` to create the experiment:
 
@@ -138,13 +138,11 @@ This configuration limits the bandwidth of `app1` to 1 mbps.
 
 ## Field description
 
-### Field description
-
 | Parameter      | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                        | Default value | Required | Example   |
 | -------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | -------- | --------- |
 | action         | string   | Indicates the specific fault type. Available types include: `netem`, `delay` (network delay), `loss` (packet loss), `duplicate` (packet duplicating), `corrupt` (packet corrupt), `partition` (network partition), and `bandwidth` (network bandwidth limit).After you specify `action` field, refer to [Description for `action`-related fields](#description-for-action-related-fields) for other necessary field configuration. | None          | Yes      | Partition |
 | target         | Selector | Used in combination with direction, making Chaos only effective for some packets.                                                                                                                                                                                                                                                                                                                                                  | None          | No       |           |
-| direction      | enum     | Indicates the direction of `target` packets. Available vaules include `from` (the packets from `target`), `to` (the packets to ` target`), and `both` ( the packets from or to `target`). This parameter makes Chaos only take effect for a specific direction of packets.                                                                                                                                                         | to            | No       | both      |
+| direction      | enum     | Indicates the direction of `target` packets. Available vaules include `from` (the packets from `target`), `to` (the packets to `target`), and `both` ( the packets from or to `target`). This parameter makes Chaos only take effect for a specific direction of packets.                                                                                                                                                          | to            | No       | both      |
 | mode           | string   | Specifies the mode of the experiment. The mode options include `one` (selecting a random Pod), `all` (selecting all eligible Pods), `fixed` (selecting a specified number of eligible Pods), `fixed-percent` (selecting a specified percentage of Pods from the eligible Pods), and `random-max-percent` (selecting the maximum percentage of Pods from the eligible Pods).                                                        | None          | Yes      | `1`       |
 | value          | string   | Provides a parameter for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods.                                                                                                                                                                                                                                                              | None          | No       | 2         |
 | containerNames | []string | Specifies the name of the container into which the fault is injected.                                                                                                                                                                                                                                                                                                                                                              | None          | No       | ["nginx"] |
@@ -176,7 +174,7 @@ The computational model for `correlation` is as follows:
    rnd = value * (1-corr) + last_rnd * corr
    ```
 
-`rnd` is the random number. `corr` is the `correlation` you fill out before.
+   `rnd` is the random number. `corr` is the `correlation` you fill out before.
 
 2. Use this random number to determine the delay of the current packet:
 

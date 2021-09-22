@@ -119,7 +119,7 @@ int main(void) {
 
 在故障注入期间，输出如下：
 
-```
+```console
 > Cannot allocate memory
 > Invalid argument
 > Cannot allocate memory
