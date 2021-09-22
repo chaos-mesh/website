@@ -38,7 +38,7 @@ Currently, Chaos workflows provide the following features:
 - Support using YAML files to define and manage Chaos workflows
 - Support using the web UI to define and manage Chaos workflows
 
-For the configuration of a specific workflow, see [ Create the Chaos Mesh workflow](create-chaos-mesh-workflow.md).
+For the configuration of a specific workflow, see [Create Chaos Mesh workflow](create-chaos-mesh-workflow.md).
 
 ## Visualized operations
 

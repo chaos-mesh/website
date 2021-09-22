@@ -2,7 +2,7 @@
 title: Basic Features
 ---
 
-This document describes the basic features of Chaos Mesh, including [fault injection](#fault-injection), [Chaos experiment scenarios](#chaos-experiment-scenarios), [visualized operations](#visualized-operations), and [security guarantees](#security-guarantees).
+This document describes the basic features of Chaos Mesh, including [fault injection](#fault-injection), [Chaos workflows](#chaos-workflows), [visualized operations](#visualized-operations), and [security guarantees](#security-guarantees).
 
 ## Fault injection
 
@@ -23,28 +23,28 @@ Fault injection is the key of Chaos experiments. Chaos Mesh covers a full range 
 - Application faults:
   - [JVMChaos](simulate-jvm-application-chaos.md): simulates JVM application failures, such as the function call delay.
 
-## Chaos experiment scenarios
+## Chaos workflows
 
-A Chaos experiment scenario includes a set of Chaos experiments and an application status check, so you can complete the entire process of a Chaos engineering project on the platform.
+A Chaos workflow includes a set of Chaos experiments and an application status check, so you can complete the entire process of a Chaos engineering project on the platform.
 
-To run a Chaos scenario, you can perform a series of Chaos experiments, keep expanding the explosion radius (including the scope of attacks), and increase the failure types.After running a Chaos experiment, you can easily view the current state of the application using Chaos Mesh and determine whether to perform follow-up experiments.At the same time, to reduce the cost of Chaos experiments, you can keep updating and accumulating the Chaos experiment scenarios, and apply the existing experiment scenarios to other applications.
+Chaos workflows enable you to perform a series of Chaos experiments, keep expanding the explosion radius (including the scope of attacks), and increase the failure types. After running a Chaos workflow, you can easily view the current state of the application using Chaos Mesh and determine whether to perform follow-up experiments.At the same time, to reduce the cost of maintaining Chaos workflows, you can keep updating and accumulating the Chaos experiment workflows, and apply the existing experiments to other workflows.
 
-Currently, Chaos experiment scenarios provide the following features:
+Currently, Chaos workflows provide the following features:
 
 - Orchestrate serial Chaos experiments
 - Orchestrate parallel Chaos experiments
 - Support checking experimental status and results
 - Support pausing a Chaos experiment
-- Support using YAML files to define and manage Chaos experiment scenarios
-- Support using the web UI to define and manage Chaos experiment scenarios
+- Support using YAML files to define and manage Chaos workflows
+- Support using the web UI to define and manage Chaos workflows
 
-For the configuration of a specific experiment scenario, see [ Create the Chaos Mesh workflow](create-chaos-mesh-workflow.md).
+For the configuration of a specific workflow, see [Create Chaos Mesh workflow](create-chaos-mesh-workflow.md).
 
 ## Visualized operations
 
 Chaos Mesh provides the Chaos Dashboard component for visualized operations, which greatly simplifies Chaos experiments.You can manage and monitor a Chaos experiment directly through the visualization interface. For example, with a few clicks on the interface, you can define the scope of a Chaos experiment, specify the type of Chaos injection, define scheduling rules, and get the results of the Chaos experiment.
 
-![Chaos experiment scenarios](img/dashboard-overview.png)
+![Chaos workflow](img/dashboard-overview.png)
 
 ## Security guarantee
 
