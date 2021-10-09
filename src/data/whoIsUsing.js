@@ -23,6 +23,10 @@ const whoisUsing = [
     img: 'img/logos/datastax.svg',
   },
   {
+    name: 'Digital China',
+    img: 'img/logos/digitalchina.jpeg',
+  },
+  {
     name: 'Fuxi Lab',
     img: 'img/logos/fuxilab.png',
   },
