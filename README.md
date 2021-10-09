@@ -2,7 +2,7 @@
 <!-- markdownlint-disable-file MD041 -->
 
 <p align="center">
-  <img src="logo.svg" width="256" alt="Chaos Mesh Logo" />
+  <img src="logo.svg" width="512" alt="Chaos Mesh Logo" />
 </p>
 <h1 align="center">Website</h1>
 <p align="center">
