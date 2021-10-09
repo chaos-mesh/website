@@ -2,6 +2,14 @@ module.exports = {
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'zh'],
+    localeConfigs: {
+      en: {
+        label: 'English',
+      },
+      zh: {
+        label: '简体中文',
+      },
+    },
   },
   title: 'Chaos Mesh®',
   tagline: 'A Powerful Chaos Engineering Platform for Kubernetes',
@@ -142,11 +150,13 @@ module.exports = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl: 'https://github.com/chaos-mesh/website/edit/master/',
+          editLocalizedFiles: true,
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
           editUrl: 'https://github.com/chaos-mesh/website/edit/master/',
+          editLocalizedFiles: true,
         },
         theme: {
           customCss: require.resolve('./src/styles/custom.css'),
