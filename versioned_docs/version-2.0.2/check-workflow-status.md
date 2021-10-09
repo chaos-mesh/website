@@ -2,9 +2,9 @@
 title: Check Workflow Status
 ---
 
-## Check workflow status using Chaos Dashboard
+<!-- ## Check workflow status using Chaos Dashboard -->
 
-<!--TODO: This section will be added after the optimization of Chaos Dashboard completes.-->
+<!-- TODO: This section will be added after the optimization of Chaos Dashboard completes. -->
 
 ## Check workflow status using `kubectl` commands
 
