@@ -1,6 +1,5 @@
 ---
 title: Simulate Stress Scenarios
-sidebar_label: Simulate Stress Scenarios
 ---
 
 ## StressChaos Introduction

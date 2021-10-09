@@ -1,6 +1,5 @@
 ---
 title: chaosctl
-sidebar_label: chaosctl
 ---
 
 chaosctl is a tool to assist in debugging Chaos Mesh. With chaosctl, you can simplify the process of developing and debugging new chaos types, and provide references for other developers when raising an issue.
@@ -17,19 +16,19 @@ For Windows or macOS users, you can compile it from the source code. Go v1.15 or
 
 1. Clone the Chaos Mesh repository to your local machine.
 
-    ```bash
-    git clone https://github.com/chaos-mesh/chaos-mesh.git
-    ```
+   ```bash
+   git clone https://github.com/chaos-mesh/chaos-mesh.git
+   ```
 
 2. Switch to the Chaos Mesh directory.
 
 3. Execute the following command:
 
-    ```bash
-    make chaosctl
-    ```
+   ```bash
+   make chaosctl
+   ```
 
-    The compiled executable file is at `bin/chaosctl`.
+   The compiled executable file is at `bin/chaosctl`.
 
 ## Features
 

@@ -1,6 +1,5 @@
 ---
 title: Simulate HTTP faults
-sidebar_label: Simulate HTTP faults
 ---
 
 This document describes how to simulate HTTP faults by creating HTTPChaos experiments in Chaos Mesh.
@@ -23,7 +22,7 @@ For the detailed description of HTTPChaos configuration, see [Field description]
 Before injecting the faults supported by HTTPChaos, note the followings:
 
 - There is no control manager of Chaos Mesh running on the target Pod.
-- HTTPS accesses should be disabled, because injecting HTTPS connections is not supported currently. 
+- HTTPS accesses should be disabled, because injecting HTTPS connections is not supported currently.
 - For HTTPChaos injection to take effect, the client should avoid reusing TCP socket. This is because HTTPChaos does not affect the HTTP requests that are sent via TCP socket before the fault injection.
 - Use non-idempotent requests (such as most of the POST requests) with caution in production environments. If such requests are used, the target service may not return to normal status by repeating requests after the fault injection.
 
@@ -35,75 +34,75 @@ Currently, Chaos Mesh only supports using YAML configuration files to create HTT
 
 1. Write the experimental configuration to the `http-abort-failure.yaml` file as the example below:
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: HTTPChaos
-metadata:
-  name: test-http-chaos
-spec:
-  mode: all
-  selector:
-    labelSelectors:
-      app: nginx
-  target: Request
-  port: 80
-  method: GET
-  path: /api
-  abort: true
-  duration: 5m
-  scheduler:
-    cron: '@every 10m'
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: HTTPChaos
+   metadata:
+     name: test-http-chaos
+   spec:
+     mode: all
+     selector:
+       labelSelectors:
+         app: nginx
+     target: Request
+     port: 80
+     method: GET
+     path: /api
+     abort: true
+     duration: 5m
+     scheduler:
+       cron: '@every 10m'
+   ```
 
-Based on this configuration example, every 10 minutes, Chaos Mesh will inject the `abort` fault into the specified pod for 5 minutes. During the fault injection, the GET requests sent through port 80 in the `/api` path of the target Pod will be interrupted.
+   Based on this configuration example, every 10 minutes, Chaos Mesh will inject the `abort` fault into the specified pod for 5 minutes. During the fault injection, the GET requests sent through port 80 in the `/api` path of the target Pod will be interrupted.
 
 2. After the configuration file is prepared, use `kubectl` to create the experiment:
 
-```bash
-kubectl apply -f ./http-abort-failure.yaml
-```
+   ```bash
+   kubectl apply -f ./http-abort-failure.yaml
+   ```
 
 ### Example of fault combinations
 
 1. Write the experimental configuration to `http-failure.yaml` file as the example below:
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: HTTPChaos
-metadata:
-  name: test-http-chaos
-spec:
-  mode: all
-  selector:
-    labelSelectors:
-      app: nginx
-  target: Request
-  port: 80
-  method: GET
-  path: /api/*
-  delay: 10s
-  replace:
-    path: /api/v2/
-    method: DELETE
-  patch:
-    headers:
-      - ['Token', '<one token>']
-      - ['Token', '<another token>']
-    body:
-      type: JSON
-      value: '{"foo": "bar"}'
-  duration: 5m
-  scheduler:
-    cron: '@every 10m'
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: HTTPChaos
+   metadata:
+     name: test-http-chaos
+   spec:
+     mode: all
+     selector:
+       labelSelectors:
+         app: nginx
+     target: Request
+     port: 80
+     method: GET
+     path: /api/*
+     delay: 10s
+     replace:
+       path: /api/v2/
+       method: DELETE
+     patch:
+       headers:
+         - ['Token', '<one token>']
+         - ['Token', '<another token>']
+       body:
+         type: JSON
+         value: '{"foo": "bar"}'
+     duration: 5m
+     scheduler:
+       cron: '@every 10m'
+   ```
 
-Based on this configuration example, Chaos Mesh will inject the `delay` fault, `replace` fault, and `patch` fault consecutively.
+   Based on this configuration example, Chaos Mesh will inject the `delay` fault, `replace` fault, and `patch` fault consecutively.
 
 2. After the configuration file is prepared, use `kubectl` to create the experiment:
 
-```bash
-kubectl apply -f ./http-failure.yaml
-```
+   ```bash
+   kubectl apply -f ./http-failure.yaml
+   ```
 
 ## Field description
 
@@ -111,7 +110,7 @@ kubectl apply -f ./http-failure.yaml
 
 Common fields are meaningful when the `target` of fault injection is `Request` or `Response`.
 
-| Parameter        | Type              | Description                                                                                                                                                                                                                                                                                                                                                                | Default value                             | Required | Example                        |
+| Parameter        | Type              | Description                                                                                                                                                                                                                                                                                                                                                                 | Default value                             | Required | Example                        |
 | ---------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- | -------- | ------------------------------ |
 | mode             | string            | Specifies the mode of the experiment. The mode options include `one` (selecting a random pod), `all` (selecting all eligible pods), `fixed` (selecting a specified number of eligible pods), `fixed-percent` (selecting a specified percentage of Pods from the eligible pods), and `random-max-percent` (selecting the maximum percentage of Pods from the eligible pods). |                                           | yes      | one                            |
 | value            | string            | Provides parameters for the `mode` configuration depending on the value of `mode`.                                                                                                                                                                                                                                                                                          |                                           | no       | 2                              |
@@ -136,12 +135,12 @@ Common fields are meaningful when the `target` of fault injection is `Request` o
 
 The `Request` field is a meaningful when the `target` set to `Request` during the fault injection.
 
-| Parameter        | Type              | Description                                                         | Default value | Required | Example      |
-| ---------------- | ----------------- | ------------------------------------------------------------------- | ------------- | -------- | ------------ |
-| replace.path     | string            | Specifies the URI path used to replace content.                     |               | no       | /api/v2/     |
-| replace.method   | string            | Specifies the replaced content of the HTTP request method.          |               | no       | DELETE       |
-| replace.queries  | map[string]string | Specifies the replaced key pair of the URI query.                   |               | no       | foo: bar     |
-| patch.queries    | [][]string        | Specifies the attached key pair of the URI query with patch faults. |               | no       | - [foo, bar] |
+| Parameter       | Type              | Description                                                         | Default value | Required | Example      |
+| --------------- | ----------------- | ------------------------------------------------------------------- | ------------- | -------- | ------------ |
+| replace.path    | string            | Specifies the URI path used to replace content.                     |               | no       | /api/v2/     |
+| replace.method  | string            | Specifies the replaced content of the HTTP request method.          |               | no       | DELETE       |
+| replace.queries | map[string]string | Specifies the replaced key pair of the URI query.                   |               | no       | foo: bar     |
+| patch.queries   | [][]string        | Specifies the attached key pair of the URI query with patch faults. |               | no       | - [foo, bar] |
 
 #### `Respond`-related fields
 

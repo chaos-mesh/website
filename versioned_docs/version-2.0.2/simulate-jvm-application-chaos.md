@@ -1,6 +1,5 @@
 ---
 title: Simulate JVM Application Faults
-sidebar_label: Simulate JVM Application Faults
 ---
 
 ## JVMChaos introduction
@@ -149,7 +148,7 @@ Inject JVMChaos with a specified value:
 kubectl apply -f ./jvm-return-example.yaml
 ```
 
-Use curl or directly access to http://localhost:8080/hello, `hello chaos mesh!` is expected to be returned:
+Use curl or directly access to <http://localhost:8080/hello>, `hello chaos mesh!` is expected to be returned:
 
 ```shell
 curl http://localhost:8080/hello

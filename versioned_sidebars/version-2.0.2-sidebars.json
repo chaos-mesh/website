@@ -42,20 +42,12 @@
           "collapsible": true
         },
         {
-          "type": "category",
-          "label": "Manage Roles",
-          "items": [
-            {
-              "type": "doc",
-              "id": "version-2.0.2/manage-user-permissions"
-            },
-            {
-              "type": "doc",
-              "id": "version-2.0.2/configure-protected-namespace"
-            }
-          ],
-          "collapsible": true,
-          "collapsed": true
+          "type": "doc",
+          "id": "version-2.0.2/manage-user-permissions"
+        },
+        {
+          "type": "doc",
+          "id": "version-2.0.2/configure-enabled-namespace"
         },
         {
           "type": "category",
@@ -76,10 +68,6 @@
             {
               "type": "doc",
               "id": "version-2.0.2/inspect-chaos-experiments"
-            },
-            {
-              "type": "doc",
-              "id": "version-2.0.2/clean-up-chaos-experiments"
             }
           ],
           "collapsible": true,
@@ -87,7 +75,7 @@
         },
         {
           "type": "category",
-          "label": " Orchestrate Multiple Chaos Experiments",
+          "label": "Orchestrate Multiple Chaos Experiments",
           "items": [
             {
               "type": "doc",
@@ -204,7 +192,9 @@
           "type": "doc",
           "id": "version-2.0.2/integrate-chaos-mesh-into-github-actions"
         }
-      ]
+      ],
+      "collapsible": true,
+      "collapsed": true
     },
     {
       "type": "category",
@@ -230,7 +220,9 @@
           "type": "doc",
           "id": "version-2.0.2/extend-chaosd"
         }
-      ]
+      ],
+      "collapsible": true,
+      "collapsed": true
     },
     {
       "type": "category",

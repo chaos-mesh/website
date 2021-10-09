@@ -1,6 +1,5 @@
 ---
 title: Chaosd Introduction
-sidebar_label: Chaosd
 ---
 
 ## Chaosd introduction

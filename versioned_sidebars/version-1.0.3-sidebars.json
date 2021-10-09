@@ -75,27 +75,27 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-1.0.3/chaos_experiments/podchaos_experiment"
+          "id": "version-1.0.3/chaos_experiments/podchaos"
         },
         {
           "type": "doc",
-          "id": "version-1.0.3/chaos_experiments/networkchaos_experiment"
+          "id": "version-1.0.3/chaos_experiments/networkchaos"
         },
         {
           "type": "doc",
-          "id": "version-1.0.3/chaos_experiments/stresschaos_experiment"
+          "id": "version-1.0.3/chaos_experiments/stresschaos"
         },
         {
           "type": "doc",
-          "id": "version-1.0.3/chaos_experiments/timechaos_experiment"
+          "id": "version-1.0.3/chaos_experiments/timechaos"
         },
         {
           "type": "doc",
-          "id": "version-1.0.3/chaos_experiments/iochaos_experiment"
+          "id": "version-1.0.3/chaos_experiments/iochaos"
         },
         {
           "type": "doc",
-          "id": "version-1.0.3/chaos_experiments/kernelchaos_experiment"
+          "id": "version-1.0.3/chaos_experiments/kernelchaos"
         }
       ]
     },
@@ -121,7 +121,7 @@
         },
         {
           "type": "doc",
-          "id": "version-1.0.3/development_guides/set_up_the_development_environment"
+          "id": "version-1.0.3/development_guides/setup_env"
         },
         {
           "type": "doc",

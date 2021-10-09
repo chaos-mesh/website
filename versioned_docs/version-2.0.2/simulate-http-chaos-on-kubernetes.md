@@ -1,6 +1,5 @@
 ---
 title: Simulate HTTP faults
-sidebar_label: Simulate HTTP faults
 ---
 
 This document describes how to simulate HTTP faults by creating HTTPChaos experiments in Chaos Mesh.
@@ -35,75 +34,75 @@ Currently, Chaos Mesh only supports using YAML configuration files to create HTT
 
 1. Write the experimental configuration to the `http-abort-failure.yaml` file as the example below:
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: HTTPChaos
-metadata:
-  name: test-http-chaos
-spec:
-  mode: all
-  selector:
-    labelSelectors:
-      app: nginx
-  target: Request
-  port: 80
-  method: GET
-  path: /api
-  abort: true
-  duration: 5m
-  scheduler:
-    cron: '@every 10m'
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: HTTPChaos
+   metadata:
+     name: test-http-chaos
+   spec:
+     mode: all
+     selector:
+       labelSelectors:
+         app: nginx
+     target: Request
+     port: 80
+     method: GET
+     path: /api
+     abort: true
+     duration: 5m
+     scheduler:
+       cron: '@every 10m'
+   ```
 
-Based on this configuration example, every 10 minutes, Chaos Mesh will inject the `abort` fault into the specified pod for 5 minutes. During the fault injection, the GET requests sent through port 80 in the `/api` path of the target Pod will be interrupted.
+   Based on this configuration example, every 10 minutes, Chaos Mesh will inject the `abort` fault into the specified pod for 5 minutes. During the fault injection, the GET requests sent through port 80 in the `/api` path of the target Pod will be interrupted.
 
 2. After the configuration file is prepared, use `kubectl` to create the experiment:
 
-```bash
-kubectl apply -f ./http-abort-failure.yaml
-```
+   ```bash
+   kubectl apply -f ./http-abort-failure.yaml
+   ```
 
 ### Example of fault combinations
 
 1. Write the experimental configuration to `http-failure.yaml` file as the example below:
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: HTTPChaos
-metadata:
-  name: test-http-chaos
-spec:
-  mode: all
-  selector:
-    labelSelectors:
-      app: nginx
-  target: Request
-  port: 80
-  method: GET
-  path: /api/*
-  delay: 10s
-  replace:
-    path: /api/v2/
-    method: DELETE
-  patch:
-    headers:
-      - ['Token', '<one token>']
-      - ['Token', '<another token>']
-    body:
-      type: JSON
-      value: '{"foo": "bar"}'
-  duration: 5m
-  scheduler:
-    cron: '@every 10m'
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: HTTPChaos
+   metadata:
+     name: test-http-chaos
+   spec:
+     mode: all
+     selector:
+       labelSelectors:
+         app: nginx
+     target: Request
+     port: 80
+     method: GET
+     path: /api/*
+     delay: 10s
+     replace:
+       path: /api/v2/
+       method: DELETE
+     patch:
+       headers:
+         - ['Token', '<one token>']
+         - ['Token', '<another token>']
+       body:
+         type: JSON
+         value: '{"foo": "bar"}'
+     duration: 5m
+     scheduler:
+       cron: '@every 10m'
+   ```
 
-Based on this configuration example, Chaos Mesh will inject the `delay` fault, `replace` fault, and `patch` fault consecutively.
+   Based on this configuration example, Chaos Mesh will inject the `delay` fault, `replace` fault, and `patch` fault consecutively.
 
 2. After the configuration file is prepared, use `kubectl` to create the experiment:
 
-```bash
-kubectl apply -f ./http-failure.yaml
-```
+   ```bash
+   kubectl apply -f ./http-failure.yaml
+   ```
 
 ## Field description
 

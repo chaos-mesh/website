@@ -1,10 +1,6 @@
 ---
-id: faqs
 title: FAQs
-sidebar_label: FAQs
 ---
-
-## Question
 
 ### Q: If I do not have Kubernetes clusters deployed, can I use Chaos Mesh to create chaos experiments?
 
@@ -12,13 +8,13 @@ No, you can not use Chaos Mesh in this case. But still you can run chaos experim
 
 ### Q: I have deployed Chaos Mesh and created PodChaos experiments successfully, but I still failed in creating NetworkChaos/TimeChaos Experiment. The log is shown below:
 
-```
+```console
 2020-06-18T01:05:26.207Z	ERROR	controllers.TimeChaos	failed to apply chaos on all pods	{"reconciler": "timechaos", "error": "rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial tcp xx.xx.xx.xx:xxxxx: connect: connection refused\""}
 ```
 
 You can try using the parameter: `hostNetwork`, as shown below:
 
-```
+```yaml
 # vim helm/chaos-mesh/values.yaml, change hostNetwork from false to true
 hostNetwork: true
 ```
@@ -63,7 +59,7 @@ If the above steps cannot solve the problem or you encounter other related error
 
 The chaosfs sidecar container is continuously restarting, and you might see the following logs at the current sidecar container:
 
-```
+```console
 2020-01-19T06:30:56.629Z	INFO	chaos-daemon	Init hookfs
 2020-01-19T06:30:56.630Z	ERROR	chaos-daemon	failed to create pid file	{"error": "pid file found, ensure docker is not running or delete /tmp/fuse/pid"}
 github.com/go-logr/zapr.(*zapLogger).Error

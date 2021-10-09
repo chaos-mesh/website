@@ -5,18 +5,14 @@
  * and scoped locally.
  */
 
-.hero {
-  border-bottom: 1px solid var(--hero-border-color);
-}
-
 .heroLogoWrapper {
   position: relative;
   left: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 256px;
-  height: 256px;
+  width: 192px;
+  height: 192px;
   margin-bottom: 1.5rem;
   background: #fff;
   border-radius: 48px;
@@ -25,8 +21,8 @@
 
 @media screen and (max-width: 768px) {
   .heroLogoWrapper {
-    width: 192px;
-    height: 192px;
+    width: 128px;
+    height: 128px;
   }
 }
 
@@ -37,10 +33,6 @@
 
 .heroTitle {
   padding-left: 1.5rem;
-}
-
-.installTextWrapper {
-  width: 100%;
 }
 
 .feature {
@@ -72,7 +64,7 @@
   }
 }
 
-.featureDesc {
+.featureContent {
   display: flex !important;
   align-items: center;
 }
@@ -90,7 +82,7 @@
   }
 }
 
-@media (min-width: 512px) and (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .whiteboardCol {
     --ifm-col-width: calc(6 / 12 * 100%) !important;
 
@@ -116,21 +108,17 @@
 }
 
 .logoWrapper img {
-  width: 80%;
+  width: 75%;
 }
 
 @media screen and (max-width: 768px) {
   .logoWrapper {
     height: 100px;
   }
-
-  .logoWrapper img {
-    width: 50%;
-  }
 }
 
 .cncfLogo {
-  height: 128px;
+  height: 96px;
 }
 
 @media screen and (max-width: 768px) {

@@ -1,8 +1,6 @@
 ---
 slug: /
-id: what_is_chaos_mesh
 title: What is Chaos Mesh
-sidebar_label: What is Chaos Mesh
 ---
 
 Chaos Mesh is a cloud-native Chaos Engineering platform that orchestrates chaos on Kubernetes environments. At the current stage, it has the following components:

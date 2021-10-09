@@ -1,6 +1,5 @@
 ---
 title: chaosctl
-sidebar_label: chaosctl
 ---
 
 chaosctl is a tool to assist in debugging Chaos Mesh. With chaosctl, you can simplify the process of developing and debugging new chaos types, and provide references for other developers when raising an issue.

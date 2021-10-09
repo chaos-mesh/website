@@ -1,6 +1,5 @@
 ---
 title: Extend Chaos Daemon Interface
-sidebar_label: Extend Chaos Daemon Interface
 ---
 
 import PickHelmVersion from '@site/src/components/PickHelmVersion'

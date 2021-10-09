@@ -1,5 +1,4 @@
 ---
-id: get_started_on_minikube
 title: Get started on Minikube
 ---
 

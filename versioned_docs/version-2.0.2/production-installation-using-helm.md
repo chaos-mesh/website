@@ -1,6 +1,5 @@
 ---
 title: Install Chaos Mesh using Helm (Recommended for Production Environments)
-sidebar_label: Install Chaos Mesh using Helm
 ---
 
 import PickVersion from '@site/src/components/PickVersion'
@@ -79,15 +78,18 @@ Because socket paths are listened to by the daemons of different running contain
 
 #### Docker
 
-<PickHelmVersion className="language-bash">{`\# Default to /var/run/docker.sock helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --version latest`}</PickHelmVersion>
+<!-- prettier-ignore -->
+<PickHelmVersion className="language-bash">{`\# Default to /var/run/docker.sock
+helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --version latest`}
+</PickHelmVersion>
 
 #### Containerd
 
-<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --version latest --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock`}</PickHelmVersion>
+<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --version latest`}</PickHelmVersion>
 
 #### K3s
 
-<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --version latest --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock`}</PickHelmVersion>
+<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock --version latest`}</PickHelmVersion>
 
 :::note
 
@@ -107,7 +109,15 @@ To install Chaos Mesh of a specific version, add the `--version xxx` parameter a
 
 To upgrade Chaos Mesh, execute the following command:
 
-<PickHelmVersion className="language-bash">{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh --version latest`}</PickHelmVersion>
+```bash
+helm upgrade chaos-mesh chaos-mesh/chaos-mesh
+```
+
+:::note
+
+To upgrade Chaos Mesh to a specific version, add the `--version xxx` parameter after `helm upgrade`, for example, `--version 2.0.0`.
+
+:::
 
 :::note
 
@@ -161,4 +171,4 @@ helm install chaos-mesh helm/chaos-mesh -n=chaos-teting
 
 The safe mode is enabled by default. To disable the safe mode, specify `dashboard.securityMode` as `false` during the installation or upgrade:
 
-<PickHelmVersion className="language-bash">{`helm install chaos-mesh helm/chaos-mesh -n=chaos-testing --version latest --set dashboard.securityMode=false`}</PickHelmVersion>
+<PickHelmVersion className="language-bash">{`helm install chaos-mesh helm/chaos-mesh -n=chaos-testing --set dashboard.securityMode=false --version latest`}</PickHelmVersion>

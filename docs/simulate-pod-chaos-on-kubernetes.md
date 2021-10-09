@@ -1,6 +1,5 @@
 ---
 title: Simulate Pod Faults
-sidebar_label: Simulate Pod Faults
 ---
 
 This document describes how to use Chaos Mesh to inject faults into Kubernetes Pod to simulate Pod or container faults. Chaos Dashboard and YAML files are provided to create PodChaos experiments.
@@ -37,7 +36,7 @@ Before create experiments using Chaos Dashboard, ensure the following:
 
 1. Open Chaos Dashboard, and click **NEW EXPERIMENT** on the page to create a new experiment.
 
-![Create a New Experiment](./img/create-new-exp.png)
+   ![Create a New Experiment](./img/create-new-exp.png)
 
 2. In the **Choose a Target** area, choose **POD FAULT** and select a specific behavior, such as **POD FAILURE**.
 
@@ -51,83 +50,83 @@ Before create experiments using Chaos Dashboard, ensure the following:
 
 1. Write the experiment configuration to the `pod-failure.yaml` file:
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: PodChaos
-metadata:
-  name: pod-failure-example
-  namespace: chaos-testing
-spec:
-  action: pod-failure
-  mode: one
-  duration: '30s'
-  selector:
-    labelSelectors:
-      'app.kubernetes.io/component': 'tikv'
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: PodChaos
+   metadata:
+     name: pod-failure-example
+     namespace: chaos-testing
+   spec:
+     action: pod-failure
+     mode: one
+     duration: '30s'
+     selector:
+       labelSelectors:
+         'app.kubernetes.io/component': 'tikv'
+   ```
 
-Based on this example, Chaos Mesh injects `pod-failure` into the specified Pod and makes the Pod unavailable for 30 seconds.
+   Based on this example, Chaos Mesh injects `pod-failure` into the specified Pod and makes the Pod unavailable for 30 seconds.
 
 2. After the configuration file is prepared, use `kubectl` to create an experiment:
 
-```bash
-kubectl apply -f ./pod-failure.yaml
-```
+   ```bash
+   kubectl apply -f ./pod-failure.yaml
+   ```
 
 ### pod-kill example
 
 1. Write the experiment configuration to the `pod-kill.yaml` file:
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: PodChaos
-metadata:
-  name: pod-kill-example
-  namespace: chaos-testing
-spec:
-  action: pod-kill
-  mode: one
-  selector:
-    namespaces:
-      - tidb-cluster-demo
-    labelSelectors:
-      'app.kubernetes.io/component': 'tikv'
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: PodChaos
+   metadata:
+     name: pod-kill-example
+     namespace: chaos-testing
+   spec:
+     action: pod-kill
+     mode: one
+     selector:
+       namespaces:
+         - tidb-cluster-demo
+       labelSelectors:
+         'app.kubernetes.io/component': 'tikv'
+   ```
 
-Based on this example, Chaos Mesh injects `pod-kill` into the specified Pod and kills the Pod once.
+   Based on this example, Chaos Mesh injects `pod-kill` into the specified Pod and kills the Pod once.
 
 2. After the configuration file is prepared, use `kubectl` to create an experiment:
 
-```bash
-kubectl apply -f ./pod-kill.yaml
-```
+   ```bash
+   kubectl apply -f ./pod-kill.yaml
+   ```
 
 ### container-kill example
 
 1. Write the experiment configuration to the `container-kill.yaml` file:
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: PodChaos
-metadata:
-  name: container-kill-example
-  namespace: chaos-testing
-spec:
-  action: container-kill
-  mode: one
-  containerNames: ['prometheus']
-  selector:
-    labelSelectors:
-      'app.kubernetes.io/component': 'monitor'
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: PodChaos
+   metadata:
+     name: container-kill-example
+     namespace: chaos-testing
+   spec:
+     action: container-kill
+     mode: one
+     containerNames: ['prometheus']
+     selector:
+       labelSelectors:
+         'app.kubernetes.io/component': 'monitor'
+   ```
 
-Based on this example, Chaos Mesh injects `container-kill` into the specified container and kills the container once.
+   Based on this example, Chaos Mesh injects `container-kill` into the specified container and kills the container once.
 
 2. After the configuration file is prepared, use `kubectl` to create an experiment:
 
-```bash
-kubectl apply -f ./container-kill.yaml
-```
+   ```bash
+   kubectl apply -f ./container-kill.yaml
+   ```
 
 ### Field description
 

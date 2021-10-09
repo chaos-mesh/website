@@ -1,6 +1,5 @@
 ---
 title: Simulate AWS Faults
-sidebar_label: Simulate AWS Faults
 ---
 
 This document describes how to use Chaos Mesh to simulate AWS faults.

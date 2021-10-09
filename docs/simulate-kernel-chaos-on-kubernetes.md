@@ -1,6 +1,5 @@
 ---
 title: Simulate Linux Kernel Faults
-sidebar_label: Simulate Linux Kernel Faults
 ---
 
 This document describes how to use KernelChaos to simulate Linux kernel faults. This feature injects I/O-based or memory-based faults into the specified kernel paths using [BPF](https://lore.kernel.org/lkml/20171213180356.hsuhzoa7s4ngro2r@destiny/T/).

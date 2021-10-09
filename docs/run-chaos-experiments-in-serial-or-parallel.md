@@ -1,6 +1,5 @@
 ---
 title: Serial and Parallel Experiments
-sidebar_label: Serial and Parallel Experiments
 ---
 
 Chaos Mesh Workflow offers two ways of scheduling experiments: serial and parallel. You can configure and schedule multiple experiments as needed.

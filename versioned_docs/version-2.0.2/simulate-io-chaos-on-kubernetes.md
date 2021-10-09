@@ -1,6 +1,5 @@
 ---
 title: Simulate File I/O Faults
-sidebar_label: Simulate File I/O Faults
 ---
 
 This document describes how to create IOChaos experiments in Chaos Mesh.
@@ -44,132 +43,132 @@ For specific features, refer to [Create experiments using the YAML files](#creat
 
 1. Write the experiment configuration to the `io-latency.yaml` file, as shown below:
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: IOChaos
-metadata:
-  name: io-latency-example
-  namespace: chaos-testing
-spec:
-  action: latency
-  mode: one
-  selector:
-    labelSelectors:
-      app: etcd
-  volumePath: /var/run/etcd
-  path: '/var/run/etcd/**/*'
-  delay: '100ms'
-  percent: 50
-  duration: '400s'
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: IOChaos
+   metadata:
+     name: io-latency-example
+     namespace: chaos-testing
+   spec:
+     action: latency
+     mode: one
+     selector:
+       labelSelectors:
+         app: etcd
+     volumePath: /var/run/etcd
+     path: '/var/run/etcd/**/*'
+     delay: '100ms'
+     percent: 50
+     duration: '400s'
+   ```
 
-In this configuration example, Chaos Mesh injects a delay into the directory `/var/run/etcd` and causes latency of 100 milliseconds to all file system operations (including read, writing, list contents, and so on) in this directory.
+   In this configuration example, Chaos Mesh injects a delay into the directory `/var/run/etcd` and causes latency of 100 milliseconds to all file system operations (including read, writing, list contents, and so on) in this directory.
 
 2. After the configuration file is prepared, use `kubectl` to create an experiment:
 
-```bash
-kubectl apply -f ./io-latency.yaml
-```
+   ```bash
+   kubectl apply -f ./io-latency.yaml
+   ```
 
 ### Fault example
 
 1. Write the experiment configuration to the `io-fault.yaml` file, as shown below:
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: IOChaos
-metadata:
-  name: io-fault-example
-  namespace: chaos-testing
-spec:
-  action: fault
-  mode: one
-  selector:
-    labelSelectors:
-      app: etcd
-  volumePath: /var/run/etcd
-  path: /var/run/etcd/**/*
-  errno: 5
-  percent: 50
-  duration: '400s'
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: IOChaos
+   metadata:
+     name: io-fault-example
+     namespace: chaos-testing
+   spec:
+     action: fault
+     mode: one
+     selector:
+       labelSelectors:
+         app: etcd
+     volumePath: /var/run/etcd
+     path: /var/run/etcd/**/*
+     errno: 5
+     percent: 50
+     duration: '400s'
+   ```
 
-In this example, Chaos Mesh injects a file fault into the directory `/var/run/etcd`, which gives a 50% probability of failure in all file system operations under this directory and returns error code 5 (Input/output error).
+   In this example, Chaos Mesh injects a file fault into the directory `/var/run/etcd`, which gives a 50% probability of failure in all file system operations under this directory and returns error code 5 (Input/output error).
 
 2. After the configuration file is prepared, use `kubectl` to create an experiment:
 
-```bash
-kubectl apply -f ./io-fault.yaml
-```
+   ```bash
+   kubectl apply -f ./io-fault.yaml
+   ```
 
 ### attrOverride example
 
 1. Write the experiment configuration to the `io-attr.yaml` file:
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: IOChaos
-metadata:
-  name: io-attr-example
-  namespace: chaos-testing
-spec:
-  action: attrOverride
-  mode: one
-  selector:
-    labelSelectors:
-      app: etcd
-  volumePath: /var/run/etcd
-  path: /var/run/etcd/**/*
-  attr:
-    perm: 72
-  percent: 10
-  duration: '400s'
-```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: IOChaos
+   metadata:
+     name: io-attr-example
+     namespace: chaos-testing
+   spec:
+     action: attrOverride
+     mode: one
+     selector:
+       labelSelectors:
+         app: etcd
+     volumePath: /var/run/etcd
+     path: /var/run/etcd/**/*
+     attr:
+       perm: 72
+     percent: 10
+     duration: '400s'
+   ```
 
-In this configuration example, Chaos Mesh injects `/var/run/etcd` directories `attrOverride` fault, giving a 10% probability that all file system operations in this directory will change the target file permissions to 72 (110 in octal), which will allow files to be executed only by the owner and their group and not authorized to perform other actions.
+   In this configuration example, Chaos Mesh injects `/var/run/etcd` directories `attrOverride` fault, giving a 10% probability that all file system operations in this directory will change the target file permissions to 72 (110 in octal), which will allow files to be executed only by the owner and their group and not authorized to perform other actions.
 
 2. After the configuration file is prepared, use `kubectl` to create an experiment:
 
-```bash
-kubectl apply -f ./io-attr.yaml
-```
+   ```bash
+   kubectl apply -f ./io-attr.yaml
+   ```
 
 ### Mistake example
 
 1. Write the experiment configuration to the `io-mistake.yaml` file:
 
-```yaml
-apiVersion: chaos-mesh. rg/v1alpha1
-ind: IOChaos
-metadata:
-  name: io-mistake-example
-  namespace: chaos-testing
-special:
-  action: mistake
-  mode: one
-  selector:
-    labelSelectors:
-      app: etcd
-  volumePath: /var/run/etcd
-  path: /var/run/etcd/**/*
-  mistake:
-    filling: zero
-    maxOccurrences: 1
-    maxLength: 10
-  methods:
-    - READ
-    - WRITE
-  percent: 10
-  duration: '400s'
-```
+   ```yaml
+   apiVersion: chaos-mesh. rg/v1alpha1
+   ind: IOChaos
+   metadata:
+     name: io-mistake-example
+     namespace: chaos-testing
+   special:
+     action: mistake
+     mode: one
+     selector:
+       labelSelectors:
+         app: etcd
+     volumePath: /var/run/etcd
+     path: /var/run/etcd/**/*
+     mistake:
+       filling: zero
+       maxOccurrences: 1
+       maxLength: 10
+     methods:
+       - READ
+       - WRITE
+     percent: 10
+     duration: '400s'
+   ```
 
-In this configuration example, Chaos Mesh injects read and write faults into the directory `/var/run/etcd`, which gives a 10% probability of failure in the read and write operations under this directory. During this process, one random position with a maximum length of 10 bytes will be replaced with 0 bytes.
+   In this configuration example, Chaos Mesh injects read and write faults into the directory `/var/run/etcd`, which gives a 10% probability of failure in the read and write operations under this directory. During this process, one random position with a maximum length of 10 bytes will be replaced with 0 bytes.
 
 2. After the configuration file is prepared, use `kubectl` to create an experiment:
 
-```bash
-kubectl apply -f ./io-mistake.yaml
-```
+   ```bash
+   kubectl apply -f ./io-mistake.yaml
+   ```
 
 ### Field description
 

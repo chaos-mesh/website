@@ -1,6 +1,5 @@
 ---
 title: Add New Chaos Experiment Type
-sidebar_label: Add New Chaos Experiment Type
 ---
 
 import PickHelmVersion from '@site/src/components/PickHelmVersion'
@@ -168,34 +167,34 @@ You need to register the CRD (Custom Resource Definition) of HelloWorldChaos to 
        helloworldchaos.Module //Add a new line. Make sure you have imported HelloWorldChaos to this file first.
    ```
 
-In `controllers/types/types.go`, add the following content:
+   In `controllers/types/types.go`, add the following content:
 
-    ```go
-        ...
-        fx.Annotated{
-            Group: "objs",
-            Target: Object{
-                Name:   "timechaos",
-                Object: &v1alpha1.TimeChaos{},
-            },
-        },
+   ```go
+       ...
+       fx.Annotated{
+           Group: "objs",
+           Target: Object{
+               Name:   "timechaos",
+               Object: &v1alpha1.TimeChaos{},
+           },
+       },
 
-        fx.Annotated{
-            Group: "objs",
-            Target: Object{
-                Name:   "gcpchaos",
-                Object: &v1alpha1.GCPChaos{},
-            },
-        },
+       fx.Annotated{
+           Group: "objs",
+           Target: Object{
+               Name:   "gcpchaos",
+               Object: &v1alpha1.GCPChaos{},
+           },
+       },
 
-        fx.Annotated{
-            Group: "objs",
-            Target: Object{
-                Name:   "helloworldchaos",
-                Object: &v1alpha1.HelloWorldChaos{},
-            },
-        },
-    ```
+       fx.Annotated{
+           Group: "objs",
+           Target: Object{
+               Name:   "helloworldchaos",
+               Object: &v1alpha1.HelloWorldChaos{},
+           },
+       },
+   ```
 
 ## Step 4: Build the Docker image
 
@@ -261,7 +260,7 @@ After you update the template, try running HelloWorldChaos.
 
 2. Deploy Chaos Mesh:
 
-   <PickHelmVersion className="language-bash">{`helm install chaos-mesh helm/chaos-mesh --namespace=chaos-testing --version latest --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock`}</PickHelmVersion>
+   <PickHelmVersion className="language-bash">{`helm install chaos-mesh helm/chaos-mesh --namespace=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --version latest`}</PickHelmVersion>
 
    To verify the deployment is successful, you can check all Pods in the `chaos-testing` namespace:
 

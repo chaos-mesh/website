@@ -1,7 +1,6 @@
 ---
 slug: /
 title: Chaos Mesh Overview
-sidebar_label: Chaos Mesh Overview
 ---
 
 This document describes the concepts, usage scenarios, core strengths, and the architecture of Chaos Mesh.
