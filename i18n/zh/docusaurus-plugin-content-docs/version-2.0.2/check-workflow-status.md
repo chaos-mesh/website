@@ -2,9 +2,9 @@
 title: 检查 Workflow 状态
 ---
 
-## 通过 Chaos Dashboard 检查 Workflow 状态
+<!-- ## 通过 Chaos Dashboard 检查 Workflow 状态 -->
 
-<!--TODO: 待 Chaos Dashboard 完善后补充这一部分 -->
+<!-- TODO: 待 Chaos Dashboard 完善后补充这一部分 -->
 
 ## 通过 `kubectl` 检查 Workflow 状态
 

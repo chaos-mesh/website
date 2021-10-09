@@ -68,10 +68,6 @@
             {
               "type": "doc",
               "id": "version-2.0.2/inspect-chaos-experiments"
-            },
-            {
-              "type": "doc",
-              "id": "version-2.0.2/clean-up-chaos-experiments"
             }
           ],
           "collapsible": true,
