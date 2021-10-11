@@ -25,17 +25,17 @@ spec:
   templates:
     - name: serial-of-3-node
       templateType: Serial
-      duration: 240s
+      deadline: 240s
       children:
         - workflow-stress-chaos
         - suspending
         - workflow-network-chaos
     - name: suspending
       templateType: Suspend
-      duration: 10s
+      deadline: 10s
     - name: workflow-network-chaos
       templateType: NetworkChaos
-      duration: 20s
+      deadline: 20s
       networkChaos:
         direction: to
         action: delay
@@ -49,7 +49,7 @@ spec:
           jitter: '90ms'
     - name: workflow-stress-chaos
       templateType: StressChaos
-      duration: 20s
+      deadline: 20s
       stressChaos:
         mode: one
         selector:
@@ -66,7 +66,7 @@ spec:
 
 串行节点执行时，会依次执行 `children` 中声明的任务，保持同一时间点只有一个任务在执行。
 
-串行节点中的 `duration` 为可选字段，目的是限制整个串行流程的最长执行时间。若达到了这个时间，其下属的子节点将会被停止，未执行的节点也不会再执行。若所有子节点先于 `duration` 完成了行为，串行节点会立刻被标记为完成，`duration` 没有任何影响。
+串行节点中的 `deadline` 为可选字段，目的是限制整个串行流程的最长执行时间。若达到了这个时间，其下属的子节点将会被停止，未执行的节点也不会再执行。若所有子节点先于 `deadline` 完成了行为，串行节点会立刻被标记为完成，`deadline` 没有任何影响。
 
 ## 并行运行实验
 
@@ -84,13 +84,13 @@ spec:
   templates:
     - name: parallel-of-2-chaos
       templateType: Parallel
-      duration: 240s
+      deadline: 240s
       children:
         - workflow-stress-chaos
         - workflow-network-chaos
     - name: workflow-network-chaos
       templateType: NetworkChaos
-      duration: 20s
+      deadline: 20s
       networkChaos:
         direction: to
         action: delay
@@ -104,7 +104,7 @@ spec:
           jitter: '90ms'
     - name: workflow-stress-chaos
       templateType: StressChaos
-      duration: 20s
+      deadline: 20s
       stressChaos:
         mode: one
         selector:
@@ -121,4 +121,4 @@ spec:
 
 并行节点执行时，会同时执行 `children` 中所有声明的任务。
 
-并行节点同样存在 `duration` 可选字段，类似于串行节点，目的是限制整个并行流程的最长执行时间。若达到了这个时间，其下属的子节点将会被停止。若所有子节点先于 `duration` 完成了行为，并行节点会立刻被标记为完成，`duration` 没有任何影响。
+并行节点同样存在 `deadline` 可选字段，类似于串行节点，目的是限制整个并行流程的最长执行时间。若达到了这个时间，其下属的子节点将会被停止。若所有子节点先于 `deadline` 完成了行为，并行节点会立刻被标记为完成，`deadline` 没有任何影响。
