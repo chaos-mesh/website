@@ -25,17 +25,17 @@ spec:
   templates:
     - name: serial-of-3-node
       templateType: Serial
-      duration: 240s
+      deadline: 240s
       children:
         - workflow-stress-chaos
         - suspending
         - workflow-network-chaos
     - name: suspending
       templateType: Suspend
-      duration: 10s
+      deadline: 10s
     - name: workflow-network-chaos
       templateType: NetworkChaos
-      duration: 20s
+      deadline: 20s
       networkChaos:
         direction: to
         action: delay
@@ -49,7 +49,7 @@ spec:
           jitter: '90ms'
     - name: workflow-stress-chaos
       templateType: StressChaos
-      duration: 20s
+      deadline: 20s
       stressChaos:
         mode: one
         selector:
@@ -66,7 +66,7 @@ The above commands claims a serial node named `serial-of-3-node`. This means Cha
 
 When Chaos Mesh executes the serial node, tasks claimed in `children` are run sequentially to ensure that only one task is running at the same time.
 
-The `duration` field in serial nodes is optional to limit the maximum duration of the entire serial process. Once this duration is running out, the sub-nodes are stopped and the nodes that are not executed yet will not be executed. If all sub-nodes finish their work before `duration` time, serial nodes are immediately marked as completed and `duration` is not affected.
+The `deadline` field in serial nodes is optional to limit the maximum duration of the entire serial process. Once this duration is running out, the sub-nodes are stopped and the nodes that are not executed yet will not be executed. If all sub-nodes finish their work before `deadline` time, serial nodes are immediately marked as completed and `deadline` is not affected.
 
 ## Parallel experiments
 
@@ -84,13 +84,13 @@ spec:
   templates:
     - name: parallel-of-2-chaos
       templateType: Parallel
-      duration: 240s
+      deadline: 240s
       children:
         - workflow-stress-chaos
         - workflow-network-chaos
     - name: workflow-network-chaos
       templateType: NetworkChaos
-      duration: 20s
+      deadline: 20s
       networkChaos:
         direction: to
         action: delay
@@ -104,7 +104,7 @@ spec:
           jitter: '90ms'
     - name: workflow-stress-chaos
       templateType: StressChaos
-      duration: 20s
+      deadline: 20s
       stressChaos:
         mode: one
         selector:
@@ -121,4 +121,4 @@ The above commands claimed a parallel node named `parallel-of-2-chaos`. This mea
 
 When Chaos Mesh executes parallel nodes, all tasks claimed in `children` are executed simultaneously.
 
-Similar to serial nodes, the optional field `duration` is also available in parallel nodes to limit the maximum execution time of the entire parallel process. If this time is reached, the sub-nodes are stopped. If all sub-nodes finish their work before `duration` time, parallel nodes are immediately marked as completed and `duration` is not affected.
+Similar to serial nodes, the optional field `deadline` is also available in parallel nodes to limit the maximum execution time of the entire parallel process. If this time is reached, the sub-nodes are stopped. If all sub-nodes finish their work before `deadline` time, parallel nodes are immediately marked as completed and `deadline` is not affected.
