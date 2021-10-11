@@ -261,6 +261,6 @@
     "message": "此外，Chaos Mesh 支持设置 Namespace 白名单和黑名单，用户可以通过此功能保护重要的 Namespace，以此更大程度控制实验的“爆炸半径”。"
   },
   "home.whoisusing": {
-    "message": "谁在使用"
+    "message": "Chaos Mesh 的用户"
   }
 }
