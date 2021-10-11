@@ -74,7 +74,7 @@ module.exports = {
           items: [
             {
               label: 'Quick Start',
-              to: 'docs/quick_start',
+              to: 'docs/quick-start',
             },
             {
               label: 'Run a Chaos Experiment',
