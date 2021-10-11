@@ -78,7 +78,7 @@ With new Chaos Dashboard and chaosd, the optimized architecture of Chaos Mesh is
 
 Another improvement is observability, namely how to tell if an experiment is carried out successfully.
 
-Before the improvement, you had to manually check the experiment metrics. If you injected [StressChaos](https://chaos-mesh.org/docs/1.2.3/chaos_experiments/stresschaos_experiment) into a Pod, you had to enter the Pod to see if there was a `stress-ng` process and then use `top` commands to check CPU and memory utilization. These metrics told you whether your StressChaos experiment was created successfully.
+Before the improvement, you had to manually check the experiment metrics. If you injected [StressChaos](https://chaos-mesh.org/docs/1.2.3/chaos_experiments/stresschaos) into a Pod, you had to enter the Pod to see if there was a `stress-ng` process and then use `top` commands to check CPU and memory utilization. These metrics told you whether your StressChaos experiment was created successfully.
 
 To streamline the process, we now integrate `node_exporter` into `chaos-daemon` and chaosd to collect node metrics. We also deploy `kube-state-metrics` in the Kubernetes cluster, combined with cadvisor, to collect Kubernetes metrics. The collected metrics are saved and visualized by Prometheus and Grafana, which provide a simple method for you to check the experiment status.
 
