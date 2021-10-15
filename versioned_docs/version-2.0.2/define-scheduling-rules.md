@@ -71,7 +71,7 @@ The fields in `Schedule` are described below, mostly similar to fields in Kubern
 
 :::note
 
-The timezone in the `schedule` field subjects to the timezone of `chaos-controller manager-`.
+The timezone in the `schedule` field subjects to the timezone of `chaos-controller-manager`.
 
 :::
 
