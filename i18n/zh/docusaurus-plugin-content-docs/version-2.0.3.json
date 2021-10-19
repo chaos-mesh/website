@@ -1,7 +1,7 @@
 {
   "version.label": {
-    "message": "2.0.2",
-    "description": "The label for version 2.0.2"
+    "message": "2.0.3",
+    "description": "The label for version 2.0.3"
   },
   "sidebar.docs.category.About Chaos Mesh": {
     "message": "关于 Chaos Mesh",

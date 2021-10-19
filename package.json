@@ -1,6 +1,6 @@
 {
   "name": "chaos-mesh-website",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "private": true,
   "scripts": {
     "start": "docusaurus start",
@@ -15,7 +15,8 @@
     "@docusaurus/preset-classic": "^2.0.0-beta.5",
     "clsx": "^1.1.1",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "semver": "^7.3.5"
   },
   "browserslist": {
     "production": [
