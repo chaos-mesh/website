@@ -138,9 +138,9 @@ Request 专用字段是指故障注入的目标过程为 Request （即 `target`
 | 参数             | 类型              | 说明                                  | 默认值 | 是否必填 | 示例         |
 | ---------------- | ----------------- | ------------------------------------- | ------ | -------- | ------------ |
 | replace.path     | string            | 指定 URI 路径替换内容                 |        | 否       | /api/v2/     |
-| replace.method`  | string            | 指定请求 HTTP 方法的替换内容          |        | 否       | DELETE       |
-| replace.queries` | map[string]string | 指定 URI query 的替换键值对           |        | 否       | foo: bar     |
-| patch.queries`   | [][]string        | 指定 URI query 附加故障中附加的键值对 |        | 否       | - [foo, bar] |
+| replace.method  | string            | 指定请求 HTTP 方法的替换内容          |        | 否       | DELETE       |
+| replace.queries | map[string]string | 指定 URI query 的替换键值对           |        | 否       | foo: bar     |
+| patch.queries   | [][]string        | 指定 URI query 附加故障中附加的键值对 |        | 否       | - [foo, bar] |
 
 ### Response 专用字段说明
 
