@@ -164,7 +164,7 @@ The `helm/chaos-mesh/values.yaml` file defines the image of the latest version (
 git clone https://github.com/chaos-mesh/chaos-mesh.git
 cd chaos-mesh
 
-helm install chaos-mesh helm/chaos-mesh -n=chaos-teting
+helm install chaos-mesh helm/chaos-mesh -n=chaos-testing
 ```
 
 ### How can I disable the safe mode?
