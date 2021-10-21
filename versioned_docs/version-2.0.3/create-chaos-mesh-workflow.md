@@ -24,7 +24,7 @@ The design of Chaos Mesh Workflow is, to some extent, inspired by Argo Workflows
 
 More workflow examples are available in the [Chaos Mesh GitHub repository](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples/workflow).
 
-## Create a workflow using a YAML file and `kubtl`
+## Create a workflow using a YAML file and `kubectl`
 
 Similar to various types of Chaos objects, workflows also exist in a Kubernetes cluster as a CRD. You can create a Chaos Mesh workflow using `kubectl create -f <workflow.yaml>`. The following command is an example of creating a workflow. Create a workflow using a local YAML file:
 
