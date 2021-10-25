@@ -15,6 +15,10 @@ const whoisUsing = [
     img: 'img/logos/celo.png',
   },
   {
+    name: 'China Everbright Bank',
+    img: 'img/logos/cebbank.png',
+  },
+  {
     name: 'Dailymotion',
     img: 'img/logos/dailymotion.svg',
   },

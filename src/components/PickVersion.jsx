@@ -22,7 +22,7 @@ export const usePickVersion = (siteConfig, versions) => {
   return activeVersion || latestStableVersion
 }
 
-const PickVersion = ({ children, className }) => {
+const PickVersion = ({ children, className = 'language-bash' }) => {
   const { siteConfig } = useDocusaurusContext()
   const { versions } = usePluginData('docusaurus-plugin-content-docs')
 

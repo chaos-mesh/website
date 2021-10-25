@@ -3,6 +3,7 @@ title: 使用 Helm 安装（生产推荐）
 ---
 
 import PickVersion from '@site/src/components/PickVersion'
+import PickHelmVersion from '@site/src/components/PickHelmVersion'
 
 import VerifyInstallation from './common/verify-installation.md'
 import QuickRun from './common/quick-run.md'
@@ -144,8 +145,8 @@ helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set dashboard.c
 
 目前，Helm 在升级时不会应用最新的 CustomResourceDefinition (CRD)，这可能会导致一些错误的发生。为了避免这种情况，请手动应用最新的 CRD：
 
-<PickVersion className="language-bash">
-curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl apply -f -
+<PickVersion>
+curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl create -f -
 </PickVersion>
 
 :::
@@ -176,6 +177,6 @@ helm install chaos-mesh helm/chaos-mesh -n=chaos-testing
 
 安全模式是默认启用的。如需关闭，请在安装或升级时指定 `dashboard.securityMode` 为 `false`：
 
-```bash
-helm install chaos-mesh helm/chaos-mesh -n=chaos-testing --set dashboard.securityMode=false
-```
+<PickHelmVersion>
+helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set dashboard.securityMode=false --version latest
+</PickHelmVersion>
