@@ -91,7 +91,7 @@ Global Flags:
 | method    | m        | 方法名称                                                            | string 类型，必须配置 |
 | pid       | 无       | 需要注入故障的 Java 进程号                                          | int 类型，必须配置    |
 | port      | 无       | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288 |
-| uid       | 无       | 实验的编号          | string 类型，可以不配置，Chaosd 会随机生成一个
+| uid       | 无       | 实验的编号          | string 类型，可以不配置，Chaosd 会随机生成一个    |
 
 #### 抛出自定义异常示例
 
@@ -144,7 +144,7 @@ Global Flags:
 | :----- | :------- | :------------------------------------------------------------------ | :-------------------- |
 | pid    | 无       | 需要注入故障的 Java 进程号                                          | int 类型，必须配置    |
 | port   | 无       | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288 |
-| uid    | 无       | 实验的编号  | string 类型，可以不配置，Chaosd 会随机生成一个
+| uid    | 无       | 实验的编号  | string 类型，可以不配置，Chaosd 会随机生成一个    |
 
 ### 触发垃圾回收示例
 
@@ -199,7 +199,7 @@ Global Flags:
 | method  | m        | 方法名称                                                            | string 类型，必须配置         |
 | pid     | 无       | 需要注入故障的 Java 进程号                                          | int 类型，必须配置            |
 | port    | 无       | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288         |
-| uid     | 无       | 实验的编号        | string 类型，可以不配置，Chaosd 会随机生成一个
+| uid     | 无       | 实验的编号        | string 类型，可以不配置，Chaosd 会随机生成一个    |
 
 ### 增加方法延迟示例
 
@@ -257,7 +257,7 @@ Global Flags:
 | value  | 无       | 指定方法的返回值                                                    | string 类型，必须配置。目前支持数字和字符串类型的返回值，如果为字符串，则需要使用双引号，例如："chaos"。 |
 | pid    | 无       | 需要注入故障的 Java 进程号                                          | int 类型，必须配置                                                                                     |
 | port   | 无       | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288                                                                                  |
-| uid    | 无       | 实验的编号    | string 类型，可以不配置，Chaosd 会随机生成一个
+| uid    | 无       | 实验的编号    | string 类型，可以不配置，Chaosd 会随机生成一个    |
 
 ### 指定方法返回值示例
 
@@ -315,7 +315,7 @@ Global Flags:
 | path   | 无       | 指定 Byteman 配置文件的路径                                         | string 类型，必须配置 |
 | pid    | 无       | 需要注入故障的 Java 进程号                                          | int 类型，必须配置    |
 | port   | 无       | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288 |
-| uid    | 无       | 实验的编号          | string 类型，可以不配置，Chaosd 会随机生成一个
+| uid    | 无       | 实验的编号          | string 类型，可以不配置，Chaosd 会随机生成一个    |
 
 ### 设置 Byteman 配置文件触发故障示例
 
@@ -388,7 +388,7 @@ Global Flags:
 | mem-size  | 无       | 指定占用内存的大小                                                  | int 类型，单位为 MB，`cpu-count` 和 `mem-size` 中必须配置一个 |
 | pid       | 无       | 需要注入故障的 Java 进程号                                          | int 类型，必须配置                                      |
 | port      | 无       | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288                                   |
-| uid       | 无       | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个
+| uid       | 无       | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个    |
 
 ### 增加 JVM 压力示例
 
