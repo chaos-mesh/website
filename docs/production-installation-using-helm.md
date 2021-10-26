@@ -139,8 +139,8 @@ For more values and their usages, refer to [all values](https://github.com/chaos
 
 Currently, the latest CustomResourceDefinition (CRD) is not applied during the Helm upgrading, which might cause errors. To avoid this situation, you can apply the latest CRD manually:
 
-<PickVersion className="language-bash">
-curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl apply -f -
+<PickVersion>
+curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl create -f -
 </PickVersion>
 
 :::
@@ -164,7 +164,7 @@ The `helm/chaos-mesh/values.yaml` file defines the image of the latest version (
 git clone https://github.com/chaos-mesh/chaos-mesh.git
 cd chaos-mesh
 
-helm install chaos-mesh helm/chaos-mesh -n=chaos-teting
+helm install chaos-mesh helm/chaos-mesh -n=chaos-testing
 ```
 
 ### How can I disable the safe mode?
