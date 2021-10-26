@@ -41,19 +41,19 @@ Available Commands:
 
 Flags:
   -h, --help       help for jvm
-      --pid int    the pid of Java process which need to attach
+      --pid int    the pid of Java process which needs to attach
       --port int   the port of agent server (default 9288)
 
 Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
+      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
       --uid string         the experiment ID
 
 Use "chaosd attack jvm [command] --help" for more information about a command.
 ```
 
-### 抛出自定义异常
+## 抛出自定义异常
 
-#### 抛出自定义异常命令
+### 抛出自定义异常命令
 
 运行以下命令查看抛出自定义异常场景支持的配置：
 
@@ -76,13 +76,13 @@ Flags:
   -m, --method string      the method name in Java class
 
 Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
-      --pid int            the pid of Java process which need to attach
+      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
+      --pid int            the pid of Java process which needs to attach
       --port int           the port of agent server (default 9288)
       --uid string         the experiment ID
 ```
 
-#### 抛出自定义异常相关配置说明
+### 抛出自定义异常相关配置说明
 
 | 配置项    | 配置缩写 | 说明                                                                | 值                    |
 | :-------- | :------- | :------------------------------------------------------------------ | :-------------------- |
@@ -91,7 +91,7 @@ Global Flags:
 | method    | m        | 方法名称                                                            | string 类型，必须配置 |
 | pid       | 无       | 需要注入故障的 Java 进程号                                          | int 类型，必须配置    |
 | port      | 无       | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288 |
-| uid       | 无       | string 类型，实验的编号，可以不设置，Chaosd 会随机生成一个          |
+| uid       | 无       | 实验的编号          | string 类型，可以不配置，Chaosd 会随机生成一个    |
 
 #### 抛出自定义异常示例
 
@@ -112,9 +112,9 @@ Attack jvm successfully, uid: 26a45ae2-d395-46f5-a126-2b2c6c85ae9d
 chaosd recover 26a45ae2-d395-46f5-a126-2b2c6c85ae9d
 ```
 
-### 触发垃圾回收
+## 触发垃圾回收
 
-#### 触发垃圾回收命令
+### 触发垃圾回收命令
 
 运行以下命令查看抛出自定义异常场景支持的配置：
 
@@ -132,21 +132,21 @@ Flags:
   -h, --help   help for gc
 
 Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
-      --pid int            the pid of Java process which need to attach
+      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
+      --pid int            the pid of Java process which needs to attach
       --port int           the port of agent server (default 9288)
       --uid string         the experiment ID
 ```
 
-#### 触发垃圾回收相关配置说明
+### 触发垃圾回收相关配置说明
 
 | 配置项 | 配置缩写 | 说明                                                                | 值                    |
 | :----- | :------- | :------------------------------------------------------------------ | :-------------------- |
 | pid    | 无       | 需要注入故障的 Java 进程号                                          | int 类型，必须配置    |
 | port   | 无       | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288 |
-| uid    | 无       | string 类型，实验的编号，可以不设置，Chaosd 会随机生成一个          |
+| uid    | 无       | 实验的编号  | string 类型，可以不配置，Chaosd 会随机生成一个    |
 
-#### 触发垃圾回收示例
+### 触发垃圾回收示例
 
 ```bash
 chaosd attack jvm gc --pid 89345
@@ -161,9 +161,9 @@ Attack jvm successfully, uid: f360e70a-5359-49b6-8526-d7e0a3c6f696
 
 触发垃圾回收为一次性操作，实验不需要恢复。
 
-### 增加方法延迟
+## 增加方法延迟
 
-#### 增加方法延迟命令
+### 增加方法延迟命令
 
 ```bash
 chaosd attack jvm latency --help
@@ -184,13 +184,13 @@ Flags:
   -m, --method string   the method name in Java class
 
 Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
-      --pid int            the pid of Java process which need to attach
+      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
+      --pid int            the pid of Java process which needs to attach
       --port int           the port of agent server (default 9288)
       --uid string         the experiment ID
 ```
 
-#### 增加方法延迟相关配置说明
+### 增加方法延迟相关配置说明
 
 | 配置项  | 配置缩写 | 说明                                                                | 值                            |
 | :------ | :------- | :------------------------------------------------------------------ | :---------------------------- |
@@ -199,9 +199,9 @@ Global Flags:
 | method  | m        | 方法名称                                                            | string 类型，必须配置         |
 | pid     | 无       | 需要注入故障的 Java 进程号                                          | int 类型，必须配置            |
 | port    | 无       | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288         |
-| uid     | 无       | string 类型，实验的编号，可以不设置，Chaosd 会随机生成一个          |
+| uid     | 无       | 实验的编号        | string 类型，可以不配置，Chaosd 会随机生成一个    |
 
-#### 增加方法延迟示例
+### 增加方法延迟示例
 
 ```bash
 chaosd attack jvm latency --class Main --method sayhello --latency 5000 --pid 100840
@@ -221,9 +221,9 @@ Attack jvm successfully, uid: bbe00c57-ac9d-4113-bf0c-2a6f184be261
 chaosd recover bbe00c57-ac9d-4113-bf0c-2a6f184be261
 ```
 
-### 指定方法返回值
+## 指定方法返回值
 
-#### 指定方法返回值命令
+### 指定方法返回值命令
 
 ```bash
 chaosd attack jvm return --help
@@ -239,27 +239,27 @@ Flags:
   -c, --class string    Java class name
   -h, --help            help for return
   -m, --method string   the method name in Java class
-      --value string    the return value for action 'return', only support number and string type now
+      --value string    the return value for action 'return'. Only supports number and string types.
 
 Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
-      --pid int            the pid of Java process which need to attach
+      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
+      --pid int            the pid of Java process which needs to attach
       --port int           the port of agent server (default 9288)
       --uid string         the experiment ID
 ```
 
-#### 指定方法返回值相关配置说明
+### 指定方法返回值相关配置说明
 
 | 配置项 | 配置缩写 | 说明                                                                | 值                                                                                                     |
 | :----- | :------- | :------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------- |
 | class  | c        | Java 类的名称                                                       | string 类型，必须配置                                                                                  |
 | method | m        | 方法名称                                                            | string 类型，必须配置                                                                                  |
-| value  | 无       | 指定方法的返回值                                                    | string 类型，目前支持数字和字符串类型的返回值，如果为字符串，则需要使用双引号，例如："chaos"。必须配置 |
+| value  | 无       | 指定方法的返回值                                                    | string 类型，必须配置。目前支持数字和字符串类型的返回值，如果为字符串，则需要使用双引号，例如："chaos"。 |
 | pid    | 无       | 需要注入故障的 Java 进程号                                          | int 类型，必须配置                                                                                     |
 | port   | 无       | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288                                                                                  |
-| uid    | 无       | string 类型，实验的编号，可以不设置，Chaosd 会随机生成一个          |
+| uid    | 无       | 实验的编号    | string 类型，可以不配置，Chaosd 会随机生成一个    |
 
-#### 指定方法返回值示例
+### 指定方法返回值示例
 
 ```bash
 chaosd attack jvm return --class Main --method getnum --value 999 --pid 112694
@@ -279,11 +279,11 @@ Attack jvm successfully, uid: e2f204f6-4bed-4d92-aade-2b4a47b02e5d
 chaosd recover e2f204f6-4bed-4d92-aade-2b4a47b02e5d
 ```
 
-### 设置 Byteman 配置文件触发故障
+## 设置 Byteman 配置文件触发故障
 
 通过 Byteman 规则配置文件来设置故障规则，然后使用 Chaosd 指定该文件路径来注入故障。关于 Byteman 的规则配置，请参考 [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language)。
 
-#### 设置 Byteman 配置文件触发故障命令
+### 设置 Byteman 配置文件触发故障命令
 
 ```bash
 chaosd attack jvm rule-file --help
@@ -303,21 +303,21 @@ Flags:
 
 Global Flags:
       --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
-      --pid int            the pid of Java process which need to attach
+      --pid int            the pid of Java process which needs to attach
       --port int           the port of agent server (default 9288)
       --uid string         the experiment ID
 ```
 
-#### 设置 Byteman 配置文件触发故障相关配置说明
+### 设置 Byteman 配置文件触发故障相关配置说明
 
 | 配置项 | 配置缩写 | 说明                                                                | 值                    |
 | :----- | :------- | :------------------------------------------------------------------ | :-------------------- |
 | path   | 无       | 指定 Byteman 配置文件的路径                                         | string 类型，必须配置 |
 | pid    | 无       | 需要注入故障的 Java 进程号                                          | int 类型，必须配置    |
 | port   | 无       | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288 |
-| uid    | 无       | string 类型，实验的编号，可以不设置，Chaosd 会随机生成一个          |
+| uid    | 无       | 实验的编号          | string 类型，可以不配置，Chaosd 会随机生成一个    |
 
-#### 设置 Byteman 配置文件触发故障示例
+### 设置 Byteman 配置文件触发故障示例
 
 首先根据具体的 Java 程序，并参考 [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language) 编写一个规则配置文件，例如：
 
@@ -352,9 +352,9 @@ Attack jvm successfully, uid: 5ca2e06d-a7c6-421d-bb67-0c9908bac17a
 chaosd recover 5ca2e06d-a7c6-421d-bb67-0c9908bac17a
 ```
 
-### 增加 JVM 压力
+## 增加 JVM 压力
 
-#### 增加 JVM 压力命令
+### 增加 JVM 压力命令
 
 ```bash
 chaosd attack jvm stress --help
@@ -369,28 +369,28 @@ Usage:
   chaosd attack jvm stress [options] [flags]
 
 Flags:
-      --cpu-count int   the CPU core number need to use
+      --cpu-count int   the CPU core number
   -h, --help            help for stress
-      --mem-size int    the memory size need to locate, the unit is MB
+      --mem-size int    the memory size to be allocated. The unit is MB.
 
 Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
-      --pid int            the pid of Java process which need to attach
+      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
+      --pid int            the pid of Java process which needs to attach
       --port int           the port of agent server (default 9288)
       --uid string         the experiment ID
 ```
 
-#### 增加 JVM 压力相关配置说明
+### 增加 JVM 压力相关配置说明
 
 | 配置项    | 配置缩写 | 说明                                                                | 值                                                      |
 | :-------- | :------- | :------------------------------------------------------------------ | :------------------------------------------------------ |
-| cpu-count | 无       | 增加 CPU 压力所使用的 CPU 核的数量                                  | int 类型，cpu-count 和 mem-size 必须配置一个            |
-| mem-size  | 无       | 指定占用内存的大小                                                  | int 类型，单位为 MB，cpu-count 和 mem-size 必须配置一个 |
+| cpu-count | 无       | 增加 CPU 压力所使用的 CPU 核的数量                                  | int 类型，`cpu-count` 和 `mem-size` 中必须配置一个            |
+| mem-size  | 无       | 指定占用内存的大小                                                  | int 类型，单位为 MB，`cpu-count` 和 `mem-size` 中必须配置一个 |
 | pid       | 无       | 需要注入故障的 Java 进程号                                          | int 类型，必须配置                                      |
 | port      | 无       | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288                                   |
-| uid       | 无       | string 类型，实验的编号，可以不设置，Chaosd 会随机生成一个          |
+| uid       | 无       | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个    |
 
-#### 增加 JVM 压力示例
+### 增加 JVM 压力示例
 
 ```bash
 chaosd attack jvm stress --cpu-count 2 --pid 123546
