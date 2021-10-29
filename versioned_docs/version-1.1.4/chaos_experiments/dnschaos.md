@@ -47,15 +47,15 @@ For more sample files, see [examples](https://github.com/chaos-mesh/chaos-mesh/t
 
 ## Fields description
 
-- **action**: Defines the chaos action for DNS chaos. Supported actions are:
+- **action**: Defines the chaos action for DNSChaos. Supported actions are:
   - `error` - Get an error when sending the DNS request
   - `random` - Get a random IP when sending the DNS request
 
-* **scope**: Defines the scope of the DNS chaos. Supported scopes are:
+* **scope**: Defines the scope of the DNSChaos. Supported scopes are:
 
-  - `outer` - DNS chaos only works on outer hosts of the Kubernetes cluster
-  - `inner`- DNS chaos only works on inner hosts of the Kubernetes cluster
-  - `all` - DNS chaos works on all hosts.
+  - `outer` - DNSChaos only works on outer hosts of the Kubernetes cluster
+  - `inner`- DNSChaos only works on inner hosts of the Kubernetes cluster
+  - `all` - DNSChaos works on all hosts.
 
 * **selector**: Specifies the target pods for chaos injection. For more details, see [Define the Scope of Chaos Experiment](../user_guides/experiment_scope.md).
 

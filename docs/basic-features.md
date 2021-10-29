@@ -11,7 +11,7 @@ Fault injection is the key of Chaos experiments. Chaos Mesh covers a full range 
 - Basic resource faults:
   - [PodChaos](simulate-pod-chaos-on-kubernetes.md): simulates Pod failures, such as Pod node restart, Pod's persistent unavailablility, and certain container failures in a specific Pod.
   - [NetworkChaos](simulate-network-chaos-on-kubernetes.md): simulates network failures, such as network latency, packet loss, packet disorder, and network partitions.
-  - [DNS Chaos](simulate-dns-chaos-on-kubernetes.md): simulates DNS failures, such as the parsing failure of DNS domain name and the wrong IP address returned.
+  - [DNSChaos](simulate-dns-chaos-on-kubernetes.md): simulates DNS failures, such as the parsing failure of DNS domain name and the wrong IP address returned.
   - [HTTPChaos](simulate-http-chaos-on-kubernetes.md): simulates HTTP communication failures, such as HTTP communication latency.
   - [StressChaos](simulate-heavy-stress-on-kubernetes.md): simulates CPU race or memory race.
   - [IOChaos](simulate-io-chaos-on-kubernetes.md): simulates the I/O failure of an application file, such as I/O delays, read and write failures.

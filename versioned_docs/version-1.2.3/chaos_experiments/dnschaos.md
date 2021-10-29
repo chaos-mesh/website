@@ -50,7 +50,7 @@ For more sample files, see [examples](https://github.com/chaos-mesh/chaos-mesh/t
 
 ## Fields description
 
-- **action**: Defines the chaos action for DNS chaos. Supported actions are:
+- **action**: Defines the chaos action for DNSChaos. Supported actions are:
 
   - `error` - Get an error when sending the DNS request
   - `random` - Get a random IP when sending the DNS request
