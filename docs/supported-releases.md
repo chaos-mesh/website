@@ -57,4 +57,10 @@ The list of supported Kubernetes versions displayed in the [Supported status of 
 
 We use e2e test for testing compatibility on each version of kubernetes cluster, our testing coverage is:
 
-TODO: e2e test coverage table
+| Version | Tested kubernetes Versions |
+| :------ | :------------------------- |
+| master  | 1.12, 1.20, 1.22           |
+| 2.0     | 1.12, 1.20                 |
+| 1.2     | 1.12                       |
+| 1.1     | 1.12                       |
+| 1.0     | 1.12                       |
