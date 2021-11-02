@@ -139,39 +139,15 @@ If you want to pause or resume a Chaos experiment using Chaos Dashboard, find th
 
 ## Update Chaos experiments
 
-If you need to update a Chaos experiment after it is created, you can edit the configuration parameters of the Chaos experiment object.
-
-:::note
-
-- For a one-time Chaos experiment that is already running properly, Chaos Mesh currently supports updating only the duration of the fault behavior, that is, the `duration` parameter of the experiment. You cannot change other configuration parameters of the fault.
-- For a scheduled or cyclic experiment, updating the `duration` parameter will take effect after the current fault injection is finished.
-
-:::
-
 ### Update Chaos experiments using commands
 
-If you manage Chaos experiments using YAML files, you can use the following commands to update the Chaos experiments:
+The `Spec` field of Chaos Experiment is currently not allowed to be updated.
 
-```sh
-vim network-delay.yaml # modify network-delay.yaml to what you want
-kubectl apply -f network-delay.yaml
-```
-
-You can also use the following `kubectl patch` command to update a specific configuration parameter:
-
-```sh
-kubectl patch networchaos network-delay -p '{"spec":{"duration":"30s"}}'
-```
-
-After the above command is executed, the duration of the Chaos experiment `network-delay` will be updated to 30s.
-
-For more operations to update experiment objects via the `kubectl` command, see the [kubectl documentation](https://kubernetes.io/docs/reference/kubectl/cheatsheet/).
+For more details, see: <https://github.com/chaos-mesh/chaos-mesh/issues/2227>.
 
 ### Update Chaos experiments using Chaos Dashboard
 
-If you want to update a Chaos experiment with the Dashboard, you can click the corresponding **Update** button of the experiment and update the experiment by editing the corresponding object.
-
-![Edit experiment](img/configuration.png)
+The Dashboard doesn't support updating Chaos Experiments at this time because the `Spec` field of Chaos experiments is not allowed to be updated.
 
 ## Delete Chaos experiments
 
