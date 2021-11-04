@@ -172,9 +172,9 @@ function Home() {
               <div className="row">
                 {whoIsUsing.map((w) => (
                   <div key={w.name} className={clsx('col col--3', styles.whiteboardCol)}>
-                    <div className={styles.logoWrapper}>
+                    <a className={styles.logoWrapper} href={w.href} target="_blank">
                       <img style={w.style} src={useBaseUrl(w.img)} alt={w.name} />
-                    </div>
+                    </a>
                   </div>
                 ))}
               </div>
