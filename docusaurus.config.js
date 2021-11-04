@@ -11,7 +11,7 @@ module.exports = {
       },
     },
   },
-  title: 'Chaos Mesh®',
+  title: 'Chaos Mesh',
   tagline: 'A Powerful Chaos Engineering Platform for Kubernetes',
   url: 'https://chaos-mesh.org',
   baseUrl: '/',
@@ -35,7 +35,7 @@ module.exports = {
     },
     navbar: {
       hideOnScroll: true,
-      title: 'Chaos Mesh®',
+      title: 'Chaos Mesh',
       logo: {
         alt: 'Chaos Mesh',
         src: 'img/logos/logo-mini.svg',
