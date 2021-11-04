@@ -141,13 +141,13 @@ If you want to pause or resume a Chaos experiment using Chaos Dashboard, find th
 
 ### Update Chaos experiments using commands
 
-The `Spec` field of Chaos Experiment is currently not allowed to be updated.
+The `Spec` field of Chaos experiment is currently not allowed to be updated.
 
-For more details, see: <https://github.com/chaos-mesh/chaos-mesh/issues/2227>.
+For more details, refer to the related [GitHub issue](https://github.com/chaos-mesh/chaos-mesh/issues/2227).
 
 ### Update Chaos experiments using Chaos Dashboard
 
-The Dashboard doesn't support updating Chaos Experiments at this time because the `Spec` field of Chaos experiments is not allowed to be updated.
+The Chaos Dashboard doesn't support updating Chaos experiments at this time because the `Spec` field of Chaos experiments is not allowed to be updated.
 
 ## Delete Chaos experiments
 

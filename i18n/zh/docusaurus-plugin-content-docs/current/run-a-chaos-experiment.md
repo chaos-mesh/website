@@ -142,7 +142,7 @@ kubectl annotate networkchaos network-delay experiment.chaos-mesh.org/pause-
 
 目前混沌实验的 `Spec` 字段不允许被更新。
 
-更多细节请参见：<https://github.com/chaos-mesh/chaos-mesh/issues/2227>。
+更多细节，请参见对应的 [GitHub issue](https://github.com/chaos-mesh/chaos-mesh/issues/2227)。
 
 ### 使用 Dashboard 更新混沌实验
 
