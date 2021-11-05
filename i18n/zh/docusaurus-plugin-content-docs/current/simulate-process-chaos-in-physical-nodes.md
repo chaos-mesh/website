@@ -80,11 +80,11 @@ chaosd attack process kill -p python
 Attack process python successfully, uid: 10e633ac-0a37-41ba-8b4a-cd5ab92099f9
 ```
 
- :::note 注意
+:::note 注意
 
-   只有 signal 为 SIGSTOP 的实验支持恢复实验。
+只有 signal 为 SIGSTOP 的实验支持恢复实验。
 
-   :::
+:::
 
 ### 模拟进程被暂停
 
@@ -160,8 +160,8 @@ curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application
 curl -X DELETE 172.16.112.130:31767/api/attack/c3c519bf-819a-4a7b-97fb-e3d0814481fa 
 ```
 
- :::note 注意
+:::note 注意
 
-   只有 signal 为 SIGSTOP 的实验支持恢复实验。
+只有 signal 为 SIGSTOP 的实验支持恢复实验。
 
-   :::
+:::

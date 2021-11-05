@@ -10,7 +10,7 @@ PhysicalMachineChaos 可用于在物理机/虚拟机中模拟网络、磁盘、�
 
 ## 部署 Chaosd Server
 
-在使用 Chaos Mesh 创建 PhysicalMachineChaos 混沌实验前，你需要在待注入故障的所有物理机/虚拟机中部署服务模式的 chaosd。chaosd 的部署请参考 [chaosd 的下载和部署](chaosd-overwrite.md#下载和部署)。
+在使用 Chaos Mesh 创建 PhysicalMachineChaos 混沌实验前，你需要在待注入故障的所有物理机/虚拟机中部署服务模式的 chaosd。chaosd 的部署请参考 [chaosd 的下载和部署](chaosd-overview.md#下载和部署)。
 
 在部署完成后，运行以下命令启动服务模式 chaosd：
 
