@@ -10,7 +10,7 @@ tags: [Announcement, Chaos Mesh, Chaos Engineering]
 
 ![Chaos-Mesh-1.0 - Chaos-Engineering-on-Kubernetes-Made-Easier](/img/chaos-mesh-1.0.png)
 
-Today, we are proud to announce the general availability of Chaos Mesh® 1.0, following its entry into CNCF as a [sandbox project](https://pingcap.com/blog/announcing-chaos-mesh-as-a-cncf-sandbox-project) in July, 2020.
+Today, we are proud to announce the general availability of Chaos Mesh 1.0, following its entry into CNCF as a [sandbox project](https://pingcap.com/blog/announcing-chaos-mesh-as-a-cncf-sandbox-project) in July, 2020.
 
 <!--truncate-->
 

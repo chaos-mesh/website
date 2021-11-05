@@ -22,7 +22,7 @@ As our community grows, Apache APISIX's features more frequently interact with e
 <p class="caption-center"> Apache APISIX architecture </p>
 
 
-In this post, we'll share how we use [Chaos Mesh®](https://chaos-mesh.org/) to improve our system stability.
+In this post, we'll share how we use [Chaos Mesh](https://chaos-mesh.org/) to improve our system stability.
 
 ## Our pain points
 

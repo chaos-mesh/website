@@ -52,7 +52,7 @@
     "description": "The label of footer link with label=Blog linking to blog"
   },
   "copyright": {
-    "message": "\n        <br />\n        <strong>© Chaos Mesh® Authors 2021 | Documentation Distributed under CC-BY-4.0 </strong>\n        <br />\n        <br />\n        © 2021 The Linux Foundation. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our <a href=\"https://www.linuxfoundation.org/trademark-usage/\"> Trademark Usage</a> page.\n      ",
+    "message": "\n        <br />\n        <strong>© Chaos Mesh Authors 2021 | Documentation Distributed under CC-BY-4.0 </strong>\n        <br />\n        <br />\n        © 2021 The Linux Foundation. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our <a href=\"https://www.linuxfoundation.org/trademark-usage/\"> Trademark Usage</a> page.\n      ",
     "description": "The footer copyright"
   }
 }
