@@ -133,16 +133,16 @@ Attack process python successfully, uid: 9cb6b3be-4f5b-4ecb-ae05-51050fcd0010
 
 以服务模式运行 chaosd，通过向 chaosd 服务的路径 /api/attack/process 发送 HTTP POTST 请求，从而创建实验。在运行实验时，请注意保存实验的 uid 信息，向 chaosd 服务的路径 /api/attack/{uid} 发送 HTTP DELETE 请求来结束 uid 对应的实验。
 
-### 服务模式向进程发系统信号
+### 服务模式模拟进程故障
 
-#### 向进程发系统信号相关参数说明
+#### 进程故障相关参数说明
 
 | 参数  |  说明                                 | 值            |
 | :------ | :----------------------------------- | :---------------------------------------------------------------------- |
 | process | 所需要杀死进程的名字或者进程的标识符 | string 类型，默认为 ""              |
 | signal  | 所提供的进程信号值                   | int 类型，默认为 9。 |
 
-#### 服务模式向进程发系统信号示例
+#### 服务模式进程故障示例
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{"process":"12345","signal":15}'

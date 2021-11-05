@@ -7,7 +7,7 @@ Chaosd 通过 [Byteman](https://github.com/chaos-mesh/byteman) 模拟 JVM 应用
 - 抛出自定义异常
 - 触发垃圾回收
 - 增加方法延迟
-- 指定方法返回值
+- 修改方法返回值
 - 设置 Byteman 配置文件触发故障
 - 增加 JVM 压力
 
@@ -221,9 +221,9 @@ Attack jvm successfully, uid: bbe00c57-ac9d-4113-bf0c-2a6f184be261
 chaosd recover bbe00c57-ac9d-4113-bf0c-2a6f184be261
 ```
 
-### 指定方法返回值
+### 修改方法返回值
 
-#### 指定方法返回值命令
+#### 修改方法返回值命令
 
 ```bash
 chaosd attack jvm return --help
@@ -248,7 +248,7 @@ Global Flags:
       --uid string         the experiment ID
 ```
 
-#### 指定方法返回值相关配置说明
+#### 修改方法返回值相关配置说明
 
 | 配置项 | 配置缩写 | 说明                                                                | 值                                                                                                     |
 | :----- | :------- | :------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------- |
@@ -259,7 +259,7 @@ Global Flags:
 | port   | 无       | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288                                                                                  |
 | uid    | 无       | 实验的编号    | string 类型，可以不配置，Chaosd 会随机生成一个    |
 
-#### 指定方法返回值示例
+#### 修改方法返回值示例
 
 ```bash
 chaosd attack jvm return --class Main --method getnum --value 999 --pid 112694
@@ -511,11 +511,11 @@ curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/js
 curl -X DELETE 172.16.112.130:31767/api/attack/a551206c-960d-4ac5-9056-518e512d4d0d
 ```
 
-### 服务模式指定方法返回值
+### 服务模式修改方法返回值
 
-#### 指定方法返回值相关参数说明
+#### 修改方法返回值相关参数说明
 
-| 配置项 | 说明                                                                | 值                                                                                                     |
+| 参数 | 说明                                                                | 值                                                                                                     |
 | :----- | :------------------------------------------------------------------ | :----------------------------------------------------------------------------------------------------- |
 | action | 实验的行为 | 设置为 "return" |
 | class  | Java 类的名称                                                       | string 类型，必须配置                                                                                  |
@@ -523,9 +523,9 @@ curl -X DELETE 172.16.112.130:31767/api/attack/a551206c-960d-4ac5-9056-518e512d4
 | value  | 指定方法的返回值                                                    | string 类型，必须配置。目前支持数字和字符串类型的返回值，如果为字符串，则需要使用双引号，例如："chaos"。 |
 | pid    | 需要注入故障的 Java 进程号                                          | int 类型，必须配置                                                                                     |
 | port  | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288                                                                                  |
-| uid    | 无       | 实验的编号    | string 类型，可以不配置，Chaosd 会随机生成一个    |
+| uid    | 实验的编号    | string 类型，可以不配置，Chaosd 会随机生成一个    |
 
-#### 服务模式指定方法返回值示例
+#### 服务模式修改方法返回值示例
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"return","class":"Main","method":"getnum","value":"999","pid":1828622}'
@@ -547,15 +547,15 @@ curl -X DELETE 172.16.112.130:31767/api/attack/a551206c-960d-4ac5-9056-518e512d4
 
 通过 Byteman 规则配置来设置故障规则。关于 Byteman 的规则配置，请参考 [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language)。
 
-#### 服务模式设置 Byteman 配置触发故障相关配置说明
+#### 设置 Byteman 配置触发故障相关参数说明
 
-| 配置项 | 配置缩写 | 说明                                                                | 值                    |
-| :----- | :------- | :------------------------------------------------------------------ | :-------------------- |
+| 参数 | 说明                                                                | 值                    |
+| :----- |:------------------------------------------------------------------ | :-------------------- |
 | action | 实验的行为 | 设置为 "rule-data" |
-| rule-data   | 无       | 指定 Byteman 配置数据                                         | string 类型，必须配置 |
-| pid    | 无       | 需要注入故障的 Java 进程号                                          | int 类型，必须配置    |
-| port   | 无       | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288 |
-| uid    | 无       | 实验的编号          | string 类型，可以不配置，Chaosd 会随机生成一个    |
+| rule-data   |  指定 Byteman 配置数据                                         | string 类型，必须配置 |
+| pid    |  需要注入故障的 Java 进程号                                          | int 类型，必须配置    |
+| port   | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288 |
+| uid    | 实验的编号          | string 类型，可以不配置，Chaosd 会随机生成一个    |
 
 #### 服务模式设置 Byteman 配置触发故障示例
 
