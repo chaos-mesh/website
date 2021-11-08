@@ -25,7 +25,7 @@ Before you install Chaos Mesh offline, you need to download all Chaos Mesh image
 
 Set the version number of Chaos Mesh as the environment variable on the machine with external network connection:
 
-<PickVersion className="language-bash">
+<PickVersion>
 export CHAOS_MESH_VERSION=latest
 </PickVersion>
 
@@ -57,17 +57,9 @@ To simulate a DNS fault (for example, make the DNS responses return a random wro
 
 On the machine connected to the external network, download the zip package of Chaos Mesh:
 
-```bash
-curl https://github.com/chaos-mesh/chaos-mesh/archive/refs/heads/${CHAOS_MESH_VERSION}.zip -o chaos-mesh.zip
-```
-
-:::note
-
-The `latest` version corresponds to the `master` branch of the Chaos Mesh repository. The download link of the latest zip package is as follows:
-
-<https://github.com/chaos-mesh/chaos-mesh/archive/refs/heads/master.zip>
-
-:::
+<PickVersion>
+curl https://github.com/chaos-mesh/chaos-mesh/archive/refs/tags/latest.zip -o chaos-mesh.zip
+</PickVersion>
 
 ### Copy files
 
