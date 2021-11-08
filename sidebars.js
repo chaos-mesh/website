@@ -62,7 +62,7 @@ module.exports = {
           label: 'Physical Nodes',
           items: [
             'chaosd-overview',
-            'simulate-physical-machine-chaos.md',
+            'simulate-physical-machine-chaos',
             'simulate-process-chaos-in-physical-nodes',
             'simulate-network-chaos-in-physical-nodes',
             'simulate-host-console-in-physical-nodes',
