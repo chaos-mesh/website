@@ -154,12 +154,6 @@ curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application
 {"status":200,"message":"attack successfully","uid":"c3c519bf-819a-4a7b-97fb-e3d0814481fa"}
 ```
 
-运行以下命令来结束 uid 对应的实验：
-
-```bash
-curl -X DELETE 172.16.112.130:31767/api/attack/c3c519bf-819a-4a7b-97fb-e3d0814481fa 
-```
-
 :::note 注意
 
 只有 signal 为 SIGSTOP 的实验支持恢复实验。

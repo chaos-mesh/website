@@ -248,12 +248,6 @@ curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/j
 {"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
 ```
 
-运行以下命令来结束 uid 对应的实验：
-
-```bash
-curl -X DELETE 172.16.112.130:31767/api/attack/a551206c-960d-4ac5-9056-518e512d4d0d
-```
-
 ### 服务模式模拟磁盘填充
 
 #### 模拟磁盘填充相关参数说明
@@ -277,10 +271,4 @@ curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/j
 
 ```bash
 {"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
-```
-
-运行以下命令来结束 uid 对应的实验：
-
-```bash
-curl -X DELETE 172.16.112.130:31767/api/attack/a551206c-960d-4ac5-9056-518e512d4d0d
 ```

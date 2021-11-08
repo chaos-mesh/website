@@ -135,18 +135,6 @@ chaosd attack stress mem --workers 2 --size 100M
 Attack stress mem successfully, uid: c2bff2f5-3aac-4ace-b7a6-322946ae6f13
 ```
 
-在运行实验时，请注意保存实验的 uid 信息。在不需要模拟压力场景时，使用 `recover` 命令来结束 uid 对应的实验：
-
-```bash
-chaosd recover c2bff2f5-3aac-4ace-b7a6-322946ae6f13
-```
-
-输出如下所示：
-
-```bash
-Recover c2bff2f5-3aac-4ace-b7a6-322946ae6f13 successfully
-```
-
 ## 使用服务模式创建压力实验
 
 以服务模式运行 chaosd，通过向 chaosd 服务的路径 /api/attack/stress 发送 HTTP POTST 请求，从而创建实验。在运行实验时，请注意保存实验的 uid 信息，向 chaosd 服务的路径 /api/attack/{uid} 发送 HTTP DELETE 请求来结束 uid 对应的实验。
@@ -182,12 +170,6 @@ curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application
 {"status":200,"message":"attack successfully","uid":"c3c519bf-819a-4a7b-97fb-e3d0814481fa"}
 ```
 
-运行以下命令来结束 uid 对应的实验：
-
-```bash
-curl -X DELETE 172.16.112.130:31767/api/attack/c3c519bf-819a-4a7b-97fb-e3d0814481fa 
-```
-
 ### 服务模式模拟内存压力场景
 
 #### 模拟内存压力相关参数说明
@@ -208,10 +190,4 @@ curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application
 
 ```bash
 {"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
-```
-
-运行以下命令来结束 uid 对应的实验：
-
-```bash
-curl -X DELETE 172.16.112.130:31767/api/attack/a551206c-960d-4ac5-9056-518e512d4d0d
 ```

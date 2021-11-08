@@ -1,5 +1,5 @@
 ---
-title: 模拟 DNS 故障
+title: 使用 Chaos Mesh 创建物理机故障
 ---
 
 本文档主要介绍如何在 Chaos Mesh 中创建 PhysicalMachineChaos 混沌实验，以模拟物理机/虚拟机中的网络、磁盘、压力、JVM、时间等故障。

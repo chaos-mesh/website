@@ -106,12 +106,6 @@ chaosd attack jvm exception -c Main -m sayhello --exception 'java.io.IOException
 Attack jvm successfully, uid: 26a45ae2-d395-46f5-a126-2b2c6c85ae9d
 ```
 
-在运行实验后，请注意保存实验的 uid 信息。在需要停止故障注入时使用 `recover` 命令结束 uid 对应的实验：
-
-```bash
-chaosd recover 26a45ae2-d395-46f5-a126-2b2c6c85ae9d
-```
-
 ### 触发垃圾回收
 
 #### 触发垃圾回收命令
@@ -215,12 +209,6 @@ chaosd attack jvm latency --class Main --method sayhello --latency 5000 --pid 10
 Attack jvm successfully, uid: bbe00c57-ac9d-4113-bf0c-2a6f184be261
 ```
 
-在运行实验后，请注意保存实验的 uid 信息。在需要停止故障注入时使用 `recover` 命令结束 uid 对应的实验：
-
-```bash
-chaosd recover bbe00c57-ac9d-4113-bf0c-2a6f184be261
-```
-
 ### 修改方法返回值
 
 #### 修改方法返回值命令
@@ -271,12 +259,6 @@ chaosd attack jvm return --class Main --method getnum --value 999 --pid 112694
 [2021/08/05 03:35:10.603 +00:00] [INFO] [jvm.go:208] ["byteman rule"] [rule="\nRULE Main-getnum-return-i6gb7\nCLASS Main\nMETHOD getnum\nAT ENTRY\nIF true\nDO \n\treturn 999;\nENDRULE\n"] [file=/tmp/rule.btm051982059]
 [2021/08/05 03:35:10.820 +00:00] [INFO] [jvm.go:94] ["submit rules"] [output="install rule Main-getnum-return-i6gb7\n\n"]
 Attack jvm successfully, uid: e2f204f6-4bed-4d92-aade-2b4a47b02e5d
-```
-
-在运行实验后，请注意保存实验的 uid 信息。在需要停止故障注入时，使用 `recover` 命令来结束 uid 对应的实验：
-
-```bash
-chaosd recover e2f204f6-4bed-4d92-aade-2b4a47b02e5d
 ```
 
 ### 设置 Byteman 配置文件触发故障
@@ -346,12 +328,6 @@ chaosd attack jvm rule-file -p ./return.btm --pid 112694
 Attack jvm successfully, uid: 5ca2e06d-a7c6-421d-bb67-0c9908bac17a
 ```
 
-在运行实验后，请注意保存实验的 uid 信息。在需要停止故障注入时，使用 `recover` 命令来结束 uid 对应的实验：
-
-```bash
-chaosd recover 5ca2e06d-a7c6-421d-bb67-0c9908bac17a
-```
-
 ### 增加 JVM 压力
 
 #### 增加 JVM 压力命令
@@ -404,11 +380,6 @@ chaosd attack jvm stress --cpu-count 2 --pid 123546
 Attack jvm successfully, uid: b9b997b5-0a0d-4f1f-9081-d52a32318b84
 ```
 
-在运行实验后，请注意保存实验的 uid 信息。在需要停止故障注入时，使用 `recover` 命令来结束 uid 对应的实验：
-
-```bash
-chaosd recover b9b997b5-0a0d-4f1f-9081-d52a32318b84
-```
 
 ## 使用服务模式创建实验
 
@@ -446,12 +417,6 @@ curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/js
 
 ```bash
 {"status":200,"message":"attack successfully","uid":"c3c519bf-819a-4a7b-97fb-e3d0814481fa"}
-```
-
-运行以下命令来结束 uid 对应的实验：
-
-```bash
-curl -X DELETE 172.16.112.130:31767/api/attack/c3c519bf-819a-4a7b-97fb-e3d0814481fa 
 ```
 
 ### 服务模式触发垃圾回收
@@ -505,12 +470,6 @@ curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/js
 {"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
 ```
 
-运行以下命令来结束 uid 对应的实验：
-
-```bash
-curl -X DELETE 172.16.112.130:31767/api/attack/a551206c-960d-4ac5-9056-518e512d4d0d
-```
-
 ### 服务模式修改方法返回值
 
 #### 修改方法返回值相关参数说明
@@ -535,12 +494,6 @@ curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/js
 
 ```bash
 {"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
-```
-
-运行以下命令来结束 uid 对应的实验：
-
-```bash
-curl -X DELETE 172.16.112.130:31767/api/attack/a551206c-960d-4ac5-9056-518e512d4d0d
 ```
 
 ### 服务模式设置 Byteman 配置触发故障
@@ -584,12 +537,6 @@ curl -X POST 127.0.0.1:31767/api/attack/jvm -H "Content-Type:application/json" -
 {"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
 ```
 
-运行以下命令来结束 uid 对应的实验：
-
-```bash
-curl -X DELETE 172.16.112.130:31767/api/attack/a551206c-960d-4ac5-9056-518e512d4d0d
-```
-
 ### 服务模式增加 JVM 压力
 
 #### 增加 JVM 压力相关参数说明
@@ -613,10 +560,4 @@ curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/js
 
 ```bash
 {"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
-```
-
-运行以下命令来结束 uid 对应的实验：
-
-```bash
-curl -X DELETE 172.16.112.130:31767/api/attack/a551206c-960d-4ac5-9056-518e512d4d0d
 ```
