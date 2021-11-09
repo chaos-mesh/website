@@ -1,12 +1,15 @@
 ---
-title: Chaosd 实验的查找和恢复
+title: 查找和恢复 Chaosd 实验
+summary: 本文档介绍了查找和恢复 Chaosd 实验的操作方法，并提供了示例。
 ---
+
+# 查找和恢复 Chaosd 实验
 
 Chaosd 支持按照条件搜索实验，以及恢复指定的 uid 对应的实验。
 
-## Chaosd 实验的查找
+## 查找 Chaosd 实验
 
-### 命令行模式实验的查找
+### 查找命令行模式实验
 
 运行以下命令可查看搜索实验支持的配置：
 
@@ -30,7 +33,7 @@ Global Flags:
       --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
 ```
 
-#### 相关参数说明
+#### 参数说明
 
 | 配置项    | 配置缩写 | 说明                                                                | 值                                                      |
 | :-------- | :------- | :------------------------------------------------------------------ | :------------------------------------------------------ |
@@ -55,7 +58,7 @@ Global Flags:
   1f6c1253-522a-43d9-83f8-42607102b3b9   network   delay    destroyed   2021-11-02T15:14:07+08:00   {"schedule":"","duration":"","action":"delay","kind":"network","uid":"1f6c1253-522a-43d9-83f8-42607102b3b9","latency":"2s","jitter":"0ms","correlation":"0","device":"eth0","ip-address":"220.181.38.251","ip-protocol":"all"} 
 ```
 
-### 服务模式实验的查找
+### 查找服务模式实验
 
 服务模式目前只支持查找出所有的实验，访问 chaosd 服务的 /api/experiments/ 路径获取数据。
 
@@ -71,7 +74,7 @@ curl -X GET 127.0.0.1:31767/api/experiments/
 [{"id":1,"uid":"ddc5ca81-b677-4595-b691-0ce57bedb156","created_at":"2021-10-18T16:01:18.563542491+08:00","updated_at":"2021-10-18T16:07:27.87111393+08:00","status":"success","kind":"stress","action":"mem","recover_command":"{\"schedule\":\"\",\"duration\":\"\",\"action\":\"mem\",\"kind\":\"stress\",\"uid\":\"ddc5ca81-b677-4595-b691-0ce57bedb156\",\"Load\":0,\"Workers\":0,\"Size\":\"100MB\",\"Options\":null,\"StressngPid\":0}","launch_mode":"svr"}]
 ```
 
-## Chaosd 实验的恢复
+## 恢复 Chaosd 实验
 
 在创建完实验后，如果想撤销实验造成的影响，可以使用实验的恢复功能。
 
@@ -79,9 +82,7 @@ curl -X GET 127.0.0.1:31767/api/experiments/
 
 使用 chaosd recover UID 的方式恢复实验。
 
-#### 命令行模式恢复实验示例
-
-使用 chaosd 创建一个 CPU 压力的实验：
+下面是一个命令行模式恢复实验示例。使用 chaosd 创建一个 CPU 压力的实验：
 
 ```bash
 chaosd attack stress cpu --workers 2 --load 10
@@ -105,9 +106,7 @@ chaosd recover 4f33b2d4-aee6-43ca-9c43-0f12867e5c9c
 
 通过向 chaosd 服务的 /api/attack/{uid} 路径发送 DELETE HTTP 请求来恢复实验。
 
-#### 服务模式恢复实验示例
-
-向 chaosd 服务发送 HTTP POST 请求创建一个 CPU 压力实验：
+下面是一个服务模式恢复实验示例。向 chaosd 服务发送 HTTP POST 请求创建一个 CPU 压力实验：
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{"load":10, "action":"cpu","workers":1}'
