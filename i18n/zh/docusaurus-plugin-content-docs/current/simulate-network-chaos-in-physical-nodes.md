@@ -301,7 +301,7 @@ Global Flags:
 | :---------- | :------- | :----------------------------------------------------------------- | :-------------------------------------------------------------------------- |
 | accept-tcp-flags | 无        | 表示接收包含指定标志的的 tcp 数据包，其他的则丢弃。具体配置规则参考 iptables 的 tcp-flags。仅当 protocol 为 tcp 时可以配置。                         | string 类型，例如："SYN,ACK SYN,ACK" |
 | device      | d        | 影响的网卡设备名称                                                 | string 类型，例如 "eth0"，必须要设置                                        |
-| direction | 无        | 指定分区的方向，对来自/发送到 hostname 指定的主机或者 ip 指定的地址的数据包进行分区 | string 类型，值可以为 "from" 或者 "to"         |
+| direction | 无        | 指定分区的方向，对来自/发送到 hostname 指定的主机或者 ip 指定的地址的数据包进行分区 | string 类型，可选值为 "from" 或者 "to"         |
 | hostname    | H        | 只影响到指定的主机名                                               | string 类型，如 "chaos-mesh.org"                                            |
 | ip          | i        | 只影响到指定的 IP 地址                                             | string 类型，如 "123.123.123.123"                                           |
 | protocol    | p        | 只影响指定的 IP 协议                                               | string 类型，支持协议类型包括：tcp、udp、icmp、all（表示影响所有网络协议） |
@@ -478,7 +478,7 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 | action | 实验的行为 | 设置为 "partition" |
 | accept-tcp-flags | 表示接收包含指定标志的的 tcp 数据包，其他的则丢弃。具体配置规则参考 iptables 的 tcp-flags。仅当 protocol 为 tcp 时可以配置。                         | string 类型，例如："SYN,ACK SYN,ACK" |
 | device      | 影响的网卡设备名称                                                 | string 类型，例如 "eth0"，必须要设置                                        |
-| direction  | 指定分区的方向，对来自/发送到 hostname 指定的主机或者 ip 指定的地址的数据包进行分区 | string 类型，值可以为 "from" 或者 "to"         |
+| direction  | 指定分区的方向，对来自/发送到 hostname 指定的主机或者 ip 指定的地址的数据包进行分区 | string 类型，可选值为 "from" 或者 "to"         |
 | hostname    | 只影响到指定的主机名                                               | string 类型，如 "chaos-mesh.org"                                            |
 | ip          | 只影响到指定的 IP 地址                                             | string 类型，如 "123.123.123.123"                                           |
 | protocol    | 只影响指定的 IP 协议                                               | string 类型，支持协议类型包括：tcp、udp、icmp、all（表示影响所有网络协议） |
