@@ -1,5 +1,6 @@
 ---
 title: Simulate time chaos
+summary: This document describes how to use Chaosd to simulate a time offset scenario.
 ---
 
 This document describes how to use Chaosd to simulate a time offset scenario.
@@ -63,13 +64,13 @@ gcc -o get_time ./time.c
 ```
 
 Then execute get_time and try to attack it.
-Such as:
+The following is an example:
 
 ```bash
 chaosd attack clock -p $PID -t 11s
 ```
 
-### Configuration description of simulating disk read load
+### Configurations of simulating disk read load
 
 | Parameter  | Type     | Note                                                                                                                                                          | Default value        | Required | Example                                 |
 | ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- | -------- | --------------------------------------- |
