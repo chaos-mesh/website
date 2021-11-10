@@ -74,71 +74,71 @@ chaosd server --port 31767
 
 #### CPU 压力
 
-模拟 CPU 压力场景，action 设置为 "stress-cpu"，对应的配置可参考 [模拟 CPU 压力相关参数说明](simulate-heavy-stress-in-physical-nodes.md#模拟-CPU-压力相关参数说明)。
+模拟 CPU 压力场景，将 action 设置为 "stress-cpu"，对应的配置可参考[模拟 CPU 压力相关参数说明](simulate-heavy-stress-in-physical-nodes.md#模拟-CPU-压力相关参数说明)。
 
 #### 内存压力
 
-模拟内存压力场景，action 设置为 "stress-mem"，对应的配置可参考 [模拟内存压力相关参数说明](simulate-heavy-stress-in-physical-nodes.md#模拟内存压力相关参数说明)。
+模拟内存压力场景，将 action 设置为 "stress-mem"，对应的配置可参考[模拟内存压力相关参数说明](simulate-heavy-stress-in-physical-nodes.md#模拟内存压力相关参数说明)。
 
 #### 磁盘读负载
 
-模拟磁盘读负载，action 设置为 "disk-read-payload"，对应的配置可参考 [模拟磁盘读负载相关参数说明](simulate-disk-pressure-in-physical-nodes.md#模拟磁盘读负载相关参数说明)。
+模拟磁盘读负载，将 action 设置为 "disk-read-payload"，对应的配置可参考[模拟磁盘读负载相关参数说明](simulate-disk-pressure-in-physical-nodes.md#模拟磁盘读负载相关参数说明)。
 
 #### 磁盘写负载
 
-模拟磁盘读负载，action 设置为 "disk-write-payload"，对应的配置可参考 [模拟磁盘写负载相关参数说明](simulate-disk-pressure-in-physical-nodes.md#模拟磁盘写负载相关参数说明)。
+模拟磁盘读负载，将 action 设置为 "disk-write-payload"，对应的配置可参考[模拟磁盘写负载相关参数说明](simulate-disk-pressure-in-physical-nodes.md#模拟磁盘写负载相关参数说明)。
 
 #### 磁盘填充
 
-模拟磁盘填充，action 设置为 "disk-fill"，对应的配置可参考 [模拟磁盘填充相关参数说明](simulate-disk-pressure-in-physical-nodes.md#模拟磁盘填充相关参数说明)。
+模拟磁盘填充，将 action 设置为 "disk-fill"，对应的配置可参考[模拟磁盘填充相关参数说明](simulate-disk-pressure-in-physical-nodes.md#模拟磁盘填充相关参数说明)。
 
 #### 网络包错误
 
-模拟网络包错误，action 设置为 "network-corrupt"，对应的配置可参考 [网络包错误相关参数说明](simulate-network-chaos-in-physical-nodes.md#网络包错误相关参数说明)。
+模拟网络包错误，将 action 设置为 "network-corrupt"，对应的配置可参考[网络包错误相关参数说明](simulate-network-chaos-in-physical-nodes.md#网络包错误相关参数说明)。
 
 #### 网络包延迟
 
-模拟网络包延迟，action 设置为 "network-delay"，对应的配置可参考 [网络包错误相关参数说明](simulate-network-chaos-in-physical-nodes.md#网络包错误相关参数说明)。
+模拟网络包延迟，将 action 设置为 "network-delay"，对应的配置可参考[网络包错误相关参数说明](simulate-network-chaos-in-physical-nodes.md#网络包错误相关参数说明)。
 
 #### 网络包重复
 
-模拟网络包重复，action 设置为 "network-duplicate"，对应的配置可参考 [网络包重复相关参数说明](simulate-network-chaos-in-physical-nodes.md#网络包重复相关参数说明)。
+模拟网络包重复，将 action 设置为 "network-duplicate"，对应的配置可参考[网络包重复相关参数说明](simulate-network-chaos-in-physical-nodes.md#网络包重复相关参数说明)。
 
 #### 网络包丢失
 
-模拟网络包丢失，action 设置为 "network-loss"，对应的配置可参考 [网络包丢失相关参数说明](simulate-network-chaos-in-physical-nodes.md#网络包丢失相关参数说明)。
+模拟网络包丢失，将 action 设置为 "network-loss"，对应的配置可参考[网络包丢失相关参数说明](simulate-network-chaos-in-physical-nodes.md#网络包丢失相关参数说明)。
 
 #### 网络分区
 
-模拟网络分区，action 设置为 "network-partition"，对应的配置可参考 [网络分区相关参数说明](simulate-network-chaos-in-physical-nodes.md#网络分区相关参数说明)。
+模拟网络分区，将 action 设置为 "network-partition"，对应的配置可参考[网络分区相关参数说明](simulate-network-chaos-in-physical-nodes.md#网络分区相关参数说明)。
 
 #### DNS 故障
 
-模拟 DNS 故障， action 设置为 "network-dns"，对应的配置可参考 [DNS 故障相关参数说明](simulate-network-chaos-in-physical-nodes.md#DNS-故障相关参数说明)。
+模拟 DNS 故障， 将 action 设置为 "network-dns"，对应的配置可参考[DNS 故障相关参数说明](simulate-network-chaos-in-physical-nodes.md#DNS-故障相关参数说明)。
 
 #### 进程故障
 
-模拟进程故障，action 设置为 "process"，对应的配置可参考 [进程故障相关参数说明](simulate-process-chaos-in-physical-nodes.md#进程故障相关参数说明)。
+模拟进程故障，将 action 设置为 "process"，对应的配置可参考[进程故障相关参数说明](simulate-process-chaos-in-physical-nodes.md#进程故障相关参数说明)。
 
 #### JVM 应用抛出自定义异常
 
-模拟 JVM 应用抛出自定义异常，action 设置为 "jvm-exception"，对应的配置可参考 [抛出自定义异常相关参数说明](simulate-jvm-application-chaos-in-physical-nodes.md#抛出自定义异常相关参数说明)。
+模拟 JVM 应用抛出自定义异常，将 action 设置为 "jvm-exception"，对应的配置可参考[抛出自定义异常相关参数说明](simulate-jvm-application-chaos-in-physical-nodes.md#抛出自定义异常相关参数说明)。
 
 #### JVM 应用增加方法延迟
 
-模拟 JVM 应用增加方法延迟，action 设置为 "jvm-latency"，对应的配置可参考 [增加方法延迟相关参数说明](simulate-jvm-application-chaos-in-physical-nodes.md#增加方法延迟相关参数说明)。
+模拟 JVM 应用增加方法延迟，将 action 设置为 "jvm-latency"，对应的配置可参考[增加方法延迟相关参数说明](simulate-jvm-application-chaos-in-physical-nodes.md#增加方法延迟相关参数说明)。
 
 #### JVM 应用修改方法返回值
 
-模拟 JVM 应用修改方法返回值，action 设置为 "jvm-return"，对应的配置可参考 [修改方法返回值相关参数说明](simulate-jvm-application-chaos-in-physical-nodes.md#修改方法返回值相关参数说明)。
+模拟 JVM 应用修改方法返回值，将 action 设置为 "jvm-return"，对应的配置可参考[修改方法返回值相关参数说明](simulate-jvm-application-chaos-in-physical-nodes.md#修改方法返回值相关参数说明)。
 
 #### JVM 应用触发垃圾回收
 
-模拟 JVM 应用触发垃圾回收，action 设置为 "jvm-gc"，对应的配置可参考 [触发垃圾回收相关参数说明](simulate-jvm-application-chaos-in-physical-nodes.md#触发垃圾回收相关参数说明)。
+模拟 JVM 应用触发垃圾回收，将 action 设置为 "jvm-gc"，对应的配置可参考[触发垃圾回收相关参数说明](simulate-jvm-application-chaos-in-physical-nodes.md#触发垃圾回收相关参数说明)。
 
 #### JVM 应用使用 Byteman 配置触发故障
 
-JVM 应用使用 Byteman 配置触发故障，action 设置为 "jvm-rule-data"，对应的配置可参考 [设置 Byteman 配置触发故障相关参数说明](simulate-jvm-application-chaos-in-physical-nodes.md#设置-Byteman-配置触发故障相关参数说明)。
+JVM 应用使用 Byteman 配置触发故障，将 action 设置为 "jvm-rule-data"，对应的配置可参考[设置 Byteman 配置触发故障相关参数说明](simulate-jvm-application-chaos-in-physical-nodes.md#设置-Byteman-配置触发故障相关参数说明)。
 
 #### 时间偏移
 
