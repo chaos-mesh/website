@@ -1,6 +1,6 @@
 ---
 slug: /chaos-mesh-join-cncf-sandbox-project
-title: Chaos Mesh® Joins CNCF as a Sandbox Project
+title: Chaos Mesh Joins CNCF as a Sandbox Project
 author: Chaos Mesh Authors
 author_title: Maintainer of Chaos Mesh
 author_url: https://github.com/chaos-mesh
@@ -10,7 +10,7 @@ tags: [Chaos Mesh, Chaos Engineering, Kubernetes, CNCF, Cloud Native]
 ---
 
 ![Chaos Mesh Join CNCF as Sandbox Project](/img/chaos-mesh-cncf.png)
-We’re thrilled to announce that [Chaos Mesh®](https://github.com/chaos-mesh/chaos-mesh) is now officially accepted as a CNCF Sandbox project. As maintainers of Chaos Mesh, we’d like to thank all the contributors and adopters. This would not be possible without your trust, support, and contributions.
+We’re thrilled to announce that [Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh) is now officially accepted as a CNCF Sandbox project. As maintainers of Chaos Mesh, we’d like to thank all the contributors and adopters. This would not be possible without your trust, support, and contributions.
 
 <!--truncate-->
 

@@ -1,6 +1,6 @@
 ---
 slug: /building_automated_testing_framework
-title: Building an Automated Testing Framework Based on Chaos Mesh® and Argo
+title: Building an Automated Testing Framework Based on Chaos Mesh and Argo
 author: Ben Ye, Chengwen Yin
 author_title: Maintainer of Chaos Mesh
 author_url: https://github.com/chaos-mesh/chaos-mesh/blob/master/MAINTAINERS.md
@@ -11,7 +11,7 @@ tags: [Chaos Mesh, Chaos Engineering, Test Automation]
 
 ![TiPocket - Automated Testing Framework](/img/automated_testing_framework.png)
 
-[Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh)® is an open-source chaos engineering platform for Kubernetes. Although it provides rich capabilities to simulate abnormal system conditions, it still only solves a fraction of the Chaos Engineering puzzle. Besides fault injection, a full chaos engineering application consists of hypothesizing around defined steady states, running experiments in production, validating the system via test cases, and automating the testing.
+[Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh) is an open-source chaos engineering platform for Kubernetes. Although it provides rich capabilities to simulate abnormal system conditions, it still only solves a fraction of the Chaos Engineering puzzle. Besides fault injection, a full chaos engineering application consists of hypothesizing around defined steady states, running experiments in production, validating the system via test cases, and automating the testing.
 
 This article describes how we use [TiPocket](https://github.com/pingcap/tipocket), an automated testing framework to build a full Chaos Engineering testing loop for TiDB, our distributed database.
 

@@ -1,6 +1,6 @@
 ---
 slug: /chaos-mesh-q&a
-title: 'Chaos Mesh® Q&A'
+title: 'Chaos Mesh Q&A'
 author: Chaos Mesh Community
 author_url: https://github.com/chaos-mesh
 author_image_url: https://avatars1.githubusercontent.com/u/59082378?v=4

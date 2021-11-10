@@ -138,39 +138,15 @@ kubectl annotate networkchaos network-delay experiment.chaos-mesh.org/pause-
 
 ## 更新混沌实验
 
-创建混沌实验后，如需更新混沌实验，可以编辑混沌实验对象的配置参数。
-
-:::note 注意
-
-- 对于已经正常运行的一次性混沌实验，目前仅支持更新当前故障行为的持续时间（`duration` 参数），不支持更新其他故障配置参数。
-- 对于定时或循环混沌实验，对 `duration` 参数的更新将在当前正在执行的故障注入行为结束后生效。
-
-:::
-
 ### 使用命令更新混沌实验
 
-如果使用 YAML 文件方式管理混沌实验，可以通过下列命令更新混沌实验：
+目前混沌实验的 `Spec` 字段不允许被更新。
 
-```yaml
-vim network-delay.yaml # modify network-delay.yaml to what you want
-kubectl apply -f network-delay.yaml
-```
-
-如果只需要更新某个特定字段，也可以直接通过 `kubectl patch` 命令更新：
-
-```yaml
-kubectl patch networchaos network-delay -p '{"spec":{"duration":"30s"}}'
-```
-
-运行此命令后，`network-delay` 混沌实验的持续时间将更新为 30s。
-
-更多通过 `kubectl` 命令来更新对象的操作，请参考 [kubectl 文档](https://kubernetes.io/docs/reference/kubectl/cheatsheet/)。
+更多细节，请参见对应的 [GitHub issue](https://github.com/chaos-mesh/chaos-mesh/issues/2227)。
 
 ### 使用 Dashboard 更新混沌实验
 
-如果你想要在 Dashboard 更新混沌实验，可以点击对应混沌实验的**更新**按钮，通过编辑对应的对象进行更新。
-
-![Edit experiment](img/configuration_zh.png)
+由于目前混沌实验的 `Spec` 字段不允许被更新，所以 Dashboard 暂不支持更新混沌实验。
 
 ## 清理混沌实验
 
@@ -180,7 +156,7 @@ kubectl patch networchaos network-delay -p '{"spec":{"duration":"30s"}}'
 
 ```yaml
 kubectl delete -f network-delay.yaml
-## or delete the chaos object directly
+# or delete the chaos object directly
 kubectl delete networkchaos network-delay
 ```
 

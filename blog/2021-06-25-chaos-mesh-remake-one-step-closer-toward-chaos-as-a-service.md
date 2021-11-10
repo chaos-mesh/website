@@ -11,7 +11,7 @@ tags: [Chaos Mesh, Chaos Engineering]
 
 ![Chaos engineering tools](/img/chaos-engineering-tools-as-a-service.jpeg)
 
-[Chaos Mesh®](https://chaos-mesh.org/) is a cloud-native Chaos Engineering platform that orchestrates chaos in Kubernetes environments. With Chaos Mesh, you can test your system's resilience and robustness on Kubernetes by injecting all types of faults into Pods, network, file system, and even the kernel.
+[Chaos Mesh](https://chaos-mesh.org/) is a cloud-native Chaos Engineering platform that orchestrates chaos in Kubernetes environments. With Chaos Mesh, you can test your system's resilience and robustness on Kubernetes by injecting all types of faults into Pods, network, file system, and even the kernel.
 
 <!--truncate-->
 
