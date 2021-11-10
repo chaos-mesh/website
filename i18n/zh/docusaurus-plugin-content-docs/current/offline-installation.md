@@ -24,7 +24,7 @@ import QuickRun from './common/quick-run.md'
 
 在有外网连接的机器上，设置 Chaos Mesh 的版本号为环境变量：
 
-<PickVersion className="language-bash">
+<PickVersion>
 export CHAOS_MESH_VERSION=latest
 </PickVersion>
 
@@ -57,16 +57,8 @@ docker save pingcap/chaos-dashboard:${CHAOS_MESH_VERSION} > image-chaos-dashboar
 在有外网连接的机器上，下载 Chaos Mesh 的 zip 包：
 
 ```bash
-curl https://github.com/chaos-mesh/chaos-mesh/archive/refs/heads/${CHAOS_MESH_VERSION}.zip -o chaos-mesh.zip
+curl https://github.com/chaos-mesh/chaos-mesh/archive/refs/heads/master.zip -o chaos-mesh.zip
 ```
-
-:::note 注意
-
-`latest` 版本对应 Chaos Mesh 仓库的 `master` 分支，链接为：
-
-<https://github.com/chaos-mesh/chaos-mesh/archive/refs/heads/master.zip>
-
-:::
 
 ### 拷贝文件
 
