@@ -96,6 +96,11 @@ const whoisUsing = [
     href: 'https://www.qiniu.com/'
   },
   {
+    name: 'RabbitMQ',
+    img: 'img/logos/rabbitmq.svg',
+    href: 'https://www.rabbitmq.com/'
+  },
+  {
     name: 'S.J. Distributors',
     img: 'img/logos/sj.png',
     href: 'https://www.sjfood.com/',
