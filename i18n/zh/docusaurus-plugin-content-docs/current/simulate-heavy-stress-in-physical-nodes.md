@@ -137,15 +137,17 @@ Attack stress mem successfully, uid: c2bff2f5-3aac-4ace-b7a6-322946ae6f13
 
 ## 使用服务模式创建压力实验
 
-以服务模式运行 chaosd，通过向 chaosd 服务的路径 /api/attack/stress 发送 HTTP POTST 请求，从而创建实验。在运行实验时，请注意保存实验的 uid 信息，向 chaosd 服务的路径 /api/attack/{uid} 发送 HTTP DELETE 请求来结束 uid 对应的实验。
-
-### 以服务模式运行 chaosd
-
-运行以下命令：
-
-```bash
-chaosd server --port 31767
-```
+要使用服务模式创建实验，请进行以下操作：
+1. 以服务模式运行 chaosd。
+    ```bash
+    chaosd server --port 31767
+    ```
+2. 向 chaosd 服务的路径 /api/attack/stress 发送 HTTP POTST 请求。
+    ```bash
+    curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d <fault-configuration>
+    ```
+其中 <fault-configuration> 需要按照故障类型进行配置，对应的配置参数请参考下文中各个类型故障的相关参数说明和命令示例。 
+在运行实验时，请注意保存实验的 uid 信息，当要结束 uid 对应的实验时，需要向 chaosd 服务的路径 /api/attack/{uid} 发送 HTTP DELETE 请求。
 
 ### 服务模式模拟 CPU 压力场景
 

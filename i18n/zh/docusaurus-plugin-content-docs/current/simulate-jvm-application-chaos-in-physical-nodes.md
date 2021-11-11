@@ -361,7 +361,7 @@ Global Flags:
 | 配置项    | 配置缩写 | 说明                                                                | 值                                                      |
 | :-------- | :------- | :------------------------------------------------------------------ | :------------------------------------------------------ |
 | cpu-count | 无       | 增加 CPU 压力所使用的 CPU 核的数量                                  | int 类型，`cpu-count` 和 `mem-type` 只能配置一个            |
-| mem-type  | 无       | OOM 的类型                             | string 类型，目前支持 stack' 和 'heap' 两种 OOM 类型。cpu-count 和 mem-type 只能配置一个 |
+| mem-type  | 无       | OOM 的类型                             | string 类型，目前支持 'stack' 和 'heap' 两种 OOM 类型。cpu-count 和 mem-type 只能配置一个 |
 | pid       | 无       | 需要注入故障的 Java 进程号                                          | int 类型，必须配置                                      |
 | port      | 无       | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288                                   |
 | uid       | 无       | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个    |
@@ -382,15 +382,17 @@ Attack jvm successfully, uid: b9b997b5-0a0d-4f1f-9081-d52a32318b84
 
 ## 使用服务模式创建实验
 
-以服务模式运行 chaosd，通过向 chaosd 服务的路径 /api/attack/jvm 发送 HTTP POTST 请求，从而创建实验。在运行实验时，请注意保存实验的 uid 信息，向 chaosd 服务的路径 /api/attack/{uid} 发送 HTTP DELETE 请求来结束 uid 对应的实验。
-
-### 以服务模式运行 chaosd
-
-运行以下命令：
-
-```bash
-chaosd server --port 31767
-```
+要使用服务模式创建实验，请进行以下操作：
+1. 以服务模式运行 chaosd。
+    ```bash
+    chaosd server --port 31767
+    ```
+2. 向 chaosd 服务的路径 /api/attack/jvm 发送 HTTP POTST 请求。
+    ```bash
+    curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d <fault-configuration>
+    ```
+其中 <fault-configuration> 需要按照故障类型进行配置，对应的配置参数请参考下文中各个类型故障的相关参数说明和命令示例。 
+在运行实验时，请注意保存实验的 uid 信息，当要结束 uid 对应的实验时，需要向 chaosd 服务的路径 /api/attack/{uid} 发送 HTTP DELETE 请求。
 
 ### 服务模式抛出自定义异常
 
@@ -544,7 +546,7 @@ curl -X POST 127.0.0.1:31767/api/attack/jvm -H "Content-Type:application/json" -
 | :-------- | :------------------------------------------------------------------ | :------------------------------------------------------ |
 | action | 实验的行为 | 设置为 "stress" |
 | cpu-count | 增加 CPU 压力所使用的 CPU 核的数量                                  | int 类型，`cpu-count` 和 `mem-type` 中必须配置一个            |
-| mem-type  | OOM 的类型                             | string 类型，目前支持 stack' 和 'heap' 两种 OOM 类型。cpu-count 和 mem-type 只能配置一个 |
+| mem-type  | OOM 的类型                             | string 类型，目前支持 'stack' 和 'heap' 两种 OOM 类型。cpu-count 和 mem-type 只能配置一个 |
 | pid       | 需要注入故障的 Java 进程号                                          | int 类型，必须配置                                      |
 | port      | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288                                   |
 | uid       | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个    |
