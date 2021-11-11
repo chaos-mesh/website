@@ -28,7 +28,7 @@ kubectl describe po -n chaos-testing chaos-controller-manager-69fd5c46c8-xlqpc
 
 :::note 注意
 
-如果手动关闭了 `leader-election`，那么 `chaos-controller-manager` 应该只有1个实例。
+如果手动关闭了 `leader-election`，`chaos-controller-manager` 应该只有 1 个实例。
 
 ```sh
 NAME                                        READY   STATUS    RESTARTS   AGE

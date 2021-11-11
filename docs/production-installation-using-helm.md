@@ -99,7 +99,7 @@ To install Chaos Mesh of a specific version, add the `--version xxx` parameter a
 
 :::note
 
-In order to ensure high availability, Chaos Mesh turn on `leader-election` feature by default, if you do not need this feature, you can manually turn it off by `--set controllerManager.leaderElection.enabled=false`.
+To ensure high availability, Chaos Mesh turns on `leader-election` feature by default. If you do not need to use this feature, you can manually turn it off through `--set controllerManager.leaderElection.enabled=false`.
 
 :::
 
