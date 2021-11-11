@@ -101,6 +101,12 @@ helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set chaosDaemon
 
 :::
 
+:::note 注意
+
+为了保证高可用，Chaos Mesh 默认开启了 `leader-election` 特性，如果你不需要这个特性，可以通过 `--set controllerManager.leaderElection.enabled=false` 来手动关闭。
+
+:::
+
 ## 验证安装
 
 <VerifyInstallation />

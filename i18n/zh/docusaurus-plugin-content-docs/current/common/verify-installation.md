@@ -8,7 +8,7 @@ kubectl get po -n chaos-testing
 
 ```bash
 NAME                                        READY   STATUS    RESTARTS   AGE
-chaos-controller-manager-69fd5c46c8-xlqpc   1/1     Running   0          2d5h
+chaos-controller-manager-69fd5c46c8-xlqpc   3/3     Running   0          2d5h
 chaos-daemon-jb8xh                          1/1     Running   0          2d5h
 chaos-dashboard-98c4c5f97-tx5ds             1/1     Running   0          2d5h
 ```
@@ -22,6 +22,19 @@ chaos-dashboard-98c4c5f97-tx5ds             1/1     Running   0          2d5h
 ```bash
 # 以 chaos-controller 为例
 kubectl describe po -n chaos-testing chaos-controller-manager-69fd5c46c8-xlqpc
+```
+
+:::
+
+:::note 注意
+
+如果手动关闭了 `leader-election`，那么 `chaos-controller-manager` 应该只有1个实例。
+
+```sh
+NAME                                        READY   STATUS    RESTARTS   AGE
+chaos-controller-manager-69fd5c46c8-xlqpc   1/1     Running   0          2d5h
+chaos-daemon-jb8xh                          1/1     Running   0          2d5h
+chaos-dashboard-98c4c5f97-tx5ds             1/1     Running   0          2d5h
 ```
 
 :::
