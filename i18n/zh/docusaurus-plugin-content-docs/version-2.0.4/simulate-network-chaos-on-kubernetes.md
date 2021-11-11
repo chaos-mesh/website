@@ -136,15 +136,15 @@ NetworkChaos 用于模拟集群中网络故障的场景，目前支持以下几�
 
 ### 字段说明
 
-| 参数           | 类型     | 说明                                                                                                                                                                                                                                                                                                       | 默认值 | 是否必填 | 示例      |
-| -------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- | --------- |
-| action         | string   | 表示具体的故障类型。netem，delay，loss，duplicate，corrupt 对应 net emulation 类型；partition 表示网络分区；bandwidth 表示限制带宽                                                                                                                                                                         | 无     | 是       | partition |
-| target         | Selector | 与 direction 组合使用，使得 Chaos 只对部分包生效                                                                                                                                                                                                                                                           | 无     | 否       |           |
-| direction      | enum     | 值为 `from`，`to` 或 `both`。用于指定选出“来自 target 的包”，“发往 target 的包”，或者“全部选中”                                                                                                                                                                                                            | to     | 否       | both      |
-| mode           | string   | 指定实验的运行方式，可选择的方式包括：`one`（表示随机选出一个符合条件的 Pod）、`all`（表示选出所有符合条件的 Pod）、`fixed`（表示选出指定数量且符合条件的 Pod）、`fixed-percent`（表示选出占符合条件的 Pod 中指定百分比的 Pod）、`random-max-percent`（表示选出占符合条件的 Pod 中不超过指定百分比的 Pod） | 无     | 是       | `one`     |
-| value          | string   | 取决与 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 Pod 的百分比                                                                                                                                                                               | 无     | 否       | 2         |
-| containerNames | []string | 指定注入的容器名称                                                                                                                                                                                                                                                                                         | 无     | 否       | ["nginx"] |
-| selector       | struct   | 指定注入故障的目标 Pod，详情请参考[定义实验范围](./define-chaos-experiment-scope.md)                                                                                                                                                                                                                       | 无     | 是       |           |
+| 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
+| --- | --- | --- | --- | --- | --- |
+| action | string | 表示具体的故障类型。netem，delay，loss，duplicate，corrupt 对应 net emulation 类型；partition 表示网络分区；bandwidth 表示限制带宽 | 无 | 是 | partition |
+| target | Selector | 与 direction 组合使用，使得 Chaos 只对部分包生效 | 无 | 否 |  |
+| direction | enum | 值为 `from`，`to` 或 `both`。用于指定选出“来自 target 的包”，“发往 target 的包”，或者“全部选中” | to | 否 | both |
+| mode | string | 指定实验的运行方式，可选择的方式包括：`one`（表示随机选出一个符合条件的 Pod）、`all`（表示选出所有符合条件的 Pod）、`fixed`（表示选出指定数量且符合条件的 Pod）、`fixed-percent`（表示选出占符合条件的 Pod 中指定百分比的 Pod）、`random-max-percent`（表示选出占符合条件的 Pod 中不超过指定百分比的 Pod） | 无 | 是 | `one` |
+| value | string | 取决与 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 Pod 的百分比 | 无 | 否 | 1 |
+| containerNames | []string | 指定注入的容器名称 | 无 | 否 | ["nginx"] |
+| selector | struct | 指定注入故障的目标 Pod，详情请参考[定义实验范围](./define-chaos-experiment-scope.md) | 无 | 是 |  |
 
 针对不同的 `action`，还有不同的配置项可以填写。
 

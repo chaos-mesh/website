@@ -153,14 +153,14 @@ stringData:
 
 下表介绍以上 YAML 配置文件中的字段。
 
-| 参数        | 类型   | 说明                                                                                                                                                                                                                                                                                                       | 默认值   | 是否必填 | 示例                 |
-| ----------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------- | -------------------- |
-| action      | string | 表示具体的故障类型，仅支持 ec2-stop、ec2-restart、detach-volume                                                                                                                                                                                                                                            | ec2-stop | 是       | ec2-stop             |
-| mode        | string | 指定实验的运行方式，可选择的方式包括：`one`（表示随机选出一个符合条件的 Pod）、`all`（表示选出所有符合条件的 Pod）、`fixed`（表示选出指定数量且符合条件的 Pod）、`fixed-percent`（表示选出占符合条件的 Pod 中指定百分比的 Pod）、`random-max-percent`（表示选出占符合条件的 Pod 中不超过指定百分比的 Pod） | 无       | 是       | `one`                |
-| value       | string | 取决与 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 Pod 的百分比。                                                                                                                                                                             | 无       | 否       | 2                    |
-| secretName  | string | 指定存储 AWS 认证信息的 Kubernetes Secret 名字                                                                                                                                                                                                                                                             | 无       | 否       | cloud-key-secret     |
-| awsRegion   | string | 指定 AWS 区域                                                                                                                                                                                                                                                                                              | 无       | 是       | us-east-2            |
-| ec2Instance | string | 指定 EC2 实例的 ID                                                                                                                                                                                                                                                                                         | 无       | 是       | your-ec2-instance-id |
-| volumeID    | string | 当 action 为 detach-volume 必填，指定 EBS 卷的 ID                                                                                                                                                                                                                                                          | 无       | 否       | your-volume-id       |
-| deviceName  | string | 当 action 为 detach-volume 必填，指定设备名                                                                                                                                                                                                                                                                | 无       | 否       | /dev/sdf             |
-| duration    | string | 指定实验的持续时间                                                                                                                                                                                                                                                                                         | 无       | 是       | 30s                  |
+| 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
+| --- | --- | --- | --- | --- | --- |
+| action | string | 表示具体的故障类型，仅支持 ec2-stop、ec2-restart、detach-volume | ec2-stop | 是 | ec2-stop |
+| mode | string | 指定实验的运行方式，可选择的方式包括：`one`（表示随机选出一个符合条件的 Pod）、`all`（表示选出所有符合条件的 Pod）、`fixed`（表示选出指定数量且符合条件的 Pod）、`fixed-percent`（表示选出占符合条件的 Pod 中指定百分比的 Pod）、`random-max-percent`（表示选出占符合条件的 Pod 中不超过指定百分比的 Pod） | 无 | 是 | `one` |
+| value | string | 取决与 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 Pod 的百分比。 | 无 | 否 | 1 |
+| secretName | string | 指定存储 AWS 认证信息的 Kubernetes Secret 名字 | 无 | 否 | cloud-key-secret |
+| awsRegion | string | 指定 AWS 区域 | 无 | 是 | us-east-2 |
+| ec2Instance | string | 指定 EC2 实例的 ID | 无 | 是 | your-ec2-instance-id |
+| volumeID | string | 当 action 为 detach-volume 必填，指定 EBS 卷的 ID | 无 | 否 | your-volume-id |
+| deviceName | string | 当 action 为 detach-volume 必填，指定设备名 | 无 | 否 | /dev/sdf |
+| duration | string | 指定实验的持续时间 | 无 | 是 | 30s |

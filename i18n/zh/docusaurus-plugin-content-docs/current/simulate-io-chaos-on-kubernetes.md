@@ -178,18 +178,18 @@ IOChaos 是 Chaos Mesh 中的一种故障类型。通过创建 IOChaos 类型的
 
 #### 通用字段
 
-| 参数          | 类型     | 说明                                                                                                                                                                                                                                                                                                       | 默认值             | 是否必填 | 示例                |
-| ------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ | -------- | ------------------- |
-| action        | string   | 表示具体的故障类型，仅支持 latency、fault、attrOverride、mistake                                                                                                                                                                                                                                           |                    | 是       | latency             |
-| mode          | string   | 指定实验的运行方式，可选择的方式包括：`one`（表示随机选出一个符合条件的 Pod）、`all`（表示选出所有符合条件的 Pod）、`fixed`（表示选出指定数量且符合条件的 Pod）、`fixed-percent`（表示选出占符合条件的 Pod 中指定百分比的 Pod）、`random-max-percent`（表示选出占符合条件的 Pod 中不超过指定百分比的 Pod） | 无                 | 是       | one                 |
-| selector      | struct   | 指定注入故障的目标 Pod，详情请参考[定义实验范围](./define-chaos-experiment-scope.md)                                                                                                                                                                                                                       | 无                 | 是       |                     |
-| value         | string   | 取决与 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 Pod 的百分比                                                                                                                                                                               |                    | 否       | 2                   |
-| volumePath    | string   | volume 在目标容器内的挂载点，必须为挂载的根目录                                                                                                                                                                                                                                                            |                    | 是       | /var/run/etcd       |
-| path          | string   | 注入错误的生效范围，可以是通配符，也可以是单个文件                                                                                                                                                                                                                                                         | 默认对所有文件生效 | 否       | /var/run/etcd/\*_/_ |
-| methods       | string[] | 需要注入故障的文件系统调用类型，具体支持的类型见[附录 A](#附录-a：methods-类型)                                                                                                                                                                                                                            | 所有类型           | 否       | READ                |
-| percent       | int      | 每次操作发生故障的概率，单位为%                                                                                                                                                                                                                                                                            | 100                | 否       | 100                 |
-| containerName | string   | 指定注入的容器名                                                                                                                                                                                                                                                                                           |                    | 否       |                     |
-| duration      | string   | 指定具体实验的持续时间                                                                                                                                                                                                                                                                                     |                    | 是       | 30s                 |
+| 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
+| --- | --- | --- | --- | --- | --- |
+| action | string | 表示具体的故障类型，仅支持 latency、fault、attrOverride、mistake |  | 是 | latency |
+| mode | string | 指定实验的运行方式，可选择的方式包括：`one`（表示随机选出一个符合条件的 Pod）、`all`（表示选出所有符合条件的 Pod）、`fixed`（表示选出指定数量且符合条件的 Pod）、`fixed-percent`（表示选出占符合条件的 Pod 中指定百分比的 Pod）、`random-max-percent`（表示选出占符合条件的 Pod 中不超过指定百分比的 Pod） | 无 | 是 | `one` |
+| selector | struct | 指定注入故障的目标 Pod，详情请参考[定义实验范围](./define-chaos-experiment-scope.md) | 无 | 是 |  |
+| value | string | 取决与 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 Pod 的百分比 | 无 | 否 | 1 |
+| volumePath | string | volume 在目标容器内的挂载点，必须为挂载的根目录 |  | 是 | /var/run/etcd |
+| path | string | 注入错误的生效范围，可以是通配符，也可以是单个文件 | 默认对所有文件生效 | 否 | /var/run/etcd/\*_/_ |
+| methods | string[] | 需要注入故障的文件系统调用类型，具体支持的类型见[附录 A](#附录-a：methods-类型) | 所有类型 | 否 | READ |
+| percent | int | 每次操作发生故障的概率，单位为% | 100 | 否 | 100 |
+| containerName | string | 指定注入的容器名 |  | 否 |  |
+| duration | string | 指定具体实验的持续时间 |  | 是 | 30s |
 
 #### 与 action 相关的字段
 
@@ -217,20 +217,20 @@ IOChaos 是 Chaos Mesh 中的一种故障类型。通过创建 IOChaos 类型的
 
   AttrOverrideSpec 定义如下
 
-  | 参数   | 类型     | 说明                                                                                   | 默认值 | 是否必填 | 示例                 |
-  | ------ | -------- | -------------------------------------------------------------------------------------- | ------ | -------- | -------------------- |
-  | ino    | int      | ino 的号                                                                               |        | 否       |                      |
-  | size   | int      | 文件大小                                                                               |        | 否       |                      |
-  | blocks | int      | 文件占用块数                                                                           |        | 否       |                      |
-  | atime  | TimeSpec | 最后访问时间                                                                           |        | 否       |                      |
-  | mtime  | TimeSpec | 最后修改时间                                                                           |        | 否       |                      |
-  | ctime  | TimeSpec | 最后状态变更时间                                                                       |        | 否       |                      |
-  | kind   | string   | 文件类型，详见 [fuser::FileType](https://docs.rs/fuser/0.7.0/fuser/enum.FileType.html) |        | 否       |                      |
-  | perm   | int      | 文件权限的十进制表示                                                                   |        | 否       | 72（八进制下为 110） |
-  | nlink  | int      | 硬链接数量                                                                             |        | 否       |                      |
-  | uid    | int      | 所有者的用户 ID                                                                        |        | 否       |                      |
-  | gid    | int      | 所有者的组 ID                                                                          |        | 否       |                      |
-  | rdev   | int      | 设备 ID                                                                                |        | 否       |                      |
+  | 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
+  | --- | --- | --- | --- | --- | --- |
+  | ino | int | ino 的号 |  | 否 |  |
+  | size | int | 文件大小 |  | 否 |  |
+  | blocks | int | 文件占用块数 |  | 否 |  |
+  | atime | TimeSpec | 最后访问时间 |  | 否 |  |
+  | mtime | TimeSpec | 最后修改时间 |  | 否 |  |
+  | ctime | TimeSpec | 最后状态变更时间 |  | 否 |  |
+  | kind | string | 文件类型，详见 [fuser::FileType](https://docs.rs/fuser/0.7.0/fuser/enum.FileType.html) |  | 否 |  |
+  | perm | int | 文件权限的十进制表示 |  | 否 | 72（八进制下为 110） |
+  | nlink | int | 硬链接数量 |  | 否 |  |
+  | uid | int | 所有者的用户 ID |  | 否 |  |
+  | gid | int | 所有者的组 ID |  | 否 |  |
+  | rdev | int | 设备 ID |  | 否 |  |
 
   TimeSpec 定义如下
 
@@ -249,15 +249,13 @@ IOChaos 是 Chaos Mesh 中的一种故障类型。通过创建 IOChaos 类型的
 
   MistakeSpec 定义如下
 
-  | 参数           | 类型   | 说明                                                               | 默认值 | 是否必填 | 示例 |
-  | -------------- | ------ | ------------------------------------------------------------------ | ------ | -------- | ---- |
-  | filling        | string | 错误数据的填充内容，只能为 zero（填充 0）或 random（填充随机字节） |        | 是       |      |
-  | maxOccurrences | int    | 错误在每一次操作中最多出现次数                                     |        | 是       | 1    |
-  | maxLength      | int    | 每次错误的最大长度（单位为字节）                                   |        | 是       | 1    |
+  | 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
+  | --- | --- | --- | --- | --- | --- |
+  | filling | string | 错误数据的填充内容，只能为 zero（填充 0）或 random（填充随机字节） |  | 是 |  |
+  | maxOccurrences | int | 错误在每一次操作中最多出现次数 |  | 是 | 1 |
+  | maxLength | int | 每次错误的最大长度（单位为字节） |  | 是 | 1 |
 
-:::warning 警告
-不推荐在除了 READ 和 WRITE 之外的文件系统调用上使用 mistake 错误。这可能会导致预期之外的结果，包括但不限于文件系统损坏、程序崩溃等。
-:::
+:::warning 警告不推荐在除了 READ 和 WRITE 之外的文件系统调用上使用 mistake 错误。这可能会导致预期之外的结果，包括但不限于文件系统损坏、程序崩溃等。 :::
 
 ## 本地调试
 
