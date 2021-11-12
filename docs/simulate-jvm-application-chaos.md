@@ -157,14 +157,14 @@ hello chaos mesh!
 
 ## Field description
 
-| Parameter | Type              | Description                                                                                                                                                                                         | Default value | Required | Example |
-| --------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | -------- | ------- |
-| action    | string            | Indicates the specific fault type. The available fault types include return, script, cfl, oom, ccf, tce, tcf, cpf, tde, and tpf.                                                                    | None          | Yes      | return  |
-| mode      | string            | Indicates how to select Pod. The supported modes include one, all, fixed, fixed-percent, and random-max-percent.                                                                                    | None          | Yes      | 1       |
-| value     | string            | Provides parameters for the `mode` configuration, depending on `mode`.                                                                                                                              | None          | No       | 2       |
-| target    | string            | Indicates the parameter passed to `chaosblade-exec-jvm`, representing JVMChaos targets, supporting servlet, psql, jvm, jedis, http, dubbo, rocketmq, tars, mysql, ruid, redisson, rabbitmq, monodb. | None          | Yes      | jvm     |
-| flags     | map[string]string | Indicates parameters passed to `chaosblade-exec-jvm` and represents the flags of action.                                                                                                            | None          | No       |         |
-| matchers  | map[string]string | Indicates parameters passed to `chaosblade-execu-jvm` and represents the matching of injection points.                                                                                              | None          | No       |         |
+| Parameter | Type | Description | Default value | Required | Example |
+| --- | --- | --- | --- | --- | --- |
+| action | string | Indicates the specific fault type. The available fault types include return, script, cfl, oom, ccf, tce, tcf, cpf, tde, and tpf. | None | Yes | return |
+| mode | string | Indicates how to select Pod. The supported modes include one, all, fixed, fixed-percent, and random-max-percent. | None | Yes | `one` |
+| value | string | Provides parameters for the `mode` configuration, depending on `mode`. | None | No | 1 |
+| target | string | Indicates the parameter passed to `chaosblade-exec-jvm`, representing JVMChaos targets, supporting servlet, psql, jvm, jedis, http, dubbo, rocketmq, tars, mysql, ruid, redisson, rabbitmq, monodb. | None | Yes | jvm |
+| flags | map[string]string | Indicates parameters passed to `chaosblade-exec-jvm` and represents the flags of action. | None | No |  |
+| matchers | map[string]string | Indicates parameters passed to `chaosblade-execu-jvm` and represents the matching of injection points. | None | No |  |
 
 For the meaning of the value of action, refer to:
 

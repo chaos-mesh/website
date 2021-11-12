@@ -157,14 +157,14 @@ hello chaos mesh!
 
 ## 字段说明
 
-| 参数     | 类型              | 说明                                                                                                                                                                | 默认值 | 是否必填 | 示例   |
-| -------- | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- | ------ |
-| action   | string            | 表示具体的故障类型，支持 delay、return、script、cfl、oom、ccf、tce、cpf、tde、tpf。                                                                                 | 无     | 是       | return |
-| mode     | string            | 表示选择 Pod 的方式，支持 one、all、fixed、fixed-percent、random-max-percent。                                                                                      | 无     | 是       | one    |
-| value    | string            | 取决于 mode 的取值，为 mode 提供参数                                                                                                                                | 无     | 否       | 2      |
-| target   | string            | 传递给 `chaosblade-exec-jvm` 的参数，代表 JVMChaos 的目标，支持 servlet、psql、jvm、jedis、http、dubbo、rocketmq、tars、mysql、druid、redisson、rabbitmq、mongodb。 | 无     | 是       | jvm    |
-| flags    | map[string]string | 传递给 `chaosblade-exec-jvm` 的参数，代表 action 的 flags                                                                                                           | 无     | 否       |        |
-| matchers | map[string]string | 传递给 `chaosblade-exec-jvm` 的参数，代表注入点的匹配方式                                                                                                           | 无     | 否       |        |
+| 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
+| --- | --- | --- | --- | --- | --- |
+| action | string | 表示具体的故障类型，支持 delay、return、script、cfl、oom、ccf、tce、cpf、tde、tpf。 | 无 | 是 | return |
+| mode | string | 表示选择 Pod 的方式，支持 one、all、fixed、fixed-percent、random-max-percent。 | 无 | 是 | `one` |
+| value | string | 取决于 mode 的取值，为 mode 提供参数 | 无 | 否 | 1 |
+| target | string | 传递给 `chaosblade-exec-jvm` 的参数，代表 JVMChaos 的目标，支持 servlet、psql、jvm、jedis、http、dubbo、rocketmq、tars、mysql、druid、redisson、rabbitmq、mongodb。 | 无 | 是 | jvm |
+| flags | map[string]string | 传递给 `chaosblade-exec-jvm` 的参数，代表 action 的 flags | 无 | 否 |  |
+| matchers | map[string]string | 传递给 `chaosblade-exec-jvm` 的参数，代表注入点的匹配方式 | 无 | 否 |  |
 
 关于 action 的取值的含义，可参考：
 

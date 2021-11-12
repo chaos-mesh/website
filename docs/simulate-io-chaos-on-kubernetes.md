@@ -174,18 +174,18 @@ For specific features, refer to [Create experiments using the YAML files](#creat
 
 #### General fields
 
-| Parameter     | Type     | Description                                                                                                                                                                                                                                                                                                                                                | Default value                  | Required | Example             |
-| ------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ | -------- | ------------------- |
-| action        | string   | Indicates the specific type of faults. Only latency, fault, attrOverride, and mistake are supported.                                                                                                                                                                                                                                                       |                                | Yes      | latency             |
-| mode          | string   | Specifies the mode of the experiment. The mode options include `one` (selecting a Pod at random), `all` (selecting all eligible Pods), `fixed` (selecting a specified number of eligible Pods), `fixed-percent` (selecting a specified percentage of the eligible Pods), and `random-max-percent` (selecting the maximum percentage of the eligible Pods). | None                           | Yes      | 1                   |
-| selector      | struct   | Specifies the target Pod. For details, refer to [Define the experiment scope](./define-chaos-experiment-scope.md).                                                                                                                                                                                                                                         | None                           | Yes      |                     |
-| value         | string   | Provides parameters for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods.                                                                                                                                                                                       |                                | No       | 2                   |
-| volumePath    | string   | The mount point of volume in the target container. Must be the root directory of the mount.                                                                                                                                                                                                                                                                |                                | Yes      | /var/run/etcd       |
-| path          | string   | The valid range of fault injections, either a wildcard or a single file.                                                                                                                                                                                                                                                                                   | Valid for all files by default | No       | /var/run/etcd/\*_/_ |
-| methods       | string[] | Type of the file system call that requires injecting fault. For more information about supported types, refer to [Appendix A](#appendix-a: methods-type).                                                                                                                                                                                                  | All Types                      | No       | READ                |
-| percent       | int      | Probability of failure per operation, in %.                                                                                                                                                                                                                                                                                                                | 100                            | No       | 100                 |
-| ContainerName | string   | Specifies the name of the container into which the fault is injected.                                                                                                                                                                                                                                                                                      |                                | No       |                     |
-| duration      | string   | Specifies the duration of the experiment.                                                                                                                                                                                                                                                                                                                  |                                | Yes      | 30s                 |
+| Parameter | Type | Description | Default value | Required | Example |
+| --- | --- | --- | --- | --- | --- |
+| action | string | Indicates the specific type of faults. Only latency, fault, attrOverride, and mistake are supported. |  | Yes | latency |
+| mode | string | Specifies the mode of the experiment. The mode options include `one` (selecting a Pod at random), `all` (selecting all eligible Pods), `fixed` (selecting a specified number of eligible Pods), `fixed-percent` (selecting a specified percentage of the eligible Pods), and `random-max-percent` (selecting the maximum percentage of the eligible Pods). | None | Yes | `one` |
+| selector | struct | Specifies the target Pod. For details, refer to [Define the experiment scope](./define-chaos-experiment-scope.md). | None | Yes |  |
+| value | string | Provides parameters for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods. |  | No | 1 |
+| volumePath | string | The mount point of volume in the target container. Must be the root directory of the mount. |  | Yes | /var/run/etcd |
+| path | string | The valid range of fault injections, either a wildcard or a single file. | Valid for all files by default | No | /var/run/etcd/\*_/_ |
+| methods | string[] | Type of the file system call that requires injecting fault. For more information about supported types, refer to [Appendix A](#appendix-a: methods-type). | All Types | No | READ |
+| percent | int | Probability of failure per operation, in %. | 100 | No | 100 |
+| ContainerName | string | Specifies the name of the container into which the fault is injected. |  | No |  |
+| duration | string | Specifies the duration of the experiment. |  | Yes | 30s |
 
 #### Fields related to action
 
@@ -213,20 +213,20 @@ The following are specific information about fields corresponding to action:
 
   AttrOverrideSpec is defined as follows:
 
-  | Parameter | Type     | Description                                                                            | Default value | Required | Example           |
-  | --------- | -------- | -------------------------------------------------------------------------------------- | ------------- | -------- | ----------------- |
-  | ino       | int      | ino number                                                                             |               | No       |                   |
-  | size      | int      | File size                                                                              |               | No       |                   |
-  | blocks    | int      | Number of blocks that the file uses                                                    |               | No       |                   |
-  | atime     | TimeSpec | Last access time                                                                       |               | No       |                   |
-  | mtime     | TimeSpec | Last modified time                                                                     |               | No       |                   |
-  | ctime     | TimeSpec | Last status change time                                                                |               | No       |                   |
-  | kind      | string   | File type, see [fuser::FileType](https://docs.rs/fuser/0.7.0/fuser/enum.FileType.html) |               | No       |                   |
-  | perm      | int      | File permissions in decimal                                                            |               | No       | 72 (110 in octal) |
-  | nlink     | int      | Number of hard links                                                                   |               | No       |                   |
-  | uid       | int      | User ID of the owner                                                                   |               | No       |                   |
-  | gid       | int      | Group ID of the owner                                                                  |               | No       |                   |
-  | rdev      | int      | Device ID                                                                              |               | No       |                   |
+  | Parameter | Type | Description | Default value | Required | Example |
+  | --- | --- | --- | --- | --- | --- |
+  | ino | int | ino number |  | No |  |
+  | size | int | File size |  | No |  |
+  | blocks | int | Number of blocks that the file uses |  | No |  |
+  | atime | TimeSpec | Last access time |  | No |  |
+  | mtime | TimeSpec | Last modified time |  | No |  |
+  | ctime | TimeSpec | Last status change time |  | No |  |
+  | kind | string | File type, see [fuser::FileType](https://docs.rs/fuser/0.7.0/fuser/enum.FileType.html) |  | No |  |
+  | perm | int | File permissions in decimal |  | No | 72 (110 in octal) |
+  | nlink | int | Number of hard links |  | No |  |
+  | uid | int | User ID of the owner |  | No |  |
+  | gid | int | Group ID of the owner |  | No |  |
+  | rdev | int | Device ID |  | No |  |
 
   TimeSpec is defined as follows:
 
@@ -245,11 +245,11 @@ The following are specific information about fields corresponding to action:
 
   MistakeSpec is defined as follows:
 
-  | Parameter      | Type   | Description                                                                                  | Default value | Required | Example |
-  | -------------- | ------ | -------------------------------------------------------------------------------------------- | ------------- | -------- | ------- |
-  | filling        | string | The wrong data to be filled. Only zero (fill 0) or random (fill random bytes) are supported. |               | Yes      |         |
-  | maxOccurrences | int    | Maximum number of errors in each operation.                                                  |               | Yes      | 1       |
-  | maxLength      | int    | Maximum length of each error (in bytes).                                                     |               | Yes      | 1       |
+  | Parameter | Type | Description | Default value | Required | Example |
+  | --- | --- | --- | --- | --- | --- |
+  | filling | string | The wrong data to be filled. Only zero (fill 0) or random (fill random bytes) are supported. |  | Yes |  |
+  | maxOccurrences | int | Maximum number of errors in each operation. |  | Yes | 1 |
+  | maxLength | int | Maximum length of each error (in bytes). |  | Yes | 1 |
 
 ::warning It is suggested that you only use mistake on READ and WRITE file system calls. Using mistake on other file system calls may lead to unexpected consequences, including but not limited to file system damage and program crashes. :::
 

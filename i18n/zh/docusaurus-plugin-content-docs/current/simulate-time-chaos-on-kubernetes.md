@@ -52,11 +52,11 @@ Chaos Mesh 提供的 TimeChaos 实验类型可用于模拟时间偏移的场景�
 
 以上 YAML 配置文件中的字段说明如下：
 
-| 参数           | 类型     | 说明                                                                                                                                                                                                                                                                                                       | 默认值               | 是否必填 | 示例                                   |
-| -------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- | -------- | -------------------------------------- |
-| timeOffset     | string   | 指定时间偏移的长度                                                                                                                                                                                                                                                                                         | 无                   | 是       | `-5m`                                  |
-| clockIds       | []string | 指定时间偏移作用的时钟，详见 [`clock_gettime` 文档](https://man7.org/linux/man-pages/man2/clock_gettime.2.html)                                                                                                                                                                                            | `["CLOCK_REALTIME"]` | 否       | `["CLOCK_REALTIME","CLOCK_MONOTONIC"]` |
-| mode           | string   | 指定实验的运行方式，可选择的方式包括：`one`（表示随机选出一个符合条件的 Pod）、`all`（表示选出所有符合条件的 Pod）、`fixed`（表示选出指定数量且符合条件的 Pod）、`fixed-percent`（表示选出占符合条件的 Pod 中指定百分比的 Pod）、`random-max-percent`（表示选出占符合条件的 Pod 中不超过指定百分比的 Pod） | 无                   | 是       | `one`                                  |
-| value          | string   | 取决于 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 Pod 的百分比                                                                                                                                                                               | 无                   | 否       | 2                                      |
-| containerNames | []string | 指定注入的容器名称                                                                                                                                                                                                                                                                                         | 无                   | 否       | `["nginx"]`                            |
-| selector       | struct   | 指定注入故障的目标 Pod，详情请参考[定义实验范围](./define-chaos-experiment-scope.md)                                                                                                                                                                                                                       | 无                   | 是       |                                        |
+| 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
+| --- | --- | --- | --- | --- | --- |
+| timeOffset | string | 指定时间偏移的长度 | 无 | 是 | `-5m` |
+| clockIds | []string | 指定时间偏移作用的时钟，详见 [`clock_gettime` 文档](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) | `["CLOCK_REALTIME"]` | 否 | `["CLOCK_REALTIME","CLOCK_MONOTONIC"]` |
+| mode | string | 指定实验的运行方式，可选择的方式包括：`one`（表示随机选出一个符合条件的 Pod）、`all`（表示选出所有符合条件的 Pod）、`fixed`（表示选出指定数量且符合条件的 Pod）、`fixed-percent`（表示选出占符合条件的 Pod 中指定百分比的 Pod）、`random-max-percent`（表示选出占符合条件的 Pod 中不超过指定百分比的 Pod） | 无 | 是 | `one` |
+| value | string | 取决于 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 Pod 的百分比 | 无 | 否 | 1 |
+| containerNames | []string | 指定注入的容器名称 | 无 | 否 | `["nginx"]` |
+| selector | struct | 指定注入故障的目标 Pod，详情请参考[定义实验范围](./define-chaos-experiment-scope.md) | 无 | 是 |  |

@@ -110,24 +110,24 @@ Currently, Chaos Mesh only supports using YAML configuration files to create HTT
 
 Common fields are meaningful when the `target` of fault injection is `Request` or `Response`.
 
-| Parameter        | Type              | Description                                                                                                                                                                                                                                                                                                                                                                 | Default value                             | Required | Example                        |
-| ---------------- | ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- | -------- | ------------------------------ |
-| mode             | string            | Specifies the mode of the experiment. The mode options include `one` (selecting a random pod), `all` (selecting all eligible pods), `fixed` (selecting a specified number of eligible pods), `fixed-percent` (selecting a specified percentage of Pods from the eligible pods), and `random-max-percent` (selecting the maximum percentage of Pods from the eligible pods). |                                           | yes      | one                            |
-| value            | string            | Provides parameters for the `mode` configuration depending on the value of `mode`.                                                                                                                                                                                                                                                                                          |                                           | no       | 2                              |
-| target           | string            | Specifies whether the target of fault injuection is `Request` or `Response`. The [`target`-related fields](#Description-for-`target`-related-fields) should be configured at the same time.                                                                                                                                                                                 |                                           | yes      | Request                        |
-| port             | int32             | The TCP port that the target service listens on.                                                                                                                                                                                                                                                                                                                            |                                           | yes      | 80                             |
-| method           | string            | The HTTP method of the target request method.                                                                                                                                                                                                                                                                                                                               | Takes effect for all methods by default.  | no       | GET                            |
-| path             | string            | The URI path of the target request which supports [Matching wildcards](https://www.wikiwand.com/en/Matching_wildcards).                                                                                                                                                                                                                                                     | Takes effect on all paths by default.     | no       | /api/\*                        |
-| request_headers  | map[string]string | Matches request headers to the target service.                                                                                                                                                                                                                                                                                                                              | Takes effect for all requests by default. | no       | Content-Type: application/json |
-| abort            | bool              | Indicates whether to inject the fault that interrupts server connection.                                                                                                                                                                                                                                                                                                    | false                                     | no       | true                           |
-| delay            | string            | Specifies the time for a latency fault.                                                                                                                                                                                                                                                                                                                                     | 0                                         | no       | 10s                            |
-| replace.header   | map[string]string | Specifies the key pair used to replace the request header or response header.                                                                                                                                                                                                                                                                                               |                                           | no       | Content-Type: application/xml  |
-| replace.body     | []byte            | Specifies request body or response body to replace the fault (Base64 encoded).                                                                                                                                                                                                                                                                                              |                                           | no       | eyJmb28iOiAiYmFyIn0K           |
-| patch.header     | [][]string        | Specifies the attached key pair of the request header or response header with patch faults.                                                                                                                                                                                                                                                                                 |                                           | no       | - [Set-Cookie, one cookie]     |
-| patch.body.type  | string            | Specifies the type of patch faults of the request body or response body. Currently, it only supports [`JSON`](https://tools.ietf.org/html/rfc7396).                                                                                                                                                                                                                         |                                           | no       | JSON                           |
-| patch.body.value | string            | Specifies the fault of the request body or response body with patch faults.                                                                                                                                                                                                                                                                                                 |                                           | no       | "{"foo": "bar"}"               |
-| duration         | string            | Specifies the duration of a specific experiment.                                                                                                                                                                                                                                                                                                                            |                                           | yes      | 30s                            |
-| scheduler        | string            | Specifies the scheduling rules for the time of a specific experiment.                                                                                                                                                                                                                                                                                                       |                                           | no       | 5 \* \* \* \*                  |
+| Parameter | Type | Description | Default value | Required | Example |
+| --- | --- | --- | --- | --- | --- |
+| mode | string | Specifies the mode of the experiment. The mode options include `one` (selecting a random pod), `all` (selecting all eligible pods), `fixed` (selecting a specified number of eligible pods), `fixed-percent` (selecting a specified percentage of Pods from the eligible pods), and `random-max-percent` (selecting the maximum percentage of Pods from the eligible pods). |  | yes | `one` |
+| value | string | Provides parameters for the `mode` configuration depending on the value of `mode`. |  | no | 1 |
+| target | string | Specifies whether the target of fault injuection is `Request` or `Response`. The [`target`-related fields](#Description-for-`target`-related-fields) should be configured at the same time. |  | yes | Request |
+| port | int32 | The TCP port that the target service listens on. |  | yes | 80 |
+| method | string | The HTTP method of the target request method. | Takes effect for all methods by default. | no | GET |
+| path | string | The URI path of the target request which supports [Matching wildcards](https://www.wikiwand.com/en/Matching_wildcards). | Takes effect on all paths by default. | no | /api/\* |
+| request_headers | map[string]string | Matches request headers to the target service. | Takes effect for all requests by default. | no | Content-Type: application/json |
+| abort | bool | Indicates whether to inject the fault that interrupts server connection. | false | no | true |
+| delay | string | Specifies the time for a latency fault. | 0 | no | 10s |
+| replace.header | map[string]string | Specifies the key pair used to replace the request header or response header. |  | no | Content-Type: application/xml |
+| replace.body | []byte | Specifies request body or response body to replace the fault (Base64 encoded). |  | no | eyJmb28iOiAiYmFyIn0K |
+| patch.header | [][]string | Specifies the attached key pair of the request header or response header with patch faults. |  | no | - [Set-Cookie, one cookie] |
+| patch.body.type | string | Specifies the type of patch faults of the request body or response body. Currently, it only supports [`JSON`](https://tools.ietf.org/html/rfc7396). |  | no | JSON |
+| patch.body.value | string | Specifies the fault of the request body or response body with patch faults. |  | no | "{"foo": "bar"}" |
+| duration | string | Specifies the duration of a specific experiment. |  | yes | 30s |
+| scheduler | string | Specifies the scheduling rules for the time of a specific experiment. |  | no | 5 \* \* \* \* |
 
 ### Description for `target`-related fields
 
@@ -135,22 +135,22 @@ Common fields are meaningful when the `target` of fault injection is `Request` o
 
 The `Request` field is a meaningful when the `target` set to `Request` during the fault injection.
 
-| Parameter       | Type              | Description                                                         | Default value | Required | Example      |
-| --------------- | ----------------- | ------------------------------------------------------------------- | ------------- | -------- | ------------ |
-| replace.path    | string            | Specifies the URI path used to replace content.                     |               | no       | /api/v2/     |
-| replace.method  | string            | Specifies the replaced content of the HTTP request method.          |               | no       | DELETE       |
-| replace.queries | map[string]string | Specifies the replaced key pair of the URI query.                   |               | no       | foo: bar     |
-| patch.queries   | [][]string        | Specifies the attached key pair of the URI query with patch faults. |               | no       | - [foo, bar] |
+| Parameter | Type | Description | Default value | Required | Example |
+| --- | --- | --- | --- | --- | --- |
+| replace.path | string | Specifies the URI path used to replace content. |  | no | /api/v2/ |
+| replace.method | string | Specifies the replaced content of the HTTP request method. |  | no | DELETE |
+| replace.queries | map[string]string | Specifies the replaced key pair of the URI query. |  | no | foo: bar |
+| patch.queries | [][]string | Specifies the attached key pair of the URI query with patch faults. |  | no | - [foo, bar] |
 
 #### `Respond`-related fields
 
 The `Response` is a meaningful when the `target` set to `Response` during the fault injection.
 
-| Parameter      | Type              | Description                                                 | Default value                                 | Required | Example                        |
-| -------------- | ----------------- | ----------------------------------------------------------- | --------------------------------------------- | -------- | ------------------------------ |
-| code           | int32             | Specifies the status code responded by `target`.            | Takes effect for all status codes by default. | no       | 200                            |
-| response_heads | map[string]string | Matches request headers to `target`.                        | Takes effect for all responses by default.    | no       | Content-Type: application/json |
-| replace.code   | int32             | Specifies the replaced content of the response status code. |                                               | no       | 404                            |
+| Parameter | Type | Description | Default value | Required | Example |
+| --- | --- | --- | --- | --- | --- |
+| code | int32 | Specifies the status code responded by `target`. | Takes effect for all status codes by default. | no | 200 |
+| response_heads | map[string]string | Matches request headers to `target`. | Takes effect for all responses by default. | no | Content-Type: application/json |
+| replace.code | int32 | Specifies the replaced content of the response status code. |  | no | 404 |
 
 ## Local debugging
 

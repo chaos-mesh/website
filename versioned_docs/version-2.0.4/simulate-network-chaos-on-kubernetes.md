@@ -138,15 +138,15 @@ Before creating NetworkChaos experiments, ensure the following:
 
 ## Field description
 
-| Parameter      | Type     | Description                                                                                                                                                                                                                                                                                                                                                                                                                        | Default value | Required | Example   |
-| -------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | -------- | --------- |
-| action         | string   | Indicates the specific fault type. Available types include: `netem`, `delay` (network delay), `loss` (packet loss), `duplicate` (packet duplicating), `corrupt` (packet corrupt), `partition` (network partition), and `bandwidth` (network bandwidth limit).After you specify `action` field, refer to [Description for `action`-related fields](#description-for-action-related-fields) for other necessary field configuration. | None          | Yes      | Partition |
-| target         | Selector | Used in combination with direction, making Chaos only effective for some packets.                                                                                                                                                                                                                                                                                                                                                  | None          | No       |           |
-| direction      | enum     | Indicates the direction of `target` packets. Available vaules include `from` (the packets from `target`), `to` (the packets to `target`), and `both` ( the packets from or to `target`). This parameter makes Chaos only take effect for a specific direction of packets.                                                                                                                                                          | to            | No       | both      |
-| mode           | string   | Specifies the mode of the experiment. The mode options include `one` (selecting a random Pod), `all` (selecting all eligible Pods), `fixed` (selecting a specified number of eligible Pods), `fixed-percent` (selecting a specified percentage of Pods from the eligible Pods), and `random-max-percent` (selecting the maximum percentage of Pods from the eligible Pods).                                                        | None          | Yes      | `1`       |
-| value          | string   | Provides a parameter for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods.                                                                                                                                                                                                                                                              | None          | No       | 2         |
-| containerNames | []string | Specifies the name of the container into which the fault is injected.                                                                                                                                                                                                                                                                                                                                                              | None          | No       | ["nginx"] |
-| selector       | struct   | Specifies the target Pod. For details, refer to [Define the experiment scope](./define-chaos-experiment-scope.md).                                                                                                                                                                                                                                                                                                                 | None          | Yes      |           |
+| Parameter | Type | Description | Default value | Required | Example |
+| --- | --- | --- | --- | --- | --- |
+| action | string | Indicates the specific fault type. Available types include: `netem`, `delay` (network delay), `loss` (packet loss), `duplicate` (packet duplicating), `corrupt` (packet corrupt), `partition` (network partition), and `bandwidth` (network bandwidth limit).After you specify `action` field, refer to [Description for `action`-related fields](#description-for-action-related-fields) for other necessary field configuration. | None | Yes | Partition |
+| target | Selector | Used in combination with direction, making Chaos only effective for some packets. | None | No |  |
+| direction | enum | Indicates the direction of `target` packets. Available vaules include `from` (the packets from `target`), `to` (the packets to `target`), and `both` ( the packets from or to `target`). This parameter makes Chaos only take effect for a specific direction of packets. | to | No | both |
+| mode | string | Specifies the mode of the experiment. The mode options include `one` (selecting a random Pod), `all` (selecting all eligible Pods), `fixed` (selecting a specified number of eligible Pods), `fixed-percent` (selecting a specified percentage of Pods from the eligible Pods), and `random-max-percent` (selecting the maximum percentage of Pods from the eligible Pods). | None | Yes | `one` |
+| value | string | Provides a parameter for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods. | None | No | 1 |
+| containerNames | []string | Specifies the name of the container into which the fault is injected. | None | No | ["nginx"] |
+| selector | struct | Specifies the target Pod. For details, refer to [Define the experiment scope](./define-chaos-experiment-scope.md). | None | Yes |  |
 
 ### Description for `action`-related fields
 
@@ -159,12 +159,12 @@ For the Net Emulation and Bandwidth fault types, you can further configure the `
 
 Setting `action` to `delay` means simulating network delay fault. You can also configure the following parameters.
 
-| Parameter   | Type              | Description                                                                 | Required | Required | Example |
-| ----------- | ----------------- | --------------------------------------------------------------------------- | -------- | -------- | ------- |
-| latency     | string            | Indicates the network latency                                               | No       | No       | 2ms     |
-| correlation | string            | Indicates the correlation between the current latency and the previous one. | No       | No       | 0.5     |
-| jitter      | string            | Indicates the range of the network latency                                  | No       | No       | 1ms     |
-| reorder     | Reorder(#Reorder) | Indicates the status of network packet reordering                           |          | No       |         |
+| Parameter | Type | Description | Required | Required | Example |
+| --- | --- | --- | --- | --- | --- |
+| latency | string | Indicates the network latency | No | No | 2ms |
+| correlation | string | Indicates the correlation between the current latency and the previous one. | No | No | 0.5 |
+| jitter | string | Indicates the range of the network latency | No | No | 1ms |
+| reorder | Reorder(#Reorder) | Indicates the status of network packet reordering |  | No |  |
 
 The computational model for `correlation` is as follows:
 
@@ -188,38 +188,38 @@ The computational model for `correlation` is as follows:
 
 Setting `action` to `reorder` means simulating network packet reordering fault. You can also configure the following parameters.
 
-| Parameter   | Type   | Description                                                                                                     | Default value | Required | Example |
-| ----------- | ------ | --------------------------------------------------------------------------------------------------------------- | ------------- | -------- | ------- |
-| reorder     | string | Indicates the probability to reorder                                                                            | 0             | No       | 0.5     |
-| correlation | string | Indicates the correlation between this time's length of delay time and the previous time's length of delay time | 0             | No       | 0.5     |
-| gap         | int    | Indicates the gap before and after packet reordering                                                            | 0             | No       | 5       |
+| Parameter | Type | Description | Default value | Required | Example |
+| --- | --- | --- | --- | --- | --- |
+| reorder | string | Indicates the probability to reorder | 0 | No | 0.5 |
+| correlation | string | Indicates the correlation between this time's length of delay time and the previous time's length of delay time | 0 | No | 0.5 |
+| gap | int | Indicates the gap before and after packet reordering | 0 | No | 5 |
 
 #### loss
 
 Setting `action` to `loss` means simulating packet loss fault. You can also configure the following parameters.
 
-| Parameter   | Type   | Description                                                                                                  | Default value | Required | Example |
-| ----------- | ------ | ------------------------------------------------------------------------------------------------------------ | ------------- | -------- | ------- |
-| loss        | string | Indicates the probability of packet loss                                                                     | 0             | No       | 0.5     |
-| correlation | string | Indicates the correlation between the probability of current packet loss and the previous time's packet loss | 0             | No       | 0.5     |
+| Parameter | Type | Description | Default value | Required | Example |
+| --- | --- | --- | --- | --- | --- |
+| loss | string | Indicates the probability of packet loss | 0 | No | 0.5 |
+| correlation | string | Indicates the correlation between the probability of current packet loss and the previous time's packet loss | 0 | No | 0.5 |
 
 #### duplicate
 
 Set `action` to `duplicate`, meaning simulating package duplication. At this point, you can also set the following parameters.
 
-| Parameter   | Type   | Description                                                                                                                | Default value | Required | Example |
-| ----------- | ------ | -------------------------------------------------------------------------------------------------------------------------- | ------------- | -------- | ------- |
-| duplicate   | string | Indicates the probability of packet duplicating                                                                            | 0             | No       | 0.5     |
-| correlation | string | Indicates the correlation between the probability of current packet duplicating and the previous time's packet duplicating | 0             | No       | 0.5     |
+| Parameter | Type | Description | Default value | Required | Example |
+| --- | --- | --- | --- | --- | --- |
+| duplicate | string | Indicates the probability of packet duplicating | 0 | No | 0.5 |
+| correlation | string | Indicates the correlation between the probability of current packet duplicating and the previous time's packet duplicating | 0 | No | 0.5 |
 
 #### corrupt
 
 Setting `action` to `corrupt` means simulating package corruption fault. You can also configure the following parameters.
 
-| Parameter   | Type   | Description                                                                                                              | Default value | Required | Example |
-| ----------- | ------ | ------------------------------------------------------------------------------------------------------------------------ | ------------- | -------- | ------- |
-| corrupt     | string | Indicates the probability of packet corruption                                                                           | 0             | No       | 0.5     |
-| correlation | string | Indicates the correlation between the probability of current packet corruption and the previous time's packet corruption | 0             | No       | 0.5     |
+| Parameter | Type | Description | Default value | Required | Example |
+| --- | --- | --- | --- | --- | --- |
+| corrupt | string | Indicates the probability of packet corruption | 0 | No | 0.5 |
+| correlation | string | Indicates the correlation between the probability of current packet corruption and the previous time's packet corruption | 0 | No | 0.5 |
 
 For occasional events such as `reorder`, `loss`, `duplicate`, and `corrupt`, the `correlation` is more complicated. For specific model description, refer to [NetemCLG](http://web.archive.org/web/20200120162102/http://netgroup.uniroma2.it/twiki/bin/view.cgi/Main/NetemCLG).
 
@@ -227,12 +227,12 @@ For occasional events such as `reorder`, `loss`, `duplicate`, and `corrupt`, the
 
 Setting `action` to `bandwidth` means simulating bandwidth limit fault. You also need to configure the following parameters.
 
-| Parameter | Type   | Description                                                            | Default value | Required | Example |
-| --------- | ------ | ---------------------------------------------------------------------- | ------------- | -------- | ------- |
-| rate      | string | Indicates the rate of bandwidth limit                                  |               | Yes      | 1mbps   |
-| limit     | string | Indicates the number of bytes waiting in queue                         |               | Yes      | 1       |
-| buffer    | uint32 | Indicates the maximum number of bytes that can be sent instantaneously |               | Yes      | 1       |
-| peakrate  | uint64 | Indicates the maximum consumption of `bucket` (usually not set)        |               | No       | 1       |
-| minburst  | uint32 | Indicates the size of `peakrate bucket` (usually not set)              |               | No       | 1       |
+| Parameter | Type | Description | Default value | Required | Example |
+| --- | --- | --- | --- | --- | --- |
+| rate | string | Indicates the rate of bandwidth limit |  | Yes | 1mbps |
+| limit | string | Indicates the number of bytes waiting in queue |  | Yes | 1 |
+| buffer | uint32 | Indicates the maximum number of bytes that can be sent instantaneously |  | Yes | 1 |
+| peakrate | uint64 | Indicates the maximum consumption of `bucket` (usually not set) |  | No | 1 |
+| minburst | uint32 | Indicates the size of `peakrate bucket` (usually not set) |  | No | 1 |
 
 For more details of these fields, you can refer to [tc-tbf document](https://man7.org/linux/man-pages/man8/tc-tbf.8.html).

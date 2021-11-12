@@ -57,15 +57,15 @@ Chaos Mesh 提供的 StressChaos 实验类型可用于模拟容器内压力的�
 
 以上 YAML 配置文件中的字段说明如下：
 
-| 参数              | 类型                    | 说明                                                                                                                                                                                                                                                                                                       | 默认值 | 是否必填 | 示例        |
-| ----------------- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | -------- | ----------- |
-| duration          | string                  | 指定具体实验的持续时间                                                                                                                                                                                                                                                                                     | 无     | 是       | `30s`       |
-| stressors         | [Stressors](#stressors) | 指定 CPU 或内存压力的参数                                                                                                                                                                                                                                                                                  | 无     | 否       |             |
-| stressngStressors | string                  | 指定 stress-ng 的参数来达到更丰富的压力注入                                                                                                                                                                                                                                                                | 无     | 否       | `--clone 2` |
-| mode              | string                  | 指定实验的运行方式，可选择的方式包括：`one`（表示随机选出一个符合条件的 Pod）、`all`（表示选出所有符合条件的 Pod）、`fixed`（表示选出指定数量且符合条件的 Pod）、`fixed-percent`（表示选出占符合条件的 Pod 中指定百分比的 Pod）、`random-max-percent`（表示选出占符合条件的 Pod 中不超过指定百分比的 Pod） | 无     | 是       | `one`       |
-| value             | string                  | 取决于 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 Pod 的百分比                                                                                                                                                                               | 无     | 否       | `2`         |
-| containerNames    | []string                | 指定注入的容器名称                                                                                                                                                                                                                                                                                         | 无     | 否       | `["nginx"]` |
-| selector          | struct                  | 指定注入故障的目标 Pod，详情请参考[定义实验范围](./define-chaos-experiment-scope.md)                                                                                                                                                                                                                       | 无     | 是       |             |
+| 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
+| --- | --- | --- | --- | --- | --- |
+| duration | string | 指定具体实验的持续时间 | 无 | 是 | `30s` |
+| stressors | [Stressors](#stressors) | 指定 CPU 或内存压力的参数 | 无 | 否 |  |
+| stressngStressors | string | 指定 stress-ng 的参数来达到更丰富的压力注入 | 无 | 否 | `--clone 2` |
+| mode | string | 指定实验的运行方式，可选择的方式包括：`one`（表示随机选出一个符合条件的 Pod）、`all`（表示选出所有符合条件的 Pod）、`fixed`（表示选出指定数量且符合条件的 Pod）、`fixed-percent`（表示选出占符合条件的 Pod 中指定百分比的 Pod）、`random-max-percent`（表示选出占符合条件的 Pod 中不超过指定百分比的 Pod） | 无 | 是 | `one` |
+| value | string | 取决于 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 Pod 的百分比 | 无 | 否 | 1 |
+| containerNames | []string | 指定注入的容器名称 | 无 | 否 | `["nginx"]` |
+| selector | struct | 指定注入故障的目标 Pod，详情请参考[定义实验范围](./define-chaos-experiment-scope.md) | 无 | 是 |  |
 
 #### Stressors
 
