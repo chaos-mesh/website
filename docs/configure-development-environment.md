@@ -26,11 +26,7 @@ After installing the above tools, follow the steps below to configure the toolch
    cd chaos-mesh
    ```
 
-2. Install Kubernetes API frameworks [kubebuilder](https://github.com/kubernetes-sigs/kubebuilder) and [kustomize](https://github.com/kubernetes-sigs/kustomize).
-
-   ```bash
-   make ensure-all
-   ```
+2. Make sure that Kubernetes API frameworks [kubebuilder](https://book.kubebuilder.io/quick-start.html#installation) and [kustomize](https://kubectl.docs.kubernetes.io/installation/kustomize) are installed.
 
 3. Make sure that [Docker](https://docs.docker.com/install/) is installed and running in your environment.
 

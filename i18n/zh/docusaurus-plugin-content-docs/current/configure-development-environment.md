@@ -26,11 +26,7 @@ title: 配置开发环境
    cd chaos-mesh
    ```
 
-2. 安装 Kubernetes API 开发框架 [kubebuilder](https://github.com/kubernetes-sigs/kubebuilder) 和 [kustomize](https://github.com/kubernetes-sigs/kustomize)。
-
-   ```bash
-   make ensure-all
-   ```
+2. 确保你的环境中已经安装 Kubernetes API 开发框架 [kubebuilder](https://book.kubebuilder.io/quick-start.html#installation) 和 [kustomize](https://kubectl.docs.kubernetes.io/installation/kustomize)。
 
 3. 确保你的环境中已经安装 [Docker](https://docs.docker.com/install/) 并且正在运行 Docker。
 
