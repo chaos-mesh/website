@@ -26,18 +26,16 @@ title: 配置开发环境
    cd chaos-mesh
    ```
 
-2. 确保你的环境中已经安装 Kubernetes API 开发框架 [kubebuilder](https://book.kubebuilder.io/quick-start.html#installation) 和 [kustomize](https://kubectl.docs.kubernetes.io/installation/kustomize)。
+2. 确保你的环境中已经安装 [Docker](https://docs.docker.com/install/) 并且正在运行 Docker。
 
-3. 确保你的环境中已经安装 [Docker](https://docs.docker.com/install/) 并且正在运行 Docker。
-
-4. 确保 [Docker Registry](https://docs.docker.com/registry/) 正在运行。将环境变量 `DOCKER_REGISTRY` 设置为其地址:
+3. 确保 [Docker Registry](https://docs.docker.com/registry/) 正在运行。将环境变量 `DOCKER_REGISTRY` 设置为其地址:
 
    ```bash
    echo 'export DOCKER_REGISTRY=localhost:5000' >> ~/.bash_profile
    source ~/.bash_profile
    ```
 
-5. 确保 `${GOPATH}/bin` 在你的 `PATH` 环境变量中。
+4. 确保 `${GOPATH}/bin` 在你的 `PATH` 环境变量中。
 
    ```bash
    echo 'export PATH=$(go env GOPATH)/bin:${PATH}' >> ~/.bash_profile
@@ -47,14 +45,14 @@ title: 配置开发环境
    source ~/.bash_profile
    ```
 
-6. 检查 Nodejs 相关环境。
+5. 检查 Nodejs 相关环境。
 
    ```bash
     node -v
     yarn -v
    ```
 
-7. 尝试编译 Chaos Mesh：
+6. 尝试编译 Chaos Mesh：
 
    ```bash
    make

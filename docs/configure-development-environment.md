@@ -26,18 +26,16 @@ After installing the above tools, follow the steps below to configure the toolch
    cd chaos-mesh
    ```
 
-2. Make sure that Kubernetes API frameworks [kubebuilder](https://book.kubebuilder.io/quick-start.html#installation) and [kustomize](https://kubectl.docs.kubernetes.io/installation/kustomize) are installed.
+2. Make sure that [Docker](https://docs.docker.com/install/) is installed and running in your environment.
 
-3. Make sure that [Docker](https://docs.docker.com/install/) is installed and running in your environment.
-
-4. Make sure [Docker Registry](https://docs.docker.com/registry/) is running. Set the environment variable `DOCKER_REGISTRY` as the address of Docker Registry:
+3. Make sure [Docker Registry](https://docs.docker.com/registry/) is running. Set the environment variable `DOCKER_REGISTRY` as the address of Docker Registry:
 
    ```bash
    echo 'export DOCKER_REGISTRY=localhost:5000' >> ~/.bash_profile
    source ~/.bash_profile
    ```
 
-5. Make sure `${GOPATH}/bin` is in your `PATH`.
+4. Make sure `${GOPATH}/bin` is in your `PATH`.
 
    ```bash
    echo 'export PATH=$(go env GOPATH)/bin:${PATH}' >> ~/.bash_profile
@@ -47,14 +45,14 @@ After installing the above tools, follow the steps below to configure the toolch
    source ~/.bash_profile
    ```
 
-6. Check the configuration environment related to Node.js.
+5. Check the configuration environment related to Node.js.
 
    ```bash
     node -v
     yarn -v
    ```
 
-7. Compile Chaos Mesh:
+6. Compile Chaos Mesh:
 
    ```bash
    make
