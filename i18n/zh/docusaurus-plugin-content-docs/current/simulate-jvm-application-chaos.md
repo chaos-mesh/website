@@ -154,7 +154,6 @@ caught ReturnException
 | --- | --- | --- | --- | --- | --- |
 | action | string | 表示具体的故障类型，支持 latency、return、exception、stress、gc、ruleData。 | 无 | 是 | return |
 | mode | string | 表示选择 Pod 的方式，支持 one、all、fixed、fixed-percent、random-max-percent。 | 无 | 是 | `one` |
-| value | string | 取决于 mode 的取值，为 mode 提供参数 | 无 | 否 | 1 |
 
 关于 action 的取值的含义，可参考：
 
