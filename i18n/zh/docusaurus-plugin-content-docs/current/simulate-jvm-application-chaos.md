@@ -2,121 +2,109 @@
 title: 模拟 JVM 应用故障
 ---
 
-## JVMChaos 介绍
+Chaosd 通过 [Byteman](https://github.com/chaos-mesh/byteman) 模拟 JVM 应用故障，主要支持以下几种故障类型：
 
-JVMChaos 能向目标容器中的 JVM 注入故障，适用于任何使用 JVM 作为运行时的应用。目前 JVMChaos 借助 [chaosblade-exec-jvm](https://github.com/chaosblade-io/chaosblade-exec-jvm) 实现对 JVM 的错误注入，主要支持以下类型的故障：
+- 抛出自定义异常
+- 触发垃圾回收
+- 增加方法延迟
+- 指定方法返回值
+- 设置 Byteman 配置文件触发故障
+- 增加 JVM 压力
 
-- 指定返回值
-- 方法延迟
-- 抛自定义异常
-- 内存溢出
-- 填充 JVM Code Cache
-- Java 进程 CPU 满载
-- 执行任意自定义 Groovy/Java 脚本
+本文主要介绍如何创建以上故障类型的 JVM 实验。
 
-## 使用限制
+## 使用 Dashboard 方式创建实验
 
-目前 Chaos Mesh 使用 [MutatingAdmissionWebhook](https://kubernetes.io/zh/docs/reference/access-authn-authz/admission-controllers/#mutatingadmissionwebhook) 修改对 Pod 的定义，通过 [Init 容器](https://kubernetes.io/zh/docs/concepts/workloads/pods/init-containers/)加载 java agnet，并非运行时加载 java agent。因此在使用时存在如下限制：
+1. 单击实验页面中的“新的实验”按钮创建实验：
 
-- Kubernetes 需要启用 Webhook 支持。
-- 在为命名空间配置 MutatingAdmissionWebhook 之前已经存在 Pod，不会受到 JVMChaos 影响。
-- 命名空间下的所有容器中的 JVM 都会在启动阶段加载 java agent，JVMChaos 在被删除后也不会卸载 java agent。若考虑到 java agent 可能对程序行为或性能带来的影响，期望清理 java agnet，请将工作负载移出该命名空间。
+   ![创建实验](./img/create-new-exp.png)
 
-另外，目前无法通过 Chaos Dashboard 创建 JVMChaos。
+2. 在“选择目标”处选择 “JVM 故障”，然后选择具体行为，例如 `RETURN`，最后填写具体配置：
+
+   ![JVMChaos 实验](./img/jvmchaos-exp.png)
+
+   具体配置的填写方式，参考[字段说明](#字段说明)。
+
+3. 填写实验信息，指定实验范围以及实验计划运行时间：
+
+   ![实验信息](./img/exp-info.png)
+
+4. 提交实验。
 
 ## 使用 YAML 方式创建实验
 
 下面将以指定返回值为例，展示 JVMChaos 的使用方法与效果。以下内容中涉及的 yaml 文件均可在 [examples/jvm](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples/jvm) 中找到，以下步骤默认的工作路径也是在 `examples/jvm` 中。 默认 Chaos Mesh 安装的命名空间为 `chaos-testing`。
 
-### 1. 创建命名空间并配置 MutatingAdmissionWebhook
+### 1. 创建被测应用
 
-建立应用所在的命名空间：
-
-```shell
-kubectl create ns app
-```
-
-为命名空间 `app` 增加 label `admission-webhook=enabled`，允许 Chaos Mesh 的 MutatingAdmissionWebhook 修改该命名空间下的 Pod。
-
-```shell
-kubectl label ns app admission-webhook=enabled
-```
-
-为 JVMChaos 所需要的修改行为准备模板：
-
-```shell
-kubectl apply -f sidecar-template.yaml
-kubectl apply -f sidecar.yaml
-```
-
-### 2. 创建被测应用
-
-[jvm-chaos-demo](https://github.com/chaos-mesh/jvm-chaos-demo) 是一个简单的 Spring Boot 应用，此处作为被测应用。被测应用定义在 `example/jvm/app.yaml` 中，内容如下：
+[helloworld](https://github.com/WangXiangUSTC/byteman-example/tree/main/example.helloworld) 是一个简单的 Java 应用，此处作为被测应用。被测应用定义在 `example/jvm/app.yaml` 中，内容如下：
 
 ```yaml
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
-  name: springboot-jvmchaos-demo
-  namespace: app
+  name: helloworld
+  namespace: helloworld
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: springboot-jvmchaos-demo
-  template:
-    metadata:
-      annotations:
-        admission-webhook.chaos-mesh.org/request: jvmchaos-sidecar
-      creationTimestamp: null
-      labels:
-        app: springboot-jvmchaos-demo
-    spec:
-      containers:
-        - image: 'gallardot/chaosmesh-jvmchaos-sample:latest'
-          imagePullPolicy: IfNotPresent
-          name: springboot-jvmchaos-demo
+  containers:
+    - name: helloworld
+      # source code: https://github.com/WangXiangUSTC/byteman-example/tree/main/example.helloworld
+      # this application will print log like this below:
+      # 0. Hello World
+      # 1. Hello World
+      # ...
+      image: xiang13225080/helloworld:v1.0
+      imagePullPolicy: IfNotPresent
 ```
 
-其中值为 `admission-webhook.chaos-mesh.org/request: jvmchaos-sidecar` 的 `annotation` 与步骤 1 `sidecar.yaml` 中 `ConfigMap` 的名称对应。
+创建应用所属的 namespace：
 
-建立应用 Deployment：
+```shell
+kubectl create namespace helloworld
+```
+
+建立该应用 Pod：
 
 ```shell
 kubectl apply -f app.yaml
 ```
 
-执行 `kubectl -n app get pods`，预期能够观察到命名空间 `app` 中出现 `1` 个名称形如 `springboot-jvmchaos-demo-777d94c5b9-7t7l2` 的 Pod，等待其 `READY` 为 `1/1` 后进行下一步。
+执行 `kubectl -n helloworld get pods`，预期能够观察到命名空间 `helloworld` 中名为 `helloworld` 的 Pod，等待其 `READY` 为 `1/1` 后进行下一步。
 
 ```shell
-kubectl -n app get pods
+kubectl -n helloworld get pods
 ```
 
 预期结果如下：
 
 ```text
-NAME                                        READY   STATUS    RESTARTS   AGE
-springboot-jvmchaos-demo-777d94c5b9-7t7l2   1/1     Running   0          21s
+kubectl get pods -n helloworld            
+NAME         READY   STATUS    RESTARTS   AGE
+helloworld   1/1     Running   0          2m
 ```
 
-### 3. 观测未被注入时的行为
+### 2. 观测未被注入时的行为
 
-在注入前你可以先观测应用 `jvm-chaos-demo` 未被注入时的行为，例如：
-
-使用 `kubectl port-forward` 将 Pod 的端口映射到本地：
+在注入前你可以先观测应用 `helloworld` 未被注入时的行为，例如：
 
 ```shell
-kubectl -n app port-forward pod/springboot-jvmchaos-demo-777d94c5b9-7t7l2 8080:8080
+kubectl -n helloworld logs -f helloworld
 ```
 
-在另外一个 shell session 中使用 curl 或者直接使用浏览器访问 `http://localhost:8080/hello`，预期返回 `Hello firend`：
+输出如下所示：
 
 ```shell
-curl http://localhost:8080/hello
-Hello friend
+0. Hello World
+1. Hello World
+2. Hello World
+3. Hello World
+4. Hello World
+5. Hello World
 ```
 
-### 4. 注入 JVMChaos 并验证
+可以看到 `helloworld` 每隔一秒输出一行 `Hello World`，每行的编号依次递增。
+
+### 3. 注入 JVMChaos 并验证
 
 指定返回值的 JVMChaos 内容如下：
 
@@ -124,23 +112,20 @@ Hello friend
 apiVersion: chaos-mesh.org/v1alpha1
 kind: JVMChaos
 metadata:
-  name: jvm-return-example
-  namespace: app
+  name: return
+  namespace: helloworld
 spec:
   action: return
-  target: jvm
-  flags:
-    value: 'hello chaos mesh!'
-  matchers:
-    classname: 'org.chaosmesh.jvm.Application'
-    methodname: 'hello'
-  mode: one
+  class: Main
+  method: getnum
+  value: "9999"
+  mode: all
   selector:
-    labelSelectors:
-      app: springboot-jvmchaos-demo
+    namespaces:
+      - helloworld
 ```
 
-JVMChaos 将 `hello` 方法的返回值修改为字符串 `hello chaos mesh!`。
+JVMChaos 将 `getnum` 方法的返回值修改为数字 `9999`，也就是让 `helloworld` 的每行输出的编号都设置为 `9999`。
 
 注入指定返回值的 JVMChaos：
 
@@ -148,39 +133,101 @@ JVMChaos 将 `hello` 方法的返回值修改为字符串 `hello chaos mesh!`。
 kubectl apply -f ./jvm-return-example.yaml
 ```
 
-使用 curl 或者直接使用浏览器访问 <http://localhost:8080/hello>，预期返回 `hello chaos mesh!`：
+查看 helloworld 的最新日志：
 
 ```shell
-curl http://localhost:8080/hello
-hello chaos mesh!
+kubectl -n helloworld logs -f helloworld
 ```
 
-## 字段说明
+日志如下所示：
+
+```shell
+Rule.execute called for return_0:0
+return execute
+caught ReturnException
+9999. Hello World
+```
+
+### 字段说明
 
 | 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
 | --- | --- | --- | --- | --- | --- |
-| action | string | 表示具体的故障类型，支持 delay、return、script、cfl、oom、ccf、tce、cpf、tde、tpf。 | 无 | 是 | return |
+| action | string | 表示具体的故障类型，支持 latency、return、exception、stress、gc、ruleData。 | 无 | 是 | return |
 | mode | string | 表示选择 Pod 的方式，支持 one、all、fixed、fixed-percent、random-max-percent。 | 无 | 是 | `one` |
 | value | string | 取决于 mode 的取值，为 mode 提供参数 | 无 | 否 | 1 |
-| target | string | 传递给 `chaosblade-exec-jvm` 的参数，代表 JVMChaos 的目标，支持 servlet、psql、jvm、jedis、http、dubbo、rocketmq、tars、mysql、druid、redisson、rabbitmq、mongodb。 | 无 | 是 | jvm |
-| flags | map[string]string | 传递给 `chaosblade-exec-jvm` 的参数，代表 action 的 flags | 无 | 否 |  |
-| matchers | map[string]string | 传递给 `chaosblade-exec-jvm` 的参数，代表注入点的匹配方式 | 无 | 否 |  |
 
 关于 action 的取值的含义，可参考：
 
 | 名称   | 含义                                   |
 | ------ | -------------------------------------- |
-| delay  | 指定方法调用延迟                       |
-| return | 修改返回值                             |
-| script | 编写 groovy 和 java 实现场景           |
-| cfl    | java 进程 CPU 使用率满载               |
-| oom    | 内存溢出，支持堆、栈、metaspace 区溢出 |
-| ccf    | 填充 jvm code cache                    |
-| tce    | 抛自定义异常场景                       |
-| cpf    | 连接池满                               |
-| tde    | 抛方法声明中的第一个异常               |
-| tpf    | 线程池满                               |
+| latency  | 增加方法调用延迟                       |
+| return | 修改方法返回值                             |
+| exception | 抛出自定义异常           |
+| stress    | 提高 java 进程 CPU 使用率，或者造成       内存溢出（支持堆、栈溢出）    |
+| gc    | 触发垃圾回收 |
+| ruleData    | 设置 Byteman 配置触发故障 |
 
-关于 action 的详细用法可参考 [chaos blade 文档](https://chaosblade-io.gitbook.io/chaosblade-help-zh-cn/blade-create-jvm)。
+针对不同的 `action`，有不同的配置项可以填写。
 
-关于传递给 `chaosblade-exec-jvm` 的参数，Chaos Mesh 会将 `flags` 与 `matchers` 中的所有字段合并后作为请求体发送给 `chaosblade-exec-jvm`，具体可参考 [chaosblade-exec-jvm/协议篇](https://github.com/chaosblade-io/chaosblade-dev-doc/blob/a7074ab656de469f7dfaa19227723d0967c590ae/zh-cn/chaosblade-exec-jvm/%E5%8D%8F%E8%AE%AE%E7%AF%87.md)。
+#### latency
+
+| 参数      | 类型                    | 说明                     | 是否必填 |
+| --------- | ----------------------- | ------------------------ | -------- |
+| class     |  string 类型        | Java 类的名称    | 是       |
+| method      | string 类型           | 方法名称      | 是       |
+| latency | int 类型 | 增加方法的延迟时间，单位为 ms    | 是       |
+| port   | int 类型     | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | 否       |
+
+#### return
+
+| 参数      | 类型                    | 说明                     | 是否必填 |
+| --------- | ----------------------- | ------------------------ | -------- |
+| class     |  string 类型        | Java 类的名称    | 是       |
+| method      | string 类型           | 方法名称      | 是       |
+| value | string 类型 | 指定方法的返回值，目前支持数字和字符串类型的返回值，如果为字符串，则需要使用双引号，例如："chaos"。    | 是       |
+| port   | int 类型     | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | 否       |
+
+#### exception
+
+| 参数      | 类型                    | 说明                     | 是否必填 |
+| --------- | ----------------------- | ------------------------ | -------- |
+| class     |  string 类型        | Java 类的名称    | 是       |
+| method      | string 类型           | 方法名称      | 是       |
+| exception | string 类型 | 抛出的自定义异常，例如：'java.io.IOException("BOOM")'   | 是       |
+| port   | int 类型     | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | 否       |
+
+#### stress
+
+| 参数      | 类型                    | 说明                     | 是否必填 |
+| --------- | ----------------------- | ------------------------ | -------- |
+| cpu-count     |  int 类型        | 增加 CPU 压力所使用的 CPU 核的数量，`cpu-count` 和 `mem-size` 中必须配置一个    | 否       |
+| mem-type      | string 类型           | 内存 OOM 的类型，目前支持 "stack" 和 "heap" 两种类型      | 无       |
+| port   | int 类型     | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | 否       |
+
+#### gc
+
+| 参数      | 类型                    | 说明                     | 是否必填 |
+| --------- | ----------------------- | ------------------------ | -------- |
+| port   | int 类型     | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | 否       |
+
+#### ruleData
+
+| 参数      | 类型                    | 说明                     | 是否必填 |
+| --------- | ----------------------- | ------------------------ | -------- |
+| ruleData     |  srting 类型        | 指定 Byteman 配置数据    | 是       |
+| port   | int 类型     | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | 否       |
+
+需要根据具体的 Java 程序，并参考 [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language) 编写规则配置文件，例如：
+
+```txt
+RULE modify return value
+CLASS Main
+METHOD getnum
+AT ENTRY
+IF true
+DO
+    return 9999
+ENDRULE
+```
+
+将配置中的换行转换为换行符 "\n"，将转换后的数据设置为参数 "ruleData" 的值，如上的配置转换为 "\nRULE modify return value\nCLASS Main\nMETHOD getnum\nAT ENTRY\nIF true\nDO return 9999\nENDRULE\n"。
