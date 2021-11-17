@@ -2,7 +2,7 @@
 title: 模拟 JVM 应用故障
 ---
 
-Chaosd 通过 [Byteman](https://github.com/chaos-mesh/byteman) 模拟 JVM 应用故障，主要支持以下几种故障类型：
+Chaos Mesh 通过 [Byteman](https://github.com/chaos-mesh/byteman) 模拟 JVM 应用故障，主要支持以下几种故障类型：
 
 - 抛出自定义异常
 - 触发垃圾回收
