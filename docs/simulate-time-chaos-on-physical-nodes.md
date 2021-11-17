@@ -3,8 +3,7 @@ title: Simulate time chaos
 summary: This document describes how to use Chaosd to simulate a time offset scenario.
 ---
 
-This document describes how to use Chaosd to simulate a time offset scenario.
-You can create experiments either in command-line mode or service mode.
+This document describes how to use Chaosd to simulate a time offset scenario. You can create experiments either in command-line mode or service mode.
 
 ## Create experiments using commands
 
@@ -63,20 +62,19 @@ EOF
 gcc -o get_time ./time.c
 ```
 
-Then execute get_time and try to attack it.
-The following is an example:
+Then execute get_time and try to attack it. The following is an example:
 
 ```bash
 chaosd attack clock -p $PID -t 11s
 ```
 
-### Configurations of simulating disk read load
+### Configurations of simulating time chaos
 
-| Parameter  | Type     | Note                                                                                                                                                          | Default value        | Required | Example                                 |
-| ---------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- | -------- | --------------------------------------- |
-| timeOffset | string   | Specifies the length of time offset.                                                                                                                          | None                 | Yes      | `-5m`                                   |
-| clockIds   | []string | Specifies the ID of clock that will be offset. See the [clock_gettime documentation](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) for details. | `["CLOCK_REALTIME"]` | No       | `["CLOCK_REALTIME", "CLOCK_MONOTONIC"]` |
-| pid        | string   | The identifier of the process.                                                                                                                                | None                 | Yes      | `1`                                     |
+| Parameter | Type | Note | Default value | Required | Example |
+| --- | --- | --- | --- | --- | --- |
+| timeOffset | string | Specifies the length of time offset. | None | Yes | `-5m` |
+| clockIds | []string | Specifies the ID of clock that will be offset. See the [clock_gettime documentation](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) for details. | `["CLOCK_REALTIME"]` | No | `["CLOCK_REALTIME", "CLOCK_MONOTONIC"]` |
+| pid | string | The identifier of the process. | None | Yes | `1` |
 
 ### Create experiments using service mode
 
