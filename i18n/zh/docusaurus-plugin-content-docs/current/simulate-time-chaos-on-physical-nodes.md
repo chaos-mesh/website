@@ -71,7 +71,7 @@ chaosd attack clock -p $PID -t 11s
 
 | 配置项 | 类型 | 说明 | 默认值 | 必要项 | 例子 |
 | --- | --- | --- | --- | --- | --- |
-| timeOffset | string | 指时间的偏移量。 | None | 是 | `-5m` |
+| timeOffset | string | 指定时间的偏移量。 | None | 是 | `-5m` |
 | clockIds | []string | 指定时间偏移作用的时钟，详见 [clock_gettime documentation](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) 。 | `["CLOCK_REALTIME"]` | 否 | `["CLOCK_REALTIME", "CLOCK_MONOTONIC"]` |
 | pid | string | 进程的标识符。 | None | 是 | `1` |
 
