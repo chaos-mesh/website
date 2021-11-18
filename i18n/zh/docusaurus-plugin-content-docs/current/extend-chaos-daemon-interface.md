@@ -133,7 +133,7 @@ func (obj *HelloWorldChaos) GetSelectorSpecs() map[string]interface{} {
    type Impl struct {
    	client.Client
    	Log     logr.Logger
-   	decoder *utils.ContianerRecordDecoder
+        decoder *utils.ContainerRecordDecoder
    }
 
    // Apply applies KernelChaos
@@ -162,7 +162,7 @@ func (obj *HelloWorldChaos) GetSelectorSpecs() map[string]interface{} {
    	return v1alpha1.NotInjected, nil
    }
 
-   func NewImpl(c client.Client, log logr.Logger, decoder *utils.ContianerRecordDecoder) *common.ChaosImplPair {
+   func NewImpl(c client.Client, log logr.Logger, decoder *utils.ContainerRecordDecoder) *common.ChaosImplPair {
    	return &common.ChaosImplPair{
    		Name:   "helloworldchaos",
    		Object: &v1alpha1.HelloWorldChaos{},
