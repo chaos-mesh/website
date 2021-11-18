@@ -199,8 +199,8 @@ caught ReturnException
 
 | 参数      | 类型                    | 说明                     | 是否必填 |
 | --------- | ----------------------- | ------------------------ | -------- |
-| cpu-count     |  int 类型        | 增加 CPU 压力所使用的 CPU 核的数量，`cpu-count` 和 `mem-size` 中必须配置一个    | 否       |
-| mem-type      | string 类型           | 内存 OOM 的类型，目前支持 "stack" 和 "heap" 两种类型      | 无       |
+| cpuCount     |  int 类型        | 增加 CPU 压力所使用的 CPU 核的数量，`cpuCount` 和 `memType` 中必须配置一个    | 否       |
+| memType      | string 类型           | 内存 OOM 的类型，目前支持 "stack" 和 "heap" 两种类型      | 无       |
 | port   | int 类型     | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | 否       |
 
 #### gc
