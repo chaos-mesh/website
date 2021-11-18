@@ -133,7 +133,7 @@ func (obj *HelloWorldChaos) GetSelectorSpecs() map[string]interface{} {
    type Impl struct {
    	client.Client
    	Log     logr.Logger
-	decoder *utils.ContainerRecordDecoder
+	       decoder *utils.ContainerRecordDecoder
    }
 
    // Apply applies KernelChaos
