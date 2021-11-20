@@ -101,6 +101,11 @@ const whoisUsing = [
     href: 'https://www.rabbitmq.com/'
   },
   {
+    name: 'SHAREit',
+    img: 'img/logos/shareit.svg',
+    href: 'https://www.ushareit.com/'
+  },
+  {
     name: 'S.J. Distributors',
     img: 'img/logos/sj.png',
     href: 'https://www.sjfood.com/',
