@@ -119,7 +119,7 @@ title: 新增混沌实验类型
    type Impl struct {
        client.Client
        Log logr.Logger
-       decoder *utils.ContianerRecordDecoder
+       decoder *utils.ContainerRecordDecoder
    }
 
    // Apply applies HelloWorldChaos
@@ -134,7 +134,7 @@ title: 新增混沌实验类型
        return v1alpha1.NotInjected, nil
    }
 
-   func NewImpl(c client.Client, log logr.Logger, decoder *utils.ContianerRecordDecoder) *common.ChaosImplPair {
+   func NewImpl(c client.Client, log logr.Logger, decoder *utils.ContainerRecordDecoder) *common.ChaosImplPair {
        return &common.ChaosImplPair{
            Name:   "helloworldchaos",
            Object: &v1alpha1.HelloWorldChaos{},
