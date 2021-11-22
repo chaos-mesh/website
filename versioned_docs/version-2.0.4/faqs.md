@@ -18,7 +18,7 @@ No. Instead, you could use [`chaosd`](https://github.com/chaos-mesh/chaosd/) to 
 
 You can use the `hostNetwork` parameter to fix this issue as follows:
 
-<PickHelmVersion className="language-bash">{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n chaos-testing --version latest --set chaosDaemon.hostNetwork=true`}</PickHelmVersion>
+<PickHelmVersion>{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n chaos-testing --version latest --set chaosDaemon.hostNetwork=true`}</PickHelmVersion>
 
 ### Q: The default administrator Google Cloud user account is forbidden to create chaos experiments. How to fix it?
 
@@ -55,9 +55,16 @@ roleRef:
 
 The `USER_ACCOUNT` above should be your Google Cloud user email.
 
+### Q: Daemon throws an error similar to `version 1.41 is too new. Maximum supported API version is 1.39`
+
+This indicates that the maximum API version that the docker daemon can accept is `1.39`, but the client in chaos-daemon uses `1.41` by default. You can choose two options to solve this problem:
+
+1. Upgrade your docker to a newer version.
+2. Helm install/upgrade with `--set chaosDaemon.env.DOCKER_API_VERSION=1.39`.
+
 ## DNSChaos
 
-### Q: While trying to run DNSChaos in OpenShift, the problems regarding authorization blocked the process.
+### Q: While trying to run DNSChaos in OpenShift, the problems regarding authorization blocked the process
 
 If the error message is similar to the following:
 
@@ -73,7 +80,7 @@ oc adm policy add-scc-to-user privileged -n chaos-testing -z chaos-dns-server
 
 ## Installation
 
-### Q: While trying to install Chaos Mesh in OpenShift, the problems regarding authorization blocked the installation process.
+### Q: While trying to install Chaos Mesh in OpenShift, the problems regarding authorization blocked the installation process
 
 If the error message is similar to the following:
 
