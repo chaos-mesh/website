@@ -58,7 +58,7 @@ To simulate a DNS fault (for example, make the DNS responses return a random wro
 On the machine connected to the external network, download the zip package of Chaos Mesh:
 
 <PickVersion>
-curl https://github.com/chaos-mesh/chaos-mesh/archive/refs/tags/latest.zip -o chaos-mesh.zip
+curl -fsSL -o chaos-mesh.zip https://github.com/chaos-mesh/chaos-mesh/archive/refs/tags/latest.zip
 </PickVersion>
 
 ### Copy files
