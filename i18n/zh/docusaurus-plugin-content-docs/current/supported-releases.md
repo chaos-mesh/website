@@ -43,7 +43,7 @@ v<major>.<minor>.<patch>
 
 ### 社区技术支持
 
-你可以在 Kubernetes Slack（频道 [#project-chaos-mesh](https://cloud-native.slack.com/archives/C0193VAV272)）或者使用 [GitHub Discussion](https://github.com/chaos-mesh/chaos-mesh/discussions) 向社区请求支持。
+你可以在 CNCF Slack（频道 [#project-chaos-mesh](https://cloud-native.slack.com/archives/C0193VAV272)）或者使用 [GitHub Discussion](https://github.com/chaos-mesh/chaos-mesh/discussions) 向社区请求支持。
 
 ### 安全和错误修复
 

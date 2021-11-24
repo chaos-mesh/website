@@ -16,17 +16,17 @@ where `<minor>` is increased for each release, and `<patch>` counts the number o
 
 ## Support status of Chaos Mesh
 
-| Version | Currently Supported  | Release Date | End of Life* | Supported Kubernetes versions                    |
-| :------ | :------------------- | :----------- | :----------- | :----------------------------------------------- |
-| master  | No, development only | -            | -            | 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22   |
-| 2.0     | Yes                  | Jul 23, 2021 | -            | 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22** |
-| 1.2     | Yes                  | Apr 23, 2021 | -            | 1.12, 1.13, 1.14, 1.15                           |
-| 1.1     | No                   | Jan 08, 2021 | Jul 23, 2021 | 1.12, 1.13, 1.14, 1.15                           |
-| 1.0     | No                   | Sep 25, 2020 | Apr 23, 2021 | 1.12, 1.13, 1.14, 1.15                           |
+| Version | Currently Supported  | Release Date | End of Life\* | Supported Kubernetes versions                      |
+| :------ | :------------------- | :----------- | :------------ | :------------------------------------------------- |
+| master  | No, development only | -            | -             | 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22     |
+| 2.0     | Yes                  | Jul 23, 2021 | -             | 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22\*\* |
+| 1.2     | Yes                  | Apr 23, 2021 | -             | 1.12, 1.13, 1.14, 1.15                             |
+| 1.1     | No                   | Jan 08, 2021 | Jul 23, 2021  | 1.12, 1.13, 1.14, 1.15                             |
+| 1.0     | No                   | Sep 25, 2020 | Apr 23, 2021  | 1.12, 1.13, 1.14, 1.15                             |
 
-*Note that dates in the future are uncertain and might change.
+\*Note that dates in the future are uncertain and might change.
 
-**The support of kubernetes 1.22 is (will be) available with release 2.0.4.
+\*\*The support of kubernetes 1.22 is (will be) available with release 2.0.4.
 
 ## Upcoming releases
 
@@ -43,7 +43,7 @@ We offer two type of supports:
 
 ### Community technical support
 
-You can request support from the community on Kubernetes Slack (in the [#project-chaos-mesh](https://cloud-native.slack.com/archives/C0193VAV272) channel), or using [GitHub Discussion](https://github.com/chaos-mesh/chaos-mesh/discussions) .
+You can request support from the community on CNCF Slack (in the [#project-chaos-mesh](https://cloud-native.slack.com/archives/C0193VAV272) channel), or using [GitHub Discussion](https://github.com/chaos-mesh/chaos-mesh/discussions) .
 
 ### Security and bug fixes
 
