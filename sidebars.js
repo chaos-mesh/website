@@ -32,7 +32,11 @@ module.exports = {
         {
           type: 'category',
           label: 'Orchestrate Multiple Chaos Experiments',
-          items: ['create-chaos-mesh-workflow', 'run-chaos-experiments-in-serial-or-parallel', 'check-workflow-status'],
+          items: [
+            'create-chaos-mesh-workflow',
+            'run-chaos-experiments-in-serial-or-parallel',
+            'send-http-request-on-workflow',
+            'check-workflow-status',],
         },
       ],
     },
