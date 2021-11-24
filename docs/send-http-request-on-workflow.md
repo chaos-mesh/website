@@ -4,9 +4,17 @@ title: Send HTTP Request on Workflow
 
 Chaos Mesh Workflow provides a `Task` node to support any workload, similar to Kubernetes `Job`. To make the user experience more convenient, Chaos Dashboard provides a template based on `Task` to create HTTP requests in WebUI.
 
-:::note There is no workflow node with type `HTTPRequest` in Chaos Mesh Workflow. This feature is based on `Task` node, so that the user can send HTTP requests more easily. :::
+:::note
 
-:::note This is an experimental feature, the configuration and behavior may change in the future. :::
+There is no workflow node with type `HTTPRequest` in Chaos Mesh Workflow. This feature is based on `Task` node, so that the user can send HTTP requests more easily.
+
+:::
+
+:::note
+
+This is an experimental feature, the configuration and behavior may change in the future.
+
+:::
 
 ## Create HTTP request through Chaos Dashboard
 
@@ -41,8 +49,20 @@ Click "Submit" button to view the task in preview window:
 | Follow 301/302 Location | boolean | Follow the 301/302 redrirect | `false` | No | `false` |
 | Json Content | boolean | Reuqest body is Json | `false` | No | `false` |
 
-:::note The generated task node's `name` field value is "name" with a `http-request` suffix. :::
+:::note
 
-:::note "Follow 301/302 Location" corresponds to `curl`'s `-L` parameter. :::
+The generated task node's `name` field value is "name" with a `http-request` suffix.
 
-:::note "Json Content" would append HTTP request header with `Content-Type: application/json`. :::
+:::
+
+:::note
+
+"Follow 301/302 Location" corresponds to `curl`'s `-L` parameter.
+
+:::
+
+:::note
+
+"Json Content" would append HTTP request header with `Content-Type: application/json`.
+
+:::

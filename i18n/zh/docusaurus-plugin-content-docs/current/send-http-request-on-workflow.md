@@ -4,9 +4,17 @@ title: 在工作流中发送 HTTP 请求
 
 Chaos Mesh Workflow 提供了 `Task` 节点以支持任意工作负载，类似于 Kubernetes 中的 `Job`。 为了更方便的用户体验， Chaos Dashboard 提供了一个基于 `Task` 的模板， 可以方便的在 WebUI 中创建 HTTP 请求。
 
-:::note 并不存在类型为 `HTTPRequest` 类型的工作流节点，该特性基于 `Task` 节点，便于用户更方便的发送 HTTP 请求。 :::
+:::note
 
-:::note 这是一个实验中的特性，其配置与行为可能会在未来的版本中发生变化。 :::
+并不存在类型为 `HTTPRequest` 类型的工作流节点，该特性基于 `Task` 节点，便于用户更方便的发送 HTTP 请求。
+
+:::
+
+:::note
+
+这是一个实验中的特性，其配置与行为可能会在未来的版本中发生变化。
+
+:::
 
 ## 通过 Chaos Dashboard 创建 HTTP 请求
 
@@ -41,8 +49,20 @@ Chaos Mesh Workflow 提供了 `Task` 节点以支持任意工作负载，类似�
 | 跟随 301/302 跳转 | boolean | 是否跟随 301/302 跳转 | `false` | 否 | `false` |
 | 为 JSON 内容 | boolean | 是否为 JSON 内容 | `false` | 否 | `false` |
 
-:::note 生成的任务节点的 `name` 字段的值为"名称"后加 `http-request` 后缀。 :::
+:::note
 
-:::note "跟随 301/302 跳转" 对应 `curl` 的 `-L` 参数。 :::
+生成的任务节点的 `name` 字段的值为"名称"后加 `http-request` 后缀。
 
-:::note "为 JSON 内容" 会为 HTTP 请求头中加入 `Content-Type: application/json` 。 :::
+:::
+
+:::note
+
+"跟随 301/302 跳转" 对应 `curl` 的 `-L` 参数。
+
+:::
+
+:::note
+
+"为 JSON 内容" 会为 HTTP 请求头中加入 `Content-Type: application/json` 。
+
+:::
