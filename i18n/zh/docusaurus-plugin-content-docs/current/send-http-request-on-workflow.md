@@ -46,23 +46,11 @@ Chaos Mesh Workflow 提供了 `Task` 节点以支持任意工作负载，类似�
 | URL | string | 请求地址 |  | 是 | `https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX` |
 | 方法 | string | 请求方法 |  | 是 | `POST` |
 | 请求体 | string | 请求体 |  | 否 | `{"text": "Hello, world."}` |
-| 跟随 301/302 跳转 | boolean | 是否跟随 301/302 跳转 | `false` | 否 | `false` |
-| 为 JSON 内容 | boolean | 是否为 JSON 内容 | `false` | 否 | `false` |
+| 跟随 301/302 跳转 | boolean | "跟随 301/302 跳转" 对应 `curl` 的 `-L` 参数 | `false` | 否 | `false` |
+| 为 JSON 内容 | boolean | "为 JSON 内容" 会为 HTTP 请求头中加入 `Content-Type: application/json` | `false` | 否 | `false` |
 
 :::note
 
 生成的任务节点的 `name` 字段的值为"名称"后加 `http-request` 后缀。
-
-:::
-
-:::note
-
-"跟随 301/302 跳转" 对应 `curl` 的 `-L` 参数。
-
-:::
-
-:::note
-
-"为 JSON 内容" 会为 HTTP 请求头中加入 `Content-Type: application/json` 。
 
 :::

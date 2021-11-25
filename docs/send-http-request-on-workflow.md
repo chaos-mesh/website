@@ -43,26 +43,12 @@ Click "Submit" button to view the task in preview window:
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
 | Name | string | Name of Workflow Node |  | Yes | `send-slack-message` |
-| URL | string | HTTP Reuest URL |  | Yes | `https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX` |
-| Method | string | HTTP Reuqest Method |  | Yes | `POST` |
+| URL | string | HTTP Request URL |  | Yes | `https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX` |
+| Method | string | HTTP Request Method |  | Yes | `POST` |
 | Body | string | HTTP Request Body |  | No | `{"text": "Hello, world."}` |
-| Follow 301/302 Location | boolean | Follow the 301/302 redrirect | `false` | No | `false` |
-| Json Content | boolean | Reuqest body is Json | `false` | No | `false` |
+| Follow 301/302 Location | boolean | "Follow 301/302 Location" corresponds to `curl`'s `-L` parameter. | `false` | No | `false` |
+| Json Content | boolean | "Json Content" would append HTTP request header with `Content-Type: application/json`. | `false` | No | `false` |
 
 :::note
 
 The generated task node's `name` field value is "name" with a `http-request` suffix.
-
-:::
-
-:::note
-
-"Follow 301/302 Location" corresponds to `curl`'s `-L` parameter.
-
-:::
-
-:::note
-
-"Json Content" would append HTTP request header with `Content-Type: application/json`.
-
-:::
