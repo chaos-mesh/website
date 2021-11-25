@@ -2,7 +2,9 @@
 title: Installation
 ---
 
-import PickVersion from '@site/src/components/PickVersion' import PickHelmVersion from '@site/src/components/PickHelmVersion'
+import PickVersion from '@site/src/components/PickVersion'
+
+import PickHelmVersion from '@site/src/components/PickHelmVersion'
 
 This document describes how to install Chaos Mesh to perform chaos experiments against your application in Kubernetes.
 
@@ -20,7 +22,7 @@ Before deploying Chaos Mesh, make sure the following items have been installed:
 
 ## Install Chaos Mesh
 
-<PickVersion className="language-bash">
+<PickVersion>
   curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash
 </PickVersion>
 
@@ -28,7 +30,7 @@ The above command installs all the CRDs, required service account configuration,
 
 If you are using k3s or k3d, please also specify `--k3s` flag.
 
-<PickVersion className="language-bash">
+<PickVersion>
   curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --k3s
 </PickVersion>
 
