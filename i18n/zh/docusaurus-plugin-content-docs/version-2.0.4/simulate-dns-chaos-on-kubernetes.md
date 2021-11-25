@@ -36,7 +36,7 @@ kubectl get pods -n chaos-testing -l app.kubernetes.io/component=chaos-dns-serve
 
 ## 使用 Dashboard 方式创建实验
 
-1. 单击实验页面中的“新的实验”按钮创建实验：
+1. 单击实验页面中的**新的实验**按钮创建实验：
 
    ![创建实验](./img/create-new-exp.png)
 
