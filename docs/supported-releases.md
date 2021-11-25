@@ -16,17 +16,25 @@ where `<minor>` is increased for each release, and `<patch>` counts the number o
 
 ## Support status of Chaos Mesh
 
-| Version | Currently Supported  | Release Date | End of Life\* | Supported Kubernetes versions                      |
-| :------ | :------------------- | :----------- | :------------ | :------------------------------------------------- |
-| master  | No, development only | -            | -             | 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22     |
-| 2.0     | Yes                  | Jul 23, 2021 | -             | 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22\*\* |
-| 1.2     | Yes                  | Apr 23, 2021 | -             | 1.12, 1.13, 1.14, 1.15                             |
-| 1.1     | No                   | Jan 08, 2021 | Jul 23, 2021  | 1.12, 1.13, 1.14, 1.15                             |
-| 1.0     | No                   | Sep 25, 2020 | Apr 23, 2021  | 1.12, 1.13, 1.14, 1.15                             |
+| Version | Currently Supported  | Release Date | End of Life  | Supported Kubernetes versions                  |
+| :------ | :------------------- | :----------- | :----------- | :--------------------------------------------- |
+| master  | No, development only | -            | -            | 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22 |
+| 2.0     | Yes                  | Jul 23, 2021 | -            | 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22 |
+| 1.2     | Yes                  | Apr 23, 2021 | -            | 1.12, 1.13, 1.14, 1.15                         |
+| 1.1     | No                   | Jan 08, 2021 | Jul 23, 2021 | 1.12, 1.13, 1.14, 1.15                         |
+| 1.0     | No                   | Sep 25, 2020 | Apr 23, 2021 | 1.12, 1.13, 1.14, 1.15                         |
 
-\*Note that dates in the future are uncertain and might change.
+:::note
 
-\*\*The support of kubernetes 1.22 is (will be) available with release 2.0.4.
+Note that dates in the future are uncertain and might change.
+
+:::
+
+:::note
+
+The support of kubernetes 1.22 is (will be) available with release 2.0.4.
+
+:::
 
 ## Upcoming releases
 
