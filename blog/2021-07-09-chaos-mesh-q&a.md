@@ -28,7 +28,7 @@ Big thanks to the more than 200 of you who joined us! We received so many great 
 
 **Q: Can I use Chaos Mesh on-premises or do I need Amazon Web Services (AWS) or Google Cloud Platform (GCP)?**
 
-**A:** You can do either! You can deploy Chaos Mesh on your Kubernetes cluster, so it does not matter whether you manage it yourself or have it hosted on AWS or GCP. However, if you would like to use it in a Kubernetes environment, you need to [set relevant parameters](https://chaos-mesh.org/docs/1.2.3/user_guides/installation) during installation.
+**A:** You can do either! You can deploy Chaos Mesh on your Kubernetes cluster, so it does not matter whether you manage it yourself or have it hosted on AWS or GCP. However, if you would like to use it in a Kubernetes environment, you need to [set relevant parameters](https://chaos-mesh.org/docs/1.2.4/user_guides/installation) during installation.
 
 **Q: How do "chaos actions" work?**
 

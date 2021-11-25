@@ -73,17 +73,15 @@ Chaos Mesh is a community-driven project, and cannot progress without an active,
 
 Cloud native has been in the DNA of Chaos Mesh since the very beginning. Joining CNCF was a natural choice, which marks a critical step for Chaos Mesh to becoming a vendor-neutral, open and transparent open-source community. Aside from integration within the cloud native ecosystem, joining CNCF gives Chaos Mesh:
 
-- More community and project exposure.
-  Collaborations with other projects and various cloud native community activities such as Kubernetes Meetup and KubeCon have presented us great opportunities to communicate with the community. We are amazed how the high-quality content produced by the community has also played a positive and far-reaching role in promoting Chaos Mesh.
+- More community and project exposure. Collaborations with other projects and various cloud native community activities such as Kubernetes Meetup and KubeCon have presented us great opportunities to communicate with the community. We are amazed how the high-quality content produced by the community has also played a positive and far-reaching role in promoting Chaos Mesh.
 
-- A more complete and open community framework.
-  CNCF provides a rather mature framework for open-source community operations. Under CNCF’s guidance, we established our basic community framework, including a Code of Conduct, Contributing Guide, and Roadmap. We’ve also created our own channel, #project-chaos-mesh, under CNCF’s Slack.
+- A more complete and open community framework. CNCF provides a rather mature framework for open-source community operations. Under CNCF’s guidance, we established our basic community framework, including a Code of Conduct, Contributing Guide, and Roadmap. We’ve also created our own channel, #project-chaos-mesh, under CNCF’s Slack.
 
 ### A friendly and supportive community
 
 The quality of the open source community determines whether our adopters and contributors are willing to stick around and get involved in the community for the long run. In this regard, we’ve been working hard on:
 
-- Continuously enriching documentation and optimizing its structure. So far, we have developed a complete set of documentation for different groups of audiences, including [a user guide](https://chaos-mesh.org/docs/1.2.3/user_guides/installation) and [developer guide](https://chaos-mesh.org/docs/1.2.3/development_guides/development_overview), [quick start guides](https://chaos-mesh.org/docs/1.2.3/get_started/get_started_on_kind), [use cases](https://chaos-mesh.org/docs/1.2.3/use_cases/multi_data_centers), and [a contributing guide](https://github.com/chaos-mesh/chaos-mesh/blob/master/CONTRIBUTING.md). All are constantly updated per each release.
+- Continuously enriching documentation and optimizing its structure. So far, we have developed a complete set of documentation for different groups of audiences, including [a user guide](https://chaos-mesh.org/docs/1.2.4/user_guides/installation) and [developer guide](https://chaos-mesh.org/docs/1.2.4/development_guides/development_overview), [quick start guides](https://chaos-mesh.org/docs/1.2.4/get_started/get_started_on_kind), [use cases](https://chaos-mesh.org/docs/1.2.4/use_cases/multi_data_centers), and [a contributing guide](https://github.com/chaos-mesh/chaos-mesh/blob/master/CONTRIBUTING.md). All are constantly updated per each release.
 
 - Working with the community to publish blog posts, tutorials, use cases, and chaos engineering practices. So far, we’ve produced 26 Chaos Mesh related articles. Among them is [an interactive tutorial](https://chaos-mesh.org/interactive-tutorial), published on O’Reilly’s Katakoda site. These materials make a great complement to the documentation.
 
@@ -91,8 +89,7 @@ The quality of the open source community determines whether our adopters and con
 
 ## Looking ahead
 
-Google’s recent global outage reminded us of the importance of system reliability, and it highlighted the importance of chaos engineering. Liz Rice, CNCF TOC Chair, shared [The 5 technologies to watch in 2021](https://twitter.com/CloudNativeFdn/status/1329863326428499971), and chaos engineering is on top of the list. We boldly predict that chaos engineering is about to enter a new stage in the near future.
-Chaos Mesh 2.0 is now in active development, and it includes community requirements such as an embedded workflow engine to support the definition and management of more flexible chaos scenarios, application state checking mechanisms, and more detailed experiments reports. Follow along through the project [roadmap](https://github.com/chaos-mesh/chaos-mesh/blob/master/ROADMAP.md).
+Google’s recent global outage reminded us of the importance of system reliability, and it highlighted the importance of chaos engineering. Liz Rice, CNCF TOC Chair, shared [The 5 technologies to watch in 2021](https://twitter.com/CloudNativeFdn/status/1329863326428499971), and chaos engineering is on top of the list. We boldly predict that chaos engineering is about to enter a new stage in the near future. Chaos Mesh 2.0 is now in active development, and it includes community requirements such as an embedded workflow engine to support the definition and management of more flexible chaos scenarios, application state checking mechanisms, and more detailed experiments reports. Follow along through the project [roadmap](https://github.com/chaos-mesh/chaos-mesh/blob/master/ROADMAP.md).
 
 ## Last but not least
 
