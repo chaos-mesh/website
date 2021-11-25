@@ -2,11 +2,9 @@
 title: 使用 Grafana Data Source 进行观测
 ---
 
-import PickVersion from '@site/src/components/PickVersion'
-
 :::note 注意
 
-需要 Grafana >= 7.0.0
+可以使用该插件的最小 Grafana 版本是 `7.0.0`。(要求 Grafana >= `7.0.0`)
 
 :::
 
@@ -14,22 +12,38 @@ import PickVersion from '@site/src/components/PickVersion'
 
 由于 Grafana 还没有受理 Chaos Mesh Data Source 的插件提交，所以目前无法使用 `grafana-cli` 进行安装。
 
-以下步骤为如何在本地 Grafana 安装 Data Source 插件。
+以下步骤为如何在本地安装 Data Source 插件。
 
 :::
 
 ## 安装
 
-前往 <https://github.com/chaos-mesh/datasource/releases> 下载名为 `chaosmeshorg-datasource-2.1.0.zip` 的插件包，然后解压至 `grafana plugins directory` 下。
+通过如下命令下载插件 zip 包或前往 <https://github.com/chaos-mesh/datasource/releases> 下载：
 
-然后修改 `grafana.ini` 文件为：
+```shell
+curl -LO https://github.com/chaos-mesh/datasource/releases/download/v2.1.0/chaosmeshorg-datasource-2.1.0.zip
+```
+
+下载完成后，进行解压：
+
+```shell
+unzip chaosmeshorg-datasource-2.1.0.zip -d YOUR_PLUGIN_DIR
+```
+
+:::tip 小贴士
+
+参考 <https://grafana.com/docs/grafana/latest/plugins/installation/#install-a-packaged-plugin> 找到插件目录。
+
+:::
+
+然后更新并保存 `grafana.ini` 文件为：
 
 ```ini
 [plugins]
   allow_loading_unsigned_plugins = chaosmeshorg-datasource
 ```
 
-修改完毕后，重启 grafana 即可加载插件。
+最后重启 Grafana 即可加载插件。
 
 ## 设置
 
@@ -43,33 +57,35 @@ import PickVersion from '@site/src/components/PickVersion'
 
 然后使用 `port-forward` 命令来激活:
 
-```sheel
+```shell
 kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333
 ```
 
-最后，点击 **Save & Test** 来测试连接。如果显示连接成功，则说明设置已经完成。
+最后，点击 **Save & Test** 来测试连接。如果显示成功的通知，则说明设置已经完成。
 
 ## Query
 
 Data Source 插件会以事件的视角来观测 Chaos Mesh，以下几个选项负责过滤不同的事件：
 
-- `Object ID` - 通过对象的 UUID 进行过滤
-- `Namespace` - 通过不同的命名空间进行过滤
-- `Name` - 通过对象名进行过滤
-- `Kind` - 通过类型 (PodChaos, Schedule...) 进行过滤
-- `Limit` - 限制事件的数量
+- **Object ID** - 通过对象的 UUID 进行过滤
+- **Namespace** - 通过不同的命名空间进行过滤
+- **Name** - 通过对象名进行过滤
+- **Kind** - 通过类型 (PodChaos, Schedule...) 进行过滤
+- **Limit** - 限制事件的数量
+
+它们将会作为参数被传递到 `/api/events` API 中。
 
 ## Annotations
 
-你可以通过 Annotations 来集成 Chaos Mesh 的事件到面板上，以下为创建示例：
+你可以通过 Annotations 来集成 Chaos Mesh 的事件到面板上，以下为创建的示例：
 
 ![Annotations](img/grafana/annotations.png)
 
-关于如何填写字段，请参考 [Query](#query) 所描述的内容。
+请参考 [Query](#query) 的内容来填写相应的字段。
 
 ## Variables
 
-你可以通过设置不同的变量来动态地查询 Chaos Mesh 的事件：
+如果你选择类型为 `Query` 并选择数据源为 `Chaos Mesh`，你可以通过不同的指标来检索变量：
 
 ![Variables](img/grafana/variables.png)
 
@@ -97,4 +113,4 @@ Data Source 插件会以事件的视角来观测 Chaos Mesh，以下几个选项
 
 ## 更多
 
-想要了解更多，请前往 [chaos-mesh/datasource](https://github.com/chaos-mesh/datasource) 查看插件的源代码。
+想要了解更多，请前往 [chaos-mesh/datasource](https://github.com/chaos-mesh/datasource) 获取更多信息。
