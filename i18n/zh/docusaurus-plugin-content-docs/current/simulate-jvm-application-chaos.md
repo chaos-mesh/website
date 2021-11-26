@@ -35,7 +35,7 @@ Chaos Mesh 通过 [Byteman](https://github.com/chaos-mesh/byteman) 模拟 JVM �
 
 下面将以指定返回值为例，展示 JVMChaos 的使用方法与效果。以下内容中涉及的 yaml 文件均可在 [examples/jvm](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples/jvm) 中找到，以下步骤默认的工作路径也是在 `examples/jvm` 中。 默认 Chaos Mesh 安装的命名空间为 `chaos-testing`。
 
-### 1. 创建被测应用
+### 第 1 步：创建被测应用
 
 [helloworld](https://github.com/WangXiangUSTC/byteman-example/tree/main/example.helloworld) 是一个简单的 Java 应用，此处作为被测应用。被测应用定义在 `example/jvm/app.yaml` 中，内容如下：
 
@@ -57,19 +57,19 @@ spec:
       imagePullPolicy: IfNotPresent
 ```
 
-创建应用所属的 namespace：
+1. 创建应用所属的 namespace：
 
 ```shell
 kubectl create namespace helloworld
 ```
 
-建立该应用 Pod：
+2. 建立该应用 Pod：
 
 ```shell
 kubectl apply -f app.yaml
 ```
 
-执行 `kubectl -n helloworld get pods`，预期能够观察到命名空间 `helloworld` 中名为 `helloworld` 的 Pod，等待其 `READY` 为 `1/1` 后进行下一步。
+3. 执行 `kubectl -n helloworld get pods`，预期能够观察到命名空间 `helloworld` 中名为 `helloworld` 的 Pod，等待其 `READY` 为 `1/1` 后进行下一步。
 
 ```shell
 kubectl -n helloworld get pods
@@ -83,7 +83,7 @@ NAME         READY   STATUS    RESTARTS   AGE
 helloworld   1/1     Running   0          2m
 ```
 
-### 2. 观测未被注入时的行为
+### 第 2 步：观测未被注入时的行为
 
 在注入前你可以先观测应用 `helloworld` 未被注入时的行为，例如：
 
@@ -104,7 +104,7 @@ kubectl -n helloworld logs -f helloworld
 
 可以看到 `helloworld` 每隔一秒输出一行 `Hello World`，每行的编号依次递增。
 
-### 3. 注入 JVMChaos 并验证
+### 第 3 步：注入 JVMChaos 并验证
 
 指定返回值的 JVMChaos 内容如下：
 
@@ -148,7 +148,7 @@ caught ReturnException
 9999. Hello World
 ```
 
-### 字段说明
+## 字段说明
 
 | 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
 | --- | --- | --- | --- | --- | --- |
@@ -168,7 +168,7 @@ caught ReturnException
 
 针对不同的 `action`，有不同的配置项可以填写。
 
-#### latency
+### latency 相关参数
 
 | 参数      | 类型                    | 说明                     | 是否必填 |
 | --------- | ----------------------- | ------------------------ | -------- |
@@ -177,7 +177,7 @@ caught ReturnException
 | latency | int 类型 | 增加方法的延迟时间，单位为 ms    | 是       |
 | port   | int 类型     | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | 否       |
 
-#### return
+### return 相关参数
 
 | 参数      | 类型                    | 说明                     | 是否必填 |
 | --------- | ----------------------- | ------------------------ | -------- |
@@ -186,7 +186,7 @@ caught ReturnException
 | value | string 类型 | 指定方法的返回值，目前支持数字和字符串类型的返回值，如果为字符串，则需要使用双引号，例如："chaos"。    | 是       |
 | port   | int 类型     | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | 否       |
 
-#### exception
+### exception 相关参数
 
 | 参数      | 类型                    | 说明                     | 是否必填 |
 | --------- | ----------------------- | ------------------------ | -------- |
@@ -195,7 +195,7 @@ caught ReturnException
 | exception | string 类型 | 抛出的自定义异常，例如：'java.io.IOException("BOOM")'   | 是       |
 | port   | int 类型     | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | 否       |
 
-#### stress
+### stress 相关参数
 
 | 参数      | 类型                    | 说明                     | 是否必填 |
 | --------- | ----------------------- | ------------------------ | -------- |
@@ -203,13 +203,13 @@ caught ReturnException
 | memType      | string 类型           | 内存 OOM 的类型，目前支持 "stack" 和 "heap" 两种类型      | 无       |
 | port   | int 类型     | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | 否       |
 
-#### gc
+### gc 相关参数
 
 | 参数      | 类型                    | 说明                     | 是否必填 |
 | --------- | ----------------------- | ------------------------ | -------- |
 | port   | int 类型     | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | 否       |
 
-#### ruleData
+### ruleData 相关参数
 
 | 参数      | 类型                    | 说明                     | 是否必填 |
 | --------- | ----------------------- | ------------------------ | -------- |
