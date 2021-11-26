@@ -2,9 +2,13 @@
 title: Install Chaos Mesh Offline
 ---
 
-import PickVersion from '@site/src/components/PickVersion' import PickHelmVersion from '@site/src/components/PickHelmVersion'
+import PickVersion from '@site/src/components/PickVersion'
 
-import VerifyInstallation from './common/verify-installation.md' import QuickRun from './common/quick-run.md'
+import PickHelmVersion from '@site/src/components/PickHelmVersion'
+
+import VerifyInstallation from './common/verify-installation.md'
+
+import QuickRun from './common/quick-run.md'
 
 This document describes how to install Chaos Mesh offline.
 
@@ -55,9 +59,9 @@ To simulate a DNS fault (for example, make the DNS responses return a random wro
 
 On the machine connected to the external network, download the zip package of Chaos Mesh:
 
-```bash
-curl -fsSL -o chaos-mesh.zip https://github.com/chaos-mesh/chaos-mesh/archive/refs/heads/master.zip
-```
+<PickVersion>
+curl -fsSL -o chaos-mesh.zip https://github.com/chaos-mesh/chaos-mesh/archive/refs/tags/latest.zip
+</PickVersion>
 
 ### Copy files
 

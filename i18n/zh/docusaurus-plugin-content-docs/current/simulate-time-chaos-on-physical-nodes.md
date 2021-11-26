@@ -1,21 +1,20 @@
 ---
-title: Simulate time chaos
-summary: This document describes how to use Chaosd to simulate a time offset scenario.
+title: 模拟时间故障
 ---
 
-This document describes how to use Chaosd to simulate a time offset scenario. You can create experiments either in command-line mode or service mode.
+本文主要介绍如何使用 Chaosd 模拟时间偏移的场景。本功能支持通过命令行模式或服务模式创建实验。
 
-## Create experiments using commands
+## 通过命令行创建实验
 
-This section describes how to create time chaos experiments using commands.
+本节介绍如何在命令行模式中创建时间故障实验。
 
-Before creating an experiment, you can run the following command to check the options of time chaos:
+在创建时间故障实验前，可运行以下命令行查看时间故障的相关配置项：
 
 ```
 chaosd attack clock -h
 ```
 
-The result is as follows:
+结果如下所示：
 
 ```bash
 $ chaosd attack clock -h
@@ -37,9 +36,9 @@ Global Flags:
 
 ```
 
-### Quick Example
+### 快速使用
 
-Prepare test program:
+准备测试程序：
 
 ```bash
 cat > time.c << EOF
@@ -62,20 +61,20 @@ EOF
 gcc -o get_time ./time.c
 ```
 
-Then execute get_time and try to attack it. The following is an example:
+接下来执行 get_time 并且使用 chaosd 尝试创建时间故障如下：
 
 ```bash
 chaosd attack clock -p $PID -t 11s
 ```
 
-### Configurations of simulating time chaos
+### 模拟时间故障的相关配置
 
-| Parameter | Type | Note | Default value | Required | Example |
+| 配置项 | 类型 | 说明 | 默认值 | 必要项 | 例子 |
 | --- | --- | --- | --- | --- | --- |
-| timeOffset | string | Specifies the length of time offset. | None | Yes | `-5m` |
-| clockIds | []string | Specifies the ID of clock that will be offset. See the [clock_gettime documentation](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) for details. | `["CLOCK_REALTIME"]` | No | `["CLOCK_REALTIME", "CLOCK_MONOTONIC"]` |
-| pid | string | The identifier of the process. | None | Yes | `1` |
+| timeOffset | string | 指定时间的偏移量。 | None | 是 | `-5m` |
+| clockIds | []string | 指定时间偏移作用的时钟，详见 [clock_gettime documentation](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) 。 | `["CLOCK_REALTIME"]` | 否 | `["CLOCK_REALTIME", "CLOCK_MONOTONIC"]` |
+| pid | string | 进程的标识符。 | None | 是 | `1` |
 
-### Create experiments using service mode
+### 使用服务模式创建实验
 
-(ongoing update)
+（正在持续更新中）

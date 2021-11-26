@@ -4,7 +4,9 @@ title: 离线安装
 
 import PickVersion from '@site/src/components/PickVersion'
 
-import VerifyInstallation from './common/verify-installation.md' import QuickRun from './common/quick-run.md'
+import VerifyInstallation from './common/verify-installation.md'
+
+import QuickRun from './common/quick-run.md'
 
 本篇文档描述如何离线安装 Chaos Mesh。
 
@@ -23,7 +25,7 @@ import VerifyInstallation from './common/verify-installation.md' import QuickRun
 
 在有外网连接的机器上，设置 Chaos Mesh 的版本号为环境变量：
 
-<PickVersion>
+<PickVersion className="language-bash">
 export CHAOS_MESH_VERSION=latest
 </PickVersion>
 
@@ -55,9 +57,9 @@ docker save pingcap/chaos-dashboard:${CHAOS_MESH_VERSION} > image-chaos-dashboar
 
 在有外网连接的机器上，下载 Chaos Mesh 的 zip 包：
 
-```bash
-curl -fsSL -o chaos-mesh.zip https://github.com/chaos-mesh/chaos-mesh/archive/refs/heads/master.zip
-```
+<PickVersion>
+curl -fsSL -o chaos-mesh.zip https://github.com/chaos-mesh/chaos-mesh/archive/refs/tags/latest.zip
+</PickVersion>
 
 ### 拷贝文件
 
