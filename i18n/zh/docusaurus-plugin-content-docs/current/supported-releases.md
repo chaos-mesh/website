@@ -12,11 +12,11 @@ title: 支持的版本
 v<major>.<minor>.<patch>
 ```
 
-其中 `<minor>` 表示当前的 `<minor>` 版本，`<patch>` 表示当前的 `<minor>` 版本的补丁数。一个补丁通常是相对于 `<minor>` 版本的小更改。
+其中，`<minor>` 表示当前的 `<minor>` 版本，`<patch>` 表示当前 `<minor>` 版本的补丁数。补丁表示针对`<minor>` 版本进行的小更改。
 
-## Chaos Mesh 的支持状态
+## 各版本支持情况与版本时间表
 
-| 版本   | 当前支持状态   | 发布日期           | 终止日期           | 支持的 Kubernetes 版本                         |
+| 版本   | 当前支持情况   | 发布日期           | 终止日期           | 支持的 Kubernetes 版本                         |
 | :----- | :------------- | :----------------- | :----------------- | :--------------------------------------------- |
 | master | 否，只支持开发 | -                  | -                  | 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22 |
 | 2.0    | 是             | 2021 年 7 月 23 日 | -                  | 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22 |
@@ -24,34 +24,30 @@ v<major>.<minor>.<patch>
 | 1.1    | 否             | 2021 年 1 月 08 日 | 2021 年 7 月 23 日 | 1.12, 1.13, 1.14, 1.15                         |
 | 1.0    | 否             | 2021 年 9 月 25 日 | 2021 年 4 月 23 日 | 1.12, 1.13, 1.14, 1.15                         |
 
+其中，部分未来日期还未确定，具体日程可能会发生变化。
+
 :::note 注意
 
-未来的日期是不确定的，可能会发生变化。
+Chaos Mes 2.0.4 版本已开始支持 Kubernetes 1.22 版本。
 
 :::
 
-:::note
+## 未来版本
 
-对 kubernetes 1.22 的支持已在 2.0.4 版本中提供。
-
-:::
-
-## 即将发布的版本
-
-你可以在[Github Milestones](https://github.com/chaos-mesh/chaos-mesh/milestones)上跟踪我们即将发布的版本。
+你可以在 [Github Milestones](https://github.com/chaos-mesh/chaos-mesh/milestones)上查看即将会发布的 Chaos Mesh 新版本。
 
 ## 支持策略
 
 我们对每个发布分支的支持窗口是六个月。鉴于我们每三个月就会发布一个新的版本，该支持窗口与最新的两个版本相对应。
 
-我们提供两种类型的支持：
+目前，Chaos Mesh 团队提供以下两种类型的支持：
 
 - 社区技术支持
 - 安全和错误修复
 
 ### 社区技术支持
 
-你可以在 CNCF Slack（频道 [#project-chaos-mesh](https://cloud-native.slack.com/archives/C0193VAV272)）或者使用 [GitHub Discussion](https://github.com/chaos-mesh/chaos-mesh/discussions) 向社区请求支持。
+如果在使用 Chaos Mesh 的遇到了问题，欢迎在 CNCF Slack（频道 [#project-chaos-mesh](https://cloud-native.slack.com/archives/C0193VAV272)） 向社区提问，或在 [GitHub Discussion](https://github.com/chaos-mesh/chaos-mesh/discussions) 向 Chaos Mesh 团队反馈。
 
 ### 安全和错误修复
 
@@ -59,11 +55,10 @@ v<major>.<minor>.<patch>
 
 对于增强功能或错误修复，我们会根据需要制作新的补丁版本。
 
-## 我们如何确定支持的 Kubernetes 版本
+##  Chaos Mesh 支持的 Kubernetes 版本
 
-在 [Chaos Mesh 的支持状态](#chaos-mesh-的支持状态) 部分显示的支持的 Kubernetes 版本列表，取决于 Chaos Mesh 维护者认为支持和测试是合理的。
+通过 E2E 测试测试各个版本的 Kubernetes 集群的兼容性后，Chaos Mesh 团队根据其支持范围和测试结果确定[各个版本的 Chaos Mesh 所支持的 Kubernetes 版本](#chaos-mesh-的支持状态)。其中，E2E 测试的测试范围如下：
 
-我们使用 e2e 测试来测试各个版本的 kubernetes 集群的兼容性，我们的测试范围是：
 
 | 版本   | 测试的 Kubernetes 版本 |
 | :----- | :--------------------- |
