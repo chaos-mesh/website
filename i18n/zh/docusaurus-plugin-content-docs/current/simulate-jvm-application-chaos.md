@@ -229,4 +229,8 @@ DO
 ENDRULE
 ```
 
-将配置中的换行转换为换行符 "\n"，将转换后的数据设置为参数 "ruleData" 的值，如上的配置转换为 "\nRULE modify return value\nCLASS Main\nMETHOD getnum\nAT ENTRY\nIF true\nDO return 9999\nENDRULE\n"。
+将配置中的换行转换为换行符 "\n"，将转换后的数据设置为参数 "ruleData" 的值，如上的配置转换为：
+
+```txt
+\nRULE modify return value\nCLASS Main\nMETHOD getnum\nAT ENTRY\nIF true\nDO return 9999\nENDRULE\n"
+```
