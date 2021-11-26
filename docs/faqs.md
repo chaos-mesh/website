@@ -13,12 +13,16 @@ No. Instead, you could use [`chaosd`](https://github.com/chaos-mesh/chaosd/) to 
 ### Q: I have deployed Chaos Mesh and created PodChaos experiments successfully, but I still failed in creating NetworkChaos/TimeChaos Experiment. The log is shown as below:
 
 ```console
-2020-06-18T01:05:26.207Z	ERROR	controllers.TimeChaos	failed to apply chaos on all pods	{"reconciler": "timechaos", "error": "rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial tcp xx.xx.xx.xx:xxxxx: connect: connection refused\""}
+2020-06-18T02:49:15.160Z ERROR controllers.TimeChaos failed to apply chaos on all pods {"reconciler": "timechaos", "error": "rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial tcp xx.xx.xx.xx:xxxx: connect: connection refused\""}
 ```
 
-You can use the `hostNetwork` parameter to fix this issue as follows:
+This is caused by `chaos-controller-manager` failing to connect to `chaos-daemon`, you can first check the pod network and its [policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/).
+
+If everything is in order, maybe you can use the `hostNetwork` parameter to fix this problem as follows:
 
 <PickHelmVersion>{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n chaos-testing --version latest --set chaosDaemon.hostNetwork=true`}</PickHelmVersion>
+
+Ref: <https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/troubleshooting-kubeadm/#hostport-services-do-not-work>
 
 ### Q: The default administrator Google Cloud user account is forbidden to create chaos experiments. How to fix it?
 
