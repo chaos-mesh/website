@@ -109,7 +109,6 @@ Flags:
   -h, --help              help for mem
   -o, --options strings   extend stress-ng options.
   -s, --size string       Size specifies N bytes consumed per vm worker, default is the total available memory. One can specify the size as % of total available memory or in units of B, KB/KiB, MB/MiB, GB/GiB, TB/TiB..
-  -w, --workers int       Workers specifies N workers to apply the stressor. (default 1)
 
 Global Flags:
       --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
@@ -119,8 +118,7 @@ Global Flags:
 
 | 配置项  | 配置缩写 | 说明                                           | 值                                                                                                          |
 | :------ | :------- | :--------------------------------------------- | :---------------------------------------------------------------------------------------------------------- |
-| size    | s        | 指定每个 vm worker 占用内存的大小              | 支持使用单位 B，KB/KiB，MB/MiB，GB/GiB，TB/TiB 来设置占用的内存大小。如果不设置，则默认占用所有可用的内存。 |
-| workers | w        | 指定用于生成内存压力的 worker 数量             | int 类型，默认值为 1                                                                                        |
+| size    | s        | 指定每个 vm worker 占用内存的大小              | string 类型，支持使用单位 B，KB/KiB，MB/MiB，GB/GiB，TB/TiB 来设置占用的内存大小。如果不设置，则默认占用所有可用的内存。 |
 | options | o        | stress-ng 的其他参数设置，一般情况下不需要配置 | string 类型，默认值为 ""                                                                                    |
 
 #### 模拟内存压力示例
@@ -137,18 +135,61 @@ chaosd attack stress mem --workers 2 --size 100M
 Attack stress mem successfully, uid: c2bff2f5-3aac-4ace-b7a6-322946ae6f13
 ```
 
-在运行实验时，请注意保存实验的 uid 信息。在不需要模拟压力场景时，使用 `recover` 命令来结束 uid 对应的实验：
+## 使用服务模式创建压力实验
+
+要使用服务模式创建实验，请进行以下操作：
+1. 以服务模式运行 chaosd。
+    ```bash
+    chaosd server --port 31767
+    ```
+2. 向 chaosd 服务的路径 /api/attack/stress 发送 HTTP POTST 请求。
+    ```bash
+    curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{fault-configuration}'
+    ```
+其中 `fault-configuration` 需要按照故障类型进行配置，对应的配置参数请参考下文中各个类型故障的相关参数说明和命令示例。 
+在运行实验时，请注意保存实验的 uid 信息，当要结束 uid 对应的实验时，需要向 chaosd 服务的路径 /api/attack/{uid} 发送 HTTP DELETE 请求。
+
+### 服务模式模拟 CPU 压力场景
+
+#### 模拟 CPU 压力相关参数说明
+
+| 参数   | 说明                                                                                         | 值                                          |
+| :------ | :------------------------------------------------------------------------------------------- | :------------------------------------------ |
+| action | 实验的行为 | 设置为 "cpu" |
+| load    | 指定使用每个 worker 占用 CPU 负载的百分比。如果为 0，则表示为一个空负载；为 100 则表示满负载 | int 类型，取值范围为 0 到 100， 默认值为 10 |
+| workers | 指定用于生成 CPU 压力的 worker 数量                                                          | int 类型，默认值为 1                        |
+| options | stress-ng 的其他参数设置，一般情况下不需要配置                                               | string 类型，默认值为 ""                    |
+
+#### 服务模式模拟 CPU 压力示例
 
 ```bash
-chaosd recover c2bff2f5-3aac-4ace-b7a6-322946ae6f13
+curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{"load":10, "action":"cpu","workers":1}'
 ```
 
 输出如下所示：
 
 ```bash
-Recover c2bff2f5-3aac-4ace-b7a6-322946ae6f13 successfully
+{"status":200,"message":"attack successfully","uid":"c3c519bf-819a-4a7b-97fb-e3d0814481fa"}
 ```
 
-## 使用服务模式创建压力实验
+### 服务模式模拟内存压力场景
 
-（正在持续更新中）
+#### 模拟内存压力相关参数说明
+
+| 参数 | 说明                                           | 值                                                                                                          |
+| :------ | :--------------------------------------------- | :---------------------------------------------------------------------------------------------------------- |
+| action | 实验的行为 | 设置为 "mem" |
+| size    | 指定每个 vm worker 占用内存的大小              | string 类型，支持使用单位 B，KB/KiB，MB/MiB，GB/GiB，TB/TiB 来设置占用的内存大小。如果不设置，则默认占用所有可用的内存。 |
+| options | stress-ng 的其他参数设置，一般情况下不需要配置 | string 类型，默认值为 ""     |
+
+#### 服务模式模拟内存压力示例
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{"size":"100M", "action":"mem"}'
+```
+
+输出如下所示：
+
+```bash
+{"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
+```
