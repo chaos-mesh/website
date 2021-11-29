@@ -147,7 +147,7 @@ Before creating NetworkChaos experiments, ensure the following:
 | value | string | Provides a parameter for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods. | None | No | 1 |
 | containerNames | []string | Specifies the name of the container into which the fault is injected. | None | No | ["nginx"] |
 | selector | struct | Specifies the target Pod. For details, refer to [Define the experiment scope](./define-chaos-experiment-scope.md). | None | Yes |  |
-| externalTargets | []string | Represents network targets outside k8s, IPv4 addresses or domains. Only works with `direction: to`. | None | No | 1.1.1.1, www.google.com |
+| externalTargets | []string | Indicates the network targets except for Kubernetes, which can be IPv4 addresses or domains. This parameter only works with `direction: to`. | None | No | 1.1.1.1, www.google.com |
 
 ### Description for `action`-related fields
 

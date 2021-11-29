@@ -145,7 +145,7 @@ NetworkChaos 用于模拟集群中网络故障的场景，目前支持以下几�
 | value | string | 取决与 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 Pod 的百分比 | 无 | 否 | 1 |
 | containerNames | []string | 指定注入的容器名称 | 无 | 否 | ["nginx"] |
 | selector | struct | 指定注入故障的目标 Pod，详情请参考[定义实验范围](./define-chaos-experiment-scope.md) | 无 | 是 |  |
-| externalTargets | []string | 表示 k8s 之外的网络目标, 可以是 IPv4 地址或者域名。只能与 `direction: to` 一起工作。 | 无 | 否 | 1.1.1.1, www.google.com |
+| externalTargets | []string | 表示 Kubernetes 之外的网络目标, 可以是 IPv4 地址或者域名。只能与 `direction: to` 一起工作。 | 无 | 否 | 1.1.1.1, www.google.com |
 
 针对不同的 `action`，还有不同的配置项可以填写。
 
