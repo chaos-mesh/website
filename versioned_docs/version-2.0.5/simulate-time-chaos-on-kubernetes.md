@@ -6,6 +6,12 @@ title: Simulate Time Faults
 
 Chaos Mesh provides the TimeChaos experiment type. You can use this experiment type to simulate a time offset scenario. This document describes how to create a TimeChaos experiment and its associated configuration file.
 
+::: note
+
+TimeChaos only affects the PID `1` process in the container's PID namespace, and child processes of the PID `1`. For example, one process started by `kubectl exec` would not be affected.
+
+:::
+
 You can create experiments in Chaos Dashboard or using the YAML configuration file.
 
 ## Create experiments using Chaos Dashboard
