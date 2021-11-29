@@ -74,7 +74,7 @@ After downloading all the files required for installation, you need to copy thes
 
 After copying the tar package of the Chaos Mesh images and the zip package of the repository to the offline environment, take the following steps to install Chaos Mesh.
 
-### Step 1: Load Chaos Mesh images
+### Step 1. Load Chaos Mesh images
 
 Load images from the tar package:
 
@@ -84,7 +84,7 @@ docker load < image-chaos-daemon.tar
 docker load < image-chaos-dashboard.tar
 ```
 
-### Step 2: Push images to Registry
+### Step 2. Push images to Registry
 
 :::note
 
@@ -117,7 +117,7 @@ docker push $CHAOS_DAEMON_IMAGE
 docker push $CHAOS_DASHBOARD_IMAGE
 ```
 
-### Step 3: Install Chaos Mesh using Helm
+### Step 3. Install Chaos Mesh using Helm
 
 Unpack the zip package of Chaos Mesh:
 
