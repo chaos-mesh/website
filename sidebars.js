@@ -75,6 +75,13 @@ module.exports = {
         },
       ],
     },
+    {
+      type: 'category',
+      label: 'Authentication',
+      items: [
+        "gcp-authentication",
+      ]
+    },
     // {
     //   type: 'category',
     //   label: 'Use Cases',

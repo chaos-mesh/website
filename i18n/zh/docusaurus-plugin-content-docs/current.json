@@ -35,6 +35,10 @@
     "message": "物理机",
     "description": "The label for category Physical Nodes in sidebar docs"
   },
+  "sidebar.docs.category.Authentication": {
+    "message": "身份验证",
+    "description": "The label for category Authentication in sidebar docs"
+  },
   "sidebar.docs.category.Tools Integration": {
     "message": "工具整合",
     "description": "The label for category Tools Integration in sidebar docs"
