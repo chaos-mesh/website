@@ -133,11 +133,11 @@ Attack process python successfully, uid: 9cb6b3be-4f5b-4ecb-ae05-51050fcd0010
 
 要使用服务模式创建实验，请进行以下操作：
 
-1. 以服务模式运行 chaosd。
+1. 以服务模式运行 Chaosd。
    ```bash
    chaosd server --port 31767
    ```
-2. 向 chaosd 服务的路径 /api/attack/process 发送 HTTP POTST 请求。 `bash curl -X POST 172.16.112.130:31767/api/attack/process -H "Content-Type:application/json" -d '{fault-configuration}' ` 其中 `fault-configuration` 需要按照故障类型进行配置，对应的配置参数请参考下文中故障的相关参数说明和命令示例。 在运行实验时，请注意保存实验的 uid 信息，当要结束 uid 对应的实验时，需要向 chaosd 服务的路径 /api/attack/{uid} 发送 HTTP DELETE 请求。
+2. 向 Chaosd 服务的路径 /api/attack/process 发送 HTTP POTST 请求。 `bash curl -X POST 172.16.112.130:31767/api/attack/process -H "Content-Type:application/json" -d '{fault-configuration}' ` 其中 `fault-configuration` 需要按照故障类型进行配置，对应的配置参数请参考下文中故障的相关参数说明和命令示例。 在运行实验时，请注意保存实验的 uid 信息，当要结束 uid 对应的实验时，需要向 Chaosd 服务的路径 /api/attack/{uid} 发送 HTTP DELETE 请求。
 
 ### 使用服务模式模拟进程故障
 
