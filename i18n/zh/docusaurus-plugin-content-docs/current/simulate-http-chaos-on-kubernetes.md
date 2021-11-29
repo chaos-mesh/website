@@ -32,7 +32,7 @@ HTTPChaos 支持多种类型故障的组合。在创建 HTTPChaos 实验时，�
 
 ![创建实验](./img/create-new-exp.png)
 
-2. 在“选择目标”处选择 “HTTP 故障”，然后选择具体行为（如 `RESPONSE ABORT`），并填写具体配置：
+2. 在“选择目标”处选择“HTTP 故障”，然后选择具体行为（如 `RESPONSE ABORT`），并填写具体配置：
 
 ![创建实验](./img/create-new-httpchaos.png)
 
