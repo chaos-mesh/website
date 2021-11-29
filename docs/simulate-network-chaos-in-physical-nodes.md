@@ -4,9 +4,11 @@ title: Simulate Network Faults
 
 This document introduces how to use Chaosd to simulate network faults. The simulations can be completed by modifying network routing and traffic flow control using iptables, ipsets, tc, etc.
 
-## Notes
+::: note
 
 Make sure the NET_SCH_NETEM module is installed in the Linux kernel. If you are using CentOS, you can install the module through the kernel-modules-extra package. Most other Linux distributions have installed it already by default.
+
+:::
 
 ## Create network fault experiments using command-line mode
 
@@ -45,7 +47,11 @@ Currently, you can simulate four experimental scenarios using Chaosd: network co
 
 ### Network corruption
 
-You can run the following command to see the configuration of simulated network corruption using Chaosd:
+You can run the command below to see the configuration of simulated network corruption using Chaosd.
+
+#### The command for network corruption
+
+The command is as follows:
 
 ```bash
 chaosd attack network corrupt --help
@@ -74,6 +80,8 @@ Global Flags:
       --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
 ```
 
+#### Configuration items related to network corruption
+
 The related configuration items are described as follows:
 
 | Configuration item | Abbreviation | Description | Value |
@@ -86,9 +94,27 @@ The related configuration items are described as follows:
 | protocol | p | The IP protocol impacted by traffic. | String. Supported protocols: tcp, udp, icmp, all (all network protocols). |
 | source-port | s | The egress traffic which only impact specific source ports. It can only be configured when the protocol is tcp or udp. | String. Use a ',' to delimit the specific port or to indicate the range of the ports, such as "80,8001:8010". |
 
+#### An example of network corruption
+
+Run the following command to simulate network corruption:
+
+```bash
+chaosd attack network corrupt -d eth0 -i 172.16.4.4 --percent 50
+```
+
+If the command runs successfully, the output is as follows:
+
+```bash
+Attack network successfully, uid: 4eab1e62-8d60-45cb-ac85-3c17b8ac4825
+```
+
 ### Network latency
 
-You can run the following command to see the configuration of simulated network latency using Chaosd:
+You can run the command below to see the configuration of simulated network latency using Chaosd.
+
+#### The command for network latency
+
+The command is as follows:
 
 ```bash
 chaosd attack network delay --help
@@ -118,6 +144,8 @@ Global Flags:
       --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
 ```
 
+#### Configuration items related to network latency
+
 The related configuration items are described as follows:
 
 | Configuration item | Abbreviation | Description | Value |
@@ -132,9 +160,27 @@ The related configuration items are described as follows:
 | protocol | p | The IP protocol impacted by traffic. | String. It supports the following protocol types: tcp, udp, icmp, all (all network protocols). |
 | source-port | s | The egress traffic that only impacts specified source ports. It can only be configured when the protocol is TCP or UDP. | String. You need to use a ',' to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
 
+#### An example of network latency
+
+Run the following command to simulate network latency:
+
+```bash
+chaosd attack network delay -d eth0 -i 172.16.4.4 -l 10ms
+```
+
+If the command runs successfully, the output is as follows:
+
+```bash
+Attack network successfully, uid: 4b23a0b5-e193-4b27-90a7-3e04235f32ab
+```
+
 ### Network duplication
 
-You can run the following command to see the configuration of simulated network duplication using Chaosd:
+You can run the command below to see the configuration of simulated network duplication using Chaosd:
+
+#### The command for network duplication
+
+The command is as follows:
 
 ```bash
 chaosd attack network duplicate --help
@@ -163,6 +209,8 @@ Global Flags:
       --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
 ```
 
+#### Configuration items related to network duplication
+
 The related configuration items are described as follows:
 
 | Configuration item | Abbreviation | Description | Value |
@@ -176,9 +224,27 @@ The related configuration items are described as follows:
 | protocol | p | The IP protocol impacted by traffic. | String. It supports the following protocol types: tcp, udp, icmp, all (all network protocols). |
 | source-port | s | The egress traffic which only impact specific source ports. It can only be configured when the protocol is tcp or udp. | String. You need to use a ',' to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
 
+#### An example of network duplication
+
+Run the following command to simulate network duplication:
+
+```bash
+chaosd attack network duplicate -d eth0 -i 172.16.4.4 --percent 50
+```
+
+If the command runs successfully, the output is as follows:
+
+```bash
+Attack network successfully, uid: 7bcb74ee-9101-4ae4-82f0-e44c8a7f113c
+```
+
 ### Network loss
 
-You can run the following command to see the configuration of simulated network loss using Chaosd:
+You can run the command below to see the configuration of simulated network loss using Chaosd:
+
+#### The command for network loss
+
+The command is as follows:
 
 ```bash
 chaosd attack network loss --help
@@ -207,6 +273,8 @@ Global Flags:
       --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
 ```
 
+#### Configuration items related to network loss
+
 The related configuration items are described as follows:
 
 | Configuration item | Abbreviation | Description | Value |
@@ -220,66 +288,18 @@ The related configuration items are described as follows:
 | protocol | p | Only impact traffic using this IP protocol. | String. It supports the following protocol types: tcp, udp, icmp, all (all network protocols). |
 | source-port | s | The egress traffic which only impact specific source ports. It can only be configured when the protocol is tcp or udp. | String. You need to use a ',' to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
 
-### Examples
+#### An example of network loss
 
-Simulate network corruption:
-
-```bash
-chaosd attack network corrupt -d eth0 -i 172.16.4.4 --percent 50
-```
-
-The output is as follows:
-
-```bash
-Attack network successfully, uid: 4eab1e62-8d60-45cb-ac85-3c17b8ac4825
-```
-
-Simulate network latency:
-
-```bash
-chaosd attack network delay -d eth0 -i 172.16.4.4 -l 10ms
-```
-
-The output is as follows:
-
-```bash
-Attack network successfully, uid: 4b23a0b5-e193-4b27-90a7-3e04235f32ab
-```
-
-Simulate network duplication:
-
-```bash
-chaosd attack network duplicate -d eth0 -i 172.16.4.4 --percent 50
-```
-
-The output is as follows:
-
-```bash
-Attack network successfully, uid: 7bcb74ee-9101-4ae4-82f0-e44c8a7f113c
-```
-
-Simulate network loss:
+Run the following command to simulate network loss:
 
 ```bash
 chaosd attack network loss -d eth0 -i 172.16.4.4 --percent 50
 ```
 
-The output is as follows:
+If the command runs successfully, the output is as follows:
 
 ```bash
 Attack network successfully, uid: 1e818adf-3942-4de4-949b-c8499f120265
-```
-
-When running the experiments, remember to save the uid of the experiments. To end a network fault simulation, use `recover`:
-
-```bash
-chaosd recover 1e818adf-3942-4de4-949b-c8499f120265
-```
-
-The output is as follows:
-
-```bash
-Recover 1e818adf-3942-4de4-949b-c8499f120265 successfully
 ```
 
 ## Create network fault experiments using service mode

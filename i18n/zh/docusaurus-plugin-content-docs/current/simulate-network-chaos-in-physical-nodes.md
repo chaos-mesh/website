@@ -4,9 +4,11 @@ title: 模拟网络故障
 
 本文主要介绍如何使用 Chaosd 模拟网络故障场景。该功能通过使用 iptables、ipsets、tc 等工具修改网络路由、流量控制来模拟网络故障。
 
-## 注意事项
+::: note 注意
 
 请确保 Linux 内核拥有 请确保 Linux 内核拥有 NET_SCH_NETEM 模块。对于 CentOS，可以通过 kernel-modules-extra 包安装该模块，大部分其他发行版已默认安装相应模块。
+
+:::
 
 ## 使用命令行模式创建网络故障实验
 
@@ -45,9 +47,11 @@ Use "chaosd attack network [command] --help" for more information about a comman
 
 ### 网络包错误
 
+通过运行网络包错误命令，可以查看模拟网络包错误场景支持的配置。
+
 #### 网络包错误命令
 
-可以运行以下命令，查看模拟网络包错误场景支持的配置：
+具体命令如下所示：
 
 ```bash
 chaosd attack network corrupt --help
@@ -93,15 +97,25 @@ Global Flags:
 
 #### 网络包错误示例
 
+运行以下命令，模拟网络包错误：
+
 ```bash
 chaosd attack network corrupt -d eth0 -i 172.16.4.4 --percent 50
 ```
 
+运行成功时，会输出以下结果：
+
+```bash
+Attack network successfully, uid: 4eab1e62-8d60-45cb-ac85-3c17b8ac4825
+```
+
 ### 网络包延迟
+
+通过运行网络包延迟命令，查看模拟网络延迟场景支持的配置。
 
 #### 网络包延迟命令
 
-可以运行以下命令，查看模拟网络延迟场景支持的配置：
+具体命令如下所示：
 
 ```bash
 chaosd attack network delay --help
@@ -149,15 +163,25 @@ Global Flags:
 
 #### 网络包延迟示例
 
+运行以下命令，模拟网络包延迟：
+
 ```bash
 chaosd attack network delay -d eth0 -i 172.16.4.4 -l 10ms
 ```
 
+运行成功时，会输出以下结果：
+
+```bash
+Attack network successfully, uid: 4b23a0b5-e193-4b27-90a7-3e04235f32ab
+```
+
 ### 网络包重复
+
+可以运行网络包重复命令，查看模拟网络包重复场景支持的配置：
 
 #### 网络包重复命令
 
-可以运行以下命令，查看模拟网络包重复场景支持的配置：
+具体命令如下所示：
 
 ```bash
 chaosd attack network duplicate --help
@@ -203,15 +227,25 @@ Global Flags:
 
 #### 网络包重复示例
 
+运行以下命令，模拟网络包重复：
+
 ```bash
 chaosd attack network duplicate -d eth0 -i 172.16.4.4 --percent 50
 ```
 
+运行成功时，会输出以下结果：
+
+```bash
+Attack network successfully, uid: 7bcb74ee-9101-4ae4-82f0-e44c8a7f113c
+```
+
 ### 网络包丢失
+
+可以运行网络包丢失命令，查看模拟网络包丢失场景支持的配置：
 
 #### 网络包丢失命令
 
-可以运行以下命令，查看模拟网络包丢失场景支持的配置：
+具体命令如下所示：
 
 ```bash
 chaosd attack network loss --help
@@ -257,15 +291,25 @@ Global Flags:
 
 #### 网络包丢失示例
 
+运行以下命令，模拟网络包丢失：
+
 ```bash
 chaosd attack network loss -d eth0 -i 172.16.4.4 --percent 50
 ```
 
+运行成功时，会输出以下结果：
+
+```bash
+Attack network successfully, uid: 1e818adf-3942-4de4-949b-c8499f120265
+```
+
 ### 网络分区
+
+可以运行网络分区命令，查看模拟网络分区场景支持的配置。
 
 #### 网络分区命令
 
-可以运行以下命令，查看模拟网络分区场景支持的配置：
+具体命令如下所示：
 
 ```bash
 chaosd attack network partition --help
@@ -314,9 +358,11 @@ Global Flags:
 
 ### DNS 故障
 
+可以运行 DNS 故障命令，查看模拟 DNS 故障场景支持的配置。
+
 #### DNS 故障命令
 
-可以运行以下命令，查看模拟 DNS 故障场景支持的配置：
+具体命令如下所示：
 
 ```bash
 chaosd attack network dns --help
@@ -369,6 +415,8 @@ Global Flags:
 
 ### 服务模式模拟网络包错误
 
+在使用服务模拟网络包错误时，请参考如下内容。
+
 #### 网络包错误相关参数说明
 
 相关参数说明如下所示：
@@ -392,6 +440,8 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 ```
 
 ### 服务模式模拟网络包延迟
+
+在使用服务模拟网络包延迟时，请参考如下内容。
 
 #### 网络包延迟相关参数说明
 
@@ -418,6 +468,8 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 
 ### 服务模式模拟网络包重复
 
+在使用服务模拟网络包重复时，请参考如下内容。
+
 #### 网络包重复相关参数说明
 
 相关参数说明如下所示：
@@ -441,6 +493,8 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 ```
 
 ### 服务模式模拟网络包丢失
+
+在使用服务模拟网络包丢失时，请参考如下内容。
 
 #### 网络包丢失相关参数说明
 
@@ -467,6 +521,8 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 
 ### 服务模式模拟网络分区
 
+在使用服务模拟网络分区时，请参考如下内容。
+
 #### 网络分区相关参数说明
 
 相关参数说明如下所示：
@@ -488,6 +544,8 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 ```
 
 ### 服务模式模拟 DNS 故障
+
+在使用服务模拟 DNS 故障时，请参考如下内容。
 
 #### DNS 故障相关参数说明
 
