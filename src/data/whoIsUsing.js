@@ -114,10 +114,6 @@ const whoisUsing = [
     },
   },
   {
-    name: 'SkyWalking',
-    img: 'img/logos/skywalking.svg'
-  },
-  {
     name: 'Tencent',
     img: 'img/logos/tencent.png',
     href: 'https://www.tencent.com/'
