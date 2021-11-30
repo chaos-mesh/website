@@ -18,6 +18,12 @@ PhysicalMachineChaos 可用于在物理或虚拟机中模拟网络、磁盘、�
 chaosd server --port 31767
 ```
 
+:::note 注意
+
+对于 Chaos Mesh 2.1.0 版本，请部署 Chaosd [1.1.0](https://github.com/chaos-mesh/chaosd/releases/tag/v1.1.0) 版本。
+
+:::
+
 ## 使用 Dashboard 方式创建实验
 
 1. 单击实验页面中的**新的实验**按钮创建实验：
