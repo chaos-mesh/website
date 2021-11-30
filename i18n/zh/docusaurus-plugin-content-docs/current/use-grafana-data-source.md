@@ -76,7 +76,7 @@ Data Source 插件会以事件的视角来观测 Chaos Mesh，以下几个选项
 - `Kind`: 通过类型（PodChaos, Schedule 等）进行过滤
 - `Limit`: 限制事件的数量
 
-它们将会作为参数被传递到 `/api/events` API 中。
+对这些选项的设置会作为参数被传递到 `/api/events` API 中。
 
 ## Annotations
 
