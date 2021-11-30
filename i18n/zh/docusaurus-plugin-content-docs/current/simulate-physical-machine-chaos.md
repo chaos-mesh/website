@@ -20,7 +20,7 @@ chaosd server --port 31767
 
 :::note 注意
 
-对于 Chaos Mesh v2.1 版本，请部署 Chaosd [v1.1](https://github.com/chaos-mesh/chaosd/releases/tag/v1.1.0) 版本。
+对于 Chaos Mesh 2.1.0 版本，请部署 Chaosd [1.1.0](https://github.com/chaos-mesh/chaosd/releases/tag/v1.1.0) 版本。
 
 :::
 
