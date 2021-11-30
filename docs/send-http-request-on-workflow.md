@@ -1,54 +1,58 @@
 ---
-title: Send HTTP Request on Workflow
+title: Send HTTP Requests on Workflow
 ---
 
 Chaos Mesh Workflow provides a `Task` node to support any workload, similar to Kubernetes `Job`. To make the user experience more convenient, Chaos Dashboard provides a template based on `Task` to create HTTP requests in WebUI.
 
+Chaos Mesh Workflow provides a `Task` node to support any workload, which function is similar to the `Job` in Kubernetes. To provide a better user experience, Chaos Dashboard provides a template based on `Task`. With this template, you can easily create HTTP requests in WebUI. This document describes how to create an HTTP request through Chaos Dashboard.
+
 :::note
 
-There is no workflow node with type `HTTPRequest` in Chaos Mesh Workflow. This feature is based on `Task` node, so that the user can send HTTP requests more easily.
+Chaos Mesh does *NOT* have the workflow node of the type `HTTPRequest`. This feature is based on `Task` node, and you can send HTTP requests more conveniently by using the feature.
 
 :::
 
 :::note
 
-This is an experimental feature, the configuration and behavior may change in the future.
+This feature is currently an experimental feature, so it is not recommended to use this feature in the production environment. The configuration and behavior of the feature might change in the future.
 
 :::
 
-## Create HTTP request through Chaos Dashboard
+## Create an HTTP request through Chaos Dashboard
 
-Take sending a message through Slack Webhook as an example, in Chaos Dashboard, you can create an HTTP request through the following steps:
+You can create an HTTP request in Chaos Dashboard as the following steps that take sending a message through Slack Webhook as an example.
 
-### 1. Create a workflow node with type `HTTPRequest`
+### Step 1. Create a workflow node with the type `HTTPRequest`
 
 Select "HTTP Request" as the task type:
 
 ![create-http-request-workflow-node](img/create-http-request-workflow-node.png)
 
-### 2. Configure HTTP request
+### Step 2. Configure an HTTP request
 
-Configure the node name as `send-slack-message`, the request URL as `https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX`, the request method as `POST`, and the request body as `{"text": "Hello, world."}` and check "For JSON content".
+Configure the followings:
+  - node name: `send-slack-message`
+  - request URL: `https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX`
+  - request method: `POST`
+  - request body: `{"text": "Hello, world."}` , then check "For JSON content".
 
 ![configure-http-request-workflow-node](img/configure-http-request-workflow-node.png)
 
-### 3. Submit the workflow node
+### Step 3. Submit the workflow node
 
-Click "Submit" button to view the task in preview window:
+Click the "Submit" button to see the task in the preview window:
 
 ![http-request-task-node-preview](img/http-request-task-node-preview.png)
 
-## Field Introduction
+## Field description
 
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
-| Name | string | Name of Workflow Node |  | Yes | `send-slack-message` |
-| URL | string | HTTP Request URL |  | Yes | `https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX` |
-| Method | string | HTTP Request Method |  | Yes | `POST` |
-| Body | string | HTTP Request Body |  | No | `{"text": "Hello, world."}` |
-| Follow 301/302 Location | boolean | "Follow 301/302 Location" corresponds to `curl`'s `-L` parameter. | `false` | No | `false` |
-| Json Content | boolean | "Json Content" would append HTTP request header with `Content-Type: application/json`. | `false` | No | `false` |
+| Name | string | Name of the workflow node |  | Yes | `send-slack-message` |
+| URL | string | URL of an HTTP request |  | Yes | `https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX` |
+| Method | string | Method of an HTTP request |  | Yes | `POST` |
+| Body | string | Body of an HTTP request |  | No | `{"text": "Hello, world."}` |
+| Follow 301/302 Location | boolean | The value of this parameter corresponds to the `-L` parameter of `curl`. | `false` | No | `false` |
+| Json Content | boolean | The parameter appends `Content-Type: application/json` to the header of an HTTP request. | `false` | No | `false` |
 
-:::note
-
-The generated task node's `name` field value is "name" with a `http-request` suffix.
+The value of the `name` field of the generated task node adds the suffix `http-request` to the end of "name".

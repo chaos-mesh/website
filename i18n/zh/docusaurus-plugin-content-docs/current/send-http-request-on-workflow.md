@@ -50,7 +50,7 @@ Chaos Mesh 中不存在属于 `HTTPRequest` 类型的工作流节点。本特性
 | URL | string | 请求地址 |  | 是 | `https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX` |
 | 方法 | string | 请求方法 |  | 是 | `POST` |
 | 请求体 | string | 请求体 |  | 否 | `{"text": "Hello, world."}` |
-| 跟随 301/302 跳转 | boolean | "跟随 301/302 跳转" 对应 `curl` 的 `-L` 参数 | `false` | 否 | `false` |
-| 为 JSON 内容 | boolean | "为 JSON 内容" 会为 HTTP 请求头中加入 `Content-Type: application/json` | `false` | 否 | `false` |
+| 跟随 301/302 跳转 | boolean | 该参数的值对应 `curl` 的 `-L` 参数 | `false` | 否 | `false` |
+| 为 JSON 内容 | boolean | 该参数会将`Content-Type: application/json` 添加至 HTTP 请求头 | `false` | 否 | `false` |
 
 生成的任务节点的 `name` 字段的值会把 `http-request` 后缀加到"名称"的后面。
