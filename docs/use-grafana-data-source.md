@@ -76,7 +76,7 @@ The Data Source plugin observes Chaos Mesh from the perspective of events. The f
 - `Kind`: Filter by kind (PodChaos, Schedule, and so on)
 - `Limit`: Limit the number of events
 
-These are passed as parameters to the `/api/events` API.
+The settings for these options are passed as parameters to the `/api/events` API.
 
 ## Annotations
 
