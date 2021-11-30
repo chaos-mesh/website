@@ -8,7 +8,7 @@ Chaos Mesh provides the TimeChaos experiment type. You can use this experiment t
 
 ::: note
 
-TimeChaos only affects the PID `1` process in the container's PID namespace, and child processes of the PID `1`. For example, one process started by `kubectl exec` would not be affected.
+TimeChaos only affects the PID `1` process in the PID namespace of the container, and child processes of the PID `1`. For example, the process started by `kubectl exec` does not be affected.
 
 :::
 
