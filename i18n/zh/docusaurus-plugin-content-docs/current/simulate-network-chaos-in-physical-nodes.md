@@ -331,7 +331,7 @@ Usage:
   chaosd attack network dns [flags]
 
 Flags:
-  -H, --dns-domain-name string   map this host to specified IP
+  -d, --dns-domain-name string   map this host to specified IP
   -i, --dns-ip string         map specified host to this IP address
       --dns-server string     update the DNS server in /etc/resolv.conf with this value (default "123.123.123.123")
   -h, --help                  help for dns
@@ -347,7 +347,7 @@ Global Flags:
 
 | 配置项      | 配置缩写 | 说明                                                               | 值                                                                          |
 | :---------- | :------- | :----------------------------------------------------------------- | :-------------------------------------------------------------------------- |
-| dns-domain-name | H        | 表示影响的域名。              | string 类型，例如："chaos-mesh.org" |
+| dns-domain-name | d        | 表示影响的域名。              | string 类型，例如："chaos-mesh.org" |
 | dns-ip      | i        | 表示将影响的域名映射到该地址。                                             | string 类型，例如 "123.123.123.123"                                        |
 | dns-server | 无        | 指定 DNS 服务地址。 | string 类型，默认值为 "123.123.123.123"         |
 
