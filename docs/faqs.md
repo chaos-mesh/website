@@ -13,12 +13,16 @@ No. Instead, you could use [`chaosd`](https://github.com/chaos-mesh/chaosd/) to 
 ### Q: I have deployed Chaos Mesh and created PodChaos experiments successfully, but I still failed in creating NetworkChaos/TimeChaos Experiment. The log is shown as below:
 
 ```console
-2020-06-18T01:05:26.207Z	ERROR	controllers.TimeChaos	failed to apply chaos on all pods	{"reconciler": "timechaos", "error": "rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial tcp xx.xx.xx.xx:xxxxx: connect: connection refused\""}
+2020-06-18T02:49:15.160Z ERROR controllers.TimeChaos failed to apply chaos on all pods {"reconciler": "timechaos", "error": "rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial tcp xx.xx.xx.xx:xxxx: connect: connection refused\""}
 ```
 
-You can use the `hostNetwork` parameter to fix this issue as follows:
+The reason is that `chaos-controller-manager` failed to connect to `chaos-daemon`. You need to first check the Pod network and its [policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/).
 
-<PickHelmVersion className="language-bash">{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n chaos-testing --version latest --set chaosDaemon.hostNetwork=true`}</PickHelmVersion>
+If everything is in order, maybe you can use the `hostNetwork` parameter to fix this problem as follows:
+
+<PickHelmVersion>{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n chaos-testing --version latest --set chaosDaemon.hostNetwork=true`}</PickHelmVersion>
+
+Reference: <https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/troubleshooting-kubeadm/#hostport-services-do-not-work>
 
 ### Q: The default administrator Google Cloud user account is forbidden to create chaos experiments. How to fix it?
 
@@ -55,9 +59,16 @@ roleRef:
 
 The `USER_ACCOUNT` above should be your Google Cloud user email.
 
+### Q: Daemon throws an error similar to `version 1.41 is too new. The maximum supported API version is 1.39`
+
+This indicates that the maximum API version that the Docker daemon can accept is `1.39`, but the client in `chaos-daemon` uses `1.41` by default. You can choose the following options to solve this problem:
+
+1. Upgrade your Docker to a newer version.
+2. Helm install/upgrade with `--set chaosDaemon.env.DOCKER_API_VERSION=1.39`.
+
 ## DNSChaos
 
-### Q: While trying to run DNSChaos in OpenShift, the problems regarding authorization blocked the process.
+### Q: While trying to run DNSChaos in OpenShift, the problems regarding authorization blocked the process
 
 If the error message is similar to the following:
 
@@ -73,7 +84,7 @@ oc adm policy add-scc-to-user privileged -n chaos-testing -z chaos-dns-server
 
 ## Installation
 
-### Q: While trying to install Chaos Mesh in OpenShift, the problems regarding authorization blocked the installation process.
+### Q: While trying to install Chaos Mesh in OpenShift, the problems regarding authorization blocked the installation process
 
 If the error message is similar to the following:
 

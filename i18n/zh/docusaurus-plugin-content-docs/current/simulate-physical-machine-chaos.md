@@ -143,4 +143,4 @@ JVM 应用使用 Byteman 配置触发故障，将 action 设置为 "jvm-rule-dat
 
 #### 时间偏移
 
-（正在持续更新中）
+模拟时间偏移故障，将 action 设置为 "clock"，对应的配置可参考[模拟时间故障相关参数说明](simulate-time-chaos-on-physical-nodes.md#模拟时间故障相关参数说明)。

@@ -228,7 +228,7 @@ Fill file /home/andrew/chaosd/bin/example623832242 successfully, uid: 097b4214-8
 #### 模拟磁盘读负载示例
 
 ```bash
-curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{"action":"read-payload","path":"/dev/zero", "process-num":7,"size":"1000G"}'
+curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{"action":"read-payload","path":"/dev/zero", "payload-process-num":7,"size":"1000G"}'
 ```
 
 输出结果如下所示：
@@ -255,7 +255,7 @@ curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/j
 #### 模拟磁盘写负载示例
 
 ```bash
-curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{"action":"write-payload","path":"/tmp/test", "process-num":7,"size":"1000G"}'
+curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{"action":"write-payload","path":"/tmp/test", "payload-process-num":7,"size":"1000G"}'
 ```
 
 输出如下所示：
@@ -282,7 +282,7 @@ curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/j
 #### 模拟磁盘填充示例
 
 ```bash
-curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{"action":"fill","path":"/tmp/test", "fill_by_fallocate":true,"percent":"50"}'
+curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{"action":"fill","path":"/tmp/test", "fill-by-fallocate":true,"percent":"50"}'
 ```
 
 输出如下所示：

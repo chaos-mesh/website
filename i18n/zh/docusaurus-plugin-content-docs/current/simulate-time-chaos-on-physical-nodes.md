@@ -75,6 +75,20 @@ chaosd attack clock -p $PID -t 11s
 | clockIds | []string | 指定时间偏移作用的时钟，详见 [clock_gettime documentation](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) 。 | `["CLOCK_REALTIME"]` | 否 | `["CLOCK_REALTIME", "CLOCK_MONOTONIC"]` |
 | pid | string | 进程的标识符。 | None | 是 | `1` |
 
-### 使用服务模式创建实验
+## 使用服务模式创建实验
 
-（正在持续更新中）
+### 模拟时间故障相关参数说明
+
+| 参数      | 说明    | 值       |
+| :---------- | :----------------------------------------------------------------- | :-------------------------------------------------------------------------- |
+| pid | 进程的标识符。 | int 类型 |
+| time-offset | 指定时间的偏移量。 | string 类型，例如："-5m" |
+| clock-ids-slice | 指定时间偏移作用的时钟，详见 [clock_gettime documentation](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) 。 | string 数组类型，默认为 `["CLOCK_REALTIME"]` |
+
+### 时间故障示例
+
+运行[快速使用](#快速使用)中的测试程序，使用以下命令创建时间故障：
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/clock -H "Content-Type:application/json" -d '{"pid":123, "time-offset":"11s"}'
+```

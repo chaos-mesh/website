@@ -14,7 +14,7 @@ module.exports = {
           type: 'category',
           label: 'Installation and Deployment',
           collapsed: false,
-          items: ['quick-start', 'production-installation-using-helm', 'offline-installation'],
+          items: ['quick-start', 'production-installation-using-helm', 'offline-installation', 'supported-releases'],
         },
         'manage-user-permissions',
         'configure-enabled-namespace',
@@ -74,6 +74,13 @@ module.exports = {
           ],
         },
       ],
+    },
+    {
+      type: 'category',
+      label: 'Authentication',
+      items: [
+        "gcp-authentication",
+      ]
     },
     // {
     //   type: 'category',

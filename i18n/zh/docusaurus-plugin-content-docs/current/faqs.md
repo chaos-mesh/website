@@ -2,81 +2,91 @@
 title: 常见问题解答 (FAQ)
 ---
 
-### Q: If I do not have Kubernetes clusters deployed, can I use Chaos Mesh to create chaos experiments?
+import PickHelmVersion from '@site/src/components/PickHelmVersion'
 
-No, you can not use Chaos Mesh in this case. But still you can run chaos experiments using command line. Refer to [Command Line Usages of Chaos](https://github.com/pingcap/tipocket/blob/master/doc/command_line_chaos.md) for details.
+## 问题
 
-### Q: I have deployed Chaos Mesh and created PodChaos experiments successfully, but I still failed in creating NetworkChaos/TimeChaos Experiment. The log is shown below:
+### Q: If I do not have deployed Kubernetes clusters, can I use Chaos Mesh to create chaos experiments?
+
+No. Instead, you could use [`chaosd`](https://github.com/chaos-mesh/chaosd/) to inject failures without kubernetes.
+
+### Q: I have deployed Chaos Mesh and created PodChaos experiments successfully, but I still failed in creating NetworkChaos/TimeChaos Experiment. The log is shown as below:
 
 ```console
-2020-06-18T01:05:26.207Z	ERROR	controllers.TimeChaos	failed to apply chaos on all pods	{"reconciler": "timechaos", "error": "rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial tcp xx.xx.xx.xx:xxxxx: connect: connection refused\""}
+2020-06-18T02:49:15.160Z ERROR controllers.TimeChaos failed to apply chaos on all pods {"reconciler": "timechaos", "error": "rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial tcp xx.xx.xx.xx:xxxx: connect: connection refused\""}
 ```
 
-You can try using the parameter: `hostNetwork`, as shown below:
+The reason is that `chaos-controller-manager` failed to connect to `chaos-daemon`. You need to first check the Pod network and its [policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/).
+
+If everything is in order, maybe you can use the `hostNetwork` parameter to fix this problem as follows:
+
+<PickHelmVersion>{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n chaos-testing --version latest --set chaosDaemon.hostNetwork=true`}</PickHelmVersion>
+
+Reference: <https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/troubleshooting-kubeadm/#hostport-services-do-not-work>
+
+### Q: The default administrator Google Cloud user account is forbidden to create chaos experiments. How to fix it?
+
+The default administrator Google Cloud user cannot be checked by `AdmissionReview`. You need to create an administrator role and assign the role to your account to grant the privilege of creating chaos experiments to it. For example:
 
 ```yaml
-# vim helm/chaos-mesh/values.yaml, change hostNetwork from false to true
-hostNetwork: true
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: role-cluster-manager-pdmas
+rules:
+  - apiGroups: ['']
+    resources: ['pods', 'namespaces']
+    verbs: ['get', 'watch', 'list']
+  - apiGroups:
+      - chaos-mesh.org
+    resources: ['*']
+    verbs: ['get', 'list', 'watch', 'create', 'delete', 'patch', 'update']
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: cluster-manager-binding
+  namespace: chaos-testing
+subjects:
+  # Google Cloud user account
+  - kind: User
+    name: USER_ACCOUNT
+roleRef:
+  kind: ClusterRole
+  name: role-cluster-manager-pdmas
+  apiGroup: rbac.authorization.k8s.io
 ```
 
-### Q: I just saw `ERROR: failed to get cluster internal kubeconfig: command "docker exec --privileged kind-control-plane cat /etc/kubernetes/admin.conf" failed with error: exit status 1` when installing Chaos Mesh with kind. How to fix it?
+The `USER_ACCOUNT` above should be your Google Cloud user email.
 
-You can try the following command to fix it:
+### Q: Daemon throws an error similar to `version 1.41 is too new. The maximum supported API version is 1.39`
+
+This indicates that the maximum API version that the Docker daemon can accept is `1.39`, but the client in `chaos-daemon` uses `1.41` by default. You can choose the following options to solve this problem:
+
+1. Upgrade your Docker to a newer version.
+2. Helm install/upgrade with `--set chaosDaemon.env.DOCKER_API_VERSION=1.39`.
+
+## DNSChaos
+
+### Q: While trying to run DNSChaos in OpenShift, the problems regarding authorization blocked the process
+
+If the error message is similar to the following:
 
 ```bash
-kind delete cluster
+Error creating: pods "chaos-dns-server-123aa56123-" is forbidden: unable to validate against any security context constraint: [spec.containers[0].securityContext.capabilities.add: Invalid value: "NET_BIND_SERVICE": capability may not be added]
 ```
 
-then deploy again.
-
-## Debug
-
-### Q: Experiment not working after chaos is applied
-
-You can debug as described below:
-
-Execute `kubectl describe` to check the specified chaos experiment resource.
-
-- If there are `NextStart` and `NextRecover` fields under `spec`, then the chaos will be triggered after `NextStart` is executed.
-
-- If there are no `NextStart` and `NextRecover`fields in `spec`, run the following command to get controller-manager's log and see whether there are errors in it.
-
-  ```bash
-  kubectl logs -n chaos-testing chaos-controller-manager-xxxxx (replace this with the name of the controller-manager) | grep "ERROR"
-  ```
-
-  For error message `no pod is selected`, run the following command to show the labels and check if the selector is desired.
-
-  ```bash
-  kubectl get pods -n yourNamespace --show-labels
-  ```
-
-If the above steps cannot solve the problem or you encounter other related errors in controller's log, [file an issue](https://github.com/chaos-mesh/chaos-mesh/issues) or message us in the #project-chaos-mesh channel in the [CNCF Slack](https://join.slack.com/t/cloud-native/shared_invite/zt-fyy3b8up-qHeDNVqbz1j8HDY6g1cY4w) workspace.
-
-## IOChaos
-
-### Q: Running chaosfs sidecar container failed, and log shows `pid file found, ensure docker is not running or delete /tmp/fuse/pid`
-
-The chaosfs sidecar container is continuously restarting, and you might see the following logs at the current sidecar container:
-
-```console
-2020-01-19T06:30:56.629Z	INFO	chaos-daemon	Init hookfs
-2020-01-19T06:30:56.630Z	ERROR	chaos-daemon	failed to create pid file	{"error": "pid file found, ensure docker is not running or delete /tmp/fuse/pid"}
-github.com/go-logr/zapr.(*zapLogger).Error
-```
-
-- **Cause**: Chaos Mesh uses Fuse to inject I/O failures. It fails if you specify an existing directory as the source path for chaos. This often happens when you try to reuse a persistent volume (PV) with the `Retain` reclaim policy to request a PersistentVolumeClaims (PVC) resource.
-- **Solution**: In this case, use the following command to change the reclaim policy to `Delete`:
+You need to add the privileged Security Context Constraints (SCC) to the `chaos-dns-server`.
 
 ```bash
-kubectl patch pv <your-pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Delete"}}'
+oc adm policy add-scc-to-user privileged -n chaos-testing -z chaos-dns-server
 ```
 
-## Install
+## 安装
 
-### Q: While trying to install chaos-mesh in OpenShift, tripped over problems regarding authorization.
+### Q: While trying to install Chaos Mesh in OpenShift, the problems regarding authorization blocked the installation process
 
-Message most looked like this:
+If the error message is similar to the following:
 
 ```bash
 Error creating: pods "chaos-daemon-" is forbidden: unable
@@ -94,5 +104,5 @@ Error creating: pods "chaos-daemon-" is forbidden: unable
 You need to add privileged scc to default.
 
 ```bash
-oc adm policy add-scc-to-user privileged -n chaos-testing -z default
+oc adm policy add-scc-to-user privileged -n chaos-testing -z chaos-daemon
 ```

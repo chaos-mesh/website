@@ -377,7 +377,7 @@ Usage:
   chaosd attack network dns [flags]
 
 Flags:
-  -H, --dns-domain-name string   map this host to specified IP
+  -d, --dns-domain-name string   map this host to specified IP
   -i, --dns-ip string         map specified host to this IP address
       --dns-server string     update the DNS server in /etc/resolv.conf with this value (default "123.123.123.123")
   -h, --help                  help for dns
