@@ -2,9 +2,13 @@
 title: Install Chaos Mesh using Helm (Recommended for Production Environments)
 ---
 
-import PickVersion from '@site/src/components/PickVersion' import PickHelmVersion from '@site/src/components/PickHelmVersion'
+import PickVersion from '@site/src/components/PickVersion'
 
-import VerifyInstallation from './common/verify-installation.md' import QuickRun from './common/quick-run.md'
+import PickHelmVersion from '@site/src/components/PickHelmVersion'
+
+import VerifyInstallation from './common/verify-installation.md'
+
+import QuickRun from './common/quick-run.md'
 
 This document describes how to install Chaos Mesh in the production environment.
 
