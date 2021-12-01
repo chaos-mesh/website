@@ -2,9 +2,13 @@
 title: 使用 Helm 安装（生产推荐）
 ---
 
-import PickVersion from '@site/src/components/PickVersion' import PickHelmVersion from '@site/src/components/PickHelmVersion'
+import PickVersion from '@site/src/components/PickVersion'
 
-import VerifyInstallation from './common/verify-installation.md' import QuickRun from './common/quick-run.md'
+import PickHelmVersion from '@site/src/components/PickHelmVersion'
+
+import VerifyInstallation from './common/verify-installation.md'
+
+import QuickRun from './common/quick-run.md'
 
 本篇文档描述如何在生产环境安装 Chaos Mesh。
 
