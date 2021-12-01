@@ -5,6 +5,7 @@ title: 离线安装
 import PickVersion from '@site/src/components/PickVersion'
 
 import VerifyInstallation from './common/verify-installation.md'
+
 import QuickRun from './common/quick-run.md'
 
 本篇文档描述如何离线安装 Chaos Mesh。

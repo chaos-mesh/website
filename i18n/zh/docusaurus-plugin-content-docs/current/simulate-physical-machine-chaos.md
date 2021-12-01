@@ -10,9 +10,9 @@ PhysicalMachineChaos 可用于在物理或虚拟机中模拟网络、磁盘、�
 
 ## 部署 Chaosd Server
 
-在使用 Chaos Mesh 创建 PhysicalMachineChaos 混沌实验前，你需要在待注入故障的所有物理机或虚拟机中部署服务模式的 chaosd。chaosd 的部署方法请参考 [chaosd 的下载和部署](chaosd-overview.md#下载和部署)。
+在使用 Chaos Mesh 创建 PhysicalMachineChaos 混沌实验前，你需要在待注入故障的所有物理机或虚拟机中部署服务模式的 Chaosd。Chaosd 的部署方法请参考 [Chaosd 的下载和部署](chaosd-overview.md#下载和部署)。
 
-在部署完成后，运行以下命令启动服务模式 chaosd：
+在部署完成后，运行以下命令启动服务模式 Chaosd：
 
 ```bash
 chaosd server --port 31767
@@ -43,6 +43,7 @@ chaosd server --port 31767
 ## 使用 YAML 方式创建实验
 
 1. 将实验配置写入到文件 `physicalmachine.yaml` 中，写入内容的示例如下：
+
    ```yaml
    apiVersion: chaos-mesh.org/v1alpha1
    kind: PhysicalMachineChaos
@@ -57,10 +58,10 @@ chaosd server --port 31767
        device: ens33
        ip-address: 140.82.112.3
        latency: 1000ms
-     duration: "10m"
+     duration: '10m'
    ```
 
-   该实验配置向指定物理机或虚拟机中的 chaosd 服务发送 HTTP 请求，触发网络延迟实验。
+   该实验配置向指定物理机或虚拟机中的 Chaosd 服务发送 HTTP 请求，触发网络延迟实验。
 
 2. 使用 kubectl 创建实验，命令如下：
 
@@ -70,11 +71,11 @@ chaosd server --port 31767
 
 ### 配置说明
 
-| 参数     | 类型        | 说明                    | 默认值 | 是否必填 | 示例                                         |
-| :------- | :---------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----- | :------- | :------------------------------------------- |
-| action   | string      | 定义物理机故障的行为，可选值为 "stress-cpu", "stress-mem", "disk-read-payload", "disk-write-payload", "disk-fill", "network-corrupt", "network-duplicate", "network-loss", "network-delay", "network-partition", "network-dns", "process", "jvm-exception", "jvm-gc", "jvm-latency", "jvm-return", "jvm-stress", "jvm-rule-data", "clock"              | 无     | 是       | "stress-cpu"                         |
-| address | string 数组 | 选择注入故障的 chaosd 服务地址        | []     | 是       | ["192.168.0.10:31767"]  |
-| duration       | string   | 指定实验的持续时间     | 无     | 是       | 30s            |
+| 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| action | string | 定义物理机故障的行为，可选值为 "stress-cpu", "stress-mem", "disk-read-payload", "disk-write-payload", "disk-fill", "network-corrupt", "network-duplicate", "network-loss", "network-delay", "network-partition", "network-dns", "process", "jvm-exception", "jvm-gc", "jvm-latency", "jvm-return", "jvm-stress", "jvm-rule-data", "clock" | 无 | 是 | "stress-cpu" |
+| address | string 数组 | 选择注入故障的 Chaosd 服务地址 | [] | 是 | ["192.168.0.10:31767"] |
+| duration | string | 指定实验的持续时间 | 无 | 是 | 30s |
 
 每种故障行为都有特定的配置。以下部分介绍各种故障类型以及对应的配置方法。
 
