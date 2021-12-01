@@ -30,7 +30,7 @@ module.exports = {
     },
     announcementBar: {
       content:
-        'Chaos Mesh 2.0 was released in July, 2021, see <a href="/blog/chaos-mesh-2.0-to-a-chaos-engineering-ecology">what\'s new</a>!',
+        'Chaos Mesh 2.1.0 was released 🎉, see <a href="https://github.com/chaos-mesh/chaos-mesh/releases/tag/v2.1.0" target="_blank">what\'s new</a>!',
       backgroundColor: '#37b5fb',
     },
     navbar: {
