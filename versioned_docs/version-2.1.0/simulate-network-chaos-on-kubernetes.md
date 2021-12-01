@@ -163,7 +163,7 @@ Setting `action` to `delay` means simulating network delay fault. You can also c
 | Parameter | Type | Description | Required | Required | Example |
 | --- | --- | --- | --- | --- | --- |
 | latency | string | Indicates the network latency | No | No | 2ms |
-| correlation | string | Indicates the correlation between the current latency and the previous one. | No | No | 0.5 |
+| correlation | string | Indicates the correlation between the current latency and the previous one. Range of value: [0, 100] | No | No | 50 |
 | jitter | string | Indicates the range of the network latency | No | No | 1ms |
 | reorder | Reorder(#Reorder) | Indicates the status of network packet reordering |  | No |  |
 
@@ -191,8 +191,8 @@ Setting `action` to `reorder` means simulating network packet reordering fault. 
 
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
-| reorder | string | Indicates the probability to reorder | 0 | No | 0.5 |
-| correlation | string | Indicates the correlation between this time's length of delay time and the previous time's length of delay time | 0 | No | 0.5 |
+| reorder | string | Indicates the probability to reorder. Range of value: [0, 100] | 0 | No | 50 |
+| correlation | string | Indicates the correlation between this time's length of delay time and the previous time's length of delay time. Range of value: [0, 100] | 0 | No | 50 |
 | gap | int | Indicates the gap before and after packet reordering | 0 | No | 5 |
 
 #### loss
@@ -201,8 +201,8 @@ Setting `action` to `loss` means simulating packet loss fault. You can also conf
 
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
-| loss | string | Indicates the probability of packet loss | 0 | No | 0.5 |
-| correlation | string | Indicates the correlation between the probability of current packet loss and the previous time's packet loss | 0 | No | 0.5 |
+| loss | string | Indicates the probability of packet loss. Range of value: [0, 100] | 0 | No | 50 |
+| correlation | string | Indicates the correlation between the probability of current packet loss and the previous time's packet loss. Range of value: [0, 100] | 0 | No | 50 |
 
 #### duplicate
 
@@ -210,8 +210,8 @@ Set `action` to `duplicate`, meaning simulating package duplication. At this poi
 
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
-| duplicate | string | Indicates the probability of packet duplicating | 0 | No | 0.5 |
-| correlation | string | Indicates the correlation between the probability of current packet duplicating and the previous time's packet duplicating | 0 | No | 0.5 |
+| duplicate | string | Indicates the probability of packet duplicating. Range of value: [0, 100] | 0 | No | 50 |
+| correlation | string | Indicates the correlation between the probability of current packet duplicating and the previous time's packet duplicating. Range of value: [0, 100] | 0 | No | 50 |
 
 #### corrupt
 
@@ -219,8 +219,8 @@ Setting `action` to `corrupt` means simulating package corruption fault. You can
 
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
-| corrupt | string | Indicates the probability of packet corruption | 0 | No | 0.5 |
-| correlation | string | Indicates the correlation between the probability of current packet corruption and the previous time's packet corruption | 0 | No | 0.5 |
+| corrupt | string | Indicates the probability of packet corruption. Range of value: [0, 100] | 0 | No | 50 |
+| correlation | string | Indicates the correlation between the probability of current packet corruption and the previous time's packet corruption. Range of value: [0, 100] | 0 | No | 50 |
 
 For occasional events such as `reorder`, `loss`, `duplicate`, and `corrupt`, the `correlation` is more complicated. For specific model description, refer to [NetemCLG](http://web.archive.org/web/20200120162102/http://netgroup.uniroma2.it/twiki/bin/view.cgi/Main/NetemCLG).
 
