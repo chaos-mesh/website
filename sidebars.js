@@ -14,7 +14,13 @@ module.exports = {
           type: 'category',
           label: 'Installation and Deployment',
           collapsed: false,
-          items: ['quick-start', 'production-installation-using-helm', 'offline-installation', 'supported-releases'],
+          items: [
+            'quick-start',
+            'production-installation-using-helm',
+            'offline-installation',
+            'uninstallation',
+            'supported-releases'
+          ],
         },
         'manage-user-permissions',
         'configure-enabled-namespace',

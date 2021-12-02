@@ -35,7 +35,7 @@ It means that Chaos Mesh has been installed as a helm release named `chaos-mesh-
 
 ### Step 3: Delete Helm Releases
 
-After determine the target release, you could delete the release by executing:
+After determine the target Helm Release, you could delete the Helm Release by executing:
 
 ```shell
 helm uninstall chaos-mesh-playground -n chaos-mesh
@@ -72,7 +72,7 @@ There are usually several kind of components as Chaos Mesh installed:
 - A `Deployment` called `chaos-dashboard`, the WebUI for Chaos Mesh.
 - A `Deployment` called `chaos-dns-server`, it is the DNS proxy server, only occurs with you enable the DNSChaos feature.
 
-So we could use kubectl to delete these workloads:
+You should remove these workload objects.
 
 Then delete their corresponding `Service`s:
 
