@@ -152,7 +152,7 @@ helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set dashboard.c
 目前，Helm 在升级时不会应用最新的 CustomResourceDefinition (CRD)，这可能会导致一些错误的发生。为了避免这种情况，请手动应用最新的 CRD：
 
 <PickVersion>
-curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl create -f -
+curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl replace -f -
 </PickVersion>
 
 :::
