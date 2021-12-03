@@ -57,9 +57,9 @@ docker save ghcr.io/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION} > image-cha
 
 在有外网连接的机器上，下载 Chaos Mesh 的 zip 包：
 
-```bash
+<PickVersion replaced="master" toGithubBranch>
 curl -fsSL -o chaos-mesh.zip https://github.com/chaos-mesh/chaos-mesh/archive/refs/heads/master.zip
-```
+</PickVersion>
 
 ### 拷贝文件
 
