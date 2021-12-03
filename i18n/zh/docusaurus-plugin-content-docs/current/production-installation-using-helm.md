@@ -95,6 +95,10 @@ helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set chaosDaemon
 helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock
 ```
 
+#### CRI-O
+
+<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set chaosDaemon.runtime=crio --set chaosDaemon.socketPath=/var/run/crio/crio.sock --version latest`}</PickHelmVersion>
+
 :::note 注意
 
 如要安装特定版本的 Chaos Mesh，请在 `helm install` 后添加 `--version xxx` 参数，如 `--version v2.0.0`。
