@@ -136,9 +136,7 @@ kubectl create ns chaos-testing
 
 ```bash
 helm install chaos-mesh helm/chaos-mesh -n=chaos-testing \
-  --set chaosDaemon.image=$CHAOS_DAEMON_IMAGE \
-  --set controllerManager.image=$CHAOS_MESH_IMAGE \
-  --set dashboard.image=$CHAOS_DASHBOARD_IMAGE
+  --set images.registry=$DOCKER_REGISTRY
 ```
 
 ## 验证安装
