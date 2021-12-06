@@ -26,7 +26,7 @@ The following walks you through an example of HelloWorldChaos, a new chaos exper
    )
 
    // +kubebuilder:object:root=true
-   // +chaos-mesh:base
+   // +chaos-mesh:experiment
    // +chaos-mesh:oneshot=true
 
    // HelloWorldChaos is the Schema for the helloworldchaos API
