@@ -22,7 +22,11 @@ export const usePickVersion = (siteConfig, versions) => {
   return activeVersion || latestStableVersion
 }
 
-const PickVersion = ({ children, replaced = 'latest', className = 'language-bash' }) => {
+function versionToGitHubRef(version) {
+  return version === 'latest' ? 'refs/heads/master' : `refs/tags/v${version}`
+}
+
+const PickVersion = ({ children, replaced = 'latest', isArchive = false, className = 'language-bash' }) => {
   const { siteConfig } = useDocusaurusContext()
   const { versions } = usePluginData('docusaurus-plugin-content-docs')
 
@@ -30,7 +34,11 @@ const PickVersion = ({ children, replaced = 'latest', className = 'language-bash
     <BrowserOnly>
       {() => {
         const version = usePickVersion(siteConfig, versions)
-        const rendered = version === 'latest' ? children : children.replace(replaced, 'v' + version)
+        const rendered = isArchive
+          ? children.replace(replaced, versionToGitHubRef(version))
+          : version === 'latest'
+          ? children
+          : children.replace(replaced, 'v' + version)
 
         return <CodeBlock className={className}>{rendered}</CodeBlock>
       }}
