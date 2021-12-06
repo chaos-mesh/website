@@ -135,10 +135,7 @@ kubectl create ns chaos-testing
 执行 Chaos Mesh 安装命令。在安装命令中，你需要指定 Chaos Mesh 的命名空间和各组件的镜像值：
 
 ```bash
-helm install chaos-mesh helm/chaos-mesh -n=chaos-testing \
-  --set chaosDaemon.image=$CHAOS_DAEMON_IMAGE \
-  --set controllerManager.image=$CHAOS_MESH_IMAGE \
-  --set dashboard.image=$CHAOS_DASHBOARD_IMAGE
+helm install chaos-mesh helm/chaos-mesh -n=chaos-testing --set images.registry=$DOCKER_REGISTRY
 ```
 
 ## 验证安装
