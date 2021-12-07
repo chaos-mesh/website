@@ -76,6 +76,12 @@ kubectl create ns chaos-testing
 
 ### 第 4 步：在不同环境下安装
 
+:::note 注意
+
+如果你正在安装在 Kubernetes 1.15(或更低版本) 中安装 Chaos Mesh，请手动安装 CRD。 细节请参考 [FAQ](./faqs.md#q-failed-to-install-chaos-mesh-with-message-no-matches-for-kind-customresourcedefinition-in-version-apiextensionsk8siov1)。
+
+:::
+
 由于不同容器运行时的守护进程所监听的 socket path 不同，在安装时需要设置不同的值，可以根据不同的环境来运行如下的安装命令。
 
 #### Docker

@@ -2,11 +2,9 @@
 title: Install Chaos Mesh using Helm (Recommended for Production Environments)
 ---
 
-import PickVersion from '@site/src/components/PickVersion'
-import PickHelmVersion from '@site/src/components/PickHelmVersion'
+import PickVersion from '@site/src/components/PickVersion' import PickHelmVersion from '@site/src/components/PickHelmVersion'
 
-import VerifyInstallation from './common/verify-installation.md'
-import QuickRun from './common/quick-run.md'
+import VerifyInstallation from './common/verify-installation.md' import QuickRun from './common/quick-run.md'
 
 This document describes how to install Chaos Mesh in the production environment.
 
@@ -73,6 +71,12 @@ kubectl create ns chaos-testing
 ```
 
 ### Step 4: Install Chaos Mesh in different environments
+
+:::note
+
+If you are trying to install Chaos Mesh on Kubernetes 1.15(or lower version), you need to manually install CRD first. For the detail: see [FAQ](./faqs.md#q-failed-to-install-chaos-mesh-with-message-no-matches-for-kind-customresourcedefinition-in-version-apiextensionsk8siov1).
+
+:::
 
 Because socket paths are listened to by the daemons of different running containers, you need to set different values for socket paths during installation. You can execute the following installation commands according to different environments.
 
