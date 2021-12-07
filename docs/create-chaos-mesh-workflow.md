@@ -24,6 +24,36 @@ The design of Chaos Mesh Workflow is, to some extent, inspired by Argo Workflows
 
 More workflow examples are available in the [Chaos Mesh GitHub repository](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples/workflow).
 
+## Create a workflow using Chaos Dashboard
+
+### Step 1. Open Chaos Dashboard, click **NEW WORKFLOW**
+
+![New Workflow](./img/new-workflow.png)
+
+### Step 2. Setup Basic Workflow Info
+
+![Workflow Info](./img/workflow-info.png)
+
+### Step 3. Configure the Workflow Nodes
+
+:::note
+
+Chaos Dashboard would create a predefined `Serial` node called `entry`, as the entry for this workflow.
+
+:::
+
+![Choose Task Type](./img/choose-task-type.png)
+
+For example, setup a podkill `PodChaos` called `kill-nginx`, as same as creating a normal chaos experiment.
+
+![Create podkill in Workflow](./img/create-podkill-in-workflow.png)
+
+### Step 4. Submit Workflow
+
+You could check workflow definition with "Preview", and click "SUBMIT WORKFLOW" to create the workflow.
+
+![Submit Workflow](./img/submit-workflow.png)
+
 ## Create a workflow using a YAML file and `kubectl`
 
 Similar to various types of Chaos objects, workflows also exist in a Kubernetes cluster as a CRD. You can create a Chaos Mesh workflow using `kubectl create -f <workflow.yaml>`. The following command is an example of creating a workflow. Create a workflow using a local YAML file:
@@ -133,33 +163,33 @@ It is flexible to create a workflow using a YAML file and `kubectl`. You can nes
 
 ### Workflow field description
 
-| Parameter | Type       | Description                                                                                                                               | Default value | Required | Example |
-| --------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------- | -------- | ------- |
-| entry     | string     | Declares the entry of the workflow. Its value is a name of a template.                                                                    | None          | Yes      |         |
-| templates | []Template | Declares the behavior of each step executable in the workflow. See [Template field description](#template-field-description) for details. | None          | Yes      |         |
+| Parameter | Type | Description | Default value | Required | Example |
+| --- | --- | --- | --- | --- | --- |
+| entry | string | Declares the entry of the workflow. Its value is a name of a template. | None | Yes |  |
+| templates | []Template | Declares the behavior of each step executable in the workflow. See [Template field description](#template-field-description) for details. | None | Yes |  |
 
 ### Template field description
 
-| Parameter           | Type                | Description                                                                                                                                                                                                                         | Default value | Required | Example                                            |
-| ------------------- | ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | -------- | -------------------------------------------------- |
-| name                | string              | The name of the template, which needs to meet the DNS-1123 requirements.                                                                                                                                                            | None          | Yes      | any-name                                           |
-| type                | string              | Type of template. Value options are Task, Serial, Parallel, Suspend, Schedule, AWSChaos, DNSChaos, GCPChaos, HTTPChaos, IOChaos, JVMChaos, KernelChaos, NetworkChaos, PodChaos, StressChaos, and TimeChaos.                         | None          | Yes      | PodChaos                                           |
-| deadline            | string              | The duration of the template.                                                                                                                                                                                                       | None          | No       | '5m30s'                                            |
-| children            | []string            | Declares the subtasks under this template. You need to configure this field when the type is `Serial` or `Parallel`.                                                                                                                | None          | No       | ["any-chaos-1", "another-serial-2", "any-shcedue"] |
-| task                | Task                | Configures the customized task. You need to configure this field when the type is `Task`. See the [Task field description](#task-field-description) for details.                                                                    | None          | No       |                                                    |
-| conditionalBranches | []ConditionalBranch | Configures the conditional branch which executes after customized task. You need to configure this field when the type is `Task`. See the [Conditional branch field description](#conditionalbranch-field-description) for details. | None          | No       |                                                    |
-| awsChaos            | object              | Configures AWSChaos. You need to configure this field when the type is `AWSChaos`. See the [Simulate AWS Faults](simulate-aws-chaos.md) document for details.                                                                       | None          | No       |                                                    |
-| dnsChaos            | object              | Configures DNSChaos. You need to configure this field when the type is `DNSChaos`. See the [Simulate DNS Faults](simulate-dns-chaos-on-kubernetes.md) document for details.                                                         | None          | No       |                                                    |
-| gcpChaos            | object              | Configures GCPChaos. You need to configure this field when the type is `GCPChaos`.See the [Simulation GCP Faults](simulate-gcp-chaos.md) document for details.                                                                      | None          | No       |                                                    |
-| httpChaos           | object              | Configures HTTPChaos. You need to configure this field when the type is `HTTPChaos`. See the [Simulate HTTP Faults](simulate-http-chaos-on-kubernetes.md) document for details.                                                     | None          | No       |                                                    |
-| ioChaos             | object              | Configure IOChaos. You need to configure this field when the type is `IOChaos`. See the [Simulate File I/O Faults](simulate-io-chaos-on-kubernetes.md) document for details.                                                        | None          | No       |                                                    |
-| jvmChaos            | object              | Configures JVMChaos. You need to configure this field when the type is `JVMChaos`. See the [Simulate JVM Application Faults](simulate-jvm-application-chaos.md) document for details.                                               | None          | No       |                                                    |
-| kernelChaos         | object              | Configure KernelChaos. You need to configure this field when the type is `KernelChaos`. See the [Simulate Kernel Faults](simulate-kernel-chaos-on-kubernetes.md) document for details.                                              | None          | No       |                                                    |
-| networkChaos        | object              | Configures NetworkChaos. You need to configure this field when the type is `NetworkChaos`. See the [Simulate AWS Faults](simulate-aws-chaos.md) document for details.                                                               | None          | No       |                                                    |
-| podChaos            | object              | Configures PodChaosd. You need to configure this field when the type is `PodChaosd`. See the [Simulate Network Faults](simulate-network-chaos-on-kubernetes.md) document for details.                                               | None          | No       |                                                    |
-| stressChao          | object              | Configures StressChaos. You need to configure this field when the type is `StressChaos`. See the [Simulate Heavy Stress on Kubernetes](simulate-heavy-stress-on-kubernetes.md) document for details.                                | None          | No       |                                                    |
-| timeChaos           | object              | Configures TimeChaos. You need to configure this field when the type is `TimeChaos`. See the [SImulate Time Faults](simulate-time-chaos-on-kubernetes.md) document for details.                                                     | None          | No       |                                                    |
-| schedule            | object              | Configures Schedule. You need to configure this field when the type is `Schedule`. See the [Define Scheduling Rules](define-scheduling-rules.md) document for details.                                                              | None          | No       |                                                    |
+| Parameter | Type | Description | Default value | Required | Example |
+| --- | --- | --- | --- | --- | --- |
+| name | string | The name of the template, which needs to meet the DNS-1123 requirements. | None | Yes | any-name |
+| type | string | Type of template. Value options are Task, Serial, Parallel, Suspend, Schedule, AWSChaos, DNSChaos, GCPChaos, HTTPChaos, IOChaos, JVMChaos, KernelChaos, NetworkChaos, PodChaos, StressChaos, and TimeChaos. | None | Yes | PodChaos |
+| deadline | string | The duration of the template. | None | No | '5m30s' |
+| children | []string | Declares the subtasks under this template. You need to configure this field when the type is `Serial` or `Parallel`. | None | No | ["any-chaos-1", "another-serial-2", "any-shcedue"] |
+| task | Task | Configures the customized task. You need to configure this field when the type is `Task`. See the [Task field description](#task-field-description) for details. | None | No |  |
+| conditionalBranches | []ConditionalBranch | Configures the conditional branch which executes after customized task. You need to configure this field when the type is `Task`. See the [Conditional branch field description](#conditionalbranch-field-description) for details. | None | No |  |
+| awsChaos | object | Configures AWSChaos. You need to configure this field when the type is `AWSChaos`. See the [Simulate AWS Faults](simulate-aws-chaos.md) document for details. | None | No |  |
+| dnsChaos | object | Configures DNSChaos. You need to configure this field when the type is `DNSChaos`. See the [Simulate DNS Faults](simulate-dns-chaos-on-kubernetes.md) document for details. | None | No |  |
+| gcpChaos | object | Configures GCPChaos. You need to configure this field when the type is `GCPChaos`.See the [Simulation GCP Faults](simulate-gcp-chaos.md) document for details. | None | No |  |
+| httpChaos | object | Configures HTTPChaos. You need to configure this field when the type is `HTTPChaos`. See the [Simulate HTTP Faults](simulate-http-chaos-on-kubernetes.md) document for details. | None | No |  |
+| ioChaos | object | Configure IOChaos. You need to configure this field when the type is `IOChaos`. See the [Simulate File I/O Faults](simulate-io-chaos-on-kubernetes.md) document for details. | None | No |  |
+| jvmChaos | object | Configures JVMChaos. You need to configure this field when the type is `JVMChaos`. See the [Simulate JVM Application Faults](simulate-jvm-application-chaos.md) document for details. | None | No |  |
+| kernelChaos | object | Configure KernelChaos. You need to configure this field when the type is `KernelChaos`. See the [Simulate Kernel Faults](simulate-kernel-chaos-on-kubernetes.md) document for details. | None | No |  |
+| networkChaos | object | Configures NetworkChaos. You need to configure this field when the type is `NetworkChaos`. See the [Simulate AWS Faults](simulate-aws-chaos.md) document for details. | None | No |  |
+| podChaos | object | Configures PodChaosd. You need to configure this field when the type is `PodChaosd`. See the [Simulate Network Faults](simulate-network-chaos-on-kubernetes.md) document for details. | None | No |  |
+| stressChao | object | Configures StressChaos. You need to configure this field when the type is `StressChaos`. See the [Simulate Heavy Stress on Kubernetes](simulate-heavy-stress-on-kubernetes.md) document for details. | None | No |  |
+| timeChaos | object | Configures TimeChaos. You need to configure this field when the type is `TimeChaos`. See the [SImulate Time Faults](simulate-time-chaos-on-kubernetes.md) document for details. | None | No |  |
+| schedule | object | Configures Schedule. You need to configure this field when the type is `Schedule`. See the [Define Scheduling Rules](define-scheduling-rules.md) document for details. | None | No |  |
 
 :::note
 
@@ -169,17 +199,17 @@ When creating a Chaos with a duration in the workflow, you need to fill the dura
 
 ### Task field description
 
-| Parameter | Type   | Description                                                                                                                                                                                                                                                                                              | Default value | Required | Example |
-| --------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | -------- | ------- |
-| container | object | Defines a customized task container. See [Container field description](#container-field-description) for details.                                                                                                                                                                                        | None          | No       |         |
-| volumes   | array  | If you need to mount a volume in a customized task container, you need to declare the volume in this field. For the detailed definition of a volume, see the [Kubernetes documentation - corev1.Volume](https://v1-17.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.17/#volume-v1-core). | None          | No       |         |
+| Parameter | Type | Description | Default value | Required | Example |
+| --- | --- | --- | --- | --- | --- |
+| container | object | Defines a customized task container. See [Container field description](#container-field-description) for details. | None | No |  |
+| volumes | array | If you need to mount a volume in a customized task container, you need to declare the volume in this field. For the detailed definition of a volume, see the [Kubernetes documentation - corev1.Volume](https://v1-17.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.17/#volume-v1-core). | None | No |  |
 
 ### Conditional branch field description
 
-| Parameter  | Type   | Description                                                                                                                                                                                                                                                            | Default value | Required | Example       |
-| ---------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | -------- | ------------- |
-| target     | string | The name of the template to be executed by the current conditional branch.                                                                                                                                                                                             | None          | Yes      | another-chaos |
-| expression | string | The type is a boolean expression. When a customized task is completed and the expression value is true, the current condition branch is executed. When this value is not set, the conditional branch will be executed directly after the customized task is completed. | None          | No       | exitCode == 0 |
+| Parameter | Type | Description | Default value | Required | Example |
+| --- | --- | --- | --- | --- | --- |
+| target | string | The name of the template to be executed by the current conditional branch. | None | Yes | another-chaos |
+| expression | string | The type is a boolean expression. When a customized task is completed and the expression value is true, the current condition branch is executed. When this value is not set, the conditional branch will be executed directly after the customized task is completed. | None | No | exitCode == 0 |
 
 Currently, two context variables are provided in `expression`:
 
@@ -194,8 +224,8 @@ Refer to [this document](https://github.com/antonmedv/expr/blob/master/docs/Lang
 
 The following table only lists the commonly used fields. For the definitions of more fields, see [Kubernetes documentation - core1.Container](https://v1-17.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.17/#container-v1-core).
 
-| Parameter | Type     | Description        | Default value | Required | Example                                           |
-| --------- | -------- | ------------------ | ------------- | -------- | ------------------------------------------------- |
-| name      | string   | Container name     | None          | Yes      | task                                              |
-| image     | string   | Image name         | None          | Yes      | busybox:latest                                    |
-| command   | []string | Container commands | None          | No       | `["wget", "-q", "http://httpbin.org/status/201"]` |
+| Parameter | Type | Description | Default value | Required | Example |
+| --- | --- | --- | --- | --- | --- |
+| name | string | Container name | None | Yes | task |
+| image | string | Image name | None | Yes | busybox:latest |
+| command | []string | Container commands | None | No | `["wget", "-q", "http://httpbin.org/status/201"]` |
