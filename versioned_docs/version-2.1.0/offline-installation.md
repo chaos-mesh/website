@@ -127,6 +127,12 @@ Unpack the zip package of Chaos Mesh:
 unzip chaos-mesh.zip -d chaos-mesh && cd chaos-mesh
 ```
 
+:::note
+
+If you are trying to install Chaos Mesh on Kubernetes 1.15(or lower version), you need to manually install CRD first by `kubectl create -f manifests/crd-v1beta1.yaml`. For the detail: see [FAQ](./faqs.md#q-failed-to-install-chaos-mesh-with-message-no-matches-for-kind-customresourcedefinition-in-version-apiextensionsk8siov1).
+
+:::
+
 Create the namespace:
 
 ```bash

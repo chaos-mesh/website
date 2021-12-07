@@ -126,6 +126,12 @@ docker push $CHAOS_DASHBOARD_IMAGE
 unzip chaos-mesh.zip -d chaos-mesh && cd chaos-mesh
 ```
 
+:::note 注意
+
+如果你正在安装在 Kubernetes 1.15(或更低版本) 中安装 Chaos Mesh，请通过 `kubectl create -f manifests/crd-v1beta1.yaml` 手动安装 CRD。 细节请参考 [FAQ](./faqs.md#q-failed-to-install-chaos-mesh-with-message-no-matches-for-kind-customresourcedefinition-in-version-apiextensionsk8siov1)。
+
+:::
+
 创建命名空间：
 
 ```bash
