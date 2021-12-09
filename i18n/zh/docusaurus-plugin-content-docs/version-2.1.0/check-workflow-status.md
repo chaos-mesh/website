@@ -2,9 +2,15 @@
 title: 检查 Workflow 状态
 ---
 
-<!-- ## 通过 Chaos Dashboard 检查 Workflow 状态 -->
+## 通过 Chaos Dashboard 检查 Workflow 状态
 
-<!-- TODO: 待 Chaos Dashboard 完善后补充这一部分 -->
+1. 在 Chaos Dashboard 中列出所有的 Workflow。
+
+![List Workflow On Dashboard](./img/list-workflow-on-dashboard.png)
+
+2. 选择你想要检查的 Workflow，显示 Workflow 的详细信息。
+
+![Workflow Status On Dashboard](./img/workflow-status-on-dashboard.png)
 
 ## 通过 `kubectl` 检查 Workflow 状态
 
