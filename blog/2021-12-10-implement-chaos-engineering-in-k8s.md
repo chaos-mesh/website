@@ -711,6 +711,504 @@ This example uses the manager. This mode prevents the cache mechanism from repet
 
 1. Get the Pod.
 
+2. Get the `
+In the controller of the PodIoChaos resource, Controller Manager encapsulates the resource into parameters and calls the Chaos Daemon interface to process the parameters.
+
+```go
+
+// Apply flushes io configuration on pod
+
+func (h *Handler) Apply(ctx context.Context, chaos *v1alpha1.PodIoChaos) error {
+
+   h.Log.Info("updating io chaos", "pod", chaos.Namespace+"/"+chaos.Name, "spec", chaos.Spec)
+
+   ...
+
+   res, err := pbClient.ApplyIoChaos(ctx, &pb.ApplyIoChaosRequest{
+
+       Actions:     input,
+
+       Volume:      chaos.Spec.VolumeMountPath,
+
+       ContainerId: containerID,
+
+       Instance:  chaos.Spec.Pid,
+
+       StartTime: chaos.Spec.StartTime,
+
+   })
+
+   if err != nil {
+
+       return err
+
+   }
+
+   chaos.Spec.Pid = res.Instance
+
+   chaos.Spec.StartTime = res.StartTime
+
+   chaos.OwnerReferences = []metav1.OwnerReference{
+
+       {
+
+           APIVersion: pod.APIVersion,
+
+           Kind:       pod.Kind,
+
+           Name:       pod.Name,
+
+           UID:        pod.UID,
+
+       },
+
+   }
+
+   return nil
+
+}
+
+```
+
+The `pkg/chaosdaemon/iochaos_server.go` file processes IOChaos. ​​In this file, a FUSE program needs to be injected into the container. As discussed in issue [#2305](https://github.com/chaos-mesh/chaos-mesh/issues/2305) on GitHub, the `/usr/local/bin/nsexec -l- p /proc/119186/ns/pid -m /proc/119186/ns/mnt - /usr/local/bin/toda --path /tmp --verbose info` command is executed to run the toda program under the same namespace as the Pod.
+
+```go
+
+func (s *DaemonServer) ApplyIOChaos(ctx context.Context, in *pb.ApplyIOChaosRequest) (*pb.ApplyIOChaosResponse, error) {
+
+   ...
+
+   pid, err := s.crClient.GetPidFromContainerID(ctx, in.ContainerId)
+
+   if err != nil {
+
+       log.Error(err, "error while getting PID")
+
+       return nil, err
+
+   }
+
+   args := fmt.Sprintf("--path %s --verbose info", in.Volume)
+
+   log.Info("executing", "cmd", todaBin+" "+args)
+
+   processBuilder := bpm.DefaultProcessBuilder(todaBin, strings.Split(args, " ")...).
+
+       EnableLocalMnt().
+
+       SetIdentifier(in.ContainerId)
+
+   if in.EnterNS {
+
+       processBuilder = processBuilder.SetNS(pid, bpm.MountNS).SetNS(pid, bpm.PidNS)
+
+   }
+
+   ...
+
+   // Calls JSON RPC
+
+   client, err := jrpc.DialIO(ctx, receiver, caller)
+
+   if err != nil {
+
+       return nil, err
+
+   }
+
+   cmd := processBuilder.Build()
+
+   procState, err := s.backgroundProcessManager.StartProcess(cmd)
+
+   if err != nil {
+
+       return nil, err
+
+   }
+
+   ...
+
+}
+
+```
+
+The following code sample builds the running commands. These commands are the underlying namespace isolation implementation of runc:
+
+```go
+
+// GetNsPath returns corresponding namespace path
+
+func GetNsPath(pid uint32, typ NsType) string {
+
+   return fmt.Sprintf("%s/%d/ns/%s", DefaultProcPrefix, pid, string(typ))
+
+}
+
+// SetNS sets the namespace of the process
+
+func (b *ProcessBuilder) SetNS(pid uint32, typ NsType) *ProcessBuilder {
+
+   return b.SetNSOpt([]nsOption{{
+
+       Typ:  typ,
+
+       Path: GetNsPath(pid, typ),
+
+   }})
+
+}
+
+// Build builds the process
+
+func (b *ProcessBuilder) Build() *ManagedProcess {
+
+   args := b.args
+
+   cmd := b.cmd
+
+   if len(b.nsOptions) > 0 {
+
+       args = append([]string{"--", cmd}, args...)
+
+       for _, option := range b.nsOptions {
+
+           args = append([]string{"-" + nsArgMap[option.Typ], option.Path}, args...)
+
+       }
+
+       if b.localMnt {
+
+           args = append([]string{"-l"}, args...)
+
+       }
+
+       cmd = nsexecPath
+
+   }
+
+   ...
+
+}
+
+```
+
+## Control plane
+
+Chaos Mesh is an open-source chaos engineering system under the Apache 2.0 protocol. As discussed above, it has rich capabilities and a good ecosystem. The maintenance team developed the [`chaos-mesh/toda`](https://github.com/chaos-mesh/toda) FUSE based on the chaos system, the [`chaos-mesh/k8s_dns_chaos`](https://github.com/chaos-mesh/k8s_dns_chaos) CoreDNS chaos plug-in, and Berkeley Packet Filter (BPF)-based kernel error injection [`chaos-mesh/bpfki`](https://github.com/chaos-mesh/bpfki).
+
+Now, I'll describe the server side code required to build an end-user-oriented chaos engineering platform. This implementation is only an example—not necessarily the best example. If you want to see the development practice on a real world platform, you can refer to Chaos Mesh's [Dashboard](https://github.com/chaos-mesh/chaos-mesh/tree/master/pkg/dashboard). It uses the [`uber-go/fx`](https://github.com/uber-go/fx) dependency injection framework and the controller runtime's manager mode.
+
+### Key Chaos Mesh features
+
+As shown in the Chaos Mesh workflow below, we need to implement a server that sends YAML to the Kubernetes API. Chaos Controller Manager implements complex rule verification and rule delivery to Chaos Daemon. If you want to use Chaos Mesh with your own platform, you only need to connect to the process of creating CRD resources.
+
+![Chaos Mesh's basic workflow](media/chaos-mesh-basic-workflow.jpg)
+<div class="caption-center"> Chaos Mesh's basic workflow </div>
+
+Let's take a look at the example on the Chaos Mesh website:
+
+```go
+
+import (
+
+   "context"
+
+   "github.com/pingcap/chaos-mesh/api/v1alpha1"
+
+   "sigs.k8s.io/controller-runtime/pkg/client"
+
+)
+
+func main() {
+
+   ...
+
+   delay := &chaosv1alpha1.NetworkChaos{
+
+       Spec: chaosv1alpha1.NetworkChaosSpec{...},
+
+   }
+
+   k8sClient := client.New(conf, client.Options{ Scheme: scheme.Scheme })
+
+   k8sClient.Create(context.TODO(), delay)
+
+   k8sClient.Delete(context.TODO(), delay)
+
+}
+
+```
+
+Chaos Mesh provides APIs corresponding to all CRDs. We use the [controller-runtime](https://github.com/kubernetes-sigs/controller-runtime) developed by Kubernetes [API Machinery SIG](https://github.com/kubernetes/community/tree/master/sig-api-machinery) to simplify the interaction with the Kubernetes API.
+
+### Inject chaos
+
+Suppose we want to create a `PodKill` resource by calling a program. After the resource is sent to the Kubernetes API server, it passes Chaos Controller Manager's [validating admission controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/) to verify data. When we create a chaos experiment, if the admission controller fails to verify the input data, it returns an error to the client. For specific parameters, you can read [Create experiments using YAML configuration files](https://chaos-mesh.org/docs/simulate-pod-chaos-on-kubernetes/#create-experiments-using-yaml-configuration-files).
+
+`NewClient` creates a Kubernetes API client. You can refer to this example:
+
+```go
+
+package main
+
+import (
+
+   "context"
+
+   "controlpanel"
+
+   "log"
+
+   "github.com/chaos-mesh/chaos-mesh/api/v1alpha1"
+
+   "github.com/pkg/errors"
+
+   metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+
+)
+
+func applyPodKill(name, namespace string, labels map[string]string) error {
+
+   cli, err := controlpanel.NewClient()
+
+   if err != nil {
+
+       return errors.Wrap(err, "create client")
+
+   }
+
+   cr := &v1alpha1.PodChaos{
+
+       ObjectMeta: metav1.ObjectMeta{
+
+           GenerateName: name,
+
+           Namespace:    namespace,
+
+       },
+
+       Spec: v1alpha1.PodChaosSpec{
+
+           Action: v1alpha1.PodKillAction,
+
+           ContainerSelector: v1alpha1.ContainerSelector{
+
+               PodSelector: v1alpha1.PodSelector{
+
+                   Mode: v1alpha1.OnePodMode,
+
+                   Selector: v1alpha1.PodSelectorSpec{
+
+                       Namespaces:     []string{namespace},
+
+                       LabelSelectors: labels,
+
+                   },
+
+               },
+
+           },
+
+       },
+
+   }
+
+   if err := cli.Create(context.Background(), cr); err != nil {
+
+       return errors.Wrap(err, "create podkill")
+
+   }
+
+   return nil
+
+}
+
+```
+
+The log output of the running program is:
+
+```bash
+
+I1021 00:51:55.225502   23781 request.go:665] Waited for 1.033116256s due to client-side throttling, not priority and fairness, request: GET:https://***
+
+2021/10/21 00:51:56 apply podkill
+
+```
+
+Use kubectl to check the status of the `PodKill` resource:
+
+```bash
+
+$ k describe podchaos.chaos-mesh.org -n dev podkillvjn77
+
+Name:         podkillvjn77
+
+Namespace:    dev
+
+Labels:       <none>
+
+Annotations:  <none>
+
+API Version:  chaos-mesh.org/v1alpha1
+
+Kind:         PodChaos
+
+Metadata:
+
+ Creation Timestamp:  2021-10-20T16:51:56Z
+
+ Finalizers:
+
+   chaos-mesh/records
+
+ Generate Name:     podkill
+
+ Generation:        7
+
+ Resource Version:  938921488
+
+ Self Link:         /apis/chaos-mesh.org/v1alpha1/namespaces/dev/podchaos/podkillvjn77
+
+ UID:               afbb40b3-ade8-48ba-89db-04918d89fd0b
+
+Spec:
+
+ Action:        pod-kill
+
+ Grace Period:  0
+
+ Mode:          one
+
+ Selector:
+
+   Label Selectors:
+
+     app:  nginx
+
+   Namespaces:
+
+     dev
+
+Status:
+
+ Conditions:
+
+   Reason: 
+
+   Status:  False
+
+   Type:    Paused
+
+   Reason: 
+
+   Status:  True
+
+   Type:    Selected
+
+   Reason: 
+
+   Status:  True
+
+   Type:    AllInjected
+
+   Reason: 
+
+   Status:  False
+
+   Type:    AllRecovered
+
+ Experiment:
+
+   Container Records:
+
+     Id:            dev/nginx
+
+     Phase:         Injected
+
+     Selector Key:  .
+
+   Desired Phase:   Run
+
+Events:
+
+ Type    Reason           Age    From          Message
+
+ ----    ------           ----   ----          -------
+
+ Normal  FinalizerInited  6m35s  finalizer     Finalizer has been inited
+
+ Normal  Updated          6m35s  finalizer     Successfully update finalizer of resource
+
+ Normal  Updated          6m35s  records       Successfully update records of resource
+
+ Normal  Updated          6m35s  desiredphase  Successfully update desiredPhase of resource
+
+ Normal  Applied          6m35s  records       Successfully apply chaos for dev/nginx
+
+ Normal  Updated          6m35s  records       Successfully update records of resource
+
+```
+
+The control plane also needs to query and acquire Chaos resources, so that platform users can view all chaos experiments' implementation status and manage them. To achieve this, we can call the `REST` API to send the `Get` or `List` request. But in practice, we need to pay attention to the details. At our company, we've noticed that each time the controller requests the full amount of resource data, the load of the Kubernetes API server increases.
+
+I recommend that you read the [How to use the controller-runtime client](https://zoetrope.github.io/kubebuilder-training/controller-runtime/client.html) (in Japanese) controller runtime tutorial. If you don't understand Japanese, you can still learn a lot from the tutorial by reading the source code. It covers many details. For example, by default, the controller runtime reads kubeconfig, flags, environment variables, and the service account automatically mounted in the Pod from multiple locations. [Pull request #21](https://github.com/armosec/kubescape/pull/21) for [`armosec/kubescape`](https://github.com/armosec/kubescape) uses this feature. This tutorial also includes common operations, such as how to paginate, update, and overwrite objects. I haven't seen any English tutorials that are so detailed.
+
+Here are examples of `Get` and `List` requests:
+
+```go
+
+package controlpanel
+
+import (
+
+   "context"
+
+   "github.com/chaos-mesh/chaos-mesh/api/v1alpha1"
+
+   "github.com/pkg/errors"
+
+   "sigs.k8s.io/controller-runtime/pkg/client"
+
+)
+
+func GetPodChaos(name, namespace string) (*v1alpha1.PodChaos, error) {
+
+   cli := mgr.GetClient()
+
+   item := new(v1alpha1.PodChaos)
+
+   if err := cli.Get(context.Background(), client.ObjectKey{Name: name, Namespace: namespace}, item); err != nil {
+
+       return nil, errors.Wrap(err, "get cr")
+
+   }
+
+   return item, nil
+
+}
+
+func ListPodChaos(namespace string, labels map[string]string) ([]v1alpha1.PodChaos, error) {
+
+   cli := mgr.GetClient()
+
+   list := new(v1alpha1.PodChaosList)
+
+   if err := cli.List(context.Background(), list, client.InNamespace(namespace), client.MatchingLabels(labels)); err != nil {
+
+       return nil, err
+
+   }
+
+   return list.Items, nil
+
+}
+
+```
+
+This example uses the manager. This mode prevents the cache mechanism from repetitively fetching large amounts of data. The following [figure](https://zoetrope.github.io/kubebuilder-training/controller-runtime/client.html) shows the workflow:
+
+1. Get the Pod.
+
 2. Get the `List` request's full data for the first time.
 
 3. Update the cache when the watch data changes.
