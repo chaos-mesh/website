@@ -268,9 +268,7 @@ After you update the template, try running HelloWorldChaos.
    kubectl get pods --namespace chaos-testing -l app.kubernetes.io/instance=chaos-mesh
    ```
 
-   :::note
-   Arguments `--set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock` are used to run NeteworkChaos on kind.
-   :::
+   :::note Arguments `--set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock` are used to run NeteworkChaos on kind. :::
 
 3. Deploy the Pod for testing:
 
