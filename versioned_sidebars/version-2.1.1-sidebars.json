@@ -1,16 +1,16 @@
 {
-  "version-2.1.0/docs": [
+  "version-2.1.1/docs": [
     {
       "type": "category",
       "label": "About Chaos Mesh",
       "items": [
         {
           "type": "doc",
-          "id": "version-2.1.0/overview"
+          "id": "version-2.1.1/overview"
         },
         {
           "type": "doc",
-          "id": "version-2.1.0/basic-features"
+          "id": "version-2.1.1/basic-features"
         }
       ],
       "collapsible": true,
@@ -28,30 +28,30 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-2.1.0/quick-start"
+              "id": "version-2.1.1/quick-start"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/production-installation-using-helm"
+              "id": "version-2.1.1/production-installation-using-helm"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/offline-installation"
+              "id": "version-2.1.1/offline-installation"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/supported-releases"
+              "id": "version-2.1.1/supported-releases"
             }
           ],
           "collapsible": true
         },
         {
           "type": "doc",
-          "id": "version-2.1.0/manage-user-permissions"
+          "id": "version-2.1.1/manage-user-permissions"
         },
         {
           "type": "doc",
-          "id": "version-2.1.0/configure-enabled-namespace"
+          "id": "version-2.1.1/configure-enabled-namespace"
         },
         {
           "type": "category",
@@ -59,19 +59,19 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-2.1.0/define-chaos-experiment-scope"
+              "id": "version-2.1.1/define-chaos-experiment-scope"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/define-scheduling-rules"
+              "id": "version-2.1.1/define-scheduling-rules"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/run-a-chaos-experiment"
+              "id": "version-2.1.1/run-a-chaos-experiment"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/inspect-chaos-experiments"
+              "id": "version-2.1.1/inspect-chaos-experiments"
             }
           ],
           "collapsible": true,
@@ -83,19 +83,19 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-2.1.0/create-chaos-mesh-workflow"
+              "id": "version-2.1.1/create-chaos-mesh-workflow"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/run-chaos-experiments-in-serial-or-parallel"
+              "id": "version-2.1.1/run-chaos-experiments-in-serial-or-parallel"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/send-http-request-on-workflow"
+              "id": "version-2.1.1/send-http-request-on-workflow"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/check-workflow-status"
+              "id": "version-2.1.1/check-workflow-status"
             }
           ],
           "collapsible": true,
@@ -114,47 +114,47 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-2.1.0/simulate-pod-chaos-on-kubernetes"
+              "id": "version-2.1.1/simulate-pod-chaos-on-kubernetes"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/simulate-network-chaos-on-kubernetes"
+              "id": "version-2.1.1/simulate-network-chaos-on-kubernetes"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/simulate-heavy-stress-on-kubernetes"
+              "id": "version-2.1.1/simulate-heavy-stress-on-kubernetes"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/simulate-io-chaos-on-kubernetes"
+              "id": "version-2.1.1/simulate-io-chaos-on-kubernetes"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/simulate-dns-chaos-on-kubernetes"
+              "id": "version-2.1.1/simulate-dns-chaos-on-kubernetes"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/simulate-time-chaos-on-kubernetes"
+              "id": "version-2.1.1/simulate-time-chaos-on-kubernetes"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/simulate-jvm-application-chaos"
+              "id": "version-2.1.1/simulate-jvm-application-chaos"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/simulate-kernel-chaos-on-kubernetes"
+              "id": "version-2.1.1/simulate-kernel-chaos-on-kubernetes"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/simulate-aws-chaos"
+              "id": "version-2.1.1/simulate-aws-chaos"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/simulate-gcp-chaos"
+              "id": "version-2.1.1/simulate-gcp-chaos"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/simulate-http-chaos-on-kubernetes"
+              "id": "version-2.1.1/simulate-http-chaos-on-kubernetes"
             }
           ],
           "collapsible": true,
@@ -166,43 +166,43 @@
           "items": [
             {
               "type": "doc",
-              "id": "version-2.1.0/chaosd-overview"
+              "id": "version-2.1.1/chaosd-overview"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/simulate-physical-machine-chaos"
+              "id": "version-2.1.1/simulate-physical-machine-chaos"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/simulate-process-chaos-in-physical-nodes"
+              "id": "version-2.1.1/simulate-process-chaos-in-physical-nodes"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/simulate-network-chaos-in-physical-nodes"
+              "id": "version-2.1.1/simulate-network-chaos-in-physical-nodes"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/simulate-host-console-in-physical-nodes"
+              "id": "version-2.1.1/simulate-host-console-in-physical-nodes"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/simulate-heavy-stress-in-physical-nodes"
+              "id": "version-2.1.1/simulate-heavy-stress-in-physical-nodes"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/simulate-disk-pressure-in-physical-nodes"
+              "id": "version-2.1.1/simulate-disk-pressure-in-physical-nodes"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/simulate-jvm-application-chaos-in-physical-nodes"
+              "id": "version-2.1.1/simulate-jvm-application-chaos-in-physical-nodes"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/simulate-time-chaos-on-physical-nodes"
+              "id": "version-2.1.1/simulate-time-chaos-on-physical-nodes"
             },
             {
               "type": "doc",
-              "id": "version-2.1.0/chaosd-search-recover"
+              "id": "version-2.1.1/chaosd-search-recover"
             }
           ],
           "collapsible": true,
@@ -218,7 +218,7 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-2.1.0/gcp-authentication"
+          "id": "version-2.1.1/gcp-authentication"
         }
       ],
       "collapsible": true,
@@ -230,11 +230,11 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-2.1.0/integrate-chaos-mesh-into-github-actions"
+          "id": "version-2.1.1/integrate-chaos-mesh-into-github-actions"
         },
         {
           "type": "doc",
-          "id": "version-2.1.0/use-grafana-data-source"
+          "id": "version-2.1.1/use-grafana-data-source"
         }
       ],
       "collapsible": true,
@@ -246,23 +246,23 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-2.1.0/developer-guide-overview"
+          "id": "version-2.1.1/developer-guide-overview"
         },
         {
           "type": "doc",
-          "id": "version-2.1.0/configure-development-environment"
+          "id": "version-2.1.1/configure-development-environment"
         },
         {
           "type": "doc",
-          "id": "version-2.1.0/add-new-chaos-experiment-type"
+          "id": "version-2.1.1/add-new-chaos-experiment-type"
         },
         {
           "type": "doc",
-          "id": "version-2.1.0/extend-chaos-daemon-interface"
+          "id": "version-2.1.1/extend-chaos-daemon-interface"
         },
         {
           "type": "doc",
-          "id": "version-2.1.0/extend-chaosd"
+          "id": "version-2.1.1/extend-chaosd"
         }
       ],
       "collapsible": true,
@@ -274,11 +274,11 @@
       "items": [
         {
           "type": "doc",
-          "id": "version-2.1.0/faqs"
+          "id": "version-2.1.1/faqs"
         },
         {
           "type": "doc",
-          "id": "version-2.1.0/upgrade-to-2.0"
+          "id": "version-2.1.1/upgrade-to-2.0"
         }
       ],
       "collapsible": true,
