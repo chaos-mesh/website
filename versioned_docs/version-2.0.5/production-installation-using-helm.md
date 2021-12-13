@@ -152,7 +152,7 @@ For more values and their usages, refer to [all values](https://github.com/chaos
 Currently, the latest CustomResourceDefinition (CRD) is not applied during the Helm upgrading, which might cause errors. To avoid this situation, you can apply the latest CRD manually:
 
 <PickVersion>
-curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl create -f -
+curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl replace -f -
 </PickVersion>
 
 :::
