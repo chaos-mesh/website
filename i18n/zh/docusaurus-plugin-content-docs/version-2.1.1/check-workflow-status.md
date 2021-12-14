@@ -8,7 +8,7 @@ title: 检查 Workflow 状态
 
 ![List Workflow On Dashboard](./img/list-workflow-on-dashboard.png)
 
-2. 选择你想要检查的 Workflow，显示 Workflow 的详细信息。
+2. 选择你想要检查的 Workflow，查看 Workflow 的详细信息。
 
 ![Workflow Status On Dashboard](./img/workflow-status-on-dashboard.png)
 

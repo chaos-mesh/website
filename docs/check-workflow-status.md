@@ -4,11 +4,11 @@ title: Check Workflow Status
 
 ## Check workflow status using Chaos Dashboard
 
-1. List all the workflows in the Chaos Dashboard.
+1. List all workflows in Chaos Dashboard.
 
 ![List Workflow On Dashboard](./img/list-workflow-on-dashboard.png)
 
-2. Select the workflow you want to check, show the details of the workflow.
+2. Select the workflow you want to check and see the details of the workflow.
 
 ![Workflow Status On Dashboard](./img/workflow-status-on-dashboard.png)
 
