@@ -1,15 +1,15 @@
 ---
-title: Simulate time chaos
+title: Simulate Time Faults
 summary: This document describes how to use Chaosd to simulate a time offset scenario.
 ---
 
 This document describes how to use Chaosd to simulate a time offset scenario. You can create experiments either in command-line mode or service mode.
 
-## Create experiments using commands
+## Create experiments using command-line mode
 
-This section describes how to create time chaos experiments using commands.
+This section describes how to create time fault experiments using commands.
 
-Before creating an experiment, you can run the following command to check the options of time chaos:
+Before creating an experiment, you can run the following command to check the options of time faults:
 
 ```
 chaosd attack clock -h
@@ -68,7 +68,7 @@ Then execute get_time and try to attack it. The following is an example:
 chaosd attack clock -p $PID -t 11s
 ```
 
-### Configurations of simulating time chaos
+### Configurations of simulating time faults
 
 | Parameter | Type | Note | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |

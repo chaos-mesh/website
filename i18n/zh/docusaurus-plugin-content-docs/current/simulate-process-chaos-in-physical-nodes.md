@@ -35,7 +35,7 @@ Use "chaosd attack process [command] --help" for more information about a comman
 
 目前 Chaosd 支持模拟进程被终止或暂停的故障。
 
-### 模拟进程被终止
+### 使用命令行模式模拟进程被终止
 
 #### 模拟进程被终止命令
 
@@ -86,7 +86,7 @@ Attack process python successfully, uid: 10e633ac-0a37-41ba-8b4a-cd5ab92099f9
 
 :::
 
-### 模拟进程被暂停
+### 使用命令行模式模拟进程被暂停
 
 #### 模拟进程被暂停命令
 
@@ -148,7 +148,7 @@ Attack process python successfully, uid: 9cb6b3be-4f5b-4ecb-ae05-51050fcd0010
 | process | 需要结束进程的名字或者进程的标识符 | string 类型，默认为 "" |
 | signal  | 所提供的进程信号值                 | int 类型，默认为 9。   |
 
-#### 服务模式进程故障示例
+#### 使用服务模式模拟进程故障示例
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/process -H "Content-Type:application/json" -d '{"process":"12345","signal":15}'

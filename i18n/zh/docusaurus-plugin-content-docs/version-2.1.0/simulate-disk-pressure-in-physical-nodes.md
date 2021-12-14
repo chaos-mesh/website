@@ -225,7 +225,7 @@ Fill file /home/andrew/chaosd/bin/example623832242 successfully, uid: 097b4214-8
 | process-num | 指定使用多少个并发运行的 [dd](https://man7.org/linux/man-pages/man1/dd.1.html) 进程执行程序。 | uint8 类型，默认值为 1，范围为 1-255 |
 | size | 指定读取多少数据。size 为 多个 dd 读数据的总量。 | string 类型，默认为""，必须要设置。合法形式为一个整数加一个单位。例如：1M、512kB。支持的单位有 c=1、w=2、b=512、kB=1000、K=1024、MB=1000\*1000,M=1024\*1024、GB=1000\*1000\*1000、G=1024\*1024\*1024 BYTE 等。 |
 
-#### 模拟磁盘读负载示例
+#### 使用服务模式模拟磁盘读负载示例
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{"action":"read-payload","path":"/dev/zero", "payload-process-num":7,"size":"1000G"}'
@@ -239,7 +239,7 @@ curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/j
 
 读负载为一次性操作，实验不需要恢复。
 
-### 服务模式模拟磁盘写负载
+### 使用服务模式模拟磁盘写负载
 
 本模块介绍使用服务模式创建磁盘写负载实验时所涉及到的相关配置说明与实验创建示例。
 
@@ -252,7 +252,7 @@ curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/j
 | process-num | 指定使用多少个并发运行的 [dd](https://man7.org/linux/man-pages/man1/dd.1.html) 进程执行程序。 | uint8 类型。默认值为 1，范围为 1-255 |
 | size | 指定写入多少数据，size 为 多个 dd 写数据的总量。 | string 类型，默认为""，合法形式为一个整数加一个单位。例如：1M、512kB。支持的单位有 c=1、w=2、b=512、kB=1000、K=1024、MB=1000\*1000,M=1024\*1024、GB=1000\*1000\*1000、G=1024\*1024\*1024 BYTE 等。size 不能为 "" 。 |
 
-#### 模拟磁盘写负载示例
+#### 使用服务模式模拟磁盘写负载示例
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{"action":"write-payload","path":"/tmp/test", "payload-process-num":7,"size":"1000G"}'
@@ -279,7 +279,7 @@ curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/j
 | percent | 指定填充多少百分比磁盘。 | string 类型，默认为 ""，可以填入 uint 类型的正整数，size 和 percent 不能同时为 "" |
 | size | 指定写入多少数据。 | string 类型，默认为""，合法形式为一个整数加一个单位。例如：1M、512kB。支持的单位有 c=1、w=2、b=512、kB=1000、K=1024、MB=1000\*1000,M=1024\*1024、GB=1000\*1000\*1000、G=1024\*1024\*1024 BYTE 等。size 和 percent 不能同时为 ""。 |
 
-#### 模拟磁盘填充示例
+#### 使用服务模式模拟磁盘填充示例
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{"action":"fill","path":"/tmp/test", "fill-by-fallocate":true,"percent":"50"}'

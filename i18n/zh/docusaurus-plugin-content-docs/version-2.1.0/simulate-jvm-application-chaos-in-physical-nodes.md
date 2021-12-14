@@ -11,7 +11,7 @@ Chaosd 通过 [Byteman](https://github.com/chaos-mesh/byteman) 模拟 JVM 应用
 - 设置 Byteman 配置文件触发故障
 - 增加 JVM 压力
 
-本文主要介绍如何创建以上故障类型的 JVM 实验。
+本文主要介绍如何通过 Chaosd 创建以上故障类型的 JVM 实验。
 
 ## 使用命令行模式创建实验
 
@@ -51,7 +51,7 @@ Global Flags:
 Use "chaosd attack jvm [command] --help" for more information about a command.
 ```
 
-### 抛出自定义异常
+### 使用命令行模式模拟抛出自定义异常
 
 #### 抛出自定义异常命令
 
@@ -90,8 +90,8 @@ Global Flags:
 | exception | 无 | 抛出的自定义异常 | string 类型，必须配置 |
 | method | m | 方法名称 | string 类型，必须配置 |
 | pid | 无 | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
-| port | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288 |
-| uid | 无 | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
+| port | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
+| uid | 无 | 实验的编号 | string 类型，可以不配置，因为 Chaosd 会随机生成一个 |
 
 #### 抛出自定义异常示例
 
@@ -106,11 +106,11 @@ chaosd attack jvm exception -c Main -m sayhello --exception 'java.io.IOException
 Attack jvm successfully, uid: 26a45ae2-d395-46f5-a126-2b2c6c85ae9d
 ```
 
-### 触发垃圾回收
+### 使用命令行模式模拟触发垃圾回收
 
 #### 触发垃圾回收命令
 
-运行以下命令查看抛出自定义异常场景支持的配置：
+运行以下命令查看抛出触发垃圾回收场景支持的配置：
 
 ```bash
 chaosd attack jvm gc --help
@@ -137,7 +137,7 @@ Global Flags:
 | 配置项 | 配置缩写 | 说明 | 值 |
 | :-- | :-- | :-- | :-- |
 | pid | 无 | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
-| port | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288 |
+| port | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
 | uid | 无 | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
 
 #### 触发垃圾回收示例
@@ -155,7 +155,7 @@ Attack jvm successfully, uid: f360e70a-5359-49b6-8526-d7e0a3c6f696
 
 触发垃圾回收为一次性操作，实验不需要恢复。
 
-### 增加方法延迟
+### 使用命令行模式模拟增加方法延迟
 
 #### 增加方法延迟命令
 
@@ -192,7 +192,7 @@ Global Flags:
 | latency | 无 | 增加方法的延迟时间 | int 类型，必须配置，单位为 ms |
 | method | m | 方法名称 | string 类型，必须配置 |
 | pid | 无 | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
-| port | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288 |
+| port | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
 | uid | 无 | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
 
 #### 增加方法延迟示例
@@ -209,7 +209,7 @@ chaosd attack jvm latency --class Main --method sayhello --latency 5000 --pid 10
 Attack jvm successfully, uid: bbe00c57-ac9d-4113-bf0c-2a6f184be261
 ```
 
-### 修改方法返回值
+### 使用命令行模式模拟修改方法返回值
 
 #### 修改方法返回值命令
 
@@ -244,7 +244,7 @@ Global Flags:
 | method | m | 方法名称 | string 类型，必须配置 |
 | value | 无 | 指定方法的返回值 | string 类型，必须配置。目前支持数字和字符串类型的返回值，如果为字符串，则需要使用双引号，例如："chaos"。 |
 | pid | 无 | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
-| port | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288 |
+| port | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
 | uid | 无 | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
 
 #### 修改方法返回值示例
@@ -261,9 +261,9 @@ chaosd attack jvm return --class Main --method getnum --value 999 --pid 112694
 Attack jvm successfully, uid: e2f204f6-4bed-4d92-aade-2b4a47b02e5d
 ```
 
-### 设置 Byteman 配置文件触发故障
+### 命令行模式下设置 Byteman 配置文件触发故障
 
-通过 Byteman 规则配置文件来设置故障规则，然后使用 Chaosd 指定该文件路径来注入故障。关于 Byteman 的规则配置，请参考 [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language)。
+你可以先在 Byteman 规则配置文件中设置故障规则，然后再通过使用 Chaosd 指定该文件路径的方式注入故障。关于 Byteman 的规则配置，请参考 [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language)。
 
 #### 设置 Byteman 配置文件触发故障命令
 
@@ -296,7 +296,7 @@ Global Flags:
 | :-- | :-- | :-- | :-- |
 | path | 无 | 指定 Byteman 配置文件的路径 | string 类型，必须配置 |
 | pid | 无 | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
-| port | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288 |
+| port | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
 | uid | 无 | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
 
 #### 设置 Byteman 配置文件触发故障示例
@@ -314,7 +314,7 @@ DO
 ENDRULE
 ```
 
-将该文件保存到文件 `return.btm`，然后运行以下命令注入故障：
+其次，将该配置文件保存到文件 `return.btm` 后，运行以下命令注入故障：
 
 ```bash
 chaosd attack jvm rule-file -p ./return.btm --pid 112694
@@ -328,7 +328,7 @@ chaosd attack jvm rule-file -p ./return.btm --pid 112694
 Attack jvm successfully, uid: 5ca2e06d-a7c6-421d-bb67-0c9908bac17a
 ```
 
-### 增加 JVM 压力
+### 使用命令行模式模拟增加 JVM 压力
 
 #### 增加 JVM 压力命令
 
@@ -361,9 +361,9 @@ Global Flags:
 | 配置项 | 配置缩写 | 说明 | 值 |
 | :-- | :-- | :-- | :-- |
 | cpu-count | 无 | 增加 CPU 压力所使用的 CPU 核的数量 | int 类型，`cpu-count` 和 `mem-type` 只能配置一个 |
-| mem-type | 无 | OOM 的类型 | string 类型，目前支持 'stack' 和 'heap' 两种 OOM 类型。cpu-count 和 mem-type 只能配置一个 |
+| mem-type | 无 | OOM 的类型 | string 类型，目前支持 'stack' 和 'heap' 两种 OOM 类型。`cpu-count` 和 `mem-type` 只能配置一个。 |
 | pid | 无 | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
-| port | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288 |
+| port | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
 | uid | 无 | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
 
 #### 增加 JVM 压力示例
@@ -390,9 +390,16 @@ Attack jvm successfully, uid: b9b997b5-0a0d-4f1f-9081-d52a32318b84
    chaosd server --port 31767
    ```
 
-2. 向 chaosd 服务的路径 /api/attack/jvm 发送 HTTP POTST 请求。其中，`bash curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{fault-configuration}'` 的 `fault-configuration` 需要按照故障类型进行配置，其对应的配置参数请参考下文中各个类型故障的相关参数说明和命令示例。在运行实验时，请注意保存实验的 UID 信息，当要结束 UID 对应的实验时，需要向 Chaosd 服务的路径 /api/attack/{uid} 发送 HTTP DELETE 请求。
+2. 向 chaosd 服务的路径 /api/attack/jvm 发送 HTTP POTST 请求。其中，`bash curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{fault-configuration}'` 的 `fault-configuration` 需要按照故障类型进行配置，其对应的配置参数请参考下文中各个类型故障的相关参数说明和命令示例。
 
-### 服务模式抛出自定义异常
+::: note 注意
+
+- 在运行实验时，请注意保存实验的 UID 信息。
+- 当要结束 UID 对应的实验时，需要向 Chaosd 服务的路径 /api/attack/{uid} 发送 HTTP DELETE 请求。
+
+::: 
+
+### 使用服务模式模拟抛出自定义异常
 
 #### 抛出自定义异常相关参数说明
 
@@ -403,10 +410,10 @@ Attack jvm successfully, uid: b9b997b5-0a0d-4f1f-9081-d52a32318b84
 | exception | 抛出的自定义异常 | string 类型，必须配置 |
 | method | 方法名称 | string 类型，必须配置 |
 | pid | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
-| port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288 |
+| port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
 | uid | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
 
-#### 服务模式抛出自定义异常示例
+#### 使用服务模式模拟抛出自定义异常示例
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"exception","class":"Main","method":"sayhello","exception":"java.io.IOException(\"BOOM\")","pid":1828622}'
@@ -418,7 +425,7 @@ curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/js
 {"status":200,"message":"attack successfully","uid":"c3c519bf-819a-4a7b-97fb-e3d0814481fa"}
 ```
 
-### 服务模式触发垃圾回收
+### 使用服务模式模拟触发垃圾回收
 
 #### 触发垃圾回收相关参数说明
 
@@ -426,10 +433,10 @@ curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/js
 | :-- | :-- | :-- |
 | action | 实验的行为 | 设置为 "gc" |
 | pid | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
-| port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288 |
+| port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
 | uid | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
 
-#### 服务模式触发垃圾回收示例
+#### 使用服务模式模拟触发垃圾回收示例
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"gc","pid":1828622}'
@@ -443,7 +450,7 @@ curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/js
 
 触发垃圾回收为一次性操作，实验不需要恢复。
 
-### 服务模式增加方法延迟
+### 使用服务模式模拟增加方法延迟
 
 #### 增加方法延迟相关参数说明
 
@@ -454,10 +461,10 @@ curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/js
 | latency | 增加方法的延迟时间 | int 类型，必须配置，单位为 ms |
 | method | 方法名称 | string 类型，必须配置 |
 | pid | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
-| port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288 |
+| port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
 | uid | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
 
-#### 服务增加方法延迟示例
+#### 使用服务模式模拟增加方法延迟示例
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"latency","class":"Main","method":"sayhello","latency":5000,"pid":1828622}'
@@ -469,7 +476,7 @@ curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/js
 {"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
 ```
 
-### 服务模式修改方法返回值
+### 使用服务模式模拟修改方法返回值
 
 #### 修改方法返回值相关参数说明
 
@@ -480,10 +487,10 @@ curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/js
 | method | 方法名称 | string 类型，必须配置 |
 | value | 指定方法的返回值 | string 类型，必须配置。目前支持数字和字符串类型的返回值，如果为字符串，则需要使用双引号，例如："chaos"。 |
 | pid | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
-| port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288 |
+| port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
 | uid | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
 
-#### 服务模式修改方法返回值示例
+#### 使用服务模式模拟修改方法返回值示例
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"return","class":"Main","method":"getnum","value":"999","pid":1828622}'
@@ -495,21 +502,21 @@ curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/js
 {"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
 ```
 
-### 服务模式设置 Byteman 配置触发故障
+### 服务模式下设置 Byteman 配置文件触发故障
 
 通过 Byteman 规则配置来设置故障规则。关于 Byteman 的规则配置，请参考 [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language)。
 
-#### 设置 Byteman 配置触发故障相关参数说明
+#### 设置 Byteman 配置文件触发故障相关参数说明
 
 | 参数 | 说明 | 值 |
 | :-- | :-- | :-- |
 | action | 实验的行为 | 设置为 "rule-data" |
 | rule-data | 指定 Byteman 配置数据 | string 类型，必须配置 |
 | pid | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
-| port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288 |
+| port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
 | uid | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
 
-#### 服务模式设置 Byteman 配置触发故障示例
+#### 服务模式下设置 Byteman 配置文件触发故障示例
 
 首先根据具体的 Java 程序，并参考 [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language) 编写一个规则配置文件，例如：
 
@@ -524,7 +531,7 @@ DO
 ENDRULE
 ```
 
-将配置中的换行转换为换行符 "\n"，将转换后的数据设置为参数 "rule-data" 的值，运行如下命令：
+其次，通过如下命令把配置中的换行转换为换行符 "\n"，并将转换后的数据设置为参数 "rule-data" 的值：
 
 ```bash
 curl -X POST 127.0.0.1:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"rule-data","pid":30045,"rule-data":"\nRULE modify return value\nCLASS Main\nMETHOD getnum\nAT ENTRY\nIF true\nDO return 9999\nENDRULE\n"}'
@@ -536,7 +543,7 @@ curl -X POST 127.0.0.1:31767/api/attack/jvm -H "Content-Type:application/json" -
 {"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
 ```
 
-### 服务模式增加 JVM 压力
+### 使用服务模式模拟增加 JVM 压力
 
 #### 增加 JVM 压力相关参数说明
 
@@ -544,12 +551,12 @@ curl -X POST 127.0.0.1:31767/api/attack/jvm -H "Content-Type:application/json" -
 | :-- | :-- | :-- |
 | action | 实验的行为 | 设置为 "stress" |
 | cpu-count | 增加 CPU 压力所使用的 CPU 核的数量 | int 类型，`cpu-count` 和 `mem-type` 中必须配置一个 |
-| mem-type | OOM 的类型 | string 类型，目前支持 'stack' 和 'heap' 两种 OOM 类型。cpu-count 和 mem-type 只能配置一个 |
+| mem-type | OOM 的类型 | string 类型，目前支持 'stack' 和 'heap' 两种 OOM 类型。`cpu-count` 和 `mem-type` 中必须配置一个 |
 | pid | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
-| port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 9288 |
+| port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
 | uid | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
 
-#### 服务模式增加 JVM 压力示例
+#### 使用服务模式模拟增加 JVM 压力示例
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"stress","cpu-count":1,"pid":1828622}'
