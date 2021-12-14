@@ -54,7 +54,7 @@ spec:
       children:
         - workflow-stress-chaos
         - workflow-network-chaos
-        - workflow-pod-chaos
+        - workflow-pod-chaos-schedule
     - name: workflow-network-chaos
       templateType: NetworkChaos
       deadline: 20s
@@ -64,22 +64,23 @@ spec:
         mode: all
         selector:
           labelSelectors:
-            "app": "hello-kubernetes"
+            'app': 'hello-kubernetes'
         delay:
-          latency: "90ms"
-          correlation: "25"
-          jitter: "90ms"
+          latency: '90ms'
+          correlation: '25'
+          jitter: '90ms'
     - name: workflow-pod-chaos-schedule
       templateType: Schedule
       deadline: 40s
       schedule:
-        schedule: "@every 2s"
+        schedule: '@every 2s'
+        type: 'PodChaos'
         podChaos:
           action: pod-kill
           mode: one
           selector:
             labelSelectors:
-              "app": "hello-kubernetes"
+              'app': 'hello-kubernetes'
     - name: workflow-stress-chaos
       templateType: StressChaos
       deadline: 20s
@@ -87,12 +88,12 @@ spec:
         mode: one
         selector:
           labelSelectors:
-            "app": "hello-kubernetes"
+            'app': 'hello-kubernetes'
         stressors:
           cpu:
             workers: 1
             load: 20
-            options: ["--cpu 1"， "--timeout 600"]
+            options: ['--cpu 1', '--timeout 600']
 ```
 
 In the above YAML template, the `templates` fields define the steps of the experiment. The `entry` field defines the entry of the workflow when the workflow is being executed.
