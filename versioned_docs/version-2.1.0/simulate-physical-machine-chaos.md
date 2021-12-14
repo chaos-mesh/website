@@ -89,11 +89,11 @@ To simulate a memory stress scenario, you need to set the action to "stress-mem"
 
 #### Disk read load
 
-To simulate a disk read load scenario, you need to set the action to "disk-read-payload". For the corresponding configurations, refer to [Parameters of  simulating disk read load](simulate-disk-pressure-in-physical-nodes.md#parameters-of-simulating-disk-read-load).
+To simulate a disk read load scenario, you need to set the action to "disk-read-payload". For the corresponding configurations, refer to [Parameters of simulating disk read load](simulate-disk-pressure-in-physical-nodes.md#parameters-of-simulating-disk-read-load).
 
 #### Disk write load
 
-To simulate a disk write load scenario, you need to set the action to "disk-write-payload". For the corresponding configurations, refer to [Parameters of  simulating disk write load](simulate-disk-pressure-in-physical-nodes.md#parameters-of-simulating-disk-write-load).
+To simulate a disk write load scenario, you need to set the action to "disk-write-payload". For the corresponding configurations, refer to [Parameters of simulating disk write load](simulate-disk-pressure-in-physical-nodes.md#parameters-of-simulating-disk-write-load).
 
 #### Disk fill
 
@@ -127,23 +127,23 @@ To simulate a DNS fault scenario, you need to set the action to "network-dns". F
 
 To simulate a process fault scenario, you need to set the action to "process". For the corresponding configurations, refer to [Parameters of simulating process fault](simulate-network-chaos-in-physical-nodes.md#parameters-of-simulating-process-fault).
 
-#### Throw custom exceptions by JVM applications
+#### Throw custom exceptions for JVM applications
 
 To simulate a scenario that JVM applications throw custom exceptions, you need to set the action to "jvm-exception". For the corresponding configurations, refer to [Parameters for simulating the scenario of throwing custom exceptions](simulate-jvm-application-chaos-in-physical-nodes.md#parameters-for-simulating-the-scenario-of-throwing-custom-exceptions).
 
-#### Increase method latency by JVM applications
+#### Increase method latency for JVM applications
 
 To simulate a scenario that JVM applications increase method latency, you need to set the action to "jvm-latency". For the corresponding configurations, refer to [Parameters for simulating the scenario of increasing method latency](simulate-jvm-application-chaos-in-physical-nodes.md#parameters-for-simulating-the-scenario-of-increasing-method-latency).
 
-#### Modify return values of methods by JVM applications
+#### Modify return values of methods for JVM applications
 
 To simulate a scenario that JVM applications modify return values of methods, you need to set the action to "jvm-return". For the corresponding configurations, refer to [Parameters for simulating the scenario of modifying return values of a method](simulate-jvm-application-chaos-in-physical-nodes.md#parameters-for-simulating-the-scenario-of-modifying-return-values-of-a-method).
 
-#### Trigger garbage collection by JVM applications
+#### Trigger garbage collection for JVM applications
 
 To simulate a scenario that JVM applications trigger garbage collection, you need to set the action to "jvm-gc". For the corresponding configurations, refer to [Parameters for simulating the scenario of triggering garbage collection](simulate-jvm-application-chaos-in-physical-nodes.md#parameters-for-simulating-the-scenario-of-triggering-garbage-collection).
 
-#### Trigger faults using Byteman configuration files by JVM applications
+#### Trigger faults using Byteman configuration files for JVM applications
 
 To simulate a scenario that JVM applications trigger faults using Byteman configuration files, you need to set the action to "jvm-rule-data". For the corresponding configurations, refer to [Parameters for simulating the scenario of triggering faults by setting Byteman configuration files](simulate-jvm-application-chaos-in-physical-nodes.md#parameters-for-simulating-the-scenario-of-triggering-faults-by-setting-Byteman-configuration-files).
 

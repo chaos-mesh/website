@@ -462,7 +462,7 @@ Triggering garbage collection is a one-time operation. The experiment does not r
 | class | The name of the Java class | string type, required to be configured |
 | latency | The duration of increasing method latency | int type, required to be configured. The unit is ms. |
 | method | The name of the method | string type, required to be configured |
-| pid | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
+| pid | The Java process ID where the fault is needed to be injected | int type, required to be configured |
 | port | The Java process ID where the fault is needed to be injected | int type, required to be configured |
 | uid | The experiment number | string type. This item is not required to be configured, because Chaosd randomly creates one. |
 
