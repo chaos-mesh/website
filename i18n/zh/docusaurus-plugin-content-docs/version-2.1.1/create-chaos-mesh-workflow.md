@@ -173,7 +173,7 @@ podChaos:
 | 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
 | --- | --- | --- | --- | --- | --- |
 | container | object | 定义自定义任务容器，可参考 [Container 字段说明](#container-字段说明) | 无 | 否 |  |
-| volumes | array | 若需要在自定义任务容器中挂载卷，则需要在该字段声明卷。关于完整定义可参考 [corev1.Volume](https://v1-17.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.17/#volume-v1-core) | 无 | 否 |  |
+| volumes | array | 若需要在自定义任务容器中挂载卷，则需要在该字段声明卷。关于完整定义可参考 [corev1.Volume](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#volume-v1-core) | 无 | 否 |  |
 
 ### ConditionalBranch 字段说明
 
@@ -193,7 +193,7 @@ podChaos:
 
 ### Container 字段说明
 
-这里只列举了常用字段，关于完整定义可参考 [corev1.Container](https://v1-17.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.17/#container-v1-core)
+这里只列举了常用字段，关于完整定义可参考 [corev1.Container](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#container-v1-core)
 
 | 参数    | 类型     | 说明           | 默认值 | 是否必填 | 示例                                              |
 | ------- | -------- | -------------- | ------ | -------- | ------------------------------------------------- |
