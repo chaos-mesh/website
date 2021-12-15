@@ -129,23 +129,23 @@ To simulate a process fault scenario, you need to set the action to "process". F
 
 #### Throw custom exceptions for JVM applications
 
-To simulate a scenario that JVM applications throw custom exceptions, you need to set the action to "jvm-exception". For the corresponding configurations, refer to [Parameters for simulating the scenario of throwing custom exceptions](simulate-jvm-application-chaos-in-physical-nodes.md#parameters-for-simulating-the-scenario-of-throwing-custom-exceptions).
+To simulate a scenario that JVM applications throw custom exceptions, you need to set the action to "jvm-exception". For the corresponding configurations, refer to [Parameters for throwing custom exceptions](simulate-jvm-application-chaos-in-physical-nodes.md#parameters-for-throwing-custom-exceptions).
 
 #### Increase method latency for JVM applications
 
-To simulate a scenario that JVM applications increase method latency, you need to set the action to "jvm-latency". For the corresponding configurations, refer to [Parameters for simulating the scenario of increasing method latency](simulate-jvm-application-chaos-in-physical-nodes.md#parameters-for-simulating-the-scenario-of-increasing-method-latency).
+To simulate a scenario that JVM applications increase method latency, you need to set the action to "jvm-latency". For the corresponding configurations, refer to [Parameters for increasing method latency](simulate-jvm-application-chaos-in-physical-nodes.md#parameters-for-increasing-method-latency).
 
 #### Modify return values of methods for JVM applications
 
-To simulate a scenario that JVM applications modify return values of methods, you need to set the action to "jvm-return". For the corresponding configurations, refer to [Parameters for simulating the scenario of modifying return values of a method](simulate-jvm-application-chaos-in-physical-nodes.md#parameters-for-simulating-the-scenario-of-modifying-return-values-of-a-method).
+To simulate a scenario that JVM applications modify return values of methods, you need to set the action to "jvm-return". For the corresponding configurations, refer to [Parameters for modifying return values of a method](simulate-jvm-application-chaos-in-physical-nodes.md#parameters-for-modifying-return-values-of-a-method).
 
 #### Trigger garbage collection for JVM applications
 
-To simulate a scenario that JVM applications trigger garbage collection, you need to set the action to "jvm-gc". For the corresponding configurations, refer to [Parameters for simulating the scenario of triggering garbage collection](simulate-jvm-application-chaos-in-physical-nodes.md#parameters-for-simulating-the-scenario-of-triggering-garbage-collection).
+To simulate a scenario that JVM applications trigger garbage collection, you need to set the action to "jvm-gc". For the corresponding configurations, refer to [Parameters for triggering garbage collection](simulate-jvm-application-chaos-in-physical-nodes.md#parameters-for-triggering-garbage-collection).
 
 #### Trigger faults using Byteman configuration files for JVM applications
 
-To simulate a scenario that JVM applications trigger faults using Byteman configuration files, you need to set the action to "jvm-rule-data". For the corresponding configurations, refer to [Parameters for simulating the scenario of triggering faults by setting Byteman configuration files](simulate-jvm-application-chaos-in-physical-nodes.md#parameters-for-simulating-the-scenario-of-triggering-faults-by-setting-Byteman-configuration-files).
+To simulate a scenario that JVM applications trigger faults using Byteman configuration files, you need to set the action to "jvm-rule-data". For the corresponding configurations, refer to [Parameters for triggering faults by setting Byteman configuration files](simulate-jvm-application-chaos-in-physical-nodes.md#parameters-for-triggering-faults-by-setting-Byteman-configuration-files).
 
 #### Time offset
 
