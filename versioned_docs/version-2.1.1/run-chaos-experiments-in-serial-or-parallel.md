@@ -123,22 +123,22 @@ When Chaos Mesh executes parallel nodes, all tasks claimed in `children` are exe
 
 Similar to serial nodes, the optional field `deadline` is also available in parallel nodes to limit the maximum execution time of the entire parallel process. If this time is reached, the sub-nodes are stopped. If all sub-nodes finish their work before `deadline` time, parallel nodes are immediately marked as completed and `deadline` is not affected.
 
-## Create Workflow with Serial or Parallel nodes using Chaos Dashboard
+## Create a workflow with serial or parallel nodes using Chaos Dashboard
 
-### Serial Node
+### Create serial nodes
 
-Chaos Dashboard would create a predefined serial node called `entry`, so the default pattern of creating workflow is under the serial `entry` node.
+Chaos Dashboard creates a predefined serial node called `entry`. Therefore, when creating a workflow with serial nodes using Chaos Dashboard, the workflow is created under `entry` by default.
 
 ![Create Serial Node On Dashboard](./img/create-serial-node-on-dashboard.png)
 
-### Parallel Node
+### Create parallel nodes
 
-You could create an `Parallel` node, then create sub-nodes under it.
+You can create a parallel node `Parallel` and create sub-nodes under `Parallel`.
 
-![Create Parallel Node on Dashboard](./img/create-parallel-node-on-dashboard.png))
+![Create Parallel Node on Dashboard](./img/create-parallel-node-on-dashboard.png)
 
-### Nested Serial and Parallel Nodes
+### Nest serial and parallel nodes
 
-You could also combine any serial and parallel as you want.
+You can create more complex processes by nesting serial and parallel nodes together.
 
 ![Nested Serial And Parallel Node](./img/nested-serial-and-parallel.png)
