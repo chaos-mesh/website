@@ -26,31 +26,33 @@ More workflow examples are available in the [Chaos Mesh GitHub repository](https
 
 ## Create a workflow using Chaos Dashboard
 
-### Step 1. Open Chaos Dashboard, click **NEW WORKFLOW**
+### Step 1. Open Chaos Dashboard
+
+Click **NEW WORKFLOW**.
 
 ![New Workflow](./img/new-workflow.png)
 
-### Step 2. Setup Basic Workflow Info
+### Step 2. Setup basic information of the workflow
 
 ![Workflow Info](./img/workflow-info.png)
 
-### Step 3. Configure the Workflow Nodes
+### Step 3. Configure the nodes of the workflow
 
 :::note
 
-Chaos Dashboard would create a predefined `Serial` node called `entry`, as the entry for this workflow.
+Chaos Dashboard automatically creates a serial node named `entry` as the entry point for this workflow.
 
 :::
 
 ![Choose Task Type](./img/choose-task-type.png)
 
-For example, setup a podkill `PodChaos` called `kill-nginx`, as same as creating a normal chaos experiment.
+The configuration method is the same as creating a normal chaos experiment. For example, you can set up a pod-kill type of `PodChaos` named `kill-nginx`.
 
 ![Create podkill in Workflow](./img/create-podkill-in-workflow.png)
 
-### Step 4. Submit Workflow
+### Step 4. Submit the workflow
 
-You could check workflow definition with "Preview", and click "SUBMIT WORKFLOW" to create the workflow.
+You can check workflow definition through "Preview", and then click the "SUBMIT WORKFLOW" button to create the workflow.
 
 ![Submit Workflow](./img/submit-workflow.png)
 
