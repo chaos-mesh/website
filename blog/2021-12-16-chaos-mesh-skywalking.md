@@ -6,7 +6,7 @@ author_title: Chaos Mesh Contributor
 author_url: https://github.com/FingerLeader
 author_image_url: https://avatars.githubusercontent.com/u/43462394?v=4
 image: /img/chaos-mesh-skywalking-banner.png
-tags: [Chaos Mesh, Chaos Engineering, tutorial]
+tags: [Chaos Mesh, Chaos Engineering, Tutorial]
 ---
 
 ![Chaos Mesh + SkyWalking: Better Observability for Chaos Engineering](/img/chaos-mesh-skywalking-banner.png)
@@ -58,17 +58,15 @@ To better observe the change in service performance, you need to increase the se
 Perform a stress test on `localhost:8079` using JMeter and add five threads to continuously increase the service loads. 
 
 ![JMeter Dashboard 1](/img/jmeter-1.png)
-
 <p class=“caption-center”>JMeter Dashboard 1</p>
 
-![JMeter Dashboard 2](/img/jmeter-2.png)
 
+![JMeter Dashboard 2](/img/jmeter-2.png)
 <p class=“caption-center”>JMeter Dashboard 2</p>
 
 Open the SkyWalking Dashboard. You can see that the access rate is 100%, and that the service loads reach about 5,300 calls per minute (CPM). 
 
 ![SkyWalking Dashboard](/img/skywalking-dashboard.png)
-
 <p class=“caption-center”>SkyWalking Dashboard</p>
 
 ## Step 4: Inject failures via Chaos Mesh and observe results 
@@ -76,7 +74,6 @@ Open the SkyWalking Dashboard. You can see that the access rate is 100%, and tha
 After you finish the three steps above, you can use the Chaos Dashboard to simulate stress scenarios and observe the change in service performance during chaos experiments. 
 
 ![StressChaos on Chaos Dashboard](/img/chaos-dashboard-stresschaos.png)
-
 <p class=“caption-center”>StressChaos on Chaos Dashboard</p>
 
 The following sections describe how service performance varies under the stress of three chaos conditions.
@@ -88,7 +85,6 @@ The first chaos experiment simulates low CPU usage. To display when a chaos expe
 During the time period between the two short, green lines, the service load decreases to 4,929 CPM, but returns to normal after the chaos experiment ends. 
 
 ![Test 1](/img/cpuload-1.png)
-
 <p class=“caption-center”>Test 1</p>
 
 ### CPU load: 50%; memory load: 128 MB
@@ -96,7 +92,6 @@ During the time period between the two short, green lines, the service load decr
 When the application’s CPU load increases to 50%,  the service load decreases to 4,307 CPM.
 
 ![Test 2](/img/cpuload-2.png)
-
 <p class=“caption-center”>Test 2</p>
 
 ### CUP load: 100%; memory load: 128 MB
@@ -104,7 +99,6 @@ When the application’s CPU load increases to 50%,  the service load decreases 
 When the CPU usage is at 100%, the service load decreases to only 40% of what it would be if no chaos experiments were taking place. 
 
 ![Test 3](/img/cpuload-3.png)
-
 <p class=“caption-center”>Test 3</p>
 
 Because the process scheduling under the Linux system does not allow a process to occupy the CPU all the time, the deployed Spring Boot Demo can still handle 40% of the access requests even in the extreme case of a full CPU load.
