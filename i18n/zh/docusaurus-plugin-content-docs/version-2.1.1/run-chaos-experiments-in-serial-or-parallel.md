@@ -122,3 +122,23 @@ spec:
 并行节点执行时，会同时执行 `children` 中所有声明的任务。
 
 并行节点同样存在 `deadline` 可选字段，类似于串行节点，目的是限制整个并行流程的最长执行时间。若达到了这个时间，其下属的子节点将会被停止。若所有子节点先于 `deadline` 完成了行为，并行节点会立刻被标记为完成，`deadline` 没有任何影响。
+
+## 通过 Chaos Dashboard 创建串行或并行节点的 Workflow
+
+### 创建串行节点
+
+Chaos Dashboard 会创建一个预定义的串行节点，名为 `entry`。因此，当在 Chaos Dashboard 中创建串行节点的 Workflow 时，默认会在 `entry` 下创建流程。
+
+![Create Serial Node On Dashboard](./img/create-serial-node-on-dashboard.png)
+
+### 创建并行节点
+
+你可以在 Chaos Dashboard 中创建一个并行节点 `Parallel`，然后在该节点下创建子节点。
+
+![Create Parallel Node on Dashboard](./img/create-parallel-node-on-dashboard.png)
+
+### 嵌套串行节点与并行节点
+
+你可以将串行与并行节点嵌套在一起，从而创建更复杂的流程。
+
+![Nested Serial And Parallel Node](./img/nested-serial-and-parallel.png)
