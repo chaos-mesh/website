@@ -173,7 +173,7 @@ When creating a Chaos with a duration in the workflow, you need to fill the dura
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
 | container | object | Defines a customized task container. See [Container field description](#container-field-description) for details. | None | No |  |
-| volumes | array | If you need to mount a volume in a customized task container, you need to declare the volume in this field. For the detailed definition of a volume, see the [Kubernetes documentation - corev1.Volume](https://v1-17.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.17/#volume-v1-core). | None | No |  |
+| volumes | array | If you need to mount a volume in a customized task container, you need to declare the volume in this field. For the detailed definition of a volume, see the [Kubernetes documentation - corev1.Volume](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#volume-v1-core). | None | No |  |
 
 ### Conditional branch field description
 
@@ -193,7 +193,7 @@ Refer to [this document](https://github.com/antonmedv/expr/blob/master/docs/Lang
 
 ### Container field description
 
-The following table only lists the commonly used fields. For the definitions of more fields, see [Kubernetes documentation - core1.Container](https://v1-17.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.17/#container-v1-core).
+The following table only lists the commonly used fields. For the definitions of more fields, see [Kubernetes documentation - core1.Container](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#container-v1-core).
 
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
