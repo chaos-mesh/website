@@ -45,7 +45,7 @@ Use "chaosd attack network [command] --help" for more information about a comman
 
 目前 Chaosd 支持模拟网络包错误（corrupt）、延迟（delay）、重复（duplicate）、丢失（loss）四种实验场景。
 
-### 网络包错误
+### 使用命令行模式模拟网络包错误
 
 通过运行网络包错误命令，可以查看模拟网络包错误场景支持的配置。
 
@@ -109,7 +109,7 @@ chaosd attack network corrupt -d eth0 -i 172.16.4.4 --percent 50
 Attack network successfully, uid: 4eab1e62-8d60-45cb-ac85-3c17b8ac4825
 ```
 
-### 网络包延迟
+### 使用命令行模式模拟网络包延迟
 
 通过运行网络包延迟命令，查看模拟网络延迟场景支持的配置。
 
@@ -175,7 +175,7 @@ chaosd attack network delay -d eth0 -i 172.16.4.4 -l 10ms
 Attack network successfully, uid: 4b23a0b5-e193-4b27-90a7-3e04235f32ab
 ```
 
-### 网络包重复
+### 使用命令行模式模拟网络包重复
 
 可以运行网络包重复命令，查看模拟网络包重复场景支持的配置：
 
@@ -239,11 +239,11 @@ chaosd attack network duplicate -d eth0 -i 172.16.4.4 --percent 50
 Attack network successfully, uid: 7bcb74ee-9101-4ae4-82f0-e44c8a7f113c
 ```
 
-### 网络包丢失
+### 使用命令行模式模拟网络包丢失
 
 可以运行网络包丢失命令，查看模拟网络包丢失场景支持的配置：
 
-#### 网络包丢失命令
+#### 使用命令行模式模拟网络包丢失命令
 
 具体命令如下所示：
 
@@ -303,7 +303,7 @@ chaosd attack network loss -d eth0 -i 172.16.4.4 --percent 50
 Attack network successfully, uid: 1e818adf-3942-4de4-949b-c8499f120265
 ```
 
-### 网络分区
+### 使用命令行模式模拟网络分区
 
 可以运行网络分区命令，查看模拟网络分区场景支持的配置。
 
@@ -356,7 +356,7 @@ Global Flags:
 ./chaosd attack network partition -i 172.16.4.4 -d eth0 --direction from
 ```
 
-### DNS 故障
+### 使用命令行模式模拟 DNS 故障
 
 可以运行 DNS 故障命令，查看模拟 DNS 故障场景支持的配置。
 
@@ -413,7 +413,7 @@ Global Flags:
    ```
 2. 向 chaosd 服务的路径 /api/attack/network 发送 HTTP POTST 请求。 `bash curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{fault-configuration}' ` 其中 `fault-configuration` 需要按照故障类型进行配置，对应的配置参数请参考下文中各个类型故障的相关参数说明和命令示例。 在运行实验时，请注意保存实验的 uid 信息，当要结束 uid 对应的实验时，需要向 chaosd 服务的路径 /api/attack/{uid} 发送 HTTP DELETE 请求。
 
-### 服务模式模拟网络包错误
+### 使用服务模式模拟网络包错误
 
 在使用服务模拟网络包错误时，请参考如下内容。
 
@@ -433,13 +433,13 @@ Global Flags:
 | source-port | 仅影响到指定目的端口的入口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
 | percent | 网络包错误的比例 | string 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 1 |
 
-#### 服务模式模拟网络包错误示例
+#### 使用服务模式模拟网络包错误示例
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"corrupt","device":"eth0","ip-address":"172.16.4.4","percent":"50"}'
 ```
 
-### 服务模式模拟网络包延迟
+### 使用服务模式模拟网络包延迟
 
 在使用服务模拟网络包延迟时，请参考如下内容。
 
@@ -460,13 +460,13 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 | ip-protocol | 只影响指定的 IP 协议 | string 类型，支持协议类型包括：tcp、 udp、icmp、all（表示影响所有网络协议） |
 | source-port | 仅影响到指定目的端口的入口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
 
-#### 服务模式模拟网络包延迟示例
+#### 使用服务模式模拟网络包延迟示例
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"delay","device":"eth0","ip-address":"172.16.4.4","latency":"10ms"}'
 ```
 
-### 服务模式模拟网络包重复
+### 使用服务模式模拟网络包重复
 
 在使用服务模拟网络包重复时，请参考如下内容。
 
@@ -486,13 +486,13 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 | ip-protocol | 只影响指定的 IP 协议 | string 类型，支持协议类型包括：tcp、 udp、icmp、all（表示影响所有网络协议） |
 | source-port | 仅影响到指定目的端口的入口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
 
-#### 服务模式模拟网络包重复示例
+#### 使用服务模式模拟网络包重复示例
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"duplicate","ip-protocol":"172.16.4.4","device":"eth0","percent":"50"}'
 ```
 
-### 服务模式模拟网络包丢失
+### 使用服务模式模拟网络包丢失
 
 在使用服务模拟网络包丢失时，请参考如下内容。
 
@@ -512,14 +512,14 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 | ip-protocol | 只影响指定的 IP 协议 | string 类型，支持协议类型包括：tcp、 udp、icmp、all（表示影响所有网络协议） |
 | source-port | 仅影响到指定目的端口的入口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
 
-#### 服务模式模拟网络包丢失示例
+#### 使用服务模式模拟网络包丢失示例
 
 ````bash
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"loss","ip-protocol":"172.16.4.4","device":"eth0","percent":"50"}'
 ````
 
-### 服务模式模拟网络分区
+### 使用服务模式模拟网络分区
 
 在使用服务模拟网络分区时，请参考如下内容。
 
@@ -543,7 +543,7 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"partition","ip-protocol":"172.16.4.4","device":"eth0","direction":"from"}'
 ```
 
-### 服务模式模拟 DNS 故障
+### 使用服务模式模拟 DNS 故障
 
 在使用服务模拟 DNS 故障时，请参考如下内容。
 
@@ -558,7 +558,7 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 | dns-ip          | 表示将影响的域名映射到该地址。 | string 类型，例如 "123.123.123.123"     |
 | dns-server      | 指定 DNS 服务地址。            | string 类型，默认值为 "123.123.123.123" |
 
-#### 服务模式模拟 DNS 故障示例
+#### 使用服务模式模拟 DNS 故障示例
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"dns","dns-ip":"123.123.123.123","dns-domain-name":"chaos-mesh.org"}'
