@@ -74,27 +74,27 @@ After you finish the three steps above, you can use the Chaos Dashboard to simul
 
 The following sections describe how service performance varies under the stress of three chaos conditions.
 
-### CPU load: 10%;  memory load: 128 MB
+* CPU load: 10%;  memory load: 128 MB
+   
+    The first chaos experiment simulates low CPU usage. To display when a chaos experiment starts and ends, click the switching button on the right side of the dashboard. To learn whether the experiment is Applied to the system or Recovered from the system, move your cursor onto the short, green line. 
+    
+    During the time period between the two short, green lines, the service load decreases to 4,929 CPM, but returns to normal after the chaos experiment ends. 
+    
+    ![Test 1](/img/cpuload-1.png)
 
-The first chaos experiment simulates low CPU usage. To display when a chaos experiment starts and ends, click the switching button on the right side of the dashboard. To learn whether the experiment is Applied to the system or Recovered from the system, move your cursor onto the short, green line. 
+* CPU load: 50%; memory load: 128 MB
+    
+    When the application’s CPU load increases to 50%,  the service load decreases to 4,307 CPM.
+    
+    ![Test 2](/img/cpuload-2.png)
 
-During the time period between the two short, green lines, the service load decreases to 4,929 CPM, but returns to normal after the chaos experiment ends. 
+* CPU load: 100%; memory load: 128 MB
 
-![Test 1](/img/cpuload-1.png)
-
-### CPU load: 50%; memory load: 128 MB
-
-When the application’s CPU load increases to 50%,  the service load decreases to 4,307 CPM.
-
-![Test 2](/img/cpuload-2.png)
-
-### CUP load: 100%; memory load: 128 MB
-
-When the CPU usage is at 100%, the service load decreases to only 40% of what it would be if no chaos experiments were taking place. 
-
-![Test 3](/img/cpuload-3.png)
-
-Because the process scheduling under the Linux system does not allow a process to occupy the CPU all the time, the deployed Spring Boot Demo can still handle 40% of the access requests even in the extreme case of a full CPU load.
+    When the CPU usage is at 100%, the service load decreases to only 40% of what it would be if no chaos experiments were taking place. 
+    
+    ![Test 3](/img/cpuload-3.png)
+    
+    Because the process scheduling under the Linux system does not allow a process to occupy the CPU all the time, the deployed Spring Boot Demo can still handle 40% of the access requests even in the extreme case of a full CPU load.
 
 ## Summary
 
