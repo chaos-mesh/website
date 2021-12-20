@@ -72,7 +72,7 @@ After you finish the three steps above, you can use the Chaos Dashboard to simul
 
 ![StressChaos on Chaos Dashboard](/img/chaos-dashboard-stresschaos.png)
 
-The following sections describe how service performance varies under the stress of three chaos conditions.
+The following sections describe how service performance varies under the stress of three chaos conditions:
 
 * CPU load: 10%;  memory load: 128 MB
    
