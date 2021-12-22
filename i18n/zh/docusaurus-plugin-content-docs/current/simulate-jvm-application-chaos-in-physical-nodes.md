@@ -390,12 +390,17 @@ Attack jvm successfully, uid: b9b997b5-0a0d-4f1f-9081-d52a32318b84
    chaosd server --port 31767
    ```
 
-2. 向 chaosd 服务的路径 /api/attack/jvm 发送 HTTP POTST 请求。其中，`bash curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{fault-configuration}'` 的 `fault-configuration` 需要按照故障类型进行配置，其对应的配置参数请参考下文中各个类型故障的相关参数说明和命令示例。
+2. 向 chaosd 服务的路径 /api/attack/jvm 发送 HTTP POTST 请求。
+
+   ```bash 
+   curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{fault-configuration}'
+   ```
+
+在上述命令中，你需要按照故障类型在 `fault-configuration` 中进行配置。有关对应的配置参数，请参考下文中各个类型故障的相关参数说明和命令示例。
 
 ::: note 注意
 
-- 在运行实验时，请注意保存实验的 UID 信息。
-- 当要结束 UID 对应的实验时，需要向 Chaosd 服务的路径 /api/attack/{uid} 发送 HTTP DELETE 请求。
+在运行实验时，请注意保存实验的 UID 信息。当要结束 UID 对应的实验时，需要向 Chaosd 服务的路径 /api/attack/{uid} 发送 HTTP DELETE 请求。
 
 ::: 
 

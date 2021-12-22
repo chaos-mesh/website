@@ -400,12 +400,15 @@ You can follow the instructions below to create experiments using service mode.
 
 2. Send HTTP POST request to the `/api/attack/{uid}` path of Chaosd service.
 
-   For the `fault-configuration` in `bash curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{fault-configuration}'`, you need to configure it according to the fault types. For the corresponding parameters, refer to the parameters and examples of each fault type in the following sections.
+   ```bash 
+   curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{fault-configuration}'
+   ```
+
+   For the `fault-configuration` part in the above command, you need to configure it according to the fault types. For the corresponding parameters, refer to the parameters and examples of each fault type in the following sections.
 
 :::note
 
-- When running an experiment, remember to save the UID information of the experiment.
-- When you want to end the experiment corresponding to the UID, you need to send an HTTP DELETE request to the `/api/attack/{uid}` path of Chaosd service.
+When running an experiment, remember to save the UID information of the experiment. When you want to end the experiment corresponding to the UID, you need to send an HTTP DELETE request to the `/api/attack/{uid}` path of Chaosd service.
 
 :::
 
