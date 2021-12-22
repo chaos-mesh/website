@@ -37,7 +37,7 @@ Chaos Mesh 通过 [Byteman](https://github.com/chaos-mesh/byteman) 模拟 JVM �
 
 ### 第 1 步：创建被测应用
 
-[helloworld](https://github.com/WangXiangUSTC/byteman-example/tree/main/example.helloworld) 是一个简单的 Java 应用，此处作为被测应用。被测应用定义在 `example/jvm/app.yaml` 中，内容如下：
+[Helloworld](https://github.com/WangXiangUSTC/byteman-example/tree/main/example.helloworld) 是一个简单的 Java 应用，此处作为被测应用。被测应用定义在 `example/jvm/app.yaml` 中，内容如下：
 
 ```yaml
 apiVersion: v1
@@ -69,7 +69,7 @@ kubectl create namespace helloworld
 kubectl apply -f app.yaml
 ```
 
-3. 执行 `kubectl -n helloworld get pods`，预期能够观察到命名空间 `helloworld` 中名为 `helloworld` 的 Pod，等待其 `READY` 为 `1/1` 后进行下一步。
+3. 执行 `kubectl -n helloworld get pods`，预期能够观察到命名空间 `helloworld` 中名为 `helloworld` 的 Pod。
 
 ```shell
 kubectl -n helloworld get pods
@@ -82,6 +82,8 @@ kubectl get pods -n helloworld
 NAME         READY   STATUS    RESTARTS   AGE
 helloworld   1/1     Running   0          2m
 ```
+
+等待 `READY` 成为 `1/1` 后，可以进行下一步。
 
 ### 第 2 步：观测未被注入时的行为
 
@@ -152,8 +154,8 @@ caught ReturnException
 
 | 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
 | --- | --- | --- | --- | --- | --- |
-| `action` | string | 表示具体的故障类型，支持 latency、return、exception、stress、gc、ruleData。 | 无 | 是 | `return` |
-| `mode` | string | 表示选择 Pod 的方式，支持 one、all、fixed、fixed-percent、random-max-percent。 | 无 | 是 | `one` |
+| `action` | string | 表示具体的故障类型，支持 `latency`、`return`、`exception`、`stress`、`gc`、`ruleData`。 | 无 | 是 | `return` |
+| `mode` | string | 表示选择 Pod 的方式，支持 `one`、`all`、`fixed`、`fixed-percent`、`random-max-percent`。 | 无 | 是 | `one` |
 
 关于 `action` 的取值的含义，可参考以下内容：
 
@@ -162,7 +164,7 @@ caught ReturnException
 | `latency`  | 增加方法延迟                       |
 | `return` | 修改方法返回值                             |
 | `exception` | 抛出自定义异常           |
-| `stress`    | 提高 java 进程 CPU 使用率，或者造成       内存溢出（支持堆、栈溢出）    |
+| `stress`    | 提高 Java 进程 CPU 使用率，或者造成内存溢出（支持堆、栈溢出）    |
 | `gc`    | 触发垃圾回收 |
 | `ruleData`    | 设置 Byteman 配置触发故障 |
 

@@ -19,11 +19,11 @@ This document describes how to use Chaos Mesh to create the above fault types of
 
    ![create a new experiment](./img/create-new-exp.png)
 
-2. In the "**Choose a Target**" area, choose **JVM faults**, and select a specific behavior, such as **`RETURN`**. Then, fill out the detailed configurations.
+2. In the "**Choose a Target**" area, choose **JVM FAULT**, and select a specific behavior, such as **`RETURN`**. Then, fill out the detailed configurations.
 
    ![JVMChaos experiments](./img/jvmchaos-exp.png)
 
-   For information about how to fill out the configurations, refer to [Field Description] (#Field Description).
+   For information about how to fill out the configurations, refer to [Field Description] (#field-description).
 
 3. Fill out the experiment information, and specify the experiment scope and the scheduled experiment duration.
 
@@ -33,9 +33,9 @@ This document describes how to use Chaos Mesh to create the above fault types of
 
 ## Create experiments using YAML files
 
-The following example shows you the methods and effects of JVMChaos with a specified return value. The YAML files referred in the following steps can be found in [examples/jvm](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples/jvm). The default work directory for the following steps is in `examples/jvm`. The default namespace installed by Chaos Mesh is `chaos-testing`.
+The following example shows the usage and effects of JVMChaos. The example specifies the return values of a method. The YAML files referred to in the following steps can be found in [examples/jvm](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples/jvm). The default work directory for the following steps is also `examples/jvm`. The default namespace where Chaos Mesh is installed is `chaos-testing`.
 
-### 1. Create the target application
+### Step 1. Create the target application
 
 [Helloworld](https://github.com/WangXiangUSTC/byteman-example/tree/main/example.helloworld) is a simple Java application. In this section, this application is used as the target application that is to be tested. The target application is defined in `example/jvm/app.yaml` as follows:
 
@@ -57,19 +57,19 @@ spec:
       imagePullPolicy: IfNotPresent
 ```
 
-1. Create the namespace for the application:
+1. Create the namespace for the target application:
 
 ```shell
 kubectl create namespace helloworld
 ```
 
-2. Build the application pod:
+2. Build the application Pod:
 
 ```shell
 kubectl apply -f app.yaml
 ```
 
-3. execute `kubectl -n helloworld get pods`, and you are expected to find a pod named `helloworld` in the namespace `helloworld`. After the `READY` sign turns to `1/1`, you can proceed to the next step.
+1. Execute `kubectl -n helloworld get pods`, and you are expected to find a pod named `helloworld` in the `helloworld` namespace.
 
 ```shell
 kubectl -n helloworld get pods
@@ -83,7 +83,9 @@ NAME         READY   STATUS    RESTARTS   AGE
 helloworld   1/1     Running   0          2m
 ```
 
-### Step 2. Obseve application behaviors before injecting faults​
+After the `READY` column turns to `1/1`, you can proceed to the next step.
+
+### Step 2. Observe application behaviors before injecting faults​
 
 You can observe the behavior of `helloworld` application before injecting faults, for example:
 
@@ -125,7 +127,7 @@ spec:
       - helloworld
 ```
 
-JVMChaos changes the return value of the `getnum` method to the number `9999`, which means that the number of each line of `helloworld` output is set to `9999`.
+JVMChaos changes the return value of the `getnum` method to the number `9999`, which means that the number of each line in the `helloworld` output is set to `9999`.
 
 2. Inject JVMChaos with a specified value:
 
@@ -152,17 +154,17 @@ caught ReturnException
 
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
-| `action` | string | Indicates the specific fault type. The available fault types include latency, return, exception, stress, gc, ruleData. | None | Yes | return |
-| `mode` | string | Indicates how to select Pod. The supported modes include one, all, fixed, fixed-percent, and random-max-percent. | None | Yes | `one` |
+| `action` | string | Indicates the specific fault type. The available fault types include `latency`, `return`, `exception`, `stress`, `gc`, and `ruleData`. | None | Yes | return |
+| `mode` | string | Indicates how to select Pod. The supported modes include `one`, `all`, `fixed`, `fixed-percent`, and `random-max-percent`. | None | Yes | `one` |
 
-For the meaning of the value of `action`, refer to:
+The meanings of the different `action` values are as follows:
 
 | Value   | Meaning                                   |
 | ------ | -------------------------------------- |
 | `latency`  | Increase method latency                       |
 | `return` | Modify return values of a method                             |
 | `exception` | Throw custom exceptions           |
-| `stress`    | Increase CPU usage of java process, or cause memory overflow (support heap overflow and stack overflow)    |
+| `stress`    | Increase CPU usage of Java process, or cause memory overflow (support heap overflow and stack overflow)    |
 | `gc`    | Trigger garbage collection |
 | `ruleData`    | Trigger faults by setting Byteman configuration files |
 
@@ -186,37 +188,37 @@ For different `action` values, there are different configuration items that can 
 | `value` | string | Specifies the return value of the method | string type, required. Currently, the item can be numeric and string types. If the item (return value) is string, double quotes are required, like  "chaos".    | Yes      |
 | `port`   | int     | The port ID attached to the Java process agent. The faults are injected into the Java process through this ID. | No       |
 
-### Parameters for `exception `
+### Parameters for `exception`
 
 | Parameter       | Type                    | Description                     | Required |
 | --------- | ----------------------- | ------------------------ | -------- |
 | `class`     |  string        | The name of the Java class    | Yes       |
 | `method`      | string           | The name of the method      | Yes       |
-| `exception` | string | The thrown custom exception, for example, 'java.io.IOException("BOOM")'.   | Yes       |
+| `exception` | string | The thrown custom exception, such as 'java.io.IOException("BOOM")'.   | Yes       |
 | `port`   | int    | The port ID attached to the Java process agent. The faults are injected into the Java process through this ID. | No       |
 
-### Parameters for `stress `
+### Parameters for `stress`
 
 | Parameter       | Type                    | Description                     | Required |
 | --------- | ----------------------- | ------------------------ | -------- |
-| `cpuCount`     |  int        | The number of CPU cores used for increasing CPU stress. You can only configure one of `cpu-count` and `mem-type`.    | No       |
-| `memType`      | string           | The type of OOM. Currently, both 'stack' and 'heap' OOM types are supported. You can only configure one of `cpu-count` and `mem-type`.    | No       |
+| `cpuCount`     |  int        | The number of CPU cores used for increasing CPU stress. You must configure one item between `cpu-count` and `mem-type`.    | No       |
+| `memType`      | string           | The type of OOM. Currently, both 'stack' and 'heap' OOM types are supported. You must configure one item between `cpu-count` and `mem-type`.    | No       |
 | `port`   | int    | The port ID attached to the Java process agent. The faults are injected into the Java process through this ID. | No       |
 
-### Parameters for `gc `
+### Parameters for `gc`
 
 | Parameter       | Type                    | Description                     | Required |
 | --------- | ----------------------- | ------------------------ | -------- |
 | `port`   | int    | The port ID attached to the Java process agent. The faults are injected into the Java process through this ID. | No       |
 
-### Parameters for `ruleData `
+### Parameters for `ruleData`
 
 | Parameter       | Type                    | Description                     | Required |
 | --------- | ----------------------- | ------------------------ | -------- |
 | `ruleData`    |  srting        | Specifies the Byteman configuration data    | Yes       |
 | `port`   | int    | The port ID attached to the Java process agent. The faults are injected into the Java process through this ID. | No       |
 
-You need to write the rule configuration file according to the specific Java program and refer to [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language). For example:
+When you write the rule configuration file, take into account the specific Java program and the [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language). For example:
 
 ```txt
 RULE modify return value
@@ -229,7 +231,7 @@ DO
 ENDRULE
 ```
 
-You need to convert the line breaks in the configuration file to the newline character "\n", and use the converted text as the value of "rule-data" as follows:
+You need to escape the line breaks in the configuration file to the newline character "\n", and use the escaped text as the value of "rule-data" as follows:
 
 ```txt
 \nRULE modify return value\nCLASS Main\nMETHOD getnum\nAT ENTRY\nIF true\nDO return 9999\nENDRULE\n"
