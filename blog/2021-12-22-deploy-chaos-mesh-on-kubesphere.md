@@ -8,7 +8,7 @@ image: /img/chaos-mesh-kubesphere-banner.png
 tags: [Chaos Mesh, Chaos Engineering, community]
 ---
 
-![Chaos Mesh + SkyWalking: Better Observability for Chaos Engineering](/img/chaos-mesh-skywalking-banner.png)
+![Deploy Chaos Mesh on KubeSphere](/img/chaos-mesh-kubesphere-banner.png)
 
 
 [Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh) is a cloud-native Chaos Engineering platform that orchestrates chaos in Kubernetes environments. With Chaos Mesh, you can test your system's resilience and robustness on Kubernetes by injecting various types of faults into Pods, network, file system, and even the kernel.
