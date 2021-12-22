@@ -78,7 +78,7 @@ kubectl -n helloworld get pods
 预期结果如下：
 
 ```text
-kubectl get pods -n helloworld
+kubectl get pods -n helloworld            
 NAME         READY   STATUS    RESTARTS   AGE
 helloworld   1/1     Running   0          2m
 ```
@@ -118,7 +118,7 @@ spec:
   action: return
   class: Main
   method: getnum
-  value: '9999'
+  value: "9999"
   mode: all
   selector:
     namespaces:
@@ -133,7 +133,7 @@ JVMChaos 将 `getnum` 方法的返回值修改为数字 `9999`，也就是让 `h
 kubectl apply -f ./jvm-return-example.yaml
 ```
 
-3. 查看 helloworld 的最新日志：
+3. 查看 `helloworld` 的最新日志：
 
 ```shell
 kubectl -n helloworld logs -f helloworld
@@ -152,71 +152,71 @@ caught ReturnException
 
 | 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
 | --- | --- | --- | --- | --- | --- |
-| action | string | 表示具体的故障类型，支持 latency、return、exception、stress、gc、ruleData。 | 无 | 是 | return |
-| mode | string | 表示选择 Pod 的方式，支持 one、all、fixed、fixed-percent、random-max-percent。 | 无 | 是 | `one` |
+| `action` | string | 表示具体的故障类型，支持 latency、return、exception、stress、gc、ruleData。 | 无 | 是 | `return` |
+| `mode` | string | 表示选择 Pod 的方式，支持 one、all、fixed、fixed-percent、random-max-percent。 | 无 | 是 | `one` |
 
-关于 action 的取值的含义，可参考：
+关于 `action` 的取值的含义，可参考以下内容：
 
-| 名称      | 含义                                                           |
-| --------- | -------------------------------------------------------------- |
-| latency   | 增加方法调用延迟                                               |
-| return    | 修改方法返回值                                                 |
-| exception | 抛出自定义异常                                                 |
-| stress    | 提高 java 进程 CPU 使用率，或者造成 内存溢出（支持堆、栈溢出） |
-| gc        | 触发垃圾回收                                                   |
-| ruleData  | 设置 Byteman 配置触发故障                                      |
+| 取值   | 含义                                   |
+| ------ | -------------------------------------- |
+| `latency`  | 增加方法延迟                       |
+| `return` | 修改方法返回值                             |
+| `exception` | 抛出自定义异常           |
+| `stress`    | 提高 java 进程 CPU 使用率，或者造成       内存溢出（支持堆、栈溢出）    |
+| `gc`    | 触发垃圾回收 |
+| `ruleData`    | 设置 Byteman 配置触发故障 |
 
-针对不同的 `action`，有不同的配置项可以填写。
+针对不同的 `action` 的值，有不同的配置项可以填写。
 
-### latency 相关参数
+### `latency` 相关参数
 
-| 参数    | 类型        | 说明                                                                | 是否必填 |
-| ------- | ----------- | ------------------------------------------------------------------- | -------- |
-| class   | string 类型 | Java 类的名称                                                       | 是       |
-| method  | string 类型 | 方法名称                                                            | 是       |
-| latency | int 类型    | 增加方法的延迟时间，单位为 ms                                       | 是       |
-| port    | int 类型    | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | 否       |
+| 参数      | 类型                    | 说明                     | 是否必填 |
+| --------- | ----------------------- | ------------------------ | -------- |
+| `class`     |  string 类型        | Java 类的名称    | 是       |
+| `method`      | string 类型           | 方法名称      | 是       |
+| `latency` | int 类型 | 增加方法的延迟时间，单位为 ms    | 是       |
+| `port`   | int 类型     | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | 否       |
 
-### return 相关参数
+### `return` 相关参数
 
-| 参数 | 类型 | 说明 | 是否必填 |
-| --- | --- | --- | --- |
-| class | string 类型 | Java 类的名称 | 是 |
-| method | string 类型 | 方法名称 | 是 |
-| value | string 类型 | 指定方法的返回值，目前支持数字和字符串类型的返回值，如果为字符串，则需要使用双引号，例如："chaos"。 | 是 |
-| port | int 类型 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | 否 |
+| 参数      | 类型                    | 说明                     | 是否必填 |
+| --------- | ----------------------- | ------------------------ | -------- |
+| `class`     |  string 类型        | Java 类的名称    | 是       |
+| `method`     | string 类型           | 方法名称      | 是       |
+| `value` | string 类型 | 指定方法的返回值，目前支持数字和字符串类型的返回值，如果为字符串，则需要使用双引号，例如："chaos"。    | 是       |
+| `port`   | int 类型     | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | 否       |
 
-### exception 相关参数
+### `exception` 相关参数
 
-| 参数      | 类型        | 说明                                                                | 是否必填 |
-| --------- | ----------- | ------------------------------------------------------------------- | -------- |
-| class     | string 类型 | Java 类的名称                                                       | 是       |
-| method    | string 类型 | 方法名称                                                            | 是       |
-| exception | string 类型 | 抛出的自定义异常，例如：'java.io.IOException("BOOM")'               | 是       |
-| port      | int 类型    | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | 否       |
+| 参数      | 类型                    | 说明                     | 是否必填 |
+| --------- | ----------------------- | ------------------------ | -------- |
+| `class`     |  string 类型        | Java 类的名称    | 是       |
+| `method`      | string 类型           | 方法名称      | 是       |
+| `exception` | string 类型 | 抛出的自定义异常，例如：'java.io.IOException("BOOM")'   | 是       |
+| `port`   | int 类型     | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | 否       |
 
-### stress 相关参数
+### `stress` 相关参数
 
-| 参数     | 类型        | 说明                                                                       | 是否必填 |
-| -------- | ----------- | -------------------------------------------------------------------------- | -------- |
-| cpuCount | int 类型    | 增加 CPU 压力所使用的 CPU 核的数量，`cpuCount` 和 `memType` 中必须配置一个 | 否       |
-| memType  | string 类型 | 内存 OOM 的类型，目前支持 "stack" 和 "heap" 两种类型                       | 无       |
-| port     | int 类型    | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程        | 否       |
+| 参数      | 类型                    | 说明                     | 是否必填 |
+| --------- | ----------------------- | ------------------------ | -------- |
+| `cpuCount`     |  int 类型        | 增加 CPU 压力所使用的 CPU 核的数量，`cpuCount` 和 `memType` 中必须配置一个    | 否       |
+| `memType`      | string 类型           | 内存 OOM 的类型，目前支持 "stack" 和 "heap" 两种类型，`cpuCount` 和 `memType` 中必须配置一个      | 否       |
+| `port`   | int 类型     | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | 否       |
 
-### gc 相关参数
+### `gc` 相关参数
 
-| 参数 | 类型     | 说明                                                                | 是否必填 |
-| ---- | -------- | ------------------------------------------------------------------- | -------- |
-| port | int 类型 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | 否       |
+| 参数      | 类型                    | 说明                     | 是否必填 |
+| --------- | ----------------------- | ------------------------ | -------- |
+| `port`   | int 类型     | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | 否       |
 
-### ruleData 相关参数
+### `ruleData` 相关参数
 
-| 参数     | 类型        | 说明                                                                | 是否必填 |
-| -------- | ----------- | ------------------------------------------------------------------- | -------- |
-| ruleData | srting 类型 | 指定 Byteman 配置数据                                               | 是       |
-| port     | int 类型    | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | 否       |
+| 参数      | 类型                    | 说明                     | 是否必填 |
+| --------- | ----------------------- | ------------------------ | -------- |
+| `ruleData`     |  srting 类型        | 指定 Byteman 配置数据    | 是       |
+| `port`   | int 类型     | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | 否       |
 
-需要根据具体的 Java 程序，并参考 [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language) 编写规则配置文件，例如：
+当编写规则配置文件时，你需要根据具体的 Java 程序，并参考 [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language)。例如：
 
 ```txt
 RULE modify return value
