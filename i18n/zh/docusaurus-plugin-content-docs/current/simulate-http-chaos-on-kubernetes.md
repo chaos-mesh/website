@@ -28,17 +28,17 @@ HTTPChaos 支持多种类型故障的组合。在创建 HTTPChaos 实验时，�
 
 ## 使用 Dashboard 创建实验
 
-1. 打开 Chaos Dashboard 面板，单击实验页面中的“**新的实验**”按钮创建实验：
+1. 打开 Chaos Dashboard 面板，单击实验页面中的**新的实验**按钮创建实验：
 
-![创建实验](./img/create-new-exp.png)
+    ![创建实验](./img/create-new-exp.png)
 
-2. 在“**选择目标**”区域选择“**HTTP 故障**”，然后选择具体行为（如 `RESPONSE ABORT`），并填写具体配置：
+2. 在**选择目标**区域选择**HTTP 故障**，然后选择具体行为（如 `RESPONSE ABORT`），并填写具体配置：
 
-![创建 HTTP 故障](./img/create-new-httpchaos.png)
+    ![创建 HTTP 故障](./img/create-new-httpchaos.png)
 
 3. 提交实验。
 
-以上图为例，点击"**提交**"即完成了对 80 端口所有请求的响应中断配置。
+    以上图为例，点击**提交**即完成了对 80 端口所有请求的响应中断配置。
 
 ## 使用 YAML 文件创建实验
 
@@ -48,71 +48,71 @@ Chaos Mesh 也支持使用 YAML 配置文件创建 HTTPChaos 实验。在 YAML �
 
 1. 将实验配置写入到 `http-abort-failure.yaml` 文件中，内容示例如下：
 
-   ```yaml
-   apiVersion: chaos-mesh.org/v1alpha1
-   kind: HTTPChaos
-   metadata:
-     name: test-http-chaos
-   spec:
-     mode: all
-     selector:
-       labelSelectors:
-         app: nginx
-     target: Request
-     port: 80
-     method: GET
-     path: /api
-     abort: true
-     duration: 5m
-   ```
+    ```yaml
+    apiVersion: chaos-mesh.org/v1alpha1
+    kind: HTTPChaos
+    metadata:
+      name: test-http-chaos
+    spec:
+      mode: all
+      selector:
+        labelSelectors:
+          app: nginx
+      target: Request
+      port: 80
+      method: GET
+      path: /api
+      abort: true
+      duration: 5m
+    ```
 
-   依据此配置示例，Chaos Mesh 将向指定的 Pod 中注入 `abort` 故障 5 分钟，故障注入期间该 Pod 的 80 端口 `/api` 路径的 GET 请求会被中断。
+    依据此配置示例，Chaos Mesh 将向指定的 Pod 中注入 `abort` 故障 5 分钟，故障注入期间该 Pod 的 80 端口 `/api` 路径的 GET 请求会被中断。
 
 2. 使用 `kubectl` 创建实验，命令如下：
 
-   ```bash
-   kubectl apply -f ./http-abort-failure.yaml
-   ```
+    ```bash
+    kubectl apply -f ./http-abort-failure.yaml
+    ```
 
 ### 其它故障组合示例
 
 1. 将实验配置写入到 `http-failure.yaml` 文件中，内容示例如下：
 
-   ```yaml
-   apiVersion: chaos-mesh.org/v1alpha1
-   kind: HTTPChaos
-   metadata:
-     name: test-http-chaos
-   spec:
-     mode: all
-     selector:
-       labelSelectors:
-         app: nginx
-     target: Request
-     port: 80
-     method: GET
-     path: /api/*
-     delay: 10s
-     replace:
-       path: /api/v2/
-       method: DELETE
-     patch:
-       headers:
-         - ['Token', '<one token>']
-         - ['Token', '<another token>']
-       body:
-         type: JSON
-         value: '{"foo": "bar"}'
-     duration: 5m
-   ```
+    ```yaml
+    apiVersion: chaos-mesh.org/v1alpha1
+    kind: HTTPChaos
+    metadata:
+      name: test-http-chaos
+    spec:
+      mode: all
+      selector:
+        labelSelectors:
+          app: nginx
+      target: Request
+      port: 80
+      method: GET
+      path: /api/*
+      delay: 10s
+      replace:
+        path: /api/v2/
+        method: DELETE
+      patch:
+        headers:
+          - ['Token', '<one token>']
+          - ['Token', '<another token>']
+        body:
+          type: JSON
+          value: '{"foo": "bar"}'
+      duration: 5m
+    ```
 
-   依据此配置示例，Chaos Mesh 将向指定的 Pod 中分别注入 `delay` 故障、`replace` 故障、`patch` 故障。
+    依据此配置示例，Chaos Mesh 将向指定的 Pod 中分别注入 `delay` 故障、`replace` 故障、`patch` 故障。
 
 2. 使用 `kubectl` 创建实验，命令如下：
 
-   ```bash
-   kubectl apply -f ./http-failure.yaml
-   ```
+    ```bash
+    kubectl apply -f ./http-failure.yaml
+    ```
 
 ## 字段说明
 

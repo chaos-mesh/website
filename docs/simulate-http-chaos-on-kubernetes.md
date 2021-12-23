@@ -30,89 +30,89 @@ Before injecting the faults supported by HTTPChaos, note the followings:
 
 1. Open Chaos Dashboard, and click "**NEW EXPERIMENT**" on the page to create a new experiment:
 
-![create an experiment](./img/create-new-exp.png)
+    ![create an experiment](./img/create-new-exp.png)
 
 2. In the ”**Choose a Target**” area, choose "**HTTP FAULT**" and select a specific behavior, such as `RESPONSE ABORT`. Then fill out specific configuration.
 
-![create HTTP fault](./img/create-new-httpchaos.png)
+    ![create HTTP fault](./img/create-new-httpchaos.png)
 
 3. Submit the experiment.
 
-Take the above image as an example, click the "**submit**" button means that you have interrupted the configurations to the responses of all requests of Port 80.
+    In the example above, you have configured injecting the "Response abort" fault into all requests of Port 80.
 
 ## Create experiments using YAML files
 
-Chaos Mesh also supports using YAML configuration files to create HTTPChaos experiments. In the YAML files, you can simulate either one HTTP fault type or a combination of different HTTP fault types.
+Chaos Mesh also supports using YAML configuration files to create HTTPChaos experiments. In a YAML file, you can simulate either one HTTP fault type or a combination of different HTTP fault types.
 
 ### Example of `abort`
 
 1. Write the experimental configuration to the `http-abort-failure.yaml` file as the example below:
 
-   ```yaml
-   apiVersion: chaos-mesh.org/v1alpha1
-   kind: HTTPChaos
-   metadata:
-     name: test-http-chaos
-   spec:
-     mode: all
-     selector:
-       labelSelectors:
-         app: nginx
-     target: Request
-     port: 80
-     method: GET
-     path: /api
-     abort: true
-     duration: 5m
-   ```
+    ```yaml
+    apiVersion: chaos-mesh.org/v1alpha1
+    kind: HTTPChaos
+    metadata:
+      name: test-http-chaos
+    spec:
+      mode: all
+      selector:
+        labelSelectors:
+          app: nginx
+      target: Request
+      port: 80
+      method: GET
+      path: /api
+      abort: true
+      duration: 5m
+    ```
 
-   Based on this configuration example, Chaos Mesh will inject the `abort` fault into the specified pod for 5 minutes. During the fault injection, the GET requests sent through port 80 in the `/api` path of the target Pod will be interrupted.
+    Based on this configuration example, Chaos Mesh will inject the `abort` fault into the specified pod for 5 minutes. During the fault injection, the GET requests sent through port 80 in the `/api` path of the target Pod will be interrupted.
 
 2. After the configuration file is prepared, use `kubectl` to create the experiment:
 
-   ```bash
-   kubectl apply -f ./http-abort-failure.yaml
-   ```
+    ```bash
+    kubectl apply -f ./http-abort-failure.yaml
+    ```
 
 ### Example of fault combinations
 
 1. Write the experimental configuration to `http-failure.yaml` file as the example below:
 
-   ```yaml
-   apiVersion: chaos-mesh.org/v1alpha1
-   kind: HTTPChaos
-   metadata:
-     name: test-http-chaos
-   spec:
-     mode: all
-     selector:
-       labelSelectors:
-         app: nginx
-     target: Request
-     port: 80
-     method: GET
-     path: /api/*
-     delay: 10s
-     replace:
-       path: /api/v2/
-       method: DELETE
-     patch:
-       headers:
-         - ['Token', '<one token>']
-         - ['Token', '<another token>']
-       body:
-         type: JSON
-         value: '{"foo": "bar"}'
-     duration: 5m
-   ```
+    ```yaml
+    apiVersion: chaos-mesh.org/v1alpha1
+    kind: HTTPChaos
+    metadata:
+      name: test-http-chaos
+    spec:
+      mode: all
+      selector:
+        labelSelectors:
+          app: nginx
+      target: Request
+      port: 80
+      method: GET
+      path: /api/*
+      delay: 10s
+      replace:
+        path: /api/v2/
+        method: DELETE
+      patch:
+        headers:
+          - ['Token', '<one token>']
+          - ['Token', '<another token>']
+        body:
+          type: JSON
+          value: '{"foo": "bar"}'
+      duration: 5m
+    ```
 
-   Based on this configuration example, Chaos Mesh will inject the `delay` fault, `replace` fault, and `patch` fault consecutively.
+    Based on this configuration example, Chaos Mesh will inject the `delay` fault, `replace` fault, and `patch` fault consecutively.
 
 2. After the configuration file is prepared, use `kubectl` to create the experiment:
 
-   ```bash
-   kubectl apply -f ./http-failure.yaml
-   ```
+    ```bash
+    kubectl apply -f ./http-failure.yaml
+    ```
 
 ## Field description
 
@@ -126,7 +126,7 @@ Common fields are meaningful when the `target` of fault injection is `Request` o
 | `value` | string | Provides parameters for the `mode` configuration depending on the value of `mode`. |  | no | 1 |
 | `target` | string | Specifies whether the target of fault injuection is `Request` or `Response`. The [`target`-related fields](#Description-for-`target`-related-fields) should be configured at the same time. |  | yes | Request |
 | `port` | int32 | The TCP port that the target service listens on. |  | yes | 80 |
-| `path` | string | The URI path of the target request which supports [Matching wildcards](https://www.wikiwand.com/en/Matching_wildcards). | Takes effect on all paths by default. | no | /api/\* |
+| `path` | string | The URI path of the target request. Supports [Matching wildcards](https://www.wikiwand.com/en/Matching_wildcards). | Takes effect on all paths by default. | no | /api/\* |
 | `method`| string | The HTTP method of the target request method. | Takes effect for all methods by default. | no | GET |
 | `request_headers` | map[string]string | Matches request headers to the target service. | Takes effect for all requests by default. | no | Content-Type: application/json |
 | `abort` | bool | Indicates whether to inject the fault that interrupts server connection. | false | no | true |
