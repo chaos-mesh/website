@@ -39,7 +39,7 @@ Global Flags:
 | :-- | :-- | :-- | :-- |
 | `all` | A | 列出所有的实验 | bool 类型 |
 | `asc` | 无 | 按照创建时间的升序对实验进行排列，默认值为 `false` | bool 类型 |
-| `kind` | k | 列出指定类型的实验 | string 类型，支持的类型包括：`network`、`process`、`stress`、`disk`、`host`、`JVM` |
+| `kind` | k | 列出指定类型的实验 | string 类型，支持的类型包括：`network`、`process`、`stress`、`disk`、`host`、`jvm` |
 | `limit` | l | 列出实验的数量 | int 类型 |
 | `offset` | o | 从指定的偏移量开始搜索 | int 类型 |
 | `status` | s | 列出指定状态的实验 | string 类型，支持的状态类型包括：`created`、`success`、`error`、`destroyed`、`revoked`

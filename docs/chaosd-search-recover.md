@@ -1,13 +1,13 @@
 ---
-title: Search and Recover Experiments Using Chaosd
-summary: Describes how to search and recover the experiments created by Chaosd, and provide related examples.
+title: Search and Recover Experiments of Chaosd
+summary: Describes how to search and recover the experiments of Chaosd, and provide related examples.
 ---
 
-You can search experiments by conditions and recover the experiments corresponding to specified UIDs using Chaosd. This document describes how to search and recover experiments using Chaosd, and provides releated examples.
+You can search experiments by conditions and recover the experiments corresponding to specified UIDs using Chaosd. This document describes how to search and recover experiments of Chaosd, and provides releated examples.
 
-## Search experiments using Chaosd
+## Search experiments of Chaosd
 
-This section introduces how to use command-line mode and service mode to find experiments using Chaosd.
+This section introduces how to use command-line mode and service mode to find experiments of Chaosd.
 
 ### Search experiments using command-line mode
 
@@ -39,8 +39,8 @@ Global Flags:
 | :-- | :-- | :-- | :-- |
 | `all` | A | Lists all experiments | bool |
 | `asc` | None | Sorts the experiments in ascending order of the creation time. The default value is `false`.| bool |
-| `kind` | k | Lists experiments of the specified kind | string. The supported kinds are as follows: `network`, `process`, `stress`, `disk`, `host`, `JVM` |
-| `limit` | l | Lists the number of experiments | int |
+| `kind` | k | Lists experiments of the specified kind | string. The supported kinds are as follows: `network`, `process`, `stress`, `disk`, `host`, `jvm` |
+| `limit` | l | The number of listed experiments? | int |
 | `offset` | o | Searches from the specified offset | int |
 | `status` | s | Lists experiments with the specified status | string. The supported types are as follows: `created`, `success`, `error`, `destroyed`, `revoked`
 
@@ -50,7 +50,7 @@ Global Flags:
 ./chaosd search --kind network --status destroyed --limit 1
 ```
 
-By running this command, you can search the experiments of the kind of `network` in the status of `destroyed` (indicating that the experiment has been restored).
+By running this command, you can search the experiments of the kind of `network` in the status of `destroyed` (indicating that the experiment has been recovered).
 
 After running the command, only one row of data is output in the result:
 
@@ -76,7 +76,7 @@ The result is as follows:
 [{"id":1,"uid":"ddc5ca81-b677-4595-b691-0ce57bedb156","created_at":"2021-10-18T16:01:18.563542491+08:00","updated_at":"2021-10-18T16:07:27.87111393+08:00","status":"success","kind":"stress","action":"mem","recover_command":"{\"schedule\":\"\",\"duration\":\"\",\"action\":\"mem\",\"kind\":\"stress\",\"uid\":\"ddc5ca81-b677-4595-b691-0ce57bedb156\",\"Load\":0,\"Workers\":0,\"Size\":\"100MB\",\"Options\":null,\"StressngPid\":0}","launch_mode":"svr"}]
 ```
 
-## Recover Chaosd experiments
+## Recover experiments of Chaosd
 
 After creating an experiment, if you want to withdraw the impact caused by the experiment, you can use the recovery feature of experiments.
 
