@@ -69,7 +69,7 @@ Global Flags:
 
 | Configuration item | Abbreviation | Description | Type                                                                                             | Value                                    |
 | :----------------- | :----------- | :----------------------------------------------------------------------------------------------------- | :---------------------------------------| :--------------------------------------- |
-| `load`               | l            | Specifies the percentage of CPU load per CPU worker. `0` means no CPU load, and `100` means full CPU load. | int | Range: `0` to `100`; Default value: `10`. |
+| `load`               | l            | Specifies the percentage of CPU load per CPU worker. `0` means no CPU utilization, and `100` means full CPU utilization. | int | Range: `0` to `100`; Default value: `10`. |
 | `workers`            | w            | Specifies the number of workers used to create CPU stress.                                             | int | Default value: 1.                   |
 | `options`            | o            | The extended parameter of stress-ng, usually not configured.                                           | string | Default value: "".               |
 
@@ -151,15 +151,15 @@ Recover c2bff2f5-3aac-4ace-b7a6-322946ae6f13 successfully
 
 You can follow the instructions below to create experiments using service mode.
 
-1. Execute Chaosd in service mode:
+1. Run Chaosd in service mode:
 
    ```bash
    chaosd server --port 31767
    ```
 
-2. Send HTTP POST request to the `/api/attack/{uid}` path of Chaosd service.
+2. Send a `POST` HTTP request to the `/api/attack/{uid}` path of Chaosd service.
 
-   ```bash 
+   ```bash
    curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{fault-configuration}'
    ```
 
@@ -178,7 +178,7 @@ When running an experiment, remember to save the UID information of the experime
 | Parameter | Description | Type | Value |
 | :-- | :-- | :-- | :-- |
 | `action` | Actions of the experiment |  | Set to "cpu" |
-| `load` | Specifies the percentage of CPU load per CPU worker. `0` means no CPU load, and `100`means full CPU load. | int | Range: `0` to `100`; Default value: `10` |
+| `load` | Specifies the percentage of CPU load per CPU worker. `0` means no CPU utilization, and `100` means full CPU utilization. | int | Range: `0` to `100`; Default value: `10` |
 | `workers` | Specifies the number of workers used to create CPU stress | int | Default value: `1` |
 | `options` | The extended parameter of stress-ng, usually not configured. | string | Default value: "" |
 

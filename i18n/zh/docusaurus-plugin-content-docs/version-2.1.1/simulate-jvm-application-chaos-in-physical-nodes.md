@@ -86,12 +86,12 @@ Global Flags:
 
 | 配置项 | 配置缩写 | 说明 | 值 |
 | :-- | :-- | :-- | :-- |
-| class | c | Java 类的名称 | string 类型，必须配置 |
-| exception | 无 | 抛出的自定义异常 | string 类型，必须配置 |
-| method | m | 方法名称 | string 类型，必须配置 |
-| pid | 无 | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
-| port | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
-| uid | 无 | 实验的编号 | string 类型，可以不配置，因为 Chaosd 会随机生成一个 |
+| `class` | c | Java 类的名称 | string 类型，必须配置 |
+| `exception` | 无 | 抛出的自定义异常 | string 类型，必须配置 |
+| `method` | m | 方法名称 | string 类型，必须配置 |
+| `pid` | 无 | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
+| `port` | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
+| `uid` | 无 | 实验的编号 | string 类型，可以不配置，因为 Chaosd 会随机生成一个 |
 
 #### 抛出自定义异常示例
 
@@ -136,9 +136,9 @@ Global Flags:
 
 | 配置项 | 配置缩写 | 说明 | 值 |
 | :-- | :-- | :-- | :-- |
-| pid | 无 | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
-| port | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
-| uid | 无 | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
+| `pid` | 无 | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
+| `port` | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
+| `uid` | 无 | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
 
 #### 触发垃圾回收示例
 
@@ -188,12 +188,12 @@ Global Flags:
 
 | 配置项 | 配置缩写 | 说明 | 值 |
 | :-- | :-- | :-- | :-- |
-| class | c | Java 类的名称 | string 类型，必须配置 |
-| latency | 无 | 增加方法的延迟时间 | int 类型，必须配置，单位为 ms |
-| method | m | 方法名称 | string 类型，必须配置 |
-| pid | 无 | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
-| port | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
-| uid | 无 | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
+| `class` | c | Java 类的名称 | string 类型，必须配置 |
+| `latency` | 无 | 增加方法的延迟时间 | int 类型，必须配置，单位为 ms |
+| `method` | m | 方法名称 | string 类型，必须配置 |
+| `pid` | 无 | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
+| `port` | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
+| `uid` | 无 | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
 
 #### 增加方法延迟示例
 
@@ -240,12 +240,12 @@ Global Flags:
 
 | 配置项 | 配置缩写 | 说明 | 值 |
 | :-- | :-- | :-- | :-- |
-| class | c | Java 类的名称 | string 类型，必须配置 |
-| method | m | 方法名称 | string 类型，必须配置 |
-| value | 无 | 指定方法的返回值 | string 类型，必须配置。目前支持数字和字符串类型的返回值，如果为字符串，则需要使用双引号，例如："chaos"。 |
-| pid | 无 | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
-| port | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
-| uid | 无 | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
+| `class` | c | Java 类的名称 | string 类型，必须配置 |
+| `method` | m | 方法名称 | string 类型，必须配置 |
+| `value` | 无 | 指定方法的返回值 | string 类型，必须配置。目前支持数字和字符串类型的返回值，如果为字符串，则需要使用双引号，例如："chaos"。 |
+| `pid` | 无 | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
+| `port` | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
+| `uid` | 无 | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
 
 #### 修改方法返回值示例
 
@@ -294,10 +294,10 @@ Global Flags:
 
 | 配置项 | 配置缩写 | 说明 | 值 |
 | :-- | :-- | :-- | :-- |
-| path | 无 | 指定 Byteman 配置文件的路径 | string 类型，必须配置 |
-| pid | 无 | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
-| port | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
-| uid | 无 | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
+| `path` | 无 | 指定 Byteman 配置文件的路径 | string 类型，必须配置 |
+| `pid` | 无 | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
+| `port` | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
+| `uid` | 无 | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
 
 #### 设置 Byteman 配置文件触发故障示例
 
@@ -360,11 +360,11 @@ Global Flags:
 
 | 配置项 | 配置缩写 | 说明 | 值 |
 | :-- | :-- | :-- | :-- |
-| cpu-count | 无 | 增加 CPU 压力所使用的 CPU 核的数量 | int 类型，`cpu-count` 和 `mem-type` 只能配置一个 |
-| mem-type | 无 | OOM 的类型 | string 类型，目前支持 'stack' 和 'heap' 两种 OOM 类型。`cpu-count` 和 `mem-type` 只能配置一个。 |
-| pid | 无 | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
-| port | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
-| uid | 无 | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
+| `cpu-count` | 无 | 增加 CPU 压力所使用的 CPU 核的数量 | int 类型，`cpu-count` 和 `mem-type` 只能配置一个 |
+| `mem-type` | 无 | OOM 的类型 | string 类型，目前支持 'stack' 和 'heap' 两种 OOM 类型。`cpu-count` 和 `mem-type` 只能配置一个。 |
+| `pid` | 无 | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
+| `port` | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
+| `uid` | 无 | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
 
 #### 增加 JVM 压力示例
 
@@ -390,9 +390,9 @@ Attack jvm successfully, uid: b9b997b5-0a0d-4f1f-9081-d52a32318b84
    chaosd server --port 31767
    ```
 
-2. 向 chaosd 服务的路径 /api/attack/jvm 发送 HTTP POTST 请求。
+2. 向 Chaosd 服务的路径 `/api/attack/jvm` 发送 `POST` HTTP 请求。
 
-   ```bash 
+   ```bash
    curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{fault-configuration}'
    ```
 
@@ -400,9 +400,9 @@ Attack jvm successfully, uid: b9b997b5-0a0d-4f1f-9081-d52a32318b84
 
 ::: note 注意
 
-在运行实验时，请注意保存实验的 UID 信息。当要结束 UID 对应的实验时，需要向 Chaosd 服务的路径 /api/attack/{uid} 发送 HTTP DELETE 请求。
+在运行实验时，请注意保存实验的 UID 信息。当要结束 UID 对应的实验时，需要向 Chaosd 服务的路径 /api/attack/{uid} 发送 `DELETE` HTTP 请求。
 
-::: 
+:::
 
 ### 使用服务模式模拟抛出自定义异常
 
@@ -410,13 +410,13 @@ Attack jvm successfully, uid: b9b997b5-0a0d-4f1f-9081-d52a32318b84
 
 | 参数 | 说明 | 值 |
 | :-- | :-- | :-- |
-| action | 实验的行为 | 设置为 "exception" |
-| class | Java 类的名称 | string 类型，必须配置 |
-| exception | 抛出的自定义异常 | string 类型，必须配置 |
-| method | 方法名称 | string 类型，必须配置 |
-| pid | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
-| port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
-| uid | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
+| `action` | 实验的行为 | 设置为 "exception" |
+| `class` | Java 类的名称 | string 类型，必须配置 |
+| `exception` | 抛出的自定义异常 | string 类型，必须配置 |
+| `method` | 方法名称 | string 类型，必须配置 |
+| `pid` | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
+| `port` | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
+| `uid` | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
 
 #### 使用服务模式模拟抛出自定义异常示例
 
@@ -436,10 +436,10 @@ curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/js
 
 | 参数 | 说明 | 值 |
 | :-- | :-- | :-- |
-| action | 实验的行为 | 设置为 "gc" |
-| pid | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
-| port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
-| uid | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
+| `action` | 实验的行为 | 设置为 "gc" |
+| `pid` | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
+| `port` | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
+| `uid` | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
 
 #### 使用服务模式模拟触发垃圾回收示例
 
@@ -461,13 +461,13 @@ curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/js
 
 | 参数 | 说明 | 值 |
 | :-- | :-- | :-- |
-| action | 实验的行为 | 设置为 "latency" |
-| class | Java 类的名称 | string 类型，必须配置 |
-| latency | 增加方法的延迟时间 | int 类型，必须配置，单位为 ms |
-| method | 方法名称 | string 类型，必须配置 |
-| pid | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
-| port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
-| uid | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
+| `action` | 实验的行为 | 设置为 "latency" |
+| `class` | Java 类的名称 | string 类型，必须配置 |
+| `latency` | 增加方法的延迟时间 | int 类型，必须配置，单位为 ms |
+| `method` | 方法名称 | string 类型，必须配置 |
+| `pid` | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
+| `port` | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
+| `uid` | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
 
 #### 使用服务模式模拟增加方法延迟示例
 
@@ -487,13 +487,13 @@ curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/js
 
 | 参数 | 说明 | 值 |
 | :-- | :-- | :-- |
-| action | 实验的行为 | 设置为 "return" |
-| class | Java 类的名称 | string 类型，必须配置 |
-| method | 方法名称 | string 类型，必须配置 |
-| value | 指定方法的返回值 | string 类型，必须配置。目前支持数字和字符串类型的返回值，如果为字符串，则需要使用双引号，例如："chaos"。 |
-| pid | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
-| port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
-| uid | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
+| `action` | 实验的行为 | 设置为 "return" |
+| `class` | Java 类的名称 | string 类型，必须配置 |
+| `method` | 方法名称 | string 类型，必须配置 |
+| `value` | 指定方法的返回值 | string 类型，必须配置。目前支持数字和字符串类型的返回值，如果为字符串，则需要使用双引号，例如："chaos"。 |
+| `pid` | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
+| `port` | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
+| `uid` | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
 
 #### 使用服务模式模拟修改方法返回值示例
 
@@ -515,11 +515,11 @@ curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/js
 
 | 参数 | 说明 | 值 |
 | :-- | :-- | :-- |
-| action | 实验的行为 | 设置为 "rule-data" |
-| rule-data | 指定 Byteman 配置数据 | string 类型，必须配置 |
-| pid | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
-| port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
-| uid | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
+| `action` | 实验的行为 | 设置为 "rule-data" |
+| `rule-data` | 指定 Byteman 配置数据 | string 类型，必须配置 |
+| `pid` | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
+| `port` | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
+| `uid` | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
 
 #### 服务模式下设置 Byteman 配置文件触发故障示例
 
@@ -554,12 +554,12 @@ curl -X POST 127.0.0.1:31767/api/attack/jvm -H "Content-Type:application/json" -
 
 | 参数 | 说明 | 值 |
 | :-- | :-- | :-- |
-| action | 实验的行为 | 设置为 "stress" |
-| cpu-count | 增加 CPU 压力所使用的 CPU 核的数量 | int 类型，`cpu-count` 和 `mem-type` 中必须配置一个 |
-| mem-type | OOM 的类型 | string 类型，目前支持 'stack' 和 'heap' 两种 OOM 类型。`cpu-count` 和 `mem-type` 中必须配置一个 |
-| pid | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
-| port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
-| uid | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
+| `action` | 实验的行为 | 设置为 "stress" |
+| `cpu-count` | 增加 CPU 压力所使用的 CPU 核的数量 | int 类型，`cpu-count` 和 `mem-type` 中必须配置一个 |
+| `mem-type` | OOM 的类型 | string 类型，目前支持 'stack' 和 'heap' 两种 OOM 类型。`cpu-count` 和 `mem-type` 中必须配置一个 |
+| `pid` | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
+| `port` | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
+| `uid` | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
 
 #### 使用服务模式模拟增加 JVM 压力示例
 

@@ -145,9 +145,9 @@ Attack stress mem successfully, uid: c2bff2f5-3aac-4ace-b7a6-322946ae6f13
    chaosd server --port 31767
    ```
 
-2. 向 chaosd 服务的路径 /api/attack/stress 发送 HTTP POTST 请求。
+2. 向 Chaosd 服务的路径 `/api/attack/stress` 发送 `POST` HTTP 请求。
 
-   ```bash 
+   ```bash
    curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{fault-configuration}'
    ```
 
@@ -155,9 +155,9 @@ Attack stress mem successfully, uid: c2bff2f5-3aac-4ace-b7a6-322946ae6f13
 
 ::: note 注意
 
-在运行实验时，请注意保存实验的 UID 信息。当要结束 UID 对应的实验时，需要向 Chaosd 服务的路径 /api/attack/{uid} 发送 HTTP DELETE 请求。
+在运行实验时，请注意保存实验的 UID 信息。当要结束 UID 对应的实验时，需要向 Chaosd 服务的路径 `/api/attack/{uid}` 发送 `DELETE` HTTP 请求。
 
-::: 
+:::
 
 ### 服务模式下模拟 CPU 压力场景
 
