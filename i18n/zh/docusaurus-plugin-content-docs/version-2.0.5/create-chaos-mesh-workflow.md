@@ -54,7 +54,7 @@ spec:
       children:
         - workflow-stress-chaos
         - workflow-network-chaos
-        - workflow-pod-chaos
+        - workflow-pod-chaos-schedule
     - name: workflow-network-chaos
       templateType: NetworkChaos
       deadline: 20s
@@ -64,22 +64,23 @@ spec:
         mode: all
         selector:
           labelSelectors:
-            "app": "hello-kubernetes"
+            'app': 'hello-kubernetes'
         delay:
-          latency: "90ms"
-          correlation: "25"
-          jitter: "90ms"
+          latency: '90ms'
+          correlation: '25'
+          jitter: '90ms'
     - name: workflow-pod-chaos-schedule
       templateType: Schedule
       deadline: 40s
       schedule:
-        schedule: "@every 2s"
+        schedule: '@every 2s'
+        type: 'PodChaos'
         podChaos:
           action: pod-kill
           mode: one
           selector:
             labelSelectors:
-              "app": "hello-kubernetes"
+              'app': 'hello-kubernetes'
     - name: workflow-stress-chaos
       templateType: StressChaos
       deadline: 20s
@@ -87,12 +88,12 @@ spec:
         mode: one
         selector:
           labelSelectors:
-            "app": "hello-kubernetes"
+            'app': 'hello-kubernetes'
         stressors:
           cpu:
             workers: 1
             load: 20
-            options: ["--cpu 1"， "--timeout 600"]
+            options: ['--cpu 1', '--timeout 600']
 ```
 
 其中 `templates` 定义了实验中的各个步骤，`entry` 定义了 Workflow 执行时的入口。
@@ -172,7 +173,7 @@ podChaos:
 | 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
 | --- | --- | --- | --- | --- | --- |
 | container | object | 定义自定义任务容器，可参考 [Container 字段说明](#container-字段说明) | 无 | 否 |  |
-| volumes | array | 若需要在自定义任务容器中挂载卷，则需要在该字段声明卷。关于完整定义可参考 [corev1.Volume](https://v1-17.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.17/#volume-v1-core) | 无 | 否 |  |
+| volumes | array | 若需要在自定义任务容器中挂载卷，则需要在该字段声明卷。关于完整定义可参考 [corev1.Volume](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#volume-v1-core) | 无 | 否 |  |
 
 ### ConditionalBranch 字段说明
 
@@ -192,7 +193,7 @@ podChaos:
 
 ### Container 字段说明
 
-这里只列举了常用字段，关于完整定义可参考 [corev1.Container](https://v1-17.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.17/#container-v1-core)
+这里只列举了常用字段，关于完整定义可参考 [corev1.Container](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#container-v1-core)
 
 | 参数    | 类型     | 说明           | 默认值 | 是否必填 | 示例                                              |
 | ------- | -------- | -------------- | ------ | -------- | ------------------------------------------------- |

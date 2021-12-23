@@ -93,6 +93,10 @@ helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --version latest`
 
 <PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock --version latest`}</PickHelmVersion>
 
+#### CRI-O
+
+<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set chaosDaemon.runtime=crio --set chaosDaemon.socketPath=/var/run/crio/crio.sock --version latest`}</PickHelmVersion>
+
 :::note
 
 To install Chaos Mesh of a specific version, add the `--version xxx` parameter after `helm upgrade`, for example, `--version 2.0.0`.
@@ -142,7 +146,7 @@ For more values and their usages, refer to [all values](https://github.com/chaos
 Currently, the latest CustomResourceDefinition (CRD) is not applied during the Helm upgrading, which might cause errors. To avoid this situation, you can apply the latest CRD manually:
 
 <PickVersion>
-curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl create -f -
+curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl replace -f -
 </PickVersion>
 
 :::

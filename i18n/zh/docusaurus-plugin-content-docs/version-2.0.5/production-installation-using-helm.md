@@ -97,6 +97,10 @@ helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set chaosDaemon
 helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock
 ```
 
+#### CRI-O
+
+<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set chaosDaemon.runtime=crio --set chaosDaemon.socketPath=/var/run/crio/crio.sock --version latest`}</PickHelmVersion>
+
 :::note 注意
 
 如要安装特定版本的 Chaos Mesh，请在 `helm install` 后添加 `--version xxx` 参数，如 `--version v2.0.0`。
@@ -148,7 +152,7 @@ helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set dashboard.c
 目前，Helm 在升级时不会应用最新的 CustomResourceDefinition (CRD)，这可能会导致一些错误的发生。为了避免这种情况，请手动应用最新的 CRD：
 
 <PickVersion>
-curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl create -f -
+curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl replace -f -
 </PickVersion>
 
 :::

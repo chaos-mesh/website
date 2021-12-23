@@ -24,7 +24,7 @@ title: 新增混沌实验类型
    )
 
    // +kubebuilder:object:root=true
-   // +chaos-mesh:base
+   // +chaos-mesh:experiment
    // +chaos-mesh:oneshot=true
 
    // HelloWorldChaos is the Schema for the helloworldchaos API
