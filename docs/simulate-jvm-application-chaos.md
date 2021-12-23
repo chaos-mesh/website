@@ -59,31 +59,31 @@ spec:
 
 1. Create the namespace for the target application:
 
-```shell
-kubectl create namespace helloworld
-```
+    ```shell
+    kubectl create namespace helloworld
+    ```
 
 2. Build the application Pod:
 
-```shell
-kubectl apply -f app.yaml
-```
+    ```shell
+    kubectl apply -f app.yaml
+    ```
 
-1. Execute `kubectl -n helloworld get pods`, and you are expected to find a pod named `helloworld` in the `helloworld` namespace.
+3. Execute `kubectl -n helloworld get pods`, and you are expected to find a pod named `helloworld` in the `helloworld` namespace.
 
-```shell
-kubectl -n helloworld get pods
-```
+    ```shell
+    kubectl -n helloworld get pods
+    ```
 
-The result is as follows:
+    The result is as follows:
 
-```text
-kubectl get pods -n helloworld
-NAME         READY   STATUS    RESTARTS   AGE
-helloworld   1/1     Running   0          2m
-```
+    ```text
+    kubectl get pods -n helloworld
+    NAME         READY   STATUS    RESTARTS   AGE
+    helloworld   1/1     Running   0          2m
+    ```
 
-After the `READY` column turns to `1/1`, you can proceed to the next step.
+    After the `READY` column turns to `1/1`, you can proceed to the next step.
 
 ### Step 2. Observe application behaviors before injecting faults​
 
@@ -110,45 +110,45 @@ You can see that `helloworld` outputs a line of `Hello World` every second, and 
 
 1. The JVMChaos with a specified return value is as follows:
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: JVMChaos
-metadata:
-  name: return
-  namespace: helloworld
-spec:
-  action: return
-  class: Main
-  method: getnum
-  value: "9999"
-  mode: all
-  selector:
-    namespaces:
-      - helloworld
-```
+    ```yaml
+    apiVersion: chaos-mesh.org/v1alpha1
+    kind: JVMChaos
+    metadata:
+      name: return
+      namespace: helloworld
+    spec:
+      action: return
+      class: Main
+      method: getnum
+      value: "9999"
+      mode: all
+      selector:
+        namespaces:
+          - helloworld
+    ```
 
-JVMChaos changes the return value of the `getnum` method to the number `9999`, which means that the number of each line in the `helloworld` output is set to `9999`.
+    JVMChaos changes the return value of the `getnum` method to the number `9999`, which means that the number of each line in the `helloworld` output is set to `9999`.
 
 2. Inject JVMChaos with a specified value:
 
-```shell
-kubectl apply -f ./jvm-return-example.yaml
-```
+    ```shell
+    kubectl apply -f ./jvm-return-example.yaml
+    ```
 
 3. Check the latest log of `helloworld`:
 
-```shell
-kubectl -n helloworld logs -f helloworld
-```
+    ```shell
+    kubectl -n helloworld logs -f helloworld
+    ```
 
-The log is as follows:
+    The log is as follows:
 
-```shell
-Rule.execute called for return_0:0
-return execute
-caught ReturnException
-9999. Hello World
-```
+    ```shell
+    Rule.execute called for return_0:0
+    return execute
+    caught ReturnException
+    9999. Hello World
+    ```
 
 ## Field description
 

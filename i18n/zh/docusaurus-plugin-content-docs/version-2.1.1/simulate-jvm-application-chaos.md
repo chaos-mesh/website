@@ -59,26 +59,26 @@ spec:
 
 1. 创建应用所属的 namespace：
 
-```shell
-kubectl create namespace helloworld
-```
+    ```shell
+    kubectl create namespace helloworld
+    ```
 
 2. 建立该应用 Pod：
 
-```shell
-kubectl apply -f app.yaml
-```
+    ```shell
+    kubectl apply -f app.yaml
+    ```
 
 3. 执行 `kubectl -n helloworld get pods`，预期能够观察到命名空间 `helloworld` 中名为 `helloworld` 的 Pod。
 
-```shell
-kubectl -n helloworld get pods
-```
+    ```shell
+    kubectl -n helloworld get pods
+    ```
 
 预期结果如下：
 
 ```text
-kubectl get pods -n helloworld            
+kubectl get pods -n helloworld
 NAME         READY   STATUS    RESTARTS   AGE
 helloworld   1/1     Running   0          2m
 ```
@@ -110,45 +110,45 @@ kubectl -n helloworld logs -f helloworld
 
 1. 指定返回值的 JVMChaos 内容如下：
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: JVMChaos
-metadata:
-  name: return
-  namespace: helloworld
-spec:
-  action: return
-  class: Main
-  method: getnum
-  value: "9999"
-  mode: all
-  selector:
-    namespaces:
-      - helloworld
-```
+    ```yaml
+    apiVersion: chaos-mesh.org/v1alpha1
+    kind: JVMChaos
+    metadata:
+      name: return
+      namespace: helloworld
+    spec:
+      action: return
+      class: Main
+      method: getnum
+      value: "9999"
+      mode: all
+      selector:
+        namespaces:
+          - helloworld
+    ```
 
 JVMChaos 将 `getnum` 方法的返回值修改为数字 `9999`，也就是让 `helloworld` 的每行输出的编号都设置为 `9999`。
 
 2. 注入指定返回值的 JVMChaos：
 
-```shell
-kubectl apply -f ./jvm-return-example.yaml
-```
+    ```shell
+    kubectl apply -f ./jvm-return-example.yaml
+    ```
 
 3. 查看 `helloworld` 的最新日志：
 
-```shell
-kubectl -n helloworld logs -f helloworld
-```
+    ```shell
+    kubectl -n helloworld logs -f helloworld
+    ```
 
-日志如下所示：
+    日志如下所示：
 
-```shell
-Rule.execute called for return_0:0
-return execute
-caught ReturnException
-9999. Hello World
-```
+    ```shell
+    Rule.execute called for return_0:0
+    return execute
+    caught ReturnException
+    9999. Hello World
+    ```
 
 ## 字段说明
 
