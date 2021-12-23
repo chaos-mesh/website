@@ -28,11 +28,11 @@ Before injecting the faults supported by HTTPChaos, note the followings:
 
 ## Create experiments using Chaos Dashboard
 
-1. Open Chaos Dashboard, and click "**NEW EXPERIMENT**" on the page to create a new experiment:
+1. Open Chaos Dashboard, and click **NEW EXPERIMENT** on the page to create a new experiment:
 
     ![create an experiment](./img/create-new-exp.png)
 
-2. In the ”**Choose a Target**” area, choose "**HTTP FAULT**" and select a specific behavior, such as `RESPONSE ABORT`. Then fill out specific configuration.
+2. In the **Choose a Target** area, choose **HTTP FAULT** and select a specific behavior, such as `RESPONSE ABORT`. Then fill out specific configurations.
 
     ![create HTTP fault](./img/create-new-httpchaos.png)
 
