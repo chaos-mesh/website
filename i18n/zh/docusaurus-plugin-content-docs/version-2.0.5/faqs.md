@@ -107,10 +107,13 @@ You need to add privileged scc to default.
 oc adm policy add-scc-to-user privileged -n chaos-testing -z chaos-daemon
 ```
 
-### Q: Failed to install Chaos Mesh with message: no matches for kind "CustomResourceDefinition" in version "apiextensions.k8s.io/v1"
+### Q: Failed to install Chaos Mesh with the message: no matches for kind "CustomResourceDefinition" in version "apiextensions.k8s.io/v1"
 
-This issue occurs with installing Chaos Mesh on Kubernetes which lower than 1.15(or lower version). We use `apiextensions.k8s.io/v1` as the default, but it was introduced in Kubernetes 1.16 at 2019-09-19.
+This issue occurs when you install Chaos Mesh on Kubernetes v1.15 or an earlier version. We use `apiextensions.k8s.io/v1` by default, but it was introduced in Kubernetes v1.16 on 2019-09-19.
 
-When you want to install Chaos Mesh on Kubernetes lower than 1.16, you should manually create CRD from `https://mirrors.chaos-mesh.org/<chaos-mesh-version>/crd-v1beta1.yaml`, and you also need to add `--validate=false` because of compatibility issue with breaking changes with CRD. For example, `kubectl create -f https://mirrors.chaos-mesh.org/v2.1.0/crd-v1beta1.yaml --validate=false`. After that, you could use helm to finish the rest of the installation.
+When you install Chaos Mesh on Kubernetes lower than v1.16, you need to follow the below process:
+1. Manually create CRD through `https://mirrors.chaos-mesh.org/<chaos-mesh-version>/crd-v1beta1.yaml`. 
+2. Add `--validate=false`. If the configuration is not added, compatibility issues with breaking changes with CRD might occur. For example, `kubectl create -f https://mirrors.chaos-mesh.org/v2.1.0/crd-v1beta1.yaml --validate=false`. 
+3. Use Helm to finish the rest process of installation.
 
-At last, we suggest upgrading your Kubernetes cluster by referencing Kubernetes [Version Skew Policy](https://kubernetes.io/releases/version-skew-policy/).
+We suggest upgrading your Kubernetes cluster by referencing Kubernetes [Version Skew Policy](https://kubernetes.io/releases/version-skew-policy/).

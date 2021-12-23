@@ -78,7 +78,7 @@ kubectl create ns chaos-testing
 
 :::note 注意
 
-如果你正在安装在 Kubernetes 1.15(或更低版本) 中安装 Chaos Mesh，请手动安装 CRD。 细节请参考 [FAQ](./faqs.md#q-failed-to-install-chaos-mesh-with-message-no-matches-for-kind-customresourcedefinition-in-version-apiextensionsk8siov1)。
+如果你正在安装在 Kubernetes v1.15（或更低版本）中安装 Chaos Mesh，请手动安装 CRD。 具体细节，请参考 [FAQ](./faqs.md#q-failed-to-install-chaos-mesh-with-message-no-matches-for-kind-customresourcedefinition-in-version-apiextensionsk8siov1)。
 
 :::
 
