@@ -12,7 +12,7 @@ Before creating an experiment, you can run the following command to see the proc
 chaosd attack process -h
 ```
 
-The output is as follows:
+The result is as follows:
 
 ```bash
 Process attack related commands
@@ -87,7 +87,7 @@ Attack process python successfully, uid: 10e633ac-0a37-41ba-8b4a-cd5ab92099f9
 chaosd attack process stop -h
 ```
 
-The output is as follows:
+The result is as follows:
 
 ```bash
 stop process, this action will stop the process with SIGSTOP

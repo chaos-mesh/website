@@ -76,7 +76,6 @@ chaosd attack process kill -p python
 输出结果如下所示：
 
 ```bash
-
 Attack process python successfully, uid: 10e633ac-0a37-41ba-8b4a-cd5ab92099f9
 ```
 
@@ -125,7 +124,6 @@ chaosd attack process stop -p python
 输出结果如下所示：
 
 ```bash
-
 Attack process python successfully, uid: 9cb6b3be-4f5b-4ecb-ae05-51050fcd0010
 ```
 
