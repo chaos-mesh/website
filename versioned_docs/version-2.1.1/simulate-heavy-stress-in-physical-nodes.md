@@ -149,7 +149,7 @@ Recover c2bff2f5-3aac-4ace-b7a6-322946ae6f13 successfully
 
 ## Create stress experiments using service mode
 
-You can follow the instructions below to create experiments using service mode.
+To create experiments using service mode, follow the instructions below:
 
 1. Run Chaosd in service mode:
 
