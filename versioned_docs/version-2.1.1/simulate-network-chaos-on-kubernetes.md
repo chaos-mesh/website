@@ -148,6 +148,7 @@ Before creating NetworkChaos experiments, ensure the following:
 | containerNames | []string | Specifies the name of the container into which the fault is injected. | None | No | ["nginx"] |
 | selector | struct | Specifies the target Pod. For details, refer to [Define the experiment scope](./define-chaos-experiment-scope.md). | None | Yes |  |
 | externalTargets | []string | Indicates the network targets except for Kubernetes, which can be IPv4 addresses or domains. This parameter only works with `direction: to`. | None | No | 1.1.1.1, www.google.com |
+| device | string | Specifies the affected network interface | None | No | "eth0" |
 
 ### Description for `action`-related fields
 
