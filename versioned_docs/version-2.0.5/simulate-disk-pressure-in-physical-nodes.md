@@ -4,9 +4,9 @@ title: Simulate Disk Faults
 
 This document describes how to use Chaosd to simulate disk faults. This feature helps you simulate disk read/write load (via [dd](https://man7.org/linux/man-pages/man1/dd.1.html)) or disk fill (via [dd](https://man7.org/linux/man-pages/man1/dd.1.html) or [fallocate](https://man7.org/linux/man-pages/man1/fallocate.1.html)).
 
-## Create experiments using commands
+## Create experiments using command-line mode
 
-This section describes how to create disk fault experiments using commands.
+This section describes how to create disk fault experiments using command-line mode.
 
 Before creating an experiment, you can run the following command to check the types of disk faults that are supported by Chaosd:
 
@@ -37,9 +37,9 @@ Use "chaosd attack disk [command] --help" for more information about a command.
 
 Currently, Chaosd supports creating disk read load experiments, disk write load experiments, and disk fill experiments.
 
-### Simulate disk read load
+### Simulate disk read load using command-line mode
 
-#### Command of simulating disk read load
+#### Commands for simulating disk read load
 
 ```bash
 chaosd attack disk add-payload read -h
@@ -63,15 +63,15 @@ Global Flags:
       --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
 ```
 
-#### Configuration description of simulating disk read load
+#### Configuration description for simulating disk read load
 
-| Configuration Item | Abbreviation | Description | Value |
+| Configuration item | Abbreviation | Description | Value |
 | :-- | :-- | :-- | :-- |
-| path | p | Specifies the file path to read the data. If this parameter is not specified, or the parameter value is set to an empty string, Chaosd reads from the virtual disk files mounted in the "/" directory. Depending on the permissions to read the files, you might be required to run this program using certain permissions. | type: string; default: "" |
-| process-num | n | Specifies the number of concurrent running [dd](https://man7.org/linux/man-pages/man1/dd.1.html) programs to be used. | type: uint8; default: "1"; range: 1-255 |
-| size | s | Specifies the amount of data to be read. It is the total size of data that <0>dd</0> reads. |  |
+| `path` | p | Specifies the file path to read the data. If this parameter is not specified, or the parameter value is set to an empty string, Chaosd reads from the virtual disk files mounted in the "/" directory. Depending on the permissions to read the files, you might be required to run this program using certain permissions. | type: string; default: "" |
+| `process-num` | n | Specifies the number of concurrent running [dd](https://man7.org/linux/man-pages/man1/dd.1.html) programs to be used. | type: uint8; default: `1`; range: range: `1` to `255` |
+| `size` | s | Specifies the amount of data to be read. It is the total size of data that <0>dd</0> reads. |  |
 
-#### Example of simulating disk read load
+#### Example for simulating disk read load
 
 ```bash
 chaosd attack disk add-payload read -s 1000G -n 7 -p /dev/zero
@@ -92,9 +92,9 @@ andrew@LAPTOP-NUS30NQD:~/chaosd/bin$ ./chaosd attack disk add-payload read -s 10
 Read file /dev/zero successfully, uid: 4bc9b74a-5fe2-4038-b4f2-09ae95b57694
 ```
 
-### Simulate disk write load
+### Simulate disk write load using command-line mode
 
-#### Command of simulating disk write load
+#### Command for simulating disk write load
 
 ```bash
 chaosd attack disk add-payload write -h
@@ -118,15 +118,15 @@ Global Flags:
       --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
 ```
 
-#### Configuration description of simulating disk write load
+#### Configuration description for simulating disk write load
 
-| Configuration Item | Abbreviation | Description | Value |
+| Configuration item | Abbreviation | Description | Value |
 | :-- | :-- | :-- | :-- |
-| path | p | Specifies the file path to write the data. If this parameter is not specified, or the parameter value is set to an empty string, a temporary file will be created in the program execution directory. Depending on the permissions to write the files, you might be required to run this program using certain permissions. | type: string; default: "" |
-| process-num | n | Specifies the number of concurrent running [dd](https://man7.org/linux/man-pages/man1/dd.1.html) programs to be used. | type: uint8; default: "1"; range: 1-255 |
-| size | s | Specifies the amount of data to be written. It is the total size of data that <0>dd</0> writes. | type: string; default: ""; legal form: an integer plus a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. Size cannot be "". |
+| `path `| p | Specifies the file path to write the data. If this parameter is not specified, or the parameter value is set to an empty string, a temporary file will be created in the program execution directory. Depending on the permissions to write the files, you might be required to run this program using certain permissions. | type: string; default: "" |
+| `process-num` | n | Specifies the number of concurrent running [dd](https://man7.org/linux/man-pages/man1/dd.1.html) programs to be used. | type: uint8; default: `1`; range: range: `1` to `255` |
+| `size` | s | Specifies the amount of data to be written. It is the total size of data that <0>dd</0> writes. | type: string; default: ""; legal form: an integer plus a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. `size` cannot be "". |
 
-#### Example of simulating disk write load
+#### Example for simulating disk write load
 
 ```bash
 chaosd attack disk add-payload write -s 2G -n 8
@@ -147,9 +147,9 @@ The result is as follows:
 Write file /home/andrew/chaosd/bin/example255569279 successfully, uid: e66afd86-6f3e-43a0-b161-09447ed84856
 ```
 
-### Simulate disk fill
+### Simulate disk fill using command-line mode
 
-#### Command of simulating disk fill
+#### Command for simulating disk fill
 
 ```bash
 chaosd attack disk fill -h
@@ -175,17 +175,17 @@ Global Flags:
       --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
 ```
 
-#### Configuration description of simulating disk fill
+#### Configuration description for simulating disk fill
 
-| Configuration Item | Abbreviation | Description | Value |
+| Configuration item | Abbreviation | Description | Value |
 | :-- | :-- | :-- | :-- |
-| destroy | d | If this parameter is set to true, the fill file is immediately deleted after being filled. | type: bool; default: false. |
-| fallocate | f | If this parameter is set to true, linux is used to call fallocate to quickly apply for disk space and size must be greater than 0. If this parameter is set to false, linux is used to call dd to fill disks at a relatively slow pace. | type: bool; default: true. |
-| path | p | Specifies the file path to write the data. If this parameter is not specified, or the parameter value is set to an empty string, a temporary file will be created in the program execution directory. Depending on the permissions to write the files, you might be required to run this program using certain permissions. | type: string; default: "" |
-| percent | c | Specifies the fill percentage of disk size. | type: string; default: ""; positive integer of the uint type is acceptable but size and percent cannot both be "". |
-| size | s | Specifies the amount of data to be written. | type: string; default: ""; legal form: an integer plus a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. Size and percent cannot both be "". |
+| `destroy` | d | If this parameter is set to `true`, the fill file is immediately deleted after being filled. | type: bool; default: `false` |
+| `fallocate` | f | If this parameter is set to `true`, Linux is used to call fallocate to quickly apply for disk space and size must be greater than `0`. If this parameter is set to false, Linux is used to call dd to fill disks at a relatively slow pace. | type: bool; default: `true` |
+| `path` | p | Specifies the file path to write the data. If this parameter is not specified, or the parameter value is set to an empty string, a temporary file will be created in the program execution directory. Depending on the permissions to write the files, you might be required to run this program using certain permissions. | type: string; default: "" |
+| `percent` | c | Specifies the ercentage of disk size to be filled. | type: string; default: ""; positive integer of the uint type is acceptable. `size` and `percent at the same time. |
+| `size` | s | Specifies the amount of data to be written. | type: string; default: ""; legal form: an integer plus a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. `size` and `percent`cannot both be "" at the same time. |
 
-#### Example of simulating disk fill
+#### Example for simulating disk fill
 
 ```bash
 chaosd attack disk fill -c 50 -d
