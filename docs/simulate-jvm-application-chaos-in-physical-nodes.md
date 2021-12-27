@@ -368,8 +368,8 @@ Global Flags:
 
 | Configuration item | Abbreviation | Description | Value |
 | :-- | :-- | :-- | :-- |
-| `cpu-count` | None | The number of CPU cores used for increasing JVM stress | int type. You can only configure one of `cpu-count` and `mem-type`. |
-| `mem-type` | None | The type of OOM | string type. Currently, both 'stack' and 'heap' OOM types are supported. You can only configure one of `cpu-count` and `mem-type`. |
+| `cpu-count` | None | The number of CPU cores used for increasing JVM stress | int type. You must configure one item between `cpu-count` and `mem-type`. |
+| `mem-type` | None | The type of OOM | string type. Currently, both 'stack' and 'heap' OOM types are supported. You must configure one item between `cpu-count` and `mem-type`. |
 | `pid` | None | The Java process ID where the fault is to be injected | int type, required |
 | `port` | None | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int type. The default value is `9288`. |
 | `uid` | None | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
@@ -541,7 +541,7 @@ DO
 ENDRULE
 ```
 
-Then, convert the line breaks in the configuration file to the newline character "\n", and use the converted text as the value of "rule-data". Run the following command:
+Then, escape the line breaks in the configuration file to the newline character "\n", and use the escaped text as the value of "rule-data". Run the following command:
 
 ```bash
 curl -X POST 127.0.0.1:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"rule-data","pid":30045,"rule-data":"\nRULE modify return value\nCLASS Main\nMETHOD getnum\nAT ENTRY\nIF true\nDO return 9999\nENDRULE\n"}'
@@ -560,8 +560,8 @@ The result is as follows:
 | Parameter | Description | Value |
 | :-- | :-- | :-- |
 | `action` | The action of the experiment | Set to "stress" |
-| `cpu-count` | The number of CPU cores used for increasing CPU stress | int type. You can only configure one of `cpu-count` and `mem-type`. |
-| `mem-type` | The type of OOM | string type. Currently, both 'stack' and 'heap' OOM types are supported. You can only configure one of `cpu-count` and `mem-type`. |
+| `cpu-count` | The number of CPU cores used for increasing CPU stress | int type. You must configure one item between `cpu-count` and `mem-type`. |
+| `mem-type` | The type of OOM | string type. Currently, both 'stack' and 'heap' OOM types are supported. You must configure one item between `cpu-count` and `mem-type`. |
 | `pid` | None | The Java process ID where the fault is to be injected | int type, required |
 | `port` | None | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int type. The default value is `9288`. |
 | `uid` | None | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
