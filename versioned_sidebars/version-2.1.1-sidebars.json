@@ -45,6 +45,10 @@
             {
               "type": "doc",
               "id": "version-2.1.1/supported-releases"
+            },
+            {
+              "type": "doc",
+              "id": "version-2.1.1/deploy-chaos-mesh-on-kubesphere"
             }
           ],
           "collapsible": true

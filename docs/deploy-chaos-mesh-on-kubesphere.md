@@ -14,7 +14,7 @@ This article will introduce how to deploy Chaos Mesh on KubeSphere to conduct ch
 
 ## Chaos experiments with Chaos Mesh
 
-### Step 1: Deploy Chaos Mesh 
+### Step 1. Deploy Chaos Mesh 
   
 1. Login KubeSphere as `project-regular`, search for **chaos-mesh** in the **App Store**, and click on the search result to enter the app. 
       
@@ -37,7 +37,7 @@ This article will introduce how to deploy Chaos Mesh on KubeSphere to conduct ch
     ![Chaos Mesh deployed](./img/deploy-chaos-mesh/chaos-mesh-deployed.png)
 
 
-### Step 2: Visit Chaos Dashboard
+### Step 2. Visit Chaos Dashboard
 
 1. In the **Resource Status** page, copy the **NodePort **of `chaos-dashboard`.
        
@@ -47,7 +47,7 @@ This article will introduce how to deploy Chaos Mesh on KubeSphere to conduct ch
 
     ![Login to Chaos Dashboard](./img/deploy-chaos-mesh/login-to-dashboard.png)
 
-### Step 3: Create a chaos experiment
+### Step 3. Create a chaos experiment
 
 Before creating a chaos experiment, you should identify and deploy your experiment target, for example, to test how an application works under network latency. Here, we use a demo application `web-show` as the target application to be tested, and the test goal is to observe the system network latency. You can deploy a demo application `web-show` with the following command: `web-show`.   
 

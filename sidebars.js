@@ -19,8 +19,7 @@ module.exports = {
             'production-installation-using-helm',
             'offline-installation',
             'uninstallation',
-            'supported-releases',
-            'deploy-chaos-mesh-on-kubesphere'
+            'supported-releases'
           ],
         },
         'manage-user-permissions',

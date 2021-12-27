@@ -13,7 +13,7 @@ title: 在 KubeSphere 中部署 Chaos Mesh
 
 ## **开始混沌实验**
 
-### 步骤1: 部署 Chaos Mesh 
+### 第 1 步：部署 Chaos Mesh 
 
 1. 使用 `project-regular` 身份登陆，在应用市场中搜索 `chaos-mesh`，点击搜索结果进入应用。 
 
@@ -40,7 +40,7 @@ title: 在 KubeSphere 中部署 Chaos Mesh
 
     ![Chaos Mesh deployments](img/deploy-chaos-mesh/chaos-mesh-deployments.png)
 
-### 步骤 2: 访问 Chaos Mesh
+### 第 2 步：访问 Chaos Mesh
 
 1. 前往**应用负载**下服务页面，复制 chaos-dashboard 的 **NodePort**。
 
@@ -50,7 +50,7 @@ title: 在 KubeSphere 中部署 Chaos Mesh
 
     ![Login to Chaos Dashboard](img/deploy-chaos-mesh/login-to-dashboard.png)
 
-### 步骤 3: 创建混沌实验
+### 第 3 步：创建混沌实验
 
 1. 在开始混沌实验之前，需要先确定并部署您的实验目标，比如，测试某应用在网络延时下的工作状态。本文使用了一个 demo 应用 `web-show` 作为待测试目标，观测系统网络延迟。 你可以使用下面命令部署一个 Demo 应用 `web-show` ： 
 
