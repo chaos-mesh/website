@@ -21,21 +21,13 @@ Hey community,
 ### Rules
 
 * Eligibility: anyone with a Twitter account
-
 * Event Period: begins on December 27, 2021, at 9:00 AM PT and ends on December 31, 2022, at 11:59 PM PT
-
 * How to participate:
-
     * Follow [@chaos_mesh](https://twitter.com/chaos_mesh).
-
     * Share your Chaos Mesh story on Twitter by using the **[#ChaosMeshStory](https://twitter.com/intent/tweet?text=%23ChaosMeshStory)** tag.
-
     * Share your experience with Chaos Mesh!
-
 * Judging Criteria: all qualified entries will be eligible to receive a Chaos Mesh Tee. The link to claim your SWAG will be published on the [@chaos_mesh](https://twitter.com/chaos_mesh) Twitter account after the event period is over.
-
 * Rules: please comply with the [code of conduct](https://github.com/chaos-mesh/chaos-mesh/blob/master/CODE_OF_CONDUCT.md), otherwise you will be ineligible to participate.
-
 * If you have any questions regarding the event, please dm [@chaos_mesh](https://twitter.com/chaos_mesh).
 
 Have fun!
