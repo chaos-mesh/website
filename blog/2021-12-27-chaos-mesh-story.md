@@ -12,7 +12,7 @@ tags: [Chaos Mesh, community, event]
 
 Hey community,
 
-🥳 Chaos Mesh turns 2 on 2021.12.31!  We're grateful for every contribution that helped this project grow. And we’d like to hear your Chaos Mesh story! How did you hear about the project? How did you get involved? Are you an adopter or a contributor? What do you think of it? It can be anything! Share your #ChaosMeshStory over on Twitter and win a Chaos Mesh Tee!
+🥳 Chaos Mesh turns 2 on 2021.12.31! We're grateful for every contribution that helped this project grow. And we'd like to hear your Chaos Mesh story! How did you hear about the project? How did you get involved? Are you an adopter or a contributor? What do you think of it? It can be anything! Share your #ChaosMeshStory over on Twitter and win a Chaos Mesh Tee!
 
 <!--truncate-->
 
@@ -21,14 +21,15 @@ Hey community,
 ### Rules
 
 * Eligibility: anyone with a Twitter account
-* Event Period: begins on December 27, 2021, at 9:00 AM PT and ends on December 31, 2022, at 11:59 PM PT
+* Event Period: December 27, 2021, at 9:00 AM - December 31, 2021, at 11:59 PM (PT)
 * How to participate:
-    * Follow [@chaos_mesh](https://twitter.com/chaos_mesh).
-    * Share your Chaos Mesh story on Twitter by using the **[#ChaosMeshStory](https://twitter.com/intent/tweet?text=%23ChaosMeshStory)** tag.
-    * Share your experience with Chaos Mesh!
-* Judging Criteria: all qualified entries will be eligible to receive a Chaos Mesh Tee. The link to claim your SWAG will be published on the [@chaos_mesh](https://twitter.com/chaos_mesh) Twitter account after the event period is over.
+    1. Follow [@chaos_mesh](https://twitter.com/chaos_mesh).
+    2. Add the **[#ChaosMeshStory](https://twitter.com/intent/tweet?text=%23ChaosMeshStory)** hashtag.
+    3. Share your experience with Chaos Mesh!
+* Judging Criteria: all qualified entries will be eligible to receive a Chaos Mesh Tee. The link to collect your contact information will be available on January 1st, 2022. Stay tuned with [@chaos_mesh](https://twitter.com/chaos_mesh) on Twitter!
 * Rules: please comply with the [code of conduct](https://github.com/chaos-mesh/chaos-mesh/blob/master/CODE_OF_CONDUCT.md), otherwise you will be ineligible to participate.
-* If you have any questions regarding the event, please dm [@chaos_mesh](https://twitter.com/chaos_mesh).
+
+If you have any questions regarding the event, please dm [@chaos_mesh](https://twitter.com/chaos_mesh).
 
 Have fun!
 
