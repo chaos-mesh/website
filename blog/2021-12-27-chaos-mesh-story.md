@@ -27,7 +27,7 @@ Hey community,
     2. Add the **[#ChaosMeshStory](https://twitter.com/intent/tweet?text=%23ChaosMeshStory)** hashtag.
     3. Share your experience with Chaos Mesh!
 * Judging Criteria: all qualified entries will be eligible to receive a Chaos Mesh Tee. The link to collect your contact information will be available on January 1st, 2022. Stay tuned with [@chaos_mesh](https://twitter.com/chaos_mesh) on Twitter!
-* Rules: please comply with the [code of conduct](https://github.com/chaos-mesh/chaos-mesh/blob/master/CODE_OF_CONDUCT.md), otherwise you will be ineligible to participate.
+* Rules: please comply with the [Code of Conduct](https://github.com/chaos-mesh/chaos-mesh/blob/master/CODE_OF_CONDUCT.md), otherwise you will be ineligible to participate.
 
 If you have any questions regarding the event, please DM [@chaos_mesh](https://twitter.com/chaos_mesh).
 
