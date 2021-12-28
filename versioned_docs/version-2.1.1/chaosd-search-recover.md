@@ -9,7 +9,7 @@ You can search experiments by conditions and recover the experiments correspondi
 
 This section introduces how to use command-line mode and service mode to find experiments of Chaosd.
 
-### Search experiments using command-line mode
+### Search experiments using the command-line mode
 
 By running the following command, you can view the configurations supported by the `search` command:
 
@@ -40,7 +40,7 @@ Global Flags:
 | `all` | A | Lists all experiments | bool |
 | `asc` | None | Sorts the experiments in ascending order of the creation time. The default value is `false`.| bool |
 | `kind` | k | Lists experiments of the specified kind | string. The supported kinds are as follows: `network`, `process`, `stress`, `disk`, `host`, `jvm` |
-| `limit` | l | The number of listed experiments? | int |
+| `limit` | l | The number of listed experiments | int |
 | `offset` | o | Searches from the specified offset | int |
 | `status` | s | Lists experiments with the specified status | string. The supported types are as follows: `created`, `success`, `error`, `destroyed`, `revoked`
 
@@ -60,7 +60,7 @@ After running the command, only one row of data is output in the result:
   1f6c1253-522a-43d9-83f8-42607102b3b9   network   delay    destroyed   2021-11-02T15:14:07+08:00   {"schedule":"","duration":"","action":"delay","kind":"network","uid":"1f6c1253-522a-43d9-83f8-42607102b3b9","latency":"2s","jitter":"0ms","correlation":"0","device":"eth0","ip-address":"220.181.38.251","ip-protocol":"all"}
 ```
 
-### Search experiments using service mode
+### Search experiments using the service mode
 
 Currently, the service mode only supports searching all experiments. You can get the data by visiting the `/api/experiments/` path of Chaosd service.
 
@@ -80,7 +80,7 @@ The result is as follows:
 
 After creating an experiment, if you want to withdraw the impact caused by the experiment, you can use the recovery feature of experiments.
 
-### Recover experiments using command-line mode
+### Recover experiments using the command-line mode
 
 You can recover an experiment by using Chaosd recover UID.
 
@@ -108,7 +108,7 @@ The following example shows how to recover an experiment using the command-line 
     chaosd recover 4f33b2d4-aee6-43ca-9c43-0f12867e5c9c
     ```
 
-### Recover experiments using service mode
+### Recover experiments using the service mode
 
 You can recover an experiment by sending a `DELETE` HTTP request to the `/api/attack/{uid}` path of Chaosd service.
 
