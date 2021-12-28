@@ -1,6 +1,6 @@
 ---
 slug: /share-your-chaos-mesh-story
-title: '[Special Event] Share your #ChaosMeshStory!'
+title: 'Share your #ChaosMeshStory!'
 author: Chaos Mesh Community
 author_url: https://github.com/chaos-mesh
 author_image_url: https://avatars1.githubusercontent.com/u/59082378?v=4
@@ -12,7 +12,7 @@ tags: [Chaos Mesh, community, event]
 
 Hey community,
 
-🥳 Chaos Mesh will turn 2 on 2021.12.31! We're grateful for every contribution from you that helped this project grow. And we'd like to hear your Chaos Mesh story! How did you hear about the project? How did you get involved? Are you an adopter or a contributor? What do you think of it? It can be anything! Share your #ChaosMeshStory over on Twitter and win a Chaos Mesh Tee!
+🥳 Chaos Mesh will turn 2 on 2021.12.31! We're grateful for every contribution from you that helped this project grow. And we'd like to hear your Chaos Mesh story! How did you hear about the project? How did you get involved? Are you an adopter or a contributor? What do you think of it? It can be anything! Share your **[#ChaosMeshStory](https://twitter.com/intent/tweet?text=%23ChaosMeshStory)** over on Twitter and win a Chaos Mesh Tee!
 
 <!--truncate-->
 
@@ -33,5 +33,7 @@ If you have any questions regarding the event, please DM [@chaos_mesh](https://t
 
 Have fun!
 
+
 Yours truly,
+
 Chaos Mesh community
