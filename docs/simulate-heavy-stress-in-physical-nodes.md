@@ -4,9 +4,9 @@ title: Simulate Stress Scenarios
 
 This document describes how to use Chaosd to simulate stress scenarios. This feature generates CPU or memory stress on the host using [stress-ng](https://wiki.ubuntu.com/Kernel/Reference/stress-ng). You can create stress experiments either in command-line or service mode.
 
-## Create stress experiments using command-line mode
+## Create stress experiments using the command-line mode
 
-This section describes how to create stress experiments using command-line mode.
+This section describes how to create stress experiments using the command-line mode.
 
 Before creating stress experiments, you can run the following command to view the stress experiment types supported by Chaosd:
 
@@ -37,7 +37,7 @@ Use "chaosd attack stress [command] --help" for more information about a command
 
 Currently, Chaosd supports creating CPU stress experiments and memory stress experiments.
 
-### Simulate CPU stress using command-line mode
+### Simulate CPU stress using the command-line mode
 
 #### Command for simulating CPU stress
 
@@ -87,7 +87,7 @@ The result is as follows:
 Attack stress cpu successfully, uid: 4f33b2d4-aee6-43ca-9c43-0f12867e5c9c
 ```
 
-### Simulating memory stress using command-line mode
+### Simulating memory stress using the command-line mode
 
 #### Command for simulating memory stress
 
@@ -147,9 +147,9 @@ The result is as follows:
 Recover c2bff2f5-3aac-4ace-b7a6-322946ae6f13 successfully
 ```
 
-## Create stress experiments using service mode
+## Create stress experiments using the service mode
 
-To create experiments using service mode, follow the instructions below:
+To create experiments using the service mode, follow the instructions below:
 
 1. Run Chaosd in service mode:
 
@@ -167,11 +167,11 @@ To create experiments using service mode, follow the instructions below:
 
 :::note
 
-When running an experiment, remember to save the UID information of the experiment. When you want to end the experiment corresponding to the UID, you need to send an HTTP DELETE request to the `/api/attack/{uid}` path of Chaosd service.
+When running an experiment, remember to save the UID information of the experiment. When you want to kill the experiment corresponding to the UID, you need to send a `DELETE` HTTP request to the `/api/attack/{uid}` path of Chaosd service.
 
 :::
 
-### Simulate CPU stress using service mode
+### Simulate CPU stress using the service mode
 
 #### Parameters for simulating CPU stress
 
@@ -182,7 +182,7 @@ When running an experiment, remember to save the UID information of the experime
 | `workers` | Specifies the number of workers used to create CPU stress | int | Default value: `1` |
 | `options` | The extended parameter of stress-ng, usually not configured. | string | Default value: "" |
 
-#### Example for simulating CPU stress using service mode
+#### Example for simulating CPU stress using the service mode
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{"load":10, "action":"cpu","workers":1}'
@@ -194,7 +194,7 @@ The result is as follows:
 {"status":200,"message":"attack successfully","uid":"c3c519bf-819a-4a7b-97fb-e3d0814481fa"}
 ```
 
-### Simulate memory stress using service mode
+### Simulate memory stress using the service mode
 
 #### Parameters for simulating memory stress
 
@@ -204,7 +204,7 @@ The result is as follows:
 | `size` | Specifies the size of memory per VM worker | string | the memory size in B, KB/KiB, MB/MiB, GB/GiB, TB/TiB. If the size is not set, all available memory is used by default.|
 | `options` | The extended parameter of stress-ng, usually not configured. | string | Default value: "" |
 
-#### Example for simulating memory stress using service mode
+#### Example for simulating memory stress using the service mode
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{"size":"100M", "action":"mem"}'

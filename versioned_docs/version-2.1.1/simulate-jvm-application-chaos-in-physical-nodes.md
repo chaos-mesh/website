@@ -13,9 +13,9 @@ Chaosd simulates the faults of JVM application through [Byteman](https://github.
 
 This document describes how to use Chaosd to create the above fault types of JVM experiments.
 
-## Create experiments using command-line mode
+## Create experiments using the command-line mode
 
-This section introduces how to create the experiments of JVM application faults using command-line mode.
+This section introduces how to create the experiments of JVM application faults using the command-line mode.
 
 Before creating the experiment, you can run the following command line to see the types of JVM application faults supported by Chaosd:
 
@@ -51,7 +51,7 @@ Global Flags:
 Use "chaosd attack jvm [command] --help" for more information about a command.
 ```
 
-### Throw custom exceptions using command-line mode
+### Throw custom exceptions using the command-line mode
 
 #### Commands for throwing custom exceptions
 
@@ -106,7 +106,7 @@ The result is as follows:
 Attack jvm successfully, uid: 26a45ae2-d395-46f5-a126-2b2c6c85ae9d
 ```
 
-### Trigger garbage collection using command-line mode
+### Trigger garbage collection using the command-line mode
 
 #### Commands for triggering garbage collection
 
@@ -155,7 +155,7 @@ Attack jvm successfully, uid: f360e70a-5359-49b6-8526-d7e0a3c6f696
 
 Triggering garbage collection is a one-time operation, and the experiment does not require recovery.
 
-### Increase method latency using command-line mode
+### Increase method latency using the command-line mode
 
 #### Commands for increasing method latency
 
@@ -211,7 +211,7 @@ The result is as follows:
 Attack jvm successfully, uid: bbe00c57-ac9d-4113-bf0c-2a6f184be261
 ```
 
-### Modify return values of a method using command-line mode
+### Modify return values of a method using the command-line mode
 
 #### Commands for modifying return values of a method
 
@@ -265,7 +265,7 @@ The result is as follows:
 Attack jvm successfully, uid: e2f204f6-4bed-4d92-aade-2b4a47b02e5d
 ```
 
-### Trigger faults by setting Byteman configuration files using command-line mode
+### Trigger faults by setting Byteman configuration files using the command-line mode
 
 You can set the fault rules in the Byteman rule configuration file, and then inject the faults by specifying the path of the configuration file using Chaosd. Regarding the Byteman rule configuration, refer to [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language).
 
@@ -334,7 +334,7 @@ The result is as follows:
 Attack jvm successfully, uid: 5ca2e06d-a7c6-421d-bb67-0c9908bac17a
 ```
 
-### Increase JVM stress using command-line mode
+### Increase JVM stress using the command-line mode
 
 #### Commands for increasing JVM stress
 
@@ -388,9 +388,9 @@ The result is as follows:
 Attack jvm successfully, uid: b9b997b5-0a0d-4f1f-9081-d52a32318b84
 ```
 
-## Create experiments using service mode
+## Create experiments using the service mode
 
-You can follow the instructions below to create experiments using service mode.
+You can follow the instructions below to create experiments using the service mode.
 
 1. Execute Chaosd in service mode:
 
@@ -400,7 +400,7 @@ You can follow the instructions below to create experiments using service mode.
 
 2. Send HTTP POST request to the `/api/attack/{uid}` path of Chaosd service.
 
-   ```bash 
+   ```bash
    curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{fault-configuration}'
    ```
 
@@ -412,7 +412,7 @@ When running an experiment, remember to save the UID information of the experime
 
 :::
 
-### Throw custom exceptions using service mode
+### Throw custom exceptions using the service mode
 
 #### Parameters for throwing custom exceptions
 
@@ -426,7 +426,7 @@ When running an experiment, remember to save the UID information of the experime
 | `port` | The port number attached to the Java process agent. The faults is injected into the Java process through this port number. | int type. The default value is `9288`. |
 | `uid` | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
 
-#### Example for throwing custom exceptions using service mode
+#### Example for throwing custom exceptions using the service mode
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"exception","class":"Main","method":"sayhello","exception":"java.io.IOException(\"BOOM\")","pid":1828622}'
@@ -449,7 +449,7 @@ The result is as follows:
 | `port` | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int type. The default value is `9288`. |
 | `uid` | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
 
-#### Example for triggering garbage collection using service mode
+#### Example for triggering garbage collection using the service mode
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"gc","pid":1828622}'
@@ -477,7 +477,7 @@ Triggering garbage collection is a one-time operation. The experiment does not r
 | `port` | The Java process ID where the fault is needed to be injected | int type, required |
 | `uid` | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
 
-#### Example for increasing method latency using service mode
+#### Example for increasing method latency using the service mode
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"latency","class":"Main","method":"sayhello","latency":5000,"pid":1828622}'
@@ -503,7 +503,7 @@ The result is as follows:
 | `port` | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int type. The default value is `9288`. |
 | `uid` | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
 
-#### Example for modifying return values of a method using service mode
+#### Example for modifying return values of a method using the service mode
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"return","class":"Main","method":"getnum","value":"999","pid":1828622}'
@@ -529,7 +529,7 @@ You can set the fault rules according to the Byteman rule configuration. Regardi
 | `port` | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int type. The default value is `9288`. |
 | `uid` | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
 
-#### Example for triggering faults by setting Byteman configuration files using service mode
+#### Example for triggering faults by setting Byteman configuration files using the service mode
 
 First, based on the specific Java program and referring to [the Byteman rule language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language), write a rule configuration file. For example:
 
@@ -556,7 +556,7 @@ The result is as follows:
 {"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
 ```
 
-### Increase JVM stress using service mode
+### Increase JVM stress using the service mode
 
 #### Parameters for increasing JVM stress
 
@@ -569,7 +569,7 @@ The result is as follows:
 | `port` | None | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int type. The default value is `9288`. |
 | `uid` | None | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
 
-#### Example for increasing JVM stress using service mode
+#### Example for increasing JVM stress using the service mode
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"stress","cpu-count":1,"pid":1828622}'
