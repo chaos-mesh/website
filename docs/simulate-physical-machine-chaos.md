@@ -12,15 +12,37 @@ You can use PhysicalMachineChaos to simulate the faults of network, disk, pressu
 
 Before creating PhysicalMachineChaos experiments using Chaos Mesh, you need to deploy Chaosd in service mode to all physical or virtual machines that are going to be injected with faults. For the deployment method of Chaosd, refer to [Download and deploy Chaosd](chaosd-overview.md#download-and-deploy).
 
+:::note
+
+When using Chaos Mesh v2.1.0, you need to deploy Chaosd [v1.1.0](https://github.com/chaos-mesh/chaosd/releases/tag/v1.1.0).
+
+:::
+
+### Preparation
+
+Before starting Chaosd Server, you need to generate TLS certificates and create a `PhysicalMachine` within the Kubernetes cluster, please refer to [Generate TLS certs for Choasd](chaosctl-tool.md#Generate-TLS-certs-for-chaosd).
+
+### Start Chaosd Server
+
 After the deployment is complete, run the following command to start Chaosd in service mode:
 
 ```bash
-chaosd server --port 31767
+chaosd server --https-port 31768 --CA=/etc/chaosd/pki/ca.crt --cert=/etc/chaosd/pki/chaosd.crt --key=/etc/choasd/pki/chaosd.key
 ```
 
 :::note
 
-When using Chaos Mesh v2.1.0, you need to deploy Chaosd [v1.1.0](https://github.com/chaos-mesh/chaosd/releases/tag/v1.1.0).
+The paths of certificates are the default output paths of `Chaosctl`. If you specify another path manually when generating certificates, please replace the corresponding file path.
+
+:::
+
+:::note
+
+If no TLS certificate is configured, use the following command to start Chaosd in service mode (this is not recommended considering cluster security):
+
+```bash
+chaosd server --port 31767
+```
 
 :::
 
@@ -52,8 +74,12 @@ When using Chaos Mesh v2.1.0, you need to deploy Chaosd [v1.1.0](https://github.
      namespace: chaos-testing
    spec:
      action: network-delay
-     address:
-       - 172.16.112.130:31767
+     mode: one
+     selector:
+       namespaces:
+         - default
+       labelSelectors:
+         'arch': 'amd64'
      network-delay:
        device: ens33
        ip-address: 140.82.112.3
@@ -74,7 +100,10 @@ When using Chaos Mesh v2.1.0, you need to deploy Chaosd [v1.1.0](https://github.
 | Configuration item | Type | Description	 | Default value | Required | Example |
 | :-- | :-- | :-- | :-- | :-- | :-- |
 | action | string | Defines the actions of physical machines faults, optional values are as follows: "stress-cpu", "stress-mem", "disk-read-payload", "disk-write-payload", "disk-fill", "network-corrupt", "network-duplicate", "network-loss", "network-delay", "network-partition", "network-dns", "process", "jvm-exception", "jvm-gc", "jvm-latency", "jvm-return", "jvm-stress", "jvm-rule-data", "clock" | None | Yes | "stress-cpu" |
-| address | string array | Selects the address of Chaosd service to inject faults | [] | Yes | ["192.168.0.10:31767"] |
+| address | string array | Selects the address of Chaosd service to inject faults, only one of address or selector could be specified | [] | Yes | ["192.168.0.10:31767"] |
+| selector | struct | Specifies the target PhysicalMachine. For details, refer to [Define the experiment scope](define-chaos-experiment-scope.md), only one of address or selector could be specified | None | No | |
+| mode | string | Specifies the mode of the experiment. The mode options include `one` (selecting a random PhysicalMachine), `all` (selecting all eligible PhysicalMachines), `fixed` (selecting a specified number of eligible PhysicalMachines), `fixed-percent` (selecting a specified percentage of PhysicalMachines from the eligible PhysicalMachines), and `random-max-percent` (selecting the maximum percentage of PhysicalMachines from the eligible PhysicalMachines). | None | Yes | one |
+| value | string | Provides a parameter for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of PhysicalMachines. | None | No | 1 |
 | duration | string | Specifies the duration of experiments | None | Yes | 30s |
 
 Each fault action has its own specific configurations. The following section introduces various fault types and their corresponding configuration methods.

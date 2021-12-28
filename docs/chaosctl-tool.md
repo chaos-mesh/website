@@ -52,6 +52,10 @@ To print debugging information, use the `chaosctl debug` command. To check the h
 
 Currently, chaosctl only supports the debugging of IOChaos, NetworkChaos, and StressChaos.
 
+### Generate TLS certs for Choasd
+
+TODO
+
 ## Scenarios
 
 If you want to raise an issue about Chaos Mesh, it is recommended to attach the relevant logs and chaos information. Therefore, you can attach the output of `chaosctl logs` to the end of the issue for developers' reference. If you want to raise issues about IOChaos, NetworkChaos or StressChaos, you can also attach the output from `chaosctl debug`.

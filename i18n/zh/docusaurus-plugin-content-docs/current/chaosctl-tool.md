@@ -52,6 +52,12 @@ chaosctl logs -t 100 # 输出所有组件的最后100行日志
 
 目前，chaosctl 只支持 iochaos, networkchaos, stresschaos 三类 Chaos 的调试。
 
+### 为 Chaosd 生成 TLS 证书
+
+使用 `chaosctl pm` 
+
+
+
 ## 使用场景
 
 如果你希望提交关于 Chaos Mesh 的问题，在问题中附上相关的日志与 chaos 信息很有帮助。你可以将 `chaosctl logs` 的输出附在 issue 尾部以供开发人员参考。如果你希望提交的问题与 iochaos, networkchaos, stresschaos 有关，那么 `chaosctl debug` 的相关信息也会很有用。

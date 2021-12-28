@@ -160,6 +160,23 @@ spec:
         - basic-tikv-1
 ```
 
+### Physical Machine List
+
+- 指定实验目标 PhysicalMachine 命名空间和 PhysicalMachine 列表。
+- 数据类型：键值对类型。"键"为目标 PhysicalMachine 所属的 Namespace, "值"为目标 PhysicalMachine 列表。
+- 只要指定了此 Selector，Chaos Mesh 就会**忽略其他配置的 Selectors**。
+
+当使用 YAML 文件创建实验时，示例配置如下：
+
+```yaml
+spec:
+  selector:
+    physicalMachines:
+      default: # namespace of the target PhysicalMachines
+        - physcial-machine-a
+        - physcial-machine-b
+```
+
 ## 在 Dashboard 上定义实验范围
 
 如果使用 Chaos Dashboard 创建混沌实验，你可以在填写实验信息时配置混沌实验范围。
@@ -174,3 +191,18 @@ spec:
 在设置 Selectors 的同时，你也可以在 Dashboard 中实时预览实验目标的实际范围，并且可以直接修改 Selectors 过滤出的目标 Pod 范围。
 
 ![Dashboard Selectors](img/dashboard_selectors_zh.png)
+
+## 兼容性矩阵
+
+| 类型 | 是否支持Kubernetes | 是否支持物理机 |
+| :-- | :-- | :-- | 
+|Namespace Selectors|Y|Y|
+|Label Selectors|Y|Y|
+|Expression Selectors|Y|Y|
+|Annotation Selectors|Y|Y|
+|Field Selectors|Y|Y|
+|PodPhase Selectors|Y|N|
+|Node Selectors|Y|N|
+|Node List|Y|N|
+|Pod List|Y|N|
+|PhysicalMachine List|N|Y|

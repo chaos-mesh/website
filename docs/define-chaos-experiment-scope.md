@@ -160,6 +160,23 @@ spec:
         - basic-tikv-1
 ```
 
+### Physical Machine List
+
+- Specifies the namespaces and list of the experiment's target PhysicalMachines.
+- Type of data: key-value pairs. The "keys" are the namespaces of the target PhysicalMachine and the "values" are the target PhysicalMachine list.
+- If you have specified this selector, Chaos Mesh will **ignore** other configured selectors.
+
+当使用 YAML 文件创建实验时，示例配置如下：
+
+```yaml
+spec:
+  selector:
+    physicalMachines:
+      default: # namespace of the target PhysicalMachines
+        - physcial-machine-a
+        - physcial-machine-b
+```
+
 ## Define the experiment scope on Chaos Dashboard
 
 If you use Chaos Dashboard to create a Chaos experiment, you can configure the Chaos experiment scope when filling out the experiment information.
@@ -174,3 +191,18 @@ The following selectors are currently available on Chaos Dashboard. You can spec
 While setting selectors, you can also view the actual scope of the experiment target in the Dashboard in real time and can directly modify the target Pod scope filtered by the selectors.
 
 ![Dashboard Selectors](img/dashboard_selectors_en.png)
+
+## Compatibility matrix
+
+| Type | Support Kubernetes | Support Physical Machine |
+| :-- | :-- | :-- | 
+|Namespace Selectors|Y|Y|
+|Label Selectors|Y|Y|
+|Expression Selectors|Y|Y|
+|Annotation Selectors|Y|Y|
+|Field Selectors|Y|Y|
+|PodPhase Selectors|Y|N|
+|Node Selectors|Y|N|
+|Node List|Y|N|
+|Pod List|Y|N|
+|PhysicalMachine List|N|Y|
