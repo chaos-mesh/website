@@ -263,7 +263,7 @@ The result is as follows:
 | `fill-by-fallocate` | If this parameter is set to `true`, Chaos Mesh uses Linux to call `fallocate` to apply for disk space quickly, and you must set `size` to a value greater than `0`. If this parameter is set to `false`, Chaos Mesh uses Linux to call dd to fill disks at a relatively slow pace. | type: bool; default: `true` |
 | `path` | Specifies the file path to write the data. If this parameter is not specified, or the parameter value is set to an empty string, a temporary file will be created in the program execution directory. Depending on the permissions to write the files, you might be required to run this program using certain permissions. | type: string; default: "" |
 | `percent` | Specifies the percentage of disk size to be filled. | type: string; default: ""; positive integer of the uint type is acceptable; `size` and `percent` cannot both be "" at the same time. |
-| `size` | Specifies the amount of data to be written. | type: string; default: ""; legal form: an integer plus a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. `size` and `percent` cannot both be "" at the same time. |
+| `size` | Specifies the volume of data to be written. | type: string; default: ""; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. `size` and `percent` cannot both be "" at the same time. |
 
 #### Example for simulating disk fill using the service mode
 
