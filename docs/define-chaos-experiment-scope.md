@@ -166,7 +166,7 @@ spec:
 - Type of data: key-value pairs. The "keys" are the namespaces of the target PhysicalMachine and the "values" are the target PhysicalMachine list.
 - If you have specified this selector, Chaos Mesh will **ignore** other configured selectors.
 
-当使用 YAML 文件创建实验时，示例配置如下：
+When you create the experiment using the YAML file, see the following example for selector configuration:
 
 ```yaml
 spec:

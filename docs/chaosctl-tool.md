@@ -54,7 +54,39 @@ Currently, chaosctl only supports the debugging of IOChaos, NetworkChaos, and St
 
 ### Generate TLS certs for Choasd
 
-TODO
+For secure communication between Chaosd and Chaos-controller-manager services, Chaos Mesh recommends enabling mTLS mode. chaosctl provides convenient commands to generate TLS certificates, and there are two options to execute the commands in different scenarios.
+
+1. Nodes running chaosctl can access the Kubernetes cluster and ssh to the physical machine
+
+   Using `chaosctl pm init` you can generate the required certificates for Chaosd with one click and create the corresponding `PhysicalMachine` resource in the Kubernetes cluster. `chaosctl pm init -h` will provide help and examples of this functionality. Example commands are as follows.
+
+   ```bash
+   ./chaosctl pm init pm-name --ip=123.123.123.123 -l arch=amd64,anotherkey=value
+   ```
+
+2. Nodes running chaosctl can access the Kubernetes cluster, but cannot ssh to the physical machine
+
+   Before executing the command, you need to manually obtain the CA certificate from the Kubernetes cluster, and the command example is as follows.
+
+   ```bash
+   kubectl get secret chaos-mesh-chaosd-client-certs -n chaos-testing -o "jsonpath={.data['ca\.crt']}" | base64 -d > ca.crt
+
+    kubectl get secret chaos-mesh-chaosd-client-certs -n chaos-testing -o "jsonpath={.data['ca\.key']}" | base64 -d> ca.key
+   ```
+
+   Copy the `ca.crt` and `ca.key` files to the corresponding physical machine, for example, to the `/etc/chaosd/pki` directory.
+   
+   Then, on the **physical machine**, use the `chaosctl pm generate` command to generate the TLS certificate. `chaosctl pm generate -h` will provide help and examples on this feature. Example commands are as follows.
+
+   ```bash
+   ./chaosctl pm generate --cacert=/etc/chaosd/pki/ca.crt --cakey=/etc/chaosd/pki/ca.key
+   ```
+
+   Finally, use the `chaosctl pm create` command to create a `PhysicalMachine` resource in a Kubernetes cluster on a machine that has access to the Kubernetes cluster. `chaosctl pm create -h` will provide help and examples on this feature. Example commands are as follows.
+
+   ```bash
+   ./chaosctl pm create pm-name --ip=123.123.123.123 -l arch=amd64
+   ```
 
 ## Scenarios
 

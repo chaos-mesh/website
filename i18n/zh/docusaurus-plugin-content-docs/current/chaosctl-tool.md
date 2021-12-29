@@ -54,9 +54,39 @@ chaosctl logs -t 100 # 输出所有组件的最后100行日志
 
 ### 为 Chaosd 生成 TLS 证书
 
-使用 `chaosctl pm` 
+为了 Chaosd 和 Chaos-controller-manager 服务之间的通信安全，Chaos Mesh 推荐开启 mTLS 模式。chaosctl 提供了方便的命令来生成 TLS 证书，并且在不同场景下，有两种方案来执行命令。
 
+1. 执行 chaosctl 的节点可访问 Kubernetes 集群，并且可以 ssh 到物理机
 
+   使用 `chaosctl pm init` 可以一键生成 Chaosd 所需要的证书，并且在 Kubernetes 集群中创建对应的 `PhysicalMachine` 资源。`chaosctl pm init -h` 会提供关于此功能的帮助和例子。命令示例如下：
+
+   ```bash
+   ./chaosctl pm init pm-name --ip=123.123.123.123 -l arch=amd64,anotherkey=value
+   ```
+
+2. 执行 chaosctl 的节点可访问 Kubernetes 集群，但无法 ssh 到物理机
+
+   在执行命令前，需要先手动从 Kubernetes 集群中获取 CA 证书，命令示例如下：
+
+   ```bash
+   kubectl get secret chaos-mesh-chaosd-client-certs -n chaos-testing -o "jsonpath={.data['ca\.crt']}" | base64 -d > ca.crt
+
+    kubectl get secret chaos-mesh-chaosd-client-certs -n chaos-testing -o "jsonpath={.data['ca\.key']}" | base64 -d> ca.key
+   ```
+
+   将 `ca.crt` 和 `ca.key` 文件拷贝到对应的物理机上，下面以保存到 `/etc/chaosd/pki` 目录为例。
+   
+   然后，在**物理机**上，使用 `chaosctl pm generate` 命令，生成 TLS 证书。`chaosctl pm generate -h` 会提供关于此功能的帮助和例子。命令示例如下：
+
+   ```bash
+   ./chaosctl pm generate --cacert=/etc/chaosd/pki/ca.crt --cakey=/etc/chaosd/pki/ca.key
+   ```
+
+   最后，在可访问到 Kubernetes 集群的机器上，使用 `chaosctl pm create` 命令，在 Kubernetes 集群中创建 `PhysicalMachine` 资源。`chaosctl pm create -h` 会提供关于此功能的帮助和例子。命令示例如下：
+
+   ```bash
+   ./chaosctl pm create pm-name --ip=123.123.123.123 -l arch=amd64
+   ```
 
 ## 使用场景
 

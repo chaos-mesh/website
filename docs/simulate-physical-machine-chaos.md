@@ -20,7 +20,7 @@ When using Chaos Mesh v2.1.0, you need to deploy Chaosd [v1.1.0](https://github.
 
 ### Preparation
 
-Before starting Chaosd Server, you need to generate TLS certificates and create a `PhysicalMachine` within the Kubernetes cluster, please refer to [Generate TLS certs for Choasd](chaosctl-tool.md#Generate-TLS-certs-for-chaosd).
+Before starting Chaosd Server, you need to generate TLS certificates and create a `PhysicalMachine` within the Kubernetes cluster, please refer to [Generate TLS certs for Choasd](chaosctl-tool.md#generate-tls-certs-for-choasd).
 
 ### Start Chaosd Server
 
