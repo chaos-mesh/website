@@ -28,7 +28,7 @@ HTTPChaos 支持多种类型故障的组合。在创建 HTTPChaos 实验时，�
 
 ## 创建实验
 
-Chaos Mesh 仅支持使用 YAML 配置文件创建 HTTPChaos 实验。在 YAML 配置文件中，你可以模拟一种 HTTP 故障类型，也可以模拟多种 HTTP 故障的组合。
+Chaos Mesh 支持使用 YAML 配置文件创建 HTTPChaos 实验。在 YAML 配置文件中，你可以模拟一种 HTTP 故障类型，也可以模拟多种 HTTP 故障的组合。
 
 ### `abort` 示例
 

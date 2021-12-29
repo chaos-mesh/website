@@ -28,7 +28,7 @@ Before injecting the faults supported by HTTPChaos, note the followings:
 
 ## Create experiments
 
-Chaos Mesh only supports using YAML configuration files to create HTTPChaos experiments. In the YAML files, you can simulate either one HTTP fault type or a combination of different HTTP fault types.
+Chaos Mesh supports using YAML configuration files to create HTTPChaos experiments. In the YAML files, you can simulate either one HTTP fault type or a combination of different HTTP fault types.
 
 ### Example of `abort`
 
@@ -52,7 +52,7 @@ Chaos Mesh only supports using YAML configuration files to create HTTPChaos expe
      duration: 5m
    ```
 
-   Based on this configuration example, Chaos Mesh will inject the `abort` fault into the specified pod for 5 minutes. During the fault injection, the GET requests sent through port 80 in the `/api` path of the target Pod will be interrupted.
+   Based on this configuration example, Chaos Mesh injects the `abort` fault into the specified pod for 5 minutes. During the fault injection, the GET requests sent through port 80 in the `/api` path of the target Pod will be interrupted.
 
 2. After the configuration file is prepared, use `kubectl` to create the experiment:
 
@@ -92,7 +92,7 @@ Chaos Mesh only supports using YAML configuration files to create HTTPChaos expe
      duration: 5m
    ```
 
-   Based on this configuration example, Chaos Mesh will inject the `delay` fault, `replace` fault, and `patch` fault consecutively.
+   Based on this configuration example, Chaos Mesh injects the `delay` fault, `replace` fault, and `patch` fault consecutively.
 
 2. After the configuration file is prepared, use `kubectl` to create the experiment:
 
