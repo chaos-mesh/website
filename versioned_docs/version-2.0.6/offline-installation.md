@@ -36,17 +36,17 @@ export CHAOS_MESH_VERSION=latest
 On the machine connected to external network, pull images using the version number that has been set:
 
 ```bash
-docker pull ghcr.io/chaos-mesh/chaos-mesh:${CHAOS_MESH_VERSION}
-docker pull ghcr.io/chaos-mesh/chaos-daemon:${CHAOS_MESH_VERSION}
-docker pull ghcr.io/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION}
+docker pull pingcap/chaos-mesh:${CHAOS_MESH_VERSION}
+docker pull pingcap/chaos-daemon:${CHAOS_MESH_VERSION}
+docker pull pingcap/chaos-dashboard:${CHAOS_MESH_VERSION}
 ```
 
 Save images as the tar packages:
 
 ```bash
-docker save ghcr.io/chaos-mesh/chaos-mesh:${CHAOS_MESH_VERSION} > image-chaos-mesh.tar
-docker save ghcr.io/chaos-mesh/chaos-daemon:${CHAOS_MESH_VERSION} > image-chaos-daemon.tar
-docker save ghcr.io/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION} > image-chaos-dashboard.tar
+docker save pingcap/chaos-mesh:${CHAOS_MESH_VERSION} > image-chaos-mesh.tar
+docker save pingcap/chaos-daemon:${CHAOS_MESH_VERSION} > image-chaos-daemon.tar
+docker save pingcap/chaos-dashboard:${CHAOS_MESH_VERSION} > image-chaos-dashboard.tar
 ```
 
 :::note
@@ -76,7 +76,7 @@ After downloading all the files required for installation, you need to copy thes
 
 After copying the tar package of the Chaos Mesh images and the zip package of the repository to the offline environment, take the following steps to install Chaos Mesh.
 
-### Step 1. Load Chaos Mesh images
+### Step 1: Load Chaos Mesh images
 
 Load images from the tar package:
 
@@ -86,7 +86,7 @@ docker load < image-chaos-daemon.tar
 docker load < image-chaos-dashboard.tar
 ```
 
-### Step 2. Push images to Registry
+### Step 2: Push images to Registry
 
 :::note
 
@@ -103,12 +103,12 @@ export CHAOS_MESH_VERSION=latest; export DOCKER_REGISTRY=localhost:5000
 Mark the images so that the images point to the Registry:
 
 ```bash
-export CHAOS_MESH_IMAGE=$DOCKER_REGISTRY/chaos-mesh/chaos-mesh:${CHAOS_MESH_VERSION}
-export CHAOS_DAEMON_IMAGE=$DOCKER_REGISTRY/chaos-mesh/chaos-daemon:${CHAOS_MESH_VERSION}
-export CHAOS_DASHBOARD_IMAGE=$DOCKER_REGISTRY/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION}
-docker image tag ghcr.io/chaos-mesh/chaos-mesh:${CHAOS_MESH_VERSION} $CHAOS_MESH_IMAGE
-docker image tag ghcr.io/chaos-mesh/chaos-daemon:${CHAOS_MESH_VERSION} $CHAOS_DAEMON_IMAGE
-docker image tag ghcr.io/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION} $CHAOS_DASHBOARD_IMAGE
+export CHAOS_MESH_IMAGE=$DOCKER_REGISTRY/pingcap/chaos-mesh:${CHAOS_MESH_VERSION}
+export CHAOS_DAEMON_IMAGE=$DOCKER_REGISTRY/pingcap/chaos-daemon:${CHAOS_MESH_VERSION}
+export CHAOS_DASHBOARD_IMAGE=$DOCKER_REGISTRY/pingcap/chaos-dashboard:${CHAOS_MESH_VERSION}
+docker image tag pingcap/chaos-mesh:${CHAOS_MESH_VERSION} $CHAOS_MESH_IMAGE
+docker image tag pingcap/chaos-daemon:${CHAOS_MESH_VERSION} $CHAOS_DAEMON_IMAGE
+docker image tag pingcap/chaos-dashboard:${CHAOS_MESH_VERSION} $CHAOS_DASHBOARD_IMAGE
 ```
 
 Push images to Registry:
@@ -119,7 +119,7 @@ docker push $CHAOS_DAEMON_IMAGE
 docker push $CHAOS_DASHBOARD_IMAGE
 ```
 
-### Step 3. Install Chaos Mesh using Helm
+### Step 3: Install Chaos Mesh using Helm
 
 Unpack the zip package of Chaos Mesh:
 
@@ -141,9 +141,7 @@ kubectl create ns chaos-testing
 
 Execute the installation command. When executing the installation command, you need to specify the namespace of Chaos Mesh and the image value of each component:
 
-```bash
-helm install chaos-mesh helm/chaos-mesh -n=chaos-testing --set images.registry=$DOCKER_REGISTRY
-```
+<PickHelmVersion className="language-bash">{`helm install chaos-mesh helm/chaos-mesh -n=chaos-testing --set chaosDaemon.image=$CHAOS_DAEMON_IMAGE --set controllerManager.image=$CHAOS_MESH_IMAGE --set dashboard.image=$CHAOS_DASHBOARD_IMAGE --version latest`}</PickHelmVersion>
 
 ## Verify the installation
 

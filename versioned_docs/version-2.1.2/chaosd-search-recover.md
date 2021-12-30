@@ -38,11 +38,11 @@ Global Flags:
 | Configuration item | Abbreviation | Description | Type |
 | :-- | :-- | :-- | :-- |
 | `all` | A | Lists all experiments | bool |
-| `asc` | None | Sorts the experiments in ascending order of the creation time. The default value is `false`.| bool |
+| `asc` | None | Sorts the experiments in ascending order of the creation time. The default value is `false`. | bool |
 | `kind` | k | Lists experiments of the specified kind | string. The supported kinds are as follows: `network`, `process`, `stress`, `disk`, `host`, `jvm` |
 | `limit` | l | The number of listed experiments | int |
 | `offset` | o | Searches from the specified offset | int |
-| `status` | s | Lists experiments with the specified status | string. The supported types are as follows: `created`, `success`, `error`, `destroyed`, `revoked`
+| `status` | s | Lists experiments with the specified status | string. The supported types are as follows: `created`, `success`, `error`, `destroyed`, `revoked` |
 
 #### Example
 
@@ -88,25 +88,25 @@ The following example shows how to recover an experiment using the command-line 
 
 1. Create a CPU stress experiment using Chaosd:
 
-    ```bash
-    chaosd attack stress cpu --workers 2 --load 10
-    ```
+   ```bash
+   chaosd attack stress cpu --workers 2 --load 10
+   ```
 
-    The result is as follows:
+   The result is as follows:
 
-    ```bash
-    [2021/05/12 03:38:33.698 +00:00] [INFO] [stress.go:66] ["stressors normalize"] [arguments=" --cpu 2 --cpu-load 10"]
-    [2021/05/12 03:38:33.702 +00:00] [INFO] [stress.go:82] ["Start stress-ng process successfully"] [command="/usr/bin/stress-ng --cpu 2 --cpu-load 10"] [Pid=27483]
-    Attack stress cpu successfully, uid: 4f33b2d4-aee6-43ca-9c43-0f12867e5c9c
-    ```
+   ```bash
+   [2021/05/12 03:38:33.698 +00:00] [INFO] [stress.go:66] ["stressors normalize"] [arguments=" --cpu 2 --cpu-load 10"]
+   [2021/05/12 03:38:33.702 +00:00] [INFO] [stress.go:82] ["Start stress-ng process successfully"] [command="/usr/bin/stress-ng --cpu 2 --cpu-load 10"] [Pid=27483]
+   Attack stress cpu successfully, uid: 4f33b2d4-aee6-43ca-9c43-0f12867e5c9c
+   ```
 
-    Save the experiment UID for later use.
+   Save the experiment UID for later use.
 
 2. When you do not need to simulate the CPU stress scenario anymore, use the `recover` command to recover the experiment corresponding to the UID:
 
-    ```bash
-    chaosd recover 4f33b2d4-aee6-43ca-9c43-0f12867e5c9c
-    ```
+   ```bash
+   chaosd recover 4f33b2d4-aee6-43ca-9c43-0f12867e5c9c
+   ```
 
 ### Recover experiments using the service mode
 
@@ -116,7 +116,7 @@ The following example shows how to recover an experiment using the service mode.
 
 1. Send a `POST` HTTP request to the Chaosd service to create a CPU stress experiment:
 
-```bash
+````bash
     curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{"load":10, "action":"cpu","workers":1}'
     ```
 
@@ -133,3 +133,4 @@ The following example shows how to recover an experiment using the service mode.
     ```bash
     curl -X DELETE 172.16.112.130:31767/api/attack/c3c519bf-819a-4a7b-97fb-e3d0814481fa
     ```
+````
