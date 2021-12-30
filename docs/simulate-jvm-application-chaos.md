@@ -13,6 +13,12 @@ Chaos Mesh simulates the faults of JVM application through [Byteman](https://git
 
 This document describes how to use Chaos Mesh to create the above fault types of JVM experiments.
 
+::: note
+
+Make sure your Linux kernel must be v4.1 or later.
+
+:::
+
 ## Create experiments using Chaos Dashboard
 
 1. Open Chaos Dashboard, and click **NEW EXPERIMENT** on the page to create a new experiment.
