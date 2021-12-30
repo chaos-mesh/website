@@ -192,7 +192,7 @@ Setting `action` to `reorder` means simulating network packet reordering fault. 
 
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
-| reorder | string | Indicates the probability to reorder | 0 | No | 0.5 |
+| reorder | string | Indicates the probability to reorder. Range of value: [0, 100] | 0 | No | 50 |
 | correlation | string | Indicates the correlation between this time's length of delay time and the previous time's length of delay time. Range of value: [0, 100] | 0 | No | 50 |
 | gap | int | Indicates the gap before and after packet reordering | 0 | No | 5 |
 

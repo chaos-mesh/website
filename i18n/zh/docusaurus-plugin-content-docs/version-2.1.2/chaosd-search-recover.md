@@ -42,7 +42,7 @@ Global Flags:
 | `kind` | k | 列出指定类型的实验 | string 类型，支持的类型包括：`network`、`process`、`stress`、`disk`、`host`、`jvm` |
 | `limit` | l | 列出实验的数量 | int 类型 |
 | `offset` | o | 从指定的偏移量开始搜索 | int 类型 |
-| `status` | s | 列出指定状态的实验 | string 类型，支持的状态类型包括：`created`、`success`、`error`、`destroyed`、`revoked`
+| `status` | s | 列出指定状态的实验 | string 类型，支持的状态类型包括：`created`、`success`、`error`、`destroyed`、`revoked` |
 
 #### 示例
 
@@ -90,25 +90,25 @@ curl -X GET 127.0.0.1:31767/api/experiments/
 
 1. 使用 Chaosd 创建一个 CPU 压力实验：
 
-    ```bash
-    chaosd attack stress cpu --workers 2 --load 10
-    ```
+   ```bash
+   chaosd attack stress cpu --workers 2 --load 10
+   ```
 
-    输出如下所示：
+   输出如下所示：
 
-    ```bash
-    [2021/05/12 03:38:33.698 +00:00] [INFO] [stress.go:66] ["stressors normalize"] [arguments=" --cpu 2 --cpu-load 10"]
-    [2021/05/12 03:38:33.702 +00:00] [INFO] [stress.go:82] ["Start stress-ng process successfully"] [command="/usr/bin/stress-ng --cpu 2 --cpu-load 10"] [Pid=27483]
-    Attack stress cpu successfully, uid: 4f33b2d4-aee6-43ca-9c43-0f12867e5c9c
-    ```
+   ```bash
+   [2021/05/12 03:38:33.698 +00:00] [INFO] [stress.go:66] ["stressors normalize"] [arguments=" --cpu 2 --cpu-load 10"]
+   [2021/05/12 03:38:33.702 +00:00] [INFO] [stress.go:82] ["Start stress-ng process successfully"] [command="/usr/bin/stress-ng --cpu 2 --cpu-load 10"] [Pid=27483]
+   Attack stress cpu successfully, uid: 4f33b2d4-aee6-43ca-9c43-0f12867e5c9c
+   ```
 
-    请注意保存输出中的实验 UID 信息，以便在下一步操作中使用。
+   请注意保存输出中的实验 UID 信息，以便在下一步操作中使用。
 
 2. 在不需要模拟 CPU 压力场景时，使用 `recover` 命令来恢复 UID 对应的实验：
 
-    ```bash
-    chaosd recover 4f33b2d4-aee6-43ca-9c43-0f12867e5c9c
-    ```
+   ```bash
+   chaosd recover 4f33b2d4-aee6-43ca-9c43-0f12867e5c9c
+   ```
 
 ### 使用服务模式恢复实验
 
@@ -118,20 +118,20 @@ curl -X GET 127.0.0.1:31767/api/experiments/
 
 1. 向 Chaosd 服务发送 `POST` HTTP 请求，创建一个 CPU 压力实验：
 
-    ```bash
-    curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{"load":10, "action":"cpu","workers":1}'
-    ```
+   ```bash
+   curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{"load":10, "action":"cpu","workers":1}'
+   ```
 
-    输出如下所示：
+   输出如下所示：
 
-    ```bash
-    {"status":200,"message":"attack successfully","uid":"c3c519bf-819a-4a7b-97fb-e3d0814481fa"}
-    ```
+   ```bash
+   {"status":200,"message":"attack successfully","uid":"c3c519bf-819a-4a7b-97fb-e3d0814481fa"}
+   ```
 
-    请注意保存输出中的实验 UID 信息，以便在下一步操作中使用。
+   请注意保存输出中的实验 UID 信息，以便在下一步操作中使用。
 
 2. 在不需要模拟 CPU 压力场景时，运行以下命令来结束 UID 对应的实验：
 
-    ```bash
-    curl -X DELETE 172.16.112.130:31767/api/attack/c3c519bf-819a-4a7b-97fb-e3d0814481fa
-    ```
+   ```bash
+   curl -X DELETE 172.16.112.130:31767/api/attack/c3c519bf-819a-4a7b-97fb-e3d0814481fa
+   ```

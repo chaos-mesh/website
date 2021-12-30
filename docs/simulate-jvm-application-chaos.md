@@ -2,185 +2,237 @@
 title: Simulate JVM Application Faults
 ---
 
-## JVMChaos introduction
+Chaos Mesh simulates the faults of JVM application through [Byteman](https://github.com/chaos-mesh/byteman). The supported fault types are as follows:
 
-JVMChaos can inject faults into JVM of the target container, which can be applied for any application that uses JVM as the runtime environment. Currently, JVMChaos uses [chaosblade-exec-jvm](https://github.com/chaosblade-io/chaosblade-exec-jvm) to inject faults into the JVM. JVMChaos supports the following fault types:
-
-- Specify return value
-- Method Delay
 - Throw custom exceptions
-- Out of memory
-- Fill JVM Code Cache
-- CPU full load in Java
-- Perform customized Groovy or Java script
+- Trigger garbage collection
+- Increase method latency
+- Modify return values of a method
+- Trigger faults by setting Byteman configuration files
+- Increase JVM pressure
 
-## Usage restrictions
+This document describes how to use Chaos Mesh to create the above fault types of JVM experiments.
 
-Currently, Chaos Mesh uses [MutatingAdmissionWebhook](https://kubernetes.io/zh/docs/reference/access-authn-authz/admission-controllers/#mutatingadmissionwebhook) to modify the Pod definition and loads Java agent using [Init Containers](https://kubernetes.io/zh/docs/concepts/workloads/pods/init-containers/) instead of loading java agent at runtime. Therefore, there are some restrictions when you use JVMChaos:
+## Create experiments using Chaos Dashboard
 
-- The Webhook support needs to be enabled in Kubernetes.
-- For Pods that exist before you configure [MutatingAdmissionWebhook](https://kubernetes.io/zh/docs/reference/access-authn-authz/admission-controllers/#mutatingadmissionwebhook) for the namespace, they will not be affected by JVMChaos.
-- JVM in all containers under namespace will load Java agent at the startup stage, and JVMChaos will not unload Java agent after being deleted. If you hope to clean up the Java agent considering the impact that Java agent may have on program behaviors or performance, you can move the workload out of the namespace.
+1. Open Chaos Dashboard, and click **NEW EXPERIMENT** on the page to create a new experiment.
 
-In addition, creating JVMChaos using Chaos Dashboard is not supported currently.
+   ![create a new experiment](./img/create-new-exp.png)
+
+2. In the "**Choose a Target**" area, choose **JVM FAULT**, and select a specific behavior, such as **`RETURN`**. Then, fill out the detailed configurations.
+
+   ![JVMChaos experiments](./img/jvmchaos-exp.png)
+
+   For information about how to fill out the configurations, refer to [Field Description] (#field-description).
+
+3. Fill out the experiment information, and specify the experiment scope and the scheduled experiment duration.
+
+   ![experiment information](./img/exp-info.png)
+
+4. Submit the experiment information.
 
 ## Create experiments using YAML files
 
-The following example shows you the methods and effects of JVMChaos with a specified return value. The YAML files referred in the following steps can be found in [examples/jvm](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples/jvm). The default work directory for the following steps is in `examples/jvm`. The default namespace installed by Chaos Mesh is `chaos-testing`.
+The following example shows the usage and effects of JVMChaos. The example specifies the return values of a method. The YAML files referred to in the following steps can be found in [examples/jvm](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples/jvm). The default work directory for the following steps is also `examples/jvm`. The default namespace where Chaos Mesh is installed is `chaos-testing`.
 
-### 1. Create a namespace and configure MutatingAdmissionWebhook
+### Step 1. Create the target application
 
-Create the namespace for the application:
-
-```shell
-kubectl create ns app
-```
-
-Add the `admission-webhook=enabled` label for the `app` namespace, and allow the MutatingAdmissionWebhook of Chaos Mesh to modify Pods under the namespace.
-
-```shell
-kubectl label ns app admission-webhook=enabled
-```
-
-Prepare a template for modifications to be made by JVMChaos:
-
-```shell
-kubectl apply -f sidecar-template.yaml
-kubectl apply -f sidecar.yaml
-```
-
-### 2. Create target applications
-
-[jvm-chaos-demo](https://github.com/chaos-mesh/jvm-chaos-demo) is a simple Spring Boot application and here serves as a target application. A target application is defined in `example/jvm/app.yaml` as follows:
+[Helloworld](https://github.com/WangXiangUSTC/byteman-example/tree/main/example.helloworld) is a simple Java application. In this section, this application is used as the target application that is to be tested. The target application is defined in `example/jvm/app.yaml` as follows:
 
 ```yaml
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
-  name: springboot-jvmchaos-demo
-  namespace: app
+  name: helloworld
+  namespace: helloworld
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: springboot-jvmchaos-demo
-  template:
-    metadata:
-      annotations:
-        admission-webhook.chaos-mesh.org/request: jvmchaos-sidecar
-      creationTimestamp: null
-      labels:
-        app: springboot-jvmchaos-demo
-    spec:
-      containers:
-        - image: 'gallardot/chaosmesh-jvmchaos-sample:latest'
-          imagePullPolicy: IfNotPresent
-          name: springboot-jvmchaos-demo
+  containers:
+    - name: helloworld
+      # source code: https://github.com/WangXiangUSTC/byteman-example/tree/main/example.helloworld
+      # this application will print log like this below:
+      # 0. Hello World
+      # 1. Hello World
+      # ...
+      image: xiang13225080/helloworld:v1.0
+      imagePullPolicy: IfNotPresent
 ```
 
-In the above example, the `annotation` with the value `admission-webhook.chaos-mesh.org/request: jvmchaos-sidecar` corresponds to the name of `ConfigMap` in `sidecar.yaml` of step 1.
+1. Create the namespace for the target application:
 
-Build application deployment:
+    ```shell
+    kubectl create namespace helloworld
+    ```
+
+2. Build the application Pod:
+
+    ```shell
+    kubectl apply -f app.yaml
+    ```
+
+3. Execute `kubectl -n helloworld get pods`, and you are expected to find a pod named `helloworld` in the `helloworld` namespace.
+
+    ```shell
+    kubectl -n helloworld get pods
+    ```
+
+    The result is as follows:
+
+    ```text
+    kubectl get pods -n helloworld
+    NAME         READY   STATUS    RESTARTS   AGE
+    helloworld   1/1     Running   0          2m
+    ```
+
+    After the `READY` column turns to `1/1`, you can proceed to the next step.
+
+### Step 2. Observe application behaviors before injecting faults​
+
+You can observe the behavior of `helloworld` application before injecting faults, for example:
 
 ```shell
-kubectl apply -f app.yaml
-```
-
-Execute `kubectl -n app get pods`, and then you can find `1` Pod with a name like `springboot-jvmchaos-demo-777d94c5b9-7t7l2` under the namespace `app`. Wait for `READY` changes to `1/1` and then execute the following commands:
-
-```shell
-kubectl -n app get pods
+kubectl -n helloworld logs -f helloworld
 ```
 
 The result is as follows:
 
-```text
-NAME                                        READY   STATUS    RESTARTS   AGE
-springboot-jvmchaos-demo-777d94c5b9-7t7l2   1/1     Running   0          21s
-```
-
-### 3. Obseve application behaviors before injecting faults
-
-You can observe the behavior of the `jvm-chaos-demo` application before injecting faults, for example:
-
-Map the port of Pod to local using `kubectl port-forward`:
-
 ```shell
-kubectl -n app port-forward pod/springboot-jvmchaos-demo-777d94c5b9-7t7l2 8080:8080
+0. Hello World
+1. Hello World
+2. Hello World
+3. Hello World
+4. Hello World
+5. Hello World
 ```
 
-Use curl in another shell session or directly access to `http://localhost:8080/hello`. `Hello firend` is expected to be returned:
+You can see that `helloworld` outputs a line of `Hello World` every second, and the number of each line increases in turn.
 
-```shell
-curl http://localhost:8080/hello
-Hello friend
-```
+### Step 3. Inject JVMChaos and check
 
-### 4. Inject JVMChaos and check
+1. The JVMChaos with a specified return value is as follows:
 
-The JVMChaos with a specified return value is as follows:
+    ```yaml
+    apiVersion: chaos-mesh.org/v1alpha1
+    kind: JVMChaos
+    metadata:
+      name: return
+      namespace: helloworld
+    spec:
+      action: return
+      class: Main
+      method: getnum
+      value: "9999"
+      mode: all
+      selector:
+        namespaces:
+          - helloworld
+    ```
 
-```yaml
-apiVersion: chaos-mesh.org/v1alpha1
-kind: JVMChaos
-metadata:
-  name: jvm-return-example
-  namespace: app
-spec:
-  action: return
-  target: jvm
-  flags:
-    value: 'hello chaos mesh!'
-  matchers:
-    classname: 'org.chaosmesh.jvm.Application'
-    methodname: 'hello'
-  mode: one
-  selector:
-    labelSelectors:
-      app: springboot-jvmchaos-demo
-```
+    JVMChaos changes the return value of the `getnum` method to the number `9999`, which means that the number of each line in the `helloworld` output is set to `9999`.
 
-JVMChaos modifies the return value of `hello` method to string `hello chaos mesh!`.
+2. Inject JVMChaos with a specified value:
 
-Inject JVMChaos with a specified value:
+    ```shell
+    kubectl apply -f ./jvm-return-example.yaml
+    ```
 
-```shell
-kubectl apply -f ./jvm-return-example.yaml
-```
+3. Check the latest log of `helloworld`:
 
-Use curl or directly access to <http://localhost:8080/hello>, `hello chaos mesh!` is expected to be returned:
+    ```shell
+    kubectl -n helloworld logs -f helloworld
+    ```
 
-```shell
-curl http://localhost:8080/hello
-hello chaos mesh!
-```
+    The log is as follows:
+
+    ```shell
+    Rule.execute called for return_0:0
+    return execute
+    caught ReturnException
+    9999. Hello World
+    ```
 
 ## Field description
 
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
-| action | string | Indicates the specific fault type. The available fault types include return, script, cfl, oom, ccf, tce, tcf, cpf, tde, and tpf. | None | Yes | return |
-| mode | string | Indicates how to select Pod. The supported modes include one, all, fixed, fixed-percent, and random-max-percent. | None | Yes | `one` |
-| value | string | Provides parameters for the `mode` configuration, depending on `mode`. | None | No | 1 |
-| target | string | Indicates the parameter passed to `chaosblade-exec-jvm`, representing JVMChaos targets, supporting servlet, psql, jvm, jedis, http, dubbo, rocketmq, tars, mysql, ruid, redisson, rabbitmq, monodb. | None | Yes | jvm |
-| flags | map[string]string | Indicates parameters passed to `chaosblade-exec-jvm` and represents the flags of action. | None | No |  |
-| matchers | map[string]string | Indicates parameters passed to `chaosblade-execu-jvm` and represents the matching of injection points. | None | No |  |
+| `action` | string | Indicates the specific fault type. The available fault types include `latency`, `return`, `exception`, `stress`, `gc`, and `ruleData`. | None | Yes | return |
+| `mode` | string | Indicates how to select Pod. The supported modes include `one`, `all`, `fixed`, `fixed-percent`, and `random-max-percent`. | None | Yes | `one` |
 
-For the meaning of the value of action, refer to:
+The meanings of the different `action` values are as follows:
 
-| Name   | Meaning                                                      |
-| ------ | ------------------------------------------------------------ |
-| delay  | Specifies method call delay                                  |
-| return | Modifies the return value                                    |
-| script | Writes groovy and Java implement scenarios                   |
-| cfl    | Java CPU usage overload                                      |
-| oom    | Out of memory, supporting oom of heap, stack, and metaspaces |
-| ccf    | JVM code cache fill                                          |
-| tce    | Throw custom exceptions                                      |
-| cpf    | Connection pool full                                         |
-| tde    | Throw the first exception of method declare                  |
-| tpf    | Thread pool full                                             |
+| Value   | Meaning                                   |
+| ------ | -------------------------------------- |
+| `latency`  | Increase method latency                       |
+| `return` | Modify return values of a method                             |
+| `exception` | Throw custom exceptions           |
+| `stress`    | Increase CPU usage of Java process, or cause memory overflow (support heap overflow and stack overflow)    |
+| `gc`    | Trigger garbage collection |
+| `ruleData`    | Trigger faults by setting Byteman configuration files |
 
-For the details of action, refer to [chaos blade document](https://chaosblade-io.gitbook.io/chaosblade-help-zh-cn/blade-create-jvm).
+For different `action` values, there are different configuration items that can be filled in.
 
-For the parameters passed to `chaosblade-exec-jvm`, Chaos Mesh will merge all fields in `flags` and `matchers` as a request body and then send it to `chaosblade-exec-jvm`. For details, refer to [chaosblade-exec-jvm/Protocol](https://github.com/chaosblade-io/chaosblade-dev-doc/blob/a7074ab656de469f7dfaa19227723d0967c590ae/zh-cn/chaosblade-exec-jvm/%E5%8D%8F%E8%AE%AE%E7%AF%87.md).
+### Parameters for `latency`
+
+| Parameter     | Type                    | Description                     | Required |
+| --------- | ----------------------- | ------------------------ | -------- |
+| `class`     |  string        | The name of the Java class    | Yes       |
+| `method`      | string           | The name of the method      | Yes       |
+| `latency` | int | The duration of increasing method latency. The unit is milisecond.    | Yes       |
+| `port`   | int     | The port ID attached to the Java process agent. The faults are injected into the Java process through this ID. | No       |
+
+### Parameters for `return`
+
+| Parameter       | Type                    | Description                     | Required |
+| --------- | ----------------------- | ------------------------ | -------- |
+| `class`     |  string        | The name of the Java class    | Yes       |
+| `method`      | string           | The name of the method      | Yes       |
+| `value` | string | Specifies the return value of the method | string type, required. Currently, the item can be numeric and string types. If the item (return value) is string, double quotes are required, like  "chaos".    | Yes      |
+| `port`   | int     | The port ID attached to the Java process agent. The faults are injected into the Java process through this ID. | No       |
+
+### Parameters for `exception`
+
+| Parameter       | Type                    | Description                     | Required |
+| --------- | ----------------------- | ------------------------ | -------- |
+| `class`     |  string        | The name of the Java class    | Yes       |
+| `method`      | string           | The name of the method      | Yes       |
+| `exception` | string | The thrown custom exception, such as 'java.io.IOException("BOOM")'.   | Yes       |
+| `port`   | int    | The port ID attached to the Java process agent. The faults are injected into the Java process through this ID. | No       |
+
+### Parameters for `stress`
+
+| Parameter       | Type                    | Description                     | Required |
+| --------- | ----------------------- | ------------------------ | -------- |
+| `cpuCount`     |  int        | The number of CPU cores used for increasing CPU stress. You must configure one item between `cpu-count` and `mem-type`.    | No       |
+| `memType`      | string           | The type of OOM. Currently, both 'stack' and 'heap' OOM types are supported. You must configure one item between `cpu-count` and `mem-type`.    | No       |
+| `port`   | int    | The port ID attached to the Java process agent. The faults are injected into the Java process through this ID. | No       |
+
+### Parameters for `gc`
+
+| Parameter       | Type                    | Description                     | Required |
+| --------- | ----------------------- | ------------------------ | -------- |
+| `port`   | int    | The port ID attached to the Java process agent. The faults are injected into the Java process through this ID. | No       |
+
+### Parameters for `ruleData`
+
+| Parameter       | Type                    | Description                     | Required |
+| --------- | ----------------------- | ------------------------ | -------- |
+| `ruleData`    |  srting        | Specifies the Byteman configuration data    | Yes       |
+| `port`   | int    | The port ID attached to the Java process agent. The faults are injected into the Java process through this ID. | No       |
+
+When you write the rule configuration file, take into account the specific Java program and the [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language). For example:
+
+```txt
+RULE modify return value
+CLASS Main
+METHOD getnum
+AT ENTRY
+IF true
+DO
+    return 9999
+ENDRULE
+```
+
+You need to escape the line breaks in the configuration file to the newline character "\n", and use the escaped text as the value of "rule-data" as follows:
+
+```txt
+\nRULE modify return value\nCLASS Main\nMETHOD getnum\nAT ENTRY\nIF true\nDO return 9999\nENDRULE\n"
+```
