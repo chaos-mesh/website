@@ -31,7 +31,7 @@ Without further ado, let’s give it a try.
 
 ## How to use chaosd
 
-In this section, I will walk you through how to inject a network fault with chaosd. Your Linux kernel version must be v2.17 or later.
+In this section, I will walk you through how to inject a network fault with chaosd. Your glibc version must be v2.17 or later.
 
 ### 1. Download and unzip chaosd
 

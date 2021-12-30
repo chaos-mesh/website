@@ -26,7 +26,7 @@ For details about the introduction and usage of each fault type, refer to the re
 
 ### Operating environment
 
-Your Linux kernel version must be v2.17 or later.
+Your glibc version must be v2.17 or later.
 
 ### Download and deploy
 
