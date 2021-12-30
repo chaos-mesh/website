@@ -397,7 +397,7 @@ Attack jvm successfully, uid: b9b997b5-0a0d-4f1f-9081-d52a32318b84
 - 在运行实验时，请注意保存实验的 UID 信息。
 - 当要结束 UID 对应的实验时，需要向 Chaosd 服务的路径 /api/attack/{uid} 发送 HTTP DELETE 请求。
 
-::: 
+:::
 
 ### 使用服务模式模拟抛出自定义异常
 

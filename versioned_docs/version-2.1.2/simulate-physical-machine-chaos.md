@@ -71,7 +71,7 @@ When using Chaos Mesh v2.1.0, you need to deploy Chaosd [v1.1.0](https://github.
 
 ### Configuration description
 
-| Configuration item | Type | Description	 | Default value | Required | Example |
+| Configuration item | Type | Description | Default value | Required | Example |
 | :-- | :-- | :-- | :-- | :-- | :-- |
 | action | string | Defines the actions of physical machines faults, optional values are as follows: "stress-cpu", "stress-mem", "disk-read-payload", "disk-write-payload", "disk-fill", "network-corrupt", "network-duplicate", "network-loss", "network-delay", "network-partition", "network-dns", "process", "jvm-exception", "jvm-gc", "jvm-latency", "jvm-return", "jvm-stress", "jvm-rule-data", "clock" | None | Yes | "stress-cpu" |
 | address | string array | Selects the address of Chaosd service to inject faults | [] | Yes | ["192.168.0.10:31767"] |
