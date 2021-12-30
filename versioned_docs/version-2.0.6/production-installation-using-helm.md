@@ -109,12 +109,6 @@ To install Chaos Mesh of a specific version, add the `--version xxx` parameter a
 
 :::
 
-:::note
-
-To ensure high availability, Chaos Mesh turns on `leader-election` feature by default. If you do not need to use this feature, you can manually turn it off through `--set controllerManager.leaderElection.enabled=false`.
-
-:::
-
 ## Verify the installation
 
 <VerifyInstallation />
@@ -158,7 +152,7 @@ For more values and their usages, refer to [all values](https://github.com/chaos
 Currently, the latest CustomResourceDefinition (CRD) is not applied during the Helm upgrading, which might cause errors. To avoid this situation, you can apply the latest CRD manually:
 
 <PickVersion>
-curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl create -f -
+curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl replace -f -
 </PickVersion>
 
 :::
@@ -189,4 +183,4 @@ helm install chaos-mesh helm/chaos-mesh -n=chaos-testing
 
 The safe mode is enabled by default. To disable the safe mode, specify `dashboard.securityMode` as `false` during the installation or upgrade:
 
-<PickHelmVersion className="language-bash">{`helm install chaos-mesh helm/chaos-mesh -n=chaos-testing --set dashboard.securityMode=false --version latest`}</PickHelmVersion>
+<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set dashboard.securityMode=false --version latest`}</PickHelmVersion>
