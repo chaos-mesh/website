@@ -31,7 +31,7 @@ Here is an example of how we use Chaos Mesh to locate a TiDB system bug. In this
 
 ![Chaos Mesh discovers downtime recovery exceptions in TiKV](/img/chaos-mesh-discovers-downtime-recovery-exceptions-in-tikv.png)
 
-<div class="caption-center"> Chaos Mesh discovers downtime recovery exceptions in TiKV</div>
+<div className="caption-center"> Chaos Mesh discovers downtime recovery exceptions in TiKV</div>
 
 As you can see from the dashboard:
 
@@ -129,7 +129,7 @@ With the CRD design settled, let's look at the big picture on how Chaos Mesh wor
 
 ![Chaos Mesh workflow](/img/chaos-mesh-workflow.png)
 
-<div class="caption-center"> Chaos Mesh workflow </div>
+<div className="caption-center"> Chaos Mesh workflow </div>
 
 Here is how these components streamline a chaos experiment:
 
@@ -218,7 +218,7 @@ The following chaos experiment simulates the TiKV Pods being frequently killed i
 
 ![Chaos experiment running](/img/chaos-experiment-running.gif)
 
-<div class="caption-center"> Chaos experiment running </div>
+<div className="caption-center"> Chaos experiment running </div>
 
 We use a sysbench program to monitor the real-time QPS changes in the TiDB cluster. When errors are injected into the cluster, the QPS show a drastic jitter, which means a specific TiKV Pod has been deleted, and Kubernetes then re-creates a new TiKV Pod.
 

@@ -24,7 +24,7 @@ Big thanks to the more than 200 of you who joined us! We received so many great 
 
 ![Project Architecture](/img/chaos-mesh-linkerd-architecture.png)
 
-<p class="caption-center">Project Architecture</p>
+<p className="caption-center">Project Architecture</p>
 
 **Q: Can I use Chaos Mesh on-premises or do I need Amazon Web Services (AWS) or Google Cloud Platform (GCP)?**
 
