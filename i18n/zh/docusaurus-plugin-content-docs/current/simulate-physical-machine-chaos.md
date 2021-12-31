@@ -73,9 +73,9 @@ chaosd server --port 31767
 
 | 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
 | :-- | :-- | :-- | :-- | :-- | :-- |
-| action | string | 定义物理机故障的行为，可选值为 "stress-cpu", "stress-mem", "disk-read-payload", "disk-write-payload", "disk-fill", "network-corrupt", "network-duplicate", "network-loss", "network-delay", "network-partition", "network-dns", "process", "jvm-exception", "jvm-gc", "jvm-latency", "jvm-return", "jvm-stress", "jvm-rule-data", "clock" | 无 | 是 | "stress-cpu" |
-| address | string 数组 | 选择注入故障的 Chaosd 服务地址 | [] | 是 | ["192.168.0.10:31767"] |
-| duration | string | 指定实验的持续时间 | 无 | 是 | 30s |
+| `action` | string | 定义物理机故障的行为，可选值为 "stress-cpu", "stress-mem", "disk-read-payload", "disk-write-payload", "disk-fill", "network-corrupt", "network-duplicate", "network-loss", "network-delay", "network-partition", "network-dns", "process", "jvm-exception", "jvm-gc", "jvm-latency", "jvm-return", "jvm-stress", "jvm-rule-data", "clock" | 无 | 是 | "stress-cpu" |
+| `address` | string 数组 | 选择注入故障的 Chaosd 服务地址 | [] | 是 | ["192.168.0.10:31767"] |
+| `duration` | string | 指定实验的持续时间 | 无 | 是 | 30s |
 
 每种故障行为都有特定的配置。以下部分介绍各种故障类型以及对应的配置方法。
 

@@ -79,8 +79,8 @@ chaosd attack clock -p $PID -t 11s
 
 ### 模拟时间故障相关参数说明
 
-| 参数      | 说明    | 值       |
-| :---------- | :----------------------------------------------------------------- | :-------------------------------------------------------------------------- |
+| 参数 | 说明 | 值 |
+| :-- | :-- | :-- |
 | pid | 进程的标识符。 | int 类型 |
 | time-offset | 指定时间的偏移量。 | string 类型，例如："-5m" |
 | clock-ids-slice | 指定时间偏移作用的时钟，详见 [clock_gettime documentation](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) 。 | string 数组类型，默认为 `["CLOCK_REALTIME"]` |

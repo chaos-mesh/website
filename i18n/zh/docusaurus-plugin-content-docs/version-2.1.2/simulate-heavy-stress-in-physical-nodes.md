@@ -67,11 +67,11 @@ Global Flags:
 
 #### 模拟 CPU 压力相关配置说明
 
-| 配置项 | 配置缩写 | 说明 | 值 |
-| :-- | :-- | :-- | :-- |
-| load | l | 指定使用每个 worker 占用 CPU 负载的百分比。如果为 0，则表示为一个空负载；为 100 则表示满负载 | int 类型，取值范围为 0 到 100， 默认值为 10 |
-| workers | w | 指定用于生成 CPU 压力的 worker 数量 | int 类型，默认值为 1 |
-| options | o | stress-ng 的其他参数设置，一般情况下不需要配置 | string 类型，默认值为 "" |
+| 配置项 | 配置缩写 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- | :-- |
+| `load` | l | 指定使用每个 CPU worker 占用 CPU 负载的百分比。如果为 `0`，则表示为一个空负载；为 `100` 则表示满负载 | int 类型 | 取值范围为 `0` 到 `100`， 默认值为 `10` |
+| `workers` | w | 指定用于生成 CPU 压力的 worker 数量 | int 类型 | 默认值为 `1` |
+| `options` | o | stress-ng 的其他参数设置，一般情况下不需要配置 | string 类型 | 默认值为 "" |
 
 #### 模拟 CPU 压力示例
 
@@ -116,10 +116,10 @@ Global Flags:
 
 #### 模拟内存压力相关配置说明
 
-| 配置项 | 配置缩写 | 说明 | 值 |
-| :-- | :-- | :-- | :-- |
-| size | s | 指定每个 vm worker 占用内存的大小 | string 类型，支持使用单位 B，KB/KiB，MB/MiB，GB/GiB，TB/TiB 来设置占用的内存大小。如果不设置，则默认占用所有可用的内存。 |
-| options | o | stress-ng 的其他参数设置，一般情况下不需要配置 | string 类型，默认值为 "" |
+| 配置项 | 配置缩写 | 说明 | 类型  | 值 |
+| :-- | :-- | :-- | :-- | :-- |
+| `size` | s | 指定每个 VM worker 占用内存的大小 | string 类型 | 支持使用单位 B，KB/KiB，MB/MiB，GB/GiB，TB/TiB 来设置占用的内存大小。如果不设置，则默认占用所有可用的内存。 |
+| `options` | o | stress-ng 的其他参数设置，一般情况下不需要配置 | string 类型 | 默认值："" |
 
 #### 模拟内存压力示例
 
@@ -139,22 +139,36 @@ Attack stress mem successfully, uid: c2bff2f5-3aac-4ace-b7a6-322946ae6f13
 
 要使用服务模式创建实验，请进行以下操作：
 
-1. 以服务模式运行 chaosd。
+1. 以服务模式运行 Chaosd。
+
    ```bash
    chaosd server --port 31767
    ```
-2. 向 chaosd 服务的路径 /api/attack/stress 发送 HTTP POTST 请求。 `bash curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{fault-configuration}' ` 其中 `fault-configuration` 需要按照故障类型进行配置，对应的配置参数请参考下文中各个类型故障的相关参数说明和命令示例。 在运行实验时，请注意保存实验的 uid 信息，当要结束 uid 对应的实验时，需要向 chaosd 服务的路径 /api/attack/{uid} 发送 HTTP DELETE 请求。
+
+2. 向 Chaosd 服务的路径 `/api/attack/stress` 发送 `POST` HTTP 请求。
+
+   ```bash
+   curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{fault-configuration}'
+   ```
+
+在上述命令中，你需要按照故障类型在 `fault-configuration` 中进行配置。有关对应的配置参数，请参考下文中各个类型故障的相关参数说明和命令示例。
+
+::: note 注意
+
+在运行实验时，请注意保存实验的 UID 信息。当要结束 UID 对应的实验时，需要向 Chaosd 服务的路径 `/api/attack/{uid}` 发送 `DELETE` HTTP 请求。
+
+:::
 
 ### 服务模式下模拟 CPU 压力场景
 
 #### 模拟 CPU 压力相关参数说明
 
-| 参数 | 说明 | 值 |
-| :-- | :-- | :-- |
-| action | 实验的行为 | 设置为 "cpu" |
-| load | 指定使用每个 worker 占用 CPU 负载的百分比。如果为 0，则表示为一个空负载；为 100 则表示满负载 | int 类型，取值范围为 0 到 100， 默认值为 10 |
-| workers | 指定用于生成 CPU 压力的 worker 数量 | int 类型，默认值为 1 |
-| options | stress-ng 的其他参数设置，一般情况下不需要配置 | string 类型，默认值为 "" |
+| 参数 | 说明 | 类型  | 值 |
+| :-- | :-- | :-- | :-- |
+| `action` | 实验的行为 |  | 设置为 "cpu" |
+| `load` | 指定使用每个 CPU worker 占用 CPU 负载的百分比。如果为 `0`，则表示为一个空负载；为 `100` 则表示满负载 | int 类型 | 取值范围为 `0` 到 `100`， 默认值为 `10` |
+| `workers` | 指定用于生成 CPU 压力的 worker 数量 | int 类型 | 默认值：`1` |
+| `options` | stress-ng 的其他参数设置，一般情况下不需要配置 | string 类型 | 默认值："" |
 
 #### 服务模式下模拟 CPU 压力示例
 
@@ -172,11 +186,11 @@ curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application
 
 #### 模拟内存压力相关参数说明
 
-| 参数 | 说明 | 值 |
-| :-- | :-- | :-- |
-| action | 实验的行为 | 设置为 "mem" |
-| size | 指定每个 vm worker 占用内存的大小 | string 类型，支持使用单位 B，KB/KiB，MB/MiB，GB/GiB，TB/TiB 来设置占用的内存大小。如果不设置，则默认占用所有可用的内存。 |
-| options | stress-ng 的其他参数设置，一般情况下不需要配置 | string 类型，默认值为 "" |
+| 参数 | 说明  | 类型  | 值 |
+| :-- | :-- | :-- | :-- |
+| `action` | 实验的行为 | | 设置为 "mem" |
+| `size` | 指定每个 VM worker 占用内存的大小 | string 类型 | 支持使用单位 B，KB/KiB，MB/MiB，GB/GiB，TB/TiB 来设置占用的内存大小。如果不设置，则默认占用所有可用的内存。 |
+| `options` | stress-ng 的其他参数设置，一般情况下不需要配置 | string 类型 | 默认值："" |
 
 #### 服务模式下模拟内存压力示例
 
