@@ -26,7 +26,7 @@ For details about the introduction and usage of each fault type, refer to the re
 
 ### Operating environment
 
-Your glibc version must be v2.17 or later.
+Your glibc version must be v2.17 or later versions.
 
 ### Download and deploy
 
