@@ -99,12 +99,12 @@ chaosd server --port 31767
 
 | 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
 | :-- | :-- | :-- | :-- | :-- | :-- |
-| action | string | 定义物理机故障的行为，可选值为 "stress-cpu", "stress-mem", "disk-read-payload", "disk-write-payload", "disk-fill", "network-corrupt", "network-duplicate", "network-loss", "network-delay", "network-partition", "network-dns", "process", "jvm-exception", "jvm-gc", "jvm-latency", "jvm-return", "jvm-stress", "jvm-rule-data", "clock" | 无 | 是 | "stress-cpu" |
-| address | string 数组 | 选择注入故障的 Chaosd 服务地址，address 与 selector 两者只能选择其中一项 | [] | 否 | ["192.168.0.10:31767"] |
-| selector | struct | 指定注入故障的目标 PhysicalMachine，详情请参考[定义实验范围](define-chaos-experiment-scope.md)，address 与 selector 两者只能选择其中一项 | 无 | 否 | |
+| `action` | string | 定义物理机故障的行为，可选值为 "stress-cpu", "stress-mem", "disk-read-payload", "disk-write-payload", "disk-fill", "network-corrupt", "network-duplicate", "network-loss", "network-delay", "network-partition", "network-dns", "process", "jvm-exception", "jvm-gc", "jvm-latency", "jvm-return", "jvm-stress", "jvm-rule-data", "clock" | 无 | 是 | "stress-cpu" |
+| `address` | string 数组 | 选择注入故障的 Chaosd 服务地址，`address` 与 `selector` 两者只能选择其中一项 | [] | 是 | ["192.168.0.10:31767"] |
+| `selector` | struct | 指定注入故障的目标 PhysicalMachine，详情请参考[定义实验范围](define-chaos-experiment-scope.md)，`address` 与 `selector` 两者只能选择其中一项 | 无 | 否 | |
 | mode | string | 指定实验的运行方式，可选择的方式包括：`one`（表示随机选出一个符合条件的 PhysicalMachine）、`all`（表示选出所有符合条件的 PhysicalMachine）、`fixed`（表示选出指定数量且符合条件的 PhysicalMachine）、`fixed-percent`（表示选出占符合条件的 PhysicalMachine 中指定百分比的 PhysicalMachine）、`random-max-percent`（表示选出占符合条件的 PhysicalMachine 中不超过指定百分比的 PhysicalMachine） | 无 | 是 | one |
-| value | string | 取决与 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 PhysicalMachine 的百分比 | 无 | 否 | 1 |
-| duration | string | 指定实验的持续时间 | 无 | 是 | 30s |
+| `value` | string | 取决与 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 PhysicalMachine 的百分比 | 无 | 否 | 1 |
+| `duration` | string | 指定实验的持续时间 | 无 | 是 | 30s |
 
 每种故障行为都有特定的配置。以下部分介绍各种故障类型以及对应的配置方法。
 
