@@ -64,7 +64,7 @@ Global Flags:
 
 | 配置项 | 配置缩写 | 说明 | 值 |
 | :-- | :-- | :-- | :-- |
-| `process` | p | 需要结束进程的名字或者进程的标识符 | string 类型，默认为 "" |
+| `process` | p | 需要注入故障的进程的名字或者进程的标识符 | string 类型，默认为 `""` |
 | `signal` | s | 所提供的进程信号值 | int 类型，默认为 `9`。目前只支持 `SIGKILL`、`SIGTERM` 和 `SIGSTOP` 三种信号值。 |
 
 #### 模拟进程被终止示例
@@ -107,7 +107,7 @@ Global Flags:
 
 | 配置项  | 配置缩写 | 说明                               | 值                    |
 | :------ | :------- | :--------------------------------- | :-------------------- |
-| `process` | p        | 需要结束进程的名字或者进程的标识符 | string 类型，默认为"" |
+| `process` | p        | 需要暂停的进程的名字或者进程的标识符 | string 类型，默认为 `""` |
 
 #### 模拟进程被暂停示例
 
@@ -120,7 +120,3 @@ chaosd attack process stop -p python
 ```bash
 Attack process python successfully, uid: 9cb6b3be-4f5b-4ecb-ae05-51050fcd0010
 ```
-
-## 使用服务模式创建实验
-
-（正在持续更新中）
