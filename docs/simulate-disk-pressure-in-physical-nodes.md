@@ -69,9 +69,9 @@ Global Flags:
 
 | Configuration item | Abbreviation | Description | Value |
 | :-- | :-- | :-- | :-- |
-| `path` | p | Specifies the file path to read the data. If this parameter is not specified, or the parameter value is set to an empty string, Chaosd reads from the virtual disk files mounted in the "/" directory. Depending on the permissions to read the files, you might be required to run this program using certain permissions. | type: string; default: "" |
+| `path` | p | Specifies the file path to read the data. If this parameter is not specified, or the parameter value is set to an empty string, Chaosd reads from the virtual disk files mounted in the "/" directory. Depending on the permissions to read the files, you might be required to run this program using certain permissions. | type: string; default: `""` |
 | `process-num` | n | Specifies the number of concurrently running [dd](https://man7.org/linux/man-pages/man1/dd.1.html) programs to be used. | type: uint8; default: `1`; range: `1` to `255` |
-| `size` | s | Specifies the amount of data to be read. It is the total size of data that <0>dd</0> reads. |  |
+| `size` | s | Specifies the volume of data to be read. It is the total size of data that <0>dd</0> reads. | type: string; default: `""`; **required**; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. |
 
 #### Example for simulating disk read load
 
@@ -124,9 +124,9 @@ Global Flags:
 
 | Configuration item | Abbreviation | Description | Value |
 | :-- | :-- | :-- | :-- |
-| `path` | p | Specifies the file path to write the data. If this parameter is not specified, or the parameter value is set to an empty string, a temporary file will be created in the program execution directory. Depending on the permissions to write the files, you might be required to run this program using certain permissions. | type: string; default: "" |
+| `path` | p | Specifies the file path to write the data. If this parameter is not specified, or the parameter value is set to an empty string, a temporary file will be created in the program execution directory. Depending on the permissions to write the files, you might be required to run this program using certain permissions. | type: string; default: `""` |
 | `process-num` | n | Specifies the number of concurrently running [dd](https://man7.org/linux/man-pages/man1/dd.1.html) programs to be used. | type: uint8; default: `1`; range: `1` to `255` |
-| `size` | s | Specifies the amount of data to be written. It is the total size of data that <0>dd</0> writes. | type: string; default: ""; legal form: an integer plus a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. `size` cannot be "". |
+| `size` | s | Specifies the volume of data to be read. It is the total size of data that <0>dd</0> reads. | type: string; default: `""`; **required**; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. |
 
 #### Example for simulating disk write load
 
@@ -183,9 +183,9 @@ Global Flags:
 | :-- | :-- | :-- | :-- |
 | `destroy` | d | If this parameter is set to `true,` the fill file is immediately deleted after being filled. | type: bool; default: `false` |
 | `fallocate` | f | If this parameter is set to `true`, Linux is used to call fallocate to quickly apply for disk space and size must be greater than `0`. If this parameter is set to `false`, Linux is used to call dd to fill disks at a relatively slow pace. | type: bool; default: `true` |
-| `path` | p | Specifies the file path to write the data. If this parameter is not specified, or the parameter value is set to an empty string, a temporary file will be created in the program execution directory. Depending on the permissions to write the files, you might be required to run this program using certain permissions. | type: string; default: "" |
-| `percent` | c | Specifies the percentage of disk size to be filled. | type: string; default: ""; positive integer of the uint type is acceptable; `size` and `percent` cannot both be "" at the same time. |
-| `size` | s | Specifies the amount of data to be written. | type: string; default: ""; legal form: an integer plus a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. `size` and `percent` cannot both be "" at the same time. |
+| `path` | p | Specifies the file path to write the data. If this parameter is not specified, or the parameter value is set to an empty string, a temporary file will be created in the program execution directory. Depending on the permissions to write the files, you might be required to run this program using certain permissions. | type: string; default: `""` |
+| `percent` | c | Specifies the percentage of disk size to be filled. | type: string; default: `""`; positive integer of the uint type is acceptable; You **must set** one of `size` or `percent` and make sure both items are not `""` at the same time. |
+| `size` | s | Specifies the volume of data to be read.  | type: string; default: `""`; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. You **must set** one of `size` or `percent` and make sure both items are not `""` at the same time. |
 
 #### Example for simulating disk fill
 
@@ -212,10 +212,10 @@ Simulating disk read load is a one-time operation, so the experiment does not ne
 
 | Parameter | Description | Value |
 | :-- | :-- | :-- |
-| `action` | Actions of the experiment | Set to "read-payload" |
-| `path` | Specifies the file path to read the data. If this parameter is not specified, or the parameter value is set to an empty string, Chaosd reads from the virtual disk files mounted in the "/" directory. Depending on the permissions to read the files, you might be required to run this program using certain permissions. | type: string; default: """ |
+| `action` | Actions of the experiment | Set to `"read-payload"` |
+| `path` | Specifies the file path to read the data. If this parameter is not specified, or the parameter value is set to an empty string, Chaosd reads from the virtual disk files mounted in the "/" directory. Depending on the permissions to read the files, you might be required to run this program using certain permissions. | type: string; default: `"""` |
 | `payload-process-num` | Specifies the number of concurrently running [dd](https://man7.org/linux/man-pages/man1/dd.1.html) programs to be used. | type: uint8; default: `1`; range: `1` to `255` |
-| `size` | Specifies the volume of data to be read. | required; type: string; default: ""; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. |
+| `size` | Specifies the volume of data to be read. It is the total size of data that <0>dd</0> reads. | type: string; default: `""`; **required**; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. |
 
 #### Example for simulating disk read load using the service mode
 
@@ -235,10 +235,10 @@ The result is as follows:
 
 | Parameter | Description | Value |
 | :-- | :-- | :-- |
-| `action` | Actions of the experiment | Set to "write-payload" |
-| `path` | Specifies the file path to write the data. If this parameter is not specified, or the parameter value is set to an empty string, a temporary file will be created in the program execution directory. Depending on the permissions to write the files, you might be required to run this program using certain permissions. | type: string; default: "" |
+| `action` | Actions of the experiment | Set to `"write-payload"` |
+| `path` | Specifies the file path to write the data. If this parameter is not specified, or the parameter value is set to an empty string, a temporary file will be created in the program execution directory. Depending on the permissions to write the files, you might be required to run this program using certain permissions. | type: string; default: `""` |
 | `payload-process-num` | Specifies the number of concurrently running [dd](https://man7.org/linux/man-pages/man1/dd.1.html) programs to be used. | type: uint8; default: `1`; range: `1` to `255` |
-| `size` | Specifies the volume of data to be written. It is the total size of data that <0>dd</0> writes. | type: string; default: ""; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. `size` cannot be "". |
+| `size` | Specifies the volume of data to be read. It is the total size of data that <0>dd</0> reads. | type: string; default: `""`; **required**; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. |
 
 #### Example for simulating disk write load using the service mode
 
@@ -258,12 +258,12 @@ The result is as follows:
 
 | Parameter | Description | Value |
 | :-- | :-- | :-- |
-| `action` | Actions of the experiment | Set to "fill" |
+| `action` | Actions of the experiment | Set to `"fill"` |
 | `destroy` | If this parameter is set to `true,` the fill file is immediately deleted after being filled. | type: bool; default: `false` |
 | `fill-by-fallocate` | If this parameter is set to `true`, Chaos Mesh uses Linux to call `fallocate` to apply for disk space quickly, and you must set `size` to a value greater than `0`. If this parameter is set to `false`, Chaos Mesh uses Linux to call dd to fill disks at a relatively slow pace. | type: bool; default: `true` |
-| `path` | Specifies the file path to write the data. If this parameter is not specified, or the parameter value is set to an empty string, a temporary file will be created in the program execution directory. Depending on the permissions to write the files, you might be required to run this program using certain permissions. | type: string; default: "" |
-| `percent` | Specifies the percentage of disk size to be filled. | type: string; default: ""; positive integer of the uint type is acceptable; `size` and `percent` cannot both be "" at the same time. |
-| `size` | Specifies the volume of data to be written. | type: string; default: ""; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. `size` and `percent` cannot both be "" at the same time. |
+| `path` | Specifies the file path to write the data. If this parameter is not specified, or the parameter value is set to an empty string, a temporary file will be created in the program execution directory. Depending on the permissions to write the files, you might be required to run this program using certain permissions. | type: string; default: `""` |
+| `percent` | Specifies the percentage of disk size to be filled. | type: string; default: ""; positive integer of the uint type is acceptable; You **must set** one of `size` or `percent` and make sure both items are not `""` at the same time. |
+| `size` | Specifies the volume of data to be read. | type: string; default: `""`; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. You **must set** one of `size` or `percent` and make sure both items are not `""` at the same time. |
 
 #### Example for simulating disk fill using the service mode
 
