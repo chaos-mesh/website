@@ -11,11 +11,11 @@ tags: [Chaos Mesh, Chaos Engineering]
 
 ![Implementing Chaos Engineering in K8s](/img/implement-chaos-engineering-in-k8s.png)
 
-[Chaos Mesh](https://chaos-mesh.org/docs/) is an open-source, cloud-native Chaos Engineering platform built on Kubernetes (K8s) custom resource definitions (CRDs). Chaos Mesh can simulate various types of faults and has an enormous capability to orchestrate fault scenarios. You can use Chaos Mesh to conveniently simulate various abnormalities that might occur in development, testing, and production environments and find potential problems in the system. 
+[Chaos Mesh](https://chaos-mesh.org/docs/) is an open-source, cloud-native Chaos Engineering platform built on Kubernetes (K8s) custom resource definitions (CRDs). Chaos Mesh can simulate various types of faults and has an enormous capability to orchestrate fault scenarios. You can use Chaos Mesh to conveniently simulate various abnormalities that might occur in development, testing, and production environments and find potential problems in the system.
 
 <!--truncate-->
 
-In this article, I'll explore the practice of Chaos Engineering in Kubernetes clusters, discuss important Chaos Mesh features through analysis of its source code, and explain how to develop Chaos Mesh's control plane with code examples. 
+In this article, I'll explore the practice of Chaos Engineering in Kubernetes clusters, discuss important Chaos Mesh features through analysis of its source code, and explain how to develop Chaos Mesh's control plane with code examples.
 
 If you're not familiar with Chaos Mesh, please review the [Chaos Mesh documentation](https://chaos-mesh.org/docs/#architecture-overview) to get a basic knowledge of Chaos Mesh's architecture.
 
@@ -401,7 +401,7 @@ func (r *Reconciler) Apply(ctx context.Context, req ctrl.Request, chaos v1alpha1
            Name:      pod.Name,
            Namespace: pod.Namespace,
        })
-       
+
        // TODO: support chaos on multiple volume
 
        t.SetVolumePath(iochaos.Spec.VolumePath)
@@ -554,7 +554,8 @@ Now, I'll describe the server side code required to build an end-user-oriented c
 As shown in the Chaos Mesh workflow below, we need to implement a server that sends YAML to the Kubernetes API. Chaos Controller Manager implements complex rule verification and rule delivery to Chaos Daemon. If you want to use Chaos Mesh with your own platform, you only need to connect to the process of creating CRD resources.
 
 ![Chaos Mesh's basic workflow](/img/chaos-mesh-basic-workflow.png)
-<p class="caption-center">Chaos Mesh's basic workflow</p>
+
+<p className="caption-center">Chaos Mesh's basic workflow</p>
 
 Let's take a look at the example on the Chaos Mesh website:
 
@@ -667,19 +668,19 @@ Spec:
 
 Status:
  Conditions:
-   Reason: 
+   Reason:
    Status:  False
    Type:    Paused
-   Reason: 
+   Reason:
    Status:  True
    Type:    Selected
-   Reason: 
+   Reason:
    Status:  True
    Type:    AllInjected
-   Reason: 
+   Reason:
    Status:  False
    Type:    AllRecovered
- 
+
  Experiment:
    Container Records:
      Id:            dev/nginx
@@ -742,7 +743,8 @@ This example uses the manager. This mode prevents the cache mechanism from repet
 3. Update the cache when the watch data changes.
 
 ![List request](/img/list-request.png)
-<p class="caption-center">List request</p>
+
+<p className="caption-center">List request</p>
 
 ### Orchestrate chaos
 
@@ -755,17 +757,18 @@ Chaos Controller Manager does most of the work for us. The control plane mainly 
 The following figure shows Chaos Mesh Dashboard. We need to consider what features the platform should provide to end users.
 
 ![Chaos Mesh Dashboard](/img/chaos-mesh-dashboard-k8s.png)
-<p class="caption-center">Chaos Mesh Dashboard</p>
+
+<p className="caption-center">Chaos Mesh Dashboard</p>
 
 From the Dashboard, we know that the platform may have these features:
 
-* Chaos injection
-* Pod crash
-* Network failure
-* Load test
-* I/O failure
-* Event tracking
-* Associated alarm
-* Timing telemetry
+- Chaos injection
+- Pod crash
+- Network failure
+- Load test
+- I/O failure
+- Event tracking
+- Associated alarm
+- Timing telemetry
 
 If you are interested in Chaos Mesh and would like to improve it, join its [Slack channel](https://slack.cncf.io/) (#project-chaos-mesh) or submit your pull requests or issues to its [GitHub repository](https://github.com/chaos-mesh/chaos-mesh).
