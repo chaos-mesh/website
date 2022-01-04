@@ -58,7 +58,7 @@ chaosctl logs -t 100 # 输出所有组件的最后100行日志
 
 1. 执行 chaosctl 的节点可访问 Kubernetes 集群，并且可以 ssh 到物理机
 
-   使用 `chaosctl pm init` 可以一键生成 Chaosd 所需要的证书，并且在 Kubernetes 集群中创建对应的 `PhysicalMachine` 资源。`chaosctl pm init -h` 会提供关于此功能的帮助和例子。命令示例如下：
+   使用 `chaosctl pm init` 可以一键生成 Chaosd 所需要的证书并保存到对应的物理机上，并且在 Kubernetes 集群中创建对应的 `PhysicalMachine` 资源。`chaosctl pm init -h` 会提供关于此功能的帮助和例子。命令示例如下：
 
    ```bash
    ./chaosctl pm init pm-name --ip=123.123.123.123 -l arch=amd64,anotherkey=value

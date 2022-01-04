@@ -58,7 +58,7 @@ For secure communication between Chaosd and Chaos-controller-manager services, C
 
 1. Nodes running chaosctl can access the Kubernetes cluster and ssh to the physical machine
 
-   Using `chaosctl pm init` you can generate the required certificates for Chaosd with one click and create the corresponding `PhysicalMachine` resource in the Kubernetes cluster. `chaosctl pm init -h` will provide help and examples of this functionality. An example command is as follows:
+   Using `chaosctl pm init` you can generate the required certificates for Chaosd with one click and save them to the corresponding physical machine, and create the corresponding `PhysicalMachine` resource in the Kubernetes cluster. `chaosctl pm init -h` will provide help and examples of this functionality. An example command is as follows:
 
    ```bash
    ./chaosctl pm init pm-name --ip=123.123.123.123 -l arch=amd64,anotherkey=value

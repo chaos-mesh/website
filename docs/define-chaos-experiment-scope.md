@@ -166,6 +166,12 @@ spec:
 - Type of data: key-value pairs. The "keys" are the namespaces of the target PhysicalMachine and the "values" are the target PhysicalMachine list.
 - If you have specified this selector, Chaos Mesh will **ignore** other configured selectors.
 
+:::note
+
+`PhysicalMachine` is a CRD that represents a physical machine, and typically uses [chaosctl](chaosctl-tool.md#generate-tls-certs-for-choasd) to create `PhysicalMachine`。
+
+:::
+
 When you create the experiment using the YAML file, see the following example for selector configuration:
 
 ```yaml

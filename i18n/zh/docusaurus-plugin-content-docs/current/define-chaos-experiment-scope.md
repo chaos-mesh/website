@@ -166,6 +166,12 @@ spec:
 - 数据类型：键值对类型。"键"为目标 PhysicalMachine 所属的 Namespace, "值"为目标 PhysicalMachine 列表。
 - 只要指定了此 Selector，Chaos Mesh 就会**忽略其他配置的 Selectors**。
 
+:::note 注意
+
+`PhysicalMachine` 是一种代表物理机的 CRD，通常情况下会使用 [chaosctl](chaosctl-tool.md#为-chaosd-生成-tls-证书) 来创建 `PhysicalMachine`。
+
+:::
+
 当使用 YAML 文件创建实验时，示例配置如下：
 
 ```yaml
