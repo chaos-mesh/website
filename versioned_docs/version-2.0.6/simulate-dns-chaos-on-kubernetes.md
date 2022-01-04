@@ -30,9 +30,9 @@ Make sure that the Pod status is `Running`.
 
 2. The chaos DNS service runs CoreDNS with the [k8s_dns_chaos](https://github.com/chaos-mesh/k8s_dns_chaos) plugin. If the CoreDNS service in your Kubernetes cluster contains some special configurations, you can edit configMap `dns-server-config` to make the configuration of the chaos DNS service consistent with that of the K8s CoreDNS service using the following command:
 
-   ```bash
-   kubectl edit configmap dns-server-config -n chaos-testing
-   ```
+    ```bash
+    kubectl edit configmap dns-server-config -n chaos-testing
+    ```
 
 ## Create experiments using Chaos Dashboard
 
@@ -86,10 +86,10 @@ Make sure that the Pod status is `Running`.
 
 | Parameter | Type | Description | Default value | Required | Example |
 | :-- | :-- | :-- | :-- | :-- | :-- |
-| `action` | string | Defines the behavior of DNS fault. The value can be `random` or `error`. When the value is `random`, DNS service returns a random IP address; when the value is `error`, DNS service returns an error. | None | Yes | `random` or `error` |
+| `action` | string | Defines the behavior of DNS fault. Optional values: `random` or `error`. When the value is `random`, DNS service returns a random IP address; when the value is `error`, DNS service returns an error. | None | Yes | `random` or `error` |
 | `patterns` | String array | Selects a domain template that matches faults. Placeholder `?` and wildcard are supported. `*` | [] | No | `google.com`, `chaos-mesh.org`, `github.com` |
 | `mode` | string | Specifies the mode of the experiment. The mode options include `one` (selecting a random Pod), `all` (selecting all eligible Pods), `fixed` (selecting a specified number of eligible Pods), `fixed-percent` (selecting a specified percentage of Pods from the eligible Pods), and `random-max-percent` (selecting the maximum percentage of Pods from the eligible Pods). | None | Yes | `one` |
-| `value` | string | Provides parameters for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods. | None | No | 1 |
+| `value` | string | Provides parameters for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods. | None | No | `1` |
 | `selector` | struct | Specifies the target Pod. For details, refer to [Define the Scope of Chaos Experiments](./define-chaos-experiment-scope.md). | None | Yes |  |
 
 :::note

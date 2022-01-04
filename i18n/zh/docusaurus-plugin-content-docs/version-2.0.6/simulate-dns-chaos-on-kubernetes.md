@@ -26,9 +26,9 @@ kubectl get pods -n chaos-testing -l app.kubernetes.io/component=chaos-dns-serve
 
 ## 注意事项
 
-- 目前 DNSChaos 只支持 DNS 记录类型 `A` 和 `AAAA`。
+1. 目前 DNSChaos 只支持 DNS 记录类型 `A` 和 `AAAA`。
 
-- Chaos DNS 服务运行的带有 [k8s_dns_chaos](https://github.com/chaos-mesh/k8s_dns_chaos) 插件的 CoreDNS。如果 Kubernetes 集群本身的 CoreDNS 服务包含一些特殊配置，你可以通过编辑 configMap `dns-server-config`，使 Chaos DNS 服务的配置与 K8s CoreDNS 服务的配置一致，编辑命令如下：
+2. Chaos DNS 服务运行的带有 [k8s_dns_chaos](https://github.com/chaos-mesh/k8s_dns_chaos) 插件的 CoreDNS。如果 Kubernetes 集群本身的 CoreDNS 服务包含一些特殊配置，你可以通过编辑 configMap `dns-server-config`，使 Chaos DNS 服务的配置与 K8s CoreDNS 服务的配置一致，编辑命令如下：
 
     ```bash
     kubectl edit configmap dns-server-config -n chaos-testing

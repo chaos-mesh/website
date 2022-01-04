@@ -2,9 +2,9 @@
 title: Simulate Process Faults
 ---
 
-This document describes how to use Chaosd to simulate process faults. The process faults use the Golang interface of the `kill` command to simulate the scenarios that the process is killed or stopped. You can create experiments either in command-line mode or service mode.
+This document describes how to use Chaosd to simulate process faults. The process faults use the Golang interface of the `kill` command to simulate the scenarios that the process is killed or stopped. You can create experiments in the command-line mode.
 
-## Create experiments using command-line mode
+## Create experiments using the command-line mode
 
 Before creating an experiment, you can run the following command to see the process fault types that are supported by Chaosd:
 
@@ -35,7 +35,7 @@ Use "chaosd attack process [command] --help" for more information about a comman
 
 Currently, Chaosd supports simulating that a process is killed or stopped.
 
-### Killing a process using command-line mode
+### Killing a process using the command-line mode
 
 #### Command for killing a process
 
@@ -64,7 +64,7 @@ Global Flags:
 
 | Configuration item | Abbreviation | Description | Value |
 | :-- | :-- | :-- | :-- |
-| `process` | p | The name or the identifier of the process to be killed | string; the default value is "". |
+| `process` | p | The name or the identifier of the process to be injected faults | string; the default value is `""`. |
 | `signal` | s | The provided value of the process signal | int; the default value is `9`. Currently, only `SIGKILL`, `SIGTERM`, and `SIGSTOP` are supported. |
 
 #### Example for killing a process
@@ -79,7 +79,7 @@ The result is as follows:
 Attack process python successfully, uid: 10e633ac-0a37-41ba-8b4a-cd5ab92099f9
 ```
 
-### Stopping a process using command-line mode
+### Stopping a process using the command-line mode
 
 #### Command for stopping a process
 
@@ -107,7 +107,7 @@ Global Flags:
 
 | Configuration item | Abbreviation | Description | Value |
 | :-- | :-- | :-- | :-- |
-| `process` | p | The name or the identifier of the process to be stopped | string; the default value is "". |
+| `process` | p | The name or the identifier of the process to be stopped | string; the default value is `""`. |
 
 #### Example for stopping a process
 
@@ -120,7 +120,3 @@ The result is as follows:
 ```bash
 Attack process python successfully, uid: 9cb6b3be-4f5b-4ecb-ae05-51050fcd0010
 ```
-
-## Create experiments using service mode
-
-(To be added)

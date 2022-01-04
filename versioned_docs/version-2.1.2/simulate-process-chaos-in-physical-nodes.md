@@ -43,7 +43,7 @@ Currently, Chaosd supports simulating that a process is killed or stopped.
 chaosd attack process kill -h
 ```
 
-The output is as follows:
+The result is as follows:
 
 ```bash
 kill process, default signal 9
@@ -64,7 +64,7 @@ Global Flags:
 
 | Configuration item | Abbreviation | Description                                                   | Value                                                                                     |
 | :----------------- | :----------- | :------------------------------------------------------------ | :---------------------------------------------------------------------------------------- |
-| `process`            | p            | The name or the identifier of the process to be killed | string; the default value is "".                                                          |
+| `process`            | p            | The name or the identifier of the process to be injected faults | string; the default value is `""`.                                                          |
 | `signal`             | s            | The provided value of the process signal                      | int; the default value is `9`. Currently, only `SIGKILL`, `SIGTERM`, and `SIGSTOP` are supported. |
 
 #### Example for killing a process
@@ -113,7 +113,7 @@ Global Flags:
 
 | Configuration item | Abbreviation | Description                                                    | Value                            |
 | :----------------- | :----------- | :------------------------------------------------------------- | :------------------------------- |
-| `process`            | p            | The name or the identifier of the process to be stopped | string; the default value is "". |
+| `process`            | p            | The name or the identifier of the process to be stopped | string; the default value is `""`. |
 
 #### Example for stopping a process
 
@@ -157,7 +157,7 @@ When running an experiment, remember to record the UID of the experiment. When y
 
 | Parameter    | Description                               | Value                     |
 | :------ | :--------------------------------- | :--------------------- |
-| `process` | The name or the identifier of the process to be injected faults | string; the default value is "". |
+| `process` | The name or the identifier of the process to be injected faults | string; the default value is `""`. |
 | `signal`  | The provided value of the process signal                 | int; the default value is `9`   |
 
 #### Examples for simulating process faults using the service mode
