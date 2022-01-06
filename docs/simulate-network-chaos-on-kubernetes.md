@@ -237,4 +237,4 @@ Setting `action` to `bandwidth` means simulating bandwidth limit fault. You also
 | peakrate | uint64 | Indicates the maximum consumption of `bucket` (usually not set) |  | No | 1 |
 | minburst | uint32 | Indicates the size of `peakrate bucket` (usually not set) |  | No | 1 |
 
-For more details of these fields, you can refer to [tc-tbf document](https://man7.org/linux/man-pages/man8/tc-tbf.8.html). The limit is suggested to set to at least `2 * rate * latency`, where the `latency` is the estimated latency between source and target. Too small `limit` can cause high loss rate and impact the throughput of the tcp connection.
+For more details of these fields, you can refer to [tc-tbf document](https://man7.org/linux/man-pages/man8/tc-tbf.8.html). The limit is suggested to set to at least `2 * rate * latency`, where the `latency` is the estimated latency between source and target, and it can be estimated through `ping` command. Too small `limit` can cause high loss rate and impact the throughput of the tcp connection.
