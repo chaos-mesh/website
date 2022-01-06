@@ -122,7 +122,7 @@ NetworkChaos 用于模拟集群中网络故障的场景，目前支持以下几�
          'app': 'app1'
      bandwidth:
        rate: '1mbps'
-       limit: 100
+       limit: 20971520
        buffer: 10000
    ```
 
