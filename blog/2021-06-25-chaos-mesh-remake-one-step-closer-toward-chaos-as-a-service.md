@@ -48,7 +48,7 @@ The current Chaos Mesh architecture is suited for individual Kubernetes clusters
 
 ![Chaos Mesh architecture](/img/chaos-mesh-remake-architecture.jpeg)
 
-<p class="caption-center">The current Chaos Mesh architecture</p>
+<p className="caption-center">The current Chaos Mesh architecture</p>
 
 During this refactor, **to allow Chaos Dashboard to manage multiple Kubernetes clusters, we separate Chaos Dashboard from the main architecture**. Now, if you deploy Chaos Dashboard outside of the Kubernetes cluster, you can add the cluster to Chaos Dashboard via the web UI. If you deploy Chaos Dashboard inside the cluster, it automatically obtains the cluster information through environment variables.
 
@@ -60,7 +60,7 @@ chaosd is a toolkit for running chaos experiments on physical machines. Previous
 
 ![chaosd, a Chaos Engineering command line tool](/img/chaosd-chaos-engineering-command-line-tool.jpeg)
 
-<p class="caption-center">Previously, chaosd was a command line tool</p>
+<p className="caption-center">Previously, chaosd was a command line tool</p>
 
 During the refactoring, **we enabled chaosd to support the RESTful API and enhanced its services so that it can configure chaos experiments by parsing CRD-format JSON or YAML files**.
 
@@ -72,7 +72,7 @@ With new Chaos Dashboard and chaosd, the optimized architecture of Chaos Mesh is
 
 ![Chaos Mesh's optimized architecture](/img/chaos-mesh-optimized-architecture.jpeg)
 
-<p class="caption-center">Chaos Mesh's optimized architecture</p>
+<p className="caption-center">Chaos Mesh's optimized architecture</p>
 
 ### Improve observability
 
@@ -107,7 +107,7 @@ A closed loop of Chaos Engineering includes four steps: exploring chaos, discove
 
 ![A closed loop of Chaos Engineering](/img/closed-loop-of-chaos-engineering.jpeg)
 
-<p class="caption-center">A closed loop of Chaos Engineering</p>
+<p className="caption-center">A closed loop of Chaos Engineering</p>
 
 However, **most of the current open source Chaos Engineering tools only focus on exploration and do not provide pragmatic feedback.** Based on the improved observability component, we can monitor chaos experiments in real time and compare and analyze the experiment results.
 
