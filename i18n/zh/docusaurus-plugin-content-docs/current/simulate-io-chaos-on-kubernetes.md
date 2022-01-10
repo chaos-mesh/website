@@ -255,9 +255,9 @@ IOChaos 是 Chaos Mesh 中的一种故障类型。通过创建 IOChaos 类型的
   | maxOccurrences | int | 错误在每一次操作中最多出现次数 |  | 是 | 1 |
   | maxLength | int | 每次错误的最大长度（单位为字节） |  | 是 | 1 |
 
-:::warning
+:::warning 警告
 
-警告不推荐在除了 READ 和 WRITE 之外的文件系统调用上使用 mistake 错误。这可能会导致预期之外的结果，包括但不限于文件系统损坏、程序崩溃等。
+不推荐在除了 READ 和 WRITE 之外的文件系统调用上使用 mistake 错误。这可能会导致预期之外的结果，包括但不限于文件系统损坏、程序崩溃等。
 
 :::
 
