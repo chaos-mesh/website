@@ -6,7 +6,7 @@ title: 模拟 Linux 内核故障
 
 尽管 KernelChaos 的注入对象可以设置成一个或几个 Pod，但所属主机的其他 Pod 的性能也会受到一些影响，因为所有的 Pod 共享同一个内核。
 
-::: warning 警告
+:::warning 警告
 
 模拟 Linux 内核故障的功能默认关闭，请不要用于生产环境。
 
