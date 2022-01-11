@@ -168,7 +168,7 @@ spec:
 
 :::note
 
-`PhysicalMachine` is a CRD that represents a physical machine, and typically uses [chaosctl](chaosctl-tool.md#generate-tls-certs-for-choasd) to create `PhysicalMachine`。
+`PhysicalMachine` is a CRD(CustomResourcesDefinition) that represents a physical machine. Chaos Mesh uses [chaosctl](chaosctl-tool.md#generate-tls-certs-for-choasd) to create `PhysicalMachine` typically。
 
 :::
 

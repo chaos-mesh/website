@@ -145,7 +145,7 @@ spec:
 
 - 指定实验目标 `Pod` 命名空间和 `Pod` 列表。
 - 数据类型：键值对类型。"键"为目标 `Pod` 所属的命名空间 (namespace), "值"为目标 `Pod` 列表(list)。
-- 只要指定了此 Selector，Chaos Mesh 就会**忽略其他配置的 Selectors**。
+- 只要指定了此 Selector，Chaos Mesh 就会**忽略**其他配置的 Selectors。
 
 当使用 YAML 文件创建实验时，示例配置如下：
 
@@ -168,7 +168,7 @@ spec:
 
 :::note 注意
 
-`PhysicalMachine` 是一种代表物理机的 CRD，通常情况下会使用 [chaosctl](chaosctl-tool.md#为-chaosd-生成-tls-证书) 来创建 `PhysicalMachine`。
+`PhysicalMachine` 是一种代表物理机的 CRD (CustomResourcesDefinition)。通常情况下，Chaos Mesh 会使用 [chaosctl](chaosctl-tool.md#为-chaosd-生成-tls-证书) 创建 `PhysicalMachine`。
 
 :::
 
