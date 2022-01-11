@@ -11,8 +11,6 @@ tags: [Chaos Mesh, Chaos Engineering, Use case]
 
 ![How to Develop a Daily Reporting System to Track Chaos Testing Results](/img/chaos-mesh-digitalchina-banner.png)
 
-# How to Develop a Daily Reporting System to Track Chaos Testing Results
-
 Chaos Mesh is a cloud-native chaos engineering platform that orchestrates chaos experiments on Kubernetes environments. It allows you to test the resilience of your system by simulating problems such as network faults, file system faults, and Pod faults. After each chaos experiment, you can review the testing results by checking the logs. But this is neither direct nor efficient. Therefore, I decided to develop a daily reporting system that would automatically analyze logs and generate reports. This way, it’s easy to examine the logs and identify the issues. 
 
 <!--truncate-->
@@ -129,4 +127,4 @@ Chaos Mesh enables you to simulate faults that most cloud-native applications mi
 
 Our team is also working on a project to [make TiDB compatible with PostgreSQL](https://github.com/DigitalChinaOpenSource/TiDB-for-PostgreSQL). If you are interested and want to make contributions, you are welcome to pick an issue and get started.
 
-Originally published at *[The New Stack](https://thenewstack.io/develop-a-daily-reporting-system-for-chaos-mesh-to-improve-system-resilience/)*.
+**Originally published at *[The New Stack](https://thenewstack.io/develop-a-daily-reporting-system-for-chaos-mesh-to-improve-system-resilience/)*.**
