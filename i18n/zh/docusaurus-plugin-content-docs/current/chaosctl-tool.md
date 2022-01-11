@@ -56,37 +56,51 @@ chaosctl logs -t 100 # 输出所有组件的最后100行日志
 
 为了 Chaosd 和 Chaos-controller-manager 服务之间的通信安全，Chaos Mesh 推荐开启 mTLS 模式。Chaosctl 提供了方便的命令来生成 TLS 证书，并且在不同场景下，有两种方案来执行命令。
 
-1. 执行 chaosctl 的节点可访问 Kubernetes 集群，并且可以 ssh 到物理机
+**场景一**：通过执行 chaosctl 的节点，可以访问 Kubernetes 集群，且可以使用 SSH 工具连接到物理机
 
-   使用 `chaosctl pm init` 可以一键生成 Chaosd 所需要的证书并保存到对应的物理机上，并且在 Kubernetes 集群中创建对应的 `PhysicalMachine` 资源。`chaosctl pm init -h` 会提供关于此功能的帮助和例子。命令示例如下：
+在该场景下，操作步骤如下：
+
+1. 使用 `chaosctl pm init` 命令：
 
    ```bash
    ./chaosctl pm init pm-name --ip=123.123.123.123 -l arch=amd64,anotherkey=value
    ```
+   
+   这条命令会执行以下操作：
 
-2. 执行 chaosctl 的节点可访问 Kubernetes 集群，但无法 ssh 到物理机
+   + 一键生成 Chaosd 所需要的证书，并把证书保存到对应的物理机上；
+   + 在 Kubernetes 集群中创建对应的 `PhysicalMachine` 资源。
 
-   在执行命令前，需要先手动从 Kubernetes 集群中获取 CA 证书，命令示例如下：
+   如需了解更多关于此功能的介绍和例子，请通过 `chaosctl pm init -h` 查阅。
+
+**场景二**：通过执行 chaosctl 的节点，可以访问 Kubernetes 集群，且无法使用 SSH 工具连接到物理机
+
+在该场景下，操作步骤如下：
+
+1. 在执行命令前，先从 Kubernetes 集群中手动获取 CA 证书。命令示例如下：
 
    ```bash
    kubectl get secret chaos-mesh-chaosd-client-certs -n chaos-testing -o "jsonpath={.data['ca\.crt']}" | base64 -d > ca.crt
-
-    kubectl get secret chaos-mesh-chaosd-client-certs -n chaos-testing -o "jsonpath={.data['ca\.key']}" | base64 -d> ca.key
+   kubectl get secret chaos-mesh-chaosd-client-certs -n chaos-testing -o "jsonpath={.data['ca\.key']}" | base64 -d> ca.key
    ```
-
-   将 `ca.crt` 和 `ca.key` 文件拷贝到**对应的物理机**上，下面以保存到 `/etc/chaosd/pki` 目录为例。
    
-   然后，在**物理机**上，使用 `chaosctl pm generate` 命令，生成 TLS 证书（证书的默认保存路径为 `/etc/chaosd/pki`）。`chaosctl pm generate -h` 会提供关于此功能的帮助和例子。命令示例如下：
+2. 执行命令后，把 `ca.crt` 文件和 `ca.key` 文件拷贝到**对应的物理机**上。下文以保存到 `/etc/chaosd/pki` 目录下为例。
+   
+3. 然后，在**物理机**上，使用 `chaosctl pm generate` 命令，生成 TLS 证书（证书的默认保存路径为 `/etc/chaosd/pki`）。命令示例如下：
 
    ```bash
    ./chaosctl pm generate --cacert=/etc/chaosd/pki/ca.crt --cakey=/etc/chaosd/pki/ca.key
    ```
+   
+   如需了解更多关于此功能的介绍和例子，请通过 `chaosctl pm generate -h` 查阅。
 
-   最后，在可访问到 Kubernetes 集群的机器上，使用 `chaosctl pm create` 命令，在 Kubernetes 集群中创建 `PhysicalMachine` 资源。`chaosctl pm create -h` 会提供关于此功能的帮助和例子。命令示例如下：
+4. 最后，在可访问到 Kubernetes 集群的机器上，使用 `chaosctl pm create` 命令，在 Kubernetes 集群中创建 `PhysicalMachine` 资源。命令示例如下：
 
    ```bash
    ./chaosctl pm create pm-name --ip=123.123.123.123 -l arch=amd64
    ```
+
+   如需了解更多关于此功能的介绍和例子，请通过 `chaosctl pm create -h` 查阅。
 
 ## 使用场景
 

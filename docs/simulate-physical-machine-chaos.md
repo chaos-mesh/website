@@ -10,41 +10,38 @@ You can use PhysicalMachineChaos to simulate the faults of network, disk, pressu
 
 ## Deploy Chaosd server
 
-Before creating PhysicalMachineChaos experiments using Chaos Mesh, you need to deploy Chaosd in service mode to all physical or virtual machines that are going to be injected with faults. For the deployment method of Chaosd, refer to [Download and deploy Chaosd](chaosd-overview.md#download-and-deploy).
+Before creating PhysicalMachineChaos experiments using Chaos Mesh, you need to deploy Chaosd in service mode to all physical or virtual machines that are going to be injected with faults. After deploying Chaosd, run Chaosd Server as follows:
 
-:::note
+1. Deploy Chaosd: for the deployment method of Chaosd, refer to [Download and deploy Chaosd](chaosd-overview.md#download-and-deploy).
 
-When using Chaos Mesh v2.1.0, you need to deploy Chaosd [v1.1.0](https://github.com/chaos-mesh/chaosd/releases/tag/v1.1.0).
+   :::note
 
-:::
+   When using Chaos Mesh v2.1.0, you need to deploy Chaosd [v1.1.0](https://github.com/chaos-mesh/chaosd/releases/tag/v1.1.0).
 
-### Preparation
+   :::
 
-Before starting Chaosd Server, you need to generate TLS certificates and create a `PhysicalMachine` within the Kubernetes cluster, please refer to [Generate TLS certs for Choasd](chaosctl-tool.md#generate-tls-certs-for-choasd).
+2. Generate TLS certificate, create `PhysicalMachine`: After deploying Chaosd, you need to generate TLS certificate and create a `PhysicalMachine` within the Kubernetes cluster before starting Chaosd Server. For more information on how to generate TLS certificates, please refer to [Generate TLS certs for Choasd](chaosctl-tool.md#generate-tls-certs-for-choasd).
 
-### Start Chaosd Server
+3. Start Chaosd Server:
 
-After the deployment is complete, run the following command to start Chaosd in service mode:
+   + After the deployment is complete, run the following command to start Chaosd in service mode:
 
-```bash
-chaosd server --https-port 31768 --CA=/etc/chaosd/pki/ca.crt --cert=/etc/chaosd/pki/chaosd.crt --key=/etc/choasd/pki/chaosd.key
-```
+      ```bash
+      chaosd server --https-port 31768 --CA=/etc/chaosd/pki/ca.crt --cert=/etc/chaosd/pki/chaosd.crt --key=/etc/choasd/pki/chaosd.key
+      ```
 
-:::note
+      :::note
 
-The paths of certificates are the default output paths of `Chaosctl`. If you specify another path manually when generating certificates, please replace the corresponding file path.
+      The paths of certificates are the default output paths of `Chaosctl`. If you specify another path manually when generating certificates, please replace the corresponding file path.
 
-:::
+      :::
 
-:::note
 
-If no TLS certificate is configured, use the following command to start Chaosd in service mode (this is not recommended considering cluster security):
+   + If no TLS certificate is configured, use the following command to start Chaosd in service mode. This is **not recommended** considering cluster security:
 
-```bash
-chaosd server --port 31767
-```
-
-:::
+      ```bash
+      chaosd server --port 31767
+      ```
 
 ## Create experiments using Chaos Dashboard
 
@@ -102,8 +99,8 @@ chaosd server --port 31767
 | `action` | string | Defines the actions of physical machines faults, optional values are as follows: "stress-cpu", "stress-mem", "disk-read-payload", "disk-write-payload", "disk-fill", "network-corrupt", "network-duplicate", "network-loss", "network-delay", "network-partition", "network-dns", "process", "jvm-exception", "jvm-gc", "jvm-latency", "jvm-return", "jvm-stress", "jvm-rule-data", "clock" | None | Yes | "stress-cpu" |
 | `address` | string array | Selects the `address` of Chaosd service to inject faults, only one of `address` or `selector` could be specified | [] | Yes | ["192.168.0.10:31767"] |
 | `selector` | struct | Specifies the target PhysicalMachine. For details, refer to [Define the experiment scope](define-chaos-experiment-scope.md), only one of `address` or `selector` could be specified | None | No | |
-| `mode` | string | Specifies the mode of the experiment. The mode options include `one` (selecting a random PhysicalMachine), `all` (selecting all eligible PhysicalMachines), `fixed` (selecting a specified number of eligible PhysicalMachines), `fixed-percent` (selecting a specified percentage of PhysicalMachines from the eligible PhysicalMachines), and `random-max-percent` (selecting the maximum percentage of PhysicalMachines from the eligible PhysicalMachines). | None | Yes | one |
-| `value` | string | Provides a parameter for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of PhysicalMachines. | None | No | 1 |
+| `mode` | string | Specifies the mode of the experiment. The mode options include `one` (selecting a random PhysicalMachine), `all` (selecting all eligible PhysicalMachines), `fixed` (selecting a specified number of eligible PhysicalMachines), `fixed-percent` (selecting a specified percentage of PhysicalMachines from the eligible PhysicalMachines), and `random-max-percent` (selecting the maximum percentage of PhysicalMachines from the eligible PhysicalMachines). | None | Yes | `one` |
+| `value` | string | Provides a parameter for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of PhysicalMachines. | None | No | `1` |
 | `duration` | string | Specifies the duration of experiments | None | Yes | 30s |
 
 Each fault action has its own specific configurations. The following section introduces various fault types and their corresponding configuration methods.

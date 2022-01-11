@@ -125,7 +125,7 @@ spec:
       'node-label': 'label-one'
 ```
 
-### Node list
+### Node list Selector
 
 - Specifies the node to which the experiment's target Pod belongs.
 - Data type: string array type.
@@ -141,10 +141,10 @@ spec:
       - node2
 ```
 
-### Pod list
+### Pod list Selector
 
-- Specifies the namespaces and list of the experiment's target Pods.
-- Type of data: key-value pairs. The "keys" are the namespaces of the target Pod and the "values" are the target Pod list.
+- Specifies the namespaces and list of the experiment's target `Pods`.
+- Type of data: key-value pairs. The "keys" are the namespaces of the target `Pod` and the "values" are the target `Pod` list.
 - If you have specified this selector, Chaos Mesh will **ignore** other configured selectors.
 
 When you create the experiment using the YAML file, see the following example for selector configuration:
@@ -160,10 +160,10 @@ spec:
         - basic-tikv-1
 ```
 
-### Physical Machine List
+### Physical Machine List Selector
 
-- Specifies the namespaces and list of the experiment's target PhysicalMachines.
-- Type of data: key-value pairs. The "keys" are the namespaces of the target PhysicalMachine and the "values" are the target PhysicalMachine list.
+- Specifies the namespaces and list of the experiment's target `PhysicalMachines`.
+- Type of data: key-value pairs. The "keys" are the namespaces of the target `PhysicalMachine` and the "values" are the target `PhysicalMachine` list.
 - If you have specified this selector, Chaos Mesh will **ignore** other configured selectors.
 
 :::note
@@ -209,6 +209,6 @@ While setting selectors, you can also view the actual scope of the experiment ta
 |Field Selectors|Y|Y|
 |PodPhase Selectors|Y|N|
 |Node Selectors|Y|N|
-|Node List|Y|N|
-|Pod List|Y|N|
-|PhysicalMachine List|N|Y|
+|Node List Selectors|Y|N|
+|Pod List Selectors|Y|N|
+|PhysicalMachine List Selectors|N|Y|
