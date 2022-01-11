@@ -86,10 +86,10 @@ Global Flags:
 
 | Configuration item | Abbreviation | Description | Value |
 | :-- | :-- | :-- | :-- |
-| `class` | `c` | The name of the Java class | string type, required|
+| `class` | `c` | The name of the Java class | string type, required |
 | `exception` | None | The thrown custom exception | string type, required |
 | method | m | The name of the method | string type, required to be configured |
-| `pid` | None | The Java process ID where the fault is to be injected | int type, required  |
+| `pid` | None | The Java process ID where the fault is to be injected | int type, required |
 | `port` | None | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int type. The default value is `9288`. |
 | uid | None | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
 
@@ -246,7 +246,7 @@ Global Flags:
 | :-- | :-- | :-- | :-- |
 | class | c | The name of the Java class | string type, required to be configured |
 | method | m | The name of the method | string type, required to be configured |
-| value | None | Specifies the return value of the method | string type, required to be configured. Currently, the item can be numeric and string types. If the item (return value) is string, double quotes are required, like  "chaos". |
+| value | None | Specifies the return value of the method | string type, required to be configured. Currently, the item can be numeric and string types. If the item (return value) is string, double quotes are required, like "chaos". |
 | pid | None | The Java process ID where the fault is needed to be injected | int type, required to be configured |
 | port | None | The port number attached to the Java process agent. The faults is injected into the Java process through this port number. | int type. The default value is `9288`. |
 | uid | None | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
@@ -498,7 +498,7 @@ The result is as follows:
 | `action` | The action of the experiment | Set to "return" |
 | `class` | The name of the Java class | string type, required |
 | `method` | The name of the method | string type, required |
-| `value` | Specifies the return value of the method | string type, required. Currently, the item can be numeric and string types. If the item (return value) is string, double quotes are required, like  "chaos". |
+| `value` | Specifies the return value of the method | string type, required. Currently, the item can be numeric and string types. If the item (return value) is string, double quotes are required, like "chaos". |
 | `pid` | The Java process ID where the fault is to be injected | int type, required |
 | `port` | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int type. The default value is `9288`. |
 | `uid` | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
@@ -561,7 +561,7 @@ The result is as follows:
 #### Parameters for increasing JVM stress
 
 | Parameter | Description | Value |
-| :-- | :-- | :-- |
+| :-- | :-- | :-- | --- |
 | `action` | The action of the experiment | Set to "stress" |
 | `cpu-count` | The number of CPU cores used for increasing CPU stress | int type. You must configure one item between `cpu-count` and `mem-type`. |
 | `mem-type` | The type of OOM | string type. Currently, both 'stack' and 'heap' OOM types are supported. You must configure one item between `cpu-count` and `mem-type`. |

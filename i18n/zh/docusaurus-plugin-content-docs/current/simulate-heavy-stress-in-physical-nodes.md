@@ -116,7 +116,7 @@ Global Flags:
 
 #### 模拟内存压力相关配置说明
 
-| 配置项 | 配置缩写 | 说明 | 类型  | 值 |
+| 配置项 | 配置缩写 | 说明 | 类型 | 值 |
 | :-- | :-- | :-- | :-- | :-- |
 | `size` | s | 指定每个 VM worker 占用内存的大小 | string 类型 | 支持使用单位 B，KB/KiB，MB/MiB，GB/GiB，TB/TiB 来设置占用的内存大小。如果不设置，则默认占用所有可用的内存。 |
 | `options` | o | stress-ng 的其他参数设置，一般情况下不需要配置 | string 类型 | 默认值："" |
@@ -163,7 +163,7 @@ Attack stress mem successfully, uid: c2bff2f5-3aac-4ace-b7a6-322946ae6f13
 
 #### 模拟 CPU 压力相关参数说明
 
-| 参数 | 说明 | 类型  | 值 |
+| 参数 | 说明 | 类型 | 值 |
 | :-- | :-- | :-- | :-- |
 | `action` | 实验的行为 |  | 设置为 "cpu" |
 | `load` | 指定使用每个 CPU worker 占用 CPU 负载的百分比。如果为 `0`，则表示为一个空负载；为 `100` 则表示满负载 | int 类型 | 取值范围为 `0` 到 `100`， 默认值为 `10` |
@@ -186,9 +186,9 @@ curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application
 
 #### 模拟内存压力相关参数说明
 
-| 参数 | 说明  | 类型  | 值 |
+| 参数 | 说明 | 类型 | 值 |
 | :-- | :-- | :-- | :-- |
-| `action` | 实验的行为 | | 设置为 "mem" |
+| `action` | 实验的行为 |  | 设置为 "mem" |
 | `size` | 指定每个 VM worker 占用内存的大小 | string 类型 | 支持使用单位 B，KB/KiB，MB/MiB，GB/GiB，TB/TiB 来设置占用的内存大小。如果不设置，则默认占用所有可用的内存。 |
 | `options` | stress-ng 的其他参数设置，一般情况下不需要配置 | string 类型 | 默认值："" |
 

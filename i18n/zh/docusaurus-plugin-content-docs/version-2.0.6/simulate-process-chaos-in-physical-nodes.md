@@ -2,7 +2,7 @@
 title: 模拟进程故障
 ---
 
-本文主要介绍如何使用 Chaosd 模拟进程故障。该功能通过使用 kill 的 golang 接口模拟进程被终止或暂停的场景，支持通过命令行模式或服务模式创建实验。
+本文主要介绍如何使用 Chaosd 模拟进程故障。该功能通过使用 `kill` 的 Golang 接口模拟进程被终止或暂停的场景，支持通过命令行模式创建实验。
 
 ## 使用命令行模式创建实验
 
@@ -64,8 +64,8 @@ Global Flags:
 
 | 配置项 | 配置缩写 | 说明 | 值 |
 | :-- | :-- | :-- | :-- |
-| process | p | 需要结束进程的名字或者进程的标识符 | string 类型，默认为 "" |
-| signal | s | 所提供的进程信号值 | int 类型，默认为 9。目前只支持 SIGKILL、SIGTERM 和 SIGSTOP 三种信号值。 |
+| `process` | p | 需要注入故障的进程的名字或者进程的标识符 | string 类型，默认为 `""` |
+| `signal` | s | 所提供的进程信号值 | int 类型，默认为 `9`。目前只支持 `SIGKILL`、`SIGTERM` 和 `SIGSTOP` 三种信号值。 |
 
 #### 模拟进程被终止示例
 
@@ -76,7 +76,6 @@ chaosd attack process kill -p python
 输出结果如下所示：
 
 ```bash
-
 Attack process python successfully, uid: 10e633ac-0a37-41ba-8b4a-cd5ab92099f9
 ```
 
@@ -108,7 +107,7 @@ Global Flags:
 
 | 配置项  | 配置缩写 | 说明                               | 值                    |
 | :------ | :------- | :--------------------------------- | :-------------------- |
-| process | p        | 需要结束进程的名字或者进程的标识符 | string 类型，默认为"" |
+| `process` | p        | 需要暂停的进程的名字或者进程的标识符 | string 类型，默认为 `""` |
 
 #### 模拟进程被暂停示例
 
@@ -119,10 +118,5 @@ chaosd attack process stop -p python
 输出结果如下所示：
 
 ```bash
-
 Attack process python successfully, uid: 9cb6b3be-4f5b-4ecb-ae05-51050fcd0010
 ```
-
-## 使用服务模式创建实验
-
-（正在持续更新中）
