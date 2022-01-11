@@ -54,7 +54,7 @@ chaosctl logs -t 100 # 输出所有组件的最后100行日志
 
 ### 为 Chaosd 生成 TLS 证书
 
-为了 Chaosd 和 Chaos-controller-manager 服务之间的通信安全，Chaos Mesh 推荐开启 mTLS 模式。Chaosctl 提供了方便的命令来生成 TLS 证书，并且在不同场景下，有两种方案来执行命令。
+为了保障 Chaosd 和 Chaos-controller-manager 服务之间的通信安全，Chaos Mesh 推荐开启 mTLS 模式。Chaosctl 可以通过命令行方便地生成 TLS 证书。在不同的场景下，Chaosctl 可以通过以下两种方案执行命令。
 
 **场景一**：通过执行 chaosctl 的节点，可以访问 Kubernetes 集群，且可以使用 SSH 工具连接到物理机
 
