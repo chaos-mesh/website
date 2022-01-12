@@ -20,7 +20,7 @@ PhysicalMachineChaos 可用于在物理或虚拟机中模拟网络、磁盘、�
 
    :::
 
-2. 生成 TLS 证书、创建 `PhysicalMachine`：部署完 Chaosd 后，在运行 Chaosd Server 前，需要先生成 TLS 证书，并在 Kubernetes 集群内创建 PhysicalMachine。有关 TLS 证书的生成方式，请参考 [Chaosctl 为 Chaosd 生成证书](chaosctl-tool.md#为-chaosd-生成-tls-证书)。
+2. 生成 TLS 证书、创建 `PhysicalMachine`：部署完 Chaosd 后，在运行 Chaosd Server **前**，需要先生成 TLS 证书，并在 Kubernetes 集群内创建 PhysicalMachine。有关 TLS 证书的生成方式，请参考 [Chaosctl 为 Chaosd 生成证书](chaosctl-tool.md#为-chaosd-生成-tls-证书)。
 
 3. 运行 Chaosd：
 

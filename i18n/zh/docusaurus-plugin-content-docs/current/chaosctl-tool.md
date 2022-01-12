@@ -54,24 +54,24 @@ chaosctl logs -t 100 # 输出所有组件的最后100行日志
 
 ### 为 Chaosd 生成 TLS 证书
 
-为了保障 Chaosd 和 Chaos-controller-manager 服务之间的通信安全，Chaos Mesh 推荐开启 mTLS 模式。Chaosctl 可以通过命令行方便地生成 TLS 证书。在不同的场景下，Chaosctl 可以通过以下两种方案执行命令。
+为了保障 Chaosd 和 Chaos-controller-manager 服务之间的通信安全，Chaos Mesh 推荐开启 mTLS 模式。Chaosctl 可以通过命令行方便地生成 TLS 证书。在以下场景下，Chaosctl 可以通过不同的方案执行命令。
 
 **场景一**：通过执行 chaosctl 的节点，可以访问 Kubernetes 集群，且可以使用 SSH 工具连接到物理机
 
-在该场景下，操作步骤如下：
+在该场景下，仅需通过执行以下命令来完成下列操作：
 
-1. 使用 `chaosctl pm init` 命令：
+- 命令：使用 `chaosctl pm init` 命令：
 
    ```bash
    ./chaosctl pm init pm-name --ip=123.123.123.123 -l arch=amd64,anotherkey=value
    ```
    
-   这条命令会执行以下操作：
+- 操作：上述命令会执行下列操作：
 
-   + 一键生成 Chaosd 所需要的证书，并把证书保存到对应的物理机上；
-   + 在 Kubernetes 集群中创建对应的 `PhysicalMachine` 资源。
+   - 一键生成 Chaosd 所需要的证书，并把证书保存到对应的物理机上；
+   - 在 Kubernetes 集群中创建对应的 `PhysicalMachine` 资源。
 
-   如需了解更多关于此功能的介绍和例子，请通过 `chaosctl pm init -h` 查阅。
+如需了解更多关于此功能的介绍和例子，请通过 `chaosctl pm init -h` 查阅。
 
 **场景二**：通过执行 chaosctl 的节点，可以访问 Kubernetes 集群，且无法使用 SSH 工具连接到物理机
 

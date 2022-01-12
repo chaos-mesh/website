@@ -20,7 +20,7 @@ Before creating PhysicalMachineChaos experiments using Chaos Mesh, you need to d
 
    :::
 
-2. Generate TLS certificate, create `PhysicalMachine`: After deploying Chaosd, you need to generate TLS certificate and create a `PhysicalMachine` within the Kubernetes cluster before starting Chaosd Server. For more information on how to generate TLS certificates, please refer to [Generate TLS certs for Choasd](chaosctl-tool.md#generate-tls-certs-for-choasd).
+2. Generate TLS certificate, create `PhysicalMachine`: After deploying Chaosd, you need to generate TLS certificate and create a `PhysicalMachine` within the Kubernetes cluster **before** starting Chaosd Server. For more information on how to generate TLS certificates, please refer to [Generate TLS certs for Choasd](chaosctl-tool.md#generate-tls-certs-for-choasd).
 
 3. Start Chaosd Server:
 

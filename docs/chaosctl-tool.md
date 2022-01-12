@@ -54,24 +54,24 @@ Currently, chaosctl only supports the debugging of IOChaos, NetworkChaos, and St
 
 ### Generate TLS certs for Choasd
 
-To secure the communication between Chaosd and Chaos-controller-manager services, Chaos Mesh recommends enabling mTLS mode. Chaosctl can easily generate TLS certificates via the command line. In different scenarios, Chaosctl can execute commands through the following two options.
+To secure the communication between Chaosd and Chaos-controller-manager services, Chaos Mesh recommends enabling mTLS mode. Chaosctl can easily generate TLS certificates via the command line. Chaosctl can execute commands through different scenarios in the following scenarios.
 
 **Scenario 1**: Nodes running chaosctl can access the Kubernetes cluster and ssh to the physical machine
 
-In this scenario, the operation steps are as follows:
+In this scenario, execute the following command to complete the following operations:
 
-1. Using `chaosctl pm init` command:
+- Command: Using `chaosctl pm init` command:
 
    ```bash
    ./chaosctl pm init pm-name --ip=123.123.123.123 -l arch=amd64,anotherkey=value
    ```
 
-   This command performs the following actions: 
+- Action: This command performs the following actions: 
    
    - generate the required certificates for Chaosd with one click and save them to the corresponding physical machine.
    - create the corresponding `PhysicalMachine` resource in the Kubernetes cluster.
 
-   For more information and examples of this feature, please refer to `chaosctl pm init -h`.
+For more information and examples of this feature, please refer to `chaosctl pm init -h`.
 
 **Scenario 2**: Nodes running chaosctl can access the Kubernetes cluster, but cannot ssh to the physical machine
 
