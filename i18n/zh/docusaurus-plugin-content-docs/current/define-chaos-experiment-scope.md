@@ -200,7 +200,7 @@ spec:
 
 ## 兼容性矩阵
 
-| 类型 | 是否支持Kubernetes | 是否支持物理机 |
+| 类型 | 是否支持 Kubernetes | 是否支持物理机 |
 | :-- | :-- | :-- | 
 |Namespace Selectors|是|是|
 |Label Selectors|是|是|
