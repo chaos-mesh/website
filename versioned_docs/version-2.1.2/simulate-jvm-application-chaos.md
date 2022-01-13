@@ -15,7 +15,7 @@ This document describes how to use Chaos Mesh to create the above fault types of
 
 :::note
 
-Make sure your Linux kernel must be v4.1 or later.
+Your Linux kernel must be v4.1 or later.
 
 :::
 
