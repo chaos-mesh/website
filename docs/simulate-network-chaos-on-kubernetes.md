@@ -124,7 +124,7 @@ Before creating NetworkChaos experiments, ensure the following:
          'app': 'app1'
      bandwidth:
        rate: '1mbps'
-       limit: 100
+       limit: 20971520
        buffer: 10000
    ```
 
@@ -148,6 +148,7 @@ Before creating NetworkChaos experiments, ensure the following:
 | containerNames | []string | Specifies the name of the container into which the fault is injected. | None | No | ["nginx"] |
 | selector | struct | Specifies the target Pod. For details, refer to [Define the experiment scope](./define-chaos-experiment-scope.md). | None | Yes |  |
 | externalTargets | []string | Indicates the network targets except for Kubernetes, which can be IPv4 addresses or domains. This parameter only works with `direction: to`. | None | No | 1.1.1.1, www.google.com |
+| device | string | Specifies the affected network interface | None | No | "eth0" |
 
 ### Description for `action`-related fields
 
@@ -236,4 +237,4 @@ Setting `action` to `bandwidth` means simulating bandwidth limit fault. You also
 | peakrate | uint64 | Indicates the maximum consumption of `bucket` (usually not set) |  | No | 1 |
 | minburst | uint32 | Indicates the size of `peakrate bucket` (usually not set) |  | No | 1 |
 
-For more details of these fields, you can refer to [tc-tbf document](https://man7.org/linux/man-pages/man8/tc-tbf.8.html).
+For more details of these fields, you can refer to [tc-tbf document](https://man7.org/linux/man-pages/man8/tc-tbf.8.html). The limit is suggested to set to at least `2 * rate * latency`, where the `latency` is the estimated latency between source and target, and it can be estimated through `ping` command. Too small `limit` can cause high loss rate and impact the throughput of the tcp connection.

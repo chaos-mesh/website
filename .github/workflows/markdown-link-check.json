@@ -21,5 +21,6 @@
     {
       "pattern": "run-a-chaos-experiment.md"
     }
-  ]
+  ],
+  "aliveStatusCodes": [200, 403, 500, 502, 503]
 }
