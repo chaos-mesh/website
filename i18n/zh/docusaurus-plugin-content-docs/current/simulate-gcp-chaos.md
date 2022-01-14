@@ -52,17 +52,17 @@ stringData:
 
 1. 单击实验页面中的**新的实验**按钮创建实验。
 
-   ![img](./img/create-pod-chaos-on-dashborad-1_zh.jpg)
+   ![img](./img/create-pod-chaos-on-dashboard-1_zh.jpg)
 
 2. 在**选择目标**处选择 **GCP 故障**，并选择具体行为，例如 **STOP NODE**。
 
-   ![img](./img/create-gcp-chaos-on-dashborad-2_zh.jpg)
+   ![img](./img/create-gcp-chaos-on-dashboard-2_zh.jpg)
 
 3. 填写实验信息，指定实验范围以及实验计划运行时间。
 
-   ![img](./img/create-gcp-chaos-on-dashborad-3_zh.jpg)
+   ![img](./img/create-gcp-chaos-on-dashboard-3_zh.jpg)
 
-   ![img](./img/create-gcp-chaos-on-dashborad-4_zh.jpg)
+   ![img](./img/create-gcp-chaos-on-dashboard-4_zh.jpg)
 
 4. 提交实验。
 

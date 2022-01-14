@@ -1,4 +1,4 @@
----
+chaos-on-dashboard---
 title: Simulate GCP Faults
 ---
 
@@ -52,17 +52,17 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
 
 1. Open Chaos Dashboard, and click **NEW EXPERIMENT** on the page to create a new experiment:
 
-   ![img](img/create-pod-chaos-on-dashborad-1.png)
+   ![img](img/create-pod-chaos-on-dashboard-1.png)
 
 2. In the **Choose a Target** area, choose **GCP fault** and select a specific behavior, such as **STOP NODE**:
 
-   ![img](img/create-gcp-chaos-on-dashborad-2.png)
+   ![img](img/create-gcp-chaos-on-dashboard-2.png)
 
 3. Fill out the experiment information, and specify the experiment scope and the scheduled experiment duration:
 
-   ![img](img/create-gcp-chaos-on-dashborad-3.png)
+   ![img](img/create-gcp-chaos-on-dashboard-3.png)
 
-   ![img](img/create-gcp-chaos-on-dashborad-4.png)
+   ![img](img/create-gcp-chaos-on-dashboard-4.png)
 
 4. Submit the experiment information.
 
