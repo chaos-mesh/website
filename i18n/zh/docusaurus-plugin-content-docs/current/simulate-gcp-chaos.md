@@ -60,7 +60,7 @@ stringData:
 
 3. 填写实验信息，指定实验范围以及实验计划运行时间。
 
-   ![img](./img/create-gcp-chaos-on-dashboard-3_zh.jpg)
+   ![img](./img/create-gcp-chaos-on-dashboard-3_zh.png)
 
    ![img](./img/create-gcp-chaos-on-dashboard-4_zh.jpg)
 
