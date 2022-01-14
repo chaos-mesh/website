@@ -81,9 +81,9 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
    spec:
      action: node-stop
      secretName: 'cloud-key-secret'
-     project: 'your-project'
+     project: 'your-project-id-id'
      zone: 'your-zone'
-     instance: 'your-instance'
+     instance: 'your-instance-name'
      duration: '5m'
    ```
 
@@ -110,9 +110,9 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
    spec:
      action: node-reset
      secretName: 'cloud-key-secret'
-     project: 'your-project'
+     project: 'your-project-id'
      zone: 'your-zone'
-     instance: 'your-instance'
+     instance: 'your-instance-name'
      duration: '5m'
    ```
 
@@ -139,9 +139,9 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
    spec:
      action: disk-loss
      secretName: 'cloud-key-secret'
-     project: 'your-project'
+     project: 'your-project-id'
      zone: 'your-zone'
-     instance: 'your-instance'
+     instance: 'your-instance-name'
      deviceNames: ['disk-name']
      duration: '5m'
    ```
@@ -166,8 +166,8 @@ The following table shows the fields in the YAML configuration file.
 | mode | string | Indicates the mode of the experiment. The mode options include `one` (selecting a Pod at random), `all` (selecting all eligible Pods), `fixed` (selecting a specified number of eligible Pods), `fixed-percent` (selecting a specified percentage of the eligible Pods), and `random-max-percent` (selecting the maximum percentage of the eligible Pods). | None | Yes | `one` |
 | value | string | Provides parameters for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of pods. | None | No | 1 |
 | secretName | string | Indicates the name of the Kubernetes secret that stores the GCP authentication information. | None | No | cloud-key-secret |
-| project | string | Indicates the name of GCP project. | None | Yes | your-project |
+| project | string | Indicates the ID of GCP project. | None | Yes | your-project-id |
 | zone | string | Indicates the region of GCP instance. | None | Yes | us-central1-a |
-| instance | string | Indicates the ID of GCP instance. | None | Yes | your-gcp-instance-id |
+| instance | string | Indicates the name of GCP instance. | None | Yes | your-gcp-instance-name |
 | deviceNames | []string | This is a required field when the `action` is `disk-loss`. This field specifies the machine disk ID. | None | no | ["your-disk-id"] |
 | duration | string | Indicates the duration of the experiment. | None | Yes | 30s |
