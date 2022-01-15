@@ -52,17 +52,17 @@ stringData:
 
 1. 单击实验页面中的**新的实验**按钮创建实验。
 
-   ![img](./img/create-pod-chaos-on-dashborad-1_zh.jpg)
+   ![img](./img/create-pod-chaos-on-dashboard-1_zh.jpg)
 
 2. 在**选择目标**处选择 **GCP 故障**，并选择具体行为，例如 **STOP NODE**。
 
-   ![img](./img/create-gcp-chaos-on-dashborad-2_zh.jpg)
+   ![img](./img/create-gcp-chaos-on-dashboard-2_zh.jpg)
 
 3. 填写实验信息，指定实验范围以及实验计划运行时间。
 
-   ![img](./img/create-gcp-chaos-on-dashborad-3_zh.jpg)
+   ![img](./img/create-gcp-chaos-on-dashboard-3_zh.png)
 
-   ![img](./img/create-gcp-chaos-on-dashborad-4_zh.jpg)
+   ![img](./img/create-gcp-chaos-on-dashboard-4_zh.jpg)
 
 4. 提交实验。
 
@@ -81,9 +81,9 @@ stringData:
    spec:
      action: node-stop
      secretName: 'cloud-key-secret'
-     project: 'your-project'
+     project: 'your-project-id'
      zone: 'your-zone'
-     instance: 'your-instance'
+     instance: 'your-instance-name'
      duration: '5m'
    ```
 
@@ -110,9 +110,9 @@ stringData:
    spec:
      action: node-reset
      secretName: 'cloud-key-secret'
-     project: 'your-project'
+     project: 'your-project-id'
      zone: 'your-zone'
-     instance: 'your-instance'
+     instance: 'your-instance-name'
      duration: '5m'
    ```
 
@@ -139,9 +139,9 @@ stringData:
    spec:
      action: disk-loss
      secretName: 'cloud-key-secret'
-     project: 'your-project'
+     project: 'your-project-id'
      zone: 'your-zone'
-     instance: 'your-instance'
+     instance: 'your-instance-name'
      deviceNames: ['disk-name']
      duration: '5m'
    ```
@@ -166,8 +166,8 @@ stringData:
 | mode | string | 指定实验的运行方式，可选择的方式包括：`one`（表示随机选出一个符合条件的 Pod）、`all`（表示选出所有符合条件的 Pod）、`fixed`（表示选出指定数量且符合条件的 Pod）、`fixed-percent`（表示选出占符合条件的 Pod 中指定百分比的 Pod）、`random-max-percent`（表示选出占符合条件的 Pod 中不超过指定百分比的 Pod） | 无 | 是 | `one` |
 | value | string | 取决与 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 Pod 的百分比。 | 无 | 否 | 1 |
 | secretName | string | 指定存储 GCP 认证信息的 Kubernetes Secret 名字 | 无 | 否 | cloud-key-secret |
-| project | string | 指定 GCP 项目名 | 无 | 是 | your-project |
+| project | string | 指定 GCP 项目 ID | 无 | 是 | your-project-id |
 | zone | string | 指定 GCP 实例区域 | 无 | 是 | us-central1-a |
-| instance | string | 指定 GCP 实例的 ID | 无 | 是 | your-gcp-instance-id |
+| instance | string | 指定 GCP 实例的名称 | 无 | 是 | your-gcp-instance-name |
 | deviceNames | []string | 当 action 为 disk-loss 必填，指定设备磁盘 ID | 无 | 否 | ["your-disk-id"] |
 | duration | string | 指定实验的持续时间 | 无 | 是 | 30s |
