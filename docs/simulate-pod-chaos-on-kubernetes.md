@@ -151,4 +151,6 @@ TLDR; There are several suggestions for using "Pod Failure" chaos experiment:
 
 Pod Failure Chaos Experiment would change the `image` of each container in the target Pod to the "pause image", which is a special image that does not perform any operations. We use `gcr.io/google-containers/pause:latest` as the default image as "pause image", and you could change it to any other image in helm values `controllerManager.podChaos.podFailure.pauseImage`.
 
+Downloading `pause image` would consume time, and that duration would be counted in the experiment duration. So you might find that the "actual effected duration" might be shorter than the configured duration. That's another reason why recommend to setup available "pause image".
+
 Another ambiguous point is that "pause image" could work "properly well" with unconfigured `command` in the container. So if the container is configured without `command`, `livenessProbe` and `readinessProbe`, the container would be inspected as `Running` and `Ready`, although it had been changed to the "pause image", and actually does not provide functionalities as normal or not-available. So setup `livenessProbe` and `readinessProbe` for containers is recommended.
