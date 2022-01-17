@@ -141,3 +141,14 @@ The following table describes the fields in the YAML configuration file.
 | containerNames | []string | When you configure `action` to `container-killed`, this configuration is mandatory to specify the target container name for injecting faults. | None | No | ['prometheus'] |
 | gracePeriod | int64 | When you configure `action` to `pod-kill`, this configuration is mandatory to specify the duration before deleting Pod. | 0 | No | 0 |
 | duration | string | Specifies the duration of the experiment. | None | Yes | 30s |
+
+## Some Notes for "Pod Failure" Chaos Experiment
+
+TLDR; There are several suggestions for using "Pod Failure" chaos experiment:
+
+- Change to an available "pause image" if you are operating an air-gapped Kubernetes cluster.
+- Setup `livenessProbe` and `readinessProbe` for containers.
+
+Pod Failure Chaos Experiment would change the `image` of each container in the target Pod to the "pause image", which is a special image that does not perform any operations. We use `gcr.io/google-containers/pause:latest` as the default image as "pause image", and you could change it to any other image in helm values `controllerManager.podChaos.podFailure.pauseImage`.
+
+Another ambiguous point is that "pause image" could work "properly well" with unconfigured `command` in the container. So if the container is configured without `command`, `livenessProbe` and `readinessProbe`, the container would be inspected as `Running` and `Ready`, although it had been changed to the "pause image", and actually does not provide functionalities as normal or not-available. So setup `livenessProbe` and `readinessProbe` for containers is recommended.
