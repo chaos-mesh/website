@@ -25,7 +25,7 @@ This section introduces the meanings of different selector types and their the u
 - Data type: string array type.
 - If this selector is empty or is not specified, Chaos Mesh will set it to the namespace of the current Chaos experiment.
 
-When you create the experiment using the YAML file, see the following example for selector configuration:
+When creating the experiment using the YAML file, you need to configure selectors. For example:
 
 ```yaml
 spec:
@@ -40,7 +40,7 @@ spec:
 - Data type: key-value pairs.
 - If multiple labels are specified, the experiment target must have all the labels specified by this selector.
 
-When you create the experiment using the YAML file, see the following example for selector configuration:
+When creating the experiment using the YAML file, you need to configure selectors. For example:
 
 ```yaml
 spec:
@@ -54,7 +54,7 @@ spec:
 - Specifies a set of [expressions](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#resources-that-support-set-based-requirements) that define the label's rules to specifiy the experiment's target Pod.
 - You can use this selector to set up the experiment's target Pod that does not meet some labels.
 
-When you create the experiment using the YAML file, see the following example for selector configuration:
+When creating the experiment using the YAML file, you need to configure selectors. For example:
 
 ```yaml
 spec:
@@ -70,7 +70,7 @@ spec:
 - Data type: key-value pairs.
 - If multiple annotations are specified, the experiment target must have all annotations specified by this selector.
 
-When you create the experiment using the YAML file, see the following example for selector configuration:
+When creating the experiment using the YAML file, you need to configure selectors. For example:
 
 ```yaml
 spec:
@@ -85,7 +85,7 @@ spec:
 - Data type: key-value pairs.
 - If multiple fields are specified, the experiment target must have all fields set by this selector.
 
-When you create the experiment using the YAML file, see the following example for selector configuration:
+When creating the experiment using the YAML file, you need to configure selectors. For example:
 
 ```yaml
 spec:
@@ -101,7 +101,7 @@ spec:
 - Supported phases: `Pending`, `Running`, `Succeeded`, `Failed`, `Unknown`.
 - This option is empty by default, which means that the target Pod's phase is not limited.
 
-When you create the experiment using the YAML file, see the following example for selector configuration:
+When creating the experiment using the YAML file, you need to configure selectors. For example:
 
 ```yaml
 spec:
@@ -116,7 +116,7 @@ spec:
 - Data type: key-value pairs.
 - If multiple node labels are specified, the node to which the experiment's target Pod belongs must have all labels specified by this selector.
 
-When you create the experiment using the YAML file, see the following example for selector configuration:
+When creating the experiment using the YAML file, you need to configure selectors. For example:
 
 ```yaml
 spec:
@@ -131,7 +131,7 @@ spec:
 - Data type: string array type.
 - The target Pod can only belong to one node in the configured node list.
 
-When you create the experiment using the YAML file, see the following example for selector configuration:
+When creating the experiment using the YAML file, you need to configure selectors. For example:
 
 ```yaml
 spec:
@@ -145,9 +145,9 @@ spec:
 
 - Specifies the namespaces and list of the experiment's target `Pods`.
 - Type of data: key-value pairs. The "keys" are the namespaces of the target `Pod` and the "values" are the target `Pod` list.
-- If you have specified this selector, Chaos Mesh will **ignore** other configured selectors.
+- If you have specified this selector, Chaos Mesh **ignores** other configured selectors.
 
-When you create the experiment using the YAML file, see the following example for selector configuration:
+When creating the experiment using the YAML file, you need to configure selectors. For example:
 
 ```yaml
 spec:
@@ -163,16 +163,16 @@ spec:
 ### Physical Machine List Selector
 
 - Specifies the namespaces and list of the experiment's target `PhysicalMachines`.
-- Type of data: key-value pairs. The "keys" are the namespaces of the target `PhysicalMachine` and the "values" are the target `PhysicalMachine` list.
-- If you have specified this selector, Chaos Mesh will **ignore** other configured selectors.
+- Type of data: key-value pairs. The "keys" are the namespaces of the target `PhysicalMachine`, and the "values" are the target `PhysicalMachine` list.
+- If you have specified this selector, Chaos Mesh **ignores** other configured selectors.
 
 :::note
 
-`PhysicalMachine` is a CRD(CustomResourcesDefinition) that represents a physical machine. Chaos Mesh uses [chaosctl](chaosctl-tool.md#generate-tls-certs-for-choasd) to create `PhysicalMachine` typically。
+`PhysicalMachine` is a CRD (CustomResourcesDefinition) that represents a physical machine. To create `PhysicalMachine`, Chaos Mesh uses [chaosctl](chaosctl-tool.md#generate-tls-certs-for-choasd).
 
 :::
 
-When you create the experiment using the YAML file, see the following example for selector configuration:
+When creating the experiment using the YAML file, you need to configure selectors. For example:
 
 ```yaml
 spec:
@@ -200,15 +200,15 @@ While setting selectors, you can also view the actual scope of the experiment ta
 
 ## Compatibility matrix
 
-| Type | Support Kubernetes | Support Physical Machine |
+| Type | Support Kubernetes | Support physical machine |
 | :-- | :-- | :-- | 
-|Namespace Selectors|Y|Y|
-|Label Selectors|Y|Y|
-|Expression Selectors|Y|Y|
-|Annotation Selectors|Y|Y|
-|Field Selectors|Y|Y|
-|PodPhase Selectors|Y|N|
-|Node Selectors|Y|N|
-|Node List Selectors|Y|N|
-|Pod List Selectors|Y|N|
-|PhysicalMachine List Selectors|N|Y|
+|Namespace Selectors|Yes|Yes|
+|Label Selectors|Yes|Yes|
+|Expression Selectors|Yes|Yes|
+|Annotation Selectors|Yes|Yes|
+|Field Selectors|Yes|Yes|
+|PodPhase Selectors|Yes|No|
+|Node Selectors|Yes|No|
+|Node List Selectors|Yes|No|
+|Pod List Selectors|Yes|No|
+|PhysicalMachine List Selectors|No|Yes|

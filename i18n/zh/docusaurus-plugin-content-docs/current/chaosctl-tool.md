@@ -54,9 +54,16 @@ chaosctl logs -t 100 # 输出所有组件的最后100行日志
 
 ### 为 Chaosd 生成 TLS 证书
 
-为了保障 Chaosd 和 Chaos-controller-manager 服务之间的通信安全，Chaos Mesh 推荐开启 mTLS 模式。Chaosctl 可以通过命令行方便地生成 TLS 证书。在以下场景下，Chaosctl 可以通过不同的方案执行命令。
+当在 Chaosd 和 Chaos Mesh 之间发起请求时，为了保障 Chaosd 和 Chaos-controller-manager 服务之间的通信安全，Chaos Mesh 推荐开启 mTLS (Mutual Transport Layer Security) 模式。
 
-**场景一**：通过执行 chaosctl 的节点，可以访问 Kubernetes 集群，且可以使用 SSH 工具连接到物理机
+如需开启 mTLS 模式，Chaosd 和 Chaos mesh 的参数中需要配置好 TLS 证书参数。因此，你需要确定 Chaosd 和 Chaos Mesh 已经生成了 TLS 证书后，再把 TLS 证书作为参数启动 Chaosd 和 Chaos Mesh。
+
+- Chaosd：该工具支持在配置 TLS 证书参数前和配置 TLS 证书参数后开始启动。为了保障集群安全，推荐配置 TLS 证书参数**后**，再启动工具。具体信息，请参阅[运行 Chaosd Server](simulate-physical-machine-chaos.md#运行-chaosd-server)。
+- Chaos Mesh：当使用 Helm 部署 Chaos Mesh 时，默认配置 TLS 证书参数。
+
+如果你的 Chaosd 没有生成 TLS 证书，可以使用 Chaosctl，通过命令行方便地生成该证书。在以下场景下，Chaosctl 可以通过不同的方案执行命令。
+
+**场景一**：开启 Chaosctl 的运行中的节点可以访问 Kubernetes 集群，并且可以使用 SSH 工具连接到物理机。
 
 在该场景下，仅需通过执行以下命令来完成下列操作：
 
@@ -73,7 +80,7 @@ chaosctl logs -t 100 # 输出所有组件的最后100行日志
 
 如需了解更多关于此功能的介绍和例子，请通过 `chaosctl pm init -h` 查阅。
 
-**场景二**：通过执行 chaosctl 的节点，可以访问 Kubernetes 集群，且无法使用 SSH 工具连接到物理机
+**场景二**：开启 Chaosctl 的运行中的节点可以访问 Kubernetes 集群，但无法使用 SSH 工具连接到物理机。
 
 在该场景下，操作步骤如下：
 
@@ -102,10 +109,10 @@ chaosctl logs -t 100 # 输出所有组件的最后100行日志
 
    如需了解更多关于此功能的介绍和例子，请通过 `chaosctl pm create -h` 查阅。
 
-## 使用场景
+## 问题反馈
 
-如果你希望提交关于 Chaos Mesh 的问题，在问题中附上相关的日志与 chaos 信息很有帮助。你可以将 `chaosctl logs` 的输出附在 issue 尾部以供开发人员参考。如果你希望提交的问题与 iochaos, networkchaos, stresschaos 有关，那么 `chaosctl debug` 的相关信息也会很有用。
+Chaosctl 的代码目前托管于 Chaos Mesh 项目中。更多信息，请参阅 [chaos-mesh/pkg/chaosctl](https://github.com/chaos-mesh/chaos-mesh/tree/master/pkg/chaosctl) 。
 
-## 开发与改进
+如果在操作的过程中遇到了问题，或有兴趣帮助我们改进这一工具，欢迎在 [CNCF Slack](https://cloud-native.slack.com/archives/C0193VAV272) 向 Chaos Mesh 团队反馈，或者直接在 GitHub 创建一个 [issue](https://github.com/chaos-mesh/chaos-mesh/issues)。
 
-chaosctl 的代码目前托管于 Chaos Mesh 项目中，你可以在 [chaos-mesh/pkg/chaosctl](https://github.com/chaos-mesh/chaos-mesh/tree/master/pkg/chaosctl) 找到相关实现。如果你有兴趣帮助我们改进这一工具，可以通过 [Slack](https://cloud-native.slack.com/archives/C0193VAV272) 联系我们，或是在 Chaos Mesh 项目中提出相关 issue 。
+反馈问题时，在问题中附上相关的日志和 Chaos 信息会有助于诊断问题。你可以将 `chaosctl logs` 的输出附在 issue 尾部，以供开发人员参考。如果你的问题与 iochaos, networkchaos, stresschaos 相关，也请附上 `chaosctl debug` 相关信息。

@@ -52,30 +52,41 @@ To print debugging information, use the `chaosctl debug` command. To check the h
 
 Currently, chaosctl only supports the debugging of IOChaos, NetworkChaos, and StressChaos.
 
-### Generate TLS certs for Choasd
+### Generate TLS certificates for Chaosd
 
-To secure the communication between Chaosd and Chaos-controller-manager services, Chaos Mesh recommends enabling mTLS mode. Chaosctl can easily generate TLS certificates via the command line. Chaosctl can execute commands through different scenarios in the following scenarios.
+When a request is initiated between Chaosd and Chaos Mesh, to ensure communications security between Chaosd and Chaos-controller-manager services, Chaos Mesh recommends enabling mTLS (Mutual Transport Layer Security) mode.
 
-**Scenario 1**: Nodes running chaosctl can access the Kubernetes cluster and ssh to the physical machine
+To enable mTLS mode, the TLS certificate parameters should be configured in Chaosd and Chaos mesh. Therefore, make sure that Chaosd and Chaos Mesh have generated TLS certificates, then start Chaosd and Chaos Mesh with the TLS certificate as parameters.
+
+- Chaosd: You can start Chaosd before **or** after configuring TLS certificate parameters. For clusters security, it is recommended to configure TLS certificate parameters first, and then start Chaosd. For details, see [Deploy Chaosd server](simulate-physical-machine-chaos.md#deploy-chaosd-server).
+- Chaos Mesh: If you deployed Chaos Mesh using Helm, TLS certificate parameters are configured by default.
+
+If your Chaosd does not generate a TLS certificate, you can use Chaosctl to easily generate the certificate through the command lines. In the following use cases, Chaosctl runs commands through different schemes.
+
+**Case 1**:The nodes where Chaosctl runs can access Kubernetes clusters and connect to a physical machine using SSH tools.
+
+Run the following commands to complete the operations:
 
 In this scenario, execute the following command to complete the following operations:
 
-- Command: Using `chaosctl pm init` command:
+- Command: Use `chaosctl pm init` command:
 
    ```bash
    ./chaosctl pm init pm-name --ip=123.123.123.123 -l arch=amd64,anotherkey=value
    ```
 
-- Action: This command performs the following actions: 
+- Operation: The command performs the following operations.
    
-   - generate the required certificates for Chaosd with one click and save them to the corresponding physical machine.
-   - create the corresponding `PhysicalMachine` resource in the Kubernetes cluster.
+   - Generate the required certificate for Chaosd simply, and save the certificate to the corresponding physical machine.
+   - Create the corresponding `PhysicalMachine` resource in Kubernetes clusters.
 
-For more information and examples of this feature, please refer to `chaosctl pm init -h`.
+For further information and examples of this feature, refer to `chaosctl pm init -h`.
 
-**Scenario 2**: Nodes running chaosctl can access the Kubernetes cluster, but cannot ssh to the physical machine
+**Case 2**: The nodes where Chaosctl runs can access Kubernetes clusters, but they cannot connect to a physical machine using SSH tools.
 
-1. Before executing the command, you need to manually obtain the CA certificate from the Kubernetes cluster. An example command is as follows:
+Run the following commands to complete the operations:
+
+1. Before executing the command, you need to manually get a CA certificate from Kubernetes clusters through commands. For example:
 
    ```bash
    kubectl get secret chaos-mesh-chaosd-client-certs -n chaos-testing -o "jsonpath={.data['ca\.crt']}" | base64 -d > ca.crt
@@ -83,27 +94,29 @@ For more information and examples of this feature, please refer to `chaosctl pm 
    kubectl get secret chaos-mesh-chaosd-client-certs -n chaos-testing -o "jsonpath={.data['ca\.key']}" | base64 -d> ca.key
    ```
 
-2. Copy the `ca.crt` and `ca.key` files to **the corresponding physical machine**, for example, to the `/etc/chaosd/pki` directory.
+2. Copy the `ca.crt` and `ca.key` files to **the corresponding physical machine**. For example, copy the files to the `/etc/chaosd/pki` directory.
    
-3. Then, on **the physical machine**, use the `chaosctl pm generate` command to generate TLS certificates (the default path for saving certifacates is `/etc/chaosd/pki`). An example command is as follows:
+3. Use the `chaosctl pm generate` command to generate TLS certificates (save to `/etc/chaosd/pki by default) on **the physical machine**. For example:
 
    ```bash
    ./chaosctl pm generate --cacert=/etc/chaosd/pki/ca.crt --cakey=/etc/chaosd/pki/ca.key
    ```
 
-   For more information and examples of this feature, please refer to `chaosctl pm generate -h`.
+   For further information and examples of this feature, refer to `chaosctl pm generate -h`.
 
-4. Finally, use the `chaosctl pm create` command to create a `PhysicalMachine` resource in the Kubernetes cluster on a machine that has access to the Kubernetes cluster. An example command is as follows:
+4. Use the `chaosctl pm create` command to create a `PhysicalMachine` resource in Kubernetes clusters on the machine that has access to Kubernetes clusters. For example:
 
    ```bash
    ./chaosctl pm create pm-name --ip=123.123.123.123 -l arch=amd64
    ```
 
-   For more information and examples of this feature, please refer to `chaosctl pm create -h`.
-## Scenarios
+   For further information and examples of this feature, refer to `chaosctl pm create -h`.
 
-If you want to raise an issue about Chaos Mesh, it is recommended to attach the relevant logs and chaos information. Therefore, you can attach the output of `chaosctl logs` to the end of the issue for developers' reference. If you want to raise issues about IOChaos, NetworkChaos or StressChaos, you can also attach the output from `chaosctl debug`.
+## Questions and feedback
 
-## Development and improvement
+The code of Chaosctl is currently hosted in the Chaos Mesh project. For details, refer to [chaos-mesh/pkg/chaosctl](https://github.com/chaos-mesh/chaos-mesh/tree/master/pkg/chaosctl).
 
-The code of chaosctl is currently hosted in the Chaos Mesh project. You can refer to [chaos-mesh/pkg/chaosctl](https://github.com/chaos-mesh/chaos-mesh/tree/master/pkg/chaosctl) for details. If you are interested in helping us improve this tool, contact us by [Slack](https://cloud-native.slack.com/archives/C0193VAV272) or raise the issue in the Chaos Mesh project.
+If you encounter problems during performing operations, or you are interested in helping us improve this tool, 
+you are welcome to contact the Chaos Mesh team through [CNCF Slack](https://cloud-native.slack.com/archives/C0193VAV272), or create an [GitHub issue](https://github.com/chaos-mesh/chaos-mesh/issues).
+
+When describing your issues, it would be helpful to attach related logs and Chaos information. To provide reference material for developers, you are encouraged to attach the results of `chaosctl logs` to your questions. Besides, if your question is related to iochaos, networkchaos, stresschaos, the `chaosctl debug` related information also helps to diagnose the problem.
