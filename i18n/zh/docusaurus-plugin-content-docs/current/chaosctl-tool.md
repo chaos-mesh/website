@@ -1,12 +1,12 @@
 ---
-title: chaosctl
+title: Chaosctl
 ---
 
-chaosctl 是一个用于辅助调试 Chaos Mesh 的工具。我们希望利用 chaosctl 简化开发调试新 chaos 类型，以及提交 issue 相关日志的流程。
+Chaosctl 是一个用于辅助调试 Chaos Mesh 的工具。我们希望利用 Chaosctl 简化开发调试新 chaos 类型，以及提交 issue 相关日志的流程。
 
-## 获取 chaosctl
+## 获取 Chaosctl
 
-我们为 Linux 提供了可执行文件。你可以直接下载 chaosctl：
+我们为 Linux 提供了可执行文件。你可以直接下载 Chaosctl：
 
 ```bash
 curl -sSL https://mirrors.chaos-mesh.org/latest/chaosctl
@@ -32,7 +32,7 @@ curl -sSL https://mirrors.chaos-mesh.org/latest/chaosctl
 
 ## 功能介绍
 
-chaosctl 有两类功能，分别是查看日志及调试 Chaos。
+Chaosctl 有两类功能，分别是查看日志及调试 Chaos。
 
 ### 日志查看
 
@@ -44,13 +44,13 @@ chaosctl logs -t 100 # 输出所有组件的最后100行日志
 
 ### 调试 Chaos
 
-使用 `chaosctl debug` 可以查看 Chaos 的调试信息。`chaosctl debug -h` 会提供关于此功能的帮助和例子。使用这一功能时，chaosctl 需要与相应的 chaos-daemon 建立连接，如果你在部署 Chaos Mesh 时关闭了 TLS （默认打开），需要使用 `-i` 选项来告知 chaosctl 不使用 TLS。命令示例如下：
+使用 `chaosctl debug` 可以查看 Chaos 的调试信息。`chaosctl debug -h` 会提供关于此功能的帮助和例子。使用这一功能时，Chaosctl 需要与相应的 chaos-daemon 建立连接，如果你在部署 Chaos Mesh 时关闭了 TLS （默认打开），需要使用 `-i` 选项来告知 Chaosctl 不使用 TLS。命令示例如下：
 
 ```bash
 ./chaosctl debug -i networkchaos web-show-network-delay
 ```
 
-目前，chaosctl 只支持 iochaos, networkchaos, stresschaos 三类 Chaos 的调试。
+目前，Chaosctl 只支持 iochaos, networkchaos, stresschaos 三类 Chaos 的调试。
 
 ### 为 Chaosd 生成 TLS 证书
 

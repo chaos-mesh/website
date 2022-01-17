@@ -1,12 +1,12 @@
 ---
-title: chaosctl
+title: Chaosctl
 ---
 
-chaosctl is a tool to assist in debugging Chaos Mesh. With chaosctl, you can simplify the process of developing and debugging new chaos types, and provide references for other developers when raising an issue.
+Chaosctl is a tool to assist in debugging Chaos Mesh. With Chaosctl, you can simplify the process of developing and debugging new chaos types, and provide references for other developers when raising an issue.
 
-## Get chaosctl
+## Get Chaosctl
 
-For Linux users, you can directly download the executable file for chaosctl.
+For Linux users, you can directly download the executable file for Chaosctl.
 
 ```bash
 curl -sSL https://mirrors.chaos-mesh.org/latest/chaosctl
@@ -32,7 +32,7 @@ For Windows or macOS users, you can compile it from the source code. Go v1.15 or
 
 ## Features
 
-Currently, chaosctl supports printing logs and debugging information for Chaos experiments.
+Currently, Chaosctl supports printing logs and debugging information for Chaos experiments.
 
 ### Printing logs
 
@@ -44,13 +44,13 @@ chaosctl logs -t 100 # Print the last 100 lines of logs from all components
 
 ### Printing debugging information
 
-To print debugging information, use the `chaosctl debug` command. To check the help information and examples of this feature, use the `chaosctl debug -h` command. When you are debugging, you need to make sure chaosctl is connected to the corresponding `chaos-daemon`. If you disable TLS (enabled by default) when deploying Chaos Mesh, add the `-i` option to tell chaosctl that TLS is not used. An example command is as follows:
+To print debugging information, use the `chaosctl debug` command. To check the help information and examples of this feature, use the `chaosctl debug -h` command. When you are debugging, you need to make sure Chaosctl is connected to the corresponding `chaos-daemon`. If you disable TLS (enabled by default) when deploying Chaos Mesh, add the `-i` option to tell Chaosctl that TLS is not used. An example command is as follows:
 
 ```bash
 ./chaosctl debug -i networkchaos web-show-network-delay
 ```
 
-Currently, chaosctl only supports the debugging of IOChaos, NetworkChaos, and StressChaos.
+Currently, Chaosctl only supports the debugging of IOChaos, NetworkChaos, and StressChaos.
 
 ### Generate TLS certificates for Chaosd
 

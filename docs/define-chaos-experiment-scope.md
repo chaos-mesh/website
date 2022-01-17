@@ -125,7 +125,7 @@ spec:
       'node-label': 'label-one'
 ```
 
-### Node list Selector
+### Node list selector
 
 - Specifies the node to which the experiment's target Pod belongs.
 - Data type: string array type.
@@ -141,7 +141,7 @@ spec:
       - node2
 ```
 
-### Pod list Selector
+### Pod list selector
 
 - Specifies the namespaces and list of the experiment's target `Pods`.
 - Type of data: key-value pairs. The "keys" are the namespaces of the target `Pod` and the "values" are the target `Pod` list.
@@ -160,7 +160,7 @@ spec:
         - basic-tikv-1
 ```
 
-### Physical Machine List Selector
+### Physical machine list selector
 
 - Specifies the namespaces and list of the experiment's target `PhysicalMachines`.
 - Type of data: key-value pairs. The "keys" are the namespaces of the target `PhysicalMachine`, and the "values" are the target `PhysicalMachine` list.
