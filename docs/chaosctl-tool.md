@@ -63,11 +63,9 @@ To enable mTLS mode, the TLS certificate parameters should be configured in Chao
 
 If your Chaosd does not generate a TLS certificate, you can use Chaosctl to easily generate the certificate through the command lines. In the following use cases, Chaosctl runs commands through different schemes.
 
-**Case 1**:The nodes where Chaosctl runs can access Kubernetes clusters and connect to a physical machine using SSH tools.
+**Case 1**: The nodes where Chaosctl runs can access Kubernetes clusters and connect to a physical machine using SSH tools.
 
 Run the following commands to complete the operations:
-
-In this scenario, execute the following command to complete the following operations:
 
 - Command: Use `chaosctl pm init` command:
 
