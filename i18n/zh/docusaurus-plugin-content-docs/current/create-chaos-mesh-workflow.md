@@ -38,9 +38,9 @@ Github 仓库中含有其他 Workflow 的[示例](https://github.com/chaos-mesh/
 
 ### 第 3 步：配置工作流节点
 
-1. 选择**Choose task type**
+1. 根据需求选择**选择任务类型**
 
-根据需求选择**Choose task type**。在本示例中，工作流入口选为串行 (Serial) 节点，并将其命名为 “entry”。
+在本示例中，工作流入口选为串行 (Serial) 节点，并将其命名为 “entry”。
 
 :::note 注意
 
