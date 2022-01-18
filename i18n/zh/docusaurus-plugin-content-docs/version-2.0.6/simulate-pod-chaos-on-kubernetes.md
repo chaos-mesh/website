@@ -155,7 +155,7 @@ PodChaos 是 Chaos Mesh 中的一种故障类型，通过创建 PodChaos 类型�
 - 如果你正在运行一个气隙或网络隔离的 Kubernetes 集群，请更换一个可用的 "pause image"。
 - 为容器配置 `livenessProbe` 和 `readinessProbe`。
 
-Pod Failure Chaos Experiment would change the `image` of each container in the target Pod to the "pause image", which is a special image that does not perform any operations. We use `gcr.io/google-containers/pause:latest` as the default image as "pause image", and you could change it to any other image in helm values `controllerManager.podChaos.podFailure.pauseImage`. Pod Failure 混沌实验将会改变目标 Pod 中每个容器的 `image` 为 "pause image"，这是一个特殊的镜像，不会执行任何操作。我们使用 `gcr.io/google-containers/pause:latest` 作为默认的 "pause image"，你可以在 helm values `controllerManager.podChaos.podFailure.pauseImage` 中更改它。
+Pod Failure 混沌实验将会改变目标 Pod 中每个容器的 `image` 为 "pause image"，这是一个特殊的镜像，不会执行任何操作。我们使用 `gcr.io/google-containers/pause:latest` 作为默认的 "pause image"，你可以在 helm values `controllerManager.podChaos.podFailure.pauseImage` 中更改它。
 
 下载 "pause image" 将会消耗时间，并且这个时间将会被计入实验的持续时间中。所以你可能会发现，"实际受影响的时间" 可能会比配置的时间短。这是推荐设置可用的 "pause image" 的另一个原因。
 
