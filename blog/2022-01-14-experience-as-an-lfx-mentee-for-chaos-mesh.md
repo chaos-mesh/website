@@ -1,5 +1,5 @@
 ---
-slug: 
+slug: /lfx-mentee-experience'
 title: 'Experience as an LFX Mentee for Chaos Mesh'
 author: Chunxu Zhang
 author_title: LFX mentee
@@ -25,29 +25,29 @@ On August 30, I was lucky enough to receive the good news that I passed the inte
 
 The project I applied for was called [Monitoring Metrics about Chaos Mesh](https://mentorship.lfx.linuxfoundation.org/project/8db683b0-0273-4a83-9ed9-4c33ee2cfcf0), which aimed to improve the observability of the Chaos Mesh system by collecting metrics and providing a Grafana dashboard.
 
-During the first two weeks of the project, I got familiar with the business process and some code details of chaos mesh. In the next two weeks, I started to write the design document to sort out all the metrics and collection methods. During this time, I studied the metric design guidelines and met with the mentor to understand the details of the proposal and some of the code logic. 
+During the first two weeks of the project, I got familiar with the business process and some code details of chaos mesh. In the next two weeks, I started to write the design document to sort out all the metrics and collection methods. During this time, I studied the metric design guidelines and met with the mentor to understand the details of the proposal and some of the code logic.
 
 Most of these metrics are relatively simple to collect, requiring only simple queries to database objects, k8s objects, or some simple counts. However, there are some special metrics that are difficult to collect. For example, you need to query the data by executing commands in the network namespace of the corresponding container, or query all the containers under the daemon through three different container runtimes, or collect data on the communication between the gRPC client and the server.
 
 These tasks were strange to me. Therefore, I had to ask my mentor for technical support from time to time, and he was always very responsive. I was greatly impressed by my mentor’s extensive knowledge and experience in this field. Under the guidance from my mentor, I was finally able to put together the [RFC](https://github.com/chaos-mesh/rfcs/pull/23) document for my design. Later, in order to track my work, I created a [tracking issue](https://github.com/chaos-mesh/chaos-mesh/issues/2397).
 
-![Tracking issue](/static/image/2022-01-14/lfx-mentee-experience-tracking-issue.png)
+![Tracking issue](/img/lfx-mentee-experience-tracking-issue.png)
 
 However, during the subsequent coding work, I encountered various problems. In retrospect, I found that many of them could have been solved in advance. So I have summarized some suggestions below:
 
 **Keep thinking critically**. When I accepted the proposal, I proposed my solution for each metric off the top of my head, but ignored some basic questions: are these metrics necessary? Do we have a better solution that’s available? These basic questions should have been addressed during the proposal phase, but they were propagated to the later design implementation phase. For example, when submitting the RFC, I was reminded by my mentor and reviewers that some metrics were already implemented in the controller-runtime library. When I was working on BPM-related metrics, I was asked similarly by the reviewer. Only then did I realize that I had never paid attention to it.
 
-![Comments about BPM metrics](/static/image/2022-01-14/lfx-mentee-experience-thinking-critically.png)
+![Comments about BPM metrics](/img/lfx-mentee-experience-thinking-critically.png)
 
-**Continuous communication**. How to communicate effectively is a very important issue in this mentorship. There are many lessons learned about communication, but the most profound is that it is better to give options before getting advice. When you have to ask for help, provide some options for the other party to reference. Although these options may not be valid, it contains your own thinking. Therefore, unless you still have no idea after thinking things through, don’t put other people in the middle of your questions. 
+**Continuous communication**. How to communicate effectively is a very important issue in this mentorship. There are many lessons learned about communication, but the most profound is that it is better to give options before getting advice. When you have to ask for help, provide some options for the other party to reference. Although these options may not be valid, it contains your own thinking. Therefore, unless you still have no idea after thinking things through, don’t put other people in the middle of your questions.
 
-**Understand open source**. This is my first actual experience with open source. Compared with working in a company, things are a lot different. Here are some examples:  
+**Understand open source**. This is my first actual experience with open source. Compared with working in a company, things are a lot different. Here are some examples:
 
 1. The way information is synchronized. Unlike working in a company where we communicate often with face-to-face meetings, basically most of the communications with an open source community are concentrated in slack channels, GitHub issues, and pull requests. Therefore, we need to record our work so that we can always let other folks know what is going on. In the first few weeks, I maintained an online R&D document based on my previous habit. Later I found that it was better to set up a Kanban or issue on GitHub, so that I would not introduce additional communication cost for my mentor by using a different platform.
 
-   ![Online R&D document](/static/image/2022-01-14/lfx-mentee-experience-rd-doc.png)
+   ![Online R&D document](/img/lfx-mentee-experience-rd-doc.png)
 
-2. Better and more rigorous automated testing. For business companies, automated testing only includes static code analysis, unit testing and simple smoke testing, while manual testing will be more rigorous. But in open source projects, the automated code pipeline contains more detailed and complete test cases, such as integration testing, end-to-end testing, license checking, and so on. The quality and security of the submitted code will be checked initially in this phase. 
+2. Better and more rigorous automated testing. For business companies, automated testing only includes static code analysis, unit testing and simple smoke testing, while manual testing will be more rigorous. But in open source projects, the automated code pipeline contains more detailed and complete test cases, such as integration testing, end-to-end testing, license checking, and so on. The quality and security of the submitted code will be checked initially in this phase.
 
 3. Code review. Many people will participate in your code reviews, and the review may last for a long time. Unlike company work, there are no dedicated reviewers in an open source community. It could be users, maintainers, or other community members who are either assigned or voluntarily do the job, which may be part of the reason for the long review duration.
 
@@ -59,6 +59,6 @@ At the same time, because of the unexpected pressure of the graduate lab project
 
 I would like to thank my mentor [@STRRL](https://github.com/STRRL). During my internship, I encountered many problems in the project, such as Git operations, cycle dependency solutions, and finding the runtime interface for CRI-O. Without my mentor's patience and guidance, it would have been difficult for me to complete these unfamiliar technical challenges. I would also like to thank the maintainers of Chaos Mesh for reviewing my code, and the CNCF LFX Mentorship project for providing a great platform for all of us who want to participate in the open-source community.
 
-![Mentor's LGTM](/static/image/2022-01-14/lfx-mentee-experience-mentors-lgtm.png)
+![Mentor's LGTM](/img/lfx-mentee-experience-mentors-lgtm.png)
 
 Finally, I hope every student who wants to be part of the open-source community can take the first step with LFX Mentorship!
