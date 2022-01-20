@@ -45,6 +45,14 @@ module.exports = {
             'check-workflow-status',],
         },
       ],
+      {
+        type: 'category',
+        label: 'Tutorials',
+        collapsed: false,
+        items: [
+          '10 Minute Guide to Chaos Mesh v2.1'
+        ],
+      },
     },
     {
       type: 'category',
