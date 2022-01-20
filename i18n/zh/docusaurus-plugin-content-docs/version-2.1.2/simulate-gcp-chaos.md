@@ -31,7 +31,7 @@ stringData:
 
 - **name** 表示 Kubernetes Secret 对象的名字。
 - **namespace** 表示 Kubernetes Secret 对象的命名空间。
-- **service_account** 存储 GCP 集群的服务账号。请注意，你需要对 GCP 集群的服务账号进行 [Base64](https://zh.wikipedia.org/wiki/Base64) 编码。
+- **service_account** 存储 GCP 集群的服务账号密钥。请注意，你需要对 GCP 集群的服务账号密钥进行 [Base64](https://zh.wikipedia.org/wiki/Base64) 编码。如需了解 GCP 服务账号密钥详情，请参阅[创建和管理服务帐号密钥](https://cloud.google.com/iam/docs/creating-managing-service-account-keys)。
 
 ## 使用 Dashboard 方式创建实验
 
