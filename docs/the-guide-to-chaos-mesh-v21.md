@@ -116,7 +116,7 @@ The architecture of the test application is as follows:
     GRANT ALL PRIVILEGES ON * . * TO 'chaos'@'%';
     ```
 
-4. Prepare the dataset for testing. You can run  [example.SQL](https://github.com/WangXiangUSTC/byteman-example/blob/chaos_demo/mysqldemo/example.SQL) in MySQL to generate the test data.
+4. Prepare the dataset for testing. You can run [`example.SQL`](https://github.com/WangXiangUSTC/byteman-example/blob/chaos_demo/mysqldemo/example.SQL) in MySQL to generate the test data.
 
 #### Deploy mysql-query service
 
@@ -187,7 +187,7 @@ If one of the Pods fails and cannot be connected, a highly available system can 
 
     ![New experiment](./img/quick-start-new-experiment-dashboard.png)
 
-2. Select **Kubernetes** as the experiment environment and ** HTTP Fault** as the experiment type:
+2. Select **Kubernetes** as the experiment environment and **HTTP Fault** as the experiment type:
 
     ![Select experiment environment](./img/quick-start-select-experiment-on-dashboard.png)
 
@@ -221,7 +221,7 @@ After the experiment, you might need to consider how to optimize the service arc
 
 Even though all of your SQL queries executed in normal situations return normal data, it does not mean your code has no bugs. If the query returns an exception, you might wonder whether your application can handle the exception and return the error message. In such cases, you can verify that situation by running a Chaos experiment.
 
-Before creating the experiment, you need to understand the code logic of your application. The [querySQL](https://github.com/WangXiangUSTC/byteman-example/blob/318a35fbff3e1648464b69bf892fcc0ec1860a28/mysqldemo/src/main/java/com/mysqldemo/App.java#L126) function executes SQL statements and can throw a `java.sql.SQLException` exception. You can inject faults into this function.
+Before creating the experiment, you need to understand the code logic of your application. The [`querySQL`](https://github.com/WangXiangUSTC/byteman-example/blob/318a35fbff3e1648464b69bf892fcc0ec1860a28/mysqldemo/src/main/java/com/mysqldemo/App.java#L126) function executes SQL statements and can throw a `java.sql.SQLException` exception. You can inject faults into this function.
 
 1. Click **New experiment** in Chaos Dashboard. Select **Kubernetes** as the experiment environment and **JVM Fault** as the experiment type:
 
