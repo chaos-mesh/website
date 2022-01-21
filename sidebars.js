@@ -46,11 +46,11 @@ module.exports = {
           ],
         },
         {
-        type: 'category',
-        label: 'Tutorials',
-        collapsed: false,
-        items: [
-          '10-minute-guide-to-chaos-mesh-v21'
+          type: 'category',
+          label: 'Tutorials',
+          collapsed: false,
+          items: [
+            '10-minute-guide-to-chaos-mesh-v21.md',
           ],
         },
       ],
