@@ -50,7 +50,7 @@ module.exports = {
           label: 'Tutorials',
           collapsed: false,
           items: [
-            '10-minute-guide-to-chaos-mesh-v21.md',
+            '10-minute-guide-to-chaos-mesh-v21',
           ],
         },
       ],
