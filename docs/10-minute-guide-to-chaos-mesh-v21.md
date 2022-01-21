@@ -58,7 +58,7 @@ kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333 --address 0.
 
 After running the command, you can access Chaos Dashboard by visiting <127.0.0.1:2333> in the browser. The Dashboard interface is as follows:
 
-[/img/quick-start-chaos-mesh-dashboard.png]
+![Dashboard interface](./img/quick-start-chaos-mesh-dashboard.png)
 
 ### Deploy Chaosd
 
@@ -93,7 +93,7 @@ In this tutorial, you are going to use Chaos Mesh to insert faults into the phys
 
 The architecture of the test application is as follows:
 
-[/img/quick-start-test-application-architecture.png]
+![Architecture of the test application](./img/quick-start-test-application-architecture.png)
 
 #### Deploy MySQL
 
@@ -179,25 +179,25 @@ After deploying Chaos Mesh, you can design Chaos experiments for your applicatio
 
 If you send HTTP requests to mysql-query service through NodePort multiple times and check the logs of the two mysql-query Pods, you can see that both Pods print the query requests in their logs. In such cases, these two Pods share the responsibility for serving your SQL queries.
 
-[/img/quick-start-two-pods-for-sql-queries.png]
+![Two mysql-query Pods](./img/quick-start-two-pods-for-sql-queries.png)
 
 If one of the Pods fails and cannot be connected, a highly available system can automatically forward the requests to another Pod. You can create a Chaos experiment to verify the service's high availability. The steps are as follows:
 
 1. Click **New experiment** in Chaos Dashboard:
 
-    [/img/quick-start-new-experiment-dashboard.png]
+    ![New experiment](./img/quick-start-new-experiment-dashboard.png)
 
 2. Select **Kubernetes** as the experiment environment and ** HTTP Fault** as the experiment type:
 
-    [/img/quick-start-select-experiment-on-dashboard.png]
+    ![Select experiment environment]](./img/quick-start-select-experiment-on-dashboard.png)
 
 3. Select **Request abort** as the fault behavior, and fill out the fault configuration:
 
-    [/img/quick-start-select-request-abort.png]
+    ![Select Request abort](./img/quick-start-select-request-abort.png)
 
 4. Fill out the experiment information:
 
-    [/img/quick-start-experiment-information.png]
+    ![Experiment information](./img/quick-start-experiment-information.png)
 
 5. Submit the experiment.
 
@@ -211,7 +211,7 @@ If one of the Pods fails and cannot be connected, a highly available system can 
 
     You can see that the command sometimes returns a normal response, but sometimes reports an error:
 
-    [/img/quick-start-report-error.png]
+    ![Report errors](./img/quick-start-report-error.png)
 
     The experiment shows that this service is not highly available. You have successfully found a fault in the service architecture through a HTTP fault injection.
 
@@ -225,15 +225,15 @@ Before creating the experiment, you need to understand the code logic of your ap
 
 1. Click **New experiment** in Chaos Dashboard. Select **Kubernetes** as the experiment environment and **JVM Fault** as the experiment type:
 
-    [/img/quick-start-select-experiment-type.png]
+    ![Select experiment type](./img/quick-start-select-experiment-type.png)
 
 2. Select **Exception** as the fault behavior, and fill out the fault configuration:
 
-    [/img/quick-start-select-fault-behavior.png]
+    ![Select fault behaviors](./img/quick-start-select-fault-behavior.png)
 
 3. Fill out the experiment information:
 
-    [/img/quick-start-fill-in-info.png]
+    ![Experiment information](./img/quick-start-fill-in-info.png)
 
 4. Submit the experiment.
 
@@ -260,15 +260,15 @@ After you fix the two issues exposed above, you might want to run an experiment 
 
 1. Click **New experiment** in Chaos Dashboard. Because MySQL is deployed on a physical machine, select **Physic** as the experiment environment and **Stress test** as the experiment type:
 
-    [/img/quick-start-stress-test.png]
+    ![Stree type](./img/quick-start-stress-test.png)
 
 2. Select **CPU** as the fault behavior, and fill out the fault configuration:
 
-    [/img/quick-start-select-cpu.png]
+    ![Stree test](./img/quick-start-select-cpu.png)
 
 3. Fill out the experiment information. In the **Address** text box, write the Chaosd service address:
 
-    [/img/quick-start-write-address.png]
+    ![Write address](./img/quick-start-write-address.png)
 
 4. Submit the experiment.
 
