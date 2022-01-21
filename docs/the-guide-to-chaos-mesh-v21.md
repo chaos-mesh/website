@@ -25,7 +25,7 @@ In this section, you are going to deploy Kubernetes and Chaos Mesh using the ins
 
 :::note
 
-The deployment methods of Kubernetes and Chaos Mesh provided in this document are only for testing and quick start. If you want to deploy them in a production environment, refer to [Install Chaos Mesh using Helm](/production-installation-using-helm.md).
+The deployment methods of Kubernetes and Chaos Mesh provided in this document are only for testing and quick start. If you want to deploy them in a production environment, refer to [Install Chaos Mesh using Helm](./production-installation-using-helm.md).
 
 :::
 
