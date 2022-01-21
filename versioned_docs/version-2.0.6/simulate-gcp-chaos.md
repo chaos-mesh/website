@@ -31,7 +31,7 @@ stringData:
 
 - **name** defines the name of kubernetes secret.
 - **namespace** defines the namespace of kubernetes secret.
-- **service_account** stores the service account of your GCP cluster. Remember to complete [Base64](https://zh.wikipedia.org/wiki/Base64) encoding for your GCP service account.
+- **service_account** stores the service account key of your GCP cluster. Remember to complete [Base64](https://zh.wikipedia.org/wiki/Base64) encoding for your GCP service account key. To learn more about service account key, see [Creating and managing service account keys](https://cloud.google.com/iam/docs/creating-managing-service-account-keys).
 
 ## Create experiments using Chaos Dashboard
 
