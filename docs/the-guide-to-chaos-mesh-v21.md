@@ -1,11 +1,11 @@
 ---
-title: 10 Minute Guide to Chaos Mesh v2.1
+title: 10 Minute Guide to Chaos Mesh v2.1.0
 ---
 
 Chaos Mesh v2.1.0 introduces the following significant changes, which expand the user scenarios of Chaos Mesh and improve overall usability:
 
 - Support creating and running Chaos experiments in a physical machine, an important step for Chaos Mesh to become a Chaos Engineering platform.
-- Optimize the workflow to display the workflow-related events and configurations and to create HTTP tasks in the workflow, which greatly extends the user scenarios of Workflow.
+- Optimize Workflow to display the Workflow-related events and configurations and to create HTTP tasks in Workflow, which greatly expands the user scenarios of workflow.
 - Support creating HTTPChaos on Chaos Dashboard, which improves the usability of HTTPChaos.
 - Supports simulating the faults of JVM application through [Byteman](https://byteman.jboss.org), which improves the usability and scalability of JVMChaos.
 - Integrates GCP certification into Chaos Dashboard.
@@ -20,7 +20,7 @@ Before you begin, make sure you have installed [Git](https://git-scm.com) and [D
 
 In this section, you are going to deploy Kubernetes and Chaos Mesh using the installation script `install.sh`, which performs the following operations:
 
-- Deploy a Kubernetes cluster using an installation script from the Chaos Mesh project.
+- Deploy a Kubernetes cluster.
 - Install Chaos Mesh in that Kubernetes cluster.
 
 :::note
@@ -35,7 +35,7 @@ The deployment methods of Kubernetes and Chaos Mesh provided in this document ar
 
     ```
     git clone https://github.com/chaos-mesh/chaos-mesh.git && \
-    cd chaos-mesh/git checkout v2.1.0
+    cd chaos-mesh && git checkout v2.1.0
     ```
 
 2. Deploy Kubernetes and Chaos Mesh using `install.sh`
@@ -46,7 +46,7 @@ The deployment methods of Kubernetes and Chaos Mesh provided in this document ar
     ./install.sh --local kind
     ```
 
-    `install.sh` is a one-click installation script provided by Chaos Mesh. The script automatically checks your environment, installs [kind](https://kind.sigs.k8s.io), starts a local Kubernetes cluster, and then installs Chaos Mesh.
+    `install.sh` is a one-click installation script provided by Chaos Mesh. The script checks your environment automatically, installs [kind](https://kind.sigs.k8s.io), starts a local Kubernetes cluster, and then installs Chaos Mesh.
 
 ### Forward the port for Dashboard service
 
@@ -56,13 +56,13 @@ To visit Chaos Dashboard in the browser, you need to run the following command t
 kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333 --address 0.0.0.0
 ```
 
-After running the command, you can access Chaos Dashboard by visiting <127.0.0.1:2333> in the browser. The Dashboard interface is as follows:
+After running the command, you can access Chaos Dashboard by visiting <127.0.0.1:2333> in your browser. The Dashboard interface is as follows:
 
 ![Dashboard interface](./img/quick-start-chaos-mesh-dashboard.png)
 
 ### Deploy Chaosd
 
-Chaosd, provided by Chaos Mesh, is a tool to run Chaos experiments on physical machines.
+Chaosd, provided by Chaos Mesh, is a tool to run Chaos experiments on a physical machine.
 
 1. Download Chaosd:
 
@@ -89,7 +89,7 @@ After that, you can send the request for Chaos experiments to Chaosd through the
 
 To run the test smoothly, you need to set up a test environment beforehand. Suppose that you have a MySQL database on a physical machine, and an application "mysql-query" in Kubernetes provides data query services for MySQL.
 
-In this tutorial, you are going to use Chaos Mesh to insert faults into the physical machine and the application in Kubernetes, and then see the impact of the faults on the service.
+In this tutorial, you are going to use Chaos Mesh to insert faults into a physical machine and an application in Kubernetes, and then see the impact of the faults on your service.
 
 The architecture of the test application is as follows:
 
@@ -148,7 +148,7 @@ The architecture of the test application is as follows:
     ```
     NAME                           READY   STATUS    RESTARTS   AGE
     mysql-query-6dd8bd5474-5zbkw   1/1     Running   0          60s
-    mysql-query-6dd8bd5474-k8bgs    1/1     Running   0          60s
+    mysql-query-6dd8bd5474-k8bgs   1/1     Running   0          60s
     ```
 
     In the result, you can find that there are two Pods that share the query request, and the mysql-query service has configured `NodePort`. Therefore, the Pods can directly access the service on the nodes of the Kubernetes cluster through the NodePort (`30001` in here).
@@ -169,11 +169,11 @@ The architecture of the test application is as follows:
     Elapsed time: 35(ms)
     ```
 
-If the result shows the query results and query time, the application can provide its service normally.
+If the result shows the query results and the query time, the application can provide its service normally.
 
 ## Create Chaos experiments
 
-After deploying Chaos Mesh, you can design Chaos experiments for your application and create the experiments using Chaos Mesh v2.1.
+After deploying Chaos Mesh, you can design Chaos experiments for your application and create the experiments using Chaos Mesh v2.1.0.
 
 ### Experiment 1: Is the service highly available?
 
@@ -189,7 +189,7 @@ If one of the Pods fails and cannot be connected, a highly available system can 
 
 2. Select **Kubernetes** as the experiment environment and ** HTTP Fault** as the experiment type:
 
-    ![Select experiment environment]](./img/quick-start-select-experiment-on-dashboard.png)
+    ![Select experiment environment](./img/quick-start-select-experiment-on-dashboard.png)
 
 3. Select **Request abort** as the fault behavior, and fill out the fault configuration:
 
@@ -201,25 +201,25 @@ If one of the Pods fails and cannot be connected, a highly available system can 
 
 5. Submit the experiment.
 
-    This experiment chooses a random Pod of the mysql-query service and injects the HTTP fault into the Pod. The chosen Pod will terminate its connection.
+This experiment chooses a random Pod of the mysql-query service and injects the HTTP fault into the Pod. The chosen Pod will terminate its connection.
 
-    After running the experiment, you can verify the experiment results by running the following command *multiple times*:
+After running the experiment, you can verify the experiment results by running the following command *multiple times*:
 
-    ```
-    docker exec -it kind-control-plane curl -X GET "http://127.0.0.1:30001/query?sql=SELECT%20*%20FROM%20chaos.website"
-    ```
+```
+docker exec -it kind-control-plane curl -X GET "http://127.0.0.1:30001/query?sql=SELECT%20*%20FROM%20chaos.website"
+```
 
-    You can see that the command sometimes returns a normal response, but sometimes reports an error:
+You can see that the command sometimes returns a normal response, but sometimes it also reports an error as follows:
 
-    ![Report errors](./img/quick-start-report-error.png)
+![Report errors](./img/quick-start-report-error.png)
 
-    The experiment shows that this service is not highly available. You have successfully found a fault in the service architecture through a HTTP fault injection.
+The experiment shows that this service is not highly available. You have successfully found a fault in the service architecture through a HTTP fault injection.
 
-    After the experiment, you might need to consider how to optimize the service architecture, such as using Ingress and NGINX.
+After the experiment, you might need to consider how to optimize the service architecture, such as using Ingress and NGINX.
 
 ### Experiment 2: What if the query returns an exception?
 
-Even though all of your SQL queries executed in normal situations return normal data, that does not mean your code has no bugs. If the query returns an exception, you might wonder whether your application can handle the exception and return the error message. In such cases, you can verify that situation by running a Chaos experiment.
+Even though all of your SQL queries executed in normal situations return normal data, it does not mean your code has no bugs. If the query returns an exception, you might wonder whether your application can handle the exception and return the error message. In such cases, you can verify that situation by running a Chaos experiment.
 
 Before creating the experiment, you need to understand the code logic of your application. The [querySQL](https://github.com/WangXiangUSTC/byteman-example/blob/318a35fbff3e1648464b69bf892fcc0ec1860a28/mysqldemo/src/main/java/com/mysqldemo/App.java#L126) function executes SQL statements and can throw a `java.sql.SQLException` exception. You can inject faults into this function.
 
@@ -237,26 +237,26 @@ Before creating the experiment, you need to understand the code logic of your ap
 
 4. Submit the experiment.
 
-    This experiment chooses all Pods of the mysql-query service and injects the JVM fault into the Pods. When your application executes the `querySQL` function, it throws an exception.
+This experiment chooses all Pods of the mysql-query service and injects the JVM fault into the Pods. When your application executes the `querySQL` function, it throws an exception.
 
-    After running the experiment, you can verify the experiment results by running the following command:
+After running the experiment, you can verify the experiment results by running the following command:
 
-    ```
-    docker exec -it kind-control-plane curl -X GET "http://127.0.0.1:30001/query?sql=SELECT%20*%20FROM%20chaos.test"
-    curl: (18) transfer closed with outstanding read data remaining
-    ```
+```
+docker exec -it kind-control-plane curl -X GET "http://127.0.0.1:30001/query?sql=SELECT%20*%20FROM%20chaos.test"
+curl: (18) transfer closed with outstanding read data remaining
+```
 
-    The application reports an error, but the result is not the exception information of the application. The logs of the two mysql-query Pods do not contain any notable information.
+As you can see in the result, the application reports an error, but the result is not the exception information of the application. The logs of the two mysql-query Pods do not contain any notable information.
 
-    To find out the root cause, you need to read the code and find out which part of the code is executed after `java.sql.SQLException` is thrown. Through investigation, you can find an exception caused by a null pointer.
+To find out the root cause, you need to read the code and find out which part of the code is executed after `java.sql.SQLException` is thrown. Through investigation, you can find an exception caused by a null pointer.
 
-    You have successfully found a fault in the code through a JVM fault injection.
+You have successfully found a fault in the code through a JVM fault injection.
 
 ### Experiment 3: How does heavy workload affect MySQL queries?
 
 After the two preceding experiments, you already know how vulnerable your application can be. This is what Chaos Engineering is all about: it helps you understand how the system handles failure, identify potential issues, fix them in advance, and thereby build confidence in your system.
 
-After you fix the two issues exposed above, you might want to run an experiment on the storage of your application – MySQL. When the server that MySQL runs on also runs heavy workloads for other applications, how does the workload affect MySQL queries? You can check it by the following experiment.
+After you fix the two issues exposed above, you might want to run an experiment on the storage of your application – MySQL. When the server that MySQL runs on also runs heavy workloads for other applications, how does those workloads affect MySQL queries? You can check it by the following experiment.
 
 1. Click **New experiment** in Chaos Dashboard. Because MySQL is deployed on a physical machine, select **Physic** as the experiment environment and **Stress test** as the experiment type:
 
@@ -272,28 +272,31 @@ After you fix the two issues exposed above, you might want to run an experiment 
 
 4. Submit the experiment.
 
-    This experiment injects CPU stress fault into the physical machine using Chaosd.
+This experiment injects CPU stress fault into the physical machine using Chaosd.
 
-    To check the experiment result, run the following command to send a HTTP request:
+To check the experiment result, run the following command to send a HTTP request:
 
-    ```
-    docker exec -it kind-control-plane curl -X GET "http://127.0.0.1:30001/query?sql=SELECT%20*%20FROM%20chaos.website"
-    ```
+```
+docker exec -it kind-control-plane curl -X GET "http://127.0.0.1:30001/query?sql=SELECT%20*%20FROM%20chaos.website"
+```
 
-    The expected result is as follows:
+The expected result is as follows:
 
-    ```
-    id, name, url
-    1, Chaos Mesh, https://chaos-mesh.org
-    2, GitHub, https://github.com
-    2, Google, https://google.com
-    Elapsed time: 39(ms)
-    ```
+```
+id, name, url
+1, Chaos Mesh, https://chaos-mesh.org
+2, GitHub, https://github.com
+2, Google, https://google.com
+Elapsed time: 39(ms)
+```
 
-    You can see that the query successfully returns a result. The elapsed time does not increase significantly.
+You can see that the query successfully returns a result. The elapsed time does not increase significantly.
 
-    For now, you do not have to worry about the performance of MySQL, and you can even deploy other applications on this physical machine. However, when the data volume is large and the database must serve thousands of queries per second, MySQL might not be able to provide your application with acceptable performance. You might consider try TiDB at this time.
+For now, you do not have to worry about the performance of MySQL, and you can even deploy other applications on this physical machine. However, when the data volume is large and the database must serve thousands of queries per second, MySQL might not be able to provide your application with acceptable performance. At this time, you might consider try TiDB.
 
-    By going through this tutorial, you have now tried out three experiments of Chaos Mesh v2.1 (HTTP, JVM, physical machine environment) and felt the charm of Chaos Mesh and Chaos Engineering.
 
-    If you have any questions when you use Chaos Mesh, feel free to [tell us](https://github.com/chaos-mesh/chaos-mesh/issues).
+## What's next
+
+By going through this tutorial, you have now tried out three experiments of Chaos Mesh v2.1.0 (HTTP, JVM, physical machine environment) and felt the charm of Chaos Mesh and Chaos Engineering.
+
+If you have any questions when you use Chaos Mesh, feel free to [tell us](https://github.com/chaos-mesh/chaos-mesh/issues).
