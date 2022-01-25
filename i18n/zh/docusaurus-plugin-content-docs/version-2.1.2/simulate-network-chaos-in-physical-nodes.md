@@ -516,7 +516,7 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"loss","ip-protocol":"172.16.4.4","device":"eth0","percent":"50"}'
-````
+```
 
 ### 使用服务模式模拟网络分区
 

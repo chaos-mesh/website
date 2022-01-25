@@ -69,14 +69,14 @@ chaosctl logs -t 100 # 输出所有组件的最后100行日志
 
 - 命令：使用 `chaosctl pm init` 命令：
 
-   ```bash
-   ./chaosctl pm init pm-name --ip=123.123.123.123 -l arch=amd64,anotherkey=value
-   ```
-   
+  ```bash
+  ./chaosctl pm init pm-name --ip=123.123.123.123 -l arch=amd64,anotherkey=value
+  ```
+
 - 操作：上述命令会执行下列操作：
 
-   - 一键生成 Chaosd 所需要的证书，并把证书保存到对应的物理机上；
-   - 在 Kubernetes 集群中创建对应的 `PhysicalMachine` 资源。
+  - 一键生成 Chaosd 所需要的证书，并把证书保存到对应的物理机上；
+  - 在 Kubernetes 集群中创建对应的 `PhysicalMachine` 资源。
 
 如需了解更多关于此功能的介绍和例子，请通过 `chaosctl pm init -h` 查阅。
 
@@ -90,15 +90,14 @@ chaosctl logs -t 100 # 输出所有组件的最后100行日志
    kubectl get secret chaos-mesh-chaosd-client-certs -n chaos-testing -o "jsonpath={.data['ca\.crt']}" | base64 -d > ca.crt
    kubectl get secret chaos-mesh-chaosd-client-certs -n chaos-testing -o "jsonpath={.data['ca\.key']}" | base64 -d> ca.key
    ```
-   
+
 2. 执行命令后，把 `ca.crt` 文件和 `ca.key` 文件拷贝到**对应的物理机**上。下文以保存到 `/etc/chaosd/pki` 目录下为例。
-   
 3. 然后，在**物理机**上，使用 `chaosctl pm generate` 命令，生成 TLS 证书（证书的默认保存路径为 `/etc/chaosd/pki`）。命令示例如下：
 
    ```bash
    ./chaosctl pm generate --cacert=/etc/chaosd/pki/ca.crt --cakey=/etc/chaosd/pki/ca.key
    ```
-   
+
    如需了解更多关于此功能的介绍和例子，请通过 `chaosctl pm generate -h` 查阅。
 
 4. 最后，在可访问到 Kubernetes 集群的机器上，使用 `chaosctl pm create` 命令，在 Kubernetes 集群中创建 `PhysicalMachine` 资源。命令示例如下：

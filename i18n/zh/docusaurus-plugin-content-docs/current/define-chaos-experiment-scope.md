@@ -200,15 +200,15 @@ spec:
 
 ## 兼容性矩阵
 
-| 类型 | 是否支持 Kubernetes | 是否支持物理机 |
-| :-- | :-- | :-- | 
-|Namespace Selectors|是|是|
-|Label Selectors|是|是|
-|Expression Selectors|是|是|
-|Annotation Selectors|是|是|
-|Field Selectors|是|是|
-|PodPhase Selectors|是|否|
-|Node Selectors|是|否|
-|Node List Selectors|是|否|
-|Pod List Selectors|是|否|
-|PhysicalMachine List Selectors|否|是|
+| 类型                           | 是否支持 Kubernetes | 是否支持物理机 |
+| :----------------------------- | :------------------ | :------------- |
+| Namespace Selectors            | 是                  | 是             |
+| Label Selectors                | 是                  | 是             |
+| Expression Selectors           | 是                  | 是             |
+| Annotation Selectors           | 是                  | 是             |
+| Field Selectors                | 是                  | 是             |
+| PodPhase Selectors             | 是                  | 否             |
+| Node Selectors                 | 是                  | 否             |
+| Node List Selectors            | 是                  | 否             |
+| Pod List Selectors             | 是                  | 否             |
+| PhysicalMachine List Selectors | 否                  | 是             |

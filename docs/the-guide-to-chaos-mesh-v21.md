@@ -31,22 +31,22 @@ The deployment methods of Kubernetes and Chaos Mesh provided in this document ar
 
 1. Clone Chaos Mesh project
 
-    You can clone [Chaos Mesh project](https://github.com/chaos-mesh/chaos-mesh) on Github by running the following command:
+   You can clone [Chaos Mesh project](https://github.com/chaos-mesh/chaos-mesh) on Github by running the following command:
 
-    ```
-    git clone https://github.com/chaos-mesh/chaos-mesh.git && \
-    cd chaos-mesh && git checkout v2.1.0
-    ```
+   ```
+   git clone https://github.com/chaos-mesh/chaos-mesh.git && \
+   cd chaos-mesh && git checkout v2.1.0
+   ```
 
 2. Deploy Kubernetes and Chaos Mesh using `install.sh`
 
-    Run the following command to deploy a Kubernetes cluster:
+   Run the following command to deploy a Kubernetes cluster:
 
-    ```
-    ./install.sh --local kind
-    ```
+   ```
+   ./install.sh --local kind
+   ```
 
-    `install.sh` is a one-click installation script provided by Chaos Mesh. The script checks your environment automatically, installs [kind](https://kind.sigs.k8s.io), starts a local Kubernetes cluster, and then installs Chaos Mesh.
+   `install.sh` is a one-click installation script provided by Chaos Mesh. The script checks your environment automatically, installs [kind](https://kind.sigs.k8s.io), starts a local Kubernetes cluster, and then installs Chaos Mesh.
 
 ### Forward the port for Dashboard service
 
@@ -66,22 +66,22 @@ Chaosd, provided by Chaos Mesh, is a tool to run Chaos experiments on a physical
 
 1. Download Chaosd:
 
-    ```
-    curl -fsSL -o chaosd-v1.1.0-linux-amd64.tar.gz https://mirrors.chaos-mesh.org/chaosd-v1.1.0-linux-amd64.tar.gz
-    ```
+   ```
+   curl -fsSL -o chaosd-v1.1.0-linux-amd64.tar.gz https://mirrors.chaos-mesh.org/chaosd-v1.1.0-linux-amd64.tar.gz
+   ```
 
 2. Unzip the Chaosd file and navigate to the local directory:
 
-    ```
-    tar zxvf chaosd-v1.1.0-linux-amd64.tar.gz
-    cd chaosd-v1.1.0-linux-amd64
-    ```
+   ```
+   tar zxvf chaosd-v1.1.0-linux-amd64.tar.gz
+   cd chaosd-v1.1.0-linux-amd64
+   ```
 
 3. Enable Chaosd in the service mode:
 
-    ```
-    nohup chaosd server --port 31767 2>&1 chaosd.log &
-    ```
+   ```
+   nohup chaosd server --port 31767 2>&1 chaosd.log &
+   ```
 
 After that, you can send the request for Chaos experiments to Chaosd through the port "31767" of your local machine.
 
@@ -99,22 +99,22 @@ The architecture of the test application is as follows:
 
 1. Deploy MySQL v8.0 using Docker:
 
-    ```
-    docker run --rm --name mysql-3306 -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql/mysql-server:8.0.27 --port=3306 --bind-address=0.0.0.0
-    ```
+   ```
+   docker run --rm --name mysql-3306 -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql/mysql-server:8.0.27 --port=3306 --bind-address=0.0.0.0
+   ```
 
 2. Use Docker to enter the container and connect to MySQL, because it is not yet possible to access the MySQL service from outside the container:
 
-    ```
-    docker exec -it mysql-3306 mysql -uroot -p123456
-    ```
+   ```
+   docker exec -it mysql-3306 mysql -uroot -p123456
+   ```
 
 3. Run the following SQL statements to create a user that can access the database externally, and grant all privileges to the user:
 
-    ```
-    CREATE USER 'chaos'@'%' IDENTIFIED BY 'chaos-mesh';
-    GRANT ALL PRIVILEGES ON * . * TO 'chaos'@'%';
-    ```
+   ```
+   CREATE USER 'chaos'@'%' IDENTIFIED BY 'chaos-mesh';
+   GRANT ALL PRIVILEGES ON * . * TO 'chaos'@'%';
+   ```
 
 4. Prepare the dataset for testing. You can run [`example.SQL`](https://github.com/WangXiangUSTC/byteman-example/blob/chaos_demo/mysqldemo/example.SQL) in MySQL to generate the test data.
 
@@ -124,50 +124,50 @@ The architecture of the test application is as follows:
 
 1. Download the [`deployment.yaml`](https://github.com/WangXiangUSTC/byteman-example/blob/chaos_demo/mysqldemo/deployment.yaml) file and modify the configuration.
 
-    :::note
+   :::note
 
-    You need to replace the IP address in the environment variable `MYSQL_DSN` with the address of the server where MySQL is installed.
+   You need to replace the IP address in the environment variable `MYSQL_DSN` with the address of the server where MySQL is installed.
 
-    :::
+   :::
 
 2. Use the `deployment.yaml` to create the mysql-query service:
 
-    ```
-    kubectl create namespace mysql-query
-    kubectl apply -f ./deployment.yaml
-    ```
+   ```
+   kubectl create namespace mysql-query
+   kubectl apply -f ./deployment.yaml
+   ```
 
 3. Check whether the Pod in the `mysql-query` namespace runs successfully:
 
-    ```
-    kubectl get pods -n mysql-query
-    ```
+   ```
+   kubectl get pods -n mysql-query
+   ```
 
-    The expected result is as follows:
+   The expected result is as follows:
 
-    ```
-    NAME                           READY   STATUS    RESTARTS   AGE
-    mysql-query-6dd8bd5474-5zbkw   1/1     Running   0          60s
-    mysql-query-6dd8bd5474-k8bgs   1/1     Running   0          60s
-    ```
+   ```
+   NAME                           READY   STATUS    RESTARTS   AGE
+   mysql-query-6dd8bd5474-5zbkw   1/1     Running   0          60s
+   mysql-query-6dd8bd5474-k8bgs   1/1     Running   0          60s
+   ```
 
-    In the result, you can find that there are two Pods that share the query request, and the mysql-query service has configured `NodePort`. Therefore, the Pods can directly access the service on the nodes of the Kubernetes cluster through the NodePort (`30001` in here).
+   In the result, you can find that there are two Pods that share the query request, and the mysql-query service has configured `NodePort`. Therefore, the Pods can directly access the service on the nodes of the Kubernetes cluster through the NodePort (`30001` in here).
 
 4. Run the following command to access kind-control-plane and send HTTP requests:
 
-    ```
-    docker exec -it kind-control-plane curl -X GET "http://127.0.0.1:30001/query?sql=SELECT%20*%20FROM%20chaos.website"
-    ```
+   ```
+   docker exec -it kind-control-plane curl -X GET "http://127.0.0.1:30001/query?sql=SELECT%20*%20FROM%20chaos.website"
+   ```
 
-    mysql-query gets the SQL statement in the request and runs it in MySQL. The expected result is as follows:
+   mysql-query gets the SQL statement in the request and runs it in MySQL. The expected result is as follows:
 
-    ```
-    id, name, url
-    1, Chaos Mesh, https://chaos-mesh.org
-    2, GitHub, https://github.com
-    2, Google, https://google.com
-    Elapsed time: 35(ms)
-    ```
+   ```
+   id, name, url
+   1, Chaos Mesh, https://chaos-mesh.org
+   2, GitHub, https://github.com
+   2, Google, https://google.com
+   Elapsed time: 35(ms)
+   ```
 
 If the result shows the query results and the query time, the application can provide its service normally.
 
@@ -185,25 +185,25 @@ If one of the Pods fails and cannot be connected, a highly available system can 
 
 1. Click **New experiment** in Chaos Dashboard:
 
-    ![New experiment](./img/quick-start-new-experiment-dashboard.png)
+   ![New experiment](./img/quick-start-new-experiment-dashboard.png)
 
 2. Select **Kubernetes** as the experiment environment and **HTTP Fault** as the experiment type:
 
-    ![Select experiment environment](./img/quick-start-select-experiment-on-dashboard.png)
+   ![Select experiment environment](./img/quick-start-select-experiment-on-dashboard.png)
 
 3. Select **Request abort** as the fault behavior, and fill out the fault configuration:
 
-    ![Select Request abort](./img/quick-start-select-request-abort.png)
+   ![Select Request abort](./img/quick-start-select-request-abort.png)
 
 4. Fill out the experiment information:
 
-    ![Experiment information](./img/quick-start-experiment-information.png)
+   ![Experiment information](./img/quick-start-experiment-information.png)
 
 5. Submit the experiment.
 
 This experiment chooses a random Pod of the mysql-query service and injects the HTTP fault into the Pod. The chosen Pod will terminate its connection.
 
-After running the experiment, you can verify the experiment results by running the following command *multiple times*:
+After running the experiment, you can verify the experiment results by running the following command _multiple times_:
 
 ```
 docker exec -it kind-control-plane curl -X GET "http://127.0.0.1:30001/query?sql=SELECT%20*%20FROM%20chaos.website"
@@ -225,15 +225,15 @@ Before creating the experiment, you need to understand the code logic of your ap
 
 1. Click **New experiment** in Chaos Dashboard. Select **Kubernetes** as the experiment environment and **JVM Fault** as the experiment type:
 
-    ![Select experiment type](./img/quick-start-select-experiment-type.png)
+   ![Select experiment type](./img/quick-start-select-experiment-type.png)
 
 2. Select **Exception** as the fault behavior, and fill out the fault configuration:
 
-    ![Select fault behaviors](./img/quick-start-select-fault-behavior.png)
+   ![Select fault behaviors](./img/quick-start-select-fault-behavior.png)
 
 3. Fill out the experiment information:
 
-    ![Experiment information](./img/quick-start-fill-in-info.png)
+   ![Experiment information](./img/quick-start-fill-in-info.png)
 
 4. Submit the experiment.
 
@@ -260,15 +260,15 @@ After you fix the two issues exposed above, you might want to run an experiment 
 
 1. Click **New experiment** in Chaos Dashboard. Because MySQL is deployed on a physical machine, select **Physic** as the experiment environment and **Stress test** as the experiment type:
 
-    ![Stree type](./img/quick-start-stress-test.png)
+   ![Stree type](./img/quick-start-stress-test.png)
 
 2. Select **CPU** as the fault behavior, and fill out the fault configuration:
 
-    ![Stree test](./img/quick-start-select-cpu.png)
+   ![Stree test](./img/quick-start-select-cpu.png)
 
 3. Fill out the experiment information. In the **Address** text box, write the Chaosd service address:
 
-    ![Write address](./img/quick-start-write-address.png)
+   ![Write address](./img/quick-start-write-address.png)
 
 4. Submit the experiment.
 
@@ -293,7 +293,6 @@ Elapsed time: 39(ms)
 You can see that the query successfully returns a result. The elapsed time does not increase significantly.
 
 For now, you do not have to worry about the performance of MySQL, and you can even deploy other applications on this physical machine. However, when the data volume is large and the database must serve thousands of queries per second, MySQL might not be able to provide your application with acceptable performance. At this time, you might consider try TiDB.
-
 
 ## What's next
 

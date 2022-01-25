@@ -200,15 +200,15 @@ While setting selectors, you can also view the actual scope of the experiment ta
 
 ## Compatibility matrix
 
-| Type | Support Kubernetes | Support physical machine |
-| :-- | :-- | :-- | 
-|Namespace Selectors|Yes|Yes|
-|Label Selectors|Yes|Yes|
-|Expression Selectors|Yes|Yes|
-|Annotation Selectors|Yes|Yes|
-|Field Selectors|Yes|Yes|
-|PodPhase Selectors|Yes|No|
-|Node Selectors|Yes|No|
-|Node List Selectors|Yes|No|
-|Pod List Selectors|Yes|No|
-|PhysicalMachine List Selectors|No|Yes|
+| Type                           | Support Kubernetes | Support physical machine |
+| :----------------------------- | :----------------- | :----------------------- |
+| Namespace Selectors            | Yes                | Yes                      |
+| Label Selectors                | Yes                | Yes                      |
+| Expression Selectors           | Yes                | Yes                      |
+| Annotation Selectors           | Yes                | Yes                      |
+| Field Selectors                | Yes                | Yes                      |
+| PodPhase Selectors             | Yes                | No                       |
+| Node Selectors                 | Yes                | No                       |
+| Node List Selectors            | Yes                | No                       |
+| Pod List Selectors             | Yes                | No                       |
+| PhysicalMachine List Selectors | No                 | Yes                      |

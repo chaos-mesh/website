@@ -69,14 +69,13 @@ Run the following commands to complete the operations:
 
 - Command: Use `chaosctl pm init` command:
 
-   ```bash
-   ./chaosctl pm init pm-name --ip=123.123.123.123 -l arch=amd64,anotherkey=value
-   ```
+  ```bash
+  ./chaosctl pm init pm-name --ip=123.123.123.123 -l arch=amd64,anotherkey=value
+  ```
 
 - Operation: The command performs the following operations.
-   
-   - Generate the required certificate for Chaosd simply, and save the certificate to the corresponding physical machine.
-   - Create the corresponding `PhysicalMachine` resource in Kubernetes clusters.
+  - Generate the required certificate for Chaosd simply, and save the certificate to the corresponding physical machine.
+  - Create the corresponding `PhysicalMachine` resource in Kubernetes clusters.
 
 For further information and examples of this feature, refer to `chaosctl pm init -h`.
 
@@ -93,7 +92,6 @@ Run the following commands to complete the operations:
    ```
 
 2. Copy the `ca.crt` and `ca.key` files to **the corresponding physical machine**. For example, copy the files to the `/etc/chaosd/pki` directory.
-   
 3. Use the `chaosctl pm generate` command to generate TLS certificates (save to `/etc/chaosd/pki by default) on **the physical machine**. For example:
 
    ```bash
@@ -114,7 +112,6 @@ Run the following commands to complete the operations:
 
 The code of Chaosctl is currently hosted in the Chaos Mesh project. For details, refer to [chaos-mesh/pkg/chaosctl](https://github.com/chaos-mesh/chaos-mesh/tree/master/pkg/chaosctl).
 
-If you encounter problems during performing operations, or you are interested in helping us improve this tool, 
-you are welcome to contact the Chaos Mesh team through [CNCF Slack](https://cloud-native.slack.com/archives/C0193VAV272), or create an [GitHub issue](https://github.com/chaos-mesh/chaos-mesh/issues).
+If you encounter problems during performing operations, or you are interested in helping us improve this tool, you are welcome to contact the Chaos Mesh team through [CNCF Slack](https://cloud-native.slack.com/archives/C0193VAV272), or create an [GitHub issue](https://github.com/chaos-mesh/chaos-mesh/issues).
 
 When describing your issues, it would be helpful to attach related logs and Chaos information. To provide reference material for developers, you are encouraged to attach the results of `chaosctl logs` to your questions. Besides, if your question is related to iochaos, networkchaos, stresschaos, the `chaosctl debug` related information also helps to diagnose the problem.
