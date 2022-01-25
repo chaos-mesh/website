@@ -40,21 +40,21 @@ Github 仓库中含有其他 Workflow 的[示例](https://github.com/chaos-mesh/
 
 1. 根据需求选择**选择任务类型**
 
-在本示例中，工作流入口选为串行 (Serial) 节点，并将其命名为 “entry”。
+    在本示例中选择的任务类型为”单一“。
 
-:::note 注意
+    :::note 注意
 
-Chaos Dashboard 会自动创建一个命名为 “entry” 串行节点，作其用为该工作流的入口。
+    Chaos Dashboard 会自动创建一个命名为 “entry” 串行节点，作其用为该工作流的入口。
 
-:::
+    :::
 
-![Choose Task Type](./img/choose-task-type.png)
+    ![Choose Task Type](./img/choose-task-type.png)
 
 2. 填写实验信息
 
-配置方法与创建普通的混沌实验相同。比如，你可以设置一个 POD KILL 类型的 PodChaos 故障，并将其命名为 “kill-nginx”。
+    配置方法与创建普通的混沌实验相同。比如，你可以设置一个 POD KILL 类型的 PodChaos 故障，并将其命名为 “kill-nginx”。
 
-![Create podkill in Workflow](./img/create-podkill-in-workflow.png)
+    ![Create podkill in Workflow](./img/create-podkill-in-workflow.png)
 
 ### 第 4 步：提交工作流
 

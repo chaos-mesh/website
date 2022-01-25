@@ -24,11 +24,11 @@ Chaos Mesh Workflow 在设计时一定程度上参考了 Argo Workflow。如果�
 
 Github 仓库中含有其他 Workflow 的[示例](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples/workflow).
 
-## 通过 Chaos Dashboard 创建工作流
+## 通过 Chaos Dashboard 创建 Workflow
 
 ### 第 1 步：打开 Chaos Dashboard
 
-点击**新的工作流** (Workflow)。
+点击**新的工作流**。
 
 ![New Workflow](./img/new-workflow.png)
 
@@ -38,21 +38,27 @@ Github 仓库中含有其他 Workflow 的[示例](https://github.com/chaos-mesh/
 
 ### 第 3 步：配置工作流节点
 
-:::note 注意
+1. 根据需求选择**选择任务类型**
 
-Chaos Dashboard 会自动创建一个名为 `entry` 的串行 (serial) 节点，作为该工作流的入口。
+    在本示例中选择的任务类型为”单一“。
 
-:::
+    :::note 注意
 
-![Choose Task Type](./img/choose-task-type.png)
+    Chaos Dashboard 会自动创建一个命名为 “entry” 串行节点，作其用为该工作流的入口。
 
-配置方法与创建普通的混沌实验相同。比如，你可以设置一个名为 `kill-nginx` 的 pod-kill 类型的 `PodChaos` 故障。
+    :::
 
-![Create podkill in Workflow](./img/create-podkill-in-workflow.png)
+    ![Choose Task Type](./img/choose-task-type.png)
+
+2. 填写实验信息
+
+    配置方法与创建普通的混沌实验相同。比如，你可以设置一个 POD KILL 类型的 PodChaos 故障，并将其命名为 “kill-nginx”。
+
+    ![Create podkill in Workflow](./img/create-podkill-in-workflow.png)
 
 ### 第 4 步：提交工作流
 
-你可以先在“预览”查看工作流定义之后，通过点击“提交 Workflow”按钮创建工作流。
+你可以先在**预览**查看工作流定义。确认无误后，点击**提交工作流**按钮创建工作流。
 
 ![Submit Workflow](./img/submit-workflow.png)
 
