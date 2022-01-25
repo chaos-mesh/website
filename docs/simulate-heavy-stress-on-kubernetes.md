@@ -78,7 +78,7 @@ The fields in the YAML configuration file are described in the following table:
 
 | Parameter | Type   | Description                                              | Default value | Required | Example |
 | --------- | ------ | -------------------------------------------------------- | ------------- | -------- | ------- |
-| workers   | int    | Specifies the number of threads that apply memory stress |               | Yes      | `1`     |
+| workers   | int    | Specifies the number of threads that apply CPU stress |               | Yes      | `1`     |
 | size      | string | Specifies the maximum memory size available for total    |               | No       | `256MB` |
 
 ##### CPUStressor
@@ -86,4 +86,4 @@ The fields in the YAML configuration file are described in the following table:
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
 | workers | int | Specifies the number of threads that apply memory stress |  | Yes | `1` |
-| load | int | Specifies the percentage of CPU occupied0 means sleep and no load; 100 means full load |  | No | `50` |
+| load | int | Specifies the percentage of CPU occupied 0 means sleep and no load; 100 means full load |  | No | `50` |
