@@ -13,6 +13,12 @@ Chaos Mesh 通过 [Byteman](https://github.com/chaos-mesh/byteman) 模拟 JVM �
 
 本文主要介绍如何创建以上故障类型的 JVM 实验。
 
+:::note 注意
+
+Linux 系统内核必须为 4.1 及以上版本。
+
+:::
+
 ## 使用 Dashboard 方式创建实验
 
 1. 单击实验页面中的“新的实验”按钮创建实验：

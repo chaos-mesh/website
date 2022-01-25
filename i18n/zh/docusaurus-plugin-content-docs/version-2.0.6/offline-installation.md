@@ -58,7 +58,7 @@ docker save pingcap/chaos-dashboard:${CHAOS_MESH_VERSION} > image-chaos-dashboar
 在有外网连接的机器上，下载 Chaos Mesh 的 zip 包：
 
 <PickVersion isArchive>
-curl -fsSL -o chaos-mesh.zip https://github.com/chaos-mesh/chaos-mesh/archive/latest.zip
+curl -fsSL -o chaos-mesh.zip https://github.com/chaos-mesh/chaos-mesh/archive/refs/heads/master.zip
 </PickVersion>
 
 ### 拷贝文件

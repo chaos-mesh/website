@@ -28,7 +28,7 @@ HTTPChaos 支持多种类型故障的组合。在创建 HTTPChaos 实验时，�
 
 ## 创建实验
 
-Chaos Mesh 目前仅支持使用 YAML 配置文件创建 HTTPChaos 实验。在 YAML 配置文件中，你可以模拟一种 HTTP 故障类型，也可以模拟多种 HTTP 故障的组合。
+Chaos Mesh 支持使用 YAML 配置文件创建 HTTPChaos 实验。在 YAML 配置文件中，你可以模拟一种 HTTP 故障类型，也可以模拟多种 HTTP 故障的组合。
 
 ### `abort` 示例
 
@@ -50,11 +50,9 @@ Chaos Mesh 目前仅支持使用 YAML 配置文件创建 HTTPChaos 实验。在 
      path: /api
      abort: true
      duration: 5m
-     scheduler:
-       cron: '@every 10m'
    ```
 
-   依据此配置示例，Chaos Mesh 将每 10 分钟向指定的 Pod 中注入 `abort` 故障 5 分钟，故障注入期间该 Pod 的 80 端口 `/api` 路径的 GET 请求会被中断。
+   依据此配置示例，Chaos Mesh 将向指定的 Pod 中注入 `abort` 故障 5 分钟，故障注入期间该 Pod 的 80 端口 `/api` 路径的 GET 请求会被中断。
 
 2. 使用 `kubectl` 创建实验，命令如下：
 
@@ -92,8 +90,6 @@ Chaos Mesh 目前仅支持使用 YAML 配置文件创建 HTTPChaos 实验。在 
          type: JSON
          value: '{"foo": "bar"}'
      duration: 5m
-     scheduler:
-       cron: '@every 10m'
    ```
 
    依据此配置示例，Chaos Mesh 将向指定的 Pod 中分别注入 `delay` 故障、`replace` 故障、`patch` 故障。
@@ -116,14 +112,14 @@ Chaos Mesh 目前仅支持使用 YAML 配置文件创建 HTTPChaos 实验。在 
 | value | string | 取决于 `mode` 的取值，为 `mode` 提供参数 | 无 | 否 | 1 |
 | target | string | 指定故障注入的目标过程为 `Request` 或 `Response`，需要同时配置[与 `target` 相关的字段](#与-target-相关的字段说明) |  | 是 | Request |
 | port | int32 | 目标服务监听的 TCP 端口 |  | 是 | 80 |
+| path | string | 目标请求的 URI 路径，支持[通配符](https://www.wikiwand.com/en/Matching_wildcards) | 默认对所有路径生效 | 是 | /api/\* |
 | method | string | 目标请求的 HTTP method | 默认对所有方法生效 | 否 | GET |
-| path | string | 目标请求的 URI 路径，支持[通配符](https://www.wikiwand.com/en/Matching_wildcards) | 默认对所有路径生效 | 否 | /api/\* |
 | request_headers | map[string]string | 目标请求的请求头匹配 | 默认对所有请求生效 | 否 | Content-Type: application/json |
 | abort | bool | 是否注入连接中断故障 | false | 否 | true |
 | delay | string | 指定延迟故障的时间 | 0 | 否 | 10s |
-| replace.header | map[string]string | 指定请求头或响应头替换故障中用于替换的键值对 |  | 否 | Content-Type: application/xml |
+| replace.headers | map[string]string | 指定请求头或响应头替换故障中用于替换的键值对 |  | 否 | Content-Type: application/xml |
 | replace.body | []byte | 指定请求体或响应体替换故障的内容（base64 编码） |  | 否 | eyJmb28iOiAiYmFyIn0K |
-| patch.header | [][]string | 指定请求头或响应头附加故障中附加的键值对 |  | 否 | - [Set-Cookie, one cookie] |
+| patch.headers | [][]string | 指定请求头或响应头附加故障中附加的键值对 |  | 否 | - [Set-Cookie, one cookie] |
 | patch.body.type | string | 指定请求体或响应体附加故障的类型，目前只支持 [`JSON`](https://tools.ietf.org/html/rfc7396) |  | 否 | JSON |
 | patch.body.value | string | 指定请求体或响应体附加故障的故障内容 |  | 否 | {"foo": "bar"} |
 | duration | string | 指定具体实验的持续时间 |  | 是 | 30s |

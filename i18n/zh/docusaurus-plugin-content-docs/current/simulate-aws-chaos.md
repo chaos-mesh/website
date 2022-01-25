@@ -54,7 +54,7 @@ stringData:
 
 1. 单击实验页面中的**新的实验**按钮进行创建实验。
 
-   ![img](./img/create-pod-chaos-on-dashborad-1_zh.jpg)
+   ![img](./img/create-pod-chaos-on-dashboard-1_zh.jpg)
 
 2. 在**选择目标**处选择 **Aws 故障**，并选择具体行为，例如 **Ec2 Stop**。
 

@@ -4,6 +4,9 @@ on:
   pull_request:
     branches:
       - master
+    paths:
+      - '**.md'
+      - '.github/workflows/markdown-link-check.json'
 
 jobs:
   markdown-link-check:

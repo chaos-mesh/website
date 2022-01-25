@@ -25,21 +25,21 @@ IOChaos 是 Chaos Mesh 中的一种故障类型。通过创建 IOChaos 类型的
 
 1. 单击实验页面中的**新的实验**按钮创建实验。
 
-   ![新建实验](img/create-io-chaos-on-dashborad-1.jpg)
+   ![新建实验](img/create-io-chaos-on-dashboard-1.jpg)
 
 2. 在**选择目标**处选择**文件系统注入**，并选择具体行为，如**LATENCY**。
 
-   ![设置实验类型](img/create-io-chaos-on-dashborad-2.jpg)
+   ![设置实验类型](img/create-io-chaos-on-dashboard-2.jpg)
 
 3. 填写实验信息，指定实验范围以及实验计划运行时间。
 
-   ![设置实验内容](img/create-io-chaos-on-dashborad-3.jpg)
+   ![设置实验内容](img/create-io-chaos-on-dashboard-3.jpg)
 
-   ![设置目标和运行时间](img/create-io-chaos-on-dashborad-4.jpg)
+   ![设置目标和运行时间](img/create-io-chaos-on-dashboard-4.jpg)
 
 4. 提交实验。
 
-   ![提交实验](img/create-io-chaos-on-dashborad-5.jpg)
+   ![提交实验](img/create-io-chaos-on-dashboard-5.jpg)
 
 ## 使用 YAML 文件创建实验
 

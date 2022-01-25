@@ -21,7 +21,7 @@ As the industry's leading Chaos testing platform, Chaos Mesh has the following c
 - Flexible experiment orchestration capabilities: You can design your own Chaos experiment scenarios on the platform, including multiple mixing experiments and application status checks.
 - High security: Chaos Mesh is designed with multiple layers of security control and provides high security.
 - An active community: Chaos Mesh is a sandbox project hosted by CNCF. It has a growing number of [contributors](https://github.com/chaos-mesh/chaos-mesh/graphs/contributors) and [adopters](https://github.com/chaos-mesh/chaos-mesh/blob/master/ADOPTERS.md) all over the world.
-- Easily scalable: It's easy to add new fault test types and functions to Chaos Mesh. 
+- Easily scalable: It's easy to add new fault test types and functions to Chaos Mesh.
 
 ## Architecture overview
 
