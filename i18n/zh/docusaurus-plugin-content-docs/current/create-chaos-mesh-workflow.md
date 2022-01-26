@@ -44,7 +44,7 @@ Github 仓库中含有其他 Workflow 的[示例](https://github.com/chaos-mesh/
 
     :::note 注意
 
-    Chaos Dashboard 会自动创建一个命名为 “entry” 串行节点，作其用为该工作流的入口。
+    Chaos Dashboard 会自动创建一个命名为 "entry" 的串行节点，作其用为该工作流的入口。
 
     :::
 
