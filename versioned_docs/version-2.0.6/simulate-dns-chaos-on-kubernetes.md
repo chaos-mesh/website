@@ -30,25 +30,25 @@ Make sure that the Pod status is `Running`.
 
 2. The chaos DNS service runs CoreDNS with the [k8s_dns_chaos](https://github.com/chaos-mesh/k8s_dns_chaos) plugin. If the CoreDNS service in your Kubernetes cluster contains some special configurations, you can edit configMap `dns-server-config` to make the configuration of the chaos DNS service consistent with that of the K8s CoreDNS service using the following command:
 
-    ```bash
-    kubectl edit configmap dns-server-config -n chaos-testing
-    ```
+   ```bash
+   kubectl edit configmap dns-server-config -n chaos-testing
+   ```
 
 ## Create experiments using Chaos Dashboard
 
 1. Open Chaos Dashboard, and click **NEW EXPERIMENT** on the page to create a new experiment:
 
-    ![Create Experiment](./img/create-new-exp.png)
+   ![Create Experiment](./img/create-new-exp.png)
 
 2. In the **Choose a Target** area, choose **DNS FAULT** and select a specific behavior, such as **ERROR**. Then fill out the matching rules.
 
-    ![DNSChaos Experiment](./img/dnschaos-exp.png)
+   ![DNSChaos Experiment](./img/dnschaos-exp.png)
 
-    According to the matching rules configured in the screenshot, the DNS FAULT takes effect for domains including `google.com`, `chaos-mesh.org`, and `github.com`, which means that an error will be returned when a DNS request is sent to these three domains. For details of specific matching rules, refer to the description of the `patterns` field in [Configuration Description](#configuration-description).
+   According to the matching rules configured in the screenshot, the DNS FAULT takes effect for domains including `google.com`, `chaos-mesh.org`, and `github.com`, which means that an error will be returned when a DNS request is sent to these three domains. For details of specific matching rules, refer to the description of the `patterns` field in [Configuration Description](#configuration-description).
 
 3. Fill out the experiment information, and specify the experiment scope and the scheduled experiment duration:
 
-    ![Experiment Information](./img/exp-info.png)
+   ![Experiment Information](./img/exp-info.png)
 
 4. Submit the experiment information.
 
@@ -56,31 +56,31 @@ Make sure that the Pod status is `Running`.
 
 1. Write the experiment configuration to the `dnschaos.yaml` file:
 
-    ```yaml
-    apiVersion: chaos-mesh.org/v1alpha1
-    kind: DNSChaos
-    metadata:
-      name: dns-chaos-example
-      namespace: chaos-testing
-    spec:
-      action: random
-      mode: all
-      patterns:
-        - google.com
-        - chaos-mesh.*
-        - github.?om
-      selector:
-        namespaces:
-          - busybox
-    ```
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: DNSChaos
+   metadata:
+     name: dns-chaos-example
+     namespace: chaos-testing
+   spec:
+     action: random
+     mode: all
+     patterns:
+       - google.com
+       - chaos-mesh.*
+       - github.?om
+     selector:
+       namespaces:
+         - busybox
+   ```
 
-    This configuration can take effect for domains including `google.com`, `chaos-mesh.org`, and `github.com`, which means that an IP address will be returned when a DNS request is sent to these three domains. For specific matching rules, refer to the `patterns` description in [Configuration Description](#configuration-description).
+   This configuration can take effect for domains including `google.com`, `chaos-mesh.org`, and `github.com`, which means that an IP address will be returned when a DNS request is sent to these three domains. For specific matching rules, refer to the `patterns` description in [Configuration Description](#configuration-description).
 
 2. After the configuration file is prepared, use `kubectl` to create an experiment:
 
-    ```bash
-    kubectl apply -f dnschaos.yaml
-    ```
+   ```bash
+   kubectl apply -f dnschaos.yaml
+   ```
 
 ### Configuration Description
 

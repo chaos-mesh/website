@@ -62,10 +62,10 @@ Global Flags:
 
 #### Configuration description for killing a process
 
-| Configuration item | Abbreviation | Description                                                   | Value                                                                                     |
-| :----------------- | :----------- | :------------------------------------------------------------ | :---------------------------------------------------------------------------------------- |
-| `process`            | p            | The name or the identifier of the process to be injected faults | string; the default value is `""`.                                                          |
-| `signal`             | s            | The provided value of the process signal                      | int; the default value is `9`. Currently, only `SIGKILL`, `SIGTERM`, and `SIGSTOP` are supported. |
+| Configuration item | Abbreviation | Description | Value |
+| :-- | :-- | :-- | :-- |
+| `process` | p | The name or the identifier of the process to be injected faults | string; the default value is `""`. |
+| `signal` | s | The provided value of the process signal | int; the default value is `9`. Currently, only `SIGKILL`, `SIGTERM`, and `SIGSTOP` are supported. |
 
 #### Example for killing a process
 
@@ -111,9 +111,9 @@ Global Flags:
 
 #### Configuration description of stopping a process
 
-| Configuration item | Abbreviation | Description                                                    | Value                            |
-| :----------------- | :----------- | :------------------------------------------------------------- | :------------------------------- |
-| `process`            | p            | The name or the identifier of the process to be stopped | string; the default value is `""`. |
+| Configuration item | Abbreviation | Description | Value |
+| :-- | :-- | :-- | :-- |
+| `process` | p | The name or the identifier of the process to be stopped | string; the default value is `""`. |
 
 #### Example for stopping a process
 
@@ -133,17 +133,17 @@ To create experiments using the service mode, follow the instructions below:
 
 1. Run Chaosd in the service mode:
 
-    ```bash
-    chaosd server --port 31767
-    ```
+   ```bash
+   chaosd server --port 31767
+   ```
 
 2. Send a `POST` HTTP request to the `/api/attack/process` path of the Chaosd service.
 
-    ```bash
-    curl -X POST 172.16.112.130:31767/api/attack/process -H "Content-Type:application/json" -d '{fault-configuration}'
-    ```
+   ```bash
+   curl -X POST 172.16.112.130:31767/api/attack/process -H "Content-Type:application/json" -d '{fault-configuration}'
+   ```
 
-    In the above command, you need to configure `fault-configuration` according to the fault types. For the corresponding parameters, refer to the parameters and examples of each fault type in the following sections.
+   In the above command, you need to configure `fault-configuration` according to the fault types. For the corresponding parameters, refer to the parameters and examples of each fault type in the following sections.
 
 :::note
 
@@ -155,10 +155,10 @@ When running an experiment, remember to record the UID of the experiment. When y
 
 #### Parameters for simulating process faults
 
-| Parameter    | Description                               | Value                     |
-| :------ | :--------------------------------- | :--------------------- |
+| Parameter | Description                                                     | Value                              |
+| :-------- | :-------------------------------------------------------------- | :--------------------------------- |
 | `process` | The name or the identifier of the process to be injected faults | string; the default value is `""`. |
-| `signal`  | The provided value of the process signal                 | int; the default value is `9`   |
+| `signal`  | The provided value of the process signal                        | int; the default value is `9`      |
 
 #### Examples for simulating process faults using the service mode
 

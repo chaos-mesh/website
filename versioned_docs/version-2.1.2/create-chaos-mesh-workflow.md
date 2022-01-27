@@ -24,6 +24,44 @@ The design of Chaos Mesh Workflow is, to some extent, inspired by Argo Workflows
 
 More workflow examples are available in the [Chaos Mesh GitHub repository](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples/workflow).
 
+## Create a workflow using Chaos Dashboard
+
+### Step 1. Open Chaos Dashboard
+
+Click **NEW WORKFLOW**.
+
+![New Workflow](./img/new-workflow.png)
+
+### Step 2. Setup basic information of the workflow
+
+![Workflow Info](./img/workflow-info.png)
+
+### Step 3. Configure the nodes of the workflow
+
+1. Select an option under **Choose task type** according to your needs.
+
+In this example, the "Single” type is selected as the task type.
+
+    :::note
+
+    Chaos Dashboard automatically creates a serial node named "entry" as the entry point for this workflow.
+
+:::
+
+    ![Choose Task Type](./img/choose-task-type.png)
+
+2. Fill out the experiment information.
+
+    The configuration method is the same as creating a normal chaos experiment. For example, you can set up a "POD KILL" type of "PodChaos" named `kill-nginx`.
+
+    ![Create podkill in Workflow](./img/create-podkill-in-workflow.png)
+
+### Step 4. Submit the workflow
+
+You can check workflow definition through **Preview**, and then click the **SUBMIT WORKFLOW** to create the workflow.
+
+![Submit Workflow](./img/submit-workflow.png)
+
 ## Create a workflow using a YAML file and `kubectl`
 
 Similar to various types of Chaos objects, workflows also exist in a Kubernetes cluster as a CRD. You can create a Chaos Mesh workflow using `kubectl create -f <workflow.yaml>`. The following command is an example of creating a workflow. Create a workflow using a local YAML file:

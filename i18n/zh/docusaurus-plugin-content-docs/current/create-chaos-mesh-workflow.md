@@ -24,6 +24,42 @@ Chaos Mesh Workflow 在设计时一定程度上参考了 Argo Workflow。如果�
 
 Github 仓库中含有其他 Workflow 的[示例](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples/workflow).
 
+## 通过 Chaos Dashboard 创建 Workflow
+
+### 第 1 步：打开 Chaos Dashboard
+
+点击**新的工作流**。
+
+![New Workflow](./img/new-workflow.png)
+
+### 第 2 步：设置工作流基本信息
+
+![Workflow Info](./img/workflow-info.png)
+
+### 第 3 步：配置工作流节点
+
+1. 根据需求选择**选择任务类型**
+
+   在本示例中选择的任务类型为”单一“。
+
+   :::note 注意
+
+   Chaos Dashboard 会自动创建一个命名为 "entry" 的串行节点，作其用为该工作流的入口。
+
+   :::
+
+2. 填写实验信息
+
+   配置方法与创建普通的混沌实验相同。比如，你可以设置一个 POD KILL 类型的 PodChaos 故障，并将其命名为 “kill-nginx”。
+
+   ![Create podkill in Workflow](./img/create-podkill-in-workflow.png)
+
+### 第 4 步：提交工作流
+
+你可以先在**预览**查看工作流定义。确认无误后，点击**提交工作流**按钮创建工作流。
+
+![Submit Workflow](./img/submit-workflow.png)
+
 ## 使用 YAML 文件与 `kubectl` 创建 Workflow
 
 Workflow 类似于各种类型的 Chaos 对象，同样作为 CRD 存在于 kubernetes 集群中。你可以使用 `kubectl create -f <workflow.yaml>` 创建 Chaos Mesh Workflow。以下为创建的具体示例。使用本地 YAML 文件创建 Workflow：
