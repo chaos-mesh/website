@@ -213,9 +213,9 @@ You need to register the CRD (Custom Resource Definition) of HelloWorldChaos to 
 3. If you deploy Kubernetes clusters using kind, then you need to load images into kind:
 
    ```bash
-   kind load docker-image localhost:5000/pingcap/chaos-mesh:latest
-   kind load docker-image localhost:5000/pingcap/chaos-daemon:latest
-   kind load docker-image localhost:5000/pingcap/chaos-dashboard:latest
+   kind load docker-image localhost:5000/chaos-mesh/chaos-mesh:latest
+   kind load docker-image localhost:5000/chaos-mesh/chaos-daemon:latest
+   kind load docker-image localhost:5000/chaos-mesh/chaos-dashboard:latest
    ```
 
 ## Step 5: Run the chaos experiment
@@ -224,17 +224,17 @@ In this step, you need to deploy Chaos Mesh with your latest changes to test Hel
 
 Before you pull any image for Chaos Mesh (using `helm install` or `helm upgrade`), modify the helm template `helm/chaos-mesh/values.yaml` to replace the default image with what you just pushed to your local Docker registry.
 
-The templates in Chaos Mesh use `pingcap/chaos-mesh:latest` as the default Registry. You need to set the path with the environment variable of `DOCKER_REGISTRY` (The default value is `localhost:5000`), as shown below:
+The templates in Chaos Mesh use `chaos-mesh/chaos-mesh:latest` as the default Registry. You need to set the path with the environment variable of `DOCKER_REGISTRY` (The default value is `localhost:5000`), as shown below:
 
 ```yaml
 controllerManager:
-  image: localhost:5000/pingcap/chaos-mesh:latest
+  image: localhost:5000/chaos-mesh/chaos-mesh:latest
   ...
 chaosDaemon:
-  image: localhost:5000/pingcap/chaos-daemon:latest
+  image: localhost:5000/chaos-mesh/chaos-daemon:latest
   ...
 dashboard:
-  image: localhost:5000/pingcap/chaos-dashboard:latest
+  image: localhost:5000/chaos-mesh/chaos-dashboard:latest
   ...
 ```
 
@@ -321,6 +321,6 @@ After you update the template, try running HelloWorldChaos.
 
 ## What's Next
 
-If you encounter any problems during the process, create an [issue](https://github.com/pingcap/chaos-mesh/issues) in the Chaos Mesh repository.
+If you encounter any problems during the process, create an [issue](https://github.com/chaos-mesh/chaos-mesh/issues) in the Chaos Mesh repository.
 
 If you want to dive deep into developing new chaos experiment types, see [Extend Chaos Daemon interface](extend-chaos-daemon-interface.md).

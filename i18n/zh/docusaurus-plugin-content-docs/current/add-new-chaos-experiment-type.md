@@ -213,9 +213,9 @@ title: 新增混沌实验类型
 3. 如果你的 Kubernetes 集群部署在 kind 上，则还需要将镜像加载进 kind 中：
 
    ```bash
-   kind load docker-image localhost:5000/pingcap/chaos-mesh:latest
-   kind load docker-image localhost:5000/pingcap/chaos-daemon:latest
-   kind load docker-image localhost:5000/pingcap/chaos-dashboard:latest
+   kind load docker-image localhost:5000/chaos-mesh/chaos-mesh:latest
+   kind load docker-image localhost:5000/chaos-mesh/chaos-daemon:latest
+   kind load docker-image localhost:5000/chaos-mesh/chaos-dashboard:latest
    ```
 
 ## 第 5 步：运行混沌实验
@@ -224,17 +224,17 @@ title: 新增混沌实验类型
 
 在你部署 Chaos Mesh 之前（使用 `helm install` 或 `helm upgrade`），请修改 helm 模板的 `helm/chaos-mesh/values.yaml`，把镜像更换成你本地 Docker Registry 中的镜像。
 
-Chaos Mesh 的模板使用 `pingcap/chaos-mesh:latest` 作为默认 Registry，你需要把它换成 `DOCKER_REGISTRY` 环境变量的值（默认为 `localhost:5000`），示例如下：
+Chaos Mesh 的模板使用 `chaos-mesh/chaos-mesh:latest` 作为默认 Registry，你需要把它换成 `DOCKER_REGISTRY` 环境变量的值（默认为 `localhost:5000`），示例如下：
 
 ```yaml
 controllerManager:
-  image: localhost:5000/pingcap/chaos-mesh:latest
+  image: localhost:5000/chaos-mesh/chaos-mesh:latest
   ...
 chaosDaemon:
-  image: localhost:5000/pingcap/chaos-daemon:latest
+  image: localhost:5000/chaos-mesh/chaos-daemon:latest
   ...
 dashboard:
-  image: localhost:5000/pingcap/chaos-dashboard:latest
+  image: localhost:5000/chaos-mesh/chaos-dashboard:latest
   ...
 ```
 
@@ -331,6 +331,6 @@ dashboard:
 
 ## 探索更多
 
-如果你在新增混沌实验类型的过程中遇到了问题，请在 GitHub 创建一个 [issue](https://github.com/pingcap/chaos-mesh/issues) 向 Chaos Mesh 团队反馈。
+如果你在新增混沌实验类型的过程中遇到了问题，请在 GitHub 创建一个 [issue](https://github.com/chaos-mesh/chaos-mesh/issues) 向 Chaos Mesh 团队反馈。
 
 如果你想进一步尝试开发工作，请参阅 [拓展 Chaos Daemon 接口](extend-chaos-daemon-interface.md)。
