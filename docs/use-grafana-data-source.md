@@ -82,7 +82,7 @@ The settings for these options are passed as parameters to the `/api/events` API
 
 You can integrate Chaos Mesh events into the panel by setting up Annotations. For example:
 
-! [Annotations](img/grafana/annotations.png)
+![Annotations](img/grafana/annotations.png)
 
 For information on how to fill in the fields in annotations, refer to [Query](#query).
 
