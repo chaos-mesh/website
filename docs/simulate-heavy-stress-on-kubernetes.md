@@ -81,6 +81,8 @@ The fields in the YAML configuration file are described in the following table:
 | workers   | int    | Specifies the number of threads that apply memory stress |               | No      | `1`     |
 | size      | string | Specifies the size of memory to be occupied or a percentage of the total memory size, and the final sum of allocated memory size is `workers * size`     |               | No       | `256MB`/`25%` |
 | time      | string | Specifies the time to reach the memory `size`, and the growth model is a linear model     |               | No       | `10min` |
+
+(**tips**: Chaos Mesh uses [memStress](https://github.com/chaos-mesh/memStress) to simulate memory stressChaos Mesh uses memStress to simulate memory stress, in which way we can avoid high CPU load.)
 ##### CPUStressor
 
 | Parameter | Type | Description | Default value | Required | Example |
