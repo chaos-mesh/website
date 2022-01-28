@@ -166,7 +166,7 @@ stringData:
 | mode | string | 指定实验的运行方式，可选择的方式包括：`one`（表示随机选出一个符合条件的 Pod）、`all`（表示选出所有符合条件的 Pod）、`fixed`（表示选出指定数量且符合条件的 Pod）、`fixed-percent`（表示选出占符合条件的 Pod 中指定百分比的 Pod）、`random-max-percent`（表示选出占符合条件的 Pod 中不超过指定百分比的 Pod） | 无 | 是 | `one` |
 | value | string | 取决与 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 Pod 的百分比。 | 无 | 否 | 1 |
 | secretName | string | 指定存储 GCP 认证信息的 Kubernetes Secret 名字 | 无 | 否 | cloud-key-secret |
-| project | string | 指定 GCP 项目的名称 | 无 | 是 | real-testing-project |
+| project | string | 指定 GCP 项目的 ID | 无 | 是 | real-testing-project |
 | zone | string | 指定 GCP 实例区域 | 无 | 是 | us-central1-a |
 | instance | string | 指定 GCP 实例的名称 | 无 | 是 | gke-xxx-cluster--default-pool-xxx-yyy |
 | deviceNames | []string | 当 action 为 disk-loss 必填，指定设备磁盘 ID | 无 | 否 | ["your-disk-id"] |
