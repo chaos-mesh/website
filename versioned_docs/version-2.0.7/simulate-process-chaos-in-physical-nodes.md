@@ -2,7 +2,7 @@
 title: Simulate Process Faults
 ---
 
-This document describes how to use Chaosd to simulate process faults. The process faults use the Golang interface of the `kill` command to simulate the scenarios that the process is killed or stopped. You can create experiments either in the command-line mode or service mode.
+This document describes how to use Chaosd to simulate process faults. The process faults use the Golang interface of the `kill` command to simulate the scenarios that the process is killed or stopped. You can create experiments in the command-line mode.
 
 ## Create experiments using the command-line mode
 
@@ -37,7 +37,7 @@ Currently, Chaosd supports simulating that a process is killed or stopped.
 
 ### Killing a process using the command-line mode
 
-#### Commands for killing a process
+#### Command for killing a process
 
 ```bash
 chaosd attack process kill -h
@@ -79,12 +79,6 @@ The result is as follows:
 Attack process python successfully, uid: 10e633ac-0a37-41ba-8b4a-cd5ab92099f9
 ```
 
-:::note
-
-Only the experiments whose `signal` is `SIGSTOP` can be recovered.
-
-:::
-
 ### Stopping a process using the command-line mode
 
 #### Command for stopping a process
@@ -109,7 +103,7 @@ Global Flags:
       --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
 ```
 
-#### Configuration description of stopping a process
+#### Configuration description for stopping a process
 
 | Configuration item | Abbreviation | Description | Value |
 | :-- | :-- | :-- | :-- |
@@ -126,54 +120,3 @@ The result is as follows:
 ```bash
 Attack process python successfully, uid: 9cb6b3be-4f5b-4ecb-ae05-51050fcd0010
 ```
-
-## Create experiments using the service mode
-
-To create experiments using the service mode, follow the instructions below:
-
-1. Run Chaosd in the service mode:
-
-   ```bash
-   chaosd server --port 31767
-   ```
-
-2. Send a `POST` HTTP request to the `/api/attack/process` path of the Chaosd service.
-
-   ```bash
-   curl -X POST 172.16.112.130:31767/api/attack/process -H "Content-Type:application/json" -d '{fault-configuration}'
-   ```
-
-   In the above command, you need to configure `fault-configuration` according to the fault types. For the corresponding parameters, refer to the parameters and examples of each fault type in the following sections.
-
-:::note
-
-When running an experiment, remember to record the UID of the experiment. When you want to end the experiment corresponding to the UID, you need to send a `DELETE` HTTP request to the `/api/attack/{uid}` path of the Chaosd service.
-
-:::
-
-### Simulate process faults using the service mode
-
-#### Parameters for simulating process faults
-
-| Parameter | Description                                                     | Value                              |
-| :-------- | :-------------------------------------------------------------- | :--------------------------------- |
-| `process` | The name or the identifier of the process to be injected faults | string; the default value is `""`. |
-| `signal`  | The provided value of the process signal                        | int; the default value is `9`      |
-
-#### Examples for simulating process faults using the service mode
-
-```bash
-curl -X POST 172.16.112.130:31767/api/attack/process -H "Content-Type:application/json" -d '{"process":"12345","signal":15}'
-```
-
-The result is as follows:
-
-```bash
-{"status":200,"message":"attack successfully","uid":"c3c519bf-819a-4a7b-97fb-e3d0814481fa"}
-```
-
-:::note
-
-Only the experiments whose `signal` is `SIGSTOP` can be recovered.
-
-:::
