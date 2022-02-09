@@ -29,10 +29,14 @@ Usage:
   chaosd attack network [command]
 
 Available Commands:
+  bandwidth   limit network bandwidth
   corrupt     corrupt network packet
   delay       delay network
+  dns         attack DNS server or map specified host to specified IP
   duplicate   duplicate network packet
   loss        loss network packet
+  partition   partition
+  port        attack network port
 
 Flags:
   -h, --help   help for network
@@ -403,6 +407,64 @@ Global Flags:
 ./chaosd attack network dns --dns-ip 123.123.123.123 --dns-domain-name chaos-mesh.org
 ```
 
+### 使用命令行模式限制网络带宽
+
+可以运行限制网络带宽命令，查看该场景支持的配置。
+
+#### 限制网络带宽命令
+
+具体命令如下所示：
+
+```bash
+chaosd attack network bandwidth --help
+```
+
+输出结果如下所示：
+
+```bash
+limit network bandwidth
+
+Usage:
+  chaosd attack network bandwidth [flags]
+
+Flags:
+  -b, --buffer uint32     the maximum amount of bytes that tokens can be available for instantaneously
+  -d, --device string     the network interface to impact
+  -h, --help              help for bandwidth
+  -H, --hostname string   only impact traffic to these hostnames
+  -i, --ip string         only impact egress traffic to these IP addresses
+  -l, --limit uint32      the number of bytes that can be queued waiting for tokens to become available
+  -m, --minburst uint32   specifies the size of the peakrate bucket
+      --peakrate uint     the maximum depletion rate of the bucket
+  -r, --rate string       the speed knob, allows bps, kbps, mbps, gbps, tbps unit. bps means bytes per second
+
+Global Flags:
+      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
+      --uid string         the experiment ID
+```
+
+#### 限制网络带宽相关配置说明
+
+相关配置说明如下所示：
+
+| 配置项          | 配置缩写 | 说明                           | 值                                      |
+| :-------------- | :------- | :----------------------------- | :-------------------------------------- |
+| buffer | b        | 能够瞬间发送的最大字节数。            | uint32 类型，例如：10000。必须要设置。     |
+| device          | d        | 影响的网卡设备名称。 | string 类型，例如 "eth0"，必须要设置。 |
+| hostname      | H       | 只影响到指定的主机名。         | string 类型，例如 "chaos-mesh.org"。hostname 与 ip 必须设置其中一个。 |
+| ip-address      | i       | 只影响到指定的 IP 地址。           | string 类型，例如 "123.123.123.123"。hostname 与 ip 必须设置其中一个。  |
+| limit      | i       | 表示在队列中等待的字节数。           | uint32 类型，例如：10000。必须要设置。  |
+| minburst      | m       | peakrate bucket 的大小。           | uint32 类型，例如：10000。 |
+| peakrate      | 无       | bucket 的最大消耗率。            | uint64 类型，例如：10000。 |
+| rate      | r       | 表示带宽限制的速率。            | string 类型，例如 "1mbps"。必须要设置。 |
+
+
+#### 限制网络带宽示例
+
+```bash
+./chaosd attack network bandwidth --buffer 10000 --device eth0 --limit 10000 --rate 10mbps
+```
+
 ## 使用服务模式创建网络故障实验
 
 要使用服务模式创建实验，请进行以下操作：
@@ -521,7 +583,7 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 
 ### 使用服务模式模拟网络分区
 
-在使用服务模拟网络分区时，请参考如下内容。
+在使用服务模式模拟网络分区时，请参考如下内容。
 
 #### 网络分区相关参数说明
 
@@ -534,13 +596,13 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 | device | 影响的网卡设备名称 | string 类型，例如 "eth0"，必须要设置 |
 | direction | 指定分区的方向，对来自/发送到 hostname 指定的主机或者 ip 指定的地址的数据包进行分区 | string 类型，可选值为 "from" 或者 "to" |
 | hostname | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org" |
-| ip | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123" |
+| ip-address | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123" |
 | protocol | 只影响指定的 IP 协议 | string 类型，支持协议类型包括：tcp、udp、icmp、all（表示影响所有网络协议） |
 
 #### 服务模式网络分区命令示例
 
 ```bash
-curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"partition","ip-protocol":"172.16.4.4","device":"eth0","direction":"from"}'
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"partition","ip-address":"172.16.4.4","device":"eth0","direction":"from"}'
 ```
 
 ### 使用服务模式模拟 DNS 故障
@@ -562,4 +624,30 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"dns","dns-ip":"123.123.123.123","dns-domain-name":"chaos-mesh.org"}'
+```
+
+### 使用服务模式限制网络带宽
+
+在使用服务模式限制网络带宽，请参考如下内容。
+
+#### 限制网络带宽相关参数说明
+
+相关参数说明如下所示：
+
+| 参数          | 说明                           | 值                                      |
+| :-------------- | :----------------------------- | :-------------------------------------- |
+| buffer | 能够瞬间发送的最大字节数。           | uint32 类型，例如：10000。必须要设置。     |
+| device        | 影响的网卡设备名称。  | string 类型，例如 "eth0"，必须要设置。 |
+| hostname      | 只影响到指定的主机名。            | string 类型，例如 "chaos-mesh.org"。hostname 与 ip 必须设置其中一个。 |
+| ip-address    | 只影响到指定的 IP 地址。            | string 类型，例如 "123.123.123.123"。hostname 与 ip 必须设置其中一个。  |
+| limit      | 表示在队列中等待的字节数。           | uint32 类型，例如：10000。必须要设置。  |
+| minburst      | peakrate bucket 的大小。           | uint32 类型，例如：10000。 |
+| peakrate      | bucket 的最大消耗率。           | uint64 类型，例如：10000。 |
+| rate      | 表示带宽限制的速率。         | string 类型，例如 "1mbps"。必须要设置。 |
+
+
+#### 使用服务模式限制网络带宽示例
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"bandwidth","ip-address": "123.123.123.123", "buffer": 10000, "device": "eth0", "limit": 10000, "rate": "10mbps"}'
 ```
