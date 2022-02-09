@@ -465,6 +465,49 @@ Global Flags:
 ./chaosd attack network bandwidth --buffer 10000 --device eth0 --limit 10000 --rate 10mbps
 ```
 
+### 使用命令行模式占用端口
+
+可以运行占用端口命令，查看该场景支持的配置。
+
+#### 占用端口命令
+
+具体命令如下所示：
+
+```bash
+chaosd attack network port --help
+```
+
+输出结果如下所示：
+
+```bash
+attack network port
+
+Usage:
+  chaosd attack network port [flags]
+
+Flags:
+  -h, --help          help for port
+  -p, --port string   this specified port is to occupied
+
+Global Flags:
+      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
+      --uid string         the experiment ID
+```
+
+#### 占用端口相关配置说明
+
+相关配置说明如下所示：
+
+| 配置项       | 配置缩写   | 说明                 | 值                                 |
+| :---------- | :------- | :--------------------| :----------------------------------|
+| port        | p        | 占用的端口号。          | int 类型，例如：8080。必须要设置。     |
+
+#### 占用端口示例
+
+```bash
+./chaosd attack network port --port 8080
+```
+
 ## 使用服务模式创建网络故障实验
 
 要使用服务模式创建实验，请进行以下操作：
@@ -650,4 +693,22 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"bandwidth","ip-address": "123.123.123.123", "buffer": 10000, "device": "eth0", "limit": 10000, "rate": "10mbps"}'
+```
+
+### 使用服务模式占用端口
+
+在使用服务模式占用端口，请参考如下内容。
+
+#### 占用端口相关参数说明
+
+相关配置说明如下所示：
+
+| 配置项           | 说明                           | 值                                      |
+| :-------------- | :----------------------------- | :-------------------------------------- |
+| port            | 占用的端口号。            | int 类型，例如：8080。必须要设置。     |
+
+#### 使用服务模式占用端口示例
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"port", "port": 8080}'
 ```
