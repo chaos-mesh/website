@@ -39,7 +39,7 @@ Description:
 - **selector** specifies the target pods for chaos injection. For more details, see [Define the Scope of Chaos Experiment](experiment_scope.md).
 - **timeOffset** specifies the time offset. It is a duration string with specified unit, such as `300ms`, `-1.5h`. Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
 - **clockIds** defines all affected `clk_id`. `clk_id` refers to the first argument of `clock_gettime` call. For most application, `CLOCK_REALTIME` is enough.
-- **containerNames** selects affected containers' names. If not set, all containers will be injected.
+- **containerNames** selects affected containers' names. If not set, the first container will be injected.
 - **duration** defines the duration for each chaos experiment. In the sample file above, the time chaos lasts for 10 seconds.
 - **scheduler** defines the scheduler rules for the running time of the chaos experiment. For more rule information, see [robfig/cron](https://godoc.org/github.com/robfig/cron).
 
