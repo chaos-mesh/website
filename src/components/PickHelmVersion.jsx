@@ -14,7 +14,7 @@ const calcHelmChartVersion = (version) => {
   const startPart = version.slice(0, 3)
   const helmChartVersionStartPart = parseFloat(startPart) - 0.7
 
-  return 'v' + helmChartVersionStartPart + version.slice(3)
+  return 'v' + helmChartVersionStartPart.toFixed(1) + version.slice(3)
 }
 
 const PickHelmVersion = ({ children, className = 'language-bash' }) => {
