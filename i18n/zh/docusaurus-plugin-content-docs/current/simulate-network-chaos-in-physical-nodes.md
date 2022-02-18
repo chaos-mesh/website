@@ -4,7 +4,7 @@ title: 模拟网络故障
 
 本文主要介绍如何使用 Chaosd 模拟网络故障场景。该功能通过使用 iptables、ipsets、tc 等工具修改网络路由、流量控制来模拟网络故障。
 
-::: note 注意
+:::note 注意
 
 请确保 Linux 内核拥有 请确保 Linux 内核拥有 NET_SCH_NETEM 模块。对于 CentOS，可以通过 kernel-modules-extra 包安装该模块，大部分其他发行版已默认安装相应模块。
 
@@ -451,8 +451,8 @@ Global Flags:
 | :-------------- | :------- | :----------------------------- | :-------------------------------------- |
 | buffer | b        | 能够瞬间发送的最大字节数。            | uint32 类型，例如：10000。必须要设置。     |
 | device          | d        | 影响的网卡设备名称。 | string 类型，例如 "eth0"，必须要设置。 |
-| hostname      | H       | 只影响到指定的主机名。         | string 类型，例如 "chaos-mesh.org"。hostname 与 ip 必须设置其中一个。 |
-| ip-address      | i       | 只影响到指定的 IP 地址。           | string 类型，例如 "123.123.123.123"。hostname 与 ip 必须设置其中一个。  |
+| hostname      | H       | 只影响到指定的主机名。         | string 类型，例如 "chaos-mesh.org"。hostname 与 ip 不能都为空；可以同时设置，对指定的主机名和 IP 地址均产生影响。 |
+| ip-address      | i       | 只影响到指定的 IP 地址。           | string 类型，例如 "123.123.123.123"。hostname 与 ip 不能都为空；可以同时设置，对指定的主机名和 IP 地址均产生影响。  |
 | limit      | i       | 表示在队列中等待的字节数。           | uint32 类型，例如：10000。必须要设置。  |
 | minburst      | m       | peakrate bucket 的大小。           | uint32 类型，例如：10000。 |
 | peakrate      | 无       | bucket 的最大消耗率。            | uint64 类型，例如：10000。 |
@@ -680,8 +680,8 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 | :-------------- | :----------------------------- | :-------------------------------------- |
 | buffer | 能够瞬间发送的最大字节数。           | uint32 类型，例如：10000。必须要设置。     |
 | device        | 影响的网卡设备名称。  | string 类型，例如 "eth0"，必须要设置。 |
-| hostname      | 只影响到指定的主机名。            | string 类型，例如 "chaos-mesh.org"。hostname 与 ip 必须设置其中一个。 |
-| ip-address    | 只影响到指定的 IP 地址。            | string 类型，例如 "123.123.123.123"。hostname 与 ip 必须设置其中一个。  |
+| hostname      | 只影响到指定的主机名。            | string 类型，例如 "chaos-mesh.org"。hostname 与 ip 不能都为空；可以同时设置，对指定的主机名和 IP 地址均产生影响。 |
+| ip-address    | 只影响到指定的 IP 地址。            | string 类型，例如 "123.123.123.123"。hostname 与 ip 不能都为空；可以同时设置，对指定的主机名和 IP 地址均产生影响。  |
 | limit      | 表示在队列中等待的字节数。           | uint32 类型，例如：10000。必须要设置。  |
 | minburst      | peakrate bucket 的大小。           | uint32 类型，例如：10000。 |
 | peakrate      | bucket 的最大消耗率。           | uint64 类型，例如：10000。 |
