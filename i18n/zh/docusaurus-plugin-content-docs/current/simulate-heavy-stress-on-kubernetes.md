@@ -82,7 +82,9 @@ Chaos Mesh 提供的 StressChaos 实验类型可用于模拟容器内压力的�
 | size    | string | 指定分配内存的大小或是占总内存的百分比，总的分配内存为 `workers * size` |        | 否       | `256MB`/`25%` |
 | time      | string | 指定达到分配内存大小的时间，增长模型为线性模型     |               | 否       | `10min` |
 
-(**tips**: Chaos Mesh 通过使用 [memStress](https://github.com/chaos-mesh/memStress) 模拟内存压力来避免高CPU负载。)
+:::note
+因为 [memStress](https://github.com/chaos-mesh/memStress) 模拟内存压力的方法是实际占用内存而不是施加内存读写压力，所以Chaos Mesh 通过使用 memStress 模拟内存压力来避免 stress-ng 施加读写压力造成的高CPU负载。
+:::
 ##### CPUStressor
 
 | 参数    | 类型 | 说明                                                            | 默认值 | 是否必填 | 示例 |

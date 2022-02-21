@@ -86,4 +86,4 @@ The fields in the YAML configuration file are described in the following table:
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
 | workers | int | Specifies the number of threads that apply CPU stress |  | Yes | `1` |
-| load | int | Specifies the percentage of CPU occupied 0 means sleep and no load; 100 means full load, and the final sum of CPU load is `workers * load` |  | No | `50` |
+| load | int | Specifies the percentage of CPU occupied. 0 means sleep and no load; 100 means full load, and the final sum of CPU load is `workers * load` |  | No | `50` |
