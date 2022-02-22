@@ -30,7 +30,7 @@ module.exports = {
     },
     announcementBar: {
       content:
-        'Chaos Mesh is now a CNCF Incubating project🥳, check <a href="https://www.cncf.io/blog/2022/02/16/chaos-mesh-moves-to-the-cncf-incubator/" target="_blank">it out</a>!',
+        'Chaos Mesh is now a CNCF Incubating project 🥳, check out <a href="https://www.cncf.io/blog/2022/02/16/chaos-mesh-moves-to-the-cncf-incubator/" target="_blank">the announcement</a>!',
       backgroundColor: '#37b5fb',
     },
     navbar: {
