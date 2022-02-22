@@ -30,7 +30,7 @@ module.exports = {
     },
     announcementBar: {
       content:
-        'Chaos Mesh 2.1.0 was released 🎉, see <a href="https://github.com/chaos-mesh/chaos-mesh/releases/tag/v2.1.0" target="_blank">what\'s new</a>!',
+        'Chaos Mesh is now a CNCF Incubating project🥳, check <a href="https://www.cncf.io/blog/2022/02/16/chaos-mesh-moves-to-the-cncf-incubator/" target="_blank">it out</a>!',
       backgroundColor: '#37b5fb',
     },
     navbar: {
