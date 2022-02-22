@@ -63,12 +63,6 @@ curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash
 
 :::
 
-:::tip
-
-To speed up the image pulling process, users in the Chinese mainland can add the `--docker-mirror` parameter at the end of the script. After adding this parameter, the `install.sh` script pulls images from `dockerhub.azk8s.cn` and `gcr.azk8s.cn`.
-
-:::
-
 After running this script, Chaos Mesh automatically installs the CustomResourceDefining (CRD) that matches the version, all required components, and related Service Account configurations.
 
 For more installation details, refer to the source code of the [`install.sh`](https://github.com/chaos-mesh/chaos-mesh/blob/master/install.sh).
