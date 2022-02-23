@@ -125,7 +125,7 @@ spec:
       'node-label': 'label-one'
 ```
 
-### Node List
+### Node List Selector
 
 - 指定实验目标 Pod 所属的 Node。
 - 数据类型： 字符串数组。
@@ -141,11 +141,11 @@ spec:
       - node2
 ```
 
-### Pod List
+### Pod List Selector
 
-- 指定实验目标 Pod 命名空间和 Pod 列表。
-- 数据类型：键值对类型。"键"为目标 Pod 所属的 Namespace, "值"为目标 Pod 列表。
-- 只要指定了此 Selector，Chaos Mesh 就会**忽略其他配置的 Selectors**。
+- 指定实验目标 `Pod` 命名空间和 `Pod` 列表。
+- 数据类型：键值对类型。"键"为目标 `Pod` 所属的命名空间 (namespace), "值"为目标 `Pod` 列表(list)。
+- 只要指定了此 Selector，Chaos Mesh 就会**忽略**其他配置的 Selectors。
 
 当使用 YAML 文件创建实验时，示例配置如下：
 
@@ -158,6 +158,29 @@ spec:
         - basic-pd-0
         - basic-tikv-0
         - basic-tikv-1
+```
+
+### Physical Machine List Selector
+
+- 指定实验目标 `PhysicalMachine` 命名空间和 `PhysicalMachine` 列表。
+- 数据类型：键值对类型。"键"为目标 `PhysicalMachine` 所属的命名空间 (namespace), "值"为目标 `PhysicalMachine` 列表(list)。
+- 只要指定了此 Selector，Chaos Mesh 就会**忽略**其他配置的 Selectors。
+
+:::note 注意
+
+`PhysicalMachine` 是一种代表物理机的 CRD (CustomResourcesDefinition)。通常情况下，Chaos Mesh 会使用 [chaosctl](chaosctl-tool.md#为-chaosd-生成-tls-证书) 创建 `PhysicalMachine`。
+
+:::
+
+当使用 YAML 文件创建实验时，示例配置如下：
+
+```yaml
+spec:
+  selector:
+    physicalMachines:
+      default: # namespace of the target PhysicalMachines
+        - physcial-machine-a
+        - physcial-machine-b
 ```
 
 ## 在 Dashboard 上定义实验范围
@@ -174,3 +197,18 @@ spec:
 在设置 Selectors 的同时，你也可以在 Dashboard 中实时预览实验目标的实际范围，并且可以直接修改 Selectors 过滤出的目标 Pod 范围。
 
 ![Dashboard Selectors](img/dashboard_selectors_zh.png)
+
+## 兼容性矩阵
+
+| 类型                           | 是否支持 Kubernetes | 是否支持物理机 |
+| :----------------------------- | :------------------ | :------------- |
+| Namespace Selectors            | 是                  | 是             |
+| Label Selectors                | 是                  | 是             |
+| Expression Selectors           | 是                  | 是             |
+| Annotation Selectors           | 是                  | 是             |
+| Field Selectors                | 是                  | 是             |
+| PodPhase Selectors             | 是                  | 否             |
+| Node Selectors                 | 是                  | 否             |
+| Node List Selectors            | 是                  | 否             |
+| Pod List Selectors             | 是                  | 否             |
+| PhysicalMachine List Selectors | 否                  | 是             |

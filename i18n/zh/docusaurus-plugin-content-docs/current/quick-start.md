@@ -63,12 +63,6 @@ curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash
 
 :::
 
-:::tip 建议
-
-中国大陆地区的用户可在脚本后添加 `--docker-mirror` 参数来加快拉取镜像的速度。添加该参数后，`install.sh` 安装脚本将从 `dockerhub.azk8s.cn` 和 `gcr.azk8s.cn` 拉取镜像。
-
-:::
-
 运行此安装脚本后，Chaos Mesh 将会自动安装与版本相符的 CustomResourceDefinition (CRD)、所有需要的组件、及相关的 Service Account 配置。
 
 如果想了解更多的安装细节，请参考 [`install.sh` 的源代码](https://github.com/chaos-mesh/chaos-mesh/blob/master/install.sh)。

@@ -42,7 +42,16 @@ module.exports = {
             'create-chaos-mesh-workflow',
             'run-chaos-experiments-in-serial-or-parallel',
             'send-http-request-on-workflow',
-            'check-workflow-status',],
+            'check-workflow-status',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Tutorials',
+          collapsed: false,
+          items: [
+            'the-guide-to-chaos-mesh-v21',
+          ],
         },
       ],
     },

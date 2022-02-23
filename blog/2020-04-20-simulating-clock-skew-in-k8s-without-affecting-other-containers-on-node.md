@@ -11,7 +11,7 @@ tags: [Chaos Mesh, Chaos Engineering, Kubernetes, Distributed System]
 
 ![Clock synchronization in distributed system](/img/clock-sync-chaos-engineering-k8s.jpg)
 
-[Chaos Mesh™](https://github.com/chaos-mesh/chaos-mesh), an easy-to-use, open-source, cloud-native chaos engineering platform for Kubernetes (K8s), has a new feature, TimeChaos, which simulates the [clock skew](https://en.wikipedia.org/wiki/Clock_skew#On_a_network) phenomenon. Usually, when we modify clocks in a container, we want a [minimized blast radius](https://learning.oreilly.com/library/view/chaos-engineering/9781491988459/ch07.html), and we don't want the change to affect the other containers on the node. In reality, however, implementing this can be harder than you think. How does Chaos Mesh solve this problem?
+[Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh), an easy-to-use, open-source, cloud-native chaos engineering platform for Kubernetes (K8s), has a new feature, TimeChaos, which simulates the [clock skew](https://en.wikipedia.org/wiki/Clock_skew#On_a_network) phenomenon. Usually, when we modify clocks in a container, we want a [minimized blast radius](https://learning.oreilly.com/library/view/chaos-engineering/9781491988459/ch07.html), and we don't want the change to affect the other containers on the node. In reality, however, implementing this can be harder than you think. How does Chaos Mesh solve this problem?
 
 <!--truncate-->
 
@@ -88,7 +88,7 @@ We can see that the whole vDSO is like a `.so` file, so we can use an executable
 
 ![TimeChaos workflow](/img/timechaos-workflow.jpg)
 
-<div class="caption-center"> TimeChaos workflow </div>
+<div className="caption-center"> TimeChaos workflow </div>
 
 The chart above is the process of **TimeChaos**, an implementation of clock skew in Chaos Mesh.
 
@@ -172,7 +172,7 @@ That's encouraging. But does TimeChaos affect services other than PD? We can che
 
 ![Chaos Dashboard](/img/chaos-dashboard.jpg)
 
-<div class="caption-center"> Chaos Dashboard </div>
+<div className="caption-center"> Chaos Dashboard </div>
 
 It's clear that in the monitor, TimeChaos was injected every 1 millisecond and the whole duration lasted 10 seconds. What's more, TiDB was not affected by that injection. The bank program ran normally, and performance was not affected.
 

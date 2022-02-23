@@ -3,11 +3,11 @@ slug: /
 title: Chaos Mesh Overview
 ---
 
-This document describes the concepts, usage scenarios, core strengths, and the architecture of Chaos Mesh.
+This document describes the concepts, use cases, core strengths, and the architecture of Chaos Mesh.
 
 ## Chaos Mesh Overview
 
-Chaos Mesh is an open source cloud-native Chaos Engineering platform. It offers various types of fault simulation and has an enormous capability to orchestrate fault scenarios. Using Chaos Mesh, you can conveniently simulate various abnormalities that might occur in reality during the development, testing, and production environments and find potential problems in the system. To lower the threshold for a Chaos Engineering project, Chaos Mesh provides you with a perfect visualization operation. You can easily design your Chaos scenarios on the Web UI interface and monitor the status of Chaos experiments.
+Chaos Mesh is an open source cloud-native Chaos Engineering platform. It offers various types of fault simulation and has an enormous capability to orchestrate fault scenarios. Using Chaos Mesh, you can conveniently simulate various abnormalities that might occur in reality during the development, testing, and production environments and find potential problems in the system. To lower the threshold for a Chaos Engineering project, Chaos Mesh provides you with a visualization operation. You can easily design your Chaos scenarios on the Web UI and monitor the status of Chaos experiments.
 
 ## Core strengths
 
@@ -20,8 +20,8 @@ As the industry's leading Chaos testing platform, Chaos Mesh has the following c
 - Various fault simulation scenarios: Chaos Mesh covers most of the scenarios of basic fault simulation in the distributed testing system.
 - Flexible experiment orchestration capabilities: You can design your own Chaos experiment scenarios on the platform, including multiple mixing experiments and application status checks.
 - High security: Chaos Mesh is designed with multiple layers of security control and provides high security.
-- An active community: Chaos Mesh is a world-renowned open source Chaos testing platform and also belongs to the CNCF open source incubation project.
-- Powerful scalability: Chaos Mesh has full scalability for the extension of fault test types and functions.
+- An active community: Chaos Mesh is a sandbox project hosted by CNCF. It has a growing number of [contributors](https://github.com/chaos-mesh/chaos-mesh/graphs/contributors) and [adopters](https://github.com/chaos-mesh/chaos-mesh/blob/master/ADOPTERS.md) all over the world.
+- Easily scalable: It's easy to add new fault test types and functions to Chaos Mesh.
 
 ## Architecture overview
 
