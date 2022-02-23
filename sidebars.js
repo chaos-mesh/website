@@ -104,6 +104,7 @@ module.exports = {
         'integrate-chaos-mesh-into-github-actions',
         // 'use-argo-to-orchestrate-chaos-experiments',
         'use-grafana-data-source',
+        'chaosctl-tool',
       ],
     },
     {
