@@ -429,9 +429,9 @@ Global Flags:
 | `mysql-connector-version` | `v` | 使用的 MySQL 客户端（ mysql-connector-java）的版本 | int 类型，对于 `5.X.X` 版本设置为 `5`，对于 `8.X.X` 版本设置为 `8`，默认为 `8` |
 | `sql-type` | 无 | 匹配的 SQL 类型 | string 类型，支持 `"select"`、`"update"`、`"insert"`、`"replace"`、`"delete"` 五种类型，默认为 `""`，表示匹配所有类型的 SQL |
 | `table` | `t` | 匹配指定的表名称 | string 类型，如 `"t1"`。默认为 `""`，表示匹配所有的表 |
-| `uid` | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
-| `port` | 注入的 Java agent 对外提供服务的端口号  | int 类型，默认为 `9288` |
-| `pid` | 注入的 Java 进程的进程 ID  | int 类型，必须设置 |
+| `uid` | 无 | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
+| `port` | 无 | 注入的 Java agent 对外提供服务的端口号  | int 类型，默认为 `9288` |
+| `pid` | 无 | 注入的 Java 进程的进程 ID  | int 类型，必须设置 |
 
 #### 模拟 MySQL 故障示例
 
@@ -695,3 +695,39 @@ curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/js
 ```bash
 {"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
 ```
+
+### 使用服务模式模拟 MySQL 故障
+
+Chaosd 支持在 MySQL 的 Java 客户端执行指定类型的 SQL 时注入延迟、抛出异常。
+
+#### 模拟 MySQL 故障相关参数说明
+
+| 配置项 | 说明 | 值 |
+| :-- | :-- | :-- |
+| `database` | 匹配指定的数据库名称 | string 类型，如 `“test”`。默认为 `""`，表示匹配所有的数据库 |
+| `exception` | 抛出的自定义异常信息 | string 类型，如 `“BOOM”`。`exception` 和 `lantency` 必须配置其中一个 |
+| `latency` | 执行 SQL 的延迟时间 | int 类型，单位为毫秒（ms），如 `1000`。`exception` 和 `lantency` 必须配置其中一个 |
+| `mysql-connector-version` | 使用的 MySQL 客户端（ mysql-connector-java）的版本 | int 类型，对于 `5.X.X` 版本设置为 `5`，对于 `8.X.X` 版本设置为 `8`，默认为 `8` |
+| `sql-type` | 匹配的 SQL 类型 | string 类型，支持 `"select"`、`"update"`、`"insert"`、`"replace"`、`"delete"` 五种类型，默认为 `""`，表示匹配所有类型的 SQL |
+| `table` | 匹配指定的表名称 | string 类型，如 `"t1"`。默认为 `""`，表示匹配所有的表 |
+| `uid` | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
+| `port` | 注入的 Java agent 对外提供服务的端口号  | int 类型，默认为 `9288` |
+| `pid` | 注入的 Java 进程的进程 ID  | int 类型，必须设置 |
+
+#### 使用服务模式模拟 MySQL 故障示例
+
+1. 部署 TiDB（或者 MySQL）以及示例应用程序
+
+   参考 [模拟 MySQL 故障示例](#模拟-MySQL-故障示例) 中的步骤 1 和 2 部署 TiDB 以及示例应用程序 `mysqldemo`。
+
+2. 注入故障
+   
+   假设示例应用程序 `mysqldemo` 的 PID 为 `12345`，运行以下命令：
+
+   ```bash
+   curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"mysql","database":"mysql", "table":"user", "port":9288, "exception":"boom", "pid":12345}'
+   ```
+
+   故障产生的影响参考[模拟 MySQL 故障示例](#模拟-MySQL-故障示例)。
+
+   
