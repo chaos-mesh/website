@@ -189,4 +189,6 @@ helm install chaos-mesh helm/chaos-mesh -n=chaos-testing
 
 The safe mode is enabled by default. To disable the safe mode, specify `dashboard.securityMode` as `false` during the installation or upgrade:
 
-<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set dashboard.securityMode=false --version latest`}</PickHelmVersion>
+<PickHelmVersion>
+helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set dashboard.securityMode=false --version latest
+</PickHelmVersion>
