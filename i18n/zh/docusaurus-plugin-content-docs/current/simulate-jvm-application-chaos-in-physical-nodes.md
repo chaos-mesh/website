@@ -448,7 +448,7 @@ Global Flags:
 
 2. 部署示例应用程序
   
-   部署一个应用程序 `mysqldemo`，该应用程序可以接收 HTTP 请求，并查询 TiDB（或者 MySQL） 数据库：
+   部署一个应用程序 `mysqldemo`，该应用程序可以接收 HTTP 请求，并查询 TiDB（或者 MySQL）数据库：
 
    ```bash
    git clone https://github.com/WangXiangUSTC/byteman-example.git
