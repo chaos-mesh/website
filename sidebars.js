@@ -45,14 +45,14 @@ module.exports = {
             'check-workflow-status',
           ],
         },
-        {
-          type: 'category',
-          label: 'Tutorials',
-          collapsed: false,
-          items: [
-            'the-guide-to-chaos-mesh-v21',
-          ],
-        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Tutorials',
+      collapsed: false,
+      items: [
+        'the-guide-to-chaos-mesh-v21',
       ],
     },
     {
