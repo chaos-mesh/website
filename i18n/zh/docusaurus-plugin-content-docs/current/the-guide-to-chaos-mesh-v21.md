@@ -155,7 +155,7 @@ Web Show 是一个简单的应用，用于获取它和 kube-system Pod 之间的
 
    说明故障注入生效了，成功地修改了 Nginx 的返回数据。
 
-### 创建 workflow
+## 创建 workflow
 
 我们创建一个 workflow，对 Web Show 服务进行干扰。
 
