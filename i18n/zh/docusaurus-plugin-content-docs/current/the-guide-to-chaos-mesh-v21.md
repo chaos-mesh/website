@@ -2,14 +2,7 @@
 title: 10 分钟体验 Chaos Mesh v2.1
 ---
 
-Chaos Mesh 最近刚发布了 [2.1](https://github.com/chaos-mesh/chaos-mesh/releases/tag/v2.1.0) 版本，从 Release Notes 中我们可以看到 Chaos Mesh 又有了很大的变化：
-- 支持了物理机混沌实验，这是 Chaos Mesh 走向平台化的重要一步；
-- 优化了 Workflow，可以展现 Workflow 相关的事件和配置，并且可以在  Workflow 中创建 HTTP 任务，极大拓展了 Workflow 的使用场景；
-- 支持在 Dashboard 上创建 HTTPChaos，提高了 HTTPChaos 的易用性；
-- 使用知名开源项目 [byteman](https://byteman.jboss.org/) 来实现 JVMChaos，提高了 JVMChaos 的易用性和可扩展性；
-- 在 Dashboard 中集成了 GCP 认证。
-
-相信关注 Chaos Mesh 的同学已经跃跃欲试了，下面我们通过简单的 demo 来演示 Chaos Mesh 的使用。在 Demo 教程中，您将学会如何用 Chaos Mesh 的 HTTP 混沌实验类型攻击 Nginx 服务，并观察实验过程和结果。
+本文通过简单的 Demo 来演示 Chaos Mesh v2.1 的使用。在此 Demo 教程中，您将学会如何用 Chaos Mesh 的 HTTP 混沌实验类型攻击 Nginx 服务，并观察实验过程和结果。同时，您也将学习到如何使用 Workflow 创建更为复杂的混沌测试流程。
 
 ## 准备环境
 
@@ -23,7 +16,7 @@ Chaos Mesh 最近刚发布了 [2.1](https://github.com/chaos-mesh/chaos-mesh/rel
 
 :::
 
-1. 运行一键部署脚本 install.sh
+1. 运行一键部署脚本 install.sh。
 
    ```bash
    curl -sSL https://mirrors.chaos-mesh.org/v2.1.2/install.sh | bash -s -- --local kind
@@ -46,7 +39,7 @@ Chaos Mesh 最近刚发布了 [2.1](https://github.com/chaos-mesh/chaos-mesh/rel
    chaos-dashboard-7c87549798-k5m9s             1/1     Running   0          1m
    ```
 
-2. 为 Dashboard 服务做端口转发
+2. 为 Dashboard 服务做端口转发。
 
    ```bash
    kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333 --address 0.0.0.0
@@ -84,7 +77,7 @@ Nginx 是一个很常用的软件，我们可以用它做反向代理、负载�
 nginx-694dd977cd-j9vql 1/1 Running 0 1m
    ```
 
-3. 为 Nginx 服务做端口转发
+3. 为 Nginx 服务做端口转发。
 
    ```bash
 kubectl port-forward --address 0.0.0.0 svc/nginx 80:80 -n nginx
@@ -98,32 +91,33 @@ kubectl port-forward --address 0.0.0.0 svc/nginx 80:80 -n nginx
 
    说明 Nginx 已经正常工作了。
 
-#### 部署 Web Show
+#### 部署 WebShow
 
-Web Show 是一个简单的应用，用于获取它和 kube-system Pod 之间的网络延迟，并在 web 页面中以折线图方式展现出来。
+WebShow 是一个简单的应用，用于获取它和 kube-system Pod 之间的网络延迟，并在 web 页面中以折线图方式展现出来。
 
-1. 执行命令部署 Webshow
+1. 执行命令部署 WebShow。
 
    ```bash
    curl -sSL https://mirrors.chaos-mesh.org/v1.0.3/web-show/deploy.sh | sh
    ```
 
-2. 在安装成功后，在浏览器中访问 http://localhost:8081/
+2. 在安装成功后，在浏览器中访问 http://localhost:8081/。
 
    可以看到如下所示的页面：
 
-   ![Web Show 1](./img/web-show1.png)
+   ![WebShow 1](./img/web-show1.png)
 
    我们可以看到网络延迟很低，基本都在 2ms 以内。
 
 ## 创建混沌实验
 
-1. 创建实验并选择故障类型
+1. 创建实验并选择故障类型。
    在 Chaos Mesh Dashboard 页面点击左侧 NEW EXPERIMENT 按钮创建新实验，选择实验类型为 “KUBERNETES”，选择故障类型为 “HTTP FAULT”：
 
    ![K8s HTTP Experiment](./img/k8s-http-exp.png)
 
-2. 设置 HTTP 实验参数
+2. 设置 HTTP 实验参数。
+
    我们这个实验的目的是修改 Nginx 的返回数据，因此选择具体的故障行为为 “RESPONSE PATCH”，然后进行具体的配置。将 “Port” 设置为 80（Nginx 提供服务的端口），将 “Patch Body Type” 设置为 “json”，在 “Patch Body Value” 中填写以下内容：
 
    ```text
@@ -134,11 +128,11 @@ Web Show 是一个简单的应用，用于获取它和 kube-system Pod 之间的
 
    ![HTTP Config](./img/http-config.png)
 
-3. 设置实验的选择范围以及元信息
+3. 设置实验的选择范围以及元信息。
 
    ![HTTP Meta](./img/http-exp-meta.png)
 
-4. 提交实验
+4. 提交实验。
    
    在所有配置完成后，点击 “Submit” 提交实验。我们可以在实验列表中看到我们创建的实验，我们可以选择指定的实验查看详情：
 
@@ -146,7 +140,8 @@ Web Show 是一个简单的应用，用于获取它和 kube-system Pod 之间的
 
    从 “Events” 中可以看到故障注入成功了。
 
-5. 验证实验效果
+5. 验证实验效果。
+
    让我们再次访问 http://localhost/ ，可以看到页面上显示了如下内容：
 
    ```bash
@@ -157,7 +152,7 @@ Web Show 是一个简单的应用，用于获取它和 kube-system Pod 之间的
 
 ## 创建 workflow
 
-我们创建一个 workflow，对 Web Show 服务进行干扰。
+我们创建一个 workflow，对 WebShow 服务进行干扰。
 
 1. 点击主页的 “NEW WORKFLOW” 按钮创建新的 workflow。
 
@@ -169,11 +164,11 @@ Web Show 是一个简单的应用，用于获取它和 kube-system Pod 之间的
 
    ![Network Config](./img/network-config.png)
 
-4. 设置实验的范围只针对 Web Show，并填写实验元信息，让该实验持续 30s：
+4. 设置实验的范围只针对 WebShow，并填写实验元信息，让该实验持续 30s：
 
    ![Network Meta](./img/network-meta.png)
 
-5. 创建一个 “Suspend” 类型的任务
+5. 创建一个 “Suspend” 类型的任务。
 
    该类型的任务正如其名字的含义一样，并不会做任何事情。这里设置该任务持续 30s：
 
@@ -189,11 +184,11 @@ Web Show 是一个简单的应用，用于获取它和 kube-system Pod 之间的
 
 8. 最后点击 “SUBMIT WORKFLOW” 按钮，这样 workflow 就创建完成并开始运行了。
 
-9. 验证 workflow 效果
+9. 验证 workflow 效果。
 
    再次在浏览器中访问 http://localhost:8081/，等待一段时间（大约90s），将看到如下图所示的折线图：
 
-   ![Web Show 2](./img/web-show2.png)
+   ![WebShow 2](./img/web-show2.png)
   
    我们可以发现网络延迟增加到了 10ms 左右，持续一段时间后延迟降低到先前水平，之后又上升到了 20ms 左右。这符合我们 workflow 的定义，说明 workflow 成功地注入了多个网络延迟故障。
 
