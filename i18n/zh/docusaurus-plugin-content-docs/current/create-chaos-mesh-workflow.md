@@ -48,6 +48,8 @@ Github 仓库中含有其他 Workflow 的[示例](https://github.com/chaos-mesh/
 
    :::
 
+   ![Choose Task Type](./img/choose-task-type.png)
+
 2. 填写实验信息
 
    配置方法与创建普通的混沌实验相同。比如，你可以设置一个 POD KILL 类型的 PodChaos 故障，并将其命名为 “kill-nginx”。
