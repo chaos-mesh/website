@@ -79,7 +79,7 @@ To start Chaos Dashboard, run the following command:
 ```bash
 cd ui && yarn
 # start
-yarn start:default # cross-env REACT_APP_API_URL=http://localhost:2333 BROWSER=none react-scripts start
+yarn workspace @ui/app start:default # cross-env REACT_APP_API_URL=http://localhost:2333 BROWSER=none react-scripts start
 ```
 
 ## Learn more

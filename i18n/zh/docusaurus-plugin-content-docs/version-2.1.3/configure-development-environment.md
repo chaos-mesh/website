@@ -79,7 +79,7 @@ kind delete cluster --name=kind
 ```bash
 cd ui && yarn
 # 启动
-yarn start:default # cross-env REACT_APP_API_URL=http://localhost:2333 BROWSER=none react-scripts start
+yarn workspace @ui/app start:default # cross-env REACT_APP_API_URL=http://localhost:2333 BROWSER=none react-scripts start
 ```
 
 ## 下一步
