@@ -10,7 +10,7 @@ title: 10 分钟体验 Chaos Mesh v2.1
 
 在开始之前，请确保你的电脑中安装了 [Docker](https://www.docker.com/)。我们将使用 Chaos Mesh 项目提供的一键部署脚本 install.sh，它会自动检查你的环境，安装 [Kind](https://kind.sigs.k8s.io/)（Kubernetes in Docker），并使用 Kind 在本地启动一个 Kubernetes 集群，最终安装 Chaos Mesh。
 
-:::注意
+:::note 注意
 
 本文提供的 Kubernetes 和 Chaos Mesh 的部署方式仅供功能的测试和体验，如果在生产环境中部署，请参考文档[使用 Helm 安装 Chaos Mesh](./production-installation-using-helm.md)。
 
