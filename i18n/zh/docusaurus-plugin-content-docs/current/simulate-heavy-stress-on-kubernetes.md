@@ -83,7 +83,9 @@ Chaos Mesh 提供的 StressChaos 实验类型可用于模拟容器内压力的�
 | time      | string | 指定达到分配内存大小的时间，增长模型为线性模型     |               | 否       | `10min` |
 
 :::note
-因为 [memStress](https://github.com/chaos-mesh/memStress) 模拟内存压力的方法是实际占用内存而不是施加内存读写压力，所以Chaos Mesh 通过使用 memStress 模拟内存压力来避免 stress-ng 施加读写压力造成的高CPU负载。
+
+为避免因 `stress-ng` 施加读写压力而造成的高 CPU 负载，Chaos Mesh 使用 [memStress](https://github.com/chaos-mesh/memStress) 模拟内存压力的方法。这是因为 memStress 模拟内存压力的方法会占用实际内存，而不是对内存施加读写压力。
+
 :::
 ##### CPUStressor
 
