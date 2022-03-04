@@ -191,6 +191,10 @@
         {
           "type": "doc",
           "id": "version-2.0.7/integrate-chaos-mesh-into-github-actions"
+        },
+        {
+          "type": "doc",
+          "id": "version-2.0.7/chaosctl-tool"
         }
       ],
       "collapsible": true,

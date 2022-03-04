@@ -239,6 +239,10 @@
         {
           "type": "doc",
           "id": "version-2.1.3/use-grafana-data-source"
+        },
+        {
+          "type": "doc",
+          "id": "version-2.1.3/chaosctl-tool"
         }
       ],
       "collapsible": true,
