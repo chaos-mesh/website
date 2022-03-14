@@ -52,12 +52,14 @@ Usage:
   chaosd attack process kill [flags]
 
 Flags:
-  -h, --help             help for kill
-  -p, --process string   The process name or the process ID
-  -s, --signal int       The signal number to send (default 9)
+  -h, --help                 help for kill
+  -p, --process string       The process name or the process ID
+  -r, --recover-cmd string   The command to be executed when recovering experiment
+  -s, --signal int           The signal number to send (default 9)
 
 Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
+      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
+      --uid string         the experiment ID
 ```
 
 #### Configuration description for killing a process
@@ -65,6 +67,7 @@ Global Flags:
 | Configuration item | Abbreviation | Description | Value |
 | :-- | :-- | :-- | :-- |
 | `process` | p | The name or the identifier of the process to be injected faults | string; the default value is `""`. |
+| `recover-cmd` | The command will be executed when recovering experiment | string; the default value is `""`. |
 | `signal` | s | The provided value of the process signal | int; the default value is `9`. Currently, only `SIGKILL`, `SIGTERM`, and `SIGSTOP` are supported. |
 
 #### Example for killing a process
