@@ -1,200 +1,214 @@
 ---
-title: 10 分钟体验 Chaos Mesh v2.1
+title: 10 分钟体验 Chaos Mesh v2.1.0
 ---
 
-本文通过简单的 Demo 来演示 Chaos Mesh v2.1 的使用。在此 Demo 教程中，您将学会如何用 Chaos Mesh 的 HTTP 混沌实验类型攻击 Nginx 服务，并观察实验过程和结果。同时，您也将学习到如何使用 Workflow 创建更为复杂的混沌测试流程。
+本文主要介绍 Chaos Mesh v2.1.0 的使用方法，包括如何通过 Chaos Mesh 混沌实验干扰 NGINX 应用程序、如何通过 Chasos Mesh 的 Workflow 创建复杂的混沌测试流程并查看实验流程和结果等等。
 
 ## 准备环境
 
 ### 部署 Kubernetes 和 Chaos Mesh
 
-在开始之前，请确保你的电脑中安装了 [Docker](https://www.docker.com/)。我们将使用 Chaos Mesh 项目提供的一键部署脚本 install.sh，它会自动检查你的环境，安装 [Kind](https://kind.sigs.k8s.io/)（Kubernetes in Docker），并使用 Kind 在本地启动一个 Kubernetes 集群，最终安装 Chaos Mesh。
+在开始之前，请确保你的电脑中安装了 [Docker](https://www.docker.com/)。
+
+本章节介绍如何使用脚本 `install.sh` 部署 Kubernetes 和 Chaos Mesh。该脚本是 Chaos Mesh 提供的一键部署脚本，可以运行以下操作：
+
+- 自动检查本地环境。
+- 安装 [kind 工具](https://kind.sigs.k8s.io/)（以下简称为 kind）。
+- 使用 kind 在本地部署并启动一个 Kubernetes 集群。
+- 在通过脚本部署的 Kubernetes 集群上安装 Chaos Mesh。
 
 :::note 注意
 
-本文提供的 Kubernetes 和 Chaos Mesh 的部署方式仅供功能的测试和体验，如果在生产环境中部署，请参考文档[使用 Helm 安装 Chaos Mesh](./production-installation-using-helm.md)。
+- 建议**仅**在快速上手体验 Chaos Mesh 或在测试环境中使用上述方式部署 Kubernetes 和 Chaos Mesh。
+- 在生产环境中，需通过 [使用 Helm 安装 Chaos Mesh](./production-installation-using-helm.md) 中提供的部署方式来部署 Kubernetes 和 Chaos Mesh。
 
 :::
 
-1. 运行一键部署脚本 install.sh。
+1. 运行 `install.sh`：
 
-   ```bash
-   curl -sSL https://mirrors.chaos-mesh.org/v2.1.2/install.sh | bash -s -- --local kind
-   ```
+    ```bash
+    curl -sSL https://mirrors.chaos-mesh.org/v2.1.2/install.sh | bash -s -- --local kind
+    ```
 
-   你可能需要等待几分钟。安装完成后，确认 Chaos Mesh 的 Pod 都处于 Running 状态：
+    完整运行脚本约需需要几分钟时间，请耐心等待。
 
-   ```bash
-   kubectl get pods -n chaos-testing
-   ```
+    安装完成后，确认 Chaos Mesh 的所有 Pod 都处于 Running 状态：
 
-   结果如下所示：
+    ```bash
+    kubectl get pods -n chaos-testing
+    ```
 
-   ```log
-   NAME                                        READY   STATUS    RESTARTS   AGE
-   chaos-controller-manager-588df5cdd7-qzxjn   1/1     Running   0          1m
-   chaos-controller-manager-588df5cdd7-vd7qj   1/1     Running   0          1m
-   chaos-controller-manager-588df5cdd7-wtrtf     1/1     Running   0          1m
-   chaos-daemon-p7zdb                                       1/1     Running   0          1m
-   chaos-dashboard-7c87549798-k5m9s             1/1     Running   0          1m
-   ```
+    结果如下所示：
 
-2. 为 Dashboard 服务做端口转发。
+    ```log
+    NAME                                        READY   STATUS    RESTARTS   AGE
+    chaos-controller-manager-588df5cdd7-qzxjn   1/1     Running   0          1m
+    chaos-controller-manager-588df5cdd7-vd7qj   1/1     Running   0          1m
+    chaos-controller-manager-588df5cdd7-wtrtf     1/1     Running   0          1m
+    chaos-daemon-p7zdb                                       1/1     Running   0          1m
+    chaos-dashboard-7c87549798-k5m9s             1/1     Running   0          1m
+    ```
 
-   ```bash
-   kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333 --address 0.0.0.0
-   ```
+2. 为 Chaos Dashboard 服务做端口转发：
 
-   这样我们就可以在浏览器中输入网址 127.0.0.1:2333 访问 Dashboard 了，界面如下所示：
+    ```bash
+    kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333 --address 0.0.0.0
+    ```
+
+   完成后，你可以通过在浏览器中输入网址 `127.0.0.1:2333` 来访问 Chaos Dashboard，其界面如下：
 
    ![Dashboard interface](./img/quick-start-chaos-mesh-dashboard.png)
 
-
 ### 部署测试应用
 
-我们选择部署 Nginx 和 webshow 作为混沌实验所需要的应用。
+本文将 NGINX 和 WebShow 选为进行混沌实验的应用。
 
-#### 部署 Nginx
+#### 部署 NGINX
 
-Nginx 是一个很常用的软件，我们可以用它做反向代理、负载平衡等工作。在这里我们只需要使用它的基本功能，访问到它的主页即可。
+NGINX 是用于进行反向代理、负载平衡等工作的应用程序。在本测试中，你只需要使用 NGINX 的基本功能，访问该应用的主页即可。
 
-1. 执行以下命令创建 Nginx 服务：
+1. 创建 NGINX 服务：
 
-   ```bash
-   kubectl apply -f  https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/master/examples/nginx/nginx.yaml
-   ```
+    ```bash
+    kubectl apply -f  https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/master/examples/nginx/nginx.yaml
+    ```
 
-2. 查看 Pod 状态，等待其状态为 Running：
+2. 查看 Pod 状态，确认其状态为 Running：
 
-   ```bash
-   kubectl get pods -l app=nginx
-   ```
+    ```bash
+    kubectl get pods -l app=nginx
+    ```
 
-   输出如下所示：
+    输出如下所示：
 
-   ```log
-   NAME READY STATUS RESTARTS AGE
-nginx-694dd977cd-j9vql 1/1 Running 0 1m
-   ```
+    ```log
+    NAME READY STATUS RESTARTS AGE
+    nginx-694dd977cd-j9vql 1/1 Running 0 1m
+    ```
 
-3. 为 Nginx 服务做端口转发。
+3. 为 NGINX 服务做端口转发：
 
-   ```bash
-kubectl port-forward --address 0.0.0.0 svc/nginx 80:80 -n nginx
-   ```
+    ```bash
+    kubectl port-forward --address 0.0.0.0 svc/nginx 80:80 -n nginx
+    ```
 
-   访问 http://localhost/ ，可以看到页面上显示如下内容：
+    在浏览器中访问 `http://localhost/`。如果页面显示如下内容，说明 NGINX 正在正常工作：
 
-   ```log
-   {"app": "Chaos App", "status": "Running"}
-   ```
-
-   说明 Nginx 已经正常工作了。
+    ```log
+    {"app": "Chaos App", "status": "Running"}
+    ```
 
 #### 部署 WebShow
 
-WebShow 是一个简单的应用，用于获取它和 kube-system Pod 之间的网络延迟，并在 web 页面中以折线图方式展现出来。
+WebShow 是 Chaos Mesh 提供的一个 Demo 应用程序。在本文中，WebShow 为 Chaos Mesh 混沌实验的待测试目标，用于观察在网络延时下该应用的工作状态。你可以在 WebShow 应用页面上通过折线图直接观察自身到 kube-system 命名空间下 Pod 的网络延迟。
 
-1. 执行命令部署 WebShow。
+1. 部署 WebShow：
 
-   ```bash
-   curl -sSL https://mirrors.chaos-mesh.org/v1.0.3/web-show/deploy.sh | sh
-   ```
+    ```bash
+    curl -sSL https://mirrors.chaos-mesh.org/v1.0.3/web-show/deploy.sh | sh
+    ```
 
-2. 在安装成功后，在浏览器中访问 http://localhost:8081/。
+2. 查看网络延迟情况：
 
-   可以看到如下所示的页面：
+   在浏览器中访问 `http://localhost:8081/`，访问 kube-system 命名空间下 Pod 的网络延迟情况。下图为页面示例，该页面中显示 Pod 的网络延迟很低，基本都在 2ms 以内。
 
    ![WebShow 1](./img/web-show1.png)
 
-   我们可以看到网络延迟很低，基本都在 2ms 以内。
+## 测试 NGINX 服务
 
-## 创建混沌实验
+本章节介绍创建 Chaos Mesh 混沌实验并通过其实验干扰 NGINX 服务的方法。该实验的目的为通过 Chaos Mesh 混沌实验向 NGINX 注入 HTTP 故障，从而修改 NGINX 的返回数据。
 
-1. 创建实验并选择故障类型。
-   在 Chaos Mesh Dashboard 页面点击左侧 NEW EXPERIMENT 按钮创建新实验，选择实验类型为 “KUBERNETES”，选择故障类型为 “HTTP FAULT”：
+1. 创建实验、选择故障类型。
 
-   ![K8s HTTP Experiment](./img/k8s-http-exp.png)
+    访问 Chaos Dashboard 页面后，点击左侧的 "NEW EXPERIMENT" 按钮创建新实验。
+
+    创建后，选择实验类型为 "KUBERNETES"、故障类型为 "HTTP FAULT"。
+
+    ![K8s HTTP Experiment](./img/k8s-http-exp.png)
 
 2. 设置 HTTP 实验参数。
 
-   我们这个实验的目的是修改 Nginx 的返回数据，因此选择具体的故障行为为 “RESPONSE PATCH”，然后进行具体的配置。将 “Port” 设置为 80（Nginx 提供服务的端口），将 “Patch Body Type” 设置为 “json”，在 “Patch Body Value” 中填写以下内容：
+    - 故障行为："RESPONSE PATCH"
+    - Port："80"（NGINX 提供服务的端口）
+    - Patch Body Type："json"
+    - Patch Body Value："{"status":"Failed","reason":"hacked by Chaos Mesh"}"
 
-   ```text
-   {"status":"Failed","reason":"hacked by Chaos Mesh"}
-   ```
+    ![HTTP Config](./img/http-config.png)
 
-   如下图所示：
+3. 填写实验的选择范围和基本信息，提交实验。
 
-   ![HTTP Config](./img/http-config.png)
+    参考以下图片的内容设置实验的选择范围和基本信息后，点击 "Submit" 提交实验。
 
-3. 设置实验的选择范围以及元信息。
+    ![HTTP Meta](./img/http-exp-meta.png)
 
-   ![HTTP Meta](./img/http-exp-meta.png)
+4. 查看故障注入状态。
 
-4. 提交实验。
-   
-   在所有配置完成后，点击 “Submit” 提交实验。我们可以在实验列表中看到我们创建的实验，我们可以选择指定的实验查看详情：
+    你可以在实验列表中看到自己创建的实验和实验的配置详情，并在 "Events" 部分中看到故障注入状态。
+
+    以下图片的 "Events" 部分显示故障注入已成功。
 
    ![HTTP Detail](./img/http-detail.png)
 
-   从 “Events” 中可以看到故障注入成功了。
-
 5. 验证实验效果。
 
-   让我们再次访问 http://localhost/ ，可以看到页面上显示了如下内容：
+   在浏览器中访问 `http://localhost/`。如果可以看到页面上显示如下内容，则说明故障注入已生效，该实验成功地修改了 NGINX 的返回数据：
 
-   ```bash
-   {"app":"Chaos App","reason":"hacked by Chaos Mesh","status":"Failed"}
-   ```
+    ```bash
+    {"app":"Chaos App","reason":"hacked by Chaos Mesh","status":"Failed"}
+    ```
 
-   说明故障注入生效了，成功地修改了 Nginx 的返回数据。
+## 测试 WebShow 服务
 
-## 创建 workflow
+本章节介绍如何在一个 Workflow 创建多个网络故障任务，并通过这个 Workflow 对 WebShow 服务进行干扰。
 
-我们创建一个 workflow，对 WebShow 服务进行干扰。
+在以下示例中，Chaos Mesh 预计向 WebShow 服务注入网络延迟，观察在网络延时下该应用的工作状态。Chaos Mesh 将先使 WebShow 延迟 10ms 后，持续一段时间的延迟状态，其后再将延迟降低到先前水平，最后再把延迟提高到 20ms。
 
-1. 点击主页的 “NEW WORKFLOW” 按钮创建新的 workflow。
+1. 访问 Chaos Dashboard，创建 Workflow。
 
-2. 创建一个 “single” 类型的 task，选择实验类型为 “KUBERNETES”，并选择故障类型为 “NETWORK ATTACK”：
+   访问 Chaos Dashboard 页面后，点击左侧的 "NEW WORKFLOW" 按钮来创建一个新的 Workflow。
+
+2. 设置任务信息。
+
+    将任务类型设置为 "single"、实验类型设为 "KUBERNETES"、故障类型设为 "NETWORK ATTACK"。
 
    ![K8s Network Experiment](./img/k8s-network-exp.png)
 
-3. 选择故障行为为 “DELAY”，这里我们设置 “Latency” 为 10ms，增加 10ms 的网络延迟：
+3. 选择故障行为。
+
+    将故障行为选为 "DELAY"，并把 "Latency" 设置为 10ms，表示增加 10ms 的网络延迟。
 
    ![Network Config](./img/network-config.png)
 
-4. 设置实验的范围只针对 WebShow，并填写实验元信息，让该实验持续 30s：
+4. 填写实验的选择范围和基本信息。
+
+   将实验范围设置为 "app: web-show"，表示该实验指针对 WebShow 应用程序。另外，填写实验的基本信息，将实验命名为 "delay1"，实验持续时间设置为 "30s"：
 
    ![Network Meta](./img/network-meta.png)
 
-5. 创建一个 “Suspend” 类型的任务。
+5. 再创建一个新的任务。
 
-   该类型的任务正如其名字的含义一样，并不会做任何事情。这里设置该任务持续 30s：
+    将任务类型选为 "Suspend"。该类型的任务正如其名字的含义一样，并不会做任何事情。该实验的持续时间设置为 "30s"：
 
    ![Suspend Task](./img/suspend-task.png)
 
-6. 创建一个网络延迟的 “Single” 类型的任务。
+6. 再创建一个新的任务。
 
-   这次将 “Latency” 设置为 20ms，创建过程同 delay1，就不再赘述。
+    将实验类型选为 "single"、故障行为选为 "DELAY"、"Latency" 设置为 20ms。具体创建流程与创建 "delay1" 的流程相同（第 2 步至第 4 步）。
 
-7. 填写 workflow 的元信息，如下所示：
+7. 创建 3 个任务后，填写 Workflow 元信息。
+
+    根据图片所示填写元信息后，点击 "SUBMIT WORKFLOW" 按钮提交 Workflow。
 
    ![Workflow Meta](./img/workflow-meta.png)
 
-8. 最后点击 “SUBMIT WORKFLOW” 按钮，这样 workflow 就创建完成并开始运行了。
+8. 验证 Workflow 效果。
 
-9. 验证 workflow 效果。
-
-   再次在浏览器中访问 http://localhost:8081/，等待一段时间（大约90s），将看到如下图所示的折线图：
+   在浏览器中访问 `http://localhost:8081/`。等待一段时间（大约 90s），将看到如下图所示的折线图：
 
    ![WebShow 2](./img/web-show2.png)
-  
-   我们可以发现网络延迟增加到了 10ms 左右，持续一段时间后延迟降低到先前水平，之后又上升到了 20ms 左右。这符合我们 workflow 的定义，说明 workflow 成功地注入了多个网络延迟故障。
 
+   你可以发现网络延迟先增加到了 10ms 左右，持续一段时间后，其延迟降低到先前水平，之后又上升到了 20ms 左右。这符合我们的 Workflow 设置，说明使用 Workflow 成功地注入了多个网络延迟故障。
 
-## 探索更多
+## 问题反馈
 
-通过 demo 我们体验了 Chaos Mesh 2.1 中的 HTTPChaos、workflow 等功能，相信你已经感受到了 Chaos Mesh 和混沌工程的魅力之处。除此之外，Chaos Mesh 2.1 还包含很多新的特性以及功能完善，期待你来探索！
-
-在 Chaos Mesh 的使用过程中遇到任何问题，欢迎通过 [issue](https://github.com/chaos-mesh/chaos-mesh/issues) 向我们反馈。
+如果在操作的过程中遇到了问题，或有兴趣帮助我们改进这一工具，欢迎在 [CNCF Slack](https://cloud-native.slack.com/archives/C0193VAV272) 向 Chaos Mesh 团队反馈，或者直接在 GitHub 创建一个 [issue](https://github.com/chaos-mesh/chaos-mesh/issues)。
