@@ -61,6 +61,11 @@ const whoisUsing = [
     },
   },
   {
+    name: 'Maycur',
+    img: 'img/logos/maycur.png',
+    href: 'https://www.maycur.com/'
+  },
+  {
     name: 'Meituan Dianping',
     img: 'img/logos/meituandianping.png',
     href: 'https://about.meituan.com/'
