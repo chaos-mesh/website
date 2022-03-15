@@ -67,7 +67,7 @@ Global Flags:
 | Configuration item | Abbreviation | Description | Value |
 | :-- | :-- | :-- | :-- |
 | `process` | p | The name or the identifier of the process to be injected faults | string; the default value is `""`. |
-| `recover-cmd` | The command to be run when recovering experiment | string; the default value is `""`. |
+| `recover-cmd` | r | The command to be run when recovering experiment | string; the default value is `""`. |
 | `signal` | s | The provided value of the process signal | int; the default value is `9`. Currently, only `SIGKILL`, `SIGTERM`, and `SIGSTOP` are supported. |
 
 #### Example for killing a process
