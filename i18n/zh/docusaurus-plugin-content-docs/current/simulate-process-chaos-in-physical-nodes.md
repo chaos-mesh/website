@@ -54,7 +54,7 @@ Usage:
 Flags:
   -h, --help                 help for kill
   -p, --process string       The process name or the process ID
-  -r, --recover-cmd string   The command to be executed when recovering experiment
+  -r, --recover-cmd string   The command to be run when recovering experiment
   -s, --signal int           The signal number to send (default 9)
 
 Global Flags:
