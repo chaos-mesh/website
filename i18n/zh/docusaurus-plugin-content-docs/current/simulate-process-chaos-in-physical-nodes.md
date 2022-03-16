@@ -52,12 +52,14 @@ Usage:
   chaosd attack process kill [flags]
 
 Flags:
-  -h, --help             help for kill
-  -p, --process string   The process name or the process ID
-  -s, --signal int       The signal number to send (default 9)
+  -h, --help                 help for kill
+  -p, --process string       The process name or the process ID
+  -r, --recover-cmd string   The command to be run when recovering experiment
+  -s, --signal int           The signal number to send (default 9)
 
 Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
+      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
+      --uid string         the experiment ID
 ```
 
 #### 模拟进程被终止相关配置说明
@@ -65,6 +67,7 @@ Global Flags:
 | 配置项 | 配置缩写 | 说明 | 值 |
 | :-- | :-- | :-- | :-- |
 | `process` | p | 需要注入故障的进程的名字或者进程的标识符 | string 类型，默认为 `""` |
+| `recover-cmd` | r | 需要在实验恢复时执行的命令 | string 类型，默认为 `""`|
 | `signal` | s | 所提供的进程信号值 | int 类型，默认为 `9`。目前只支持 `SIGKILL`、`SIGTERM` 和 `SIGSTOP` 三种信号值。 |
 
 #### 模拟进程被终止示例
