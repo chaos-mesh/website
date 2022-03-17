@@ -2,7 +2,7 @@
 title: 模拟 JVM 应用故障
 ---
 
-Chaosd 通过 [Byteman](https://github.com/chaos-mesh/byteman) 模拟 JVM 应用故障，主要支持以下几种故障类型：
+Chaosd 可以通过 [Byteman](https://github.com/chaos-mesh/byteman) 模拟 JVM 应用故障，主要支持以下几种故障类型：
 
 - 抛出自定义异常
 - 触发垃圾回收
@@ -11,9 +11,7 @@ Chaosd 通过 [Byteman](https://github.com/chaos-mesh/byteman) 模拟 JVM 应用
 - 设置 Byteman 配置文件触发故障
 - 增加 JVM 压力
 
-此外，Chaosd 对常用的服务（或其 Java 客户端）也支持了故障注入：
-
-- MySQL Java 客户端故障注入，支持在执行指定类型的 SQL 时注入延迟、抛出异常。
+同时，Chaosd 支持对常用的服务或其 Java 客户端注入上述的故障。比如，当 MySQL Java 客户端执行指定类型的 SQL 语句（`"select"`，`"update"`，`"insert"`，`"replace"` 或 `"delete"`）时，你可以使用 Chaosd 在该客户端注入延迟或抛出异常。
 
 本文主要介绍如何通过 Chaosd 创建以上故障类型的 JVM 实验。
 
@@ -385,11 +383,11 @@ chaosd attack jvm stress --cpu-count 2 --pid 123546
 Attack jvm successfully, uid: b9b997b5-0a0d-4f1f-9081-d52a32318b84
 ```
 
-### 使用命令行模式模拟 MySQL 故障
+### 使用命令行模式在 MySQL 的 Java 客户端注入故障
 
-Chaosd 支持在 MySQL 的 Java 客户端执行指定类型的 SQL 时注入延迟、抛出异常。
+Chaosd 支持在 MySQL 的 Java 客户端执行指定类型的 SQL 语句时对其注入延迟、抛出异常。
 
-#### 模拟 MySQL 故障命令
+#### 注入故障命令
 
 ```bash
 chaosd attack jvm stress --help
@@ -419,21 +417,21 @@ Global Flags:
       --uid string         the experiment ID
 ```
 
-#### 模拟 MySQL 故障相关配置说明
+#### 注入故障相关配置说明
 
-| 配置项 | 配置缩写 | 说明 | 值 |
-| :-- | :-- | :-- | :-- |
-| `database` | `d` | 匹配指定的数据库名称 | string 类型，如 `“test”`。默认为 `""`，表示匹配所有的数据库 |
-| `exception` | 无 | 抛出的自定义异常信息 | string 类型，如 `“BOOM”`。`exception` 和 `lantency` 必须配置其中一个 |
-| `latency` | 无 | 执行 SQL 的延迟时间 | int 类型，单位为毫秒（ms），如 `1000`。`exception` 和 `lantency` 必须配置其中一个 |
-| `mysql-connector-version` | `v` | 使用的 MySQL 客户端（ mysql-connector-java）的版本 | int 类型，对于 `5.X.X` 版本设置为 `5`，对于 `8.X.X` 版本设置为 `8`，默认为 `8` |
-| `sql-type` | 无 | 匹配的 SQL 类型 | string 类型，支持 `"select"`、`"update"`、`"insert"`、`"replace"`、`"delete"` 五种类型，默认为 `""`，表示匹配所有类型的 SQL |
-| `table` | `t` | 匹配指定的表名称 | string 类型，如 `"t1"`。默认为 `""`，表示匹配所有的表 |
-| `uid` | 无 | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
-| `port` | 无 | 注入的 Java agent 对外提供服务的端口号  | int 类型，默认为 `9288` |
-| `pid` | 无 | 注入的 Java 进程的进程 ID  | int 类型，必须设置 |
+| 配置项 | 配置缩写 | 说明 | 值 | 默认值 |
+| :-- | :-- | :-- | :-- | :-- |
+| `database` | `d` | 可匹配的指定的数据库名称 | string 类型，如 `“test”` | `""`（即匹配所有的数据库） |
+| `exception` | 无 | 抛出的自定义异常信息 | string 类型，如 `“BOOM”`。`exception` 和 `lantency` 中必须配置一个 | 无 |
+| `latency` | 无 | 执行 SQL 的延迟时间 | int 类型，单位为毫秒 (ms)，如 `1000`。`exception` 和 `lantency` 中必须配置一个  | 无 |
+| `mysql-connector-version` | `v` | 使用的 MySQL 客户端 (mysql-connector-java) 的版本 | int 类型，对于 `5.X.X` 版本设置为 `5`，对于 `8.X.X` 版本设置为 `8` | `8` |
+| `sql-type` | 无 | 可匹配的 SQL 类型 | string 类型，可选值为 `"select"`、`"update"`、`"insert"`、`"replace"`、`"delete"`  | `""`（即匹配所有类型的 SQL） |
+| `table` | `t` | 可匹配的指定的表名称 | string 类型，如 `"t1"`| `""`（即匹配所有的表） |
+| `uid` | 无 | 实验的编号 | string 类型，可以不配置（Chaosd 会随机生成一个） | 无 |
+| `port` | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程  | int 类型 | `9288` |
+| `pid` | 无 | 需要注入故障的 Java 进程号  | int 类型，必须设置 |
 
-#### 模拟 MySQL 故障示例
+#### 注入故障示例
 
 1. 部署 TiDB（或者 MySQL）
 
@@ -446,16 +444,16 @@ Global Flags:
    ${tidb_dir}/bin/tidb-server -store mocktikv -P 4000 > tidb.log 2>&1 &
    ```
 
-2. 部署示例应用程序
-  
-   部署一个应用程序 `mysqldemo`，该应用程序可以接收 HTTP 请求，并查询 TiDB（或者 MySQL）数据库：
+2. 部署 Demo 应用程序
+
+   部署一个 Demo 应用程序 `mysqldemo`。该应用程序可以接收 HTTP 请求，并查询 TiDB（或者 MySQL）数据库：
 
    ```bash
    git clone https://github.com/WangXiangUSTC/byteman-example.git
    cd byteman-example/mysqldemo
    mvn -X package -Dmaven.test.skip=true -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true
-   export MYSQL_DSN=jdbc:"mysql://127.0.0.1:4000/test"                        
-   export MYSQL_USER=root                             
+   export MYSQL_DSN=jdbc:"mysql://127.0.0.1:4000/test"
+   export MYSQL_USER=root
    export MYSQL_CONNECTOR_VERSION=8
    mvn exec:java -Dexec.mainClass="com.mysqldemo.App" > mysqldemo.log 2>&1 &
    ```
@@ -465,18 +463,18 @@ Global Flags:
    ```bash
    curl -X GET "http://127.0.0.1:8001/query?sql=SELECT%20*%20FROM%20mysql.user"
    ```
-   
-   可以从输出中看到 root 用户的信息。
+
+   你可以在命令输出结果中查看用户名为 root 的用户的信息。
 
 3. 注入故障
-   
-   假设示例应用程序 `mysqldemo` 的 PID 为 `12345`，运行以下命令：
+
+   假设 `mysqldemo` 的 PID（需要注入故障的 Java 进程号） 为 `12345`，通过以下命令在该应用程序中注入故障：
 
    ```bash
    chaosd attack jvm mysql --database mysql --table user --port 9288  --exception "BOOM" --pid 12345
    ```
 
-   该命令将注入故障到示例应用程序 `mysqldemo`，当执行表 `mysql.user` 相关的 SQL 时都将返回异常 `BOOM`。再次向 `mysqldemo` 发送查询请求：
+   注入故障后，正在执行与 `mysql.user` 表相关的 SQL 语句时，应用程序会返回异常信息 `BOOM`。确认该结果后，再次向 `mysqldemo` 发送查询请求：
 
    ```bash
    curl -X GET "http://127.0.0.1:8001/query?sql=SELECT%20*%20FROM%20mysql.user"
@@ -696,38 +694,55 @@ curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/js
 {"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
 ```
 
-### 使用服务模式模拟 MySQL 故障
+### 使用服务模式模拟对 MySQL Java 客户端注入故障
 
-Chaosd 支持在 MySQL 的 Java 客户端执行指定类型的 SQL 时注入延迟、抛出异常。
+Chaosd 支持对 MySQL 的 Java 客户端执行指定类型的 SQL 时注入延迟、抛出异常。
 
-#### 模拟 MySQL 故障相关参数说明
+#### 注入故障相关参数说明
 
-| 配置项 | 说明 | 值 |
-| :-- | :-- | :-- |
-| `database` | 匹配指定的数据库名称 | string 类型，如 `“test”`。默认为 `""`，表示匹配所有的数据库 |
-| `exception` | 抛出的自定义异常信息 | string 类型，如 `“BOOM”`。`exception` 和 `lantency` 必须配置其中一个 |
-| `latency` | 执行 SQL 的延迟时间 | int 类型，单位为毫秒（ms），如 `1000`。`exception` 和 `lantency` 必须配置其中一个 |
-| `mysql-connector-version` | 使用的 MySQL 客户端（ mysql-connector-java）的版本 | int 类型，对于 `5.X.X` 版本设置为 `5`，对于 `8.X.X` 版本设置为 `8`，默认为 `8` |
-| `sql-type` | 匹配的 SQL 类型 | string 类型，支持 `"select"`、`"update"`、`"insert"`、`"replace"`、`"delete"` 五种类型，默认为 `""`，表示匹配所有类型的 SQL |
-| `table` | 匹配指定的表名称 | string 类型，如 `"t1"`。默认为 `""`，表示匹配所有的表 |
-| `uid` | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
-| `port` | 注入的 Java agent 对外提供服务的端口号  | int 类型，默认为 `9288` |
-| `pid` | 注入的 Java 进程的进程 ID  | int 类型，必须设置 |
+| 配置项 | 说明 | 值 | 默认值 |
+| :-- | :-- | :-- | :-- |
+| `database` | 可匹配的指定的数据库名称 | string 类型，如 `“test”` | `""`（即匹配所有的数据库） |
+| `exception` | 抛出的自定义异常信息 | string 类型，如 `“BOOM”`。`exception` 和 `lantency` 中必须配置一个 | 无 |
+| `latency` | 执行 SQL 的延迟时间 | int 类型，单位为毫秒 (ms)，如 `1000`。`exception` 和 `lantency` 中必须配置一个  | 无 |
+| `mysql-connector-version` | 使用的 MySQL 客户端 (mysql-connector-java) 的版本 | int 类型，对于 `5.X.X` 版本设置为 `5`，对于 `8.X.X` 版本设置为 `8` | `8` |
+| `sql-type` | 可匹配的 SQL 类型 | string 类型，可选值为 `"select"`、`"update"`、`"insert"`、`"replace"`、`"delete"`  | `""`（即匹配所有类型的 SQL） |
+| `table` | 可匹配的指定的表名称 | string 类型，如 `"t1"`| `""`（即匹配所有的表） |
+| `uid` | 实验的编号 | string 类型，可以不配置（Chaosd 会随机生成一个） | 无 |
+| `port` | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程  | int 类型 | `9288` |
+| `pid` | 需要注入故障的 Java 进程号  | int 类型，必须设置 |
 
 #### 使用服务模式模拟 MySQL 故障示例
 
-1. 部署 TiDB（或者 MySQL）以及示例应用程序
+1. 部署 TiDB（或者 MySQL）和 Demo 应用程序
 
-   参考 [模拟 MySQL 故障示例](#模拟-MySQL-故障示例) 中的步骤 1 和 2 部署 TiDB 以及示例应用程序 `mysqldemo`。
+   在注入故障前，你需要提前部署 TiDB（或者 MySQL）和 Demo 应用程序 `mysqldemo`。具体的部署步骤，请参阅 [使用命令行模式在 MySQL 的 Java 客户端注入故障的示例](#注入故障示例) 中的步骤 1 和步骤 2。
 
 2. 注入故障
-   
-   假设示例应用程序 `mysqldemo` 的 PID 为 `12345`，运行以下命令：
+
+   假设 `mysqldemo` 的 PID（需要注入故障的 Java 进程号） 为 `12345`，通过以下命令在该应用程序中注入故障：
 
    ```bash
    curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"mysql","database":"mysql", "table":"user", "port":9288, "exception":"boom", "pid":12345}'
    ```
 
-   故障产生的影响参考[模拟 MySQL 故障示例](#模拟-MySQL-故障示例)。
+   结果如下所示：
 
-   
+   ```log
+   java.sql.SQLException: BOOM
+	   at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
+	   at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	   at com.mysql.cj.jdbc.StatementImpl.executeQuery(StatementImpl.java:1206)
+	   at com.mysqldemo.App.querySQL(App.java:125)
+	   at com.mysqldemo.App$QueryHandler.handle(App.java:95)
+	   at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:77)
+	   at jdk.httpserver/sun.net.httpserver.AuthFilter.doFilter(AuthFilter.java:82)
+	   at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:80)
+	   at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange$LinkHandler.handle(ServerImpl.java:692)
+	   at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:77)
+	   at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange.run(ServerImpl.java:664)
+	   at jdk.httpserver/sun.net.httpserver.ServerImpl$DefaultExecutor.execute(ServerImpl.java:159)
+	   at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.handle(ServerImpl.java:442)
+	   at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.run(ServerImpl.java:408)
+	   at java.base/java.lang.Thread.run(Thread.java:832)
+   ```
