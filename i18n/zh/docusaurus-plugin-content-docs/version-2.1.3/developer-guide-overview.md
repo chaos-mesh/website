@@ -11,3 +11,8 @@ title: 开发指南概览
 
 - [新增混沌实验类型](add-new-chaos-experiment-type.md)
 - [拓展 Chaos Daemon 接口](extend-chaos-daemon-interface.md)
+
+开发规范相关内容如下：
+
+- [错误处理](https://github.com/chaos-mesh/rfcs/blob/main/text/2021-09-27-refine-error-handling.md)
+- [日志打印](https://github.com/chaos-mesh/rfcs/blob/main/text/2021-12-09-logging.md)
