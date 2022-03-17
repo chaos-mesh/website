@@ -435,89 +435,89 @@ Global Flags:
 
 1. 部署 TiDB（或者 MySQL）
 
-   执行以下命令，部署一个 `mocktikv` 模式的 TiDB：
+    执行以下命令，部署一个 `mocktikv` 模式的 TiDB：
 
-   ```bash
-   export tidb_dir="tidb-v5.3.0-linux-amd64"
-   curl -fsSL -o ${tidb_dir}.tar.gz https://download.pingcap.org/${tidb_dir}.tar.gz
-   tar zxvf ${tidb_dir}.tar.gz
-   ${tidb_dir}/bin/tidb-server -store mocktikv -P 4000 > tidb.log 2>&1 &
-   ```
+    ```bash
+    export tidb_dir="tidb-v5.3.0-linux-amd64"
+    curl -fsSL -o ${tidb_dir}.tar.gz https://download.pingcap.org/${tidb_dir}.tar.gz
+    tar zxvf ${tidb_dir}.tar.gz
+    ${tidb_dir}/bin/tidb-server -store mocktikv -P 4000 > tidb.log 2>&1 &
+    ```
 
 2. 部署 Demo 应用程序
 
-   部署一个 Demo 应用程序 `mysqldemo`。该应用程序可以接收 HTTP 请求，并查询 TiDB（或者 MySQL）数据库：
+    部署一个 Demo 应用程序 `mysqldemo`。该应用程序可以接收 HTTP 请求，并查询 TiDB（或者 MySQL）数据库：
 
-   ```bash
-   git clone https://github.com/WangXiangUSTC/byteman-example.git
-   cd byteman-example/mysqldemo
-   mvn -X package -Dmaven.test.skip=true -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true
-   export MYSQL_DSN=jdbc:"mysql://127.0.0.1:4000/test"
-   export MYSQL_USER=root
-   export MYSQL_CONNECTOR_VERSION=8
-   mvn exec:java -Dexec.mainClass="com.mysqldemo.App" > mysqldemo.log 2>&1 &
-   ```
+    ```bash
+    git clone https://github.com/WangXiangUSTC/byteman-example.git
+    cd byteman-example/mysqldemo
+    mvn -X package -Dmaven.test.skip=true -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true
+    export MYSQL_DSN=jdbc:"mysql://127.0.0.1:4000/test"
+    export MYSQL_USER=root
+    export MYSQL_CONNECTOR_VERSION=8
+    mvn exec:java -Dexec.mainClass="com.mysqldemo.App" > mysqldemo.log 2>&1 &
+    ```
 
-   执行以下命令，确认应用程序可以正常提供服务：
+    执行以下命令，确认应用程序可以正常提供服务：
 
-   ```bash
-   curl -X GET "http://127.0.0.1:8001/query?sql=SELECT%20*%20FROM%20mysql.user"
-   ```
+    ```bash
+    curl -X GET "http://127.0.0.1:8001/query?sql=SELECT%20*%20FROM%20mysql.user"
+    ```
 
-   你可以在命令输出结果中查看用户名为 root 的用户的信息。
+    你可以在命令输出结果中查看用户名为 root 的用户的信息。
 
 3. 注入故障
 
-   假设 `mysqldemo` 的 PID（需要注入故障的 Java 进程号） 为 `12345`，通过以下命令在该应用程序中注入故障：
+    假设 `mysqldemo` 的 PID（需要注入故障的 Java 进程号） 为 `12345`，通过以下命令在该应用程序中注入故障：
 
-   ```bash
-   chaosd attack jvm mysql --database mysql --table user --port 9288  --exception "BOOM" --pid 12345
-   ```
+    ```bash
+    chaosd attack jvm mysql --database mysql --table user --port 9288  --exception "BOOM" --pid 12345
+    ```
 
-   注入故障后，正在执行与 `mysql.user` 表相关的 SQL 语句时，应用程序会返回异常信息 `BOOM`。确认该结果后，再次向 `mysqldemo` 发送查询请求：
+    注入故障后，正在执行与 `mysql.user` 表相关的 SQL 语句时，应用程序会返回异常信息 `BOOM`。确认该结果后，再次向 `mysqldemo` 发送查询请求：
 
-   ```bash
-   curl -X GET "http://127.0.0.1:8001/query?sql=SELECT%20*%20FROM%20mysql.user"
-   ```
+    ```bash
+    curl -X GET "http://127.0.0.1:8001/query?sql=SELECT%20*%20FROM%20mysql.user"
+    ```
 
-   结果如下所示：
+    结果如下所示：
 
-   ```log
-   java.sql.SQLException: BOOM
-	   at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
-	   at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
-	   at com.mysql.cj.jdbc.StatementImpl.executeQuery(StatementImpl.java:1206)
-	   at com.mysqldemo.App.querySQL(App.java:125)
-	   at com.mysqldemo.App$QueryHandler.handle(App.java:95)
-	   at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:77)
-	   at jdk.httpserver/sun.net.httpserver.AuthFilter.doFilter(AuthFilter.java:82)
-	   at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:80)
-	   at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange$LinkHandler.handle(ServerImpl.java:692)
-	   at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:77)
-	   at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange.run(ServerImpl.java:664)
-	   at jdk.httpserver/sun.net.httpserver.ServerImpl$DefaultExecutor.execute(ServerImpl.java:159)
-	   at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.handle(ServerImpl.java:442)
-	   at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.run(ServerImpl.java:408)
-	   at java.base/java.lang.Thread.run(Thread.java:832)
-   ```
+    ```log
+    java.sql.SQLException: BOOM
+    at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
+	  at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+    at com.mysql.cj.jdbc.StatementImpl.executeQuery(StatementImpl.java:1206)
+	  at com.mysqldemo.App.querySQL(App.java:125)
+	  at com.mysqldemo.App$QueryHandler.handle(App.java:95)
+    at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:77)
+	  at jdk.httpserver/sun.net.httpserver.AuthFilter.doFilter(AuthFilter.java:82)
+	  at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:80)
+	  at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange$LinkHandler.handle(ServerImpl.java:692)
+    at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:77)
+	  at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange.run(ServerImpl.java:664)
+    at jdk.httpserver/sun.net.httpserver.ServerImpl$DefaultExecutor.execute(ServerImpl.java:159)
+	  at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.handle(ServerImpl.java:442)
+	  at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.run(ServerImpl.java:408)
+	  at java.base/java.lang.Thread.run(Thread.java:832)
+    ```
 
 ## 使用服务模式创建实验
 
 要使用服务模式创建实验，请进行以下操作：
 
-1. 以服务模式运行 chaosd。
+1. 以服务模式运行 Chaosd。
 
-   ```bash
-   chaosd server --port 31767
-   ```
+    ```bash
+    chaosd server --port 31767
+    ```
 
 2. 向 Chaosd 服务的路径 `/api/attack/jvm` 发送 `POST` HTTP 请求。
 
-   ```bash
-   curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{fault-configuration}'
-   ```
+    ```bash
+    curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{fault-configuration}'
+    ```
 
-在上述命令中，你需要按照故障类型在 `fault-configuration` 中进行配置。有关对应的配置参数，请参考下文中各个类型故障的相关参数说明和命令示例。
+    在上述命令中，你需要按照故障类型在 `fault-configuration` 中进行配置。有关对应的配置参数，请参考下文中各个类型故障的相关参数说明和命令示例。
 
 :::note 注意
 
@@ -716,33 +716,33 @@ Chaosd 支持对 MySQL 的 Java 客户端执行指定类型的 SQL 时注入延�
 
 1. 部署 TiDB（或者 MySQL）和 Demo 应用程序
 
-   在注入故障前，你需要提前部署 TiDB（或者 MySQL）和 Demo 应用程序 `mysqldemo`。具体的部署步骤，请参阅 [使用命令行模式在 MySQL 的 Java 客户端注入故障的示例](#注入故障示例) 中的步骤 1 和步骤 2。
+    在注入故障前，你需要提前部署 TiDB（或者 MySQL）和 Demo 应用程序 `mysqldemo`。具体的部署步骤，请参阅 [使用命令行模式在 MySQL 的 Java 客户端注入故障的示例](#注入故障示例) 中的步骤 1 和步骤 2。
 
 2. 注入故障
 
-   假设 `mysqldemo` 的 PID（需要注入故障的 Java 进程号） 为 `12345`，通过以下命令在该应用程序中注入故障：
+    假设 `mysqldemo` 的 PID（需要注入故障的 Java 进程号） 为 `12345`，通过以下命令在该应用程序中注入故障：
 
-   ```bash
-   curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"mysql","database":"mysql", "table":"user", "port":9288, "exception":"boom", "pid":12345}'
-   ```
+    ```bash
+    curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"mysql","database":"mysql", "table":"user", "port":9288, "exception":"boom", "pid":12345}'
+    ```
 
    结果如下所示：
 
-   ```log
-   java.sql.SQLException: BOOM
-	   at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
-	   at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
-	   at com.mysql.cj.jdbc.StatementImpl.executeQuery(StatementImpl.java:1206)
-	   at com.mysqldemo.App.querySQL(App.java:125)
-	   at com.mysqldemo.App$QueryHandler.handle(App.java:95)
-	   at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:77)
-	   at jdk.httpserver/sun.net.httpserver.AuthFilter.doFilter(AuthFilter.java:82)
-	   at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:80)
-	   at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange$LinkHandler.handle(ServerImpl.java:692)
-	   at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:77)
-	   at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange.run(ServerImpl.java:664)
-	   at jdk.httpserver/sun.net.httpserver.ServerImpl$DefaultExecutor.execute(ServerImpl.java:159)
-	   at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.handle(ServerImpl.java:442)
-	   at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.run(ServerImpl.java:408)
-	   at java.base/java.lang.Thread.run(Thread.java:832)
-   ```
+    ```log
+    java.sql.SQLException: BOOM
+	  at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
+	  at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+    at com.mysql.cj.jdbc.StatementImpl.executeQuery(StatementImpl.java:1206)
+	  at com.mysqldemo.App.querySQL(App.java:125)
+	  at com.mysqldemo.App$QueryHandler.handle(App.java:95)
+    at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:77)
+	  at jdk.httpserver/sun.net.httpserver.AuthFilter.doFilter(AuthFilter.java:82)
+	  at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:80)
+	  at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange$LinkHandler.handle(ServerImpl.java:692)
+    at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:77)
+	  at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange.run(ServerImpl.java:664)
+    at jdk.httpserver/sun.net.httpserver.ServerImpl$DefaultExecutor.execute(ServerImpl.java:159)
+	  at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.handle(ServerImpl.java:442)
+	  at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.run(ServerImpl.java:408)
+	  at java.base/java.lang.Thread.run(Thread.java:832)
+    ```
