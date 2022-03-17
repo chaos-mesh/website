@@ -12,7 +12,7 @@ Then, you can start from [Configure Development Environment](configure-developme
 - [Add New Chaos Experiment Type](add-new-chaos-experiment-type.md)
 - [Extend Chaos Daemon interface](extend-chaos-daemon-interface.md)
 
-Coding Conventions:
+For coding conventions, refer to the following documents:
 
 - [Error Handling](https://github.com/chaos-mesh/rfcs/blob/main/text/2021-09-27-refine-error-handling.md)
 - [Logging](https://github.com/chaos-mesh/rfcs/blob/main/text/2021-12-09-logging.md)
