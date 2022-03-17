@@ -14,5 +14,5 @@ title: 开发指南概览
 
 开发规范
 
-- [错误处理规范](https://github.com/chaos-mesh/rfcs/blob/main/text/2021-09-27-refine-error-handling.md)
-- [日志打印规范](https://github.com/chaos-mesh/rfcs/blob/main/text/2021-12-09-logging.md)
+- [错误处理](https://github.com/chaos-mesh/rfcs/blob/main/text/2021-09-27-refine-error-handling.md)
+- [日志打印](https://github.com/chaos-mesh/rfcs/blob/main/text/2021-12-09-logging.md)
