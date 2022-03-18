@@ -2,7 +2,7 @@
 title: 10 分钟体验 Chaos Mesh v2.1.0
 ---
 
-本文主要介绍 Chaos Mesh v2.1.0 的使用方法，包括如何通过 Chaos Mesh 混沌实验干扰 NGINX 应用程序、如何通过 Chasos Mesh 的 Workflow 创建复杂的混沌测试流程并查看实验流程和结果等等。
+本文主要介绍 Chaos Mesh v2.1.0 的使用方法，包括如何通过 HTTPChaos 实验干扰 NGINX 应用程序的服务，如何使用 Chaos Mesh Workflow 为 WebShow 应用程序 (Demo) 模拟复杂的网络环境，以及如何查看干扰应用程序服务的过程和结果等等。
 
 ## 准备环境
 
@@ -19,8 +19,8 @@ title: 10 分钟体验 Chaos Mesh v2.1.0
 
 :::note 注意
 
-- 建议**仅**在快速上手体验 Chaos Mesh 或在测试环境中使用上述方式部署 Kubernetes 和 Chaos Mesh。
-- 在生产环境中，需通过 [使用 Helm 安装 Chaos Mesh](./production-installation-using-helm.md) 中提供的部署方式来部署 Kubernetes 和 Chaos Mesh。
+- 建议**仅**在快速上手体验 Chaos Mesh 时或在测试环境中使用上述方式部署 Kubernetes 和 Chaos Mesh。
+- 在生产环境中，请通过 [使用 Helm 安装 Chaos Mesh](./production-installation-using-helm.md) 中提供的部署方式来部署 Kubernetes 和 Chaos Mesh。
 
 :::
 
@@ -30,7 +30,7 @@ title: 10 分钟体验 Chaos Mesh v2.1.0
     curl -sSL https://mirrors.chaos-mesh.org/v2.1.2/install.sh | bash -s -- --local kind
     ```
 
-    完整运行脚本约需需要几分钟时间，请耐心等待。
+    完整运行脚本约需要几分钟时间，请耐心等待。
 
     安装完成后，确认 Chaos Mesh 的所有 Pod 都处于 Running 状态：
 
@@ -79,7 +79,7 @@ NGINX 是用于进行反向代理、负载平衡等工作的应用程序。在�
     kubectl get pods -l app=nginx
     ```
 
-    输出如下所示：
+    输出结果如下所示：
 
     ```log
     NAME READY STATUS RESTARTS AGE
@@ -92,7 +92,7 @@ NGINX 是用于进行反向代理、负载平衡等工作的应用程序。在�
     kubectl port-forward --address 0.0.0.0 svc/nginx 80:80 -n nginx
     ```
 
-    在浏览器中访问 `http://localhost/`。如果页面显示如下内容，说明 NGINX 正在正常工作：
+    运行后，请在浏览器中访问 `http://localhost/`。如果页面显示如下，说明 NGINX 正在正常工作：
 
     ```log
     {"app": "Chaos App", "status": "Running"}
@@ -128,16 +128,16 @@ WebShow 是 Chaos Mesh 提供的一个 Demo 应用程序。在本文中，WebSho
 
 2. 设置 HTTP 实验参数。
 
-    - 故障行为："RESPONSE PATCH"
-    - Port："80"（NGINX 提供服务的端口）
-    - Patch Body Type："json"
-    - Patch Body Value："{"status":"Failed","reason":"hacked by Chaos Mesh"}"
+    - 故障行为：RESPONSE PATCH
+    - Port：80（NGINX 提供服务的端口）
+    - Patch Body Type：json
+    - Patch Body Value：{"status":"Failed","reason":"hacked by Chaos Mesh"}
 
     ![HTTP Config](./img/http-config.png)
 
 3. 填写实验的选择范围和基本信息，提交实验。
 
-    参考以下图片的内容设置实验的选择范围和基本信息后，点击 "Submit" 提交实验。
+    参考以下图片的内容设置实验的选择范围和基本信息后，点击 "SUBMIT" 提交实验。
 
     ![HTTP Meta](./img/http-exp-meta.png)
 
@@ -161,7 +161,7 @@ WebShow 是 Chaos Mesh 提供的一个 Demo 应用程序。在本文中，WebSho
 
 本章节介绍如何在一个 Workflow 创建多个网络故障任务，并通过这个 Workflow 对 WebShow 服务进行干扰。
 
-在以下示例中，Chaos Mesh 预计向 WebShow 服务注入网络延迟，观察在网络延时下该应用的工作状态。Chaos Mesh 将先使 WebShow 延迟 10ms 后，持续一段时间的延迟状态，其后再将延迟降低到先前水平，最后再把延迟提高到 20ms。
+在以下示例中，Chaos Mesh 会向 WebShow 服务注入网络延迟，并观察在网络延迟的情况下该应用的工作状态。Chaos Mesh 将先使 WebShow 延迟 10ms 后，持续一段时间的延迟状态，其后再将延迟降低到先前水平，最后再把延迟提高到 20ms。
 
 1. 访问 Chaos Dashboard，创建 Workflow。
 
@@ -169,7 +169,7 @@ WebShow 是 Chaos Mesh 提供的一个 Demo 应用程序。在本文中，WebSho
 
 2. 设置任务信息。
 
-    将任务类型设置为 "single"、实验类型设为 "KUBERNETES"、故障类型设为 "NETWORK ATTACK"。
+    将任务类型设置为 "Single"、实验类型设为 "KUBERNETES"、故障类型设为 "NETWORK ATTACK"。
 
    ![K8s Network Experiment](./img/k8s-network-exp.png)
 
@@ -193,7 +193,7 @@ WebShow 是 Chaos Mesh 提供的一个 Demo 应用程序。在本文中，WebSho
 
 6. 再创建一个新的任务。
 
-    将实验类型选为 "single"、故障行为选为 "DELAY"、"Latency" 设置为 20ms。具体创建流程与创建 "delay1" 的流程相同（第 2 步至第 4 步）。
+    将实验类型选为 "Single"、故障行为选为 "DELAY"、"Latency" 设置为 20ms。具体创建流程与创建 "delay1" 的流程相同（第 2 步至第 4 步）。
 
 7. 创建 3 个任务后，填写 Workflow 元信息。
 
@@ -201,7 +201,7 @@ WebShow 是 Chaos Mesh 提供的一个 Demo 应用程序。在本文中，WebSho
 
    ![Workflow Meta](./img/workflow-meta.png)
 
-8. 验证 Workflow 效果。
+8. 验证 Workflow 影响 WebShow 服务的效果。
 
    在浏览器中访问 `http://localhost:8081/`。等待一段时间（大约 90s），将看到如下图所示的折线图：
 
