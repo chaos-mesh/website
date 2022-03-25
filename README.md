@@ -34,7 +34,7 @@ yarn build
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
-## Rlease new version
+## Release a new version
 
 ```sh
 yarn docusaurus docs:version x.x.x
