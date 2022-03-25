@@ -192,3 +192,7 @@ The safe mode is enabled by default. To disable the safe mode, specify `dashboar
 <PickHelmVersion>
 helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set dashboard.securityMode=false --version latest
 </PickHelmVersion>
+
+### How can I persist Chaos Dashboard data
+
+Chaos Dashboard uses SQLite as the default database engine. If [`PV(Persistent Volumes)`](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) is disabled, the data of Chaos Dashboard will be lost after a reboot occurs. To avoid data loss, you can refer to the [Persistence of Chaos Dashboard Data](persistence-dashboard.md) document to enable `PV` for Chaos Dashboard or set `MySQL` and `Postgres` as the database engine.
