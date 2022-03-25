@@ -20,6 +20,12 @@ yarn start
 
 This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
+By default, the `start` command will only preview documents in English. If you want to preview documents in other languages, such as Chinese, then add `--locale` after the command:
+
+```sh
+yarn start --locale zh
+```
+
 ## Build
 
 ```sh
