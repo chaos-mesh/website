@@ -72,14 +72,14 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
    apiVersion: chaos-mesh.org/v1alpha1
    kind: AWSChaos
    metadata:
-   name: ec2-stop-example
-   namespace: chaos-testing
+     name: ec2-stop-example
+     namespace: chaos-testing
    spec:
-   action: ec2-stop
-   secretName: 'cloud-key-secret'
-   awsRegion: 'us-east-2'
-   ec2Instance: 'your-ec2-instance-id'
-   duration: '5m'
+     action: ec2-stop
+     secretName: 'cloud-key-secret'
+     awsRegion: 'us-east-2'
+     ec2Instance: 'your-ec2-instance-id'
+     duration: '5m'
    ```
 
    Based on this configuration example, Chaos Mesh will inject the `ec2-stop` fault into the specified EC2 instance so that the EC2 instance will be unavailable in 5 minutes.
@@ -100,13 +100,13 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
    apiVersion: chaos-mesh.org/v1alpha1
    kind: AWSChaos
    metadata:
-   name: ec2-restart-example
-   namespace: chaos-testing
+     name: ec2-restart-example
+     namespace: chaos-testing
    spec:
-   action: ec2-restart
-   secretName: 'cloud-key-secret'
-   awsRegion: 'us-east-2'
-   ec2Instance: 'your-ec2-instance-id'
+     action: ec2-restart
+     secretName: 'cloud-key-secret'
+     awsRegion: 'us-east-2'
+     ec2Instance: 'your-ec2-instance-id'
    ```
 
    Based on this configuration example, Chaos Mesh will inject `ec2-restart` fault into the specified EC2 instance so that the EC2 instance will be restarted.
@@ -127,16 +127,16 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
    apiVersion: chaos-mesh.org/v1alpha1
    kind: AWSChaos
    metadata:
-   name: ec2-detach-volume-example
-   namespace: chaos-testing
+     name: ec2-detach-volume-example
+     namespace: chaos-testing
    spec:
-   action: ec2-stop
-   secretName: 'cloud-key-secret'
-   awsRegion: 'us-east-2'
-   ec2Instance: 'your-ec2-instance-id'
-   volumeID: 'your-volume-id'
-   deviceName: '/dev/sdf'
-   duration: '5m'
+     action: ec2-stop
+     secretName: 'cloud-key-secret'
+     awsRegion: 'us-east-2'
+     ec2Instance: 'your-ec2-instance-id'
+     volumeID: 'your-volume-id'
+     deviceName: '/dev/sdf'
+     duration: '5m'
    ```
 
    Based on this configuration example, Chaos Mesh will inject a `detail-volume` fault into the specified EC2 instance so that the EC2 instance is detached from the specified storage volume within 5 minutes.
