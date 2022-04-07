@@ -132,7 +132,7 @@ Chaos Mesh 会安装多个 Webhook：
 
 你应该删除这些 Webhooks。
 
-### Step 6: 删除 CRDs
+### 第 6 步: 删除 CRDs
 
 最后，你可以通过执行以下命令来删除 CRDs：
 
