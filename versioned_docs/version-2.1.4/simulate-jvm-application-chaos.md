@@ -29,7 +29,7 @@ Your Linux kernel must be v4.1 or later.
 
    ![JVMChaos experiments](./img/jvmchaos-exp.png)
 
-   For information about how to fill out the configurations, refer to [Field Description] (#field-description).
+   For information about how to fill out the configurations, refer to [Field Description](#field-description).
 
 3. Fill out the experiment information, and specify the experiment scope and the scheduled experiment duration.
 
