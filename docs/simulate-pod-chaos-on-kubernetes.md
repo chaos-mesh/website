@@ -14,7 +14,7 @@ PodChaos is a fault type in Chaos Mesh. By creating a PodChaos experiment, you c
 
 ## Usage restrictions
 
-Currently, Chaos Mesh only supports fault injection to certain types of Pod, such as Deployment, StatefulSet, and DaemonSet. Chaos Mesh does not support injecting faults into an independent Pod. An independent Pod means a Pod that is not bound to ReplicaSet or Deployment Pod.
+Chaos Mesh could inject PodChaos into any Pod, no matter whether it is bound to Deployment, StatefulSet, DaemonSet, or other controllers. But there might be different expected situations when you inject PodChaos into an independent Pod. For example, when we inject "pod-kill" chaos into an independent Pod, there is no way to guarantee the application would recover from the failure.
 
 ## Notes
 
