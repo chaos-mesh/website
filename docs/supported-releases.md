@@ -68,9 +68,5 @@ We use e2e test for testing compatibility on each version of kubernetes cluster,
 
 | Version | Tested kubernetes Versions |
 | :------ | :------------------------- |
-| master  | 1.12, 1.20, 1.22           |
-| 2.1     | 1.12, 1.20, 1.22           |
-| 2.0     | 1.12, 1.20                 |
-| 1.2     | 1.12                       |
-| 1.1     | 1.12                       |
-| 1.0     | 1.12                       |
+| master  | 1.15, 1.20, 1.23           |
+| 2.1     | 1.15, 1.20, 1.23           |
