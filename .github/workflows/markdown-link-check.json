@@ -1,0 +1,29 @@
+{
+  "ignorePatterns": [
+    {
+      "pattern": "^/img/"
+    },
+    {
+      "pattern": "^http://localhost"
+    },
+    {
+      "pattern": "^../"
+    },
+    {
+      "pattern": "^https://github.com"
+    },
+    {
+      "pattern": "^https://www.linkedin.com"
+    },
+    {
+      "pattern": "https://hacktoberfest.digitalocean.com/login"
+    },
+    {
+      "pattern": "^https://www.antdv.com/"
+    },
+    {
+      "pattern": "run-a-chaos-experiment.md"
+    }
+  ],
+  "aliveStatusCodes": [200, 403, 500, 502, 503]
+}
