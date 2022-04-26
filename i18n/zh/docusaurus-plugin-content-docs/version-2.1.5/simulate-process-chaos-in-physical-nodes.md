@@ -172,6 +172,18 @@ curl -X POST 172.16.112.130:31767/api/attack/process -H "Content-Type:applicatio
 {"status":200,"message":"attack successfully","uid":"c3c519bf-819a-4a7b-97fb-e3d0814481fa"}
 ```
 
+#### 使用服务模式模拟进程暂停示例
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/process -H "Content-Type:application/json" -d '{"process":"12345","signal":19}'
+```
+
+输出如下所示：
+
+```bash
+{"status":200,"message":"attack successfully","uid":"a00cca2b-eba7-4716-86b3-3e66f94880f7"}
+```
+
 :::note 注意
 
 只有 `signal` 为 `SIGSTOP` 的实验支持被恢复。
