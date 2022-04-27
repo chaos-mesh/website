@@ -175,6 +175,30 @@ The result is as follows:
 {"status":200,"message":"attack successfully","uid":"c3c519bf-819a-4a7b-97fb-e3d0814481fa"}
 ```
 
+##### killing a process
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/process -H "Content-Type:application/json" -d '{"process":"12345","signal":15}'
+```
+
+The result is as follows：
+
+```bash
+{"status":200,"message":"attack successfully","uid":"c3c519bf-819a-4a7b-97fb-e3d0814481fa"}
+```
+
+##### stopping a process
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/process -H "Content-Type:application/json" -d '{"process":"12345","signal":19}'
+```
+
+The result is as follows：
+
+```bash
+{"status":200,"message":"attack successfully","uid":"a00cca2b-eba7-4716-86b3-3e66f94880f7"}
+```
+
 :::note
 
 Only the experiments whose `signal` is `SIGSTOP` can be recovered.
