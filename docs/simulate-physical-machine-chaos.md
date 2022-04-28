@@ -19,7 +19,7 @@ Before creating PhysicalMachineChaos experiments using Chaos Mesh, you need to d
 
   :::note
 
-  When using Chaos Mesh v2.1.0, you need to deploy Chaosd [v1.1.0](https://github.com/chaos-mesh/chaosd/releases/tag/v1.1.0).
+  When using Chaos Mesh v2.2.0, you need to deploy Chaosd [v1.2.0](https://github.com/chaos-mesh/chaosd/releases/tag/v1.2.0).
 
   :::
 

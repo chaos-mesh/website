@@ -19,7 +19,7 @@ PhysicalMachineChaos 可用于在物理或虚拟机中模拟网络、磁盘、�
 
   :::note 注意
 
-  对于 Chaos Mesh 2.1.0 版本，请部署 Chaosd [1.1.0](https://github.com/chaos-mesh/chaosd/releases/tag/v1.1.0) 版本。
+  对于 Chaos Mesh 2.2.0 版本，请部署 Chaosd [1.2.0](https://github.com/chaos-mesh/chaosd/releases/tag/v1.2.0) 版本。
 
   :::
 
