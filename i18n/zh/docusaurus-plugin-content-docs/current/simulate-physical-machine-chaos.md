@@ -6,7 +6,11 @@ title: 使用 Chaos Mesh 创建物理机故障
 
 ## PhysicalMachineChaos 介绍
 
-PhysicalMachineChaos 可用于在物理或虚拟机中模拟网络、磁盘、压力、JVM、时间等故障。
+PhysicalMachineChaos 用于在物理机或虚拟机中模拟网络、磁盘、压力、JVM、时间等故障。在使用 Chaos Mesh 的 PhysicalMachineChaos 功能之前，你需要在物理机或虚拟机上部署 Chaosd。Chaos Mesh 与 Chaosd 的版本对应关系如下：
+| Chaos Mesh 版本 | Chaosd 版本 |
+| :-- | :-- |
+| v2.1.x | v1.1.x |
+| v2.2.x | v1.2.x |
 
 ## 运行 Chaosd Server
 
@@ -16,12 +20,6 @@ PhysicalMachineChaos 可用于在物理或虚拟机中模拟网络、磁盘、�
 
 - 有关部署的具体方法，请参考 [Chaosd 的下载和部署](chaosd-overview.md#下载和部署)。
 - 完成部署后，在运行 Chaosd Server **前**，需要先生成 TLS 证书，并在 Kubernetes 集群内创建 `PhysicalMachine`。有关 TLS 证书的生成方式，请参考 [Chaosctl 为 Chaosd 生成证书](chaosctl-tool.md#为-chaosd-生成-tls-证书)。
-
-  :::note 注意
-
-  对于 Chaos Mesh 2.1.0 版本，请部署 Chaosd [1.1.0](https://github.com/chaos-mesh/chaosd/releases/tag/v1.1.0) 版本。
-
-  :::
 
 2. 运行 Chaosd：
 
