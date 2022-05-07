@@ -14,7 +14,7 @@ PodChaos is a fault type in Chaos Mesh. By creating a PodChaos experiment, you c
 
 ## Usage restrictions
 
-Chaos Mesh could inject PodChaos into any Pod, no matter whether it is bound to Deployment, StatefulSet, DaemonSet, or other controllers. But there might be different expected situations when you inject PodChaos into an independent Pod. For example, when we inject "pod-kill" chaos into an independent Pod, there is no way to guarantee the application would recover from the failure.
+Chaos Mesh can inject PodChaos into any Pod, no matter whether the Pod is bound to Deployment, StatefulSet, DaemonSet, or other controllers. However, when you inject PodChaos into an independent Pod, some different situations might occur. For example, when you inject "pod-kill" chaos into an independent Pod, Chaos Mesh cannot guarantee that the application recovers from its failure.
 
 ## Notes
 
