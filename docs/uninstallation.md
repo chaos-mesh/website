@@ -126,7 +126,7 @@ There are several Webhooks as Chaos Mesh installed:
 
 - ValidatingWebhookConfigurations
   - chaos-mesh-validation
-  - validate-auth
+  - chaos-mesh-validate-auth
 - MutatingWebhookConfigurations
   - chaos-mesh-mutation
 
