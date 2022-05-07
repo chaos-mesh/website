@@ -489,7 +489,7 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 #### 使用服务模式模拟网络包重复示例
 
 ```bash
-curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"duplicate","ip-protocol":"172.16.4.4","device":"eth0","percent":"50"}'
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"duplicate","ip-address":"172.16.4.4","device":"eth0","percent":"50"}'
 ```
 
 ### 使用服务模式模拟网络包丢失
@@ -515,7 +515,7 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 #### 使用服务模式模拟网络包丢失示例
 
 ```bash
-curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"loss","ip-protocol":"172.16.4.4","device":"eth0","percent":"50"}'
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"loss","ip-address":"172.16.4.4","device":"eth0","percent":"50"}'
 ```
 
 ### 使用服务模式模拟网络分区
@@ -539,7 +539,7 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 #### 服务模式网络分区命令示例
 
 ```bash
-curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"partition","ip-protocol":"172.16.4.4","device":"eth0","direction":"from"}'
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"partition","ip-address":"172.16.4.4","device":"eth0","direction":"from"}'
 ```
 
 ### 使用服务模式模拟 DNS 故障
