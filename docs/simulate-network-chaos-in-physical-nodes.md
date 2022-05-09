@@ -29,10 +29,14 @@ Usage:
   chaosd attack network [command]
 
 Available Commands:
+  bandwidth limit network bandwidth
   corrupt     corrupt network packet
   delay       delay network
+  dns attack  DNS server or map specified host to specified IP
   duplicate   duplicate network packet
   loss        loss network packet
+  partition   partition
+  port        attack network port
 
 Flags:
   -h, --help   help for network
@@ -176,7 +180,7 @@ Attack network successfully, uid: 4b23a0b5-e193-4b27-90a7-3e04235f32ab
 
 ### Network duplication
 
-You can run the command below to see the configuration of simulated network duplication using Chaosd:
+You can run the command below to see the configuration of simulated network duplication using Chaosd.
 
 #### The command for network duplication
 
@@ -300,6 +304,116 @@ If the command runs successfully, the output is as follows:
 
 ```bash
 Attack network successfully, uid: 1e818adf-3942-4de4-949b-c8499f120265
+```
+
+### Network partition
+
+You can run the command below to see the configuration of simulated network partition using Chaosd.
+
+#### The command for network partition
+
+The command is as follows:
+
+```bash
+chaosd attack network partition --help
+```
+
+The output is as follows:
+
+```bash
+partition
+
+Usage:
+  chaosd attack network partition [flags]
+
+Flags:
+      --accept-tcp-flags string   only the packet which match the tcp flag can be accepted, others will be dropped. only set when the protocol is tcp.
+  -d, --device string             the network interface to impact
+      --direction string          specifies the partition direction, values can be 'to', 'from' or 'both'. 'from' means packets coming from the 'IPAddress' or 'Hostname' and going to your server, 'to' means packets originating from your server and going to the 'IPAddress' or 'Hostname'. (default "both")
+  -h, --help                      help for partition
+  -H, --hostname string           only impact traffic to these hostnames
+  -i, --ip string                 only impact egress traffic to these IP addresses
+  -p, --protocol string           only impact traffic using this IP protocol, supported: tcp, udp, icmp, all
+
+Global Flags:
+      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
+      --uid string         the experiment ID
+```
+
+
+#### Configuration items related to network partition
+
+The related configuration items are described as follows:
+
+| Configuration item | Abbreviation | Description | Value |
+| :-- | :-- | :-- | :-- |
+| accept-tcp-flags | none | only the packet which match the tcp flag can be accepted, others will be dropped. only set when the protocol is tcp. | string, such as "SYN,ACK SYN,ACK" |
+| device | d | the network interface to impact | string, such as "eth0", required |
+| direction | d | specifies the partition direction, values can be 'to', 'from' or 'both'. 'from' means packets coming from the 'IPAddress' or 'Hostname' and going to your server, 'to' means packets originating from your server and going to the 'IPAddress' or 'Hostname'. | string, values can be 'to', 'from' or 'both' (default "both") |
+| hostname | H | only impact traffic to these hostnames | string, such as "chaos-mesh.org". one of "hostname" and "ip" is required |
+| ip | i | only impact egress traffic to these IP addresses | string, such as "192.168.123.123". one of "hostname" and "ip" is required |
+| protocol | p | only impact traffic using this IP protocol, supported: tcp, udp, icmp, all | string, such as "tcp", "udp", "icmp", "all" |
+
+
+#### An example of network partition
+
+Run the following command to simulate network partition:
+
+```bash
+chaosd attack network partition -i 172.16.4.4 -d eth0 --direction from
+```
+
+### DNS fault
+
+You can run the command below to see the configuration of simulated DNS fault using Chaosd.
+
+#### The command for DNS fault
+
+```bash
+chaosd attack network dns --help
+```
+
+The output is as follows:
+
+```bash
+attack DNS server or map specified host to specified IP
+
+Usage:
+  chaosd attack network dns [flags]
+
+Flags:
+  -d, --dns-domain-name string   map this host to specified IP
+  -i, --dns-ip string            map specified host to this IP address
+      --dns-server string        update the DNS server in /etc/resolv.conf with this value (default "123.123.123.123")
+  -h, --help                     help for dns
+
+Global Flags:
+      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
+      --uid string         the experiment ID
+```
+
+#### Configuration items related to DNS fault
+
+The related configuration items are described as follows:
+
+| Configuration item | Abbreviation | Description | Value |
+| :-- | :-- | :-- | :-- |
+| dns-domain-name | d | map this host to specified IP(dns-ip) | string, such as "chaos-mesh.org".  |
+| dns-ip | i | map specified host(dns-domain-name) to this IP address | string, such as "123.123.123.123" |
+| dns-server | none | update the DNS server in /etc/resolv.conf with this value | string, such as "123.123.123.123" (default "123.123.123.123") |
+
+#### An example of DNS fault
+
+Run the following command to simulate DNS fault by mapping specified host to specified IP:
+
+```bash
+chaosd attack network dns --dns-ip 123.123.123.123 --dns-domain-name chaos-mesh.org
+```
+
+Run the following command to simulate DNS fault by using wrong DNS server:
+
+```bash
+chaosd attack network dns --dns-server 123.123.123.123
 ```
 
 ## Create network fault experiments using service mode
