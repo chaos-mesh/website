@@ -416,6 +416,110 @@ Run the following command to simulate DNS fault by using wrong DNS server:
 chaosd attack network dns --dns-server 123.123.123.123
 ```
 
+### Network bandwidth
+
+You can run the command below to see the configuration of simulated network bandwidth using Chaosd.
+
+#### The command for network bandwidth
+
+The command is as follows:
+
+```bash
+chaosd attack network bandwidth --help
+```
+
+The output is as follows:
+
+```bash
+limit network bandwidth
+
+Usage:
+  chaosd attack network bandwidth [flags]
+
+Flags:
+  -b, --buffer uint32     the maximum amount of bytes that tokens can be available for instantaneously
+  -d, --device string     the network interface to impact
+  -h, --help              help for bandwidth
+  -H, --hostname string   only impact traffic to these hostnames
+  -i, --ip string         only impact egress traffic to these IP addresses
+  -l, --limit uint32      the number of bytes that can be queued waiting for tokens to become available
+  -m, --minburst uint32   specifies the size of the peakrate bucket
+      --peakrate uint     the maximum depletion rate of the bucket
+  -r, --rate string       the speed knob, allows bps, kbps, mbps, gbps, tbps unit. bps means bytes per second
+
+Global Flags:
+      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
+      --uid string         the experiment ID
+```
+
+#### Configuration items related to network bandwidth
+
+The related configuration items are described as follows:
+
+| Configuration item | Abbreviation | Description | Value |
+| :-- | :-- | :-- | :-- |
+| buffer | b | the maximum amount of bytes that tokens can be available for instantaneously | int, such as 10000, required |
+| device | d | the network interface to impact | string, such as "eth0", required |
+| hostname | H | only impact traffic to these hostnames | string, such as "chaos-mesh.org". `hostname` and `ip` cannot be empty at the same time. when 'hostname' and 'ip' are set at the same time, the configuration item affects both the specified hostname and ip |
+| ip | i | only impact egress traffic to these IP addresses | string, such as "123.123.123.123". `hostname` and `ip` cannot be empty at the same time. when 'hostname' and 'ip' are set at the same time, the configuration item affects both the specified hostname and ip |
+| limit | l | the number of bytes that can be queued waiting for tokens to become available | int, such as 10000, required |
+| minburst | m | specifies the size of the peakrate bucket | int, such as 10000 |
+| peakrate | none | the maximum depletion rate of the bucket | int, such as 10000 |
+| rate | r | the speed knob, allows bps, kbps, mbps, gbps, tbps unit. bps means bytes per second | string, such as "1mbps", required |
+
+#### An example of network bandwidth
+
+Run the following command to simulate network bandwidth:
+
+```bash
+chaosd attack network bandwidth --buffer 10000 --device eth0 --limit 10000 --rate 10mbps
+```
+
+### Port occupation
+
+You can run the command below to see the configuration of simulated port occupation.
+
+#### The command for port occupation
+
+The command is as follows:
+
+```bash
+chaosd attack network port --help
+```
+
+The output is as follows:
+
+```bash
+attack network port
+
+Usage:
+  chaosd attack network port [flags]
+
+Flags:
+  -h, --help          help for port
+  -p, --port string   this specified port is to occupied
+
+Global Flags:
+      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
+      --uid string         the experiment ID
+```
+
+#### Configuration items related to port occupation
+
+The related configuration items are described as follows:
+
+| Configuration item | Abbreviation | Description | Value |
+| :-- | :-- | :-- | :-- |
+| port | p | this specified port is to occupied | int, such as 8080, required |
+
+#### An example of port occupation
+
+Run the following command to simulate network bandwidth:
+
+```bash
+chaosd attack network port --port 8080
+```
+
 ## Create network fault experiments using service mode
 
 (To be added)
