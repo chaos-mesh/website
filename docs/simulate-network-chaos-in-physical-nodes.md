@@ -49,7 +49,7 @@ Use "chaosd attack network [command] --help" for more information about a comman
 
 Currently, you can simulate four experimental scenarios using Chaosd: network corruption, network latency, network duplication, and network loss.
 
-### Network corruption
+### Simulate network corruption using the command-line mode
 
 You can run the command below to see the configuration of simulated network corruption using Chaosd.
 
@@ -93,12 +93,12 @@ The related configuration items are described as follows:
 | correlation | c | The correlation between the percentage of current corrupt occurrence and the previous occurrence. | Int. It is a percentage ranging from 0 to 100 (10 is 10%) ("0" by default ). |
 | device | d | Name of the impacted network interface card. | String, such as "eth0". The value is required. |
 | egress-port | e | The egress traffic that only impacts specific destination ports. It can only be configured when the protocol is TCP or UDP. | String. You need to use a ',' to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
-| hostname | H | The host name impacted by traffic. | String, such as "chaos-mesh.org". |
-| ip | i | The IP address impacted by egress traffic. | String, such as "123.123.123.123". |
+| hostname | H | The host name impacted by traffic. `hostname` and `ip` cannot be empty at the same time. When 'hostname' and 'ip' are set at the same time, the configuration item affects both the specified `hostname` and `ip`. | String, such as "chaos-mesh.org". |
+| ip | i | The IP address impacted by egress traffic. `hostname` and `ip` cannot be empty at the same time. When 'hostname' and 'ip' are set at the same time, the configuration item affects both the specified `hostname` and `ip`. | String, such as "123.123.123.123". |
 | protocol | p | The IP protocol impacted by traffic. | String. Supported protocols: tcp, udp, icmp, all (all network protocols). |
 | source-port | s | The egress traffic which only impact specific source ports. It can only be configured when the protocol is tcp or udp. | String. Use a ',' to delimit the specific port or to indicate the range of the ports, such as "80,8001:8010". |
 
-#### An example of network corruption
+#### Example for simulating network corruption using the command mode
 
 Run the following command to simulate network corruption:
 
@@ -112,7 +112,7 @@ If the command runs successfully, the output is as follows:
 Attack network successfully, uid: 4eab1e62-8d60-45cb-ac85-3c17b8ac4825
 ```
 
-### Network latency
+### Simulate network latency using the command-line mode
 
 You can run the command below to see the configuration of simulated network latency using Chaosd.
 
@@ -157,14 +157,14 @@ The related configuration items are described as follows:
 | correlation | c | The correlation between the current latency and the previous one. | Int. It is a percentage ranging from 0 to 100 (10 is 10%) ("0" by default). |
 | device | d | Name of the impacted network interface card. | String, such as "eth0". The value is required. |
 | egress-port | e | The egress traffic which only impact specific destination ports. It can only be configured when the protocol is TCP or UDP. | String. You need to use a ',' to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
-| hostname | H | The host name impacted by traffic. | String, such as "chaos-mesh.org". |
-| ip | i | The IP address impacted by egress traffic. | String, such as "123.123.123.123". |
+| hostname | H | The host name impacted by traffic. `hostname` and `ip` cannot be empty at the same time. When 'hostname' and 'ip' are set at the same time, the configuration item affects both the specified `hostname` and `ip`. | String, such as "chaos-mesh.org". |
+| ip | i | The IP address impacted by egress traffic. `hostname` and `ip` cannot be empty at the same time. When 'hostname' and 'ip' are set at the same time, the configuration item affects both the specified `hostname` and `ip`. | String, such as "123.123.123.123". |
 | jitter | j | Range of the length of network delay time. | String. The time units can be: ns, us (µs), ms, s, m, h, such as "1ms". |
 | latency | l | Length of network delay time. | String. The time units can be: ns, us (μs), ms, s, m, h, such as "1ms". |
-| protocol | p | The IP protocol impacted by traffic. | String. It supports the following protocol types: tcp, udp, icmp, all (all network protocols). |
+| protocol | p | The IP protocol impacted by traffic. | String. It supports the following protocol types: "tcp", "udp", "icmp", "all" (all network protocols). |
 | source-port | s | The egress traffic that only impacts specified source ports. It can only be configured when the protocol is TCP or UDP. | String. You need to use a ',' to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
 
-#### An example of network latency
+#### Example for simulating network latency using the command-line mode
 
 Run the following command to simulate network latency:
 
@@ -178,7 +178,7 @@ If the command runs successfully, the output is as follows:
 Attack network successfully, uid: 4b23a0b5-e193-4b27-90a7-3e04235f32ab
 ```
 
-### Network duplication
+### Simulate network duplication using the command-line mode
 
 You can run the command below to see the configuration of simulated network duplication using Chaosd.
 
@@ -222,13 +222,13 @@ The related configuration items are described as follows:
 | correlation | c | The correlation between the percentage of current duplication occurrence and the previous one. | Int. It is a percentage which range is 0 to 100 (10 is 10%) (default "0"). |
 | device | d | Name of the impacted network interface card. | String, such as "eth0". The value is required. |
 | egress-port | e | The egress traffic that only impacts specified destination ports. It can only be configured when the protocol is TCP or UDP. | String. You need to use a ',' to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
-| hostname | H | The host name impacted by traffic. | String, such as "chaos-mesh.org". |
-| ip | i | The IP address impacted by egress traffic. | String, such as "123.123.123.123". |
+| hostname | H | The host name impacted by traffic. `hostname` and `ip` cannot be empty at the same time. When 'hostname' and 'ip' are set at the same time, the configuration item affects both the specified `hostname` and `ip`. | String, such as "chaos-mesh.org". |
+| ip | i | The IP address impacted by egress traffic. `hostname` and `ip` cannot be empty at the same time. When 'hostname' and 'ip' are set at the same time, the configuration item affects both the specified `hostname` and `ip`. | String, such as "123.123.123.123". |
 | percent | none | Ratio of network packet duplicate. | Int. It is a percentage which range is 0 to 100 (10 is 10%) (default "1"). |
-| protocol | p | The IP protocol impacted by traffic. | String. It supports the following protocol types: tcp, udp, icmp, all (all network protocols). |
+| protocol | p | The IP protocol impacted by traffic. | String. It supports the following protocol types: "tcp", "udp", "icmp", "all" (all network protocols). |
 | source-port | s | The egress traffic which only impact specific source ports. It can only be configured when the protocol is tcp or udp. | String. You need to use a ',' to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
 
-#### An example of network duplication
+#### Example for simulating network duplication using the command-line mode
 
 Run the following command to simulate network duplication:
 
@@ -242,7 +242,7 @@ If the command runs successfully, the output is as follows:
 Attack network successfully, uid: 7bcb74ee-9101-4ae4-82f0-e44c8a7f113c
 ```
 
-### Network loss
+### Simulate network loss using the command-line mode
 
 You can run the command below to see the configuration of simulated network loss using Chaosd:
 
@@ -286,13 +286,13 @@ The related configuration items are described as follows:
 | correlation | c | The correlation between the percentage of the current network loss and the previous one. | Int. It is a percentage which range is 0 to 100 (10 is 10%) (default "0"). |
 | device | d | Name of the impacted network interface card. | String, such as "eth0". The value is required. |
 | egress-port | e | The egress traffic that only impacts specified destination ports. It can only be configured when the protocol is TCP or UDP. | String. You need to use a ',' to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
-| hostname | H | The host name impacted by traffic. | String, such as "chaos-mesh.org". |
-| ip | i | The IP address impacted by egress traffic. | String, such as "123.123.123.123". |
+| hostname | H | The host name impacted by traffic. `hostname` and `ip` cannot be empty at the same time. When 'hostname' and 'ip' are set at the same time, the configuration item affects both the specified `hostname` and `ip`. | String, such as "chaos-mesh.org". |
+| ip | i | The IP address impacted by egress traffic. `hostname` and `ip` cannot be empty at the same time. When 'hostname' and 'ip' are set at the same time, the configuration item affects both the specified `hostname` and `ip`. | String, such as "123.123.123.123". |
 | percent | none | Ratio of network packet loss. | Int. It is a percentage which range is 0 to 100 (10 is 10%) (default "1"). |
-| protocol | p | Only impact traffic using this IP protocol. | String. It supports the following protocol types: tcp, udp, icmp, all (all network protocols). |
+| protocol | p | Only impact traffic using this IP protocol. | String. It supports the following protocol types: "tcp", "udp", "icmp", "all" (all network protocols). |
 | source-port | s | The egress traffic which only impact specific source ports. It can only be configured when the protocol is tcp or udp. | String. You need to use a ',' to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
 
-#### An example of network loss
+#### Example for simulating network loss using the command-line mode
 
 Run the following command to simulate network loss:
 
@@ -306,7 +306,7 @@ If the command runs successfully, the output is as follows:
 Attack network successfully, uid: 1e818adf-3942-4de4-949b-c8499f120265
 ```
 
-### Network partition
+### Simulate network partition using the command-line mode
 
 You can run the command below to see the configuration of simulated network partition using Chaosd.
 
@@ -347,15 +347,15 @@ The related configuration items are described as follows:
 
 | Configuration item | Abbreviation | Description | Value |
 | :-- | :-- | :-- | :-- |
-| accept-tcp-flags | none | only the packet which match the tcp flag can be accepted, others will be dropped. only set when the protocol is tcp. | string, such as "SYN,ACK SYN,ACK" |
-| device | d | the network interface to impact | string, such as "eth0", required |
-| direction | d | specifies the partition direction, values can be 'to', 'from' or 'both'. 'from' means packets coming from the 'IPAddress' or 'Hostname' and going to your server, 'to' means packets originating from your server and going to the 'IPAddress' or 'Hostname'. | string, values can be 'to', 'from' or 'both' (default "both") |
-| hostname | H | only impact traffic to these hostnames | string, such as "chaos-mesh.org". one of "hostname" and "ip" is required |
-| ip | i | only impact egress traffic to these IP addresses | string, such as "192.168.123.123". one of "hostname" and "ip" is required |
-| protocol | p | only impact traffic using this IP protocol, supported: tcp, udp, icmp, all | string, such as "tcp", "udp", "icmp", "all" |
+| accept-tcp-flags | none | Only the packet which match the tcp flag can be accepted, others will be dropped. only set when the protocol is tcp. | String, such as "SYN,ACK SYN,ACK" |
+| device | d | the network interface to impact | String, such as "eth0", required |
+| direction | d | Specifies the partition direction, values can be 'to', 'from' or 'both'. 'from' means packets coming from the 'ip' or 'hostname' and going to your server, 'to' means packets originating from your server and going to the 'ip' or 'hostname'. | String, values can be 'to', 'from' or 'both' (default "both") |
+| hostname | H | Only impact traffic to these hostnames. `hostname` and `ip` cannot be empty at the same time. When 'hostname' and 'ip' are set at the same time, the configuration item affects both the specified `hostname` and `ip`. | String, such as "chaos-mesh.org". |
+| ip | i | Only impact egress traffic to these IP addresses. `hostname` and `ip` cannot be empty at the same time. When 'hostname' and 'ip' are set at the same time, the configuration item affects both the specified `hostname` and `ip`. | String, such as "192.168.123.123". |
+| protocol | p | Only impact traffic using this IP protocol | String. It supports the following protocol types: "tcp", "udp", "icmp", "all" (all network protocols). |
 
 
-#### An example of network partition
+#### Example for simulating network partition using the command-line mode
 
 Run the following command to simulate network partition:
 
@@ -363,7 +363,7 @@ Run the following command to simulate network partition:
 chaosd attack network partition -i 172.16.4.4 -d eth0 --direction from
 ```
 
-### DNS fault
+### Simulate DNS fault using the command-line mode
 
 You can run the command below to see the configuration of simulated DNS fault using Chaosd.
 
@@ -398,11 +398,11 @@ The related configuration items are described as follows:
 
 | Configuration item | Abbreviation | Description | Value |
 | :-- | :-- | :-- | :-- |
-| dns-domain-name | d | map this host to specified IP(dns-ip) | string, such as "chaos-mesh.org".  |
-| dns-ip | i | map specified host(dns-domain-name) to this IP address | string, such as "123.123.123.123" |
-| dns-server | none | update the DNS server in /etc/resolv.conf with this value | string, such as "123.123.123.123" (default "123.123.123.123") |
+| dns-domain-name | d | Map this host to specified IP(dns-ip) | String, such as "chaos-mesh.org".  |
+| dns-ip | i | Map specified host(dns-domain-name) to this IP address | String, such as "123.123.123.123" |
+| dns-server | none | Update the DNS server in /etc/resolv.conf with this value | String, such as "123.123.123.123" (default "123.123.123.123") |
 
-#### An example of DNS fault
+#### Example for simulating DNS fault using the command-line mode
 
 Run the following command to simulate DNS fault by mapping specified host to specified IP:
 
@@ -416,7 +416,7 @@ Run the following command to simulate DNS fault by using wrong DNS server:
 chaosd attack network dns --dns-server 123.123.123.123
 ```
 
-### Network bandwidth
+### Simulate network bandwidth using the command-line mode
 
 You can run the command below to see the configuration of simulated network bandwidth using Chaosd.
 
@@ -458,16 +458,16 @@ The related configuration items are described as follows:
 
 | Configuration item | Abbreviation | Description | Value |
 | :-- | :-- | :-- | :-- |
-| buffer | b | the maximum amount of bytes that tokens can be available for instantaneously | int, such as 10000, required |
-| device | d | the network interface to impact | string, such as "eth0", required |
-| hostname | H | only impact traffic to these hostnames | string, such as "chaos-mesh.org". `hostname` and `ip` cannot be empty at the same time. when 'hostname' and 'ip' are set at the same time, the configuration item affects both the specified hostname and ip |
-| ip | i | only impact egress traffic to these IP addresses | string, such as "123.123.123.123". `hostname` and `ip` cannot be empty at the same time. when 'hostname' and 'ip' are set at the same time, the configuration item affects both the specified hostname and ip |
-| limit | l | the number of bytes that can be queued waiting for tokens to become available | int, such as 10000, required |
-| minburst | m | specifies the size of the peakrate bucket | int, such as 10000 |
-| peakrate | none | the maximum depletion rate of the bucket | int, such as 10000 |
-| rate | r | the speed knob, allows bps, kbps, mbps, gbps, tbps unit. bps means bytes per second | string, such as "1mbps", required |
+| buffer | b | The maximum amount of bytes that tokens can be available for instantaneously | Int, such as 10000, required |
+| device | d | The network interface to impact | String, such as "eth0", required |
+| hostname | H | Only impact traffic to these hostnames. `hostname` and `ip` cannot be empty at the same time. When 'hostname' and 'ip' are set at the same time, the configuration item affects both the specified `hostname` and `ip`. | String, such as "chaos-mesh.org". |
+| ip | i | Only impact egress traffic to these IP addresses. `hostname` and `ip` cannot be empty at the same time. When 'hostname' and 'ip' are set at the same time, the configuration item affects both the specified `hostname` and `ip`. | String, such as "123.123.123.123". |
+| limit | l | The number of bytes that can be queued waiting for tokens to become available | Int, such as 10000, required |
+| minburst | m | Specifies the size of the peakrate bucket | Int, such as 10000 |
+| peakrate | none | The maximum depletion rate of the bucket | Int, such as 10000 |
+| rate | r | The speed knob, allows bps, kbps, mbps, gbps, tbps unit. bps means bytes per second | String, such as "1mbps", required |
 
-#### An example of network bandwidth
+#### Example for simulating network bandwidth using the command-line mode
 
 Run the following command to simulate network bandwidth:
 
@@ -475,7 +475,7 @@ Run the following command to simulate network bandwidth:
 chaosd attack network bandwidth --buffer 10000 --device eth0 --limit 10000 --rate 10mbps
 ```
 
-### Port occupation
+### Simulate port occupation using the command-line mode
 
 You can run the command below to see the configuration of simulated port occupation.
 
@@ -510,9 +510,9 @@ The related configuration items are described as follows:
 
 | Configuration item | Abbreviation | Description | Value |
 | :-- | :-- | :-- | :-- |
-| port | p | this specified port is to occupied | int, such as 8080, required |
+| port | p | The specified port to be occupied | Int, such as 8080, required |
 
-#### An example of port occupation
+#### Example for simulating port occupation using the command-line mode
 
 Run the following command to simulate network bandwidth:
 
@@ -522,4 +522,187 @@ chaosd attack network port --port 8080
 
 ## Create network fault experiments using service mode
 
-(To be added)
+To create experiments using the service mode, follow the instructions below:
+
+1. Run Chaosd in the service mode:
+
+   ```bash
+   chaosd server --port 31767
+   ```
+
+2. Send a `POST` HTTP request to the `/api/attack/process` path of the Chaosd service.
+
+   ```bash
+   curl -X POST 172.16.112.130:31767/api/attack/process -H "Content-Type:application/json" -d '{fault-configuration}'
+   ```
+
+   In the above command, you need to configure `fault-configuration` according to the fault types. For the corresponding parameters, refer to the parameters and examples of each fault type in the following sections.
+
+:::note
+
+When running an experiment, remember to record the UID of the experiment. When you want to end the experiment corresponding to the UID, you need to send a `DELETE` HTTP request to the `/api/attack/{uid}` path of the Chaosd service.
+
+:::
+
+### Simulate network corruption using the service mode
+
+#### Parameters for simulating network corruption
+
+| Parameter | Description | Value |
+| --- | --- | --- |
+| action | Action of the experiment | set to "corrupt" |
+| correlation | The correlation between the current latency and the previous one. |  Int. It is a percentage ranging from 0 to 100 (10 is 10%) ("0" by default). |
+| device | Name of the impacted network interface card. | String, such as "eth0". The value is required. |
+| egress-port | The egress traffic which only impact specific destination ports. It can only be configured when the protocol is TCP or UDP. | String. You need to use a ',' to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
+| hostname | The host name impacted by traffic. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | String, such as "chaos-mesh.org". |
+| ip-address | The IP address impacted by egress traffic. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | String, such as "123.123.123.123".  |
+| ip-protocol | The IP protocol impacted by traffic. | String. Supported protocols: tcp, udp, icmp, all (all network protocols). |
+| source-port | The egress traffic which only impact specific source ports. It can only be configured when the protocol is tcp or udp. | String. Use a ',' to delimit the specific port or to indicate the range of the ports, such as "80,8001:8010". |
+
+#### Example for simulating network corruption using the service mode
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"corrupt","device":"eth0","ip-address":"172.16.4.4","percent":"50"}'
+```
+
+### Simulate network corruption using the service mode
+
+#### Parameters for simulating network corruption
+
+| Parameter | Description | Value |
+| --- | --- | --- |
+| action | Action of the experiment | Set to "delay" |
+| correlation | The correlation between the current latency and the previous one. | Int. It is a percentage ranging from 0 to 100 (10 is 10%) ("0" by default). |
+| device | Name of the impacted network interface card. | String, such as "eth0". The value is required. |
+| egress-port | The egress traffic which only impact specific destination ports. It can only be configured when the protocol is TCP or UDP. | String. You need to use a ',' to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
+| hostname | The host name impacted by traffic. `hostname` and `ip-address` cannot be empty at the same time. When `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | String, such as "chaos-mesh.org". |
+| ip-address | The IP address impacted by egress traffic. `hostname` and `ip-address` cannot be empty at the same time. When `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | String, such as "123.123.123.123". |
+| jitter | Range of the length of network delay time. | String. The time units can be: ns, us (µs), ms, s, m, h, such as "1ms". |
+| latency | Length of network delay time. | String. The time units can be: ns, us (μs), ms, s, m, h, such as "1ms". |
+| ip-protocol | The IP protocol impacted by traffic. | String. It supports the following protocol types: "tcp", "udp", "icmp", "all" (all network protocols). |
+| source-port | The egress traffic that only impacts specified source ports. It can only be configured when the protocol is TCP or UDP. | String. You need to use a ',' to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
+
+#### Example for simulating network corruption using the service mode
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"delay","device":"eth0","ip-address":"172.16.4.4","latency":"10ms"}'
+```
+
+### Simulate network duplication using the service mode
+
+#### Parameters for simulating network duplication
+
+| Parameter | Description | Value |
+| --- | --- | --- |
+| action | Action of the experiment | set to "duplicate" |
+| correlation | The correlation between the percentage of current duplication occurrence and the previous one. | Int. It is a percentage which range is 0 to 100 (10 is 10%) (default "0"). |
+| device | Name of the impacted network interface card. | String, such as "eth0". The value is required. |
+| egress-port | The egress traffic that only impacts specified destination ports. It can only be configured when the protocol is TCP or UDP. | String. You need to use a ',' to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
+| hostname | The host name impacted by traffic. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`.  | String, such as "chaos-mesh.org". |
+| ip-address | The IP address impacted by egress traffic. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | String, such as "123.123.123.123". |
+| percent | Ratio of network packet duplicate. | Int. It is a percentage which range is 0 to 100 (10 is 10%) (default "1"). |
+| ip-protocol | The IP protocol impacted by traffic. | String. It supports the following protocol types: "tcp", "udp", "icmp", "all" (all network protocols). |
+| source-port | The egress traffic which only impact specific source ports. It can only be configured when the protocol is tcp or udp. | String. You need to use a ',' to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
+
+#### Example for simulating network duplication using the service mode
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"duplicate","ip-address":"172.16.4.4","device":"eth0","percent":"50"}'
+```
+
+### Simulate network loss using the service mode
+
+#### Parameters for simulating network loss
+
+| Parameter | Description | Value |
+| --- | --- | --- |
+| action | Action of the experiment | set to "loss" |
+| correlation | The correlation between the percentage of the current network loss and the previous one. | Int, it is a percentage which range is 0 to 100 (10 is 10%) (default "0"). |
+| device | Name of the impacted network interface card. | String, such as "eth0". The value is required. |
+| egress-port | The egress traffic that only impacts specified destination ports. It can only be configured when the protocol is TCP or UDP. | String. You need to use a ',' to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
+| hostname | The host name impacted by traffic. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | String, such as "chaos-mesh.org". |
+| ip-address | The IP address impacted by egress traffic. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | String, such as "123.123.123.123". |
+| percent | Ratio of network packet loss. | Int. It is a percentage which range is 0 to 100 (10 is 10%) (default "1"). |
+| ip-protocol | Only impact traffic using this IP protocol. | String, it supports the following protocol types: "tcp", "udp", "icmp", "all" (all network protocols). |
+| source-port | The egress traffic which only impact specific source ports. It can only be configured when the protocol is tcp or udp. | String. You need to use a ',' to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
+
+
+#### Example for simulating network loss using the service mode
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"loss","ip-address":"172.16.4.4","device":"eth0","percent":"50"}'
+```
+
+### Simulate network partition using the service mode
+
+#### Parameters for simulating network partition
+
+| Parameter | Description | Value |
+| --- | --- | --- |
+| action | Action of the experiment | Set to "partition" |
+| accept-tcp-flags | Only the packet which match the tcp flag can be accepted, others will be dropped. Only set when the protocol is tcp. | String, such as "SYN,ACK SYN,ACK" |
+| device | The network interface to impact | String, such as "eth0", required |
+| direction | Specifies the partition direction, values can be 'to', 'from' or 'both'. 'from' means packets coming from the 'ip-address' or 'hostname' and going to your server, 'to' means packets originating from your server and going to the 'ip-address' or 'hostname'. | String, values can be 'to', 'from' or 'both' (default "both") |
+| hostname | Only impact traffic to these hostnames. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | String, such as "chaos-mesh.org". |
+| ip-address | Only impact egress traffic to these IP addresses. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | String, such as "192.168.123.123". |
+| ip-protocol | Only impact traffic using this IP protocol | String. It supports the following protocol types: tcp, udp, icmp, all (all network protocols).  |
+
+#### Example for simulating network partition using the service mode
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"partition","ip-address":"172.16.4.4","device":"eth0","direction":"from"}'
+```
+
+### Simulate DNS fault using the service mode
+
+#### Parameters for simulating DNS fault
+
+| Parameter | Description | Value |
+| --- | --- | --- |
+| action | Action of the experiment | Set to "dns" |
+| dns-domain-name | Map this host to specified IP(dns-ip) | String, such as "chaos-mesh.org".  |
+| dns-ip | Map specified host(dns-domain-name) to this IP address | String, such as "123.123.123.123" |
+| dns-server | Update the DNS server in /etc/resolv.conf with this value | String, such as "123.123.123.123" (default "123.123.123.123") |
+
+#### Example for simulating DNS fault using the service mode
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"dns","dns-domain-name":"chaos-mesh.org","dns-ip":"123.123.123.123"}'
+```
+
+### Simulate network bandwidth using the service mode
+
+#### Parameters for simulating network bandwidth
+
+| Parameter | Description | Value |
+| --- | --- | --- |
+| action | Action of the experiment | Set to "bandwidth" |
+| buffer | The maximum amount of bytes that tokens can be available for instantaneously | Int, such as 10000, required |
+| device | The network interface to impact | String, such as "eth0", required |
+| hostname | Only impact traffic to these hostnames. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | String, such as "chaos-mesh.org". |
+| ip-address | Only impact egress traffic to these IP addresses. `hostname` and `ip-address` cannot be empty at the same time. When `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | String, such as "123.123.123.123". |
+| limit | The number of bytes that can be queued waiting for tokens to become available | Int, such as 10000, required |
+| minburst | Specifies the size of the peakrate bucket | Int, such as 10000 |
+| peakrate | The maximum depletion rate of the bucket | Int, such as 10000 |
+| rate | The speed knob, allows bps, kbps, mbps, gbps, tbps unit. bps means bytes per second | String, such as "1mbps", required |
+
+#### Example for simulating network bandwidth using the service mode
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"bandwidth","buffer":10000,"limit":10000,"rate":"10mbps","device":"eth0"}'
+```
+
+### Simulate port occupation using the service mode
+
+#### Parameters for simulating port occupation 
+
+| Parameter | Description | Value |
+| --- | --- | --- |
+| action | Action of the experiment | Set to "occupied" |
+| port | The specified port to be occupied | Int, such as 8080, required |
+
+#### Example for simulating port occupation using the service mode
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"occupied","port":8080}'
+```
