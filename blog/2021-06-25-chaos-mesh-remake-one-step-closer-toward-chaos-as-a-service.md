@@ -134,7 +134,6 @@ To enable full plugin support, we need to explore a new method to add plugins. A
 
 - Develop a controller or operator to manage CRDs.
 - Handle CRD events uniformly and operate on CRDs via HTTP callback. This method only uses HTTP APIs, with no requirement on Golang. For an example, see [Whitebox Controller](https://github.com/summerwind/whitebox-controller).
-- Use WebAssembly (Wasm). When you need to call chaos experiment logic, just call the Wasm program. See Vector's [WASM Transform](https://vector.dev/docs/reference/transforms/wasm/).
 - Use SQL to query the chaos experiment status. Because Chaos Mesh is based on CRDs, you can use SQL to operate on Kubernetes. Examples include [Presto connector](https://github.com/xuxinkun/kubesql) and [osquery extension](https://github.com/aquasecurity/kube-query).
 - Use SDK-based extensions, such as [Chaos Toolkit](https://docs.chaostoolkit.org/reference/api/experiment/).
 
