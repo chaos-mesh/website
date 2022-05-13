@@ -165,6 +165,8 @@ Attack process python successfully, uid: 9cb6b3be-4f5b-4ecb-ae05-51050fcd0010
 
 #### 使用服务模式模拟进程故障示例
 
+##### 进程被终止
+
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/process -H "Content-Type:application/json" -d '{"process":"12345","signal":15}'
 ```
@@ -173,6 +175,18 @@ curl -X POST 172.16.112.130:31767/api/attack/process -H "Content-Type:applicatio
 
 ```bash
 {"status":200,"message":"attack successfully","uid":"c3c519bf-819a-4a7b-97fb-e3d0814481fa"}
+```
+
+##### 进程被暂停
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/process -H "Content-Type:application/json" -d '{"process":"12345","signal":19}'
+```
+
+输出如下所示：
+
+```bash
+{"status":200,"message":"attack successfully","uid":"a00cca2b-eba7-4716-86b3-3e66f94880f7"}
 ```
 
 :::note 注意
