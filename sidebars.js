@@ -89,7 +89,7 @@ module.exports = {
             'simulate-disk-pressure-in-physical-nodes',
             'simulate-jvm-application-chaos-in-physical-nodes',
             'simulate-time-chaos-on-physical-nodes',
-            'simulate-file-chaos-in-physical-nodes.md',
+            'simulate-file-chaos-in-physical-nodes',
             'chaosd-search-recover',
           ],
         },
