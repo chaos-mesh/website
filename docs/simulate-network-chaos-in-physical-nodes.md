@@ -340,7 +340,6 @@ Global Flags:
       --uid string         the experiment ID
 ```
 
-
 #### Configuration items related to network partition
 
 The related configuration items are described as follows:
