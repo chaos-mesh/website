@@ -119,8 +119,8 @@ Global Flags:
 
 | 配置项 | 配置缩写 | 说明 | 值 |
 | :-- | :-- | :-- | :-- |
-| `dir-name` | d | 创建的目录名称 | String，例如 "/tmp/test"，`dir-name` 和 `file-name` 必须要设置其中一个 |
-| `file-name` | f | 创建的文件名称 | String，例如 "/tmp/test.txt"，`dir-name` 和 `file-name` 必须要设置其中一个 |
+| `dir-name` | d | 创建的目录名称 | string，例如 `"/tmp/test"`，`dir-name` 和 `file-name` 必须要设置其中一个 |
+| `file-name` | f | 创建的文件名称 | string，例如 `"/tmp/test.txt"`，`dir-name` 和 `file-name` 必须要设置其中一个 |
 
 #### 使用命令行模式创建文件示例
 
@@ -296,7 +296,7 @@ Global Flags:
 | `dest-string` | d | 将文件中的内容替换为该值 | string，例如 `"text"`，必须要设置 |
 | `file-name` | f | 要替换内容的文件名称 | string，例如 `"/tmp/test.txt"`，必须要设置 |
 | `line` | l | 替换文件中哪一行的数据 | int，默认为 `0`，表示替换所有能匹配到 `origin-string` 的行的数据 |
-| `origin-string` | o | 文件中要替换的数据 | String，例如 "test"，必须要设置 |
+| `origin-string` | o | 文件中要替换的数据 | string，例如 `"test"`，必须要设置 |
 
 #### 使用命令行模式替换文件内容示例
 
