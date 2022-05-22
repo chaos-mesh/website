@@ -168,7 +168,7 @@ The `Response` is a meaningful when the `target` set to `Response` during the fa
 
 The rules will affect both of clients and servers in the pod by default, but you can affect only one side by selecting the request headers.
 
-This section provides some examples to specify the affected side, you should adjust the header selector in rules.
+This section provides some examples to specify the affected side, you can adjust the header selector in rules depend on your particular cases.
 
 ### Client side
 
