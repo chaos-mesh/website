@@ -6,10 +6,10 @@ This document describes how to simulate HTTP faults by creating HTTPChaos experi
 
 ## HTTPChaos introduction
 
-HTTPChaos is a fault type provided by Chaos Mesh. By creating HTTPChaos experiments, you can simulate the fault scenarios of the **HTTP server** during the HTTP request and response processing. Currently, HTTPChaos supports simulating the following fault types:
+HTTPChaos is a fault type provided by Chaos Mesh. By creating HTTPChaos experiments, you can simulate the fault scenarios during the HTTP request and response processing. Currently, HTTPChaos supports simulating the following fault types:
 
-- `abort`: interrupts server connection
-- `delay`: injects latency into the target process
+- `abort`: interrupts the connection
+- `delay`: injects latency into the request or response
 - `replace`: replaces part of content in HTTP request or response messages
 - `patch`: adds additional content to HTTP request or response messages
 
@@ -22,6 +22,7 @@ For the detailed description of HTTPChaos configuration, see [Field description]
 Before injecting the faults supported by HTTPChaos, note the followings:
 
 - There is no control manager of Chaos Mesh running on the target Pod.
+- The rules will affect both of clients and servers in the pod, if you want to affect only one side, please refer to the [specify side](#specify-side) section.
 - HTTPS accesses should be disabled, because injecting HTTPS connections is not supported currently.
 - For HTTPChaos injection to take effect, the client should avoid reusing TCP socket. This is because HTTPChaos does not affect the HTTP requests that are sent via TCP socket before the fault injection.
 - Use non-idempotent requests (such as most of the POST requests) with caution in production environments. If such requests are used, the target service may not return to normal status by repeating requests after the fault injection.
@@ -129,7 +130,7 @@ Common fields are meaningful when the `target` of fault injection is `Request` o
 | `path` | string | The URI path of the target request. Supports [Matching wildcards](https://www.wikiwand.com/en/Matching_wildcards). | Takes effect on all paths by default. | no | /api/\* |
 | `method` | string | The HTTP method of the target request method. | Takes effect for all methods by default. | no | GET |
 | `request_headers` | map[string]string | Matches request headers to the target service. | Takes effect for all requests by default. | no | Content-Type: application/json |
-| `abort` | bool | Indicates whether to inject the fault that interrupts server connection. | false | no | true |
+| `abort` | bool | Indicates whether to inject the fault that interrupts the connection. | false | no | true |
 | `delay` | string | Specifies the time for a latency fault. | 0 | no | 10s |
 | `replace.headers` | map[string]string | Specifies the key pair used to replace the request headers or response headers. |  | no | Content-Type: application/xml |
 | `replace.body` | []byte | Specifies request body or response body to replace the fault (Base64 encoded). |  | no | eyJmb28iOiAiYmFyIn0K |
@@ -159,8 +160,85 @@ The `Response` is a meaningful when the `target` set to `Response` during the fa
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
 | `code` | int32 | Specifies the status code responded by `target`. | Takes effect for all status codes by default. | no | 200 |
-| `response_heads` | map[string]string | Matches request headers to `target`. | Takes effect for all responses by default. | no | Content-Type: application/json |
+| `response_headers` | map[string]string | Matches request headers to `target`. | Takes effect for all responses by default. | no | Content-Type: application/json |
 | `replace.code` | int32 | Specifies the replaced content of the response status code. |  | no | 404 |
+
+
+## Specify side
+
+The rules will affect both of clients and servers in the pod by default, but you can affect only one side by selecting the request headers.
+
+This section provides some examples to specify the affected side, you should adjust the header selector in rules.
+
+### Client side
+
+To inject faults into clients in the pod without affecting servers, you can select the request/response by the `Host` header in request.
+
+For example, if you want to interrupt all requests to `http://example.com/`, you can apply the following YAML config:
+
+```yaml
+apiVersion: chaos-mesh.org/v1alpha1
+kind: HTTPChaos
+metadata:
+  name: test-http-client
+spec:
+  mode: all
+  selector:
+    labelSelectors:
+      app: some-http-client
+  target: Request
+  port: 80
+  path: "*"
+  request_headers:
+    Host: "example.com"
+  abort: true
+```
+
+### Server side
+
+To inject faults into servers in the pod without affecting clients, you can also select the request/response by the `Host` header in the request.
+
+For example, if you want to interrupt all requests to you server behind service `nginx.nginx`, you can apply the following YAML config:
+
+```yaml
+apiVersion: chaos-mesh.org/v1alpha1
+kind: HTTPChaos
+metadata:
+  name: test-http-server
+spec:
+  mode: all
+  selector:
+    labelSelectors:
+      app: nginx
+  target: Request
+  port: 80
+  path: "*"
+  request_headers:
+    Host: "nginx.nginx.svc"
+  abort: true
+```
+
+In other cases, especially when injecting the inbound request from outside, you may select the request/response by the `X-Forwarded-Host` header in the request.
+
+For example, if you want to interrupt all requests to you server behind a public gateway `nginx.host.org`, you can apply the following YAML config:
+
+```yaml
+apiVersion: chaos-mesh.org/v1alpha1
+kind: HTTPChaos
+metadata:
+  name: test-http-server
+spec:
+  mode: all
+  selector:
+    labelSelectors:
+      app: nginx
+  target: Request
+  port: 80
+  path: "*"
+  request_headers:
+    X-Forwarded-Host: "nginx.host.org"
+  abort: true
+```
 
 ## Local debugging
 
