@@ -69,10 +69,10 @@ Chaos Mesh 提供的 StressChaos 实验类型可用于模拟容器内压力的�
 
 #### Stressors
 
-| 参数   | 类型                              | 说明                | 默认值 | 是否必填 | 示例 |
-| ------ | --------------------------------- | ------------------- | ------ | -------- | ---- |
-| memory | [MemoryStressor](#memorystressor) | 指定内存压力的参数  | 无     | 否       |      |
-| cpu    | [CPUStressor](#cpustressor)       | 指定 CPU 压力的参数 | 无     | 否       |      |
+| 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
+| --- | --- | --- | --- | --- | --- |
+| memory | [MemoryStressor](#memorystressor) | 指定内存压力的参数  | 无 | 否 | |
+| cpu | [CPUStressor](#cpustressor) | 指定 CPU 压力的参数 | 无 | 否 | |
 
 ##### MemoryStressor
 
@@ -80,6 +80,7 @@ Chaos Mesh 提供的 StressChaos 实验类型可用于模拟容器内压力的�
 | --- | --- | --- | --- | --- | --- |
 | workers | int | 指定施加内存压力的线程个数 |  | 是 | `1` |
 | size | string | 指定分配内存的大小或是占总内存的百分比，分配内存的总和为 `size` |  | 否 | `256MB`/`25%` |
+
 
 ##### CPUStressor
 

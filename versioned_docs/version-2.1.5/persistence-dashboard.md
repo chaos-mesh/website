@@ -4,13 +4,13 @@ title: Persistence Chaos Dashboard
 
 import PickHelmVersion from '@site/src/components/PickHelmVersion'
 
-This document describes how to persistence Chaos Dashboard.
+This document describes how to make Chaos Dashboard persistence.
 
-Chaos Dashboard support `SQLite`, `MySQL` and `Postgres` as database backend for persistence.
+Chaos Dashboard support `SQLite`, `MySQL` and `PostgreSQL` as database backends for persistence.
 
-## SQLite (Default Database Engine)
+## SQLite (default)
 
-Chaos Dashboard uses `SQLite` as the default database engine, and it is recommended to enable [`PV(Persistent Volumes)`](https://kubernetes.io/docs/concepts/storage/persistent-volumes/). To enable PV, specify `dashboard.persistentVolume.enabled` to `true`. You can find the related configurations on [`value.yaml`](https://github.com/chaos-mesh/chaos-mesh/blob/release-2.1/helm/chaos-mesh/values.yaml#L251-L279) as flower:
+Chaos Dashboard uses `SQLite` as the default database engine, and it is recommended to enable [PV (Persistent Volumes)](https://kubernetes.io/docs/concepts/storage/persistent-volumes/). To enable PV, set `dashboard.persistentVolume.enabled` to `true`. You can find related configurations on [`value.yaml`](https://github.com/chaos-mesh/chaos-mesh/blob/master/helm/chaos-mesh/values.yaml#L255-L282) as follows:
 
 ```yaml
 dashboard:
@@ -44,31 +44,30 @@ dashboard:
 
 :::warning
 
-If Chaos Dashboard component restarts without `PV`, the data of Chaos Dashboard will be list and can't be retrieved.
+If Chaos Dashboard component restarts without PV, the data of Chaos Dashboard will be lost and can't be retrieved.
 
 :::
 
 ## MySQL
 
-Chaos Dashboard supports MySQL 5.6 and higher as the database engine. The below example demonstrates MySQL database configuration. Please reference the official driver [documentation](https://github.com/go-sql-driver/mysql#dsn-data-source-name) for connection string configuration details.
+Chaos Dashboard supports MySQL 5.6 and higher versions as the database engine. The below example demonstrates MySQL database configuration. For details about connection string configuration, refer to the [MySQL-Driver for Go](https://github.com/go-sql-driver/mysql#dsn-data-source-name).
 
 <PickHelmVersion>
 helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --version latest --set dashboard.env.DATABASE_DRIVER=mysql --set dashboard.env.DATABASE_DATASOURCE=root:password@tcp(1.2.3.4:3306)/chaos-mesh?parseTime=true
 </PickHelmVersion>
 
-## Postgres
+## PostgreSQL
 
-Chaos Dashboard supports Postgres 9.6 and higher as the database engine. The below example demonstrates Postgres database configuration. Please reference the official driver [documentation](https://www.postgresql.org/docs/current/static/libpq-connect.html#LIBPQ-CONNSTRING) for connection string configuration details.
+Chaos Dashboard supports PostgreSQL 9.6 and higher versions as the database engine. The below example demonstrates PostgreSQL database configuration. For details about connection string configuration, refer to [libpq connect](https://www.postgresql.org/docs/current/static/libpq-connect.html#LIBPQ-CONNSTRING).
 
 <PickHelmVersion>
 helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --version latest --set dashboard.env.DATABASE_DRIVER=postgres --set dashboard.env.DATABASE_DATASOURCE=postgres://root:password@1.2.3.4:5432/postgres?sslmode=disable
 </PickHelmVersion>
 
-## Set TTL(Time To Live) for Chaos Dashboard Data
+## Set TTL (Time To Live) for Chaos Dashboard data
 
-Chaos Dashboard supports setting the expiration time of Chaos Dashboard data. The default `Event` related data expires by `168h`, and the `Experiment` related data defaults to `336h`. If you need to modify it, you can set `dashboard.env.TTL_EVENT` and `dashboard.env` .TTL_EXPERIMENT` parameter, like:
+Chaos Dashboard supports setting the expiration time of Chaos Dashboard data. The default `Event` related data expires by `168h`, and the `Experiment` related data defaults to `336h`. If you need to modify it, you can set `dashboard.env.TTL_EVENT` and `dashboard.env.TTL_EXPERIMENT` parameters, like:
 
 <PickHelmVersion>
 helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --version latest --set dashboard.env.TTL_EVENT=168h --set dashboard.env.TTL_EXPERIMENT=336h
 </PickHelmVersion>
-# Working in Progress

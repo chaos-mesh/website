@@ -6,11 +6,11 @@ import PickHelmVersion from '@site/src/components/PickHelmVersion'
 
 本文档介绍如何持久化 Chaos Dashboard 数据。
 
-Chaos Dashboard 支持 `SQLite`、`MySQL` 和 `Postgres` 作为后端数据存储。
+Chaos Dashboard 支持 `SQLite`、`MySQL` 和 `PostgreSQL` 作为后端数据存储。
 
-## SQLite (默认存储)
+## SQLite（默认存储）
 
-Chaos Dashboard 默认使用 `SQLite` 作为后端存储，并推荐为 `SQLite` 配置单独的 [`PV(Persistent Volumes)`](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) 。如需要配置 `PV`, 请在安装的时候指定 `dashboard.persistentVolume.enabled` 为 `true` 和设置其他 `PV` 相关的配置，[`value.yaml`](https://github.com/chaos-mesh/chaos-mesh/blob/master/helm/chaos-mesh/values.yaml#L255-L282) 中 `PV` 相关的配置如下：
+Chaos Dashboard 默认使用 `SQLite` 作为后端存储，并推荐为 `SQLite` 配置单独的[持久卷 (PV)](https://kubernetes.io/zh/docs/concepts/storage/persistent-volumes/) 。如需要配置 PV，请在安装的时候指定 `dashboard.persistentVolume.enabled` 为 `true` 和设置其他 PV 相关的配置。[`value.yaml`](https://github.com/chaos-mesh/chaos-mesh/blob/master/helm/chaos-mesh/values.yaml#L255-L282) 中 PV 相关的配置如下：
 
 ```yaml
 dashboard:
@@ -50,15 +50,15 @@ dashboard:
 
 ## MySQL
 
-Chaos Dashboard 支持使用 MySQL 5.6 或者更高版本作为后端存储。若想使用 MySQL 作为后端存储，可以在安装的时候设置 `dashboard.env.DATABASE_DRIVER` 和 `dashboard.env.DATABASE_DATASOURCE` 参数，具体参数配置请参考官方驱动[文档(https://github.com/go-sql-driver/mysql#dsn-data-source-name) 。
+Chaos Dashboard 支持使用 MySQL 5.6 或者更高版本作为后端存储。若想使用 MySQL 作为后端存储，可以在安装的时候设置 `dashboard.env.DATABASE_DRIVER` 和 `dashboard.env.DATABASE_DATASOURCE` 参数，具体参数配置请参考[官方驱动文档(https://github.com/go-sql-driver/mysql#dsn-data-source-name) 。
 
 <PickHelmVersion>
 helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --version latest --set dashboard.env.DATABASE_DRIVER=mysql --set dashboard.env.DATABASE_DATASOURCE=root:password@tcp(1.2.3.4:3306)/chaos-mesh?parseTime=true
 </PickHelmVersion>
 
-## Postgres
+## PostgreSQL
 
-Chaos Dashboard 支持使用 Postgres 9.6 或者更高版本作为后端存储。若想使用 Postgres 作为后端存储，可以在安装的时候设置 `dashboard.env.DATABASE_DRIVER` 和 `dashboard.env.DATABASE_DATASOURCE` 参数, 具体参数配置请参考官方驱动[文档(https://github.com/go-sql-driver/mysql#dsn-data-source-name) 。
+Chaos Dashboard 支持使用 PostgreSQL 9.6 或者更高版本作为后端存储。若想使用 PostgreSQL 作为后端存储，可以在安装的时候设置 `dashboard.env.DATABASE_DRIVER` 和 `dashboard.env.DATABASE_DATASOURCE` 参数，具体参数配置请参考 [libpq connect](https://github.com/go-sql-driver/mysql#dsn-data-source-name)。
 
 <PickHelmVersion>
 helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --version latest --set dashboard.env.DATABASE_DRIVER=postgres --set dashboard.env.DATABASE_DATASOURCE=postgres://root:password@1.2.3.4:5432/postgres?sslmode=disable
