@@ -39,6 +39,10 @@
               "id": "version-2.1.5/offline-installation"
             },
             {
+              "type": "doc",
+              "id": "version-2.1.5/persistence-dashboard"
+            },
+            {
              "type": "doc",
              "id": "version-2.1.5/uninstallation"
             },

@@ -76,10 +76,10 @@ The fields in the YAML configuration file are described in the following table:
 
 ##### MemoryStressor
 
-| Parameter | Type   | Description                                              | Default value | Required | Example |
-| --------- | ------ | -------------------------------------------------------- | ------------- | -------- | ------- |
-| workers   | int    | Specifies the number of threads that apply memory stress |               | Yes      | `1`     |
-| size      | string | Specifies the memory size to be occupied or a percentage of the total memory size. The final sum of the occupied memory size is `size`.    |               | No       | `256MB / 25%` |
+| Parameter | Type | Description | Default value | Required | Example |
+| --- | --- | --- | --- | --- | --- |
+| workers | int | Specifies the number of threads that apply memory stress |  | Yes | `1` |
+| size | string | Specifies the memory size to be occupied or a percentage of the total memory size. The final sum of the occupied memory size is `size`. |  | No | `256MB / 25%` |
 
 ##### CPUStressor
 

@@ -198,3 +198,7 @@ helm install chaos-mesh helm/chaos-mesh -n=chaos-testing
 <PickHelmVersion>
 helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set dashboard.securityMode=false --version latest
 </PickHelmVersion>
+
+### 如何持久化 Chaos Dashboard 数据
+
+默认 Chaos Dashboard 组件使用 `SQLite` 作为后端存储，如果没有为 Chaos Dashboard 配置[持久卷 (PV)](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) ，Chaos Dashboard 在发生重启后，数据会出现丢失。为了避免数据丢失，可以参考[持久化 Chaos Dashboard 数据](persistence-dashboard.md) 文档，为 Chaos Dashboard 配置持久卷或者设置 `MySQL`、`Postgres` 作为后端存储。
