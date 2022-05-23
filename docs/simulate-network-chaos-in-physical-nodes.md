@@ -572,7 +572,7 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 
 | Parameter | Description | Value |
 | --- | --- | --- |
-| action | Action of the experiment. | Set to "delay" |
+| action | Action of the experiment. | set to "delay" |
 | correlation | The correlation between the current latency and the previous one. | string. It is a percentage ranging from 0 to 100 (10 is 10%) ("0" by default). |
 | device | Name of the impacted network interface card. | string, such as "eth0", required. |
 | egress-port | The egress traffic which only impact specific destination ports. It can only be configured when the protocol is TCP or UDP. | string. You need to use a `,` to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
@@ -640,7 +640,7 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 
 | Parameter | Description | Value |
 | --- | --- | --- |
-| action | Action of the experiment. | Set to "partition" |
+| action | Action of the experiment. | set to "partition" |
 | accept-tcp-flags | Only the packet which match the tcp flag can be accepted, others will be dropped. Only set when the protocol is tcp. | string, such as "SYN,ACK SYN,ACK" |
 | device | The network interface to impact | string, such as "eth0", required |
 | direction | Specifies the partition direction, values can be 'to', 'from' or 'both'. 'from' means packets coming from the 'ip-address' or 'hostname' and going to your server, 'to' means packets originating from your server and going to the 'ip-address' or 'hostname'. | string, values can be "to", "from" or "both" (default "both") |
@@ -660,7 +660,7 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 
 | Parameter | Description | Value |
 | --- | --- | --- |
-| action | Action of the experiment. | Set to "dns" |
+| action | Action of the experiment. | set to "dns" |
 | dns-domain-name | Map this host to specified IP(dns-ip) | string, such as "chaos-mesh.org".  |
 | dns-ip | Map specified host(dns-domain-name) to this IP address | string, such as "123.123.123.123" |
 | dns-server | Update the DNS server in /etc/resolv.conf with this value | string, such as "123.123.123.123" (default "123.123.123.123") |
@@ -677,7 +677,7 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 
 | Parameter | Description | Value |
 | --- | --- | --- |
-| action | Action of the experiment. | Set to "bandwidth" |
+| action | Action of the experiment. | set to "bandwidth" |
 | buffer | The maximum amount of bytes that tokens can be available for instantaneously | int, such as `10000`, required |
 | device | The network interface to impact | string, such as "eth0", required |
 | hostname | Only impact traffic to these hostnames. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "chaos-mesh.org". |
@@ -699,7 +699,7 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 
 | Parameter | Description | Value |
 | --- | --- | --- |
-| action | Action of the experiment. | Set to "occupied" |
+| action | Action of the experiment. | set to "occupied" |
 | port | The specified port to be occupied. | int, such as 8080, required |
 
 #### Example for simulating port occupation using the service mode
