@@ -84,7 +84,7 @@ stringData:
 
    依据此配置示例，Chaos Mesh 将向指定的 EC2 实例中注入 ec2-stop 故障，使该 EC2 实例将在 5 分钟时间内处于不可用的状态。
 
-   如需查看更多关于停止 EC2 实例的信息，可以参考 [停止和启动 EC2 实例](https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/Stop_Start.html)。
+   如需查看更多关于停止 EC2 实例的信息，可以参考[停止和启动 EC2 实例](https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/Stop_Start.html)。
 
 2. 使用 `kubectl` 创建实验，命令如下：
 

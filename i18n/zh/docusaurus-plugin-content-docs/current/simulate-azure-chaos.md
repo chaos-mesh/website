@@ -36,7 +36,7 @@ stringData:
 - **client_id** 存储 Azure 应用注册的应用程序(客户端) ID。
 - **client_secret** 存储 Azure 应用注册的应用程序(客户端)的机密值。
 - **tenant_id** 存储 Azure 应用注册的目录(租户) ID。
-`client_id`及`client_secret`的获取请参考[机密客户端应用程序](https://docs.microsoft.com/zh-cn/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app)。
+`client_id` 及 `client_secret` 的获取请参考[机密客户端应用程序](https://docs.microsoft.com/zh-cn/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app)。
 
 :::note 注意
 请确保 Secret 文件中的应用注册已作为参与者或所有者添加到指定 VM 实例的访问控制（IAM）中。
@@ -55,7 +55,7 @@ stringData:
     kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333
    ```
 
-   接着你可以在浏览器通过 [`http://localhost:2333`](http://localhost:2333)访问 Dashboard 。
+   接着你可以在浏览器通过 [`http://localhost:2333`](http://localhost:2333) 访问 Dashboard 。
 
 :::
 
@@ -89,9 +89,9 @@ stringData:
      duration: '5m'
    ```
 
-   依据此配置示例，Chaos Mesh 将向指定的 VM 实例中注入 `vm-stop` 故障，使该 VM 实例将在 5 分钟时间内处于不可用的状态。
+   依据此配置示例，Chaos Mesh 将向指定的 VM 实例中注入 `vm-stop` 故障，该 VM 实例将在 5 分钟时间内处于不可用的状态。
 
-   如需查看更多关于停止 VM 实例的信息，可以参考 [启动或停止 VM](https://docs.microsoft.com/zh-cn/azure/devtest-labs/use-command-line-start-stop-virtual-machines)。
+   如需查看更多关于停止 VM 实例的信息，可以参考[启动或停止 VM](https://docs.microsoft.com/zh-cn/azure/devtest-labs/use-command-line-start-stop-virtual-machines)。
 
 2. 使用 `kubectl` 创建实验，命令如下：
 
