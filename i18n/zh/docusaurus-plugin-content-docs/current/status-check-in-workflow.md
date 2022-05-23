@@ -16,6 +16,8 @@ title: 在工作流中进行状态检查
 
 ### 定义一个 `HTTP` 类型的 `StatusCheck` 节点
 
+`StatusCheck` 节点支持对指定的 URL 执行 HTTP GET 或 POST 请求，可携带自定义的 HTTP Headers 和 Body，并通过 `criteria` 中的条件来判断请求是否成功。
+
 ```yaml
 - name: workflow-status-check
   templateType: StatusCheck
@@ -61,7 +63,10 @@ title: 在工作流中进行状态检查
         statusCode: "200"
 ```
 
-在这个配置文件中，
+在这个配置文件中，`StatusCheck` 节点会持续性地执行状态检查：
+
+- 当出现连续 1 次及以上“执行结果”为“成功”时，认为“状态检查结果”为成功
+- 当出现连续 3 次及以上“执行结果”为“失败”时，认为“状态检查结果”为失败
 
 :::note
 
@@ -69,9 +74,15 @@ title: 在工作流中进行状态检查
 
 :::
 
-### 当状态检查失败时，终止 Workflow
+### 当状态检查不成功时，终止 Workflow
 
-当执行混沌实验时，应用系统可能会变得“不健康”，如果在某些情况下，想通过快速结束混沌实验来恢复应用系统，则可以使用这个功能。通过在 `StatusCheck` 节点上设置 `abortWithStatusCheck` 为 `true`，那么，当状态检查失败时，就会自动的终止 Workflow。
+:::note
+
+目前，`StatusCheck` 节点只支持当状态检查失败时，自动终止 Workflow。不支持暂停 Workflow 和恢复 Workflow 的功能。
+
+:::
+
+当执行混沌实验时，应用系统可能会变得“不健康”，如果在某些情况下，想通过快速结束混沌实验来恢复应用系统，则可以使用这个功能。在 `StatusCheck` 节点上将 `abortWithStatusCheck` 字段设置为 `true`，那么当状态检查失败时，就会自动的终止 Workflow。
 
 ```yaml
 - name: workflow-status-check
@@ -88,24 +99,108 @@ title: 在工作流中进行状态检查
         statusCode: "200"
 ```
 
+当符合以下任意条件时，就认为是状态检查不成功：
+
+- 状态检查失败
+- 当达到 `StatusCheck`节点超时时间时，状态检查结果不是“成功”。比如 `successThreshold` 为 1，`failureThreshold` 为 3，而当达到超时时间时，当前连续出现 2 次失败，0 次成功，虽然不符合状态检查失败的条件，但在这种情况下也被认为状态检查不成功。
+
 ## 执行模式
 
 ### 持续性的状态检查
 
-当 `mode` 为 `Continuous` 时，代表这个 `StatusCheck` 会持续性执行状态检查，直到节点超时退出或者状态检查失败。
+当 `mode` 字段为 `Continuous` 时，代表这个 `StatusCheck` 节点会持续性地执行状态检查，直到节点超时退出或者状态检查失败。
 
+```yaml
+- name: workflow-status-check
+  templateType: StatusCheck
+  deadline: 20s
+  statusCheck:
+    mode: Continuous
+    type: HTTP
+    intervalSeconds: 1
+    successThreshold: 1
+    failureThreshold: 3
+    http:
+      url: http://123.123.123.123
+      method: GET
+      criteria:
+        statusCode: "200"
+```
 
+在这个配置文件中，`StatusCheck` 节点每隔 1 秒会执行一次状态检查，当符合以下任意条件时退出：
+
+- 状态检查失败，即出现连续 3 次及以上失败的“执行结果”
+- 20 秒后触发节点超时
 
 ### 一次性的状态检查
 
+当 `mode` 字段为 `Synchronous` 时，代表这个 `StatusCheck` 节点会在明确状态检查结果时立即退出，或当节点超时时退出。
 
+```yaml
+- name: workflow-status-check
+  templateType: StatusCheck
+  deadline: 20s
+  statusCheck:
+    mode: Synchronous
+    type: HTTP
+    intervalSeconds: 1
+    successThreshold: 1
+    failureThreshold: 3
+    http:
+      url: http://123.123.123.123
+      method: GET
+      criteria:
+        statusCode: "200"
+```
 
+在这个配置文件中，`StatusCheck` 节点每隔 1 秒会执行一次状态检查，当符合以下任意条件时退出：
+
+- 状态检查成功，即出现连续 1 次及以上成功的“执行结果”
+- 状态检查失败，即出现连续 3 次及以上失败的“执行结果”
+- 20 秒后触发节点超时
 
 ## Status Check vs HTTP Request Task
 
+相同点：
+
+- `StatusCheck` 节点和 `HTTP Request Task` 节点（用来执行 HTTP 请求的 `Task` 节点）都属于 Workflow 的一种节点类型
+- `StatusCheck` 节点和 `HTTP Request Task` 节点都可以通过 HTTP 请求来获得外部系统的信息
+
+不同点：
+
+- `HTTP Request Task` 节点只能发送一次请求，而不能持续性的发送请求
+- `HTTP Request Task` 节点在请求失败时，无法对 Workflow 的执行状态产生影响（比如终止 Workflow）
 
 ## Field description
 
+Workflow 和 Template 字段说明参考[这个文档](./create-chaos-mesh-workflow.md#field-description)。
+
+### StatusCheck field description
+
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
-| Name | string | Name of the workflow node |  | Yes | `send-slack-message` |
+| mode | string | Defines the execution mode of the status check. Support type: `Synchronous` / `Continuous`. | None | Yes | `Synchronous` |
+| type | string | Defines the specific status check type. Support type: `HTTP`. | `HTTP` | Yes | `HTTP` |
+| duration | string | The duration of the whole status check if the number of failed execution does not exceed the failure threshold. Duration is available to both `Synchronous` and `Continuous` mode. A duration string is a possibly signed sequence of decimal numbers, each with optional fraction and a unit suffix, such as "300ms", "-1.5h" or "2h45m". | None | No | `100s` |
+| timeoutSeconds | int | The number of seconds after which an execution of status check times out. | `1` | No | `1` |
+| intervalSeconds | int | Defines how often (in seconds) to perform an execution of status check. | `1` | No | `1` |
+| failureThreshold | int | The minimum consecutive failure for the status check to be considered failed. | `3` | No | `3` |
+| successThreshold | int | The minimum consecutive successes for the status check to be considered successful. | `1` | No | `1` |
+| recordsHistoryLimit | int | The number of record to retain. | 100 | No | `100` |
+| http | HTTPStatusCheck | Defines the execution mode of the status check. Support type: Synchronous / Continuous. | None | No |  |
+
+### HTTPStatusCheck field description
+
+| Parameter | Type | Description | Default value | Required | Example |
+| --- | --- | --- | --- | --- | --- |
+| url | string | The URL of the HTTP request. | None | Yes | `http://123.123.123.123` |
+| method | string | The method of the HTTP request. | `GET` | No | `GET` |
+| headers | map[string][]string | The headers of the HTTP request. | None | No | |
+| body | string | The body of the HTTP request. | None | No | `{"a":"b"}` |
+| criteria | HTTPCriteria | Defines how to determine the result of the HTTP StatusCheck. | None | Yes |  |
+
+### HTTPCriteria field description
+
+| Parameter | Type | Description | Default value | Required | Example |
+| --- | --- | --- | --- | --- | --- |
+| statusCode | string | The expected http status code for the request. A statusCode string could be a single code (e.g. `200`), or an inclusive range (e.g. `200-400`, both `200` and `400` are included). | None | Yes | `200` |
