@@ -198,7 +198,7 @@ spec:
 
 To inject faults into servers in the Pod without affecting clients, you can also select the request/response by the `Host` header in the request.
 
-For example, if you want to interrupt all requests to you server behind service `nginx.nginx.svc`, you can apply the following YAML config:
+For example, if you want to interrupt all requests to your server behind service `nginx.nginx.svc`, you can apply the following YAML config:
 
 ```yaml
 apiVersion: chaos-mesh.org/v1alpha1
