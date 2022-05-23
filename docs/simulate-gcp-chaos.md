@@ -40,13 +40,13 @@ stringData:
 Before you create an experiment using Chaos Dashboard, make sure the following requirements are met:
 
 1. Chaos Dashboard is installed.
-2. Chaos Dashboard can be accessed using **kubectl port-forward** command:
+2. Chaos Dashboard can be accessed using `kubectl port-forward` command:
 
    ```bash
    kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333
    ```
 
-   You can then access the dashboard via [`http://localhost:2333`](http://localhost:2333) in your browser.
+   Then you can access the dashboard via [`http://localhost:2333`](http://localhost:2333) in your browser.
 
 :::
 

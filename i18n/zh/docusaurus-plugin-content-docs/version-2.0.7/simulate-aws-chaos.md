@@ -42,7 +42,7 @@ stringData:
 在使用 Dashboard 方式创建实验之前，请确保：
 
 1. 已经安装了 Dashboard。
-2. 可以通过 **kubectl port-forward** 方式访问 Dashboard：
+2. 可以通过 `kubectl port-forward` 方式访问 Dashboard：
 
    ```bash
     kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333
@@ -86,7 +86,7 @@ stringData:
 
    如需查看更多关于停止 EC2 实例的信息，可以参考 [停止和启动 EC2 实例](https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/Stop_Start.html)。
 
-2. 使用 kubectl 创建实验，命令如下：
+2. 使用 `kubectl` 创建实验，命令如下：
 
    ```bash
    kubectl apply -f awschaos-ec2-stop.yaml
@@ -113,7 +113,7 @@ stringData:
 
    如需查看更多关于重启 EC2 实例的信息，可以参考[重启实例](https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/ec2-instance-reboot.html)。
 
-2. 使用 kubectl 创建实验，命令如下：
+2. 使用 `kubectl` 创建实验，命令如下：
 
    ```bash
    kubectl apply -f awschaos-ec2-restart.yaml
@@ -143,7 +143,7 @@ stringData:
 
    查看更多关于分离 Amazon EBS 卷的消息, 可以参考[分离 Amazon EBS 卷](https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/ebs-detaching-volume.html)。
 
-2. 使用 kubectl 创建实验，命令如下：
+2. 使用 `kubectl` 创建实验，命令如下：
 
    ```bash
    kubectl apply -f awschaos-detach-volume.yaml

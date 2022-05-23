@@ -12,7 +12,7 @@ AwsChaos can help you inject faults into the specified AWS Instance, specificall
 
 - **Detach Volume** action detaches the storage volume from the specified ec2 instance.
 
-## Secret file
+## `Secret` file
 
 In order to facilitate the connection to the AWS cluster, you can first create a kubernetes secret file to store related information (such as access key id).
 

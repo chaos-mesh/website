@@ -76,7 +76,7 @@ kubectl get pods -n chaos-testing -l app.kubernetes.io/component=chaos-dns-serve
 
    该实验配置可以对域名 `google.com`、`chaos-mesh.org` 和 `github.com` 生效，对这三个域名发送 DNS 请求将返回随机 IP 地址。具体的匹配规则填写方式，参考[配置说明](#配置说明)中 `patterns` 字段的介绍。
 
-2. 使用 kubectl 创建实验，命令如下：
+2. 使用 `kubectl` 创建实验，命令如下：
 
    ```bash
    kubectl apply -f dnschaos.yaml

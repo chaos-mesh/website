@@ -14,7 +14,7 @@ AzureChaos can help you simulate fault scenarios on the specified Azure instance
 
 ## `Secret` file
 
-To easily connect to the AWS cluster, you can create a Kubernetes `Secret` file to store the authentication information in advance.
+To easily connect to the Azure cluster, you can create a Kubernetes `Secret` file to store the authentication information in advance.
 
 A `Secret` file sample is as follows:
 
@@ -56,7 +56,7 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
     kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333
    ```
 
-   You can then access the dashboard via [`http://localhost:2333`](http://localhost:2333) in your browser.
+   Then you can access the dashboard via [`http://localhost:2333`](http://localhost:2333) in your browser.
 
 :::
 
@@ -64,7 +64,7 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
 
    ![img](./img/create-new-exp.png)
 
-2. In the "**Choose a Target**" area, choose **Azure FAULT** and select a specific behavior, such as **VM STOP**.
+2. In the **Choose a Target** area, choose **Azure FAULT** and select a specific behavior, such as **VM STOP**.
 
 3. Fill out the experiment information, and specify the experiment scope and the scheduled experiment duration.
 
@@ -72,7 +72,7 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
 
 ## Create experiments using the YAML file
 
-### An `vm-stop` configuration example
+### A `vm-stop` configuration example
 
 1. Write the experiment configuration to the `azurechaos-vm-stop.yaml` file, as shown below:
 
@@ -100,7 +100,7 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
    kubectl apply -f azurechaos-vm-stop.yaml
    ```
 
-### An `vm-restart` configuration example
+### A `vm-restart` configuration example
 
 1. Write the experiment configuration to the `azurechaos-vm-restart.yaml` file:
 

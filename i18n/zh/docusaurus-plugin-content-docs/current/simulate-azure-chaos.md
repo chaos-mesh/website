@@ -12,7 +12,7 @@ AzureChaos 能够帮助你模拟指定的 Azure 实例发生故障的情景。�
 - **VM Restart**：重启指定的 VM 实例。
 - **Disk Detach**：从指定的 VM 实例中卸载数据磁盘。
 
-## Secret 文件
+## `Secret` 文件
 
 为了方便地连接 Azure 集群，你可以提前创建一个 Kubernetes Secret 文件存储认证相关信息。
 
@@ -36,7 +36,6 @@ stringData:
 - **client_id** 存储 Azure 应用注册的应用程序(客户端) ID。
 - **client_secret** 存储 Azure 应用注册的应用程序(客户端)的机密值。
 - **tenant_id** 存储 Azure 应用注册的目录(租户) ID。
-
 `client_id`及`client_secret`的获取请参考[机密客户端应用程序](https://docs.microsoft.com/zh-cn/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app)。
 
 :::note 注意
@@ -50,7 +49,7 @@ stringData:
 在使用 Dashboard 方式创建实验之前，请确保：
 
 1. 已经安装了 Dashboard。
-2. 可以通过 **kubectl port-forward** 方式访问 Dashboard：
+2. 可以通过 `kubectl port-forward` 方式访问 Dashboard：
 
    ```bash
     kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333
@@ -72,7 +71,7 @@ stringData:
 
 ## 使用 YAML 方式创建实验
 
-### vm-stop 配置文件示例
+### `vm-stop` 配置文件示例
 
 1. 将实验配置写入到文件 `azurechaos-vm-stop.yaml` 中，内容如下所示：
 
@@ -90,17 +89,17 @@ stringData:
      duration: '5m'
    ```
 
-   依据此配置示例，Chaos Mesh 将向指定的 VM 实例中注入 vm-stop 故障，使该 VM 实例将在 5 分钟时间内处于不可用的状态。
+   依据此配置示例，Chaos Mesh 将向指定的 VM 实例中注入 `vm-stop` 故障，使该 VM 实例将在 5 分钟时间内处于不可用的状态。
 
    如需查看更多关于停止 VM 实例的信息，可以参考 [启动或停止 VM](https://docs.microsoft.com/zh-cn/azure/devtest-labs/use-command-line-start-stop-virtual-machines)。
 
-2. 使用 kubectl 创建实验，命令如下：
+2. 使用 `kubectl` 创建实验，命令如下：
 
    ```bash
    kubectl apply -f azurechaos-vm-stop.yaml
    ```
 
-### vm-restart 配置文件示例
+### `vm-restart` 配置文件示例
 
 1. 将实验配置写入到文件 `azurechaos-vm-restart.yaml` 中，内容如下所示：
 
@@ -117,11 +116,11 @@ stringData:
      resourceGroupName: 'your-resource-group-name'
    ```
 
-   依据此配置示例，Chaos Mesh 将向指定的 VM 实例中注入 vm-restart 故障，使该 VM 实例将重启一次。
+   依据此配置示例，Chaos Mesh 将向指定的 VM 实例中注入 `vm-restart` 故障，该 VM 实例将重启一次。
 
    如需查看更多关于重启 VM 实例的信息，可以参考[重新启动 VM](https://docs.microsoft.com/zh-cn/azure/devtest-labs/devtest-lab-restart-vm)。
 
-2. 使用 kubectl 创建实验，命令如下：
+2. 使用 `kubectl` 创建实验，命令如下：
 
    ```bash
    kubectl apply -f azurechaos-vm-restart.yaml
@@ -151,7 +150,7 @@ stringData:
 
    查看更多关于分离 Azure 数据磁盘的消息, 可以参考[分离数据磁盘](https://docs.microsoft.com/zh-cn/azure/devtest-labs/devtest-lab-attach-detach-data-disk#detach-a-data-disk)。
 
-2. 使用 kubectl 创建实验，命令如下：
+2. 使用 `kubectl` 创建实验，命令如下：
 
    ```bash
    kubectl apply -f azurechaos-disk-detach.yaml
