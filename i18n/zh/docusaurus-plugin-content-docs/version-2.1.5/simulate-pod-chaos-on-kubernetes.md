@@ -14,7 +14,7 @@ PodChaos 是 Chaos Mesh 中的一种故障类型，通过创建 PodChaos 类型�
 
 ## 使用限制
 
-目前 Chaos Mesh 仅支持向特定类型的 Pod 中注入故障，例如 Deployment、Statefulset、Daemonset。Chaos Mesh 不支持向独立的 Pod 中注入故障，独立的 Pod 指未绑定到 ReplicaSet 或 Deployment 的 Pod。
+Chaos Mesh 可以向任一 Pod 注入 PodChaos，无论其 Pod 是否绑定至 Deployment，StatefulSet，DaemonSet 或其他控制器。然而，当向独立的 Pod 注入 PodChaos 时，可能会引起不同的情况。比如，向独立的 Pod 注入 "pod-kill" 混沌时，无法保证应用程序在故障发生后能够恢复正常。
 
 ## 注意事项
 
