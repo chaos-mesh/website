@@ -126,7 +126,7 @@ stringData:
    kubectl apply -f azurechaos-vm-restart.yaml
    ```
 
-### disk-detach 配置文件示例
+### `disk-detach` 配置文件示例
 
 1. 将实验配置写入到文件 `azurechaos-disk-detach.yaml` 中，内容如下所示：
 
@@ -146,7 +146,7 @@ stringData:
      duration: '5m'
    ```
 
-   依据此配置示例，Chaos Mesh 将向指定的 VM 实例中注入 disk-detach 故障，使该 VM 实例在 5 分钟内与指定数据磁盘分离。
+   依据此配置示例，Chaos Mesh 将向指定的 VM 实例中注入 `disk-detach `故障，使该 VM 实例在 5 分钟内与指定数据磁盘分离。
 
    查看更多关于分离 Azure 数据磁盘的消息, 可以参考[分离数据磁盘](https://docs.microsoft.com/zh-cn/azure/devtest-labs/devtest-lab-attach-detach-data-disk#detach-a-data-disk)。
 
@@ -162,12 +162,12 @@ stringData:
 
 | 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
 | --- | --- | --- | --- | --- | --- |
-| action | string | 表示具体的故障类型，仅支持 vm-stop、vm-restart、disk-detach | vm-stop | 是 | vm-stop |
+| action | string | 表示具体的故障类型，仅支持 `vm-stop`、`vm-restart`、`disk-detach` | `vm-stop` | 是 | `vm-stop` |
 | mode | string | 指定实验的运行方式，可选择的方式包括：`one`（表示随机选出一个符合条件的 Pod）、`all`（表示选出所有符合条件的 Pod）、`fixed`（表示选出指定数量且符合条件的 Pod）、`fixed-percent`（表示选出占符合条件的 Pod 中指定百分比的 Pod）、`random-max-percent`（表示选出占符合条件的 Pod 中不超过指定百分比的 Pod） | 无 | 是 | `one` |
-| value | string | 取决与 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 Pod 的百分比。 | 无 | 否 | 1 |
-| secretName | string | 指定存储 Azure 认证信息的 Kubernetes Secret 名字 | 无 | 否 | cloud-key-secret |
-| subscriptionID | string | 指定 VM 实例的订阅 ID | 无 | 是 | your-subscription-id |
-| resourceGroupName | string | 指定 VM 实例所属的资源组的名称 | 无 | 是 | your-resource-group-name |
-| lun | string | 当 action 为 disk-detach 时必填，指定硬盘的 LUN(Logic Unit Number) | 无 | 否 | `0` |
-| diskName | string | 当 action 为 disk-detach 时必填，指定设备名 | 无 | 否 | `DATADISK_0` |
-| duration | string | 指定实验的持续时间 | 无 | 是 | 30s |
+| value | string | 取决与 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 Pod 的百分比。 | 无 | 否 | `1` |
+| secretName | string | 指定存储 Azure 认证信息的 Kubernetes Secret 名字 | 无 | 否 | `cloud-key-secret` |
+| subscriptionID | string | 指定 VM 实例的订阅 ID | 无 | 是 | `your-subscription-id` |
+| resourceGroupName | string | 指定 VM 实例所属的资源组的名称 | 无 | 是 | `your-resource-group-name` |
+| lun | string | 当 action 为 `disk-detach` 时必填，指定硬盘的 LUN (Logic Unit Number) | 无 | 否 | `0` |
+| diskName | string | 当 action 为 `disk-detach` 时必填，指定设备名 | 无 | 否 | `DATADISK_0` |
+| duration | string | 指定实验的持续时间 | 无 | 是 | `30s` |

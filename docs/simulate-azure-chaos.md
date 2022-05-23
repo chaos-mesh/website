@@ -36,7 +36,6 @@ stringData:
 - **client_id** stores Application (client) ID of Azure App registrations.
 - **client_secret** stores Application (client) secret value of Azure App registrations.
 - **tenant_id** stores Directory (tenant) ID of Azure App registrations.
-  
 For `client_id` and `client_secret`, please refer to [Confidential client application](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app).
 
 :::note
@@ -163,12 +162,12 @@ The following table shows the fields in the YAML configuration file.
 
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
-| action | string | Indicates the specific type of faults. Only vm-stop, vm-restart, and disk-detach are supported. | vm-stop | Yes | vm-stop |
-| mode | string | Specifies the mode of the experiment. The mode options include `one` (selecting a random Pod), `all` (selecting all eligible Pods), `fixed` (selecting a specified number of eligible Pods), `fixed-percent` (selecting a specified percentage of Pods from the eligible Pods), and `random-max-percent` (selecting the maximum percentage of Pods from the eligible Pods). | None | Yes | `one` |
-| value | string | Provides parameters for the `mode` configuration, depending on `mode`.For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods. | None | No | 1 |
-| secretName | string | Specifies the name of the Kubernetes Secret that stores the Azure authentication information. | None | No | cloud-key-secret |
-| subscriptionID | string | Specifies the VM instacnce's subscription ID | None | Yes | your-subscription-id |
-| resourceGroupName | string | Specifies the Resource group of VM | None | Yes | your-resource-group-name |
-| lun | string | This is a required field when the `action` is `disk-detach`, specifies the LUN(Logic Unit Number) of data disk | None | No | `0` |
-| diskName | string | This is a required field when the `action` is `disk-detach`, specifies the name of data disk | None | No | `DATADISK_0` |
-| duration | string | Specifies the duration of the experiment. | None | Yes | 30s |
+| action | string | Indicates the specific type of faults. Only `vm-stop`, `vm-restart`, and `disk-detach` are supported. | `vm-stop` | Yes | `vm-stop` |
+| mode | string | Specifies the mode of the experiment. The mode options include `one` (selecting a random Pod), `all` (selecting all eligible Pods), `fixed` (selecting a specified number of eligible Pods), `fixed-percent` (selecting a specified percentage of Pods from the eligible Pods), and `random-max-percent` (selecting the maximum percentage of Pods from the eligible Pods). | N/A | Yes | `one` |
+| value | string | Provides parameters for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods. | N/A | No | `1` |
+| secretName | string | Specifies the name of the Kubernetes Secret that stores the Azure authentication information. | N/A | No | `cloud-key-secret` |
+| subscriptionID | string | Specifies the VM instacnce's subscription ID. | N/A | Yes | `your-subscription-id` |
+| resourceGroupName | string | Specifies the Resource group of VM. | N/A | Yes | `your-resource-group-name` |
+| lun | string | This is a required field when the `action` is `disk-detach`, specifies the LUN (Logic Unit Number) of data disk. | N/A | No | `0` |
+| diskName | string | This is a required field when the `action` is `disk-detach`, specifies the name of data disk. | N/A | No | `DATADISK_0` |
+| duration | string | Specifies the duration of the experiment. | N/A | Yes | `30s` |
