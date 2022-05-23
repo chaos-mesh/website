@@ -6,7 +6,7 @@ title: 在工作流中进行状态检查
 
 :::note
 
-当前“状态检查”节点还不支持在 Dashboard 上创建，只能通过 yaml 方式进行创建。
+当前 `StatusCheck` 节点还不支持在 Dashboard 上创建，只能通过 yaml 方式进行创建。
 
 :::
 
@@ -171,36 +171,36 @@ title: 在工作流中进行状态检查
 - `HTTP Request Task` 节点只能发送一次请求，而不能持续性的发送请求
 - `HTTP Request Task` 节点在请求失败时，无法对 Workflow 的执行状态产生影响（比如终止 Workflow）
 
-## Field description
+## 字段说明
 
-Workflow 和 Template 字段说明参考[这个文档](./create-chaos-mesh-workflow.md#field-description)。
+Workflow 和 Template 字段说明参考[创建 Chaos Mesh Workflow](create-chaos-mesh-workflow.md#字段说明)。
 
-### StatusCheck field description
+### StatusCheck 字段说明
 
-| Parameter | Type | Description | Default value | Required | Example |
+| 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
 | --- | --- | --- | --- | --- | --- |
-| mode | string | Defines the execution mode of the status check. Support type: `Synchronous` / `Continuous`. | None | Yes | `Synchronous` |
-| type | string | Defines the specific status check type. Support type: `HTTP`. | `HTTP` | Yes | `HTTP` |
-| duration | string | The duration of the whole status check if the number of failed execution does not exceed the failure threshold. Duration is available to both `Synchronous` and `Continuous` mode. A duration string is a possibly signed sequence of decimal numbers, each with optional fraction and a unit suffix, such as "300ms", "-1.5h" or "2h45m". | None | No | `100s` |
-| timeoutSeconds | int | The number of seconds after which an execution of status check times out. | `1` | No | `1` |
-| intervalSeconds | int | Defines how often (in seconds) to perform an execution of status check. | `1` | No | `1` |
-| failureThreshold | int | The minimum consecutive failure for the status check to be considered failed. | `3` | No | `3` |
-| successThreshold | int | The minimum consecutive successes for the status check to be considered successful. | `1` | No | `1` |
-| recordsHistoryLimit | int | The number of record to retain. | 100 | No | `100` |
-| http | HTTPStatusCheck | Defines the execution mode of the status check. Support type: Synchronous / Continuous. | None | No |  |
+| mode | string | 状态检查的模式，可选值有：`Synchronous` / `Continuous`。| 无 | 是 | `Synchronous` |
+| type | string | 状态检查的类型，可选值有：`HTTP`。 | `HTTP` | 是 | `HTTP` |
+| duration | string | 当失败的执行次数小于 failureThreshold 时的状态检查的持续时间。`Duration` 字段对于 `Synchronous` 和 `Continuous` 模式的状态检查都适用。| 无 | 否 | `100s` |
+| timeoutSeconds | int | 状态检查单次执行的超时秒数 | `1` | 否 | `1` |
+| intervalSeconds | int | Defines how often (in seconds) to perform an execution of status check. | `1` | 否 | `1` |
+| failureThreshold | int | 决定状态检查失败的最小连续失败次数。 | `3` | 否 | `3` |
+| successThreshold | int | 决定状态检查成功的最小连续成功次数。 | `1` | 否 | `1` |
+| recordsHistoryLimit | int | 保存历史执行记录的条数。 | 100 | 否 | `100` |
+| http | HTTPStatusCheck | 配置执行 HTTP 请求的具体细节。 | 无 | 否 |  |
 
-### HTTPStatusCheck field description
+### HTTPStatusCheck 字段说明
 
-| Parameter | Type | Description | Default value | Required | Example |
+| 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
 | --- | --- | --- | --- | --- | --- |
-| url | string | The URL of the HTTP request. | None | Yes | `http://123.123.123.123` |
-| method | string | The method of the HTTP request. | `GET` | No | `GET` |
-| headers | map[string][]string | The headers of the HTTP request. | None | No | |
-| body | string | The body of the HTTP request. | None | No | `{"a":"b"}` |
-| criteria | HTTPCriteria | Defines how to determine the result of the HTTP StatusCheck. | None | Yes |  |
+| url | string | HTTP 请求的 URL。 | 无 | 是 | `http://123.123.123.123` |
+| method | string | HTTP 请求的方法，可选值有：`GET` / `POST`。 | `GET` | 否 | `GET` |
+| headers | map[string][]string | HTTP 请求的请求头。 | 无 | 否 | |
+| body | string | HTTP 请求的请求体。 | 无 | 否 | `{"a":"b"}` |
+| criteria | HTTPCriteria | 定义如何判断 HTTP StatusCheck 执行的结果。| 无 | 是 |  |
 
-### HTTPCriteria field description
+### HTTPCriteria 字段说明
 
-| Parameter | Type | Description | Default value | Required | Example |
+| 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
 | --- | --- | --- | --- | --- | --- |
-| statusCode | string | The expected http status code for the request. A statusCode string could be a single code (e.g. `200`), or an inclusive range (e.g. `200-400`, both `200` and `400` are included). | None | Yes | `200` |
+| statusCode | string | HTTP 请求预期的状态码。取值可以是单一的数字（比如 `200`），或者也可以是一个范围（比如 `200-400`，这里，`200` 和 `400` 都被包括在范围内）。 | 无 | 是 | `200` |
