@@ -22,7 +22,7 @@ For the detailed description of HTTPChaos configuration, see [Field description]
 Before injecting the faults supported by HTTPChaos, note the followings:
 
 - There is no control manager of Chaos Mesh running on the target Pod.
-- The rules will affect both of clients and servers in the pod, if you want to affect only one side, please refer to the [specify side](#specify-side) section.
+- The rules will affect both of clients and servers in the Pod, if you want to affect only one side, please refer to the [specify side](#specify-side) section.
 - HTTPS accesses should be disabled, because injecting HTTPS connections is not supported currently.
 - For HTTPChaos injection to take effect, the client should avoid reusing TCP socket. This is because HTTPChaos does not affect the HTTP requests that are sent via TCP socket before the fault injection.
 - Use non-idempotent requests (such as most of the POST requests) with caution in production environments. If such requests are used, the target service may not return to normal status by repeating requests after the fault injection.
@@ -166,13 +166,13 @@ The `Response` is a meaningful when the `target` set to `Response` during the fa
 
 ## Specify side
 
-The rules will affect both of clients and servers in the pod by default, but you can affect only one side by selecting the request headers.
+The rules will affect both of clients and servers in the Pod by default, but you can affect only one side by selecting the request headers.
 
 This section provides some examples to specify the affected side, you can adjust the header selector in rules depend on your particular cases.
 
 ### Client side
 
-To inject faults into clients in the pod without affecting servers, you can select the request/response by the `Host` header in request.
+To inject faults into clients in the Pod without affecting servers, you can select the request/response by the `Host` header in the request.
 
 For example, if you want to interrupt all requests to `http://example.com/`, you can apply the following YAML config:
 
@@ -196,9 +196,9 @@ spec:
 
 ### Server side
 
-To inject faults into servers in the pod without affecting clients, you can also select the request/response by the `Host` header in the request.
+To inject faults into servers in the Pod without affecting clients, you can also select the request/response by the `Host` header in the request.
 
-For example, if you want to interrupt all requests to you server behind service `nginx.nginx`, you can apply the following YAML config:
+For example, if you want to interrupt all requests to you server behind service `nginx.nginx.svc`, you can apply the following YAML config:
 
 ```yaml
 apiVersion: chaos-mesh.org/v1alpha1
@@ -220,7 +220,7 @@ spec:
 
 In other cases, especially when injecting the inbound request from outside, you may select the request/response by the `X-Forwarded-Host` header in the request.
 
-For example, if you want to interrupt all requests to you server behind a public gateway `nginx.host.org`, you can apply the following YAML config:
+For example, if you want to interrupt all requests to your server behind a public gateway `nginx.host.org`, you can apply the following YAML config:
 
 ```yaml
 apiVersion: chaos-mesh.org/v1alpha1
