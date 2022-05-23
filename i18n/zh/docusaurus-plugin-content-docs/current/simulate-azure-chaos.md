@@ -8,9 +8,9 @@ title: 模拟 Azure 故障
 
 AzureChaos 能够帮助你模拟指定的 Azure 实例发生故障的情景。目前，AzureChaos 支持以下类型的故障：
 
-- **VM Stop**: 使指定的 VM 实例进入停止状态。
-- **VM Restart**: 重启指定的 VM 实例。
-- **Disk Detach**: 从指定的 VM 实例中卸载数据磁盘。
+- **VM Stop**：使指定的 VM 实例进入停止状态。
+- **VM Restart**：重启指定的 VM 实例。
+- **Disk Detach**：从指定的 VM 实例中卸载数据磁盘。
 
 ## Secret 文件
 

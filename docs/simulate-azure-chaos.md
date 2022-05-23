@@ -1,5 +1,5 @@
 ---
-title: Simulate AWS Faults
+title: Simulate Azure Faults
 ---
 
 This document describes how to use Chaos Mesh to simulate Azure faults.
