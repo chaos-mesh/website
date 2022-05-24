@@ -33,9 +33,9 @@ stringData:
 
 - **name** 表示 Kubernetes Secret 对象的名字。
 - **namespace** 表示 Kubernetes Secret 对象的命名空间。
-- **client_id** 存储 Azure 应用注册的应用程序(客户端) ID。
-- **client_secret** 存储 Azure 应用注册的应用程序(客户端)的机密值。
-- **tenant_id** 存储 Azure 应用注册的目录(租户) ID。
+- **client_id** 存储 Azure 应用注册的应用程序（客户端）ID。
+- **client_secret** 存储 Azure 应用注册的应用程序（客户端）的机密值。
+- **tenant_id** 存储 Azure 应用注册的目录（租户）ID。
 `client_id` 及 `client_secret` 的获取请参考[机密客户端应用程序](https://docs.microsoft.com/zh-cn/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app)。
 
 :::note 注意
@@ -55,7 +55,7 @@ stringData:
     kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333
    ```
 
-   接着你可以在浏览器通过 [`http://localhost:2333`](http://localhost:2333) 访问 Dashboard 。
+   接着你可以在浏览器通过 [`http://localhost:2333`](http://localhost:2333) 访问 Dashboard。
 
 :::
 
@@ -148,7 +148,7 @@ stringData:
 
    依据此配置示例，Chaos Mesh 将向指定的 VM 实例中注入 `disk-detach `故障，使该 VM 实例在 5 分钟内与指定数据磁盘分离。
 
-   查看更多关于分离 Azure 数据磁盘的消息, 可以参考[分离数据磁盘](https://docs.microsoft.com/zh-cn/azure/devtest-labs/devtest-lab-attach-detach-data-disk#detach-a-data-disk)。
+   查看更多关于分离 Azure 数据磁盘的消息，可以参考[分离数据磁盘](https://docs.microsoft.com/zh-cn/azure/devtest-labs/devtest-lab-attach-detach-data-disk#detach-a-data-disk)。
 
 2. 使用 `kubectl` 创建实验，命令如下：
 
