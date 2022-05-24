@@ -7,10 +7,11 @@ title: 使用 Chaos Mesh 创建物理机故障
 ## PhysicalMachineChaos 介绍
 
 PhysicalMachineChaos 用于在物理机或虚拟机中模拟网络、磁盘、压力、JVM、时间等故障。在使用 Chaos Mesh 的 PhysicalMachineChaos 功能之前，你需要在物理机或虚拟机上部署 Chaosd。Chaos Mesh 与 Chaosd 的版本对应关系如下：
+
 | Chaos Mesh 版本 | Chaosd 版本 |
-| :-- | :-- |
-| v2.1.x | v1.1.x |
-| v2.2.x | v1.2.x |
+| :-------------- | :---------- |
+| v2.1.x          | v1.1.x      |
+| v2.2.x          | v1.2.x      |
 
 ## 运行 Chaosd Server
 
