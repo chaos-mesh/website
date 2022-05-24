@@ -48,7 +48,7 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
     kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333
    ```
 
-   You can then access the dashboard via [`http://localhost:2333`](http://localhost:2333) in your browser.
+   Then you can access the dashboard via [`http://localhost:2333`](http://localhost:2333) in your browser.
 
 :::
 
@@ -56,7 +56,7 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
 
    ![img](./img/create-new-exp.png)
 
-2. In the "**Choose a Target**" area, choose **AWS FAULT** and select a specific behavior, such as **STOP EC2**.
+2. In the **Choose a Target** area, choose **AWS FAULT** and select a specific behavior, such as **STOP EC2**.
 
 3. Fill out the experiment information, and specify the experiment scope and the scheduled experiment duration.
 

@@ -40,7 +40,7 @@ stringData:
 在使用 Dashboard 方式创建实验前，请确保满足以下条件：
 
 1. 已安装 Dashboard。
-2. 可以通过 **kubectl port-forward** 方式访问 Dashboard：
+2. 可以通过 `kubectl port-forward` 方式访问 Dashboard：
 
    ```bash
    kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333
@@ -91,7 +91,7 @@ stringData:
 
    更多关于停止 GCP 实例的信息，请参考[停止 GCP 实例](https://cloud.google.com/compute/docs/instances/stop-start-instance)。
 
-2. 使用 kubectl 创建实验，命令如下：
+2. 使用 `kubectl` 创建实验，命令如下：
 
    ```bash
    kubectl apply -f gcpchaos-node-stop.yaml
@@ -120,7 +120,7 @@ stringData:
 
    更多关于重置 GCP 实例的信息，请参考[重置 GCP 实例](https://cloud.google.com/compute/docs/instances/stop-start-instance#resetting_an_instance)。
 
-2. 使用 kubectl 创建实验，命令如下：
+2. 使用 `kubectl` 创建实验，命令如下：
 
    ```bash
    kubectl apply -f gcpchaos-node-reset.yaml
@@ -148,9 +148,9 @@ stringData:
 
    依据此配置示例，Chaos Mesh 将向指定的 GCP 实例中注入 disk-loss 故障，使该 GCP 实例在 5 分钟内与指定存储设备分离。
 
-   更多关于分离 GCP 存储设备的信息，请参考 [分离 GCP 存储](https://cloud.google.com/compute/docs/reference/rest/v1/instances/detachDisk)。
+   更多关于分离 GCP 存储设备的信息，请参考[分离 GCP 存储](https://cloud.google.com/compute/docs/reference/rest/v1/instances/detachDisk)。
 
-2. 使用 kubectl 创建实验，命令如下：
+2. 使用 `kubectl` 创建实验，命令如下：
 
    ```bash
    kubectl apply -f gcpchaos-disk-loss.yaml

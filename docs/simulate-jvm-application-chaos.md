@@ -25,7 +25,7 @@ Your Linux kernel must be v4.1 or later.
 
    ![create a new experiment](./img/create-new-exp.png)
 
-2. In the "**Choose a Target**" area, choose **JVM FAULT**, and select a specific behavior, such as **`RETURN`**. Then, fill out the detailed configurations.
+2. In the **Choose a Target** area, choose **JVM FAULT**, and select a specific behavior, such as **`RETURN`**. Then, fill out the detailed configurations.
 
    ![JVMChaos experiments](./img/jvmchaos-exp.png)
 

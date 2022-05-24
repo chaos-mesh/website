@@ -73,6 +73,7 @@ module.exports = {
             'simulate-jvm-application-chaos',
             'simulate-kernel-chaos-on-kubernetes',
             'simulate-aws-chaos',
+            'simulate-azure-chaos',
             'simulate-gcp-chaos',
             'simulate-http-chaos-on-kubernetes',
           ],

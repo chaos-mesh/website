@@ -83,9 +83,9 @@ spec:
   - **probability** 指定故障发生概率，如果你想要 1% 的概率，请将其设置为 '1'.
   - **times** 指定触发故障的最大次数。
 
-## 使用 kubectl 创建实验
+## 使用 `kubectl` 创建实验
 
-使用 kubectl 创建实验，命令如下：
+使用 `kubectl` 创建实验，命令如下：
 
 ```bash
 kubectl apply -f KernelChaos

@@ -85,7 +85,7 @@ spec:
 
 ## 使用 kubectl 创建实验
 
-使用 kubectl 创建实验，命令如下：
+使用 `kubectl` 创建实验，命令如下：
 
 ```bash
 kubectl apply -f KernelChaos

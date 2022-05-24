@@ -84,7 +84,7 @@ PhysicalMachineChaos 用于在物理机或虚拟机中模拟网络、磁盘、�
 
    该实验配置向指定物理机或虚拟机中的 Chaosd 服务发送 HTTP 请求，触发网络延迟实验。
 
-2. 使用 kubectl 创建实验，命令如下：
+2. 使用 `kubectl` 创建实验，命令如下：
 
    ```bash
    kubectl apply -f physicalmachine.yaml
