@@ -43,6 +43,7 @@ module.exports = {
             'run-chaos-experiments-in-serial-or-parallel',
             'send-http-request-on-workflow',
             'check-workflow-status',
+            'status-check-in-workflow'
           ],
         },
       ],
