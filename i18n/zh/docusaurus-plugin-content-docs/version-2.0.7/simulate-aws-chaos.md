@@ -141,7 +141,7 @@ stringData:
 
    依据此配置示例，Chaos Mesh 将向指定的 EC2 实例中注入 detach-volume 故障，使该 EC2 实例在 5 分钟内与指定存储卷分离。
 
-   查看更多关于分离 Amazon EBS 卷的消息, 可以参考[分离 Amazon EBS 卷](https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/ebs-detaching-volume.html)。
+   查看更多关于分离 Amazon EBS 卷的消息，可以参考[分离 Amazon EBS 卷](https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/ebs-detaching-volume.html)。
 
 2. 使用 `kubectl` 创建实验，命令如下：
 
