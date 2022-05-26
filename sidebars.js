@@ -147,6 +147,7 @@ module.exports = {
         'faqs',
         // 'troubleshooting-guide',
         'upgrade-to-2.0',
+        'upgrade-from-2.1-to-2.2',
       ],
     },
     // {
