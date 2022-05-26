@@ -30,8 +30,8 @@ const PickVersion = ({
   children,
   // replaced represent the string would be replaced in the original content
   replaced = 'latest',
-  // when isArchive is false, it would replaced as pattern like refs/tags/vX.Y.Z
-  // when isArchive is true, it would replaced with vX.Y.Z
+  // when `isArchive` is true, it would be replaced as patterns like `refs/heads/master` or `refs/tags/vX.Y.Z`
+  // when `isArchive` is false, it would be replaced with `vX.Y.Z`
   isArchive = false,
   className = 'language-bash',
 }) => {
