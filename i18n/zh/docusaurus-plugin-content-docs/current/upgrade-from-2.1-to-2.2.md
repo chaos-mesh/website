@@ -8,7 +8,7 @@ title: 从 2.1 升级到 2.2
 
 ### 第 1 步: 添加/更新 Chaos Mesh Helm 仓库
 
-Add the Chaos Mesh repository to the Helm repository and update it: 添加 Chaos Mesh 到 Helm 仓库并更新:
+添加 Chaos Mesh 到 Helm 仓库并更新:
 
 ```bash
 helm repo add chaos-mesh https://charts.chaos-mesh.org
@@ -62,4 +62,4 @@ helm upgrade <release-name> chaos-mesh/chaos-mesh --namespace=<namespace> --vers
 
 ## 询问社区
 
-If you have any question about upgrading Chaos Mesh, feel free to contact us at [Slack Channel](https://cloud-native.slack.com/archives/C0193VAV272), GitHub [Issues](https://github.com/chaos-mesh/chaos-mesh/issues/new?assignees=&labels=&template=question.md) and [Discussions](https://github.com/chaos-mesh/chaos-mesh/discussions/new). 如果你对升级 Chaos Mesh 有任何问题，请在 [Slack Channel](https://cloud-native.slack.com/archives/C0193VAV272)，GitHub [Issues](https://github.com/chaos-mesh/chaos-mesh/issues/new?assignees=&labels=&template=question.md) 和 [Discussions](https://github.com/chaos-mesh/chaos-mesh/discussions/new) 联系我们.
+如果你对升级 Chaos Mesh 有任何问题，请在 [Slack Channel](https://cloud-native.slack.com/archives/C0193VAV272)，GitHub [Issues](https://github.com/chaos-mesh/chaos-mesh/issues/new?assignees=&labels=&template=question.md) 和 [Discussions](https://github.com/chaos-mesh/chaos-mesh/discussions/new) 联系我们.
