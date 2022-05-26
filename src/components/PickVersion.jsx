@@ -26,7 +26,15 @@ function versionToGitHubRef(version) {
   return version === 'latest' ? 'refs/heads/master' : `refs/tags/v${version}`
 }
 
-const PickVersion = ({ children, replaced = 'latest', isArchive = false, className = 'language-bash' }) => {
+const PickVersion = ({
+  children,
+  // replaced represent the string would be replaced in the original content
+  replaced = 'latest',
+  // when `isArchive` is true, it would be replaced as patterns like `refs/heads/master` or `refs/tags/vX.Y.Z`
+  // when `isArchive` is false, it would be replaced with `vX.Y.Z`
+  isArchive = false,
+  className = 'language-bash',
+}) => {
   const { siteConfig } = useDocusaurusContext()
   const { versions } = usePluginData('docusaurus-plugin-content-docs')
 
