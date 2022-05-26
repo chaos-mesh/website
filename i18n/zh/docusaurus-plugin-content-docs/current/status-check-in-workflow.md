@@ -2,7 +2,7 @@
 title: 在工作流中进行状态检查
 ---
 
-在 Workflow 中，状态检查可对外部系统（比如业务应用系统、监控系统）执行指定的操作来获得系统的状态，并当检查到系统不健康时可以自动地终止 Workflow，其概念类似于 Kubernetes 中的 `Container Probes`。本文介绍如果通过 yaml 的方式在 Workflow 中进行状态检查。
+在 Workflow 中，状态检查可对外部系统（比如业务应用系统、监控系统）执行指定的操作来获得系统的状态，并当检查到系统不健康时可以自动地终止 Workflow，其概念类似于 Kubernetes 中的 `Container Probes`。本文介绍如何通过 YAML 的方式在 Workflow 中进行状态检查。
 
 :::note
 
@@ -16,7 +16,7 @@ title: 在工作流中进行状态检查
 
 ### 定义一个 `HTTP` 类型的 `StatusCheck` 节点
 
-`StatusCheck` 节点支持对指定的 URL 执行 HTTP GET 或 POST 请求，可携带自定义的 HTTP Headers 和 Body，并通过 `criteria` 中的条件来判断请求是否成功。
+`StatusCheck` 节点支持对指定的 URL 执行 HTTP `GET` 或 `POST` 请求，可携带自定义的 HTTP headers 和 body，并通过 `criteria` 中的条件来判断请求是否成功。
 
 ```yaml
 - name: workflow-status-check
@@ -36,7 +36,7 @@ title: 在工作流中进行状态检查
 
 在这个配置文件中，可以看到定义了一个 `HTTP` 类型的 `StatusCheck` 节点。`deadline` 字段指定了该节点最多执行 20 秒。`mode` 字段指定了该 `StatusCheck` 节点会持续性的执行状态检查。`intervalSeconds` 字段指定了重复间隔为 1 秒。`timeoutSeconds` 字段指定了每次执行的超时时间。
 
-当 Workflow 运行到这个节点时，每隔 1 秒会执行一次指定的状态检查行为：使用 GET 方法向 `http://123.123.123.123` 这个 URL 进行 HTTP 请求，如果该请求在 1 秒内响应，且状态码为 200，则此次执行成功，反之失败。
+当 Workflow 运行到这个节点时，每隔 1 秒会执行一次指定的状态检查行为：使用 `GET` 方法向 `http://123.123.123.123` 这个 URL 进行 HTTP 请求，如果该请求在 1 秒内响应，且状态码为 `200`，则此次执行成功，反之失败。
 
 ## 检查结果
 
@@ -179,14 +179,14 @@ Workflow 和 Template 字段说明参考[创建 Chaos Mesh Workflow](create-chao
 
 | 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
 | --- | --- | --- | --- | --- | --- |
-| mode | string | 状态检查的模式，可选值有：`Synchronous` / `Continuous`。| 无 | 是 | `Synchronous` |
+| mode | string | 状态检查的模式，可选值有：`Synchronous`/`Continuous`。| 无 | 是 | `Synchronous` |
 | type | string | 状态检查的类型，可选值有：`HTTP`。 | `HTTP` | 是 | `HTTP` |
-| duration | string | 当失败的执行次数小于 failureThreshold 时的状态检查的持续时间。`Duration` 字段对于 `Synchronous` 和 `Continuous` 模式的状态检查都适用。| 无 | 否 | `100s` |
-| timeoutSeconds | int | 状态检查单次执行的超时秒数 | `1` | 否 | `1` |
-| intervalSeconds | int | Defines how often (in seconds) to perform an execution of status check. | `1` | 否 | `1` |
+| duration | string | 当失败的执行次数小于 `failureThreshold`  时状态检查的持续时间。对于 `Synchronous` 和 `Continuous` 模式的状态检查都适用。| 无 | 否 | `100s` |
+| timeoutSeconds | int | 状态检查单次执行的超时秒数。 | `1` | 否 | `1` |
+| intervalSeconds | int | 状态检查的间隔时间（秒）。| `1` | 否 | `1` |
 | failureThreshold | int | 决定状态检查失败的最小连续失败次数。 | `3` | 否 | `3` |
 | successThreshold | int | 决定状态检查成功的最小连续成功次数。 | `1` | 否 | `1` |
-| recordsHistoryLimit | int | 保存历史执行记录的条数。 | 100 | 否 | `100` |
+| recordsHistoryLimit | int | 保存历史执行记录的条数。 | `100` | 否 | `100` |
 | http | HTTPStatusCheck | 配置执行 HTTP 请求的具体细节。 | 无 | 否 |  |
 
 ### HTTPStatusCheck 字段说明
@@ -194,7 +194,7 @@ Workflow 和 Template 字段说明参考[创建 Chaos Mesh Workflow](create-chao
 | 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
 | --- | --- | --- | --- | --- | --- |
 | url | string | HTTP 请求的 URL。 | 无 | 是 | `http://123.123.123.123` |
-| method | string | HTTP 请求的方法，可选值有：`GET` / `POST`。 | `GET` | 否 | `GET` |
+| method | string | HTTP 请求的方法，可选值有：`GET`/`POST`。 | `GET` | 否 | `GET` |
 | headers | map[string][]string | HTTP 请求的请求头。 | 无 | 否 | |
 | body | string | HTTP 请求的请求体。 | 无 | 否 | `{"a":"b"}` |
 | criteria | HTTPCriteria | 定义如何判断 HTTP StatusCheck 执行的结果。| 无 | 是 |  |

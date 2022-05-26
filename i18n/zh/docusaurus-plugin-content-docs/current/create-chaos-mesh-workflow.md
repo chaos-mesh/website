@@ -200,7 +200,7 @@ podChaos:
 | timeChaos | object | 配置 TimeChaos，当 type 为 TimeChaos 时需要配置该字段。详见 [模拟时间故障](simulate-time-chaos-on-kubernetes.md) | 无 | 否 |  |
 | schedule | object | 配置 Schedule ，当 type 为 Schedule 时需要配置该字段。详见 [定义调度规则](define-scheduling-rules.md) | 无 | 否 |  |
 | statusCheck | object | 配置 StatusCheck，当 type 为 StatusCheck 时需要配置该字段。详见 [在工作流中进行状态检查](status-check-in-workflow.md) | 无 | 否 |  |
-| abortWithStatusCheck | bool | 配置当 StatusCheck 失败时是否终止 Workflow，当 type 为 StatusCheck 时可选配置该字段。 | false | 否 | `true` |
+| abortWithStatusCheck | bool | 配置当 StatusCheck 失败时是否终止 Workflow，当 type 为 StatusCheck 时可选配置该字段。 | `false` | 否 | `true` |
 
 :::note 注意
 
