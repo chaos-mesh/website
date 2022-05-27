@@ -44,6 +44,32 @@ yarn docusaurus docs:version x.x.x
 
 The versions of the all docs split into two parts, one is the **latest (in `docs/`)** and the others are **versioned (in `versioned_docs/`)**. When a version has been released, the current latest `docs/` will be copied into `versioned_docs/` (by running the command above).
 
+#### i18n
+
+All translated docs won't be copied automatically. You have to handle them manually. For example, release `2.2.0`:
+
+1. Copy `i18n/zh/docusaurus-plugin-content-docs/current` to the same folder and rename it to `i18n/zh/docusaurus-plugin-content-docs/version-2.2.0`.
+2. Copy `i18n/zh/docusaurus-plugin-content-docs/current.json` to the same folder and rename it to `i18n/zh/docusaurus-plugin-content-docs/version-2.2.0.json`.
+3. The replace `Next` and `current` in `version-2.2.0.json`, e.g.:
+
+   ```json
+   "version.label": {
+     "message": "Next",
+     "description": "The label for version current"
+   }
+   ```
+
+   to:
+
+   ```json
+    "version.label": {
+      "message": "2.2.0",
+      "description": "The label for version 2.2.0"
+    }
+   ```
+
+Don't forget test the new version build after you've done the above steps!
+
 ### Patch
 
 For patch versions, it's only needed to move some folders and change some text. For example, `v2.1.3` to `v2.1.4`:
