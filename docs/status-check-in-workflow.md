@@ -2,7 +2,7 @@
 title: Status Check in Workflow
 ---
 
-In Workflow, the status check could execute specified operations on external systems, such as application systems and monitoring systems, to obtain their statuses, and automatically abort the `Workflow` when it finds the system is unhealthy. The concept is similar to `Container Probes` in Kubernetes. This article describes how to execute status checks in `Workflow` using YAML files.
+In Workflow, the status check could execute specified operations on external systems, such as application systems and monitoring systems, to obtain their statuses, and automatically abort the Workflow when it finds the system is unhealthy. The concept is similar to `Container Probes` in Kubernetes. This article describes how to execute status checks in Workflow using YAML files.
 
 :::note
 
@@ -10,13 +10,13 @@ Chaos Mesh does not yet support creating `StatusCheck` nodes on Chaos Dashboard,
 
 :::
 
-## Status Check Type
+## Status Check type
 
 Chaos Mesh only support the `HTTP` type to execute a status check.
 
 ### Define a `HTTP` `StatusCheck` node
 
-A `StatusCheck` node sends `GET` or `POST` HTTP requests to the specific URL, with custom request headers and request body, and then determines the result of the request by the conditions in the `criteria` field.
+A `StatusCheck` node sends `GET` or `POST` HTTP requests to the specific URL, with custom headers and body, and then determines the result of the request by the conditions in the `criteria` field.
 
 ```yaml
 - name: workflow-status-check
@@ -36,9 +36,9 @@ A `StatusCheck` node sends `GET` or `POST` HTTP requests to the specific URL, wi
 
 In the configuration, you can see a `StatusCheck` node with `HTTP` type. The `deadline` field specifies that this node could be executed for a maximum of 20 seconds. The `mode` field specifies that this node will execute status checks continuously. The `intervalSeconds` field specifies a repetition interval of 1 second. The `timeoutSeconds` field specifies the timeout for each execution.
 
-When Workflow runs to this `StatusCheck` node, the specified status check would be executed every second. The status check uses the `GET` method to send an HTTP request to the URL `http://123.123.123.123`, if the response is returned within 1 second and the status code is `200`, this execution succeeds, otherwise it fails.
+When Workflow runs to this `StatusCheck` node, the specified status check would be executed every second. The status check uses the `GET` method to send an HTTP request to the URL `http://123.123.123.123`. If the response is returned within 1 second and the status code is `200`, this execution succeeds, otherwise it fails.
 
-## Status Check Result
+## Status Check results
 
 Each execution of the status check will get an `execution result`, either `Success` or `Failure`. Because a single `execution result` may not reflect the real situation of the system, due to fluctuations in certain conditions, the final `status check result` is not determined based on a single `execution result`.
 
@@ -74,7 +74,7 @@ In the following sections, `status check fails` refers to that `status check res
 
 :::
 
-### When the status check is unsuccessful, abort the workflow
+### When the Status Check is unsuccessful, abort the Workflow
 
 :::note
 
@@ -102,9 +102,9 @@ When executing chaos experiments, the application system might become `unhealthy
 The status check is considered unsuccessful when any of the following conditions are met:
 
 - The status check fails.
-- When the `StatusCheck` node timeout is exceeded, and the `status check result` is not successful. For example, `successThreshold` is 1, `failureThreshold` is 3, and when the timeout is exceeded, there are 2 consecutive failures and 0 successes. Although it does not meet the condition for `status check fails`, it's also considered in this case, that the status check is unsuccessful.
+- When the `StatusCheck` node timeout is exceeded, and the `status check result` is not successful. For example, `successThreshold` is 1, `failureThreshold` is 3, and when the timeout is exceeded, there are 2 consecutive failures and 0 successes. Although it does not meet the condition for "status check fails", it is also considered to be unsuccessful in this case.
 
-## Status Check Mode
+## Status Check mode
 
 ### Continuous Status Check
 
@@ -127,7 +127,7 @@ When the `mode` field is `Continuous`, it means this `StatusCheck` node will exe
         statusCode: "200"
 ```
 
-In the configuration, the `StatusCheck` node will execute status checks every ssecond, and exit when any of the following conditions are met:
+In the configuration, the `StatusCheck` node will execute status checks every second, and exit when any of the following conditions are met:
 
 - The status check fails, i.e. 3 or more consecutive failed `execution results`
 - Trigger the node timeout after 20 seconds
@@ -159,7 +159,7 @@ In the configuration, the `StatusCheck` node will execute status checks every se
 - The status check fails, i.e. 3 or more consecutive failed `execution results`
 - Trigger the node timeout after 20 seconds
 
-## Status Check vs HTTP Request Task
+## StatusCheck vs HTTP Request Task
 
 Similarities:
 

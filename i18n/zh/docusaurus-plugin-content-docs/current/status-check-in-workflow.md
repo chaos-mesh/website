@@ -6,7 +6,7 @@ title: 在工作流中进行状态检查
 
 :::note
 
-当前 `StatusCheck` 节点还不支持在 Dashboard 上创建，只能通过 yaml 方式进行创建。
+当前 `StatusCheck` 节点还不支持在 Dashboard 上创建，只能通过 YAML 方式进行创建。
 
 :::
 
