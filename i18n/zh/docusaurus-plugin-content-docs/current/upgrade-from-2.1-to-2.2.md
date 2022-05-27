@@ -29,10 +29,10 @@ helm show values chaos-mesh/chaos-mesh --version 2.2.0 > values.yaml
 
 这里是 Helm Chart 改变的列表：
 
-- 新配置: `chaosDaemon.mtls.enabled` 表示在 chaos-controller-manager 和 chaos-daemon 之间使用 mtls.
-- 新配置: `webhook.caBundlePEM` 表示用于 webhook 服务的 CA bundle.
-- 改变的值: `dashboard.serviceAccount` 从 `chaos-controller-manager` 改为 `chaos-dashboard`.
-- 改变的值: `webhook.FailurePolicy` 从 `Ignore` 改为 `Fail`.
+- 新配置：`chaosDaemon.mtls.enabled` 表示在 `chaos-controller-manager` 和 `chaos-daemon` 之间使用 mtls。
+- 新配置：`webhook.caBundlePEM` 表示用于 webhook 服务的 CA bundle。
+- 改变的值：`dashboard.serviceAccount` 从 `chaos-controller-manager` 改为 `chaos-dashboard`。
+- 改变的值：`webhook.FailurePolicy` 从 `Ignore` 改为 `Fail`。
 
 :::note 
 你可以在 [README](https://github.com/chaos-mesh/chaos-mesh/blob/v2.2.0/helm/chaos-mesh/README.md) 查看 Helm Chart 配置的详细描述。
