@@ -126,7 +126,7 @@ Chaos Mesh 会安装多个 Webhook：
 
 - ValidatingWebhookConfigurations
   - chaos-mesh-validation
-  - validate-auth
+  - chaos-mesh-validate-auth
 - MutatingWebhookConfigurations
   - chaos-mesh-mutation
 
