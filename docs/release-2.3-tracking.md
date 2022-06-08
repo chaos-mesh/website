@@ -6,7 +6,7 @@ title: Chaos Mesh v2.3.0 Tracking
 
 - [Chaos Mesh release cycle](release-cycle.md)
 
-## Tracking
+## Tracking Docs
 
 - [Release 2.3 Milestone](https://github.com/chaos-mesh/chaos-mesh/milestone/10)
 - [Docs Milestone](https://github.com/chaos-mesh/website/milestone/2)
