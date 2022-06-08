@@ -403,8 +403,16 @@ Global Flags:
 
 #### DNS 故障示例
 
+通过映射指定的主机名和 IP 地址从而模拟 DNS 故障，运行命令如下所示：
+
 ```bash
 ./chaosd attack network dns --dns-ip 123.123.123.123 --dns-domain-name chaos-mesh.org
+```
+
+配置错误的 DNS 服务地址从而模拟 DNS 故障，运行命令如下所示：
+
+```bash
+chaosd attack network dns --dns-server 123.123.123.123
 ```
 
 ### 使用命令行模式限制网络带宽
