@@ -51,14 +51,6 @@ module.exports = {
     },
     {
       type: 'category',
-      label: 'Tutorials',
-      collapsed: false,
-      items: [
-        'the-guide-to-chaos-mesh-v21',
-      ],
-    },
-    {
-      type: 'category',
       label: 'Types of Chaos Experiments',
       items: [
         {
