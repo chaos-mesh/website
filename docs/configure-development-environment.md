@@ -2,18 +2,24 @@
 title: Configure the Development Environment
 ---
 
-This document describes how to configure a development environment for Chaos Mesh.
+This document describes how to configure a local development environment for Chaos Mesh.
 
 ## Configuration requirements
 
-Before configuring, you need to install the development tools for Chaos Mesh.
+Before configuring, we suggest to install the development tools for Chaos Mesh.
 
-- [golang](https://golang.org/dl/), v1.15 or later versions
+- [golang](https://go.dev/doc/install), v1.18 or later versions
 - [docker](https://www.docker.com/)
 - [gcc](https://gcc.gnu.org/)
-- [helm](https://helm.sh/) v2.8.2 or later versions
-- [kind](https://github.com/kubernetes-sigs/kind)
+- [helm](https://helm.sh/) v3.9.0 or later versions
+- [minikube](https://minikube.sigs.k8s.io/docs/start/)
 - [nodejs](https://nodejs.org/en/) and [yarn](https://yarnpkg.com/lang/en/), for developing Chaos Dashboard
+
+## Compiling Chaos Mesh
+
+After installing the above tools, follow the steps below to configure the toolchain for compiling Chaos Mesh.
+
+## Debug Chaos Mesh in local environment
 
 ## Prepare the toolchain
 
