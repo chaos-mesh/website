@@ -4,24 +4,23 @@ title: Configure the Development Environment
 
 This document describes how to configure a local development environment for Chaos Mesh.
 
-## Configuration requirements
+Most components of Chaos Mesh are designed only for Linux, so we suggest that you also configure your development environment to run on Linux. For example, using a virtual machine or WSL 2, and using VSCode Remote as your editor.
+
+This document assumes that you use Linux, without the restriction on specific Linux distributions. If you persist to use Windows/MacOS, you might need some tricks to make it work by yourself.
+
+## Configuration Requirements
 
 Before configuring, we suggest to install the development tools for Chaos Mesh.
 
+- [make](https://www.gnu.org/software/make/)
+- [docker](https://docs.docker.com/install/)
 - [golang](https://go.dev/doc/install), v1.18 or later versions
-- [docker](https://www.docker.com/)
 - [gcc](https://gcc.gnu.org/)
 - [helm](https://helm.sh/) v3.9.0 or later versions
 - [minikube](https://minikube.sigs.k8s.io/docs/start/)
 - [nodejs](https://nodejs.org/en/) and [yarn](https://yarnpkg.com/lang/en/), for developing Chaos Dashboard
 
 ## Compiling Chaos Mesh
-
-After installing the above tools, follow the steps below to configure the toolchain for compiling Chaos Mesh.
-
-## Debug Chaos Mesh in local environment
-
-## Prepare the toolchain
 
 After installing the above tools, follow the steps below to configure the toolchain for compiling Chaos Mesh.
 
@@ -34,59 +33,54 @@ After installing the above tools, follow the steps below to configure the toolch
 
 2. Make sure that [Docker](https://docs.docker.com/install/) is installed and running in your environment.
 
-3. Make sure [Docker Registry](https://docs.docker.com/registry/) is running. Set the environment variable `DOCKER_REGISTRY` as the address of Docker Registry:
+3. Compile Chaos Mesh:
 
    ```bash
-   echo 'export DOCKER_REGISTRY=localhost:5000' >> ~/.bash_profile
-   source ~/.bash_profile
+   UI=1 make
    ```
 
-4. Make sure `${GOPATH}/bin` is in your `PATH`.
+You should get these container images:
+
+- ghcr.io/chaos-mesh/chaos-dashboard:latest
+- ghcr.io/chaos-mesh/chaos-mesh:latest
+- ghcr.io/chaos-mesh/chaos-daemon:latest
+
+## Run Chaos Mesh in Local minkube Kubernetes Cluster
+
+After compiling Chaos Mesh, you can run Chaos Mesh in a local Kubernetes cluster.
+
+1. Start a local Kubernetes cluster with minkube.
 
    ```bash
-   echo 'export PATH=$(go env GOPATH)/bin:${PATH}' >> ~/.bash_profile
+   minikube start
    ```
+
+2. Load container images into minikube
 
    ```bash
-   source ~/.bash_profile
+   minikube image load ghcr.io/chaos-mesh/chaos-dashboard:latest
+   minikube image load ghcr.io/chaos-mesh/chaos-mesh:latest
+   minikube image load ghcr.io/chaos-mesh/chaos-daemon:latest
    ```
 
-5. Check the configuration environment related to Node.js.
+3. Install Chaos Mesh with Helm
 
    ```bash
-    node -v
-    yarn -v
+   helm upgrade --install chaos-mesh-debug ./helm/chaos-mesh --namespace=chaos-mesh-debug --create-namespace
    ```
 
-6. Compile Chaos Mesh:
+:::note
 
-   ```bash
-   make
-   ```
-
-If no error occurs, you have successfully cnofigured the toolchain.
-
-## Prepare the environment for deployment
-
-After configuring the toolchain, you need to launch a local Kubernetes cluster to deploy Chaos Mesh. Because kind is installed in the configuration requirements section, you can directly use the following command to launch a Kubernetes cluster:
+`minikube image load` would cost lots of time, so here is a trick to avoid load images again and again. Using docker from minikube node instead of host's docker.
 
 ```bash
-hack/kind-cluster-build.sh
+minikube start --mount --mount-string "$(pwd):$(pwd)"
+eval $(minikube -p minikube docker-env)
 ```
 
-When you no longer need this cluster and want to delete it, you can use the following command:
+:::
 
-```bash
-kind delete cluster --name=kind
-```
-
-To start Chaos Dashboard, run the following command:
-
-```bash
-cd ui && yarn
-# start
-yarn workspace @ui/app start:default # cross-env REACT_APP_API_URL=http://localhost:2333 BROWSER=none react-scripts start
-```
+## Debug Chaos Mesh in local environment
 
 ## Learn more
 
