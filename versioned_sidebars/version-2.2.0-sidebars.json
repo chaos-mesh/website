@@ -118,18 +118,6 @@
     },
     {
       "type": "category",
-      "label": "Tutorials",
-      "collapsed": false,
-      "items": [
-        {
-          "type": "doc",
-          "id": "version-2.2.0/the-guide-to-chaos-mesh-v21"
-        }
-      ],
-      "collapsible": true
-    },
-    {
-      "type": "category",
       "label": "Types of Chaos Experiments",
       "items": [
         {
