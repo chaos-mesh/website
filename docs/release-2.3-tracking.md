@@ -13,7 +13,7 @@ title: Chaos Mesh v2.3.0 Tracking
 
 ## Release manager
 
-- [STRRL](https://github.com/STRRL) **<--**
+- [STRRL](https://github.com/STRRL)
 - [YangKeao](https://github.com/YangKeao)
 - [Hexilee](https://github.com/Hexilee)
 - [cwen0](https://github.com/cwen0)
