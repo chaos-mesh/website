@@ -16,7 +16,7 @@ Before configuring, we suggest to install the development tools for Chaos Mesh.
 - [docker](https://docs.docker.com/install/)
 - [golang](https://go.dev/doc/install), v1.18 or later versions
 - [gcc](https://gcc.gnu.org/)
-- [helm](https://helm.sh/) v3.9.0 or later versions
+- [helm](https://helm.sh/), v3.9.0 or later versions
 - [minikube](https://minikube.sigs.k8s.io/docs/start/)
 - [nodejs](https://nodejs.org/en/) and [yarn](https://yarnpkg.com/lang/en/), for developing Chaos Dashboard
 
@@ -41,9 +41,9 @@ After installing the above tools, follow the steps below to configure the toolch
 
 You should get these container images:
 
-- ghcr.io/chaos-mesh/chaos-dashboard:latest
-- ghcr.io/chaos-mesh/chaos-mesh:latest
-- ghcr.io/chaos-mesh/chaos-daemon:latest
+- `ghcr.io/chaos-mesh/chaos-dashboard:latest`
+- `ghcr.io/chaos-mesh/chaos-mesh:latest`
+- `ghcr.io/chaos-mesh/chaos-daemon:latest`
 
 ## Run Chaos Mesh in Local minkube Kubernetes Cluster
 
@@ -76,6 +76,7 @@ After compiling Chaos Mesh, you can run Chaos Mesh in a local Kubernetes cluster
 ```bash
 minikube start --mount --mount-string "$(pwd):$(pwd)"
 eval $(minikube -p minikube docker-env)
+UI=1 make
 ```
 
 :::
