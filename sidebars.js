@@ -148,5 +148,19 @@ module.exports = {
     //   label: 'Release Notes',
     //   items: ['release-2.0.0', 'release-1.0.0', 'release-0.0.9', 'release-0.0.8'],
     // },
+    {
+        type: 'category',
+        label: 'Release',
+        items: [
+          'release-cycle',
+          {
+            type: 'category',
+            label: 'Release Tracking',
+            items: [
+              'release-2.3-tracking',
+            ]
+          }
+        ],
+    }
   ],
 }
