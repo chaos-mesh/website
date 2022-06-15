@@ -17,7 +17,7 @@ Contributors are expected to participate in the release cycle with the following
 As a contributor, the only 2 things you need to notice are:
 
 - you might be asked to complete your uncompleted work, or prune them from the release branch.
-- your PR might not be merged into master quickly during “Code Freeze”
+- your PR might not be merged into master quickly during "Code Freeze"
 
 ### Release Manager
 
@@ -25,7 +25,7 @@ As a contributor, the only 2 things you need to notice are:
 
 Release Manager are expected to:
 
-- collect “new features/enhancements” as a GitHub Issue
+- collect "new features/enhancements" as a GitHub Issue
 - create and maintain `vX.Y.0` GitHub Milestone
 - schedule and hold the required meeting
 - keep maintaining the tracking documentation for next coming release
@@ -55,20 +55,20 @@ There would be 3 phases in a cycle of release:
 
 ### Normal Dev
 
-Things happened during “Normal Dev”:
+Things happened during "Normal Dev":
 
 - selecting new Release Managers
-- collecting “new features/enhancements” would be carried with the next release
+- collecting "new features/enhancements" would be carried with the next release
 - create the `vX.Y.0` milestone if not existed
 - coding and documenting
 - releasing alpha versions every 2 weeks
 
 ### Code Freeze
 
-Things happened during “Code Freeze”:
+Things happened during "Code Freeze":
 
 - blocking the merging of all unrelated PRs
-- reviewing “new features/enhancements” would be carried with the next release
+- reviewing "new features/enhancements" would be carried with the next release
   - finish or prune the unfinished features
   - the documents are ready, at least have a related open issue on chaos-mesh/website
 - cutting branch `release-X.Y`
@@ -78,13 +78,13 @@ Things happened during “Code Freeze”:
 - merging bugfix if required
 - documenting about the new release
 
-Phase “Code Freeze” would start at Week 6, and finish at branch `release-X.Y` created.
+Phase "Code Freeze" would start at Week 6, and finish at branch `release-X.Y` created.
 
-When we are in “Code Freeze”, PRs which are not related to the coming minor release would be prevented from merging into master. Only PRs related to the coming release could be merged into the master branch.
+When we are in "Code Freeze", PRs which are not related to the coming minor release would be prevented from merging into master. Only PRs related to the coming release could be merged into the master branch.
 
 Release Managers would communicate with contributors to ask them for finishing or pruning the unfinished features. Sometimes Release Managers would prune them by themselves if we lost the communication with the contributors.
 
-Once all the unfinished features are completed or marked as “need prune”, the release manager would cut the `release-X.Y` branch. The merging process for all PRs back to normal.
+Once all the unfinished features are completed or marked as "need prune", the release manager would cut the `release-X.Y` branch. The merging process for all PRs back to normal.
 
 Once uncompleted features are pruned, Release Manager would release the first beta version. After that, only bug fixes would be cherry-picked into the release branch. Release Manager could release more beta versions if we have updates on the release branch.
 
@@ -92,7 +92,7 @@ Release Manager should start to prepare Release Notes after the beta version is 
 
 ### Release Week
 
-Things happened during “Release Week”:
+Things happened during "Release Week":
 
 - merging emergency bugfix or vulnerabilities fix if required
 - releasing the minor version artifacts (helm charts, container images, and others)
