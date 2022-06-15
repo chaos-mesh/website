@@ -117,7 +117,7 @@ We could use [delve](https://github.com/go-delve/delve) with remote debugging to
    kubectl -n chaos-mesh-debug port-forward chaos-controller-manager-766dc8488d-7n5bq 58000:8000
    ```
 
-   Then we could access the remote delve debugger server with `127.0.0.1:8000`.
+   Then we could access the remote delve debugger server with `127.0.0.1:58000`.
 
    :::note We always use `8000` in the pod for serving the delve debug server, that's a convention. You could find that in helm templates files. :::
 
