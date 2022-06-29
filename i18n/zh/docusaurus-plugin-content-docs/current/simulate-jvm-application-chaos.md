@@ -253,7 +253,7 @@ ENDRULE
 | `mysqlConnectorVersion` | string 类型 | 使用的 MySQL 客户端 (mysql-connector-java) 的版本，对于 5.X.X 版本设置为 `"5"`，对于 8.X.X 版本设置为 `"8"`。默认值为 `"8"`。 | 否 |
 | `database` | string 类型 | 匹配的指定的库名称，默认值为 `""`，即匹配所有的库。 | 否 |
 | `table` | string 类型 | 匹配的指定的表名称，默认值为 `""`，即匹配所有的表。 | 否 |
-| `sqlType` | string 类型 | 匹配的 SQL 类型，可选值为 `"select"`、`"update"`、`"insert"`、`"replace"`、`"delete"`，默认值为 `""`，即匹配所有类型的 SQL。 |否 |
-| `exception` | string 类型 | 抛出的自定义异常信息，如 "BOOM"。`exception` 和 `latency` 中必须配置一个。              | 否 |
-| `latency` | int 类型   | 执行 SQL 的延迟时间，单位为 ms，如 `1000`。`exception` 和 `latency` 中必须配置一个。            | 否 |
+| `sqlType` | string 类型 | 匹配的 SQL 类型，可选值为 `"select"`、`"update"`、`"insert"`、`"replace"`、`"delete"`，默认值为 `""`，即匹配所有类型的 SQL。 | 否 |
+| `exception` | string 类型 | 抛出的自定义异常信息，如 `"BOOM"`。`exception` 和 `latency` 中必须配置一个。 | 否 |
+| `latency` | int 类型   | 执行 SQL 的延迟时间，单位为 ms，如 `1000`。`exception` 和 `latency` 中必须配置一个。 | 否 |
 | `port`      | int 类型  | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程。 | 否 |
