@@ -182,9 +182,9 @@ For specific features, refer to [Create experiments using the YAML files](#creat
 | value | string | Provides parameters for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods. |  | No | 1 |
 | volumePath | string | The mount point of volume in the target container. Must be the root directory of the mount. |  | Yes | /var/run/etcd |
 | path | string | The valid range of fault injections, either a wildcard or a single file. | Valid for all files by default | No | /var/run/etcd/\*_/_ |
-| methods | string[] | Type of the file system call that requires injecting fault. For more information about supported types, refer to [Appendix A](#appendix-a: methods-type). | All Types | No | READ |
+| methods | []string | Type of the file system call that requires injecting fault. For more information about supported types, refer to [Appendix A](#appendix-a: methods-type). | All Types | No | READ |
 | percent | int | Probability of failure per operation, in %. | 100 | No | 100 |
-| ContainerName | string | Specifies the name of the container into which the fault is injected. |  | No |  |
+| containerNames | []string | Specifies the name of the container into which the fault is injected. |  | No |  |
 | duration | string | Specifies the duration of the experiment. |  | Yes | 30s |
 
 #### Fields related to action
