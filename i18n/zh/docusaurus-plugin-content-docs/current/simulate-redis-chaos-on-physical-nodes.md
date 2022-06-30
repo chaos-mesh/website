@@ -254,7 +254,7 @@ Global Flags:
       --uid string         the experiment ID
 ```
 
-#### 模拟缓存穿透相关配置说明
+#### 模拟哨兵不可用相关配置说明
 
 | 配置项    | 配置缩写 | 说明                                 | 值                       |
 | :-------- | :------- | :----------------------------------- | :----------------------- |
@@ -265,7 +265,7 @@ Global Flags:
 | `redis-path` | 无        | 指定 `redis-server` 命令的路径 | string 类型，默认为 `""` |
 
 
-#### 模拟缓存穿透示例
+#### 模拟哨兵不可用示例
 
 ```bash
 chaosd attack redis sentinel-stop -a 127.0.0.1:26379 --conf /home/redis-test/sentinel-26379.conf
