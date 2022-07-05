@@ -422,8 +422,8 @@ Global Flags:
 | 配置项 | 配置缩写 | 说明 | 值 | 默认值 |
 | :-- | :-- | :-- | :-- | :-- |
 | `database` | `d` | 可匹配的指定的数据库名称 | string 类型，如 `“test”` | `""`（即匹配所有的数据库） |
-| `exception` | 无 | 抛出的自定义异常信息 | string 类型，如 `“BOOM”`。`exception` 和 `lantency` 中必须配置一个 | 无 |
-| `latency` | 无 | 执行 SQL 的延迟时间 | int 类型，单位为毫秒 (ms)，如 `1000`。`exception` 和 `lantency` 中必须配置一个 | 无 |
+| `exception` | 无 | 抛出的自定义异常信息 | string 类型，如 `“BOOM”`。`exception` 和 `latency` 中必须配置一个 | 无 |
+| `latency` | 无 | 执行 SQL 的延迟时间 | int 类型，单位为毫秒 (ms)，如 `1000`。`exception` 和 `latency` 中必须配置一个 | 无 |
 | `mysql-connector-version` | `v` | 使用的 MySQL 客户端 (mysql-connector-java) 的版本 | int 类型，对于 `5.X.X` 版本设置为 `5`，对于 `8.X.X` 版本设置为 `8` | `8` |
 | `sql-type` | 无 | 可匹配的 SQL 类型 | string 类型，可选值为 `"select"`、`"update"`、`"insert"`、`"replace"`、`"delete"` | `""`（即匹配所有类型的 SQL） |
 | `table` | `t` | 可匹配的指定的表名称 | string 类型，如 `"t1"` | `""`（即匹配所有的表） |
@@ -703,8 +703,8 @@ Chaosd 支持对 MySQL 的 Java 客户端执行指定类型的 SQL 时注入延�
 | 配置项 | 说明 | 值 | 默认值 |
 | :-- | :-- | :-- | :-- |
 | `database` | 可匹配的指定的数据库名称 | string 类型，如 `“test”` | `""`（即匹配所有的数据库） |
-| `exception` | 抛出的自定义异常信息 | string 类型，如 `“BOOM”`。`exception` 和 `lantency` 中必须配置一个 | 无 |
-| `latency` | 执行 SQL 的延迟时间 | int 类型，单位为毫秒 (ms)，如 `1000`。`exception` 和 `lantency` 中必须配置一个 | 无 |
+| `exception` | 抛出的自定义异常信息 | string 类型，如 `“BOOM”`。`exception` 和 `latency` 中必须配置一个 | 无 |
+| `latency` | 执行 SQL 的延迟时间 | int 类型，单位为毫秒 (ms)，如 `1000`。`exception` 和 `latency` 中必须配置一个 | 无 |
 | `mysql-connector-version` | 使用的 MySQL 客户端 (mysql-connector-java) 的版本 | int 类型，对于 `5.X.X` 版本设置为 `5`，对于 `8.X.X` 版本设置为 `8` | `8` |
 | `sql-type` | 可匹配的 SQL 类型 | string 类型，可选值为 `"select"`、`"update"`、`"insert"`、`"replace"`、`"delete"` | `""`（即匹配所有类型的 SQL） |
 | `table` | 可匹配的指定的表名称 | string 类型，如 `"t1"` | `""`（即匹配所有的表） |
