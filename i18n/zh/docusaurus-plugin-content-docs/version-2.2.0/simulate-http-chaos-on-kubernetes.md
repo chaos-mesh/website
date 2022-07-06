@@ -139,6 +139,18 @@ Chaos Mesh 也支持使用 YAML 配置文件创建 HTTPChaos 实验。在 YAML �
 | `duration` | string | 指定具体实验的持续时间 |  | 是 | 30s |
 | `scheduler` | string | 指定具体实验的运行时间调度规则 |  | 否 | 5 \* \* \* \* |
 
+:::note 注意
+
+- 当使用 YAML 文件创建实验时，`replace.body` 必须为替换内容的 Base64 编码。
+
+- 当使用 Kubernetes API 创建实验时，无需将替换的内容进行 Base64 编码，直接将其转换成 `[]byte` 后传入 `httpchaos.Spec.Replace.Body` 字段即可。例如：
+
+```golang
+httpchaos.Spec.Replace.Body = []byte(`{"foo": "bar"}`)
+```
+
+:::
+
 ### 与 `target` 相关的字段说明
 
 ### `Request` 专用字段说明
