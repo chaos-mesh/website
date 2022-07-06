@@ -140,6 +140,18 @@ Common fields are meaningful when the `target` of fault injection is `Request` o
 | `duration` | string | Specifies the duration of a specific experiment. |  | yes | 30s |
 | `scheduler` | string | Specifies the scheduling rules for the time of a specific experiment. |  | no | 5 \* \* \* \* |
 
+:::note
+
+- When creating experiments with YAML files, `replace.body` must be the base64 encoding of the replacement content.
+
+- When creating experiments with the Kubernetes API, there is no need to encode the replacement content, just convert it to `[]byte` and put it into the `httpchaos.Spec.Replace.Body` field. The following is an example:
+
+```golang
+httpchaos.Spec.Replace.Body = []byte(`{"foo": "bar"}`)
+```
+
+:::
+
 ### Description for `target`-related fields
 
 #### `Request`-related fields
