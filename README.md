@@ -75,7 +75,7 @@ Don't forget test the new version build after you've done the above steps!
 For patch versions, it's only needed to move some folders and change some text. For example, `v2.1.3` to `v2.1.4`:
 
 1. Replace `2.1.3` in **versions.json** with `2.1.4`.
-2. `versioned_docs/version-2.1.3` to `version_docs/version-2.1.4`.
+2. `versioned_docs/version-2.1.3` to `versioned_docs/version-2.1.4`.
 3. `versioned_sidebars/version-2.1.3-sidebars.json` to `versioned_sidebars/version-2.1.4-sidebars.json` and replace `2.1.3` with `2.1.4` in json.
 4. `i18n/zh/docusaurus-plugin-content-docs/version-2.1.3` to `i18n/zh/docusaurus-plugin-content-docs/version-2.1.4`.
 5. `i18n/zh/docusaurus-plugin-content-docs/version-2.1.3.json` to `i18n/zh/docusaurus-plugin-content-docs/version-2.1.4.json` and replace `2.1.3` with `2.1.4` in json.
