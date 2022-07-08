@@ -6,7 +6,7 @@ title: 模拟 Redis 故障
 
 ## 使用命令行模式创建实验
 
-在创建进程故障实验前，可运行以下命令行查看 Chaosd 支持的进程故障类型：
+在创建 Redis 故障实验前，可运行以下命令行查看 Chaosd 支持的进程故障类型：
 
 ```bash
 chaosd attack redis -h
@@ -82,8 +82,8 @@ Global Flags:
 | :-- | :-- | :-- | :-- |
 | `addr` | a | 需要注入故障的 Redis 服务器的地址以及端口号,如 `127.0.0.1:6379` | string 类型，默认为 `""` |
 | `expiration` | 无 | 指定的键值对将会 `expiration` 到达之后过期 | string 类型，请确保输入的字符串为 `time.Duration` 支持的格式，默认为 `0`|
-| `key` | k | 要从缓存中过期的键 | string 类型，默认为 `""`。当该值为默认时，将对所有键设置过期操作 |
-| `option` | 无 | 对 `expiration` 的额外操作，用于设置键的过期条件，**只有7.0之后的 Redis 版本支持该参数** | string 类型，默认为 `""`。只支持 NX，XX，GT，LT |
+| `key` | k | 要从缓存中过期的键 | string 类型，默认为 `""`。当该值为默认时，将对所有键设置过期时间 |
+| `option` | 无 | 对 `expiration` 的额外操作，用于设置键的过期条件，**只有7.0.0之后的 Redis 版本支持该参数** | string 类型，默认为 `""`。只支持 NX，XX，GT，LT |
 | `password` | p | 登录 Redis 服务器的密码 | string 类型，默认为 `""`|
 
 #### 模拟缓存过期示例
@@ -120,14 +120,14 @@ Global Flags:
       --uid string         the experiment ID
 ```
 
-#### 模拟进程被暂停相关配置说明
+#### 模拟缓存限流相关配置说明
 
 | 配置项    | 配置缩写 | 说明                                 | 值                       |
 | :-------- | :------- | :----------------------------------- | :----------------------- |
 | `addr` | a        | 需要注入故障的 Redis 服务器的地址以及端口号,如 `127.0.0.1:6379` | string 类型，默认为 `""` |
 | `password` | p        | 登录 Redis 服务器的密码 | string 类型，默认为 `""`|
 | `percent` | 无        | 指定 `maxmemory` 为原值的百分比 | string 类型，默认为 `""` |
-| `size` | s        | 指定 `maxmemory` 的大小 | string 类型，默认为 `0` |
+| `size` | s        | 指定 `maxmemory` 的大小 | string 类型，默认为 `0`, `0` 表示不限制内存大小 |
 
 #### 模拟缓存限流示例
 
@@ -273,4 +273,116 @@ chaosd attack redis sentinel-stop -a 127.0.0.1:26379 --conf /home/redis-test/sen
 
 ## 使用服务模式创建实验
 
-TODO
+要使用服务模式创建实验，请进行以下操作：
+
+1. 以服务模式运行 Chaosd。
+
+   ```bash
+   chaosd server --port 31767
+   ```
+
+2. 向 Chaosd 服务的路径 `/api/attack/redis` 发送 `POST` HTTP 请求。
+
+   ```bash
+   curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json" -d '{fault-configuration}'
+   ```
+
+在上述命令中，你需要按照故障类型在 `fault-configuration` 中进行配置。有关对应的配置参数，请参考下文中各个类型故障的相关参数说明和命令示例。
+
+:::note 注意
+
+在运行实验时，请注意保存实验的 UID 信息。当要结束 UID 对应的实验时，需要向 Chaosd 服务的路径 `/api/attack/{uid}` 发送 `DELETE` HTTP 请求。
+
+:::
+
+### 服务模式下模拟缓存过期
+
+#### 模拟缓存过期相关参数说明
+
+| 参数 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- |
+| `action` | 实验的行为 | string | 设置为 "expiration" |
+| `addr` | 需要注入故障的 Redis 服务器的地址以及端口号,如 `127.0.0.1:6379` | string | 默认为 `""` |
+| `expiration` | 指定的键值对将会 `expiration` 到达之后过期 | string |请确保输入的字符串为 `time.Duration` 支持的格式，默认为 `0`|
+| `key` | 要从缓存中过期的键 | string | 默认为 `""`。当该值为默认时，将对所有键设置过期时间 |
+| `option` | 对 `expiration` 的额外操作，用于设置键的过期条件，**只有7.0.0之后的 Redis 版本支持该参数** | string | 默认为 `""`。只支持 NX，XX，GT，LT |
+| `password` | 登录 Redis 服务器的密码 | string | 默认为 `""`|
+
+#### 服务模式下模拟缓存过期示例
+
+```bash
+curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json" -d '{"action":"expiration", "expiration":"1m","addr":"127.0.0.1:6379"}'
+```
+
+### 服务模式下模拟缓存限流
+
+#### 模拟缓存限流相关参数说明
+
+| 参数 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- |
+| `action` | 实验的行为 | string | 设置为 "cacheLimit" |
+| `addr` | 需要注入故障的 Redis 服务器的地址以及端口号,如 `127.0.0.1:6379` | string | 默认为 `""` |
+| `password` | 登录 Redis 服务器的密码 | string | 默认为 `""`|
+| `percent` | 指定 `maxmemory` 为原值的百分比 | string | 默认为 `""` |
+| `size` | 指定 `maxmemory` 的大小 | string | 默认为 `0`, `0` 表示不限制内存大小 |
+
+#### 服务模式下模拟缓存限流示例
+
+```bash
+curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json" -d '{"action":"cacheLimit", ""addr":"127.0.0.1:6379", "percent":"50%"}'
+```
+
+### 服务模式下模拟缓存穿透
+
+#### 模拟缓存穿透相关参数说明
+
+| 参数 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- |
+| `action` | 实验的行为 | string | 设置为 "penetration" |
+| `addr` | 需要注入故障的 Redis 服务器的地址以及端口号,如 `127.0.0.1:6379` | string | 默认为 `""` |
+| `password` | 登录 Redis 服务器的密码 | string | 默认为 `""`|
+| `request-num` | 指定向 Redis 服务器发送的无效请求数 | int 类型 | 默认为 `0` |
+
+#### 服务模式下模拟缓存穿透示例
+
+```bash
+curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json" -d '{"action":"penetration", ""addr":"127.0.0.1:6379", "request-num":"10000"}'
+```
+
+### 服务模式下模拟哨兵重启
+
+#### 模拟哨兵重启相关参数说明
+
+| 参数 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- |
+| `action` | 实验的行为 | string | 设置为 "restart" |
+| `addr` | 需要注入故障的 Redis Sentinel 的地址以及端口号,如 `127.0.0.1:26379` | string | 默认为 `""` |
+| `conf` | 指定哨兵的配置文件路径，用于恢复哨兵 | string | 默认为 `""` |
+| `flush-config` | 指定在哨兵重启前，将内存中的配置更新到配置文件中 | bool 类型 | 默认为 `true` |
+| `password` | 登录 Redis Sentinel 的密码 | string | 默认为 `""`|
+| `redis-path` | 指定 `redis-server` 命令的路径 | string | 默认为 `""` |
+
+#### 服务模式下模拟哨兵重启示例
+
+```bash
+curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json" -d '{"action":"restart", ""addr":"127.0.0.1:26379", "conf":"/home/redis-test/sentinel-26379.conf"}'
+```
+
+### 服务模式下模拟哨兵不可用
+
+#### 模拟哨兵不可用相关参数说明
+
+| 参数 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- |
+| `action` | 实验的行为 | string | 设置为 "stop" |
+| `addr` | 需要注入故障的 Redis Sentinel 的地址以及端口号,如 `127.0.0.1:26379` | string | 默认为 `""` |
+| `conf` | 指定哨兵的配置文件路径，用于恢复哨兵 | string | 默认为 `""` |
+| `flush-config` | 指定在哨兵重启前，将内存中的配置更新到配置文件中 | bool 类型 | 默认为 `true` |
+| `password` | 登录 Redis Sentinel 的密码 | string | 默认为 `""`|
+| `redis-path` | 指定 `redis-server` 命令的路径 | string | 默认为 `""` |
+
+#### 服务模式下模拟哨兵不可用示例
+
+```bash
+curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json" -d '{"action":"stop", ""addr":"127.0.0.1:26379", "conf":"/home/redis-test/sentinel-26379.conf"}'
+```
