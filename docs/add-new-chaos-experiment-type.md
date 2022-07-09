@@ -111,36 +111,35 @@ You need to register the CRD (Custom Resource Definition) of HelloWorldChaos to 
        "sigs.k8s.io/controller-runtime/pkg/client"
 
        "github.com/chaos-mesh/chaos-mesh/api/v1alpha1"
+        impltypes "github.com/chaos-mesh/chaos-mesh/controllers/chaosimpl/types"
        "github.com/chaos-mesh/chaos-mesh/controllers/chaosimpl/utils"
-       "github.com/chaos-mesh/chaos-mesh/controllers/common"
-       "github.com/chaos-mesh/chaos-mesh/controllers/utils/chaosdaemon"
    )
 
    type Impl struct {
        client.Client
-       Log logr.Logger
+       Log     logr.Logger
        decoder *utils.ContainerRecordDecoder
    }
 
-   // This corresponds to the Apply phase of HelloWorldChaos. The execution of HelloWorldChaos will be triggered.
+   // Apply applies HelloWorldChaos
    func (impl *Impl) Apply(ctx context.Context, index int, records []*v1alpha1.Record, obj v1alpha1.InnerObject) (v1alpha1.Phase, error) {
        impl.Log.Info("Hello world!")
        return v1alpha1.Injected, nil
    }
 
-   // This corresponds to the Recover phase of HelloWorldChaos. The reconciler will be triggered to recover the chaos action.
+   // Recover means the reconciler recovers the chaos action
    func (impl *Impl) Recover(ctx context.Context, index int, records []*v1alpha1.Record, obj v1alpha1.InnerObject) (v1alpha1.Phase, error) {
        impl.Log.Info("Goodbye world!")
        return v1alpha1.NotInjected, nil
    }
 
-   func NewImpl(c client.Client, log logr.Logger, decoder *utils.ContainerRecordDecoder) *common.ChaosImplPair {
-       return &common.ChaosImplPair{
+   func NewImpl(c client.Client, log logr.Logger, decoder *utils.ContainerRecordDecoder) *impltypes.ChaosImplPair {
+       return &impltypes.ChaosImplPair{
            Name:   "helloworldchaos",
            Object: &v1alpha1.HelloWorldChaos{},
            Impl: &Impl{
-               Client: c,
-               Log:    log.WithName("helloworldchaos"),
+               Client:  c,
+               Log:     log.WithName("helloworldchaos"),
                decoder: decoder,
            },
            ObjectList: &v1alpha1.HelloWorldChaosList{},
@@ -222,23 +221,7 @@ You need to register the CRD (Custom Resource Definition) of HelloWorldChaos to 
 
 In this step, you need to deploy Chaos Mesh with your latest changes to test HelloWorldChaos.
 
-Before you pull any image for Chaos Mesh (using `helm install` or `helm upgrade`), modify the helm template `helm/chaos-mesh/values.yaml` to replace the default image with what you just pushed to your local Docker registry.
-
-The templates in Chaos Mesh use `chaos-mesh/chaos-mesh:latest` as the default Registry. You need to set the path with the environment variable of `DOCKER_REGISTRY` (The default value is `localhost:5000`), as shown below:
-
-```yaml
-controllerManager:
-  image: localhost:5000/chaos-mesh/chaos-mesh:latest
-  ...
-chaosDaemon:
-  image: localhost:5000/chaos-mesh/chaos-daemon:latest
-  ...
-dashboard:
-  image: localhost:5000/chaos-mesh/chaos-dashboard:latest
-  ...
-```
-
-After you update the template, try running HelloWorldChaos.
+Try running HelloWorldChaos.
 
 1. Register the CRD in your cluster:
 
@@ -258,7 +241,13 @@ After you update the template, try running HelloWorldChaos.
    kubectl get crd helloworldchaos.chaos-mesh.org
    ```
 
-2. Deploy Chaos Mesh:
+2. Create a namespace for installing Chaos Mesh. It is recommended to install Chaos Mesh under the chaos-testing namespace. You can also specify any namespace to install Chaos Mesh:
+
+   ```bash
+   kubectl create ns chaos-testing
+   ```
+
+3. Deploy Chaos Mesh:
 
    <PickHelmVersion className="language-bash">{`helm install chaos-mesh helm/chaos-mesh --namespace=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --version latest`}</PickHelmVersion>
 
@@ -268,11 +257,9 @@ After you update the template, try running HelloWorldChaos.
    kubectl get pods --namespace chaos-testing -l app.kubernetes.io/instance=chaos-mesh
    ```
 
-   :::note
-   Arguments `--set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock` are used to run NeteworkChaos on kind.
-   :::
+   :::note Arguments `--set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock` are used to run NeteworkChaos on kind. :::
 
-3. Deploy the Pod for testing:
+4. Deploy the Pod for testing:
 
    ```bash
    kubectl apply -f https://raw.githubusercontent.com/chaos-mesh/apps/master/ping/busybox-statefulset.yaml
@@ -280,7 +267,7 @@ After you update the template, try running HelloWorldChaos.
 
    Make sure the Pod for testing works properly.
 
-4. Create a `chaos.yaml` file in any location with the following content:
+5. Create a `chaos.yaml` file in any location with the following content:
 
    ```yaml
    apiVersion: chaos-mesh.org/v1alpha1
@@ -296,7 +283,7 @@ After you update the template, try running HelloWorldChaos.
      duration: 1h
    ```
 
-5. Run the chaos experiment:
+6. Run the chaos experiment:
 
    ```bash
    kubectl apply -f /path/to/chaos.yaml
@@ -319,9 +306,7 @@ After you update the template, try running HelloWorldChaos.
    2021-06-24T06:42:26.858Z        INFO    helloworldchaos Hello World!
    ```
 
-   :::note
-   `{pod-post-fix}` is a random string generated by Kubernetes. You can check it by executing `kubectl get pod -n chaos-testing`.
-   :::
+   :::note `{pod-post-fix}` is a random string generated by Kubernetes. You can check it by executing `kubectl get pod -n chaos-testing`. :::
 
 ## What's Next
 

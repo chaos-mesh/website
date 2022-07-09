@@ -111,14 +111,13 @@ title: 新增混沌实验类型
        "sigs.k8s.io/controller-runtime/pkg/client"
 
        "github.com/chaos-mesh/chaos-mesh/api/v1alpha1"
+        impltypes "github.com/chaos-mesh/chaos-mesh/controllers/chaosimpl/types"
        "github.com/chaos-mesh/chaos-mesh/controllers/chaosimpl/utils"
-       "github.com/chaos-mesh/chaos-mesh/controllers/common"
-       "github.com/chaos-mesh/chaos-mesh/controllers/utils/chaosdaemon"
    )
 
    type Impl struct {
        client.Client
-       Log logr.Logger
+       Log     logr.Logger
        decoder *utils.ContainerRecordDecoder
    }
 
@@ -134,13 +133,13 @@ title: 新增混沌实验类型
        return v1alpha1.NotInjected, nil
    }
 
-   func NewImpl(c client.Client, log logr.Logger, decoder *utils.ContainerRecordDecoder) *common.ChaosImplPair {
-       return &common.ChaosImplPair{
+   func NewImpl(c client.Client, log logr.Logger, decoder *utils.ContainerRecordDecoder) *impltypes.ChaosImplPair {
+       return &impltypes.ChaosImplPair{
            Name:   "helloworldchaos",
            Object: &v1alpha1.HelloWorldChaos{},
            Impl: &Impl{
-               Client: c,
-               Log:    log.WithName("helloworldchaos"),
+               Client:  c,
+               Log:     log.WithName("helloworldchaos"),
                decoder: decoder,
            },
            ObjectList: &v1alpha1.HelloWorldChaosList{},
@@ -222,23 +221,7 @@ title: 新增混沌实验类型
 
 在这一步中，你需要部署修改版的 Chaos Mesh 并测试 HelloWorldChaos。
 
-在你部署 Chaos Mesh 之前（使用 `helm install` 或 `helm upgrade`），请修改 helm 模板的 `helm/chaos-mesh/values.yaml`，把镜像更换成你本地 Docker Registry 中的镜像。
-
-Chaos Mesh 的模板使用 `chaos-mesh/chaos-mesh:latest` 作为默认 Registry，你需要把它换成 `DOCKER_REGISTRY` 环境变量的值（默认为 `localhost:5000`），示例如下：
-
-```yaml
-controllerManager:
-  image: localhost:5000/chaos-mesh/chaos-mesh:latest
-  ...
-chaosDaemon:
-  image: localhost:5000/chaos-mesh/chaos-daemon:latest
-  ...
-dashboard:
-  image: localhost:5000/chaos-mesh/chaos-dashboard:latest
-  ...
-```
-
-完成上述模板修改后，请尝试运行 HelloWorldChaos。
+尝试运行 HelloWorldChaos。
 
 1. 将 CRD 注册进集群：
 
@@ -258,7 +241,13 @@ dashboard:
    kubectl get crd helloworldchaos.chaos-mesh.org
    ```
 
-2. 安装 Chaos Mesh：
+2. 创建安装 Chaos Mesh 的命名空间，推荐将 Chaos Mesh 安装在 chaos-testing 命名空间下，也可以指定任意命名空间安装 Chaos Mesh：
+
+   ```bash
+   kubectl create ns chaos-testing
+   ```
+
+3. 安装 Chaos Mesh：
 
    ```bash
    helm install chaos-mesh helm/chaos-mesh --namespace=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock
@@ -276,7 +265,7 @@ dashboard:
 
    :::
 
-3. 部署用于测试的目标 Pod：
+4. 部署用于测试的目标 Pod：
 
    ```bash
    kubectl apply -f https://raw.githubusercontent.com/chaos-mesh/apps/master/ping/busybox-statefulset.yaml
@@ -284,7 +273,7 @@ dashboard:
 
    请确保用于测试的目标 Pod 可以正常运行。
 
-4. 创建一个名为 `chaos.yaml` 的文件，写入以下内容：
+5. 创建一个名为 `chaos.yaml` 的文件，写入以下内容：
 
    ```yaml
    apiVersion: chaos-mesh.org/v1alpha1
@@ -300,7 +289,7 @@ dashboard:
      duration: 1h
    ```
 
-5. 运行混沌实验：
+6. 运行混沌实验：
 
    ```bash
    kubectl apply -f /path/to/chaos.yaml
