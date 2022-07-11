@@ -241,15 +241,11 @@ Try running HelloWorldChaos.
    kubectl get crd helloworldchaos.chaos-mesh.org
    ```
 
-2. Create a namespace for installing Chaos Mesh. It is recommended to install Chaos Mesh under the chaos-testing namespace. You can also specify any namespace to install Chaos Mesh:
+2. Deploy Chaos Mesh:
 
    ```bash
-   kubectl create ns chaos-testing
+   helm install chaos-mesh helm/chaos-mesh --namespace=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --set images.registry=localhost:5000 --version latest
    ```
-
-3. Deploy Chaos Mesh:
-
-   <PickHelmVersion className="language-bash">{`helm install chaos-mesh helm/chaos-mesh --namespace=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --version latest`}</PickHelmVersion>
 
    To verify the deployment is successful, you can check all Pods in the `chaos-testing` namespace:
 
@@ -263,7 +259,7 @@ Try running HelloWorldChaos.
 
    :::
 
-4. Deploy the Pod for testing:
+3. Deploy the Pod for testing:
 
    ```bash
    kubectl apply -f https://raw.githubusercontent.com/chaos-mesh/apps/master/ping/busybox-statefulset.yaml
@@ -271,7 +267,7 @@ Try running HelloWorldChaos.
 
    Make sure the Pod for testing works properly.
 
-5. Create a `chaos.yaml` file in any location with the following content:
+4. Create a `chaos.yaml` file in any location with the following content:
 
    ```yaml
    apiVersion: chaos-mesh.org/v1alpha1
@@ -287,7 +283,7 @@ Try running HelloWorldChaos.
      duration: 1h
    ```
 
-6. Run the chaos experiment:
+5. Run the chaos experiment:
 
    ```bash
    kubectl apply -f /path/to/chaos.yaml

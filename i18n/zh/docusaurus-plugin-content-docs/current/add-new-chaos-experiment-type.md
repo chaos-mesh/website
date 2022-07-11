@@ -241,16 +241,10 @@ title: 新增混沌实验类型
    kubectl get crd helloworldchaos.chaos-mesh.org
    ```
 
-2. 创建安装 Chaos Mesh 的命名空间，推荐将 Chaos Mesh 安装在 chaos-testing 命名空间下，也可以指定任意命名空间安装 Chaos Mesh：
+2. 安装 Chaos Mesh：
 
    ```bash
-   kubectl create ns chaos-testing
-   ```
-
-3. 安装 Chaos Mesh：
-
-   ```bash
-   helm install chaos-mesh helm/chaos-mesh --namespace=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock
+   helm install chaos-mesh helm/chaos-mesh --namespace=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --set images.registry=localhost:5000 --version latest
    ```
 
    验证一下安装是否成功，查询 `chaos-testing` 命名空间的 Pod:
@@ -265,7 +259,7 @@ title: 新增混沌实验类型
 
    :::
 
-4. 部署用于测试的目标 Pod：
+3. 部署用于测试的目标 Pod：
 
    ```bash
    kubectl apply -f https://raw.githubusercontent.com/chaos-mesh/apps/master/ping/busybox-statefulset.yaml
@@ -273,7 +267,7 @@ title: 新增混沌实验类型
 
    请确保用于测试的目标 Pod 可以正常运行。
 
-5. 创建一个名为 `chaos.yaml` 的文件，写入以下内容：
+4. 创建一个名为 `chaos.yaml` 的文件，写入以下内容：
 
    ```yaml
    apiVersion: chaos-mesh.org/v1alpha1
@@ -289,7 +283,7 @@ title: 新增混沌实验类型
      duration: 1h
    ```
 
-6. 运行混沌实验：
+5. 运行混沌实验：
 
    ```bash
    kubectl apply -f /path/to/chaos.yaml

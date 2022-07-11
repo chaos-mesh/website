@@ -86,7 +86,7 @@ func (obj *HelloWorldChaos) GetSelectorSpecs() map[string]interface{} {
    )
 
    func (s *DaemonServer) ExecHelloWorldChaos(ctx context.Context, req *pb.ExecHelloWorldRequest) (*empty.Empty, error) {
-      log := s.getLoggerFromContext(ctx)
+   	log := s.getLoggerFromContext(ctx)
    	log.Info("ExecHelloWorldChaos", "request", req)
 
    	pid, err := s.crClient.GetPidFromContainerID(ctx, req.ContainerId)
@@ -141,7 +141,7 @@ func (obj *HelloWorldChaos) GetSelectorSpecs() map[string]interface{} {
 
    // Apply applies KernelChaos
    func (impl *Impl) Apply(ctx context.Context, index int, records []*v1alpha1.Record, obj v1alpha1.InnerObject) (v1alpha1.Phase, error) {
-      impl.Log.Info("Apply helloworld chaos")
+   	impl.Log.Info("Apply helloworld chaos")
    	decodedContainer, err := impl.decoder.DecodeContainerRecord(ctx, records[index], obj)
    	if err != nil {
    		return v1alpha1.NotInjected, err
