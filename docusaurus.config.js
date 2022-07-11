@@ -22,17 +22,15 @@ module.exports = {
   themeConfig: {
     image: 'chaos-mesh-social-preview.png',
     algolia: {
-      apiKey: '49739571d4f89670b12f39d5ad135f5a',
+      appId: '3BY0S3HQX6',
+      apiKey: '42036edeeb613eb626500a004b024e18',
       indexName: 'chaos-mesh',
     },
-    googleAnalytics: {
-      trackingID: 'UA-90760217-2',
-    },
-    announcementBar: {
-      content:
-        'Chaos Mesh is now a CNCF Incubating project 🥳, check out <a href="https://www.cncf.io/blog/2022/02/16/chaos-mesh-moves-to-the-cncf-incubator/" target="_blank">the announcement</a>!',
-      backgroundColor: '#37b5fb',
-    },
+    // announcementBar: {
+    //   content:
+    //     'Chaos Mesh is now a CNCF Incubating project 🥳, check out <a href="https://www.cncf.io/blog/2022/02/16/chaos-mesh-moves-to-the-cncf-incubator/" target="_blank">the announcement</a>!',
+    //   backgroundColor: '#37b5fb',
+    // },
     navbar: {
       hideOnScroll: true,
       title: 'Chaos Mesh',
@@ -146,6 +144,9 @@ module.exports = {
     [
       '@docusaurus/preset-classic',
       {
+        googleAnalytics: {
+          trackingID: 'UA-90760217-2',
+        },
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
