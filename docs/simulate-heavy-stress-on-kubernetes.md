@@ -79,7 +79,7 @@ The fields in the YAML configuration file are described in the following table:
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
 | workers | int | Specifies the number of threads that apply memory stress |  | No | `1` |
-| size | string | Specifies the memory size to be occupied or a percentage of the total memory size. The final sum of the occupied memory size is `workers * size`. |  | No | `256MB / 25%` |
+| size | string | Specifies the memory size to be occupied or a percentage of the total memory size. The final sum of the occupied memory size is `size`. |  | No | `256MB / 25%` |
 | time | string | Specifies the time to reach the memory `size`. The growth model is a linear model. |  | No | `10min` |
 | oomScoreAdj | int | Specifies the [oom_score_adj](https://man7.org/linux/man-pages/man5/proc.5.html) of the stress process. |  | No | `-1000` |
 
