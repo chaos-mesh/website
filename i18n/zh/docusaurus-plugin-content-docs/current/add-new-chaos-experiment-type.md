@@ -121,13 +121,13 @@ title: 新增混沌实验类型
        decoder *utils.ContainerRecordDecoder
    }
 
-   // Apply applies HelloWorldChaos
+   // This corresponds to the Apply phase of HelloWorldChaos. The execution of HelloWorldChaos will be triggered.
    func (impl *Impl) Apply(ctx context.Context, index int, records []*v1alpha1.Record, obj v1alpha1.InnerObject) (v1alpha1.Phase, error) {
        impl.Log.Info("Hello world!")
        return v1alpha1.Injected, nil
    }
 
-   // Recover means the reconciler recovers the chaos action
+   // This corresponds to the Recover phase of HelloWorldChaos. The reconciler will be triggered to recover the chaos action.
    func (impl *Impl) Recover(ctx context.Context, index int, records []*v1alpha1.Record, obj v1alpha1.InnerObject) (v1alpha1.Phase, error) {
        impl.Log.Info("Goodbye world!")
        return v1alpha1.NotInjected, nil
