@@ -111,7 +111,7 @@ title: 新增混沌实验类型
        "sigs.k8s.io/controller-runtime/pkg/client"
 
        "github.com/chaos-mesh/chaos-mesh/api/v1alpha1"
-        impltypes "github.com/chaos-mesh/chaos-mesh/controllers/chaosimpl/types"
+       impltypes "github.com/chaos-mesh/chaos-mesh/controllers/chaosimpl/types"
        "github.com/chaos-mesh/chaos-mesh/controllers/chaosimpl/utils"
    )
 
@@ -220,8 +220,6 @@ title: 新增混沌实验类型
 ## 第 5 步：运行混沌实验
 
 在这一步中，你需要部署修改版的 Chaos Mesh 并测试 HelloWorldChaos。
-
-尝试运行 HelloWorldChaos。
 
 1. 将 CRD 注册进集群：
 

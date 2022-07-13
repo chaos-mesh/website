@@ -111,7 +111,7 @@ You need to register the CRD (Custom Resource Definition) of HelloWorldChaos to 
        "sigs.k8s.io/controller-runtime/pkg/client"
 
        "github.com/chaos-mesh/chaos-mesh/api/v1alpha1"
-        impltypes "github.com/chaos-mesh/chaos-mesh/controllers/chaosimpl/types"
+       impltypes "github.com/chaos-mesh/chaos-mesh/controllers/chaosimpl/types"
        "github.com/chaos-mesh/chaos-mesh/controllers/chaosimpl/utils"
    )
 
@@ -220,8 +220,6 @@ You need to register the CRD (Custom Resource Definition) of HelloWorldChaos to 
 ## Step 5: Run the chaos experiment
 
 In this step, you need to deploy Chaos Mesh with your latest changes to test HelloWorldChaos.
-
-Try running HelloWorldChaos.
 
 1. Register the CRD in your cluster:
 

@@ -78,37 +78,37 @@ To allow Chaos Daemon to accept the requests from Chaos Controller Manager, you 
    package chaosdaemon
 
    import (
-   	"context"
-   	"fmt"
+      "context"
+      "fmt"
 
-   	"github.com/golang/protobuf/ptypes/empty"
+      "github.com/golang/protobuf/ptypes/empty"
 
-   	"github.com/chaos-mesh/chaos-mesh/pkg/bpm"
-   	"github.com/chaos-mesh/chaos-mesh/pkg/chaosdaemon/pb"
+      "github.com/chaos-mesh/chaos-mesh/pkg/bpm"
+      "github.com/chaos-mesh/chaos-mesh/pkg/chaosdaemon/pb"
    )
 
    func (s *DaemonServer) ExecHelloWorldChaos(ctx context.Context, req *pb.ExecHelloWorldRequest) (*empty.Empty, error) {
-   	log := s.getLoggerFromContext(ctx)
-   	log.Info("ExecHelloWorldChaos", "request", req)
+      log := s.getLoggerFromContext(ctx)
+      log.Info("ExecHelloWorldChaos", "request", req)
 
-   	pid, err := s.crClient.GetPidFromContainerID(ctx, req.ContainerId)
-   	if err != nil {
-   		return nil, err
-   	}
+      pid, err := s.crClient.GetPidFromContainerID(ctx, req.ContainerId)
+      if err != nil {
+         return nil, err
+      }
 
-   	cmd := bpm.DefaultProcessBuilder("sh", "-c", fmt.Sprintf("ps aux")).
-   		SetNS(pid, bpm.MountNS).
-   		SetContext(ctx).
-   		Build(ctx)
-   	out, err := cmd.Output()
-   	if err != nil {
-   		return nil, err
-   	}
-   	if len(out) != 0 {
-   		log.Info("cmd output", "output", string(out))
-   	}
+      cmd := bpm.DefaultProcessBuilder("sh", "-c", fmt.Sprintf("ps aux")).
+         SetNS(pid, bpm.MountNS).
+         SetContext(ctx).
+         Build(ctx)
+      out, err := cmd.Output()
+      if err != nil {
+         return nil, err
+      }
+      if len(out) != 0 {
+         log.Info("cmd output", "output", string(out))
+      }
 
-   	return &empty.Empty{}, nil
+      return &empty.Empty{}, nil
    }
    ```
 
@@ -124,15 +124,15 @@ To allow Chaos Daemon to accept the requests from Chaos Controller Manager, you 
    package helloworldchaos
 
    import (
-   	"context"
+      "context"
 
-   	"github.com/chaos-mesh/chaos-mesh/api/v1alpha1"
-   	impltypes "github.com/chaos-mesh/chaos-mesh/controllers/chaosimpl/types"
-   	"github.com/chaos-mesh/chaos-mesh/controllers/chaosimpl/utils"
-   	"github.com/chaos-mesh/chaos-mesh/pkg/chaosdaemon/pb"
-   	"github.com/go-logr/logr"
-   	"go.uber.org/fx"
-   	"sigs.k8s.io/controller-runtime/pkg/client"
+      "github.com/chaos-mesh/chaos-mesh/api/v1alpha1"
+      impltypes "github.com/chaos-mesh/chaos-mesh/controllers/chaosimpl/types"
+      "github.com/chaos-mesh/chaos-mesh/controllers/chaosimpl/utils"
+      "github.com/chaos-mesh/chaos-mesh/pkg/chaosdaemon/pb"
+      "github.com/go-logr/logr"
+      "go.uber.org/fx"
+      "sigs.k8s.io/controller-runtime/pkg/client"
    )
 
    type Impl struct {
@@ -143,28 +143,28 @@ To allow Chaos Daemon to accept the requests from Chaos Controller Manager, you 
 
    // Apply applies KernelChaos
    func (impl *Impl) Apply(ctx context.Context, index int, records []*v1alpha1.Record, obj v1alpha1.InnerObject) (v1alpha1.Phase, error) {
-   	impl.Log.Info("Apply helloworld chaos")
-   	decodedContainer, err := impl.decoder.DecodeContainerRecord(ctx, records[index], obj)
-   	if err != nil {
-   		return v1alpha1.NotInjected, err
-   	}
-   	pbClient := decodedContainer.PbClient
-   	containerId := decodedContainer.ContainerId
+      impl.Log.Info("Apply helloworld chaos")
+      decodedContainer, err := impl.decoder.DecodeContainerRecord(ctx, records[index], obj)
+      if err != nil {
+         return v1alpha1.NotInjected, err
+      }
+      pbClient := decodedContainer.PbClient
+      containerId := decodedContainer.ContainerId
 
-   	_, err = pbClient.ExecHelloWorldChaos(ctx, &pb.ExecHelloWorldRequest{
-   		ContainerId: containerId,
-   	})
-   	if err != nil {
-   		return v1alpha1.NotInjected, err
-   	}
+      _, err = pbClient.ExecHelloWorldChaos(ctx, &pb.ExecHelloWorldRequest{
+      	ContainerId: containerId,
+      })
+      if err != nil {
+         return v1alpha1.NotInjected, err
+      }
 
-   	return v1alpha1.Injected, nil
+      return v1alpha1.Injected, nil
    }
 
    // Recover means the reconciler recovers the chaos action
    func (impl *Impl) Recover(ctx context.Context, index int, records []*v1alpha1.Record, obj v1alpha1.InnerObject) (v1alpha1.Phase, error) {
-   	impl.Log.Info("Recover helloworld chaos")
-   	return v1alpha1.NotInjected, nil
+      mpl.Log.Info("Recover helloworld chaos")
+      return v1alpha1.NotInjected, nil
    }
 
    func NewImpl(c client.Client, log logr.Logger, decoder *utils.ContainerRecordDecoder) *impltypes.ChaosImplPair {
