@@ -23,7 +23,7 @@ module.exports = {
     image: 'chaos-mesh-social-preview.png',
     algolia: {
       appId: '3BY0S3HQX6',
-      apiKey: '42036edeeb613eb626500a004b024e18',
+      apiKey: '99bb3af44d57f0e8f6d7e019d7e2c2d7',
       indexName: 'chaos-mesh',
     },
     // announcementBar: {
