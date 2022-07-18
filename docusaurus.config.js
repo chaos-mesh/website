@@ -24,7 +24,7 @@ module.exports = {
     algolia: {
       appId: '3BY0S3HQX6',
       apiKey: '99bb3af44d57f0e8f6d7e019d7e2c2d7',
-      indexName: 'chaos-mesh',
+      indexName: 'crawler_docusaurus',
     },
     // announcementBar: {
     //   content:
