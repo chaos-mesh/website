@@ -69,6 +69,7 @@ module.exports = {
             'simulate-azure-chaos',
             'simulate-gcp-chaos',
             'simulate-http-chaos-on-kubernetes',
+            'simulate-block-chaos-on-kubernetes',
           ],
         },
         {
