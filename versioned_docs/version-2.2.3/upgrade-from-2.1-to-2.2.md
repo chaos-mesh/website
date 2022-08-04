@@ -34,9 +34,7 @@ Here is a list of Helm Chart changes:
 - value changed: `dashboard.serviceAccount` changed from `chaos-controller-manager` to `chaos-dashboard`
 - value changed: `webhook.FailurePolicy` changed from `Ignore` to `Fail`
 
-:::note
-For more information about the detailed description, see [README](https://github.com/chaos-mesh/chaos-mesh/blob/v2.2.0/helm/chaos-mesh/README.md).
-:::
+:::note For more information about the detailed description, see [README](https://github.com/chaos-mesh/chaos-mesh/blob/v2.2.0/helm/chaos-mesh/README.md). :::
 
 ### Step 3: Update the CRD
 
