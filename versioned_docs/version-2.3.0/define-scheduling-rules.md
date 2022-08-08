@@ -43,7 +43,7 @@ spec:
     duration: '12s'
 ```
 
-Save this YAML file as `schedule-networkchaos.yaml`, and then run `kubectl apple-f ./schedule-networkchaos.yaml`.
+Save this YAML file as `schedule-networkchaos.yaml`, and then run `kubectl apply -f ./schedule-networkchaos.yaml`.
 
 Based on this configuration, Chaos Mesh will create the following `NetworkChaos` object in the fifth minute of each hour (such as 0:05, 1:05...):
 
