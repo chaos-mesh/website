@@ -297,7 +297,7 @@ When running an experiment, remember to record the UID of the experiment. When y
 #### Parameters for simulating cache expiration
 
 | Parameter | Description | Type | Value |
-| :-- | :-- | :-- |
+| :-- | :-- | :-- | :-- |
 | `action` | Action of the experiment | string | set to "corrupt" |
 | `addr` | The address and port number of Redis server to be inject into the fault, e.g. `127.0.0.1:6379` | string | Default value: `""` |
 | `expiration` | The specified key will be expired after `expiration` arrives | string | Default value: `"0"`. Ensure that the string is in the format supported by `time.Duration`|
@@ -316,7 +316,7 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 #### Parameters for simulating cache limit
 
 | Parameter | Description | Type | Value |
-| :-- | :-- | :-- |
+| :-- | :-- | :-- | :-- |
 | `action` | Action of the experiment | string | set to "cacheLimit" |
 | `addr` | The address and port number of Redis server to be inject into the fault, e.g. `127.0.0.1:6379` | string | Default value: `""` |
 | `password` | The password to log in the server | string | Default value: `""`|
@@ -334,7 +334,7 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 #### Parameters for simulating cache penetration
 
 | Parameter | Description | Type | Value |
-| :-- | :-- | :-- |
+| :-- | :-- | :-- | :-- |
 | `action` | Action of the experiment | string | set to "penetration" |
 | `addr` | The address and port number of Redis server to be inject into the fault, e.g. `127.0.0.1:6379` | string | Default value: `""` |
 | `password` | The password to log in the server | string | Default value: `""`|
@@ -351,7 +351,7 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 #### Parameters for simulating Sentinel restart
 
 | Parameter | Description | Type | Value |
-| :-- | :-- | :-- |
+| :-- | :-- | :-- | :-- |
 | `action` | Action of the experiment | string | set to "restart" |
 | `addr` | The address and port number of Sentinel to be inject into the fault, e.g. `127.0.0.1:26379` | string | Default value: `""` |
 | `conf` | Specifies the path of Sentinel config file, this file will be used to revover the Sentinel | string | Default value: `""` |
@@ -370,7 +370,7 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 #### Parameters for simulating Sentinel stop
 
 | Parameter | Description | Type | Value |
-| :-- | :-- | :-- |
+| :-- | :-- | :-- | :-- |
 | `action` | Action of the experiment | string | set to "stop" |
 | `addr` | The address and port number of Sentinel to be inject into the fault, e.g. `127.0.0.1:26379` | string | Default value: `""` |
 | `conf` | Specifies the path of Sentinel config file, this file will be used to revover the Sentinel | string | Default value: `""` |
