@@ -12,6 +12,8 @@ tags: [Chaos Mesh, Chaos Engineering, KubeCon, CloudNativeCon]
 
 At KubeCon EU 2022, the [Chaos Mesh](https://chaos-mesh.org/) team hosted two activities "Make Cloud Native Chaos Engineering Easier - Deep Dive into Chaos Mesh" and "office hours session". We are very grateful and enjoyed it with all of you very much. We shared with each other, got to know each other, and discussed a lot of things in depth.
 
+<!--truncate-->
+
 For the presentations, we gave a brief overview of Chaos Mesh, then delved into how Chaos Mesh is implemented and how it is practiced, and shared the team's latest explorations around chaos engineering and plans for Chaos Mesh's development.
 
 For Office Hour, we introduced the Chaos Mesh project and its latest progress, and answered online questions from attendees. 
@@ -50,4 +52,4 @@ When using clium CNI without iptables, Chaos Mesh still works.
 
 ## Join the Chaos Mesh community
 
-If you are interested in Chaos Mesh and would like to help us improve it, you're welcome to join [our Slack channel](https://slack.cncf.io/) or submit your pull requests or issues to our [GitHub repository](https://github.com/chaos-mesh/chaos-mesh).
+If you are interested in Chaos Mesh and would like to help us improve it, you're welcome to join [our Slack channel](https://slack.cncf.io/)(#project-chaos-mesh) or submit your pull requests or issues to our [GitHub repository](https://github.com/chaos-mesh/chaos-mesh).
