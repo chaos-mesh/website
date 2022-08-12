@@ -9,7 +9,7 @@ Chaosctl is a tool to assist in debugging Chaos Mesh. With Chaosctl, you can sim
 For Linux users, you can directly download the executable file for Chaosctl.
 
 ```bash
-curl -sSL https://mirrors.chaos-mesh.org/latest/chaosctl
+curl -sSL https://mirrors.chaos-mesh.org/latest/chaosctl -O
 ```
 
 For Windows or macOS users, you can compile it from the source code. Go v1.15 or above is recommended for compiling. Perform the following steps:
