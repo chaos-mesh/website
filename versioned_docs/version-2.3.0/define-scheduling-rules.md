@@ -144,11 +144,11 @@ Not all experiment types support multiple experiments on the same Pod. For detai
 
 ### `startingDeadlineSeconds` field
 
-The default value of `startingDeadlineSeconds` is 0.
+The default value of `startingDeadlineSeconds` is `nil`.
 
-When `startingDeadlineSeconds` is set to 0, Chaos Mesh will check if any experiments are missed from the last time of the scheduling to now (this might happen when you close Chaos Mesh, suspend Schedule for a long time, or set `concertencyPolicy` to `Forbid`).
+When `startingDeadlineSeconds` is set to `nil`, Chaos Mesh will check if any experiments are missed from the last time of the scheduling to now (this might happen when you close Chaos Mesh, suspend Schedule for a long time, or set `concertencyPolicy` to `Forbid`).
 
-When `startingDeadlineSeconds` exceeds 0, Chaos Mesh will check if any experiments are missed for the past `startingDeadlineSeconds` seconds since the current time. If the value of `startingDeadlineSeconds` is too small, some experiments might be missed. For example:
+When `startingDeadlineSeconds` is set and larger than `0`, Chaos Mesh will check if any experiments are missed for the past `startingDeadlineSeconds` seconds since the current time. If the value of `startingDeadlineSeconds` is too small, some experiments might be missed. For example:
 
 ```yaml
 spec:
@@ -170,7 +170,7 @@ spec:
 
 In the above example, due to `concurrencyPolicy` is set to `Forbid`, creating new tasks is forbidden at the beginning of the minute. And in the tenth second of this minute, the last created Chaos experiment has finished running. But due to the limits of `startingDeadlineSeconds` and the set of `concurrencyPolicy`, the missing events will not be retrieved and no Chaos experiments will be created. New Chaos experiment will only be created at the beginning of the next minute.
 
-If `startingDeadlineSeconds` is not set (or is set to 0), there will always be a delay of 10 milliseconds. This is because after the running task is done, Chaos Mesh finds a previous missing task (due to `concurrencyPolicy` is set to `Forbid`), and immediately creates a new task.
+If `startingDeadlineSeconds` is not set (or is set to `nil`), there will always be a delay of 10 milliseconds. This is because after the running task is done, Chaos Mesh finds a previous missing task (due to `concurrencyPolicy` is set to `Forbid`), and immediately creates a new task.
 
 To learn more examples and similar explanations of this field, see [Kubernetes CronJob documents](https://kubernetes.io/zh/docs/concepts/workloads/controllers/cron-jobs/#cron-job-limitations).
 

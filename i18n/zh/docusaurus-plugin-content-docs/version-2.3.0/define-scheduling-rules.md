@@ -144,9 +144,9 @@ spec:
 
 ### `startingDeadlineSeconds` 字段
 
-`startingDeadlineSeconds` 默认值为 0。
+`startingDeadlineSeconds` 默认值为 `nil`。
 
-在 `startingDeadlineSeconds` 为 0 时，Chaos Mesh 将检查从上一次调度发生到当前时间为止，期间是否有错过的实验（这种情况在用户关闭 Chaos Mesh、长期暂停 Schedule、设置 `concurrencyPolicy` 为 `Forbid` 时可能发生）。
+在 `startingDeadlineSeconds` 为 `nil` 时，Chaos Mesh 将检查从上一次调度发生到当前时间为止，期间是否有错过的实验（这种情况在用户关闭 Chaos Mesh、长期暂停 Schedule、设置 `concurrencyPolicy` 为 `Forbid` 时可能发生）。
 
 在 `startingDeadlineSeconds` 的值大于 0 时，Chaos Mesh 将检查从当前时间开始，过去的 `startingDeadlineSeconds` 秒内是否有错过的实验。如果 `startingDeadlineSeconds` 的值过小可能会错过一些实验，以下给出一个例子：
 
@@ -170,7 +170,7 @@ spec:
 
 由于 `concurrencyPolicy` 为 `Forbid`，在分钟的开始会因为这一限制而禁止创建新任务。而在该分钟的第十秒，上一次创建的 Chaos 运行结束，但由于 `startingDeadlineSeconds` 的限制不会检索到因 `concurrencyPolicy` 而错过的事件，所以不会创建 Chaos。在下一分钟开始时才会创建新的 Chaos。
 
-而如果不设置 `startingDeadlineSeconds` （或设置为 0），则表现为一直有 10 毫秒的延迟。这是因为在运行着的任务结束之后，Chaos Mesh 发现一段时间前错过了一个任务（因为 `concurrencyPolicy` 的阻止），于是立即创建了新的任务。
+而如果不设置 `startingDeadlineSeconds` （或设置为 `nil`），则表现为一直有 10 毫秒的延迟。这是因为在运行着的任务结束之后，Chaos Mesh 发现一段时间前错过了一个任务（因为 `concurrencyPolicy` 的阻止），于是立即创建了新的任务。
 
 这一字段在 Kubernetes CronJob 的[文档](https://kubernetes.io/zh/docs/concepts/workloads/controllers/cron-jobs/#cron-job-limitations)中拥有其他例子与类似解释。
 
