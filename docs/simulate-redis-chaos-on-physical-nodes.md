@@ -81,10 +81,10 @@ Global Flags:
 | Configuration item | Abbreviation | Type | Description | Value |
 | :-- | :-- | :-- | :-- | :-- |
 | `addr` | a | string | The address and port of Redis server to be injected into the fault, for example `127.0.0.1:6379` | Default value: `""` |
-| `expiration` | None | string | The specified key will be expired after `expiration` arrives |  Default value: `"0"`. Make sure that the string is in the format supported by `time.Duration` |
+| `expiration` | None | string | The specified key will be expired after `expiration` arrives | Default value: `"0"`. Make sure that the string is in the format supported by `time.Duration` |
 | `key` | k | string | The key to be expired | Default value: `""`, which means the expiration is set for all keys |
-| `option` | None | string | Additional options for `expiration`. **Only versions of Redis after 7.0.0 support this flag** | Default value: `""`. Only NX, XX, GT, and LT are supported|
-| `password` | p | string | The password to log in to the server | Default value: `""`|
+| `option` | None | string | Additional options for `expiration`. **Only versions of Redis after 7.0.0 support this flag** | Default value: `""`. Only NX, XX, GT, and LT are supported |
+| `password` | p | string | The password to log in to the server | Default value: `""` |
 
 #### Example for simulating cache expiration
 
@@ -122,8 +122,8 @@ Global Flags:
 
 #### Configuration description for cache limit
 
-| Configuratuin item | Abbreviation | Type | Description | Value |
-| :--| :-- | :-- | :-- | :-- |
+| Configuration item | Abbreviation | Type | Description | Value |
+| :-- | :-- | :-- | :-- | :-- |
 | `addr` | a | string | The address and port of Redis server to be injected into the fault, such as `127.0.0.1:6379` | Default value: `""` |
 | `password` | p | string | The password to log in to the server | Default value: `""` |
 | `percent` | None | string | Specifies `maxmemory` as a percentage of the original value | Default value: `""` |
@@ -166,8 +166,8 @@ Global Flags:
 
 #### Configuration description for cache penetration
 
-| Configuratuin item | Abbreviation | Type | Description | Value |
-| :--| :-- | :-- | :-- | :-- |
+| Configuration item | Abbreviation | Type | Description | Value |
+| :-- | :-- | :-- | :-- | :-- |
 | `addr` | a | string | The address and port of Redis server to be injected into the fault, such as `127.0.0.1:6379` | Default value: `""` |
 | `password` | p | string | The password to log in to the server | Default value: `""` |
 | `request-num` | None | int | Specifies the number of requests to be sent to the Redis server | Default value: `0` |
@@ -209,13 +209,13 @@ Global Flags:
 
 #### Configuration description for Sentinel restart
 
-| Configuratuin item | Abbreviation | Type | Description | Value |
-| :--| :-- | :-- | :-- | :-- |
+| Configuration item | Abbreviation | Type | Description | Value |
+| :-- | :-- | :-- | :-- | :-- |
 | `addr` | a | string | The address and port of Sentinel to be injected into the fault, such as `127.0.0.1:26379` | Default value: `""` |
 | `conf` | c | string | Specifies the path of Sentinel config file, this file will be used to revover the Sentinel | Default value: `""` |
-| `flush-config` | None | bool | Forces Sentinel to rewrite its configuration on disk, including the current Sentinel state | Default value: `true` | 
-| `password` | p | string | The password to log in to the server | Default value: `""`|
-| `redis-path` | None | string | Specifies the path of `redis-server` command-line tool | Default value: `""`|
+| `flush-config` | None | bool | Forces Sentinel to rewrite its configuration on disk, including the current Sentinel state | Default value: `true` |
+| `password` | p | string | The password to log in to the server | Default value: `""` |
+| `redis-path` | None | string | Specifies the path of `redis-server` command-line tool | Default value: `""` |
 
 #### Example for simulating Sentinel restart
 
@@ -255,10 +255,10 @@ Global Flags:
 #### Configuration description for Sentinel stop
 
 | Configuration item | Abbreviation | Type | Description | Value |
-| :--| :-- | :-- | :-- | :-- |
+| :-- | :-- | :-- | :-- | :-- |
 | `addr` | a | string | The address and port of Sentinel to be injected into the fault, such as `127.0.0.1:26379` | Default value: `""` |
 | `conf` | c | string | Specifies the path of Sentinel configuration file, which is used to recover the Sentinel | Default value: `""` |
-| `flush-config` | None | bool | Forces Sentinel to rewrite its configuration on disk, including the current Sentinel state | Default value: `true` | 
+| `flush-config` | None | bool | Forces Sentinel to rewrite its configuration on disk, including the current Sentinel state | Default value: `true` |
 | `password` | p | string | The password to log in to the server | Default value: `""` |
 | `redis-path` | None | string | Specifies the path of `redis-server` command-line tool | Default value: `""` |
 
@@ -300,7 +300,7 @@ When running an experiment, remember to record the UID of the experiment. When y
 | :-- | :-- | :-- | :-- |
 | `action` | Action of the experiment | string | set to "corrupt" |
 | `addr` | The address and port of Redis server to be injected into the fault, such as `127.0.0.1:6379` | string | Default value: `""` |
-| `expiration` | The specified key will be expired after `expiration` arrives | string | Default value: `"0"`. Make sure that the string is in the format supported by `time.Duration`|
+| `expiration` | The specified key will be expired after `expiration` arrives | string | Default value: `"0"`. Make sure that the string is in the format supported by `time.Duration` |
 | `key` | The key to be expired | string | Default value: `""`, which means the expiration is set for all keys |
 | `option` | Additional options for `expiration`. **Only versions of Redis after 7.0.0 support this flag** | string | Default value: `""`. Only NX, XX, GT, and LT are supported |
 | `password` | The password to log in to the server | Default value: `""` |
@@ -318,9 +318,8 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 | Parameter | Description | Type | Value |
 | :-- | :-- | :-- | :-- |
 | `action` | Action of the experiment | string | set to "cacheLimit" |
-| `addr` | The address and port of Redis server to be injected into the fault, such as 
- `127.0.0.1:6379` | string | Default value: `""` |
-| `password` | The password to log in to the server | string | Default value: `""`|
+| `addr` | The address and port of Redis server to be injected into the fault, such as `127.0.0.1:6379` | string | Default value: `""` |
+| `password` | The password to log in to the server | string | Default value: `""` |
 | `percent` | Specifies `maxmemory` as a percentage of the original value | string | Default value: `""` |
 | `size` | Specifies the size of `maxmemory` | string | Default `0`, which means no limitation of memory |
 
@@ -337,7 +336,7 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 | Parameter | Description | Type | Value |
 | :-- | :-- | :-- | :-- |
 | `action` | Action of the experiment | string | set to "penetration" |
-| `addr` | The address and port of Redis server to be injected into the fault, such as  `127.0.0.1:6379` | string | Default value: `""` |
+| `addr` | The address and port of Redis server to be injected into the fault, such as `127.0.0.1:6379` | string | Default value: `""` |
 | `password` | The password to log in to the server | string | Default value: `""` |
 | `request-num` | Specifies the number of requests to be sent to the Redis server | int | Default value: `0` |
 
@@ -356,8 +355,8 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 | `action` | Action of the experiment | string | set to "restart" |
 | `addr` | The address and port of Sentinel to be injected into the fault, such as `127.0.0.1:26379` | string | Default value: `""` |
 | `conf` | Specifies the path of Sentinel configuration file, which is used to recover the Sentinel | string | Default value: `""` |
-| `flush-config` | Forces Sentinel to rewrite its configuration on disk, including the current Sentinel state | bool | Default value: `true` | 
-| `password` | The password to log in to the server | string | Default value: `""`|
+| `flush-config` | Forces Sentinel to rewrite its configuration on disk, including the current Sentinel state | bool | Default value: `true` |
+| `password` | The password to log in to the server | string | Default value: `""` |
 | `redis-path` | Specifies the path of `redis-server` command-line tool | string | Default value: `""` |
 
 #### Example for simulating Sentinel restart using service mode
@@ -375,7 +374,7 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 | `action` | Action of the experiment | string | set to "stop" |
 | `addr` | The address and port of Sentinel to be injected into the fault, such as `127.0.0.1:26379` | string | Default value: `""` |
 | `conf` | Specifies the path of Sentinel configuration file, which is used to recover the Sentinel | string | Default value: `""` |
-| `flush-config` | Forces Sentinel to rewrite its configuration on disk, including the current Sentinel state | bool | Default value: `true` | 
+| `flush-config` | Forces Sentinel to rewrite its configuration on disk, including the current Sentinel state | bool | Default value: `true` |
 | `password` | The password to log in to the server | string | Default value: `""` |
 | `redis-path` | Specifies the path of `redis-server` command-line tool | string | Default value: `""` |
 
