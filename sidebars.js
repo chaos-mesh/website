@@ -85,6 +85,7 @@ module.exports = {
             'simulate-jvm-application-chaos-in-physical-nodes',
             'simulate-time-chaos-on-physical-nodes',
             'simulate-file-chaos-in-physical-nodes',
+            'simulate-redis-chaos-on-physical-nodes',
             'chaosd-search-recover',
           ],
         },
