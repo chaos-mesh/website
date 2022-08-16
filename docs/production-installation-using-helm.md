@@ -187,10 +187,10 @@ helm install chaos-mesh helm/chaos-mesh -n=chaos-testing
 
 ### How can I disable the safe mode?
 
-The safe mode is enabled by default. To disable the safe mode, specify `dashboard.securityMode` as `false` during the installation or upgrade:
+Safe mode allows you to disable authentication to the Chaos Mesh dashboard, and should only be used for non-production deployments. Safe mode is **enabled** by default. To disable the safe mode, specify `dashboard.securityMode` as `false` during the installation or upgrade:
 
 <PickHelmVersion>
-helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set dashboard.securityMode=false --version latest
+helm install chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --set dashboard.securityMode=false --version latest
 </PickHelmVersion>
 
 ### How can I persist Chaos Dashboard data
