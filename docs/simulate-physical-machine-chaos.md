@@ -26,7 +26,7 @@ Before creating PhysicalMachineChaos experiments using Chaos Mesh, you need to d
 - After generating the TLS certificate through Chaosctl, run the following command to start Chaosd in service mode:
 
   ```bash
-  chaosd server --https-port 31768 --CA=/etc/chaosd/pki/ca.crt --cert=/etc/chaosd/pki/chaosd.crt --key=/etc/choasd/pki/chaosd.key
+  chaosd server --https-port 31768 --CA=/etc/chaosd/pki/ca.crt --cert=/etc/chaosd/pki/chaosd.crt --key=/etc/chaosd/pki/chaosd.key
   ```
 
   :::note
