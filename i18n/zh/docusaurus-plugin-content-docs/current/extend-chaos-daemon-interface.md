@@ -5,7 +5,9 @@ title: 拓展 Chaos Daemon 接口
 在[新增混沌实验类型](add-new-chaos-experiment-type.md)中，你实现了一种名为 HelloWorldChaos 的混沌实验，它的功能是在 Chaos Controller Manager 的日志中输出一行 "Hello world!"。为了让 HelloWorldChaos 真正有用，你还需要向 Chaos Daemon 添加接口，从而在目标 Pod 上注入一些故障。比方说，获取目标 Pod 中正在运行的进程信息。
 
 :::note 注意
+
 一些关于 Chaos Mesh 架构的知识对于帮助你理解这一文档非常有用，例如 [Chaos Mesh  架构](architecture.md)。
+
 :::
 
 本文档分为以下几部分：
@@ -74,36 +76,37 @@ func (obj *HelloWorldChaos) GetSelectorSpecs() map[string]interface{} {
    package chaosdaemon
 
    import (
-   	"context"
-   	"fmt"
+      "context"
+      "fmt"
 
-   	"github.com/golang/protobuf/ptypes/empty"
+      "github.com/golang/protobuf/ptypes/empty"
 
-   	"github.com/chaos-mesh/chaos-mesh/pkg/bpm"
-   	pb "github.com/chaos-mesh/chaos-mesh/pkg/chaosdaemon/pb"
+      "github.com/chaos-mesh/chaos-mesh/pkg/bpm"
+      "github.com/chaos-mesh/chaos-mesh/pkg/chaosdaemon/pb"
    )
 
    func (s *DaemonServer) ExecHelloWorldChaos(ctx context.Context, req *pb.ExecHelloWorldRequest) (*empty.Empty, error) {
-   	log.Info("ExecHelloWorldChaos", "request", req)
+      log := s.getLoggerFromContext(ctx)
+      log.Info("ExecHelloWorldChaos", "request", req)
 
-   	pid, err := s.crClient.GetPidFromContainerID(ctx, req.ContainerId)
-   	if err != nil {
-   		return nil, err
-   	}
+      pid, err := s.crClient.GetPidFromContainerID(ctx, req.ContainerId)
+      if err != nil {
+         return nil, err
+      }
 
-   	cmd := bpm.DefaultProcessBuilder("sh", "-c", fmt.Sprintf("ps aux")).
-   		SetNS(pid, bpm.MountNS).
-   		SetContext(ctx).
-   		Build()
-   	out, err := cmd.Output()
-   	if err != nil {
-   		return nil, err
-   	}
-   	if len(out) != 0 {
-   		log.Info("cmd output", "output", string(out))
-   	}
+      cmd := bpm.DefaultProcessBuilder("sh", "-c", fmt.Sprintf("ps aux")).
+         SetNS(pid, bpm.MountNS).
+         SetContext(ctx).
+         Build(ctx)
+      out, err := cmd.Output()
+      if err != nil {
+         return nil, err
+      }
+      if len(out) != 0 {
+         log.Info("cmd output", "output", string(out))
+      }
 
-   	return &empty.Empty{}, nil
+      return &empty.Empty{}, nil
    }
    ```
 
@@ -119,72 +122,74 @@ func (obj *HelloWorldChaos) GetSelectorSpecs() map[string]interface{} {
    package helloworldchaos
 
    import (
-   	"context"
+      "context"
 
-   	"github.com/chaos-mesh/chaos-mesh/api/v1alpha1"
-   	"github.com/chaos-mesh/chaos-mesh/controllers/chaosimpl/utils"
-   	"github.com/chaos-mesh/chaos-mesh/controllers/common"
-   	"github.com/chaos-mesh/chaos-mesh/pkg/chaosdaemon/pb"
-   	"github.com/go-logr/logr"
-   	"go.uber.org/fx"
-   	"sigs.k8s.io/controller-runtime/pkg/client"
+      "github.com/chaos-mesh/chaos-mesh/api/v1alpha1"
+      impltypes "github.com/chaos-mesh/chaos-mesh/controllers/chaosimpl/types"
+      "github.com/chaos-mesh/chaos-mesh/controllers/chaosimpl/utils"
+      "github.com/chaos-mesh/chaos-mesh/pkg/chaosdaemon/pb"
+      "github.com/go-logr/logr"
+      "go.uber.org/fx"
+      "sigs.k8s.io/controller-runtime/pkg/client"
    )
 
    type Impl struct {
-   	client.Client
-   	Log     logr.Logger
-           decoder *utils.ContainerRecordDecoder
+      client.Client
+      Log     logr.Logger
+      decoder *utils.ContainerRecordDecoder
    }
 
    // Apply applies KernelChaos
    func (impl *Impl) Apply(ctx context.Context, index int, records []*v1alpha1.Record, obj v1alpha1.InnerObject) (v1alpha1.Phase, error) {
-   	impl.Log.Info("Apply helloworld chaos")
-   	decodedContainer, err := impl.decoder.DecodeContainerRecord(ctx, records[index])
-   	if err != nil {
-   		return v1alpha1.NotInjected, err
-   	}
-   	pbClient := decodedContainer.PbClient
-   	containerId := decodedContainer.ContainerId
+      impl.Log.Info("Apply helloworld chaos")
+      decodedContainer, err := impl.decoder.DecodeContainerRecord(ctx, records[index], obj)
+      if err != nil {
+         return v1alpha1.NotInjected, err
+      }
+      pbClient := decodedContainer.PbClient
+      containerId := decodedContainer.ContainerId
 
-   	_, err = pbClient.ExecHelloWorldChaos(ctx, &pb.ExecHelloWorldRequest{
-   		ContainerId: containerId,
-   	})
-   	if err != nil {
-   		return v1alpha1.NotInjected, err
-   	}
+      _, err = pbClient.ExecHelloWorldChaos(ctx, &pb.ExecHelloWorldRequest{
+      	ContainerId: containerId,
+      })
+      if err != nil {
+         return v1alpha1.NotInjected, err
+      }
 
-   	return v1alpha1.Injected, nil
+      return v1alpha1.Injected, nil
    }
 
    // Recover means the reconciler recovers the chaos action
    func (impl *Impl) Recover(ctx context.Context, index int, records []*v1alpha1.Record, obj v1alpha1.InnerObject) (v1alpha1.Phase, error) {
-   	impl.Log.Info("Recover helloworld chaos")
-   	return v1alpha1.NotInjected, nil
+      mpl.Log.Info("Recover helloworld chaos")
+      return v1alpha1.NotInjected, nil
    }
 
-   func NewImpl(c client.Client, log logr.Logger, decoder *utils.ContainerRecordDecoder) *common.ChaosImplPair {
-   	return &common.ChaosImplPair{
-   		Name:   "helloworldchaos",
-   		Object: &v1alpha1.HelloWorldChaos{},
-   		Impl: &Impl{
-   			Client:  c,
-   			Log:     log.WithName("helloworldchaos"),
-   			decoder: decoder,
-   		},
-   		ObjectList: &v1alpha1.HelloWorldChaosList{},
-   	}
+   func NewImpl(c client.Client, log logr.Logger, decoder *utils.ContainerRecordDecoder) *impltypes.ChaosImplPair {
+      return &impltypes.ChaosImplPair{
+         Name:   "helloworldchaos",
+         Object: &v1alpha1.HelloWorldChaos{},
+         Impl: &Impl{
+            Client:  c,
+            Log:     log.WithName("helloworldchaos"),
+            decoder: decoder,
+         },
+         ObjectList: &v1alpha1.HelloWorldChaosList{},
+      }
    }
 
    var Module = fx.Provide(
-   	fx.Annotated{
-   		Group:  "impl",
-   		Target: NewImpl,
-   	},
+      fx.Annotated{
+         Group:  "impl",
+         Target: NewImpl,
+      },
    )
    ```
 
    :::note 注意
+
    在 HelloWorldChaos 中，恢复过程什么都没有做。这是因为 HelloWorldChaos 是一个 OneShot 实验。如果你的新实验需要恢复，你应该在其中实现相关逻辑。
+
    :::
 
 ## 验证实验效果
@@ -269,7 +274,9 @@ func (obj *HelloWorldChaos) GetSelectorSpecs() map[string]interface{} {
      可以看到两条 `ps aux`，对应两个不同的 Pod。
 
      :::note 注意
+
      如果你的集群有多个节点，你会发现有不止一个 Chaos Daemon Pod。试着查看每一个 Chaos Daemon Pod 的日志，寻找真正被调用的那一个。
+
      :::
 
 ## 探索更多
