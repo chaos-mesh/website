@@ -35,7 +35,7 @@ You can also specify a YAML file using the `-f` parameter to describe the config
 
 ## Add annotations to namespaces for Chaos experiments
 
-When FilterNamespace is enabled, Chaos Mesh only injects faults to namespaces containing the annotation `chaos-mesh.org/input=enabled`. Therefore, before starting Chaos experiments, you need to add this annotation to the namespace in which Chaos experiments can take effect, while other namespaces are protected agains fault injection.
+When FilterNamespace is enabled, Chaos Mesh only injects faults to namespaces containing the annotation `chaos-mesh.org/inject=enabled`. Therefore, before starting Chaos experiments, you need to add this annotation to the namespace in which Chaos experiments can take effect, while other namespaces are protected against fault injection.
 
 You can add the annotation for a `namespace` using the following `kubectl` command:
 
@@ -69,7 +69,7 @@ You can list all the namespaces that allows Chaos experiments using the followin
 kubectl get ns -o jsonpath='{.items[?(@.metadata.annotations.chaos-mesh\.org/inject=="enabled")].metadata.name}'
 ```
 
-This command outputs all the namespaces with the `chaos-mesh.org/input=enabled` annotation. For example:
+This command outputs all the namespaces with the `chaos-mesh.org/inject=enabled` annotation. For example:
 
 ```bash
 default
