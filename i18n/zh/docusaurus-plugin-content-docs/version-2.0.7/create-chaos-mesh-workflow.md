@@ -158,7 +158,7 @@ podChaos:
 | kernelChaos | object | 配置 KernelChaos，当 type 为 KernelChaos 时需要配置该字段。详见 [模拟内核故障](simulate-kernel-chaos-on-kubernetes.md) | 无 | 否 |  |
 | networkChaos | object | 配置 NetworkChaos，当 type 为 NetworkChaos 时需要配置该字段。详见 [模拟 AWS 故障](simulate-aws-chaos.md) | 无 | 否 |  |
 | podChaos | object | 配置 PodChaosd ，当 type 为 PodChaosd 时需要配置该字段。详见 [模拟网络故障](simulate-network-chaos-on-kubernetes.md) | 无 | 否 |  |
-| stressChao | object | 配置 StressChaos，当 type 为 StressChaos 时需要配置该字段。详见 [模拟压力场景](simulate-heavy-stress-on-kubernetes.md) | 无 | 否 |  |
+| stressChaos | object | 配置 StressChaos，当 type 为 StressChaos 时需要配置该字段。详见 [模拟压力场景](simulate-heavy-stress-on-kubernetes.md) | 无 | 否 |  |
 | timeChaos | object | 配置 TimeChaos，当 type 为 TimeChaos 时需要配置该字段。详见 [模拟时间故障](simulate-time-chaos-on-kubernetes.md) | 无 | 否 |  |
 | schedule | object | 配置 Schedule ，当 type 为 Schedule 时需要配置该字段。详见 [定义调度规则](define-scheduling-rules.md) | 无 | 否 |  |
 
