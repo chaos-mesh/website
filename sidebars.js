@@ -158,7 +158,7 @@ module.exports = {
             type: 'category',
             label: 'Release Tracking',
             items: [
-              'release-2.3-tracking',
+              'release-2.4-tracking',
             ]
           }
         ],
