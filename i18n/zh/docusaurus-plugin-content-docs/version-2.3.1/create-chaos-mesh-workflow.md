@@ -182,7 +182,7 @@ podChaos:
 | 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
 | --- | --- | --- | --- | --- | --- |
 | name | string | template 的名称，需要符合 DNS-1123 命名规范。 | 无 | 是 | any-name |
-| type | string | template 的类型。可选值有: Task、Serial、Parallel、Suspend、Schedule、AWSChaos、DNSChaos、GCPChaos、HTTPChaos、IOChaos、JVMChaos、KernelChaos、NetworkChaos、PodChaos、StressChaos、TimeChaos | 无 | 是 | PodChaos |
+| type | string | template 的类型。可选值有: Task、Serial、Parallel、Suspend、Schedule、AWSChaos、DNSChaos、GCPChaos、HTTPChaos、IOChaos、JVMChaos、KernelChaos、NetworkChaos、PodChaos、StressChaos、TimeChaos、StatusCheck | 无 | 是 | PodChaos |
 | deadline | string | template 持续的时间。 | 无 | 否 | '5m30s' |
 | children | []string | 声明该 template 下的子任务，当 type 为 Serial 或 Parallel 时需要配置该字段。 | 无 | 否 | ["any-chaos-1", "another-serial-2", "any-shcedule"] |
 | task | Task | 配置自定义任务，当 type 为 Task 时需要配置该字段。详见 [Task 字段说明](#task-字段说明) | 无 | 否 |  |
@@ -196,9 +196,11 @@ podChaos:
 | kernelChaos | object | 配置 KernelChaos，当 type 为 KernelChaos 时需要配置该字段。详见 [模拟内核故障](simulate-kernel-chaos-on-kubernetes.md) | 无 | 否 |  |
 | networkChaos | object | 配置 NetworkChaos，当 type 为 NetworkChaos 时需要配置该字段。详见 [模拟 AWS 故障](simulate-aws-chaos.md) | 无 | 否 |  |
 | podChaos | object | 配置 PodChaosd ，当 type 为 PodChaosd 时需要配置该字段。详见 [模拟网络故障](simulate-network-chaos-on-kubernetes.md) | 无 | 否 |  |
-| stressChao | object | 配置 StressChaos，当 type 为 StressChaos 时需要配置该字段。详见 [模拟压力场景](simulate-heavy-stress-on-kubernetes.md) | 无 | 否 |  |
+| stressChaos | object | 配置 StressChaos，当 type 为 StressChaos 时需要配置该字段。详见 [模拟压力场景](simulate-heavy-stress-on-kubernetes.md) | 无 | 否 |  |
 | timeChaos | object | 配置 TimeChaos，当 type 为 TimeChaos 时需要配置该字段。详见 [模拟时间故障](simulate-time-chaos-on-kubernetes.md) | 无 | 否 |  |
 | schedule | object | 配置 Schedule ，当 type 为 Schedule 时需要配置该字段。详见 [定义调度规则](define-scheduling-rules.md) | 无 | 否 |  |
+| statusCheck | object | 配置 StatusCheck，当 type 为 StatusCheck 时需要配置该字段。详见 [在工作流中进行状态检查](status-check-in-workflow.md) | 无 | 否 |  |
+| abortWithStatusCheck | bool | 配置当 StatusCheck 失败时是否终止 Workflow，当 type 为 StatusCheck 时可选配置该字段。 | `false` | 否 | `true` |
 
 :::note 注意
 

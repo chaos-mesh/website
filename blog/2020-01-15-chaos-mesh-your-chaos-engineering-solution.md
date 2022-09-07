@@ -27,7 +27,7 @@ In the following sections, I will share with you what Chaos Mesh is, how we desi
 
 Chaos Mesh is a versatile Chaos Engineering platform that features all-around fault injection methods for complex systems on Kubernetes, covering faults in Pod, network, file system, and even the kernel.
 
-Here is an example of how we use Chaos Mesh to locate a TiDB system bug. In this example, we simulate Pod downtime with our distributed storage engine ([TiKV](https://pingcap.com/docs/stable/architecture/#tikv-server)) and observe changes in queries per second (QPS). Regularly, if one TiKV node is down, the QPS may experience a transient jitter before it returns to the level before the failure. This is how we guarantee high availability.
+Here is an example of how we use Chaos Mesh to locate a TiDB system bug. In this example, we simulate Pod downtime with our distributed storage engine ([TiKV](https://docs.pingcap.com/tidb/stable/tidb-architecture#tikv-server)) and observe changes in queries per second (QPS). Regularly, if one TiKV node is down, the QPS may experience a transient jitter before it returns to the level before the failure. This is how we guarantee high availability.
 
 ![Chaos Mesh discovers downtime recovery exceptions in TiKV](/img/chaos-mesh-discovers-downtime-recovery-exceptions-in-tikv.png)
 
