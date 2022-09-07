@@ -109,6 +109,12 @@ To install Chaos Mesh of a specific version, add the `--version xxx` parameter a
 
 :::
 
+:::note
+
+To ensure high availability, Chaos Mesh turns on `leader-election` feature by default. If you do not need to use this feature, you can manually turn it off through `--set controllerManager.leaderElection.enabled=false`.
+
+:::
+
 ## Verify the installation
 
 <VerifyInstallation />
@@ -186,3 +192,7 @@ Safe mode allows you to disable authentication to the Chaos Mesh dashboard, and 
 <PickHelmVersion>
 helm install chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --set dashboard.securityMode=false --version latest
 </PickHelmVersion>
+
+### How can I persist Chaos Dashboard data
+
+Chaos Dashboard uses SQLite as the default database engine. If [`PV(Persistent Volumes)`](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) is disabled, the data of Chaos Dashboard will be lost after a reboot occurs. To avoid data loss, you can refer to the [Persistence of Chaos Dashboard Data](persistence-dashboard.md) document to enable `PV` for Chaos Dashboard or set `MySQL` and `Postgres` as the database engine.

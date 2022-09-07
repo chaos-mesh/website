@@ -21,7 +21,7 @@ Since it was open-sourced and accepted by the Cloud Native Computing Foundation 
 - It is mostly for Kubernetes environments. Because Chaos Mesh can't manage multiple Kubernetes clusters, you need to deploy Chaos Mesh for each Kubernetes cluster. Though [chaosd](https://github.com/chaos-mesh/chaosd) supports running chaos experiments on physical machines, the features are quite limited, and command line usage is not user friendly.
 - It doesn't allow plugins. To apply a customized chaos experiment, you have to alter the source code. Moreover, Chaos Mesh only supports Golang.
 
-Admittedly, Chaos Mesh is a first-rate Chaos Engineering platform, but is still a long way from offering Chaos as a Service (CaaS). Therefore, at [TiDB Hackathon 2020](https://pingcap.com/community/events/hackathon2020/), **we made changes to Chaos Mesh's architecture, moving it one step closer toward CaaS**.
+Admittedly, Chaos Mesh is a first-rate Chaos Engineering platform, but is still a long way from offering Chaos as a Service (CaaS). Therefore, at [TiDB Hackathon 2020](https://pingcap.com/community-activity/tidb-hackathon-2020/), **we made changes to Chaos Mesh's architecture, moving it one step closer toward CaaS**.
 
 In this article, I'll talk about what CaaS is, how we achieve it with Chaos Mesh, and our plans and lessons learned. I hope you find our experience helpful in building your own Chaos Engineering system.
 

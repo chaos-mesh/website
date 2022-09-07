@@ -9,9 +9,10 @@ This document describes how to create PhysicalMachineChaos (physical machine cha
 You can use PhysicalMachineChaos to simulate the faults of network, disk, pressure, JVM, time, and others in physical or virtual machines. Before using PhysicalMachineChaos provided by Chaos Mesh, you need to deploy Chaosd in your physical or virtual machines. The version mapping between Chaos Mesh and Chaosd is as follows:
 
 | Chaos Mesh version | Chaosd version |
-| :-- | :-- |
-| v2.1.x | v1.1.x |
-| v2.2.x | v1.2.x |
+| :----------------- | :------------- |
+| v2.1.x             | v1.1.x         |
+| v2.2.x             | v1.2.x         |
+
 ## Deploy Chaosd server
 
 Before creating PhysicalMachineChaos experiments using Chaos Mesh, you need to deploy Chaosd in service mode to all physical or virtual machines that are going to be injected with faults. After deploying Chaosd, run Chaosd server as follows:

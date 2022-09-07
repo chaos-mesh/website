@@ -7,7 +7,9 @@ import PickHelmVersion from '@site/src/components/PickHelmVersion'
 In [Add new chaos experiment type](add-new-chaos-experiment-type.md), you have added HelloWorldChaos, which can print `Hello World!` in the logs of Chaos Controller Manager. To enable the HelloWorldChaos to inject some faults into the target Pod, you need to extend interface for Chaos Daemon.
 
 :::note
+
 It's recommended to read [Chaos Mesh architecture](architecture.md) before you go forward.
+
 :::
 
 This document covers:
@@ -15,6 +17,7 @@ This document covers:
 - [Selector](#selector)
 - [Implement the gRPC interface](#implement-the-grpc-interface)
 - [Verify the experiment](#verify-the-experiment)
+- [Next steps](#next-steps)
 
 ## Selector
 
@@ -75,36 +78,37 @@ To allow Chaos Daemon to accept the requests from Chaos Controller Manager, you 
    package chaosdaemon
 
    import (
-   "context"
-   "fmt"
+      "context"
+      "fmt"
 
-   "github.com/golang/protobuf/ptypes/empty"
+      "github.com/golang/protobuf/ptypes/empty"
 
-   "github.com/chaos-mesh/chaos-mesh/pkg/bpm"
-   pb "github.com/chaos-mesh/chaos-mesh/pkg/chaosdaemon/pb"
+      "github.com/chaos-mesh/chaos-mesh/pkg/bpm"
+      "github.com/chaos-mesh/chaos-mesh/pkg/chaosdaemon/pb"
    )
 
    func (s *DaemonServer) ExecHelloWorldChaos(ctx context.Context, req *pb.ExecHelloWorldRequest) (*empty.Empty, error) {
-   log.Info("ExecHelloWorldChaos", "request", req)
+      log := s.getLoggerFromContext(ctx)
+      log.Info("ExecHelloWorldChaos", "request", req)
 
-   pid, err := s.crClient.GetPidFromContainerID(ctx, req.ContainerId)
-   if err != nil {
-       return nil, err
-   }
+      pid, err := s.crClient.GetPidFromContainerID(ctx, req.ContainerId)
+      if err != nil {
+         return nil, err
+      }
 
-   cmd := bpm.DefaultProcessBuilder("sh", "-c", fmt.Sprintf("ps aux")).
-       SetNS(pid, bpm.MountNS).
-       SetContext(ctx).
-       Build()
-   out, err := cmd.Output()
-   if err != nil {
-       return nil, err
-   }
-   if len(out) != 0 {
-       log.Info("cmd output", "output", string(out))
-   }
+      cmd := bpm.DefaultProcessBuilder("sh", "-c", fmt.Sprintf("ps aux")).
+         SetNS(pid, bpm.MountNS).
+         SetContext(ctx).
+         Build(ctx)
+      out, err := cmd.Output()
+      if err != nil {
+         return nil, err
+      }
+      if len(out) != 0 {
+         log.Info("cmd output", "output", string(out))
+      }
 
-   return &empty.Empty{}, nil
+      return &empty.Empty{}, nil
    }
    ```
 
@@ -120,72 +124,74 @@ To allow Chaos Daemon to accept the requests from Chaos Controller Manager, you 
    package helloworldchaos
 
    import (
-   "context"
+      "context"
 
-   "github.com/chaos-mesh/chaos-mesh/api/v1alpha1"
-   "github.com/chaos-mesh/chaos-mesh/controllers/chaosimpl/utils"
-   "github.com/chaos-mesh/chaos-mesh/controllers/common"
-   "github.com/chaos-mesh/chaos-mesh/pkg/chaosdaemon/pb"
-   "github.com/go-logr/logr"
-   "go.uber.org/fx"
-   "sigs.k8s.io/controller-runtime/pkg/client"
+      "github.com/chaos-mesh/chaos-mesh/api/v1alpha1"
+      impltypes "github.com/chaos-mesh/chaos-mesh/controllers/chaosimpl/types"
+      "github.com/chaos-mesh/chaos-mesh/controllers/chaosimpl/utils"
+      "github.com/chaos-mesh/chaos-mesh/pkg/chaosdaemon/pb"
+      "github.com/go-logr/logr"
+      "go.uber.org/fx"
+      "sigs.k8s.io/controller-runtime/pkg/client"
    )
 
    type Impl struct {
-   client.Client
-   Log     logr.Logger
-   decoder *utils.ContainerRecordDecoder
+      client.Client
+      Log     logr.Logger
+      decoder *utils.ContainerRecordDecoder
    }
 
-   // This corresponds to the Apply phase of HelloWorldChaos. The execution of HelloWorldChaos will be triggered.
+   // Apply applies KernelChaos
    func (impl *Impl) Apply(ctx context.Context, index int, records []*v1alpha1.Record, obj v1alpha1.InnerObject) (v1alpha1.Phase, error) {
-   impl.Log.Info("Apply helloworld chaos")
-   decodedContainer, err := impl.decoder.DecodeContainerRecord(ctx, records[index])
-   if err != nil {
-       return v1alpha1.NotInjected, err
-   }
-   pbClient := decodedContainer.PbClient
-   containerId := decodedContainer.ContainerId
+      impl.Log.Info("Apply helloworld chaos")
+      decodedContainer, err := impl.decoder.DecodeContainerRecord(ctx, records[index], obj)
+      if err != nil {
+         return v1alpha1.NotInjected, err
+      }
+      pbClient := decodedContainer.PbClient
+      containerId := decodedContainer.ContainerId
 
-   _, err = pbClient.ExecHelloWorldChaos(ctx, &pb.ExecHelloWorldRequest{
-       ContainerId: containerId,
-   })
-   if err != nil {
-       return v1alpha1.NotInjected, err
+      _, err = pbClient.ExecHelloWorldChaos(ctx, &pb.ExecHelloWorldRequest{
+      	ContainerId: containerId,
+      })
+      if err != nil {
+         return v1alpha1.NotInjected, err
+      }
+
+      return v1alpha1.Injected, nil
    }
 
-   return v1alpha1.Injected, nil
-   }
-
-   // This corresponds to the Recover phase of HelloWorldChaos. The reconciler will be triggered to recover the chaos action.
+   // Recover means the reconciler recovers the chaos action
    func (impl *Impl) Recover(ctx context.Context, index int, records []*v1alpha1.Record, obj v1alpha1.InnerObject) (v1alpha1.Phase, error) {
-   impl.Log.Info("Recover helloworld chaos")
-   return v1alpha1.NotInjected, nil
+      mpl.Log.Info("Recover helloworld chaos")
+      return v1alpha1.NotInjected, nil
    }
 
-   func NewImpl(c client.Client, log logr.Logger, decoder *utils.ContainerRecordDecoder) *common.ChaosImplPair {
-   return &common.ChaosImplPair{
-       Name:   "helloworldchaos",
-       Object: &v1alpha1.HelloWorldChaos{},
-       Impl: &Impl{
-           Client:  c,
-           Log:     log.WithName("helloworldchaos"),
-           decoder: decoder,
-       },
-       ObjectList: &v1alpha1.HelloWorldChaosList{},
-   }
+   func NewImpl(c client.Client, log logr.Logger, decoder *utils.ContainerRecordDecoder) *impltypes.ChaosImplPair {
+      return &impltypes.ChaosImplPair{
+         Name:   "helloworldchaos",
+         Object: &v1alpha1.HelloWorldChaos{},
+         Impl: &Impl{
+            Client:  c,
+            Log:     log.WithName("helloworldchaos"),
+            decoder: decoder,
+         },
+         ObjectList: &v1alpha1.HelloWorldChaosList{},
+      }
    }
 
    var Module = fx.Provide(
-   fx.Annotated{
-       Group:  "impl",
-       Target: NewImpl,
-   },
+      fx.Annotated{
+         Group:  "impl",
+         Target: NewImpl,
+      },
    )
    ```
 
    :::note
+
    In this chaos experiment, there is no need to recover the chaos action. This is because HelloWorldChaos is a OneShot experiment. For the chaos experiment type you developed, you can implement the logic of the recovery function as needed.
+
    :::
 
 ## Verify the experiment
@@ -268,7 +274,9 @@ To verify the experiment, perform the following steps.
    You can see `ps aux` in two separate lines, which are corresponding to two different Pods.
 
    :::note
+
    If your cluster has multiple nodes, you will find more than one Chaos Daemon Pod. Try to check logs of every Chaos Daemon Pods and find which Pod is being called.
+
    :::
 
 ## Next steps

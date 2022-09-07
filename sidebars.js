@@ -86,6 +86,7 @@ module.exports = {
             'simulate-jvm-application-chaos-in-physical-nodes',
             'simulate-time-chaos-on-physical-nodes',
             'simulate-file-chaos-in-physical-nodes',
+            'simulate-redis-chaos-on-physical-nodes',
             'chaosd-search-recover',
           ],
         },
@@ -158,7 +159,7 @@ module.exports = {
             type: 'category',
             label: 'Release Tracking',
             items: [
-              'release-2.3-tracking',
+              'release-2.4-tracking',
             ]
           }
         ],
