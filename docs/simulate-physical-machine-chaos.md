@@ -9,31 +9,32 @@ This document describes how to create PhysicalMachineChaos (physical machine cha
 You can use PhysicalMachineChaos to simulate the faults of network, disk, pressure, JVM, time, and others in physical or virtual machines. Before using PhysicalMachineChaos provided by Chaos Mesh, you need to deploy Chaosd in your physical or virtual machines. The version mapping between Chaos Mesh and Chaosd is as follows:
 
 | Chaos Mesh version | Chaosd version |
-| :-- | :-- |
-| v2.1.x | v1.1.x |
-| v2.2.x | v1.2.x |
+| :----------------- | :------------- |
+| v2.1.x             | v1.1.x         |
+| v2.2.x             | v1.2.x         |
+
 ## Deploy Chaosd server
 
 Before creating PhysicalMachineChaos experiments using Chaos Mesh, you need to deploy Chaosd in service mode to all physical or virtual machines that are going to be injected with faults. After deploying Chaosd, run Chaosd server as follows:
 
 1. Deploy Chaosd, generate a TLS certificate, and create `PhysicalMachine`:
 
-- For the deployment method of Chaosd, refer to [Download and deploy Chaosd](chaosd-overview.md#download-and-deploy).
-- After deploying Chaosd, **before** starting Chaosd server, you need to generate a TLS certificate and create a `PhysicalMachine` in Kubernetes clusters. For more information on how to generate TLS certificates, refer to [Generate TLS certificates for Chaosd](chaosctl-tool.md#generate-tls-certificates-for-chaosd).
+   - For the deployment method of Chaosd, refer to [Download and deploy Chaosd](chaosd-overview.md#download-and-deploy).
+   - After deploying Chaosd, **before** starting Chaosd server, you need to generate a TLS certificate and create a `PhysicalMachine` in Kubernetes clusters. For more information on how to generate TLS certificates, refer to [Generate TLS certificates for Chaosd](chaosctl-tool.md#generate-tls-certificates-for-chaosd).
 
-2. Start Chaosd Server:
+2. Start Chaosd server:
 
-- After generating the TLS certificate through Chaosctl, run the following command to start Chaosd in service mode:
+   - After generating the TLS certificate through Chaosctl, run the following command to start Chaosd in service mode:
 
-  ```bash
-  chaosd server --https-port 31768 --CA=/etc/chaosd/pki/ca.crt --cert=/etc/chaosd/pki/chaosd.crt --key=/etc/chaosd/pki/chaosd.key
-  ```
+     ```bash
+     chaosd server --https-port 31768 --CA=/etc/chaosd/pki/ca.crt --cert=/etc/chaosd/pki/chaosd.crt --key=/etc/chaosd/pki/chaosd.key
+     ```
 
-  :::note
+     :::note
 
-  The TLS certificates are saved to the default output directory of Chaosctl. If you manually specified another directory when generating certificates, replace the directory in the command line with the corresponding one.
+     The TLS certificates are saved to the default output directory of Chaosctl. If you manually specified another directory when generating certificates, replace the directory in the command line with the corresponding one.
 
-  :::
+     :::
 
 - If the TLS certificate is not generated through Chaosctl, you can run the following command to start Chaosd in service mode. However, for the security of your clusters, this is **not** recommended.
 
