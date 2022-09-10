@@ -47,7 +47,7 @@ glibc 必须为 2.17 及以上版本。
 2. 下载 Chaosd：
 
    ```bash
-   curl -fsSL -o chaosd-$CHAOSD_VERSION-linux-amd64.tar.gz https://mirrors.chaos-mesh.org/chaosd-$CHAOSD_VERSION-linux-amd64.tar.gz
+   curl -fsSLO https://mirrors.chaos-mesh.org/chaosd-$CHAOSD_VERSION-linux-amd64.tar.gz
    ```
 
 3. 解压 Chaosd 文件并转移到 /usr/local 目录下：
