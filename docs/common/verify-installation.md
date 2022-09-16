@@ -1,7 +1,7 @@
 To check the running status of Chaos Mesh, execute the following command:
 
 ```sh
-kubectl get po -n chaos-testing
+kubectl get po -n chaos-mesh
 ```
 
 The expected output is as follows:
@@ -21,7 +21,7 @@ If the `STATUS` of your actual output is not `Running`, then execute the followi
 
 ```sh
 # Take the chaos-controller as an example
-kubectl describe po -n chaos-testing chaos-controller-manager-69fd5c46c8-xlqpc
+kubectl describe po -n chaos-mesh chaos-controller-manager-69fd5c46c8-xlqpc
 ```
 
 :::
