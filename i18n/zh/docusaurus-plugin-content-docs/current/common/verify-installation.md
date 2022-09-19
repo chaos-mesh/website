@@ -1,7 +1,7 @@
 要查看 Chaos Mesh 的运行情况，请执行以下命令：
 
 ```bash
-kubectl get po -n chaos-testing
+kubectl get po -n chaos-mesh
 ```
 
 以下是预期输出：
@@ -21,7 +21,7 @@ chaos-dashboard-98c4c5f97-tx5ds             1/1     Running   0          2d5h
 
 ```bash
 # 以 chaos-controller 为例
-kubectl describe po -n chaos-testing chaos-controller-manager-69fd5c46c8-xlqpc
+kubectl describe po -n chaos-mesh chaos-controller-manager-69fd5c46c8-xlqpc
 ```
 
 :::
