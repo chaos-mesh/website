@@ -1,7 +1,7 @@
 要查看 Chaos Mesh 的运行情况，请执行以下命令：
 
 ```bash
-kubectl get po -n chaos-mesh
+kubectl get po -n chaos-testing
 ```
 
 以下是预期输出：
