@@ -10,47 +10,47 @@ const whoisUsing = [
   {
     name: 'Authzed',
     img: 'img/logos/authzed.svg',
-    href: 'https://authzed.com/'
+    href: 'https://authzed.com/',
   },
   {
     name: 'ByteDance',
     img: 'img/logos/bytedance.svg',
-    href: 'https://www.bytedance.com/'
+    href: 'https://www.bytedance.com/',
   },
   {
     name: 'Celo',
     img: 'img/logos/celo.png',
-    href: 'https://celo.org/'
+    href: 'https://celo.org/',
   },
   {
     name: 'China Everbright Bank',
     img: 'img/logos/cebbank.png',
-    href: 'https://www.cebbank.com/'
+    href: 'https://www.cebbank.com/',
   },
   {
     name: 'Dailymotion',
     img: 'img/logos/dailymotion.svg',
-    href: 'https://www.dailymotion.com/'
+    href: 'https://www.dailymotion.com/',
   },
   {
     name: 'DataStax',
     img: 'img/logos/datastax.svg',
-    href: 'https://www.datastax.com/'
+    href: 'https://www.datastax.com/',
   },
   {
     name: 'Digital China',
     img: 'img/logos/digitalchina.jpeg',
-    href: 'http://www.digitalchina.com/'
+    href: 'http://www.digitalchina.com/',
   },
   {
     name: 'Fuxi Lab',
     img: 'img/logos/fuxilab.png',
-    href: 'https://fuxi.163.com/'
+    href: 'https://fuxi.163.com/',
   },
   {
     name: 'juiceFS',
     img: 'img/logos/juicefs.svg',
-    href: 'https://juicefs.com/'
+    href: 'https://juicefs.com/',
   },
   {
     name: 'KingNet',
@@ -63,52 +63,52 @@ const whoisUsing = [
   {
     name: 'Maycur',
     img: 'img/logos/maycur.png',
-    href: 'https://www.maycur.com/'
+    href: 'https://www.maycur.com/',
   },
   {
     name: 'Meituan Dianping',
     img: 'img/logos/meituandianping.png',
-    href: 'https://about.meituan.com/'
+    href: 'https://about.meituan.com/',
   },
   {
     name: 'NETSTARS',
     img: 'img/logos/netstars.png',
-    href: 'https://www.netstars.co.jp/'
+    href: 'https://www.netstars.co.jp/',
   },
   {
     name: 'Percona',
     img: 'img/logos/percona.jpeg',
-    href: 'https://www.percona.com/'
+    href: 'https://www.percona.com/',
   },
   {
     name: 'PingCAP',
     img: 'img/logos/pingcap.svg',
-    href: 'https://pingcap.com/'
+    href: 'https://pingcap.com/',
   },
   {
     name: 'Pulsar',
     img: 'img/logos/pulsar.svg',
-    href: 'https://pulsar.apache.org/'
+    href: 'https://pulsar.apache.org/',
   },
   {
     name: 'Qihoo 360',
     img: 'img/logos/qihoo360.png',
-    href: 'http://www.360totalsecurity.com/'
+    href: 'http://www.360totalsecurity.com/',
   },
   {
     name: 'Qiniu Cloud',
     img: 'img/logos/qiniucloud.png',
-    href: 'https://www.qiniu.com/'
+    href: 'https://www.qiniu.com/',
   },
   {
     name: 'RabbitMQ',
     img: 'img/logos/rabbitmq.svg',
-    href: 'https://www.rabbitmq.com/'
+    href: 'https://www.rabbitmq.com/',
   },
   {
     name: 'SHAREit',
     img: 'img/logos/shareit.svg',
-    href: 'https://www.ushareit.com/'
+    href: 'https://www.ushareit.com/',
   },
   {
     name: 'S.J. Distributors',
@@ -121,7 +121,7 @@ const whoisUsing = [
   {
     name: 'Tencent',
     img: 'img/logos/tencent.png',
-    href: 'https://www.tencent.com/'
+    href: 'https://www.tencent.com/',
   },
   {
     name: 'Vald',
@@ -134,12 +134,12 @@ const whoisUsing = [
   {
     name: 'WeBank',
     img: 'img/logos/webank.png',
-    href: 'https://www.webank.com/'
+    href: 'https://www.webank.com/',
   },
   {
     name: 'Xpeng',
     img: 'img/logos/xpeng.png',
-    href: 'https://www.xiaopeng.com/'
+    href: 'https://www.xiaopeng.com/',
   },
 ]
 

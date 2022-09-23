@@ -1,6 +1,6 @@
 {
   "name": "chaos-mesh-website",
-  "version": "2.2.2",
+  "version": "2.4.0",
   "private": true,
   "scripts": {
     "start": "docusaurus start",
@@ -32,6 +32,7 @@
     ]
   },
   "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^3.3.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.4.1"

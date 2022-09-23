@@ -1,8 +1,8 @@
 import BrowserOnly from '@docusaurus/BrowserOnly'
-import CodeBlock from '@theme/CodeBlock'
-import React from 'react'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import { usePluginData } from '@docusaurus/useGlobalData'
+import CodeBlock from '@theme/CodeBlock'
+import React from 'react'
 
 export const usePickVersion = (siteConfig, versions) => {
   const pathname = window.location.pathname
