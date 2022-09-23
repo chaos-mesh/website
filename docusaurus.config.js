@@ -26,11 +26,6 @@ module.exports = {
       apiKey: '99bb3af44d57f0e8f6d7e019d7e2c2d7',
       indexName: 'chaos-mesh',
     },
-    // announcementBar: {
-    //   content:
-    //     'Chaos Mesh is now a CNCF Incubating project 🥳, check out <a href="https://www.cncf.io/blog/2022/02/16/chaos-mesh-moves-to-the-cncf-incubator/" target="_blank">the announcement</a>!',
-    //   backgroundColor: '#37b5fb',
-    // },
     navbar: {
       hideOnScroll: true,
       title: 'Chaos Mesh',
@@ -42,15 +37,13 @@ module.exports = {
       items: [
         { type: 'docsVersionDropdown' },
         { to: 'docs', label: 'Documentation' },
-        { to: 'interactive-tutorial', label: 'Interactive Tutorial' },
-        {
-          to: 'blog',
-          label: 'Blog',
-          position: 'right',
-        },
         {
           href: 'https://community.cncf.io/chaos-mesh-community/',
           label: 'Events',
+        },
+        {
+          to: 'blog',
+          label: 'Blog',
           position: 'right',
         },
         {
