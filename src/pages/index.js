@@ -43,6 +43,8 @@ function Home() {
           </div>
         </div>
 
+        <div className="hero-divider" />
+
         <div className="hero">
           <div className="container text--center">
             <h2 className="hero__subtitle">
@@ -51,6 +53,8 @@ function Home() {
             <PickVersion>curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash</PickVersion>
           </div>
         </div>
+
+        <div className="hero-divider" />
 
         <div className="hero">
           <div className="container">
@@ -163,6 +167,8 @@ function Home() {
           </div>
         </div>
 
+        <div className="hero-divider" />
+
         <div className="hero">
           <div className="container text--center">
             <h2 className="hero__subtitle">
@@ -181,6 +187,8 @@ function Home() {
             </div>
           </div>
         </div>
+
+        <div className="hero-divider" />
 
         <div className="hero">
           <div className="container text--center">

@@ -85,16 +85,16 @@ module.exports = {
           title: 'Community',
           items: [
             {
-              label: 'Twitter',
-              href: 'https://twitter.com/chaos_mesh',
+              label: 'Events',
+              href: 'https://community.cncf.io/chaos-mesh-community/',
             },
             {
               label: 'Slack (#project-chaos-mesh)',
               href: 'https://slack.cncf.io/',
             },
             {
-              label: 'Events',
-              href: 'https://community.cncf.io/chaos-mesh-community/',
+              label: 'Twitter',
+              href: 'https://twitter.com/chaos_mesh',
             },
           ],
         },
@@ -102,17 +102,17 @@ module.exports = {
           title: 'More',
           items: [
             {
-              label: 'GitHub',
-              href: 'https://github.com/chaos-mesh/chaos-mesh',
-            },
-            {
               label: 'Blog',
               to: 'blog',
+            },
+            {
+              label: 'GitHub',
+              href: 'https://github.com/chaos-mesh/chaos-mesh',
             },
           ],
         },
         {
-          title: 'Others',
+          title: 'Thanks',
           items: [
             {
               html: '<a href="https://www.netlify.com"><img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" /></a>',

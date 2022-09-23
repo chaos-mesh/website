@@ -7,6 +7,18 @@
 
 /* You can override the default Infima variables here. */
 :root {
+  --ifm-color-primary: #172d72;
+  --ifm-color-primary-dark: #152967;
+  --ifm-color-primary-darker: #142661;
+  --ifm-color-primary-darkest: #102050;
+  --ifm-color-primary-light: #19327d;
+  --ifm-color-primary-lighter: #1a3483;
+  --ifm-color-primary-lightest: #1e3b94;
+
+  --hero-border-color: rgba(0, 0, 0, 0.1);
+}
+
+:root[data-theme='dark'] {
   --ifm-color-primary: #10a6fa;
   --ifm-color-primary-dark: #0598ea;
   --ifm-color-primary-darker: #0590dd;
@@ -15,21 +27,17 @@
   --ifm-color-primary-lighter: #37b5fb;
   --ifm-color-primary-lightest: #5ec3fc;
 
-  --hero-border-color: rgba(0, 0, 0, 0.1);
-}
-
-:root[data-theme='dark'] {
   --hero-border-color: rgba(255, 255, 255, 0.1);
 }
 
-.hero {
+.hero-divider {
   border-bottom: 1px solid var(--hero-border-color);
 }
 
 @media screen and (max-width: 768px) {
   .hero {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-top: 2em;
+    padding-bottom: 2em;
   }
 }
 

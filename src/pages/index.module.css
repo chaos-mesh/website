@@ -71,7 +71,10 @@
 
 .whiteboard {
   margin-top: 3rem;
-  background: #fff;
+}
+
+[data-theme='dark'] .whiteboard {
+  background: #eee;
   border-radius: 8px;
 }
 
@@ -91,7 +94,7 @@
   }
 }
 
-@media (min-width: 769px) and (max-width: 1024px) {
+@media (min-width: 769px) and (max-width: 1023px) {
   .whiteboardCol {
     --ifm-col-width: calc(4 / 12 * 100%) !important;
 
