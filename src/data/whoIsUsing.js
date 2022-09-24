@@ -39,8 +39,11 @@ const whoisUsing = [
   },
   {
     name: 'Digital China',
-    img: 'img/logos/digitalchina.jpeg',
+    img: 'img/logos/digitalchina.png',
     href: 'http://www.digitalchina.com/',
+    style: {
+      width: '60%',
+    },
   },
   {
     name: 'Fuxi Lab',
@@ -77,7 +80,7 @@ const whoisUsing = [
   },
   {
     name: 'Percona',
-    img: 'img/logos/percona.jpeg',
+    img: 'img/logos/percona.png',
     href: 'https://www.percona.com/',
   },
   {
