@@ -4,10 +4,17 @@ import { usePluginData } from '@docusaurus/useGlobalData'
 import CodeBlock from '@theme/CodeBlock'
 import React from 'react'
 
+/**
+ *
+ * @param {*} siteConfig
+ * @param {object[]} versions
+ * @returns
+ */
 export const usePickVersion = (siteConfig, versions) => {
   const pathname = window.location.pathname
 
   let preferred = window.localStorage.getItem('docs-preferred-version-default')
+  // Get the last selected version from local storage on the homepage.
   if (pathname === siteConfig.baseUrl && preferred) {
     return preferred === 'current' ? 'latest' : preferred
   }
@@ -16,10 +23,10 @@ export const usePickVersion = (siteConfig, versions) => {
     return 'latest'
   }
 
-  const latestStableVersion = versions.filter((d) => d.isLast)[0].name
-  const activeVersion = versions.filter((d) => pathname.includes(d.name)).map((d) => d.name)[0]
+  const latestStableVersion = versions.find((d) => d.isLast)
+  const activeVersion = versions.find((d) => pathname.includes(d.name))
 
-  return activeVersion || latestStableVersion
+  return activeVersion ? activeVersion.name : latestStableVersion.name
 }
 
 function versionToGitHubRef(version) {
