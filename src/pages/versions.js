@@ -93,7 +93,7 @@ export default function Versions() {
                   <th scope="row">v{version}</th>
                   <td>
                     <Link
-                      to={`https://chaos-mesh-website-archived.netlify.app/docs${i === 0 ? '' : '/' + version.version}`}
+                      to={`https://chaos-mesh-website-archived.netlify.app/docs${i === 0 ? '' : '/' + version}`}
                       className="button button--outline button--primary"
                     >
                       Documentation
