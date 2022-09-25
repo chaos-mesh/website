@@ -20,7 +20,7 @@ module.exports = {
             'offline-installation',
             'persistence-dashboard',
             'uninstallation',
-            'supported-releases'
+            'supported-releases',
           ],
         },
         'manage-user-permissions',
@@ -44,7 +44,7 @@ module.exports = {
             'run-chaos-experiments-in-serial-or-parallel',
             'send-http-request-on-workflow',
             'check-workflow-status',
-            'status-check-in-workflow'
+            'status-check-in-workflow',
           ],
         },
       ],
@@ -95,15 +95,8 @@ module.exports = {
     {
       type: 'category',
       label: 'Authentication',
-      items: [
-        "gcp-authentication",
-      ]
+      items: ['gcp-authentication'],
     },
-    // {
-    //   type: 'category',
-    //   label: 'Use Cases',
-    //   items: ['multi-data-center-scenario'],
-    // },
     {
       type: 'category',
       label: 'Tools Integration',
@@ -123,46 +116,24 @@ module.exports = {
         'add-new-chaos-experiment-type',
         'extend-chaos-daemon-interface',
         'extend-chaosd',
-        // {
-        //   type: 'category',
-        //   label: 'Clients',
-        //   items: ['go-client', 'rust-client', 'java-client', 'python-client'],
-        // },
       ],
     },
-    // {
-    //   type: 'category',
-    //   label: 'Reference Guides',
-    //   items: ['architecture', 'chaos-engineering-principles', 'chaosctl-tool', 'glossary'],
-    // },
     {
       type: 'category',
       label: 'FAQs and Troubleshooting',
+      items: ['faqs', 'upgrade-to-2.0', 'upgrade-from-2.1-to-2.2'],
+    },
+    {
+      type: 'category',
+      label: 'Release',
       items: [
-        'faqs',
-        // 'troubleshooting-guide',
-        'upgrade-to-2.0',
-        'upgrade-from-2.1-to-2.2',
+        'release-cycle',
+        {
+          type: 'category',
+          label: 'Release Tracking',
+          items: ['release-2.4-tracking'],
+        },
       ],
     },
-    // {
-    //   type: 'category',
-    //   label: 'Release Notes',
-    //   items: ['release-2.0.0', 'release-1.0.0', 'release-0.0.9', 'release-0.0.8'],
-    // },
-    {
-        type: 'category',
-        label: 'Release',
-        items: [
-          'release-cycle',
-          {
-            type: 'category',
-            label: 'Release Tracking',
-            items: [
-              'release-2.4-tracking',
-            ]
-          }
-        ],
-    }
   ],
 }

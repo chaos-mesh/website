@@ -2,7 +2,8 @@
 <!-- markdownlint-disable-file MD041 -->
 
 <p align="center">
-  <img src="logo.svg" width="512" alt="Chaos Mesh Logo" />
+  <img src="logo.svg#gh-light-mode-only" width="512" alt="Chaos Mesh Logo" />
+  <img src="logo-white.svg#gh-dark-mode-only" width="512" alt="Chaos Mesh Logo" />
 </p>
 <h1 align="center">Website</h1>
 <p align="center">
@@ -48,9 +49,8 @@ The versions of the all docs split into two parts, one is the **latest (in `docs
 
 All translated docs won't be copied automatically. You have to handle them manually. For example, release `2.2.0`:
 
-1. Copy `i18n/zh/docusaurus-plugin-content-docs/current` to the same folder and rename it to `i18n/zh/docusaurus-plugin-content-docs/version-2.2.0`.
-2. Copy `i18n/zh/docusaurus-plugin-content-docs/current.json` to the same folder and rename it to `i18n/zh/docusaurus-plugin-content-docs/version-2.2.0.json`.
-3. The replace `Next` and `current` in `version-2.2.0.json`, e.g.:
+1. Copy `i18n/zh/docusaurus-plugin-content-docs/current.json` to the same folder and rename it to `i18n/zh/docusaurus-plugin-content-docs/version-2.2.0.json`.
+2. The replace `Next` and `current` in `version-2.2.0.json`, e.g.:
 
    ```json
    "version.label": {
