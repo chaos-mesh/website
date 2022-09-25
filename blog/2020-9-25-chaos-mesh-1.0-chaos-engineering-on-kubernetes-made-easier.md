@@ -4,11 +4,11 @@ title: 'Chaos Mesh 1.0: Chaos Engineering on Kubernetes Made Easier'
 author: Chaos Mesh Maintainers
 author_url: https://github.com/chaos-mesh
 author_image_url: https://avatars1.githubusercontent.com/u/59082378?v=4
-image: /img/chaos-mesh-1.0.png
+image: /img/blog/chaos-mesh-1.0.png
 tags: [Announcement, Chaos Mesh, Chaos Engineering]
 ---
 
-![Chaos-Mesh-1.0 - Chaos-Engineering-on-Kubernetes-Made-Easier](/img/chaos-mesh-1.0.png)
+![Chaos-Mesh-1.0 - Chaos-Engineering-on-Kubernetes-Made-Easier](/img/blog/chaos-mesh-1.0.png)
 
 Today, we are proud to announce the general availability of Chaos Mesh 1.0, following its entry into CNCF as a [sandbox project](https://pingcap.com/blog/announcing-chaos-mesh-as-a-cncf-sandbox-project) in July, 2020.
 
@@ -42,13 +42,13 @@ Chaos Mesh 1.0 supports the following fault types:
 
 The Chaos Dashboard component is a one-stop web interface for Chaos Mesh users to orchestrate chaos experiments. Previously, Chaos Dashboard was only available for testing TiDB. With Chaos Mesh 1.0, it is available to everyone. Chaos Dashboard greatly simplifies the complexity of chaos experiments. With only a few mouse clicks, you can define the scope of the chaos experiment, specify the type of chaos injection, define scheduling rules, and observe the results of the chaos experiment—all in the same web interface.
 
-![Chaos Dashboard](/img/chaos-dashboard.gif)
+![Chaos Dashboard](/img/blog/chaos-dashboard.gif)
 
 ## Grafana plug-in for enhanced observability
 
 To further improve the observability of chaos experiments, Chaos Mesh 1.0 includes a Grafana plug-in to allow you to directly display real-time chaos experiment information on your application monitoring panel. Currently, the chaos experiment information is displayed as annotations. This way, you can simultaneously observe the running status of the application and the current chaos experiment information.
 
-![Chaos status and application status on Grafana](/img/chaos-status.png)
+![Chaos status and application status on Grafana](/img/blog/chaos-status.png)
 
 ## Safe and controllable chaos
 

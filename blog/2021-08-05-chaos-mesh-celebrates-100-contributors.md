@@ -4,11 +4,11 @@ title: 'Chaos Mesh Celebrates 100th Contributor'
 author: Chaos Mesh Maintainers
 author_url: https://github.com/chaos-mesh/chaos-mesh/blob/master/MAINTAINERS.md
 author_image_url: https://avatars1.githubusercontent.com/u/59082378?v=4
-image: /img/chaos-mesh-celebrates-100-contributors.png
+image: /img/blog/chaos-mesh-celebrates-100-contributors.png
 tags: [Chaos Mesh, Chaos Engineering, community]
 ---
 
-![Chaos Mesh Celebrates 100th Contributor](/img/chaos-mesh-celebrates-100-contributors.png)
+![Chaos Mesh Celebrates 100th Contributor](/img/blog/chaos-mesh-celebrates-100-contributors.png)
 
 The [Chaos Mesh project](https://github.com/chaos-mesh/chaos-mesh) just hit two major milestones: the community recently welcomed our [100th contributor](https://github.com/chaos-mesh/chaos-mesh/graphs/contributors) to the chaos-mesh repo and 1,000 followers on [Twitter](https://twitter.com/chaos_mesh)!
 
@@ -18,7 +18,7 @@ Chaos Mesh is a Chaos Engineering platform that orchestrates chaos experiments o
 
 So far, Chaos Mesh has brought out 35 releases, received 1,500+ commits from 100+ contributors, won over 3.8k+ stargazers and 420+ forks. All these achievements would not have been possible without the wonderful community.
 
-![Chaos Mesh contributors](/img/chaos-mesh-all-contributors.jpeg)
+![Chaos Mesh contributors](/img/blog/chaos-mesh-all-contributors.jpeg)
 
 <p className="caption-center">Chaos Mesh contributors (as of 2021.08.02)</p>
 

@@ -5,11 +5,11 @@ author: Shuyang Wu
 author_title: Chaos Mesh Committer
 author_url: https://github.com/Yiyiyimu
 author_image_url: https://avatars.githubusercontent.com/u/34589752?v=4
-image: /img/chaos-mesh-apisix.jpeg
+image: /img/blog/chaos-mesh-apisix.jpeg
 tags: [Chaos Mesh, Chaos Engineering]
 ---
 
-![Chaos Mesh helps Apache APISIX improve system stability](/img/chaos-mesh-apisix.jpeg)
+![Chaos Mesh helps Apache APISIX improve system stability](/img/blog/chaos-mesh-apisix.jpeg)
 
 [Apache APISIX](https://github.com/apache/apisix) is a cloud-native, high-performance, scaling microservices API gateway. It is one of the Apache Software Foundation's top-level projects and serves hundreds of companies around the world, processing their mission-critical traffic, including finance, the Internet, manufacturing, retail, and operators. Our customers include NASA, the European Union's digital factory, China Mobile, and Tencent.
 
@@ -17,7 +17,7 @@ tags: [Chaos Mesh, Chaos Engineering]
 
 As our community grows, Apache APISIX's features more frequently interact with external components, making our system more complex and increasing the possibility of errors. To identify potential system failures and build confidence in the production environment, we introduced the concept of Chaos Engineering.
 
-![Apache APISIX architecture](/img/apache-apisix-architecture.jpg)
+![Apache APISIX architecture](/img/blog/apache-apisix-architecture.jpg)
 
 <p className="caption-center"> Apache APISIX architecture </p>
 
@@ -56,7 +56,7 @@ We deployed a Chaos Engineering experiment using the following steps:
 
 3. We used network chaos to add a five second network latency and then retested. This time, `set route` failed, `get route` succeeded, etcd could be connected to, and RPS had no significant change compared to the previous experiment. The experiment met our expectations.
 
-![High network latency occurs between etcd and Apache APISIX](/img/high-network-latency-between-etcd-and-apache-apisix.jpg)
+![High network latency occurs between etcd and Apache APISIX](/img/blog/high-network-latency-between-etcd-and-apache-apisix.jpg)
 
 <p className="caption-center"> High network latency occurs between etcd and Apache APISIX </p>
 
@@ -70,7 +70,7 @@ Our troubleshooting revealed that the etcd Lua API used by Apache APISIX selecte
 
 After we fixed this problem, we added a health check to the etcd Lua API to ensure that a large number of requests would not be sent to the disconnected etcd node. To avoid flooding the log with errors, we added a fallback mechanism when the etcd cluster was completely disconnected.
 
-![Error Reported from etcd Node Interaction](/img/error-reported-from-etcd-node-interaction.jpg)
+![Error Reported from etcd Node Interaction](/img/blog/error-reported-from-etcd-node-interaction.jpg)
 
 <p className="caption-center"> An error is reported from one etcd node's interaction with the Apache APISIX admin API </p>
 

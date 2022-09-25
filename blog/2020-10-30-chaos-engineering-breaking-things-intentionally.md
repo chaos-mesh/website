@@ -4,11 +4,11 @@ title: Chaos Engineering - Breaking things Intentionally
 author: Manish Dangi
 author_url: https://www.linkedin.com/in/manishdangi/
 author_image_url: https://avatars1.githubusercontent.com/u/43807816?s=400
-image: /img/chaos-engineering2.png
+image: /img/blog/chaos-engineering2.png
 tags: [Chaos Engineering, Chaos Mesh, Open Source]
 ---
 
-![Chaos-Engineering-Breaking-things-Intentionally](/img/chaos-engineering2.png)
+![Chaos-Engineering-Breaking-things-Intentionally](/img/blog/chaos-engineering2.png)
 
 “Necessity is the mother of invention”; similarly, Netflix is not only a platform for online media streaming. Netflix gave birth to Chaos engineering because of their necessity.
 
@@ -36,8 +36,7 @@ They are probably right, but over the period, Chaos engineering has evolved so m
 
 ## Chaos-Mesh
 
-To test the resiliency and reliability of [TiDB](https://pingcap.com/products/tidb), engineers at [PingCAP](https://pingcap.com/) came up with a fantastic tool for Chaos testing called [Chaos Mesh](https://chaos-mesh.org/), a cloud-native Chaos Engineering platform that orchestrates chaos on Kubernetes environments.
-Chaos Mesh takes into account the possible faults of a distributed system, covering the pod, the network, system I/O, and the kernel.
+To test the resiliency and reliability of [TiDB](https://pingcap.com/products/tidb), engineers at [PingCAP](https://pingcap.com/) came up with a fantastic tool for Chaos testing called [Chaos Mesh](https://chaos-mesh.org/), a cloud-native Chaos Engineering platform that orchestrates chaos on Kubernetes environments. Chaos Mesh takes into account the possible faults of a distributed system, covering the pod, the network, system I/O, and the kernel.
 
 Chaos Mesh provides many fault injection methods:
 

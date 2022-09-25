@@ -5,11 +5,11 @@ author: Yinghao Wang
 author_title: Contributor of Chaos Mesh
 author_url: https://github.com/AsterNighT
 author_image_url: https://avatars.githubusercontent.com/u/22937027?v=4
-image: /img/how-to-efficiently-stress-test-pod-memory-banner.jpg
+image: /img/blog/how-to-efficiently-stress-test-pod-memory-banner.jpg
 tags: [Chaos Mesh, Chaos Engineering, StressChaos, Stress Testing]
 ---
 
-![banner](/img/how-to-efficiently-stress-test-pod-memory-banner.jpg)
+![banner](/img/blog/how-to-efficiently-stress-test-pod-memory-banner.jpg)
 
 [Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh) includes the StressChaos tool, which allows you to inject CPU and memory stress into your Pod. This tool can be very useful when you test or benchmark a CPU-sensitive or memory-sensitive program and want to know its behavior under pressure.
 

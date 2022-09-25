@@ -5,11 +5,11 @@ author: Chang Yu, Xiang Wang
 author_title: Contributor of Chaos Mesh
 author_url: https://github.com/chaos-mesh/chaos-mesh/blob/master/MAINTAINERS.md
 author_image_url: https://avatars1.githubusercontent.com/u/59082378?v=4
-image: /img/chaos-engineering-tools-as-a-service.jpeg
+image: /img/blog/chaos-engineering-tools-as-a-service.jpeg
 tags: [Chaos Mesh, Chaos Engineering]
 ---
 
-![Chaos engineering tools](/img/chaos-engineering-tools-as-a-service.jpeg)
+![Chaos engineering tools](/img/blog/chaos-engineering-tools-as-a-service.jpeg)
 
 [Chaos Mesh](https://chaos-mesh.org/) is a cloud-native Chaos Engineering platform that orchestrates chaos in Kubernetes environments. With Chaos Mesh, you can test your system's resilience and robustness on Kubernetes by injecting all types of faults into Pods, network, file system, and even the kernel.
 
@@ -46,7 +46,7 @@ Based on our understanding of CaaS, we refined the architecture of Chaos Mesh du
 
 The current Chaos Mesh architecture is suited for individual Kubernetes clusters. Chaos Dashboard, the web UI, is bound to a specified Kubernetes environment:
 
-![Chaos Mesh architecture](/img/chaos-mesh-remake-architecture.jpeg)
+![Chaos Mesh architecture](/img/blog/chaos-mesh-remake-architecture.jpeg)
 
 <p className="caption-center">The current Chaos Mesh architecture</p>
 
@@ -58,7 +58,7 @@ You can register Chaos Mesh (technically, the Kubernetes configuration) in Chaos
 
 chaosd is a toolkit for running chaos experiments on physical machines. Previously, it was only a command line tool and had limited features.
 
-![chaosd, a Chaos Engineering command line tool](/img/chaosd-chaos-engineering-command-line-tool.jpeg)
+![chaosd, a Chaos Engineering command line tool](/img/blog/chaosd-chaos-engineering-command-line-tool.jpeg)
 
 <p className="caption-center">Previously, chaosd was a command line tool</p>
 
@@ -70,7 +70,7 @@ Moreover, **chaosd can now schedule chaos experiments at specified time and mana
 
 With new Chaos Dashboard and chaosd, the optimized architecture of Chaos Mesh is as follows:
 
-![Chaos Mesh's optimized architecture](/img/chaos-mesh-optimized-architecture.jpeg)
+![Chaos Mesh's optimized architecture](/img/blog/chaos-mesh-optimized-architecture.jpeg)
 
 <p className="caption-center">Chaos Mesh's optimized architecture</p>
 
@@ -105,7 +105,7 @@ Because of the limited time at Hackathon, we didn't finish all our plans. Here a
 
 A closed loop of Chaos Engineering includes four steps: exploring chaos, discovering deficiencies in the system, analyzing root causes, and sending feedback for improvement.
 
-![A closed loop of Chaos Engineering](/img/closed-loop-of-chaos-engineering.jpeg)
+![A closed loop of Chaos Engineering](/img/blog/closed-loop-of-chaos-engineering.jpeg)
 
 <p className="caption-center">A closed loop of Chaos Engineering</p>
 

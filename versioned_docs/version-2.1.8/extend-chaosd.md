@@ -1,5 +1,0 @@
----
-title: Extend Chaosd
----
-
-## TODO

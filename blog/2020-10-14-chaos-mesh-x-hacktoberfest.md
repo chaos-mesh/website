@@ -4,11 +4,11 @@ title: Chaos Mesh X Hacktoberfest 2020 - An Invitation to Open Source
 author: Chaos Mesh Community
 author_url: https://github.com/chaos-mesh
 author_image_url: https://avatars1.githubusercontent.com/u/59082378?v=4
-image: /img/chaos-mesh-x-hacktoberfest.jpg
+image: /img/blog/chaos-mesh-x-hacktoberfest.jpg
 tags: [Chaos Mesh, Chaos Engineering, Open Source]
 ---
 
-![Chaos-Mesh-X-Hacktoberfest-An-Invitation-to-Open-Source](/img/chaos-mesh-x-hacktoberfest.jpg)
+![Chaos-Mesh-X-Hacktoberfest-An-Invitation-to-Open-Source](/img/blog/chaos-mesh-x-hacktoberfest.jpg)
 
 [Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh) is proud to be in [Hacktoberfest 2020](https://hacktoberfest.digitalocean.com/)!
 
@@ -16,7 +16,7 @@ Hosted by DigitalOcean, Intel and DEV, Hacktoberfest is an open source celebrati
 
 <!--truncate-->
 
-![Hacktoberfest T-shirt](/img/hacktoberfest-shirt.png)
+![Hacktoberfest T-shirt](/img/blog/hacktoberfest-shirt.png)
 
 ## Open source is the spirit
 
@@ -35,7 +35,7 @@ How can you participate? It could not be easier with the following steps:
 3. Start coding and submit your PRs. Again the PR does not need to be corresponding to the labeled issue.
 4. Our maintainers review your PRs. Once you successfully merged, or have gained approval for 4 or more of them, the PRs will be automatically counted on the Hacktoberfest end, and you will be eligible to claim your SWAG.
 
-   ![PR count](/img/PR-count.png)
+   ![PR count](/img/blog/PR-count.png)
 
 **Note:** If your PRs are merged or approved but you haven’t seen the number reflected on Hacktoberfest, comment under your PR.
 

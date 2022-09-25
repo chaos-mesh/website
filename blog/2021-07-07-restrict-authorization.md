@@ -5,11 +5,11 @@ author: Anurag Paliwal
 author_title: Contributor of Chaos Mesh
 author_url: https://github.com/anuragpaliwal80
 author_image_url: https://avatars.githubusercontent.com/u/3283882?v=4
-image: /img/chaos-engineering-tools-as-a-service.jpeg
+image: /img/blog/chaos-engineering-tools-as-a-service.jpeg
 tags: [Chaos Mesh, Chaos Engineering]
 ---
 
-![Chaos engineering tools](/img/chaos-mesh-restrict-authorization.jpeg)
+![Chaos engineering tools](/img/blog/chaos-mesh-restrict-authorization.jpeg)
 
 A [multi-tenant](https://cloud.google.com/kubernetes-engine/docs/concepts/multitenancy-overview) cluster is shared by multiple users and/or workloads which are referred to as "tenants".The operators of multi-tenant clusters must isolate tenants from each other to minimize the damage that a compromised or malicious tenant can do to the cluster and other tenants.
 
@@ -19,8 +19,7 @@ A [multi-tenant](https://cloud.google.com/kubernetes-engine/docs/concepts/multit
 
 When you plan a multi-tenant architecture, you should consider the layers of resource isolation in Kubernetes: cluster, namespace, node, Pod, and container.
 
-Although Kubernetes cannot guarantee perfectly secure isolation between tenants, it does offer features that may be sufficient for specific use cases. You can separate each tenant and their Kubernetes resources into their own [namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/).
-Kubernetes supports multiple virtual clusters backed by the same physical cluster. These virtual clusters are called namespaces. [Namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) are intended for use in environments with many users spread across multiple teams, or projects.
+Although Kubernetes cannot guarantee perfectly secure isolation between tenants, it does offer features that may be sufficient for specific use cases. You can separate each tenant and their Kubernetes resources into their own [namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/). Kubernetes supports multiple virtual clusters backed by the same physical cluster. These virtual clusters are called namespaces. [Namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) are intended for use in environments with many users spread across multiple teams, or projects.
 
 ## Cluster having Chaos Mesh
 

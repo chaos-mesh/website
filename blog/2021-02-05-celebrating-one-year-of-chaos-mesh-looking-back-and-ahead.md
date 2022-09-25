@@ -5,11 +5,11 @@ author: Cwen Yin, Calvin Weng
 author_title: Maintainer of Chaos Mesh
 author_url: https://github.com/chaos-mesh/chaos-mesh/blob/master/MAINTAINERS.md
 author_image_url: https://avatars1.githubusercontent.com/u/59082378?v=4
-image: /img/celebrating-one-year-of-chaos-mesh-looking-back-and-ahead.jpg
+image: /img/blog/celebrating-one-year-of-chaos-mesh-looking-back-and-ahead.jpg
 tags: [Chaos Mesh, Chaos Engineering]
 ---
 
-![Celebrating One Year of Chaos Mesh: Looking Back and Ahead](/img/celebrating-one-year-of-chaos-mesh-looking-back-and-ahead.jpg)
+![Celebrating One Year of Chaos Mesh: Looking Back and Ahead](/img/blog/celebrating-one-year-of-chaos-mesh-looking-back-and-ahead.jpg)
 
 It’s been a year since Chaos Mesh was first open-sourced on GitHub. Chaos Mesh started out as a mere fault injection tool and is now heading towards the goal of building a chaos engineering ecology. Meanwhile, the Chaos Mesh community was also built from scratch and has helped [Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh) join CNCF as a Sandbox project.
 
@@ -25,7 +25,7 @@ In this past year, Chaos Mesh has grown at an impressive speed with the joint ef
 
 When first open-sourced, Chaos Mesh supported only three fault types: PodChaos, NetworkChaos, and IOChaos. Within only a year, Chaos Mesh can perform all around fault injections into the network, system clock, JVM applications, filesystems, operating systems, and so on.
 
-![Chaos Tests](/img/chaos-tests.png)
+![Chaos Tests](/img/blog/chaos-tests.png)
 
 After continuous optimization, Chaos Mesh now provides a flexible scheduling mechanism, which enables users to better design their own chaos experiments. This laid the foundation for chaos orchestration.
 
@@ -37,7 +37,7 @@ To better support Kubernetes native components and node-level failures, we devel
 
 Ease of use has been one of the guiding principles of Chaos Mesh development since day one. You can deploy Chaos Mesh with a single command line. The V1.0 release brought the long-awaited Chaos Dashboard, a one-stop web interface for users to orchestrate chaos experiments. You can define the scope of the chaos experiment, specify the type of chaos injection, define scheduling rules, and observe the results of the chaos experiment—all in the same web interface with only a few clicks.
 
-![Chaos Dashboard](/img/chaos-dashboard1.png)
+![Chaos Dashboard](/img/blog/chaos-dashboard1.png)
 
 Prior to V1.0, many users reported being blocked by various configuration problems when injecting IOChaos faults. After intense investigations and discussions, we gave up the original SideCar implementation. Instead, we used chaos-daemon to dynamically invade the target Pod, which significantly simplifies the logic. This optimization has made dynamic I/O fault injection possible with Chaos Mesh, and users can focus solely on their experiments without having to worry about additional configurations.
 
@@ -63,7 +63,7 @@ To enable users to run chaos experiments even during the development phase, we d
 
 [TiPocket](https://github.com/pingcap/tipocket) is an automated test platform that integrates Chaos Mesh and Argo, a workflow engine designed for Kubernetes. TiPocket is designed to be a fully automated chaos engineering testing loop for TiDB, a distributed database. There are a number of steps when we conduct chaos experiments, including deploying applications, running workloads, injecting exceptions, and business checks. To fully automate these steps, Argo was integrated into TiPocket. Chaos Mesh provides rich fault injection, while Argo provides flexible orchestration and scheduling.
 
-![TiPocket](/img/tipocket.png)
+![TiPocket](/img/blog/tipocket.png)
 
 ## The community: built from the ground up
 

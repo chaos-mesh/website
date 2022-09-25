@@ -5,11 +5,11 @@ author: Keao Yang
 author_title: Maintainer of Chaos Mesh
 author_url: https://github.com/YangKeao
 author_image_url: https://avatars2.githubusercontent.com/u/5244316
-image: /img/how-to-simulate-io-faults-at-runtime.jpg
+image: /img/blog/how-to-simulate-io-faults-at-runtime.jpg
 tags: [Chaos Mesh, Chaos Engineering, Fault Injection]
 ---
 
-![Chaos Engineering - How to simulate I/O faults at runtime](/img/how-to-simulate-io-faults-at-runtime.jpg)
+![Chaos Engineering - How to simulate I/O faults at runtime](/img/blog/how-to-simulate-io-faults-at-runtime.jpg)
 
 In a production environment, filesystem faults might occur due to various incidents such as disk failures and administrator errors. As a Chaos Engineering platform, Chaos Mesh has supported simulating I/O faults in a filesystem ever since its early versions. By simply adding an IOChaos CustomResourceDefinition (CRD), we can watch how the filesystem fails and returns errors.
 
@@ -34,8 +34,7 @@ But ChaosFS has several problems:
 
 Before Chaos Mesh 1.0, we used the [mutating admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/) to implement IOChaos. This technique addressed the three problems lists above and allowed us to:
 
-- Run scripts in the target container. This action changed the target directory of the ChaosFS's backend filesystem (for example, from `/mnt/a` to `/mnt/a_bak`) so that we could mount ChaosFS to the target path (`/mnt/a`).
-  Modify the command that starts the Pod. For example, we could modify the original command `/app` to `/waitfs.sh /app`.
+- Run scripts in the target container. This action changed the target directory of the ChaosFS's backend filesystem (for example, from `/mnt/a` to `/mnt/a_bak`) so that we could mount ChaosFS to the target path (`/mnt/a`). Modify the command that starts the Pod. For example, we could modify the original command `/app` to `/waitfs.sh /app`.
 - The `waitfs.sh` script kept checking whether the filesystem was successfully mounted. If it was mounted, `/app` was started.
 - Add a new container in the Pod to run ChaosFS. This container needed to share a volume with the target container (for example, `/mnt`), and then we mounted this volume to the target directory (for example, `/mnt/a`). We also properly enabled [mount propagation](https://kubernetes.io/docs/concepts/storage/volumes/#mount-propagation) for this volume's mount to penetrate the share to host and then penetrate slave to the target.
 
@@ -72,8 +71,7 @@ After the process is finished, the target container will open, read, and write t
 
 > **Note:**
 >
-> In the [x86_64 architecture](https://en.wikipedia.org/wiki/X86_assembly_language), the RIP register (also called an instruction pointer) always points to the memory address at which the next directive is run.
-> To load the program into the target process memory spaces:
+> In the [x86_64 architecture](https://en.wikipedia.org/wiki/X86_assembly_language), the RIP register (also called an instruction pointer) always points to the memory address at which the next directive is run. To load the program into the target process memory spaces:
 
 1. Use ptrace to call mmap in the target program to allocate the needed memory.
 2. Write the binary program to the newly allocated memory and make the RIP register point to it.
@@ -113,14 +111,13 @@ The combined functionality of ptrace and dup2 makes it possible for the tracer t
 
 1. Write a piece of assembly code according to the two sections above and the usage of syscall directives. [Here](https://github.com/chaos-mesh/toda/blob/1d73871d8ab72b8d1eace55f5222b01957193531/src/replacer/fd_replacer.rs#L133) is an example of the assembly code.
 2. Use an assembler to translate the code into a binary program. We use [dynasm-rs](https://github.com/CensoredUsername/dynasm-rs) as the assembler.
-3. Use ptrace to make the target process run this program.
-   When the program runs, the FD is replaced at runtime.
+3. Use ptrace to make the target process run this program. When the program runs, the FD is replaced at runtime.
 
 ### Overall fault injection process
 
 The following diagram illustrates the overall I/O fault injection process:
 
-![Fault injection process](/img/fault-injection-process.jpg)
+![Fault injection process](/img/blog/fault-injection-process.jpg)
 
 <div style={{ margin: '1rem 0', fontStyle: 'italic', textAlign: 'center' }}> Fault injection process </div>
 

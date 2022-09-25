@@ -5,11 +5,11 @@ author: Ben Ye, Chengwen Yin
 author_title: Maintainer of Chaos Mesh
 author_url: https://github.com/chaos-mesh/chaos-mesh/blob/master/MAINTAINERS.md
 author_image_url: https://avatars1.githubusercontent.com/u/59082378?v=4
-image: /img/automated_testing_framework.png
+image: /img/blog/automated_testing_framework.png
 tags: [Chaos Mesh, Chaos Engineering, Test Automation]
 ---
 
-![TiPocket - Automated Testing Framework](/img/automated_testing_framework.png)
+![TiPocket - Automated Testing Framework](/img/blog/automated_testing_framework.png)
 
 [Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh) is an open-source chaos engineering platform for Kubernetes. Although it provides rich capabilities to simulate abnormal system conditions, it still only solves a fraction of the Chaos Engineering puzzle. Besides fault injection, a full chaos engineering application consists of hypothesizing around defined steady states, running experiments in production, validating the system via test cases, and automating the testing.
 
@@ -126,19 +126,19 @@ Prometheus processes TiDB’s monitoring information. Prometheus and Loki have a
 
 Now, everything is ready. Here is a simplified diagram of TiPocket:
 
-![TiPocket Architecture](/img/tipocket-architecture.png)
+![TiPocket Architecture](/img/blog/tipocket-architecture.png)
 
 As you can see, the Argo workflow manages all chaos experiments and test cases. Generally, a complete test cycle involves the following steps:
 
 1. Argo creates a Cron Workflow, which defines the cluster to be tested, the faults to inject, the test case, and the duration of the task. If necessary, the Cron Workflow also lets you view case logs in real-time.
 
-![Argo Workflow](/img/argo-workflow.png)
+![Argo Workflow](/img/blog/argo-workflow.png)
 
 1. At a specified time, a separate TiPocket thread is started in the workflow, and the Cron Workflow is triggered. TiPocket sends TiDB-Operator the definition of the cluster to test. In turn, TiDB-Operator creates a target TiDB cluster. Meanwhile, Loki collects the related logs.
 2. Chaos Mesh injects faults in the cluster.
 3. Using the test cases mentioned above, the user validates the health of the system. Any test case failure leads to workflow failure in Argo, which triggers Alertmanager to send the result to the specified Slack channel. If the test cases complete normally, the cluster is cleared, and Argo stands by until the next test.
 
-![Alert in Slack](/img/alert_message.png)
+![Alert in Slack](/img/blog/alert_message.png)
 
 This is the complete TiPocket workflow. .
 
