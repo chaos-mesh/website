@@ -35,7 +35,16 @@ module.exports = {
         srcDark: 'img/logos/logo-mini-white.svg',
       },
       items: [
-        { type: 'docsVersionDropdown' },
+        {
+          type: 'docsVersionDropdown',
+          dropdownItemsAfter: [
+            {
+              type: 'html',
+              value: '<hr style="margin: .5em 0;" />',
+            },
+            { to: '/versions', label: 'All versions' },
+          ],
+        },
         { to: 'docs', label: 'Documentation' },
         {
           href: 'https://community.cncf.io/chaos-mesh-community/',

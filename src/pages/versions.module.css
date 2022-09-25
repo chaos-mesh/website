@@ -1,0 +1,15 @@
+@media screen and (max-width: 396px) {
+  .viewNextDoc {
+    margin-bottom: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 996px) {
+  .cardCol {
+    margin-bottom: 1rem;
+  }
+
+  .cardCol:last-child {
+    margin-bottom: 0;
+  }
+}
