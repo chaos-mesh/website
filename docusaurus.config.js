@@ -167,4 +167,5 @@ module.exports = {
       },
     ],
   ],
+  plugins: ['./docusaurus-tailwind-v3'],
 }

@@ -12,11 +12,11 @@ import styles from './index.module.css'
 
 function Feature({ imgUrl, title, description, reverse }) {
   return (
-    <div className={clsx('row', styles.feature, reverse && styles.featureReverse)}>
+    <div className={clsx('row', 'tw-mb-6 last:tw-mb-0 md:tw-mb-16', reverse && 'tw-flex-row-reverse')}>
       <div className="col col--6 text--center">
-        <img className={styles.featureImage} src={useBaseUrl(imgUrl)} alt={title} />
+        <img className="tw-h-48 tw-mb-6 md:tw-h-64 md:tw-mb-0" src={useBaseUrl(imgUrl)} alt={title} />
       </div>
-      <div className={clsx('col col--6', styles.featureContent)}>
+      <div className="col col--6 tw-flex tw-items-center">
         <div>
           <h3>{title}</h3>
           <div>{description}</div>
@@ -35,9 +35,9 @@ function Home() {
         <div className="hero">
           <div className="container text--center">
             <div className={styles.heroLogoWrapper}>
-              <img className={styles.heroLogo} src={useBaseUrl('img/logos/logo-mini.svg')} alt="Chaos Mesh" />
+              <img className="tw-w-4/5 tw-h-4/5" src={useBaseUrl('img/logos/logo-mini.svg')} alt="Chaos Mesh" />
             </div>
-            <h1 className={clsx('hero__title', styles.heroTitle)}>{siteConfig.title}</h1>
+            <h1 className="hero__title">{siteConfig.title}</h1>
             <p className="hero__subtitle">
               <Translate id="siteConfig.tagline">{siteConfig.tagline}</Translate>
             </p>
@@ -179,8 +179,12 @@ function Home() {
               <div className="row">
                 {whoIsUsing.map((w) => (
                   <div key={w.name} className={clsx('col col--3', styles.whiteboardCol)}>
-                    <a className={styles.logoWrapper} href={w.href} target="_blank">
-                      <img style={w.style} src={useBaseUrl(w.img)} alt={w.name} />
+                    <a
+                      className="tw-flex tw-justify-center tw-items-center tw-h-[100px] md:tw-h-[150px]"
+                      href={w.href}
+                      target="_blank"
+                    >
+                      <img className="tw-w-3/4" style={w.style} src={useBaseUrl(w.img)} alt={w.name} />
                     </a>
                   </div>
                 ))}
@@ -196,7 +200,7 @@ function Home() {
             <h2 className="hero__subtitle">
               Chaos Mesh is a <Link to="https://cncf.io/">Cloud Native Computing Foundation</Link> incubating project
             </h2>
-            <div className={clsx('cncf-logo', styles.cncfLogo)} />
+            <div className="cncf-logo tw-h-16 md:tw-h-24" />
           </div>
         </div>
       </main>
