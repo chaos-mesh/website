@@ -5,25 +5,16 @@
  * and scoped locally.
  */
 
-.heroLogoWrapper {
-  position: relative;
-  left: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 192px;
-  height: 192px;
-  margin-bottom: 1.5rem;
-  background: #fff;
-  border-radius: 48px;
-  transform: translateX(-50%);
-}
-
-@media screen and (max-width: 768px) {
-  .heroLogoWrapper {
-    width: 128px;
-    height: 128px;
-  }
+.heroTitle {
+  background: #10a6fa; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #f25c7c, #10a6fa); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #f25c7c,
+    #10a6fa
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .whiteboard {

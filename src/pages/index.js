@@ -1,3 +1,4 @@
+import BrowserOnly from '@docusaurus/BrowserOnly'
 import Link from '@docusaurus/Link'
 import Translate from '@docusaurus/Translate'
 import useBaseUrl from '@docusaurus/useBaseUrl'
@@ -6,6 +7,7 @@ import Layout from '@theme/Layout'
 import clsx from 'clsx'
 import React from 'react'
 
+import Mesh from '../components/Mesh'
 import PickVersion from '../components/PickVersion'
 import whoIsUsing from '../data/whoIsUsing'
 import styles from './index.module.css'
@@ -32,26 +34,30 @@ function Home() {
   return (
     <Layout title={siteConfig.tagline} description={siteConfig.tagline}>
       <main>
-        <div className="hero">
-          <div className="container text--center">
-            <div className={styles.heroLogoWrapper}>
-              <img className="tw-w-4/5 tw-h-4/5" src={useBaseUrl('img/logos/logo-mini.svg')} alt="Chaos Mesh" />
+        <div className="hero tw-relative tw-h-[768px]">
+          <BrowserOnly>{() => <Mesh />}</BrowserOnly>
+          <div className="container tw-z-10">
+            <div className="tw-flex tw-flex-col md:tw-flex-row md:tw-justify-around md:tw-items-center">
+              <div className="tw-backdrop-blur-sm">
+                <h1 className={clsx('hero__title tw-inline-block tw-text-left', styles.heroTitle)}>
+                  <span>Break</span>
+                  <br />
+                  Your System
+                  <br />
+                  <span>Constructively</span>
+                </h1>
+                <p className="hero__subtitle tw-text-xl tw-font-medium">
+                  <Translate id="siteConfig.tagline">{siteConfig.tagline}</Translate>
+                </p>
+                <Link to="/docs" className="button button--lg button--primary">
+                  Get Started
+                </Link>
+              </div>
+
+              <div>
+                <PickVersion>curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash</PickVersion>
+              </div>
             </div>
-            <h1 className="hero__title">{siteConfig.title}</h1>
-            <p className="hero__subtitle">
-              <Translate id="siteConfig.tagline">{siteConfig.tagline}</Translate>
-            </p>
-          </div>
-        </div>
-
-        <div className="hero-divider" />
-
-        <div className="hero">
-          <div className="container text--center">
-            <h2 className="hero__subtitle">
-              <Translate id="home.quickstart">Start By One Line</Translate>
-            </h2>
-            <PickVersion>curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash</PickVersion>
           </div>
         </div>
 

@@ -168,4 +168,5 @@ module.exports = {
     ],
   ],
   plugins: ['./docusaurus-tailwind-v3'],
+  scripts: ['https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.2/gsap.min.js'],
 }
