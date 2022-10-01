@@ -34,11 +34,11 @@ function Home() {
   return (
     <Layout title={siteConfig.tagline} description={siteConfig.tagline}>
       <main>
-        <div className="hero tw-relative tw-h-[768px]">
+        <div className="hero tw-relative tw-h-[768px] tw-pt-0 tw-overflow-hidden">
           <BrowserOnly>{() => <Mesh />}</BrowserOnly>
           <div className="container tw-z-10">
-            <div className="tw-flex tw-flex-col md:tw-flex-row md:tw-justify-around md:tw-items-center">
-              <div className="tw-backdrop-blur-sm">
+            <div className="tw-flex tw-flex-col md:tw-flex-row md:tw-justify-between md:tw-items-center">
+              <div className="tw-backdrop-blur-sm dark:tw-backdrop-filter-none">
                 <h1 className={clsx('hero__title tw-inline-block tw-text-left', styles.heroTitle)}>
                   <span>Break</span>
                   <br />
@@ -49,12 +49,13 @@ function Home() {
                 <p className="hero__subtitle tw-text-xl tw-font-medium">
                   <Translate id="siteConfig.tagline">{siteConfig.tagline}</Translate>
                 </p>
-                <Link to="/docs" className="button button--lg button--primary">
+                <Link to="/docs/production-installation-using-helm" className="button button--lg button--primary">
                   Get Started
                 </Link>
               </div>
 
-              <div>
+              <div className="tw-backdrop-blur-sm dark:tw-backdrop-filter-none">
+                <h2 className="hero__subtitle tw-text-xl tw-font-semibold">Try it out with the following command 👇</h2>
                 <PickVersion>curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash</PickVersion>
               </div>
             </div>

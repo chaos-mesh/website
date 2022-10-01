@@ -97,7 +97,7 @@ html[data-theme='dark'] .cncf-logo {
 @tailwind utilities;
 
 .navbar {
-  @apply tw-container tw-mx-auto tw-shadow-none;
+  @apply tw-shadow-none;
 }
 
 .navbar .navbar__item {
