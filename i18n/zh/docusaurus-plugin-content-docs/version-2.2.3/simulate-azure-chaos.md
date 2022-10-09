@@ -37,24 +37,13 @@ stringData:
 - **client_secret** 存储 Azure 应用注册的应用程序（客户端）的机密值。
 - **tenant_id** 存储 Azure 应用注册的目录（租户）ID。 `client_id` 及 `client_secret` 的获取请参考[机密客户端应用程序](https://docs.microsoft.com/zh-cn/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app)。
 
-:::note 注意请确保 Secret 文件中的应用注册已作为参与者或所有者添加到指定 VM 实例的访问控制（IAM）中。 :::
+:::note
 
-## 使用 Dashboard 方式创建实验
-
-:::note 注意
-
-在使用 Dashboard 方式创建实验之前，请确保：
-
-1. 已经安装了 Dashboard。
-2. 可以通过 `kubectl port-forward` 方式访问 Dashboard：
-
-   ```bash
-    kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333
-   ```
-
-   接着你可以在浏览器通过 [`http://localhost:2333`](http://localhost:2333) 访问 Dashboard。
+注意请确保 Secret 文件中的应用注册已作为参与者或所有者添加到指定 VM 实例的访问控制（IAM）中。
 
 :::
+
+## 使用 Dashboard 方式创建实验
 
 1. 单击实验页面中的**新的实验**按钮进行创建实验。
 

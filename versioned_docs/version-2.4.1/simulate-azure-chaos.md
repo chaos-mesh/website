@@ -37,24 +37,13 @@ stringData:
 - **client_secret** stores Application (client) secret value of Azure App registrations.
 - **tenant_id** stores Directory (tenant) ID of Azure App registrations. For `client_id` and `client_secret`, please refer to [Confidential client application](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app).
 
-:::note Make sure that App registrations in the Secret file has been added as a contributor or owner to the access control (IAM) of the VM instance. :::
-
-## Create experiments using Chaos Dashboard
-
 :::note
 
-Before you create an experiment using Chaos Dashboard, make sure the following requirements are met:
-
-1. Chaos Dashboard is installed.
-2. Chaos Dashboard can be accessed via `kubectl port-forward`:
-
-   ```bash
-    kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333
-   ```
-
-   Then you can access the dashboard via [`http://localhost:2333`](http://localhost:2333) in your browser.
+Make sure that App registrations in the Secret file has been added as a contributor or owner to the access control (IAM) of the VM instance.
 
 :::
+
+## Create experiments using Chaos Dashboard
 
 1. Open Chaos Dashboard, and click **NEW EXPERIMENT** on the page to create a new experiment:
 
