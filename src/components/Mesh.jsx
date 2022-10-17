@@ -15,7 +15,8 @@ function setLineColor() {
 }
 
 export default function Mesh() {
-  const ref = useRef()
+  const pathsGroup = useRef()
+  const dotsGroup = useRef()
 
   useEffect(() => {
     const pts = []
@@ -26,14 +27,17 @@ export default function Mesh() {
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
 
         gsap.set(path, { attr: { class: 'path path-' + i, stroke: setLineColor(), fill: 'none', 'stroke-width': 0.3 } })
-        ref.current.appendChild(path)
+        pathsGroup.current.appendChild(path)
 
         const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
         const position = { x: (row % 2 ? 0 : spacing) + dotNum * spacing * 2, y: row * spacing }
         pts.push(position)
 
-        gsap.set(dot, { attr: { class: 'dot dot-' + i, r: 1.5, fill: setDotColor(), stroke: 'none' }, ...position })
-        ref.current.appendChild(dot)
+        gsap.set(dot, {
+          attr: { class: 'dot dot-' + i, r: 1.5, fill: setDotColor(), stroke: 'none' },
+          ...position,
+        })
+        dotsGroup.current.appendChild(dot)
 
         i++
       }
@@ -44,8 +48,6 @@ export default function Mesh() {
       x: '+=6',
       y: '-=12',
       ease: 'sine.inOut',
-      repeat: -1,
-      yoyo: true,
       stagger: { grid: [rows, dotsPerRow], amount: 1, from: 'random', repeat: -1, yoyo: true },
       onUpdate: reDraw,
     })
@@ -111,15 +113,15 @@ export default function Mesh() {
 
   return (
     <svg
-      ref={ref}
       className="tw-absolute tw-bottom-0 2xl:tw-left-[-250px] tw-w-full tw-h-[110%]"
-      style={
-        {
-          // transform: 'perspective(2000px) rotate3d(1, -.5, 0, 45deg)',
-        }
-      }
+      style={{
+        transform: 'perspective(2000px) rotate3d(1, -.5, 0, 45deg)',
+      }}
       viewBox="0 0 500 250"
       xmlns="http://www.w3.org/2000/svg"
-    />
+    >
+      <g ref={pathsGroup} />
+      <g ref={dotsGroup} />
+    </svg>
   )
 }
