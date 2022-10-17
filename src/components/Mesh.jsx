@@ -113,9 +113,9 @@ export default function Mesh() {
 
   return (
     <svg
-      className="tw-absolute tw-bottom-0 2xl:tw-left-[-250px] tw-w-full tw-h-[110%]"
+      className="tw-absolute tw-top-[-10%] 2xl:tw-left-[-50px] tw-w-full tw-h-[125%]"
       style={{
-        transform: 'perspective(2000px) rotate3d(1, -.5, 0, 45deg)',
+        transform: 'rotate3d(3, -.6, -1, 30deg)',
       }}
       viewBox="0 0 500 250"
       xmlns="http://www.w3.org/2000/svg"
