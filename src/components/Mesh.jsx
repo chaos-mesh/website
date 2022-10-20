@@ -15,6 +15,7 @@ function setLineColor() {
 }
 
 export default function Mesh() {
+  const svgEl = useRef()
   const pathsGroup = useRef()
   const dotsGroup = useRef()
 
@@ -26,18 +27,26 @@ export default function Mesh() {
       for (let dotNum = 0; dotNum < dotsPerRow; dotNum++) {
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
 
-        gsap.set(path, { attr: { class: 'path path-' + i, stroke: setLineColor(), fill: 'none', 'stroke-width': 0.3 } })
+        gsap.set(path, { attr: { class: 'path path-' + i, fill: 'none', stroke: setLineColor(), 'stroke-width': 0.3 } })
         pathsGroup.current.appendChild(path)
 
+        const dotG = document.createElementNS('http://www.w3.org/2000/svg', 'g')
         const dot = document.createElementNS('http://www.w3.org/2000/svg', 'circle')
         const position = { x: (row % 2 ? 0 : spacing) + dotNum * spacing * 2, y: row * spacing }
         pts.push(position)
 
-        gsap.set(dot, {
-          attr: { class: 'dot dot-' + i, r: 1.5, fill: setDotColor(), stroke: 'none' },
+        gsap.set(dotG, {
+          attr: { class: 'dot dot-' + i },
           ...position,
         })
-        dotsGroup.current.appendChild(dot)
+
+        const color = setDotColor()
+        gsap.set(dot, {
+          attr: { r: 1, fill: color, stroke: color, 'stroke-opacity': 0.5, 'stroke-width': 1 },
+        })
+
+        dotG.appendChild(dot)
+        dotsGroup.current.appendChild(dotG)
 
         i++
       }
@@ -51,6 +60,9 @@ export default function Mesh() {
       stagger: { grid: [rows, dotsPerRow], amount: 1, from: 'random', repeat: -1, yoyo: true },
       onUpdate: reDraw,
     })
+
+    let scaling = false
+    let percent = 0
 
     function reDraw() {
       let row = 0
@@ -69,23 +81,28 @@ export default function Mesh() {
             })
           } else {
             if (row % 2 === 1) {
-              gsap.set('.path-' + i, {
-                attr: {
-                  d:
-                    'M' +
-                    pts[i + dotsPerRow].x +
-                    ',' +
-                    pts[i + dotsPerRow].y +
-                    ' L' +
-                    pts[i].x +
-                    ',' +
-                    pts[i].y +
-                    ' L' +
-                    pts[i + dotsPerRow + 1].x +
-                    ',' +
-                    pts[i + dotsPerRow + 1].y,
-                },
-              })
+              const start = `M ${pts[i + dotsPerRow].x} ${pts[i + dotsPerRow].y}`
+              let dot = ` L ${pts[i].x} ${pts[i].y}`
+              let end = ` L ${pts[i + dotsPerRow + 1].x} ${pts[i + dotsPerRow + 1].y}`
+              const d = start + dot + end
+
+              if (i === 64 && scaling) {
+                dot = ` C ${pts[i + dotsPerRow].x} ${pts[i + dotsPerRow].y - 30 * percent}, ${pts[i].x} ${
+                  pts[i].y + 15 * percent
+                }, ${pts[i].x} ${pts[i].y}`
+
+                gsap.set('.path-' + i, {
+                  attr: {
+                    d: start + dot + end,
+                  },
+                })
+              } else {
+                gsap.set('.path-' + i, {
+                  attr: {
+                    d,
+                  },
+                })
+              }
             } else {
               gsap.set('.path-' + i, {
                 attr: {
@@ -109,11 +126,42 @@ export default function Mesh() {
         }
       }
     }
+
+    // Add rotation animation.
+    svgEl.current.addEventListener('mousemove', (e) => {
+      const rotationX = Math.max((1 - e.clientY / window.innerHeight) * 45, 30)
+      const rotationY = Math.max((1 - e.clientX / window.innerWidth) * -18, -9)
+
+      gsap.to('.mesh', {
+        duration: 1.5,
+        rotationX,
+        rotationY,
+      })
+    })
+
+    svgEl.current.addEventListener('click', () => {
+      if (!scaling) {
+        scaling = true
+
+        const inject = gsap.to('.dot-64', {
+          duration: 1,
+          scale: 3,
+          ease: 'back.inOut(3)',
+          repeat: 5,
+          yoyo: true,
+          onUpdate: function () {
+            percent = inject.time()
+          },
+          onComplete: () => (scaling = false),
+        })
+      }
+    })
   }, [])
 
   return (
     <svg
-      className="tw-absolute tw-top-[-10%] 2xl:tw-left-[-50px] tw-w-full tw-h-[125%]"
+      ref={svgEl}
+      className="mesh tw-absolute tw-top-[-10%] 2xl:tw-left-[-50px] tw-w-full tw-h-[125%]"
       style={{
         transform: 'rotate3d(3, -.6, -1, 30deg)',
       }}
