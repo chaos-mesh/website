@@ -18,7 +18,8 @@ where `<minor>` is increased for each release, and `<patch>` counts the number o
 
 | Version | Currently Supported  | Release Date | End of Life  | Supported Kubernetes versions                  |
 | :------ | :------------------- | :----------- | :----------- | :--------------------------------------------- |
-| master  | No, development only | -            | -            | 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22 |
+| master  | No, development only | -            | -            | 1.20, 1.21, 1.22, 1.23, 1.24, 1.25             |
+| 2.4     | Yes                  | Sep 23, 2022 | -            | 1.20, 1.21, 1.22, 1.23, 1.24, 1.25             |
 | 2.3     | Yes                  | Jul 29, 2022 | -            | 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22 |
 | 2.2     | Yes                  | Apr 29, 2022 | -            | 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22 |
 | 2.1     | No                   | Nov 30, 2021 | Jul 29, 2022 | 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22 |
@@ -35,7 +36,7 @@ Note that dates in the future are uncertain and might change.
 
 :::note
 
-The support of kubernetes 1.22 is (will be) available with release 2.0.4.
+The support of kubernetes 1.22 is available with release 2.0.4.
 
 :::
 
@@ -70,6 +71,7 @@ We use e2e test for testing compatibility on each version of kubernetes cluster,
 
 | Version | Tested kubernetes Versions |
 | :------ | :------------------------- |
-| master  | 1.15, 1.20, 1.23           |
+| master  | 1.20, 1.23, 1.25           |
+| 2.4     | 1.20, 1.23, 1.25           |
 | 2.3     | 1.15, 1.20, 1.23           |
 | 2.2     | 1.15, 1.20, 1.23           |
