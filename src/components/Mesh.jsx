@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react'
+import Typewriter from 'typewriter-effect/dist/core'
 
 const rows = 10
 const dotsPerRow = 10
@@ -63,6 +64,11 @@ export default function Mesh() {
 
     let scaling = false
     let percent = 0
+    let curve1 = 15
+    let curve2 = 0
+    let curve2Range = [5, 10, 15]
+    let injectedDot = 64
+    let injectedDots = [64]
 
     function reDraw() {
       let row = 0
@@ -86,14 +92,18 @@ export default function Mesh() {
               let end = ` L ${pts[i + dotsPerRow + 1].x} ${pts[i + dotsPerRow + 1].y}`
               const d = start + dot + end
 
-              if (i === 64 && scaling) {
-                dot = ` C ${pts[i + dotsPerRow].x} ${pts[i + dotsPerRow].y - 30 * percent}, ${pts[i].x} ${
-                  pts[i].y + 15 * percent
+              if (i === injectedDot && scaling) {
+                dot = ` C ${pts[i + dotsPerRow].x} ${pts[i + dotsPerRow].y - curve1 * percent}, ${pts[i].x} ${
+                  pts[i].y + curve2 * percent
                 }, ${pts[i].x} ${pts[i].y}`
+                end = ` C ${pts[i].x + curve2 * percent} ${pts[i].y}, ${pts[i + dotsPerRow + 1].x - curve1 * percent} ${
+                  pts[i + dotsPerRow + 1].y
+                }, ${pts[i + dotsPerRow + 1].x} ${pts[i + dotsPerRow + 1].y}`
 
                 gsap.set('.path-' + i, {
                   attr: {
                     d: start + dot + end,
+                    'stroke-dasharray': `30 ${10 * percent}`,
                   },
                 })
               } else {
@@ -104,23 +114,47 @@ export default function Mesh() {
                 })
               }
             } else {
-              gsap.set('.path-' + i, {
-                attr: {
-                  d:
-                    'M' +
-                    pts[i + dotsPerRow - 1].x +
-                    ',' +
-                    pts[i + dotsPerRow - 1].y +
-                    ' L' +
-                    pts[i].x +
-                    ',' +
-                    pts[i].y +
-                    ' L' +
-                    pts[i + dotsPerRow].x +
-                    ',' +
-                    pts[i + dotsPerRow].y,
-                },
-              })
+              const start = `M ${pts[i + dotsPerRow - 1].x} ${pts[i + dotsPerRow - 1].y}`
+              let dot = ` L ${pts[i].x} ${pts[i].y}`
+              let end = ` L ${pts[i + dotsPerRow].x} ${pts[i + dotsPerRow].y}`
+              const d = start + dot + end
+
+              if (i === injectedDot - dotsPerRow && scaling) {
+                end = ` C ${pts[i].x + curve1 * percent} ${pts[i].y}, ${pts[i + dotsPerRow].x - curve2 * percent} ${
+                  pts[i + dotsPerRow].y
+                }, ${pts[i + dotsPerRow].x} ${pts[i + dotsPerRow].y}`
+
+                gsap.set('.path-' + i, {
+                  attr: {
+                    d: start + dot + end,
+                    'stroke-dasharray': `30 ${10 * percent}`,
+                  },
+                })
+              } else if (i === injectedDot - dotsPerRow + 1 && scaling) {
+                dot = ` C ${pts[i + dotsPerRow - 1].x} ${pts[i + dotsPerRow - 1].y - curve2 * percent}, ${pts[i].x} ${
+                  pts[i].y + curve1 * percent
+                }, ${pts[i].x} ${pts[i].y}`
+
+                gsap.set('.path-' + i, {
+                  attr: {
+                    d: start + dot + end,
+                    'stroke-dasharray': `30 ${10 * percent}`,
+                  },
+                })
+              } else if ((i === injectedDot + dotsPerRow || i === injectedDot + dotsPerRow + 1) && scaling) {
+                gsap.set('.path-' + i, {
+                  attr: {
+                    d,
+                    'stroke-dasharray': `30 ${10 * percent}`,
+                  },
+                })
+              } else {
+                gsap.set('.path-' + i, {
+                  attr: {
+                    d,
+                  },
+                })
+              }
             }
           }
         }
@@ -141,10 +175,52 @@ export default function Mesh() {
 
     svgEl.current.addEventListener('click', () => {
       if (!scaling) {
+        curve2 = curve2Range[Math.floor(Math.random() * curve2Range.length)]
+        injectedDot = injectedDots[Math.floor(Math.random() * injectedDots.length)]
+
         scaling = true
 
-        const inject = gsap.to('.dot-64', {
-          duration: 1,
+        const tagline = document.querySelector('.tagline').getBoundingClientRect()
+        gsap.fromTo(
+          '.mesh-text',
+          {
+            top: tagline.top + 150,
+            left: tagline.left + tagline.width - 50,
+          },
+          {
+            duration: 1,
+            opacity: 1,
+            top: tagline.top + 100,
+            left: tagline.left + tagline.width - 50,
+          }
+        )
+        new Typewriter('.mesh-text', { delay: 50 })
+          .typeString('Injecting network delay...')
+          .pauseFor(2000)
+          .deleteAll()
+          .typeString('⏳ Recovering...')
+          .pauseFor(2000)
+          .deleteAll()
+          .typeString('✅ Done!')
+          .pauseFor(1000)
+          .callFunction(() => {
+            gsap.fromTo(
+              '.mesh-text',
+              {
+                top: tagline.top + 100,
+                left: tagline.left + tagline.width - 50,
+              },
+              {
+                opacity: 0,
+                top: tagline.top + 150,
+                left: tagline.left + tagline.width - 50,
+              }
+            )
+          })
+          .start()
+
+        const inject = gsap.to(`.dot-${injectedDot}`, {
+          duration: 2,
           scale: 3,
           ease: 'back.inOut(3)',
           repeat: 5,
@@ -159,17 +235,22 @@ export default function Mesh() {
   }, [])
 
   return (
-    <svg
-      ref={svgEl}
-      className="mesh tw-absolute tw-top-[-10%] 2xl:tw-left-[-50px] tw-w-full tw-h-[125%]"
-      style={{
-        transform: 'rotate3d(3, -.6, -1, 30deg)',
-      }}
-      viewBox="0 0 500 250"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <g ref={pathsGroup} />
-      <g ref={dotsGroup} />
-    </svg>
+    <>
+      <svg
+        ref={svgEl}
+        className="mesh tw-absolute tw-top-[-10%] 2xl:tw-left-[-50px] tw-w-full tw-h-[125%]"
+        style={{
+          transform: 'rotate3d(3, -.6, -1, 30deg)',
+        }}
+        viewBox="0 0 500 250"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g ref={pathsGroup} />
+        <g ref={dotsGroup} />
+      </svg>
+      <div className="mesh-text tw-absolute tw-px-2 tw-py-1 tw-bg-black tw-text-white tw-rounded tw-opacity-0">
+        klajdlaksjdlaskd
+      </div>
+    </>
   )
 }

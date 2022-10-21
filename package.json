@@ -18,7 +18,8 @@
     "daisyui": "^2.31.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "semver": "^7.3.5"
+    "semver": "^7.3.5",
+    "typewriter-effect": "^2.19.0"
   },
   "browserslist": {
     "production": [

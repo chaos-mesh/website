@@ -46,7 +46,7 @@ function Home() {
                   <br />
                   <span>Constructively</span>
                 </h1>
-                <p className="hero__subtitle tw-text-xl tw-font-medium">
+                <p className="tagline hero__subtitle tw-text-xl tw-font-medium">
                   <Translate id="siteConfig.tagline">{siteConfig.tagline}</Translate>
                 </p>
                 <Link to="/docs/production-installation-using-helm" className="button button--lg button--primary">
