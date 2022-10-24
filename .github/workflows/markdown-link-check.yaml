@@ -14,6 +14,8 @@ on:
       - '**.md'
       - '.github/workflows/markdown-link-check.json'
 
+permissions: read-all
+
 jobs:
   markdown-link-check:
     runs-on: ubuntu-latest
