@@ -1,6 +1,12 @@
 name: Check Markdown links
 
 on:
+  push:
+    branches:
+      - master
+    paths:
+      - '**.md'
+      - '.github/workflows/markdown-link-check.json'
   pull_request:
     branches:
       - master
