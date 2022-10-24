@@ -77,7 +77,7 @@ apiVersion: chaos-mesh.org/v1alpha1
 kind: StressChaos
 metadata:
   name: mem-stress
-  namespace: chaos-testing
+  namespace: chaos-mesh
 spec:
   mode: all
   selector:

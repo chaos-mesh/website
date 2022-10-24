@@ -33,7 +33,7 @@ You can create experiments using either Chaos Dashboard or the YAML configuratio
    kind: StressChaos
    metadata:
      name: memory-stress-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      mode: one
      selector:

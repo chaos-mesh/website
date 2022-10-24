@@ -39,7 +39,7 @@ TimeChaos 只影响容器中 PID 命名空间的 PID `1` 进程，以及 PID `1`
    kind: TimeChaos
    metadata:
      name: time-shift-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      mode: one
      selector:

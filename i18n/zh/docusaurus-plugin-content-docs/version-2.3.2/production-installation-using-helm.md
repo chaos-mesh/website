@@ -68,10 +68,10 @@ helm search repo chaos-mesh -l
 
 ### 第 3 步：创建安装 Chaos Mesh 的命名空间
 
-推荐将 Chaos Mesh 安装在 `chaos-testing` 命名空间下，也可以指定任意命名空间安装 Chaos Mesh：
+推荐将 Chaos Mesh 安装在 `chaos-mesh` 命名空间下，也可以指定任意命名空间安装 Chaos Mesh：
 
 ```bash
-kubectl create ns chaos-testing
+kubectl create ns chaos-mesh
 ```
 
 ### 第 4 步：在不同环境下安装
@@ -88,24 +88,24 @@ kubectl create ns chaos-testing
 
 ```bash
 # 默认为 /var/run/docker.sock
-helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing
+helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh
 ```
 
 #### containerd
 
 ```bash
-helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock
+helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock
 ```
 
 #### K3s
 
 ```bash
-helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock
+helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock
 ```
 
 #### CRI-O
 
-<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set chaosDaemon.runtime=crio --set chaosDaemon.socketPath=/var/run/crio/crio.sock --version latest`}</PickHelmVersion>
+<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=crio --set chaosDaemon.socketPath=/var/run/crio/crio.sock --version latest`}</PickHelmVersion>
 
 :::note 注意
 
@@ -150,7 +150,7 @@ helm upgrade chaos-mesh chaos-mesh/chaos-mesh
 如要修改配置，请根据需要设置不同的值。例如，如下命令会升级并卸载 `chaos-dashboard`：
 
 ```bash
-helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set dashboard.create=false
+helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set dashboard.create=false
 ```
 
 :::note 注意
@@ -174,7 +174,7 @@ curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl replace -f -
 如要卸载 Chaos Mesh，请执行以下命令：
 
 ```bash
-helm uninstall chaos-mesh -n chaos-testing
+helm uninstall chaos-mesh -n chaos-mesh
 ```
 
 ## 常见问题解答
@@ -188,7 +188,7 @@ Chaos Mesh 仓库中的 `helm/chaos-mesh/values.yaml` 定义了最新版本（ma
 git clone https://github.com/chaos-mesh/chaos-mesh.git
 cd chaos-mesh
 
-helm install chaos-mesh helm/chaos-mesh -n=chaos-testing
+helm install chaos-mesh helm/chaos-mesh -n=chaos-mesh
 ```
 
 ### 如何关闭安全模式
@@ -196,7 +196,7 @@ helm install chaos-mesh helm/chaos-mesh -n=chaos-testing
 安全模式是默认启用的。如需关闭，请在安装或升级时指定 `dashboard.securityMode` 为 `false`：
 
 <PickHelmVersion>
-helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set dashboard.securityMode=false --version latest
+helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set dashboard.securityMode=false --version latest
 </PickHelmVersion>
 
 ### 如何持久化 Chaos Dashboard 数据

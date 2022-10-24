@@ -67,7 +67,7 @@ Before creating PhysicalMachineChaos experiments using Chaos Mesh, you need to d
    kind: PhysicalMachineChaos
    metadata:
      name: physical-network-delay
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: network-delay
      mode: one

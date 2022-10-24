@@ -23,7 +23,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: cloud-key-secret
-  namespace: chaos-testing
+  namespace: chaos-mesh
 type: Opaque
 stringData:
   aws_access_key_id: your-aws-access-key-id
@@ -45,7 +45,7 @@ stringData:
 2. 可以通过 `kubectl port-forward` 方式访问 Dashboard：
 
    ```bash
-    kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333
+    kubectl port-forward -n chaos-mesh svc/chaos-dashboard 2333:2333
    ```
 
    接着你可以在浏览器通过 [`http://localhost:2333`](http://localhost:2333)访问 Dashboard 。
@@ -73,7 +73,7 @@ stringData:
    kind: AWSChaos
    metadata:
      name: ec2-stop-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: ec2-stop
      secretName: 'cloud-key-secret'
@@ -101,7 +101,7 @@ stringData:
    kind: AWSChaos
    metadata:
      name: ec2-restart-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: ec2-restart
      secretName: 'cloud-key-secret'
@@ -128,7 +128,7 @@ stringData:
    kind: AWSChaos
    metadata:
      name: ec2-detach-volume-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: ec2-stop
      secretName: 'cloud-key-secret'

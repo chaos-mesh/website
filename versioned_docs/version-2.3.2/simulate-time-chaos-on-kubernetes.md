@@ -39,7 +39,7 @@ You can create experiments in Chaos Dashboard or using the YAML configuration fi
    kind: TimeChaos
    metadata:
      name: time-shift-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      mode: one
      selector:

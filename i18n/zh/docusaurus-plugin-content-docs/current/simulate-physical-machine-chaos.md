@@ -67,7 +67,7 @@ PhysicalMachineChaos 用于在物理机或虚拟机中模拟网络、磁盘、�
    kind: PhysicalMachineChaos
    metadata:
      name: physical-network-delay
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: network-delay
      mode: one

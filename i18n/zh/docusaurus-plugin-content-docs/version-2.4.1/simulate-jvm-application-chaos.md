@@ -41,7 +41,7 @@ Linux 系统内核必须为 4.1 及以上版本。
 
 ## 使用 YAML 方式创建实验
 
-下面将以指定返回值为例，展示 JVMChaos 的使用方法与效果。以下内容中涉及的 YAML 文件均可在 [examples/jvm](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples/jvm) 中找到，以下步骤默认的工作路径也是在 `examples/jvm` 中。 默认 Chaos Mesh 安装的命名空间为 `chaos-testing`。
+下面将以指定返回值为例，展示 JVMChaos 的使用方法与效果。以下内容中涉及的 YAML 文件均可在 [examples/jvm](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples/jvm) 中找到，以下步骤默认的工作路径也是在 `examples/jvm` 中。 默认 Chaos Mesh 安装的命名空间为 `chaos-mesh`。
 
 ### 第 1 步：创建被测应用
 

@@ -33,7 +33,7 @@ Chaos Mesh 提供的 StressChaos 实验类型可用于模拟容器内压力的�
    kind: StressChaos
    metadata:
      name: memory-stress-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      mode: one
      selector:

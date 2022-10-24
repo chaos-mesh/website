@@ -61,7 +61,7 @@ You can install the Data Source plugin locally in Grafana by following these ste
 2. Then use the `port-forward` command to make the API externally accessible:
 
    ```shell
-   kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333
+   kubectl port-forward -n chaos-mesh svc/chaos-dashboard 2333:2333
    ```
 
 3. Click **Save & Test** to test the connection. If it shows a successful notification, the set-up is complete.

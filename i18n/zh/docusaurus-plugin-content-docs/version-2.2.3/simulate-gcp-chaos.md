@@ -23,7 +23,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: cloud-key-secret
-  namespace: chaos-testing
+  namespace: chaos-mesh
 type: Opaque
 stringData:
   service_account: your-gcp-service-account-base64-encode
@@ -43,7 +43,7 @@ stringData:
 2. 可以通过 `kubectl port-forward` 方式访问 Dashboard：
 
    ```bash
-   kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333
+   kubectl port-forward -n chaos-mesh svc/chaos-dashboard 2333:2333
    ```
 
    接着你可以在浏览器通过[`http://localhost:2333`](http://localhost:2333)访问 Dashboard 。
@@ -77,7 +77,7 @@ stringData:
    kind: GCPChaos
    metadata:
      name: node-stop-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: node-stop
      secretName: 'cloud-key-secret'
@@ -106,7 +106,7 @@ stringData:
    kind: GCPChaos
    metadata:
      name: node-reset-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: node-reset
      secretName: 'cloud-key-secret'
@@ -135,7 +135,7 @@ stringData:
    kind: GCPChaos
    metadata:
      name: disk-loss-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: disk-loss
      secretName: 'cloud-key-secret'

@@ -210,7 +210,7 @@ To verify the experiment, perform the following steps.
 
 2. Update Chaos Mesh:
 
-   <PickHelmVersion className="language-bash">{`helm upgrade chaos-mesh helm/chaos-mesh --namespace=chaos-testing --version latest`}</PickHelmVersion>
+   <PickHelmVersion className="language-bash">{`helm upgrade chaos-mesh helm/chaos-mesh --namespace=chaos-mesh --version latest`}</PickHelmVersion>
 
 3. Deploy the target Pod for testing. Skip this step if you have already deployed this Pod:
 
@@ -244,7 +244,7 @@ To verify the experiment, perform the following steps.
    - Check the logs of Chaos Controller Manager:
 
    ```bash
-   kubectl logs chaos-controller-manager-{pod-post-fix} -n chaos-testing
+   kubectl logs chaos-controller-manager-{pod-post-fix} -n chaos-mesh
    ```
 
    Example output:
@@ -257,7 +257,7 @@ To verify the experiment, perform the following steps.
    - Check the logs of Chaos Daemon:
 
    ```bash
-   kubectl logs chaos-daemon-{pod-post-fix} -n chaos-testing
+   kubectl logs chaos-daemon-{pod-post-fix} -n chaos-mesh
    ```
 
    Example output:

@@ -5,6 +5,7 @@ title: 快速试用（测试推荐）
 import PickVersion from '@site/src/components/PickVersion'
 
 import VerifyInstallation from './common/verify-installation.md'
+
 import QuickRun from './common/quick-run.md'
 
 本篇文档描述如何在测试环境或本机环境快速试用 Chaos Mesh。
@@ -83,10 +84,10 @@ curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash
 curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --template | kubectl delete -f -
 </PickVersion>
 
-也可以通过删除 `chaos-testing` 命名空间直接卸载 Chaos Mesh：
+也可以通过删除 `chaos-mesh` 命名空间直接卸载 Chaos Mesh：
 
 ```sh
-kubectl delete ns chaos-testing
+kubectl delete ns chaos-mesh
 ```
 
 ## 常见问题解答

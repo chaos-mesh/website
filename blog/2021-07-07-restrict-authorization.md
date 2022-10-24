@@ -31,14 +31,14 @@ You enabled Chaos Mesh ([Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh) i
 
 <!--truncate-->
 
-Suppose one of the tenant users wants to perform pod kill operations in his/her namespace i.e. chaos-testing. To achieve the same, the user created the below Chaos Mesh YAML file:
+Suppose one of the tenant users wants to perform pod kill operations in his/her namespace i.e. chaos-mesh. To achieve the same, the user created the below Chaos Mesh YAML file:
 
 ```yml
 apiVersion: chaos-mesh.org/v1alpha1
 kind: PodChaos
 metadata:
   name: pod-kill
-  namespace: chaos-testing
+  namespace: chaos-mesh
 spec:
   action: pod-kill
   mode: one
@@ -51,7 +51,7 @@ spec:
     cron: '@every 1m'
 ```
 
-The user has required rights to namespace chaos-testing, but does not have rights on tidb-cluster-demo namespace. When the user applies the above YAML file using kubectl, it will create the pod-kill Chaos Mesh resource in chaos-testing namespace. As we can see in the selector section, the user has specified some other namespace (tidb-cluster-demo), which means the pods which will be selected for this chaos operation will be from tidb-cluster-demo namespace, and not from the one for which the user has access i.e. chaos-testing. This means that this user is able to impact the other namespace for which (s)he does not have the rights. **Problem!!!**
+The user has required rights to namespace chaos-mesh, but does not have rights on tidb-cluster-demo namespace. When the user applies the above YAML file using kubectl, it will create the pod-kill Chaos Mesh resource in chaos-mesh namespace. As we can see in the selector section, the user has specified some other namespace (tidb-cluster-demo), which means the pods which will be selected for this chaos operation will be from tidb-cluster-demo namespace, and not from the one for which the user has access i.e. chaos-mesh. This means that this user is able to impact the other namespace for which (s)he does not have the rights. **Problem!!!**
 
 <!--truncate-->
 

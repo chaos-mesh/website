@@ -68,10 +68,10 @@ After the above command is completed, you can start installing Chaos Mesh.
 
 ### Step 3: Create the namespace to install Chaos Mesh
 
-It is recommended to install Chaos Mesh under the `chaos-testing` namespace, or you can specify any namespace to install Chaos Mesh:
+It is recommended to install Chaos Mesh under the `chaos-mesh` namespace, or you can specify any namespace to install Chaos Mesh:
 
 ```bash
-kubectl create ns chaos-testing
+kubectl create ns chaos-mesh
 ```
 
 ### Step 4: Install Chaos Mesh in different environments
@@ -88,20 +88,20 @@ Because socket paths are listened to by the daemons of different running contain
 
 <!-- prettier-ignore -->
 <PickHelmVersion className="language-bash">{`\# Default to /var/run/docker.sock
-helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --version latest`}
+helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version latest`}
 </PickHelmVersion>
 
 #### Containerd
 
-<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --version latest`}</PickHelmVersion>
+<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --version latest`}</PickHelmVersion>
 
 #### K3s
 
-<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock --version latest`}</PickHelmVersion>
+<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock --version latest`}</PickHelmVersion>
 
 #### CRI-O
 
-<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --set chaosDaemon.runtime=crio --set chaosDaemon.socketPath=/var/run/crio/crio.sock --version latest`}</PickHelmVersion>
+<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=crio --set chaosDaemon.socketPath=/var/run/crio/crio.sock --version latest`}</PickHelmVersion>
 
 :::note
 
@@ -145,7 +145,7 @@ If you have upgraded Chaos Mesh in a non-Docker environment, you need to add the
 
 To modify the configuration, set different values according to your need. For example, execute the following command to upgrade and uninstall `chaos-dashboard`:
 
-<PickHelmVersion className="language-bash">{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --version latest --set dashboard.create=false`}</PickHelmVersion>
+<PickHelmVersion className="language-bash">{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version latest --set dashboard.create=false`}</PickHelmVersion>
 
 :::note
 
@@ -168,7 +168,7 @@ curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl create -f -
 To uninstall Chaos Mesh, execute the following command:
 
 ```bash
-helm uninstall chaos-mesh -n chaos-testing
+helm uninstall chaos-mesh -n chaos-mesh
 ```
 
 ## FAQs
@@ -182,7 +182,7 @@ The `helm/chaos-mesh/values.yaml` file defines the image of the latest version (
 git clone https://github.com/chaos-mesh/chaos-mesh.git
 cd chaos-mesh
 
-helm install chaos-mesh helm/chaos-mesh -n=chaos-testing
+helm install chaos-mesh helm/chaos-mesh -n=chaos-mesh
 ```
 
 ### How can I disable the safe mode?
@@ -190,7 +190,7 @@ helm install chaos-mesh helm/chaos-mesh -n=chaos-testing
 Safe mode allows you to disable authentication to the Chaos Mesh dashboard, and should only be used for non-production deployments. Safe mode is **enabled** by default. To disable the safe mode, specify `dashboard.securityMode` as `false` during the installation or upgrade:
 
 <PickHelmVersion>
-helm install chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --set dashboard.securityMode=false --version latest
+helm install chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-mesh --set dashboard.securityMode=false --version latest
 </PickHelmVersion>
 
 ### How can I persist Chaos Dashboard data
