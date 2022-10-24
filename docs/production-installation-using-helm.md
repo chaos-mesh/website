@@ -68,10 +68,10 @@ After the above command is completed, you can start installing Chaos Mesh.
 
 ### Step 3: Create the namespace to install Chaos Mesh
 
-It is recommended to install Chaos Mesh under the `chaos-testing` namespace, or you can specify any namespace to install Chaos Mesh:
+It is recommended to install Chaos Mesh under the `chaos-mesh` namespace, or you can specify any namespace to install Chaos Mesh:
 
 ```bash
-kubectl create ns chaos-testing
+kubectl create ns chaos-mesh
 ```
 
 ### Step 4: Install Chaos Mesh in different environments

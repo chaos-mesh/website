@@ -245,7 +245,7 @@ In this step, you need to deploy Chaos Mesh with your latest changes to test Hel
    helm install chaos-mesh helm/chaos-mesh --namespace=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --set images.registry=localhost:5000 --version latest
    ```
 
-   To verify the deployment is successful, you can check all Pods in the `chaos-testing` namespace:
+   To verify the deployment is successful, you can check all Pods in the `chaos-mesh` namespace:
 
    ```bash
    kubectl get pods --namespace chaos-mesh -l app.kubernetes.io/instance=chaos-mesh
@@ -300,7 +300,7 @@ In this step, you need to deploy Chaos Mesh with your latest changes to test Hel
    Example output:
 
    ```log
-   2021-06-24T06:42:26.858Z        INFO    records apply chaos     {"id": "chaos-testing/chaos-daemon-vsmc5"}
+   2021-06-24T06:42:26.858Z        INFO    records apply chaos     {"id": "chaos-mesh/chaos-daemon-vsmc5"}
    2021-06-24T06:42:26.858Z        INFO    helloworldchaos Hello World!
    ```
 

@@ -84,10 +84,10 @@ curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash
 curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --template | kubectl delete -f -
 </PickVersion>
 
-也可以通过删除 `chaos-testing` 命名空间直接卸载 Chaos Mesh：
+也可以通过删除 `chaos-mesh` 命名空间直接卸载 Chaos Mesh：
 
 ```sh
-kubectl delete ns chaos-testing
+kubectl delete ns chaos-mesh
 ```
 
 ## 常见问题解答

@@ -245,7 +245,7 @@ title: 新增混沌实验类型
    helm install chaos-mesh helm/chaos-mesh --namespace=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --set images.registry=localhost:5000 --version latest
    ```
 
-   验证一下安装是否成功，查询 `chaos-testing` 命名空间的 Pod:
+   验证一下安装是否成功，查询 `chaos-mesh` 命名空间的 Pod:
 
    ```bash
    kubectl get pods --namespace chaos-mesh -l app.kubernetes.io/instance=chaos-mesh
@@ -300,7 +300,7 @@ title: 新增混沌实验类型
    显示日志如下：
 
    ```log
-   2021-06-24T06:42:26.858Z        INFO    records apply chaos     {"id": "chaos-testing/chaos-daemon-vsmc5"}
+   2021-06-24T06:42:26.858Z        INFO    records apply chaos     {"id": "chaos-mesh/chaos-daemon-vsmc5"}
    2021-06-24T06:42:26.858Z        INFO    helloworldchaos Hello World!
    ```
 

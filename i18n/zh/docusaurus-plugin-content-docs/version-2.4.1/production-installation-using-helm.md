@@ -68,10 +68,10 @@ helm search repo chaos-mesh -l
 
 ### 第 3 步：创建安装 Chaos Mesh 的命名空间
 
-推荐将 Chaos Mesh 安装在 `chaos-testing` 命名空间下，也可以指定任意命名空间安装 Chaos Mesh：
+推荐将 Chaos Mesh 安装在 `chaos-mesh` 命名空间下，也可以指定任意命名空间安装 Chaos Mesh：
 
 ```bash
-kubectl create ns chaos-testing
+kubectl create ns chaos-mesh
 ```
 
 ### 第 4 步：在不同环境下安装

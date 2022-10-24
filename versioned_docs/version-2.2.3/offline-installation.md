@@ -136,7 +136,7 @@ When installing Chaos Mesh on Kubernetes v1.15(or an earlier version), you need 
 Create the namespace:
 
 ```bash
-kubectl create ns chaos-testing
+kubectl create ns chaos-mesh
 ```
 
 Execute the installation command. When executing the installation command, you need to specify the namespace of Chaos Mesh and the image value of each component:
