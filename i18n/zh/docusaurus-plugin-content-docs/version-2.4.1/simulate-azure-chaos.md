@@ -23,7 +23,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: cloud-key-secret
-  namespace: chaos-testing
+  namespace: chaos-mesh
 type: Opaque
 stringData:
   client_id: your-client-id
@@ -44,7 +44,6 @@ stringData:
 :::
 
 ## 使用 Dashboard 方式创建实验
-
 
 1. 单击实验页面中的**新的实验**按钮进行创建实验。
 
@@ -67,7 +66,7 @@ stringData:
    kind: AzureChaos
    metadata:
      name: vm-stop-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: vm-stop
      secretName: 'cloud-key-secret'
@@ -95,7 +94,7 @@ stringData:
    kind: AzureChaos
    metadata:
      name: vm-restart-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: vm-restart
      secretName: 'cloud-key-secret'
@@ -122,7 +121,7 @@ stringData:
    kind: AzureChaos
    metadata:
      name: disk-detach-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: disk-detach
      secretName: 'cloud-key-secret'

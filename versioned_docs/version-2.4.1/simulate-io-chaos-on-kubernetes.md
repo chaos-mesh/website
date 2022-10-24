@@ -48,7 +48,7 @@ For specific features, refer to [Create experiments using the YAML files](#creat
    kind: IOChaos
    metadata:
      name: io-latency-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: latency
      mode: one
@@ -79,7 +79,7 @@ For specific features, refer to [Create experiments using the YAML files](#creat
    kind: IOChaos
    metadata:
      name: io-fault-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: fault
      mode: one
@@ -110,7 +110,7 @@ For specific features, refer to [Create experiments using the YAML files](#creat
    kind: IOChaos
    metadata:
      name: io-attr-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: attrOverride
      mode: one
@@ -142,7 +142,7 @@ For specific features, refer to [Create experiments using the YAML files](#creat
    ind: IOChaos
    metadata:
      name: io-mistake-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    special:
      action: mistake
      mode: one

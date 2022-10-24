@@ -285,7 +285,7 @@ After you update the template, try running HelloWorldChaos.
    kind: HelloWorldChaos
    metadata:
      name: hello-world
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      selector:
        namespaces:

@@ -27,7 +27,7 @@ apiVersion: chaos-mesh.org/v1alpha1
 kind: KernelChaos
 metadata:
   name: kernel-chaos-example
-  namespace: chaos-testing
+  namespace: chaos-mesh
 spec:
   mode: one
   selector:

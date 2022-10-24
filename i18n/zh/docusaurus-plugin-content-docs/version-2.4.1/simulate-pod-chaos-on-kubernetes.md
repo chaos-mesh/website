@@ -61,7 +61,7 @@ Chaos Mesh 可以向任一 Pod 注入 PodChaos，无论其 Pod 是否绑定至 D
    kind: PodChaos
    metadata:
      name: pod-failure-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: pod-failure
      mode: one
@@ -88,7 +88,7 @@ Chaos Mesh 可以向任一 Pod 注入 PodChaos，无论其 Pod 是否绑定至 D
    kind: PodChaos
    metadata:
      name: pod-kill-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: pod-kill
      mode: one
@@ -116,7 +116,7 @@ Chaos Mesh 可以向任一 Pod 注入 PodChaos，无论其 Pod 是否绑定至 D
    kind: PodChaos
    metadata:
      name: container-kill-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: container-kill
      mode: one

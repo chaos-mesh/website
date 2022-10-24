@@ -61,7 +61,7 @@ kubectl get pods -n chaos-mesh -l app.kubernetes.io/component=chaos-dns-server
    kind: DNSChaos
    metadata:
      name: dns-chaos-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: random
      mode: all

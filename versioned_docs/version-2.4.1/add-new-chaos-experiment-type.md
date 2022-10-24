@@ -272,7 +272,7 @@ In this step, you need to deploy Chaos Mesh with your latest changes to test Hel
    kind: HelloWorldChaos
    metadata:
      name: hello-world
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      selector:
        namespaces:

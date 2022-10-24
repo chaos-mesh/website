@@ -55,7 +55,7 @@ Before create experiments using Chaos Dashboard, ensure the following:
    kind: PodChaos
    metadata:
      name: pod-failure-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: pod-failure
      mode: one
@@ -82,7 +82,7 @@ Before create experiments using Chaos Dashboard, ensure the following:
    kind: PodChaos
    metadata:
      name: pod-kill-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: pod-kill
      mode: one
@@ -110,7 +110,7 @@ Before create experiments using Chaos Dashboard, ensure the following:
    kind: PodChaos
    metadata:
      name: container-kill-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: container-kill
      mode: one

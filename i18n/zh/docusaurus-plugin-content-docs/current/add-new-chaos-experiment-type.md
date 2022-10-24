@@ -272,7 +272,7 @@ title: 新增混沌实验类型
    kind: HelloWorldChaos
    metadata:
      name: hello-world
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      selector:
        namespaces:

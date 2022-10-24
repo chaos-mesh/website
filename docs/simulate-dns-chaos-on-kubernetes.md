@@ -61,7 +61,7 @@ Make sure that the Pod status is `Running`.
    kind: DNSChaos
    metadata:
      name: dns-chaos-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: random
      mode: all

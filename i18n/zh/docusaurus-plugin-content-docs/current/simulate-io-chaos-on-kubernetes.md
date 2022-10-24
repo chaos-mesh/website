@@ -52,7 +52,7 @@ IOChaos 是 Chaos Mesh 中的一种故障类型。通过创建 IOChaos 类型的
    kind: IOChaos
    metadata:
      name: io-latency-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: latency
      mode: one
@@ -83,7 +83,7 @@ IOChaos 是 Chaos Mesh 中的一种故障类型。通过创建 IOChaos 类型的
    kind: IOChaos
    metadata:
      name: io-fault-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: fault
      mode: one
@@ -114,7 +114,7 @@ IOChaos 是 Chaos Mesh 中的一种故障类型。通过创建 IOChaos 类型的
    kind: IOChaos
    metadata:
      name: io-attr-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: attrOverride
      mode: one
@@ -146,7 +146,7 @@ IOChaos 是 Chaos Mesh 中的一种故障类型。通过创建 IOChaos 类型的
    kind: IOChaos
    metadata:
      name: io-mistake-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: mistake
      mode: one

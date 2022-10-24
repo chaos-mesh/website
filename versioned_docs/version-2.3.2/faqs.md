@@ -46,7 +46,7 @@ kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: cluster-manager-binding
-  namespace: chaos-testing
+  namespace: chaos-mesh
 subjects:
   # Google Cloud user account
   - kind: User

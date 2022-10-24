@@ -23,7 +23,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: cloud-key-secret
-  namespace: chaos-testing
+  namespace: chaos-mesh
 type: Opaque
 stringData:
   client_id: your-client-id
@@ -66,7 +66,7 @@ stringData:
    kind: AzureChaos
    metadata:
      name: vm-stop-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: vm-stop
      secretName: 'cloud-key-secret'
@@ -94,7 +94,7 @@ stringData:
    kind: AzureChaos
    metadata:
      name: vm-restart-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: vm-restart
      secretName: 'cloud-key-secret'
@@ -121,7 +121,7 @@ stringData:
    kind: AzureChaos
    metadata:
      name: disk-detach-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: disk-detach
      secretName: 'cloud-key-secret'

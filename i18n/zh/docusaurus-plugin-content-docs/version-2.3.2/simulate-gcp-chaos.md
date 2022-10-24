@@ -23,7 +23,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: cloud-key-secret
-  namespace: chaos-testing
+  namespace: chaos-mesh
 type: Opaque
 stringData:
   service_account: your-gcp-service-account-base64-encode
@@ -77,7 +77,7 @@ stringData:
    kind: GCPChaos
    metadata:
      name: node-stop-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: node-stop
      secretName: 'cloud-key-secret'
@@ -106,7 +106,7 @@ stringData:
    kind: GCPChaos
    metadata:
      name: node-reset-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: node-reset
      secretName: 'cloud-key-secret'
@@ -135,7 +135,7 @@ stringData:
    kind: GCPChaos
    metadata:
      name: disk-loss-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: disk-loss
      secretName: 'cloud-key-secret'

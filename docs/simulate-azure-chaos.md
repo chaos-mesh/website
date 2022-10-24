@@ -23,7 +23,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: cloud-key-secret
-  namespace: chaos-testing
+  namespace: chaos-mesh
 type: Opaque
 stringData:
   client_id: your-client-id
@@ -35,8 +35,7 @@ stringData:
 - **namespace** means the namespace of the Kubernetes Secret object.
 - **client_id** stores Application (client) ID of Azure App registrations.
 - **client_secret** stores Application (client) secret value of Azure App registrations.
-- **tenant_id** stores Directory (tenant) ID of Azure App registrations.
-For `client_id` and `client_secret`, please refer to [Confidential client application](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app).
+- **tenant_id** stores Directory (tenant) ID of Azure App registrations. For `client_id` and `client_secret`, please refer to [Confidential client application](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app).
 
 :::note
 
@@ -67,7 +66,7 @@ Make sure that App registrations in the Secret file has been added as a contribu
    kind: AzureChaos
    metadata:
      name: vm-stop-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: vm-stop
      secretName: 'cloud-key-secret'
@@ -95,7 +94,7 @@ Make sure that App registrations in the Secret file has been added as a contribu
    kind: AzureChaos
    metadata:
      name: vm-restart-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: vm-restart
      secretName: 'cloud-key-secret'
@@ -122,7 +121,7 @@ Make sure that App registrations in the Secret file has been added as a contribu
    kind: AzureChaos
    metadata:
      name: disk-detach-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: disk-detach
      secretName: 'cloud-key-secret'

@@ -198,7 +198,7 @@ You can define your own chaos experiments through the YAML file method, which pr
    kind: PodChaos
    metadata:
      name: pod-kill-chaos-demo
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: pod-kill
      mode: one

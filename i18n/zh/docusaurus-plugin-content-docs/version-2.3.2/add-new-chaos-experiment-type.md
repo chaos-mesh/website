@@ -291,7 +291,7 @@ dashboard:
    kind: HelloWorldChaos
    metadata:
      name: hello-world
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      selector:
        namespaces:

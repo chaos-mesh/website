@@ -23,7 +23,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: cloud-key-secret
-  namespace: chaos-testing
+  namespace: chaos-mesh
 type: Opaque
 stringData:
   client_id: your-client-id
@@ -35,8 +35,7 @@ stringData:
 - **namespace** 表示 Kubernetes Secret 对象的命名空间。
 - **client_id** 存储 Azure 应用注册的应用程序（客户端）ID。
 - **client_secret** 存储 Azure 应用注册的应用程序（客户端）的机密值。
-- **tenant_id** 存储 Azure 应用注册的目录（租户）ID。
-`client_id` 及 `client_secret` 的获取请参考[机密客户端应用程序](https://docs.microsoft.com/zh-cn/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app)。
+- **tenant_id** 存储 Azure 应用注册的目录（租户）ID。 `client_id` 及 `client_secret` 的获取请参考[机密客户端应用程序](https://docs.microsoft.com/zh-cn/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app)。
 
 :::note 注意
 
@@ -67,7 +66,7 @@ stringData:
    kind: AzureChaos
    metadata:
      name: vm-stop-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: vm-stop
      secretName: 'cloud-key-secret'
@@ -95,7 +94,7 @@ stringData:
    kind: AzureChaos
    metadata:
      name: vm-restart-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: vm-restart
      secretName: 'cloud-key-secret'
@@ -122,7 +121,7 @@ stringData:
    kind: AzureChaos
    metadata:
      name: disk-detach-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: disk-detach
      secretName: 'cloud-key-secret'

@@ -38,7 +38,7 @@ apiVersion: chaos-mesh.org/v1alpha1
 kind: PodChaos
 metadata:
   name: pod-kill
-  namespace: chaos-testing
+  namespace: chaos-mesh
 spec:
   action: pod-kill
   mode: one
