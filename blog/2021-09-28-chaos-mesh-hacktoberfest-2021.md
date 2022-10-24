@@ -26,7 +26,7 @@ If you are interested in chaos engineering, open-source, trying to come up with 
 
 ## Quick start
 
-Here’s a quick run-through of how to be part of Hacktoberfest 2021, and you can check out a detailed how to be part of Hacktoberfest on the [official website](https://hacktoberfest.digitalocean.com/resources/participation):
+Here’s a quick run-through of how to be part of Hacktoberfest 2021, and you can check out a detailed how to be part of Hacktoberfest on the [official website](https://hacktoberfest.digitalocean.com/participation):
 
 1. Sign up for [Hacktoberfest](https://hacktoberfest.digitalocean.com/) anytime between Oct 1 and Oct 31.
 2. Join the #project-chaos-mesh channel under [CNCF Slack](https://slack.cncf.io/), just in case you have any questions, or need help.
