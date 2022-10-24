@@ -170,14 +170,14 @@ Chaos Mesh runs on Kubernetes v1.12 or later. Helm, a Kubernetes package managem
    // create CRD resource
    kubectl apply -f manifests/
    // install chaos-mesh
-   helm install helm/chaos-mesh --name=chaos-mesh --namespace=chaos-testing
+   helm install helm/chaos-mesh --name=chaos-mesh --namespace=chaos-mesh
    ```
 
    Wait until all components are installed, and check the installation status using:
 
    ```bash
    // check chaos-mesh status
-   kubectl get pods --namespace chaos-testing -l app.kubernetes.io/instance=chaos-mesh
+   kubectl get pods --namespace chaos-mesh -l app.kubernetes.io/instance=chaos-mesh
    ```
 
    If the installation is successful, you can see all pods up and running. Now, time to play.

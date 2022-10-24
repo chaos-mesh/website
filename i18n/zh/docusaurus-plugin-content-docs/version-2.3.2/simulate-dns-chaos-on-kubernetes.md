@@ -13,13 +13,13 @@ DNSChaos 可以用于模拟错误的 DNS 响应，例如在收到 DNS 请求时�
 在使用 Chaos Mesh 创建 DNSChaos 混沌实验前，你需要部署一个专门的 DNS 服务用于注入故障，命令如下：
 
 ```bash
-helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --set dnsServer.create=true
+helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-mesh --set dnsServer.create=true
 ```
 
 执行后，可以通过如下命令检查 DNS 服务的状态是否正常：
 
 ```bash
-kubectl get pods -n chaos-testing -l app.kubernetes.io/component=chaos-dns-server
+kubectl get pods -n chaos-mesh -l app.kubernetes.io/component=chaos-dns-server
 ```
 
 确认 Pod 的状态为 `Running` 即可。
@@ -31,7 +31,7 @@ kubectl get pods -n chaos-testing -l app.kubernetes.io/component=chaos-dns-serve
 2. Chaos DNS 服务运行的带有 [k8s_dns_chaos](https://github.com/chaos-mesh/k8s_dns_chaos) 插件的 CoreDNS。如果 Kubernetes 集群本身的 CoreDNS 服务包含一些特殊配置，你可以通过编辑 configMap `dns-server-config`，使 Chaos DNS 服务的配置与 K8s CoreDNS 服务的配置一致，编辑命令如下：
 
    ```bash
-   kubectl edit configmap dns-server-config -n chaos-testing
+   kubectl edit configmap dns-server-config -n chaos-mesh
    ```
 
 ## 使用 Dashboard 方式创建实验

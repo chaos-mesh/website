@@ -16,7 +16,7 @@ Chaos Mesh 提供了以下两种方式用于控制混沌实验生效的范围：
 如果你尚未安装 Chaos Mesh，在使用 Helm 进行安装时，可以在安装命令中添加 `--set controllerManager.enableFilterNamespace=true` 来开启这项功能。Docker 容器的命令示例如下：
 
 ```bash
-helm install chaos-mesh chaos-mesh/chaos-mesh -n chaos-testing --set controllerManager.enableFilterNamespace=true
+helm install chaos-mesh chaos-mesh/chaos-mesh -n chaos-mesh --set controllerManager.enableFilterNamespace=true
 ```
 
 :::note 注意
@@ -28,7 +28,7 @@ helm install chaos-mesh chaos-mesh/chaos-mesh -n chaos-testing --set controllerM
 如果已经通过 Helm 安装了 Chaos Mesh ，可以通过 `helm upgrade` 命令来更新配置。示例如下：
 
 ```bash
-helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n chaos-testing --set controllerManager.enableFilterNamespace=true
+helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n chaos-mesh --set controllerManager.enableFilterNamespace=true
 ```
 
 `helm upgrade` 中可以通过设置多个 `--set` 参数来设置多个参数，覆盖规则是后设置的覆盖前设置的。比如 `--set controllerManager.enableFilterNamespace=false --set controllerManager.enableFilterNamespace=true` 仍将开启这项功能。

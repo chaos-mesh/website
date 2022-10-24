@@ -33,7 +33,7 @@ Chaos Mesh 可以向任一 Pod 注入 PodChaos，无论其 Pod 是否绑定至 D
 - 如果已安装 Chaos Dashboard，你可以通过运行 `kubectl port-forward` 命令的方式访问 Dashboard：
 
   ```bash
-  kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333
+  kubectl port-forward -n chaos-mesh svc/chaos-dashboard 2333:2333
   ```
 
   然后可以在浏览器中输入 [`http://localhost:2333`](http://localhost:2333) 访问 Chaos Dashboard。

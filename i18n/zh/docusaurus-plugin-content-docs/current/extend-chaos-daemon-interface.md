@@ -209,7 +209,7 @@ func (obj *HelloWorldChaos) GetSelectorSpecs() map[string]interface{} {
 2. 更新 Chaos Mesh：
 
    ```bash
-   helm upgrade chaos-mesh helm/chaos-mesh --namespace=chaos-testing
+   helm upgrade chaos-mesh helm/chaos-mesh --namespace=chaos-mesh
    ```
 
 3. 部署用于测试的目标 Pod（如果你已经在之前部署了这个 Pod，请跳过这一步）：
@@ -244,7 +244,7 @@ func (obj *HelloWorldChaos) GetSelectorSpecs() map[string]interface{} {
    - 查看 Chaos Controller Manager 的日志:
 
      ```bash
-     kubectl logs chaos-controller-manager-{pod-post-fix} -n chaos-testing
+     kubectl logs chaos-controller-manager-{pod-post-fix} -n chaos-mesh
      ```
 
      查找以下内容:
@@ -257,7 +257,7 @@ func (obj *HelloWorldChaos) GetSelectorSpecs() map[string]interface{} {
    - 查看 Chaos Daemon 的日志:
 
      ```bash
-     kubectl logs chaos-daemon-{pod-post-fix} -n chaos-testing
+     kubectl logs chaos-daemon-{pod-post-fix} -n chaos-mesh
      ```
 
      查找以下内容:

@@ -30,7 +30,7 @@ Before creating PodChaos experiments, ensure the following:
 Before create experiments using Chaos Dashboard, ensure the following:
 
 - Chaos Dashboard is installed.
-- If Chaos Dashboard is already installed, you can run `kubectl port-forward` to access Dashboard: `bash kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333`. Then you can enter [`http://localhost:2333`](http://localhost:2333) to access Chaos Dashboard.
+- If Chaos Dashboard is already installed, you can run `kubectl port-forward` to access Dashboard: `bash kubectl port-forward -n chaos-mesh svc/chaos-dashboard 2333:2333`. Then you can enter [`http://localhost:2333`](http://localhost:2333) to access Chaos Dashboard.
 
 :::
 

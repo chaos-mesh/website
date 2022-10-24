@@ -20,7 +20,7 @@ The reason is that `chaos-controller-manager` failed to connect to `chaos-daemon
 
 If everything is in order, maybe you can use the `hostNetwork` parameter to fix this problem as follows:
 
-<PickHelmVersion>{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n chaos-testing --version latest --set chaosDaemon.hostNetwork=true`}</PickHelmVersion>
+<PickHelmVersion>{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n chaos-mesh --version latest --set chaosDaemon.hostNetwork=true`}</PickHelmVersion>
 
 Reference: <https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/troubleshooting-kubeadm/#hostport-services-do-not-work>
 
@@ -79,7 +79,7 @@ Error creating: pods "chaos-dns-server-123aa56123-" is forbidden: unable to vali
 You need to add the privileged Security Context Constraints (SCC) to the `chaos-dns-server`.
 
 ```bash
-oc adm policy add-scc-to-user privileged -n chaos-testing -z chaos-dns-server
+oc adm policy add-scc-to-user privileged -n chaos-mesh -z chaos-dns-server
 ```
 
 ## Installation
@@ -104,7 +104,7 @@ Error creating: pods "chaos-daemon-" is forbidden: unable
 You need to add privileged scc to default.
 
 ```bash
-oc adm policy add-scc-to-user privileged -n chaos-testing -z chaos-daemon
+oc adm policy add-scc-to-user privileged -n chaos-mesh -z chaos-daemon
 ```
 
 ### Q: Failed to install Chaos Mesh with the message: no matches for kind "CustomResourceDefinition" in version "apiextensions.k8s.io/v1"

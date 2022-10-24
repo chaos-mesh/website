@@ -61,7 +61,7 @@ title: 使用 Grafana Data Source 插件进行观测
 2. 然后使用 `port-forward` 命令让 API 可被外部访问:
 
    ```shell
-   kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333
+   kubectl port-forward -n chaos-mesh svc/chaos-dashboard 2333:2333
    ```
 
 3. 点击 **Save & Test** 来测试连接。如果显示成功的通知，则说明设置已经完成。

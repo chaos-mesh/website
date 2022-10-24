@@ -45,7 +45,7 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
 2. Chaos Dashboard can be accessed via `kubectl port-forward`:
 
    ```bash
-    kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333
+    kubectl port-forward -n chaos-mesh svc/chaos-dashboard 2333:2333
    ```
 
    Then you can access the dashboard via [`http://localhost:2333`](http://localhost:2333) in your browser.

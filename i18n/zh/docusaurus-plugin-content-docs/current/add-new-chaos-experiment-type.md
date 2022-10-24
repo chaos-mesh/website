@@ -242,13 +242,13 @@ title: 新增混沌实验类型
 2. 安装 Chaos Mesh：
 
    ```bash
-   helm install chaos-mesh helm/chaos-mesh --namespace=chaos-testing --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --set images.registry=localhost:5000 --version latest
+   helm install chaos-mesh helm/chaos-mesh --namespace=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --set images.registry=localhost:5000 --version latest
    ```
 
    验证一下安装是否成功，查询 `chaos-testing` 命名空间的 Pod:
 
    ```bash
-   kubectl get pods --namespace chaos-testing -l app.kubernetes.io/instance=chaos-mesh
+   kubectl get pods --namespace chaos-mesh -l app.kubernetes.io/instance=chaos-mesh
    ```
 
    :::note 注意
@@ -288,13 +288,13 @@ title: 新增混沌实验类型
    ```
 
    ```bash
-   kubectl get HelloWorldChaos -n chaos-testing
+   kubectl get HelloWorldChaos -n chaos-mesh
    ```
 
    现在查看 `chaos-controller-manager` 的日志，就会看到 `Hello World!`：
 
    ```bash
-   kubectl logs chaos-controller-manager-{pod-post-fix} -n chaos-testing
+   kubectl logs chaos-controller-manager-{pod-post-fix} -n chaos-mesh
    ```
 
    显示日志如下：
@@ -306,7 +306,7 @@ title: 新增混沌实验类型
 
    :::note 注意
 
-   `{pod-post-fix}` 是一个随机串。你可以运行 `kubectl get pod -n chaos-testing` 来查看它。
+   `{pod-post-fix}` 是一个随机串。你可以运行 `kubectl get pod -n chaos-mesh` 来查看它。
 
    :::
 
