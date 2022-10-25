@@ -139,6 +139,11 @@ Common fields are meaningful when the `target` of fault injection is `Request` o
 | `patch.body.value` | string | Specifies the fault of the request body or response body with patch faults. |  | no | "{"foo": "bar"}" |
 | `duration` | string | Specifies the duration of a specific experiment. |  | yes | 30s |
 | `scheduler` | string | Specifies the scheduling rules for the time of a specific experiment. |  | no | 5 \* \* \* \* |
+| `tls.secretName` | string | SecretName represents the name of required secret resource | | no | "http-tls-scr" |
+| `tls.secretNamespace` | string | SecretNamespace represents the namespace of required secret resource,should be the same with deployment/chaos-controller-manager in most cases | | no | "chaos-mesh" |
+| `tls.certName` | string | CertName represents the data name of cert file in secret, `tls.crt` for example | | no | "tls.crt" |
+| `tls.KeyName` | string | KeyName represents the data name of key file in secret, `tls.key` for example | | no | "tls.key" |
+| `tls.caName` | string | CAName represents the data name of ca file in secret, `ca.crt` for example | | no | "ca.crt" |
 
 :::note
 
