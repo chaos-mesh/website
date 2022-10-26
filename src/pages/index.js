@@ -5,7 +5,7 @@ import useBaseUrl from '@docusaurus/useBaseUrl'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import Layout from '@theme/Layout'
 import clsx from 'clsx'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import Mesh from '../components/Mesh'
 import PickVersion from '../components/PickVersion'
@@ -31,22 +31,26 @@ function Feature({ imgUrl, title, description, reverse }) {
 function Home() {
   const { siteConfig } = useDocusaurusContext()
 
+  useEffect(() => {
+    document.querySelector('.navbar').classList.add('tw-container', 'tw-mx-auto', 'tw-px-0', 'tw-shadow-none')
+  }, [])
+
   return (
     <Layout title={siteConfig.tagline} description={siteConfig.tagline}>
       <main>
         <div className="hero tw-relative tw-h-[768px] tw-pt-0 tw-overflow-hidden">
-          <BrowserOnly>{() => <Mesh />}</BrowserOnly>
-          <div className="container tw-z-10">
-            <div className="tw-flex tw-flex-col md:tw-flex-row md:tw-justify-between md:tw-items-center">
+          <Mesh />
+          <div className="tw-container tw-mx-auto tw-z-10">
+            <div className="tw-flex tw-flex-col md:tw-flex-row md:tw-justify-around md:tw-items-center">
               <div className="tw-backdrop-blur-sm dark:tw-backdrop-filter-none">
-                <h1 className={clsx('hero__title tw-inline-block tw-text-left', styles.heroTitle)}>
+                <h1 className={clsx('hero__title tw-inline-block tw-text-6xl tw-text-left', styles.heroTitle)}>
                   <span>Break</span>
                   <br />
                   Your System
                   <br />
-                  <span>Constructively</span>
+                  <span>Constructively.</span>
                 </h1>
-                <p className="tagline hero__subtitle tw-text-xl tw-font-medium">
+                <p className="tagline tw-text-lg">
                   <Translate id="siteConfig.tagline">{siteConfig.tagline}</Translate>
                 </p>
                 <Link to="/docs/production-installation-using-helm" className="button button--lg button--primary">
@@ -55,14 +59,12 @@ function Home() {
               </div>
 
               <div className="tw-backdrop-blur-sm dark:tw-backdrop-filter-none">
-                <h2 className="hero__subtitle tw-text-xl tw-font-semibold">Try it out with the following command 👇</h2>
+                <h2 className="tw-text-lg tw-font-semibold">Try it out with the following command 👇</h2>
                 <PickVersion>curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash</PickVersion>
               </div>
             </div>
           </div>
         </div>
-
-        <div className="hero-divider" />
 
         <div className="hero">
           <div className="container">
