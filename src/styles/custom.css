@@ -35,10 +35,6 @@
   --hero-border-color: rgba(255, 255, 255, 0.1);
 }
 
-.hero-divider {
-  border-bottom: 1px solid var(--hero-border-color);
-}
-
 @media screen and (max-width: 768px) {
   .hero {
     padding-top: 2em;
@@ -84,10 +80,15 @@
 @tailwind components;
 @tailwind utilities;
 
+a.tw-btn:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
 .navbar .navbar__item {
   @apply tw-px-4;
 }
 
 .DocSearch.DocSearch-Button {
-  @apply tw-w-[200px] tw-rounded-md;
+  @apply tw-w-[200px] tw-rounded-lg;
 }

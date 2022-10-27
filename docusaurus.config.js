@@ -1,3 +1,5 @@
+const draculaTheme = require('prism-react-renderer/themes/dracula')
+
 module.exports = {
   i18n: {
     defaultLocale: 'en',
@@ -138,7 +140,30 @@ module.exports = {
       `,
     },
     prism: {
-      theme: require('prism-react-renderer/themes/dracula'),
+      theme: {
+        ...draculaTheme,
+        styles: [
+          ...draculaTheme.styles,
+          {
+            types: ['function', 'keyword'],
+            style: {
+              color: '#10a6fa',
+            },
+          },
+        ],
+      },
+      darkTheme: {
+        ...draculaTheme,
+        styles: [
+          ...draculaTheme.styles,
+          {
+            types: ['function', 'keyword'],
+            style: {
+              color: '#f25c7c',
+            },
+          },
+        ],
+      },
     },
   },
   onBrokenLinks: 'warn',

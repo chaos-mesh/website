@@ -17,13 +17,8 @@
   -webkit-text-fill-color: transparent;
 }
 
-.whiteboard {
-  margin-top: 3rem;
-}
-
-[data-theme='dark'] .whiteboard {
-  background: #eee;
-  border-radius: 8px;
+[data-theme='dark'] .whiteboard img {
+  filter: invert(80%) saturate(0%);
 }
 
 @media screen and (max-width: 768px) {

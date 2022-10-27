@@ -8,6 +8,20 @@ module.exports = {
   },
   plugins: [require('daisyui')],
   daisyui: {
-    theme: false,
+    base: false,
+    themes: [
+      {
+        light: {
+          ...require('daisyui/src/colors/themes')['[data-theme=light]'],
+          primary: '#172d72',
+        },
+      },
+      {
+        dark: {
+          ...require('daisyui/src/colors/themes')['[data-theme=dark]'],
+          primary: '#10a6fa',
+        },
+      },
+    ],
   },
 }

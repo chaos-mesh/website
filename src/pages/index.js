@@ -1,4 +1,5 @@
 import BrowserOnly from '@docusaurus/BrowserOnly'
+import Head from '@docusaurus/Head'
 import Link from '@docusaurus/Link'
 import Translate from '@docusaurus/Translate'
 import useBaseUrl from '@docusaurus/useBaseUrl'
@@ -11,6 +12,9 @@ import Mesh from '../components/Mesh'
 import PickVersion from '../components/PickVersion'
 import whoIsUsing from '../data/whoIsUsing'
 import styles from './index.module.css'
+
+const description =
+  'Chaos Mesh brings various types of fault simulation to Kubernetes and has an enormous capability to orchestrate fault scenarios. It helps you conveniently simulate various abnormalities that might occur in reality during the development, testing, and production environments and find potential problems in the system.'
 
 function Feature({ imgUrl, title, description, reverse }) {
   return (
@@ -32,17 +36,21 @@ function Home() {
   const { siteConfig } = useDocusaurusContext()
 
   useEffect(() => {
-    document.querySelector('.navbar').classList.add('tw-container', 'tw-mx-auto', 'tw-px-0', 'tw-shadow-none')
+    document.querySelector('.navbar').classList.add('tw-shadow-none')
+    document.querySelector('.navbar__inner').classList.add('tw-container', 'tw-mx-auto', 'tw-shadow-none')
   }, [])
 
   return (
-    <Layout title={siteConfig.tagline} description={siteConfig.tagline}>
+    <Layout description={description}>
+      <Head>
+        <title>Chaos Mesh: {siteConfig.tagline}</title>
+      </Head>
       <main>
         <div className="hero tw-relative tw-h-[768px] tw-pt-0 tw-overflow-hidden">
-          <Mesh />
+          <BrowserOnly>{() => <Mesh />}</BrowserOnly>
           <div className="tw-container tw-mx-auto tw-z-10">
             <div className="tw-flex tw-flex-col md:tw-flex-row md:tw-justify-around md:tw-items-center">
-              <div className="tw-flex-[.7] tw-p-3 tw-backdrop-blur dark:tw-backdrop-filter-none">
+              <div className="tw-flex-[.8] 2xl:tw-flex-[.6] tw-p-6 tw-rounded-2xl tw-backdrop-blur">
                 <h1 className={clsx('tw-inline-block tw-text-6xl tw-text-left', styles.heroTitle)}>
                   <span>Break</span>
                   <br />
@@ -51,21 +59,36 @@ function Home() {
                   <span>Constructively.</span>
                 </h1>
                 <p className="tw-text-lg tw-font-medium">
-                  <Translate id="siteConfig.tagline">
-                    Chaos Mesh brings various types of fault simulation to Kubernetes and has an enormous capability to
-                    orchestrate fault scenarios. It helps you conveniently simulate various abnormalities that might
-                    occur in reality during the development, testing, and production environments and find potential
-                    problems in the system.
-                  </Translate>
+                  {/* TODO: add translation. */}
+                  <Translate id="home.description">{description}</Translate>
                 </p>
-                <Link to="/docs/production-installation-using-helm" className="button button--primary">
+                <Link to="/docs/production-installation-using-helm" className="tw-btn tw-btn-sm tw-btn-primary">
                   Get Started →
                 </Link>
               </div>
 
-              <div className="tw-p-3 tw-backdrop-blur dark:tw-backdrop-filter-none">
-                <h2 className="tw-text-lg tw-font-semibold try-it">Try it out with the following command 👇</h2>
+              <div className="tw-p-6 tw-backdrop-blur tw-rounded-2xl">
+                <h2 className="tw-text-lg tw-font-semibold">Try it out with the following command 👇</h2>
                 <PickVersion>curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash</PickVersion>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="hero tw-pt-8">
+          <div className="tw-container tw-mx-auto tw-text-center">
+            <h2 className="tw-text-lg">
+              <Translate id="home.whoisusing">Who is Using Chaos Mesh</Translate>
+            </h2>
+            <div className={styles.whiteboard}>
+              <div className="row">
+                {whoIsUsing.map((w) => (
+                  <div key={w.name} className={clsx('col col--1', styles.whiteboardCol)}>
+                    <a className="tw-flex tw-justify-center tw-items-center tw-h-[100px]" href={w.href} target="_blank">
+                      <img style={w.style} src={useBaseUrl(w.img)} alt={w.name} />
+                    </a>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -181,33 +204,6 @@ function Home() {
             />
           </div>
         </div>
-
-        <div className="hero-divider" />
-
-        <div className="hero">
-          <div className="tw-container tw-mx-auto tw-text-center">
-            <h2 className="hero__subtitle">
-              <Translate id="home.whoisusing">Who is Using Chaos Mesh</Translate>
-            </h2>
-            <div className={styles.whiteboard}>
-              <div className="row">
-                {whoIsUsing.map((w) => (
-                  <div key={w.name} className={clsx('col col--3', styles.whiteboardCol)}>
-                    <a
-                      className="tw-flex tw-justify-center tw-items-center tw-h-[100px] md:tw-h-[150px]"
-                      href={w.href}
-                      target="_blank"
-                    >
-                      <img className="tw-w-3/4" style={w.style} src={useBaseUrl(w.img)} alt={w.name} />
-                    </a>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="hero-divider" />
 
         <div className="hero">
           <div className="tw-container tw-mx-auto tw-text-center">

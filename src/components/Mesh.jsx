@@ -1,25 +1,35 @@
+import { useColorMode } from '@docusaurus/theme-common'
 import { gsap } from 'gsap'
 import React, { useEffect, useRef } from 'react'
 import Typewriter from 'typewriter-effect/dist/core'
 
+import { useDidMountEffect } from '../utils/hooks'
+
 const rows = 10
 const dotsPerRow = 10
+const dotsNum = rows * dotsPerRow
 const spacing = 30
 const dotColor1 = '#f25c7c'
 const dotColor2 = '#10a6fa'
 
-function setDotColor() {
-  return Math.random() > 0.65 ? dotColor1 : Math.random() < 0.35 ? dotColor2 : '#333'
+function setNeutralDotColor(theme) {
+  return theme !== 'dark' ? '#333' : '#eee'
 }
 
-function setLineColor() {
-  return '#eee'
+function setDotColor(theme) {
+  return Math.random() > 0.65 ? dotColor1 : Math.random() < 0.35 ? dotColor2 : setNeutralDotColor(theme)
+}
+
+function setLineColor(theme) {
+  return theme !== 'dark' ? '#eee' : '#333'
 }
 
 export default function Mesh() {
   const svgEl = useRef()
   const pathsGroup = useRef()
   const dotsGroup = useRef()
+
+  const { colorMode } = useColorMode()
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -31,7 +41,7 @@ export default function Mesh() {
           const path = document.createElementNS('http://www.w3.org/2000/svg', 'path')
 
           gsap.set(path, {
-            attr: { class: 'path path-' + i, fill: 'none', stroke: setLineColor(), 'stroke-width': 0.3 },
+            attr: { class: 'path path-' + i, fill: 'none', stroke: setLineColor(colorMode), 'stroke-width': 0.3 },
           })
           pathsGroup.current.appendChild(path)
 
@@ -45,9 +55,9 @@ export default function Mesh() {
             ...position,
           })
 
-          const color = setDotColor()
+          const color = setDotColor(colorMode)
           gsap.set(dot, {
-            attr: { r: 1, fill: color, stroke: color, 'stroke-opacity': 0.5, 'stroke-width': 1 },
+            attr: { class: 'dot-inner', r: 1, fill: color, stroke: color, 'stroke-opacity': 0.5, 'stroke-width': 1 },
           })
 
           dotG.appendChild(dot)
@@ -186,9 +196,9 @@ export default function Mesh() {
 
           scaling = true
 
-          const tryIt = document.querySelector('.try-it').getBoundingClientRect()
-          const top = tryIt.top + 300
-          const left = tryIt.left - tryIt.width / 2
+          const rect = document.querySelector(`.dot-${injectedDot}`).getBoundingClientRect()
+          const top = rect.top + 100
+          const left = rect.left - 250
           gsap.fromTo(
             '.mesh-text',
             {
@@ -250,7 +260,7 @@ export default function Mesh() {
                 class: `wave wave-${i}`,
                 r: 0,
                 fill: 'none',
-                stroke: gsap.getProperty(`.dot-${injectedDot} > circle`, 'fill'),
+                stroke: gsap.getProperty(`.dot-${injectedDot} > .dot-inner`, 'fill'),
                 'stroke-opacity': 0.5,
                 'stroke-width': 0.3,
               },
@@ -285,11 +295,33 @@ export default function Mesh() {
     window.gsapCtx = ctx
   }, [])
 
+  useDidMountEffect(() => {
+    for (let i = 0; i < dotsNum; i++) {
+      const fill = gsap.getProperty(`.dot-${i} > .dot-inner`, 'fill')
+
+      if (fill !== 'rgb(16, 166, 250)' && fill !== 'rgb(242, 92, 124)') {
+        const dotColor = setNeutralDotColor(colorMode)
+
+        gsap.set(`.dot-${i} > .dot-inner`, {
+          attr: {
+            fill: dotColor,
+            stroke: dotColor,
+          },
+        })
+      }
+    }
+    gsap.set('.path', {
+      attr: {
+        stroke: setLineColor(colorMode),
+      },
+    })
+  }, [colorMode])
+
   return (
     <>
       <svg
         ref={svgEl}
-        className="mesh tw-absolute tw-top-[-10%] 2xl:tw-left-[-50px] tw-w-full tw-h-[125%]"
+        className="mesh tw-absolute tw-top-[-10%] 2xl:tw-left-[-100px] tw-w-full tw-h-[125%]"
         style={{
           transform: 'rotate3d(3, -.6, -1, 30deg)',
         }}
@@ -299,7 +331,7 @@ export default function Mesh() {
         <g ref={pathsGroup} />
         <g ref={dotsGroup} />
       </svg>
-      <div className="mesh-text tw-absolute tw-px-2 tw-py-1 tw-bg-black tw-text-white tw-rounded tw-opacity-0" />
+      <div className={`mesh-text tw-absolute tw-px-2 tw-py-1 tw-bg-primary tw-text-white tw-rounded tw-opacity-0`} />
     </>
   )
 }
