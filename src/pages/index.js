@@ -15,7 +15,7 @@ import styles from './index.module.css'
 function Feature({ imgUrl, title, description, reverse }) {
   return (
     <div className={clsx('row', 'tw-mb-6 last:tw-mb-0 md:tw-mb-16', reverse && 'tw-flex-row-reverse')}>
-      <div className="col col--6 text--center">
+      <div className="col col--6 tw-text-center">
         <img className="tw-h-48 tw-mb-6 md:tw-h-64 md:tw-mb-0" src={useBaseUrl(imgUrl)} alt={title} />
       </div>
       <div className="col col--6 tw-flex tw-items-center">
@@ -42,24 +42,29 @@ function Home() {
           <Mesh />
           <div className="tw-container tw-mx-auto tw-z-10">
             <div className="tw-flex tw-flex-col md:tw-flex-row md:tw-justify-around md:tw-items-center">
-              <div className="tw-backdrop-blur-sm dark:tw-backdrop-filter-none">
-                <h1 className={clsx('hero__title tw-inline-block tw-text-6xl tw-text-left', styles.heroTitle)}>
+              <div className="tw-flex-[.7] tw-p-3 tw-backdrop-blur dark:tw-backdrop-filter-none">
+                <h1 className={clsx('tw-inline-block tw-text-6xl tw-text-left', styles.heroTitle)}>
                   <span>Break</span>
                   <br />
                   Your System
                   <br />
                   <span>Constructively.</span>
                 </h1>
-                <p className="tagline tw-text-lg">
-                  <Translate id="siteConfig.tagline">{siteConfig.tagline}</Translate>
+                <p className="tw-text-lg tw-font-medium">
+                  <Translate id="siteConfig.tagline">
+                    Chaos Mesh brings various types of fault simulation to Kubernetes and has an enormous capability to
+                    orchestrate fault scenarios. It helps you conveniently simulate various abnormalities that might
+                    occur in reality during the development, testing, and production environments and find potential
+                    problems in the system.
+                  </Translate>
                 </p>
-                <Link to="/docs/production-installation-using-helm" className="button button--lg button--primary">
-                  Get Started
+                <Link to="/docs/production-installation-using-helm" className="button button--primary">
+                  Get Started →
                 </Link>
               </div>
 
-              <div className="tw-backdrop-blur-sm dark:tw-backdrop-filter-none">
-                <h2 className="tw-text-lg tw-font-semibold">Try it out with the following command 👇</h2>
+              <div className="tw-p-3 tw-backdrop-blur dark:tw-backdrop-filter-none">
+                <h2 className="tw-text-lg tw-font-semibold try-it">Try it out with the following command 👇</h2>
                 <PickVersion>curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash</PickVersion>
               </div>
             </div>
@@ -67,7 +72,7 @@ function Home() {
         </div>
 
         <div className="hero">
-          <div className="container">
+          <div className="tw-container tw-mx-auto">
             <Feature
               imgUrl="img/features/undraw_server_down_s4lk.svg"
               title={<Translate id="home.easytouse">Easy to Use</Translate>}
@@ -139,7 +144,7 @@ function Home() {
               reverse={true}
             />
             <Feature
-              imgUrl="img/features/undraw_Operating_system_re_iqsc.svg"
+              imgUrl="img/features/undraw_stars_re_6je7.svg"
               title={<Translate id="home.failuretypes">A wide variety of failure types</Translate>}
               description={
                 <p>
@@ -153,7 +158,7 @@ function Home() {
               }
             />
             <Feature
-              imgUrl="img/features/undraw_Security_on_re_e491.svg"
+              imgUrl="img/features/undraw_safe_re_kiil.svg"
               title={<Translate id="home.safe">Safe and Controllable</Translate>}
               description={
                 <>
@@ -180,7 +185,7 @@ function Home() {
         <div className="hero-divider" />
 
         <div className="hero">
-          <div className="container text--center">
+          <div className="tw-container tw-mx-auto tw-text-center">
             <h2 className="hero__subtitle">
               <Translate id="home.whoisusing">Who is Using Chaos Mesh</Translate>
             </h2>
@@ -205,7 +210,7 @@ function Home() {
         <div className="hero-divider" />
 
         <div className="hero">
-          <div className="container text--center">
+          <div className="tw-container tw-mx-auto tw-text-center">
             <h2 className="hero__subtitle">
               Chaos Mesh is a <Link to="https://cncf.io/">Cloud Native Computing Foundation</Link> incubating project
             </h2>

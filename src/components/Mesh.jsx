@@ -17,7 +17,7 @@ function setLineColor() {
 }
 
 export default function Mesh() {
-  const comp = useRef()
+  const svgEl = useRef()
   const pathsGroup = useRef()
   const dotsGroup = useRef()
 
@@ -168,7 +168,7 @@ export default function Mesh() {
       }
 
       // Add rotation animation.
-      comp.current.addEventListener('mousemove', (e) => {
+      svgEl.current.addEventListener('mousemove', (e) => {
         const rotationX = Math.max((1 - e.clientY / window.innerHeight) * 45, 30)
         const rotationY = Math.max((1 - e.clientX / window.innerWidth) * -18, -9)
 
@@ -186,26 +186,31 @@ export default function Mesh() {
 
           scaling = true
 
-          const tagline = document.querySelector('.tagline').getBoundingClientRect()
+          const tryIt = document.querySelector('.try-it').getBoundingClientRect()
+          const top = tryIt.top + 300
+          const left = tryIt.left - tryIt.width / 2
           gsap.fromTo(
             '.mesh-text',
             {
-              top: tagline.top + 150,
-              left: tagline.left + tagline.width - 50,
+              top,
+              left,
             },
             {
               duration: 1,
               opacity: 1,
-              top: tagline.top + 100,
-              left: tagline.left + tagline.width - 25,
+              top: top - 50,
+              left: left + 25,
             }
           )
           new Typewriter('.mesh-text', { delay: 50 })
-            .typeString('Injecting network loss...')
+            .typeString('Injecting NetworkChaos/loss...')
+            .pauseFor(500)
+            .deleteAll()
+            .typeString('Simulating packet loss...')
             .pauseFor(2000)
             .deleteAll()
             .typeString('⏳ Recovering...')
-            .pauseFor(2000)
+            .pauseFor(1500)
             .deleteAll()
             .typeString('✅ Done!')
             .pauseFor(1000)
@@ -213,13 +218,13 @@ export default function Mesh() {
               gsap.fromTo(
                 '.mesh-text',
                 {
-                  top: tagline.top + 100,
-                  left: tagline.left + tagline.width - 25,
+                  top: top - 50,
+                  left: left + 25,
                 },
                 {
                   opacity: 0,
-                  top: tagline.top + 150,
-                  left: tagline.left + tagline.width - 25,
+                  top,
+                  left: left + 25,
                 }
               )
             })
@@ -229,7 +234,7 @@ export default function Mesh() {
             duration: 2,
             scale: 5,
             ease: 'back.inOut(3)',
-            repeat: 5,
+            repeat: 7,
             yoyo: true,
             onUpdate: function () {
               percent = injected.time()
@@ -272,17 +277,18 @@ export default function Mesh() {
         }
       }
 
-      comp.current.addEventListener('click', () => {
+      svgEl.current.addEventListener('click', () => {
         injectChaos()
       })
-    }, comp)
+    }, svgEl)
 
     window.gsapCtx = ctx
   }, [])
 
   return (
-    <div ref={comp}>
+    <>
       <svg
+        ref={svgEl}
         className="mesh tw-absolute tw-top-[-10%] 2xl:tw-left-[-50px] tw-w-full tw-h-[125%]"
         style={{
           transform: 'rotate3d(3, -.6, -1, 30deg)',
@@ -294,6 +300,6 @@ export default function Mesh() {
         <g ref={dotsGroup} />
       </svg>
       <div className="mesh-text tw-absolute tw-px-2 tw-py-1 tw-bg-black tw-text-white tw-rounded tw-opacity-0" />
-    </div>
+    </>
   )
 }
