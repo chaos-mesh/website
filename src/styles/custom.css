@@ -35,13 +35,6 @@
   --hero-border-color: rgba(255, 255, 255, 0.1);
 }
 
-@media screen and (max-width: 768px) {
-  .hero {
-    padding-top: 2em;
-    padding-bottom: 2em;
-  }
-}
-
 /* https://github.com/facebook/jest/blob/main/website/src/css/docusaurusTheme.css */
 .header-github-link:hover {
   opacity: 0.6;
@@ -90,5 +83,5 @@ a.tw-btn:hover {
 }
 
 .DocSearch.DocSearch-Button {
-  @apply tw-w-[200px] tw-rounded-lg;
+  @apply md:tw-w-[200px] tw-rounded-lg;
 }

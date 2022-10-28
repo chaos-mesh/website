@@ -288,7 +288,10 @@ export default function Mesh() {
       }
 
       svgEl.current.addEventListener('click', () => {
-        injectChaos()
+        // Stop in mobile devices.
+        if (window.matchMedia('(min-width: 768px)').matches) {
+          injectChaos()
+        }
       })
     }, svgEl)
 
@@ -321,7 +324,7 @@ export default function Mesh() {
     <>
       <svg
         ref={svgEl}
-        className="mesh tw-absolute tw-top-[-10%] 2xl:tw-left-[-100px] tw-w-full tw-h-[125%]"
+        className="mesh tw-absolute tw-top-[-10%] 2xl:tw-left-[-100px] tw-w-[1024px] lg:tw-w-full tw-h-[125%]"
         style={{
           transform: 'rotate3d(3, -.6, -1, 30deg)',
         }}

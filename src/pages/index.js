@@ -20,7 +20,7 @@ function Feature({ imgUrl, title, description, reverse }) {
   return (
     <div className={clsx('row', 'tw-mb-6 last:tw-mb-0 md:tw-mb-16', reverse && 'tw-flex-row-reverse')}>
       <div className="col col--6 tw-text-center">
-        <img className="tw-h-48 tw-mb-6 md:tw-h-64 md:tw-mb-0" src={useBaseUrl(imgUrl)} alt={title} />
+        <img className="tw-h-48 tw-mb-6 lg:tw-h-64 lg:tw-mb-0" src={useBaseUrl(imgUrl)} alt={title} />
       </div>
       <div className="col col--6 tw-flex tw-items-center">
         <div>
@@ -36,8 +36,7 @@ function Home() {
   const { siteConfig } = useDocusaurusContext()
 
   useEffect(() => {
-    document.querySelector('.navbar').classList.add('tw-shadow-none')
-    document.querySelector('.navbar__inner').classList.add('tw-container', 'tw-mx-auto', 'tw-shadow-none')
+    document.querySelector('.navbar__inner').classList.add('tw-container', 'tw-mx-auto')
   }, [])
 
   return (
@@ -49,16 +48,21 @@ function Home() {
         <div className="hero tw-relative tw-h-[768px] tw-pt-0 tw-overflow-hidden">
           <BrowserOnly>{() => <Mesh />}</BrowserOnly>
           <div className="tw-container tw-mx-auto tw-z-10">
-            <div className="tw-flex tw-flex-col md:tw-flex-row md:tw-justify-around md:tw-items-center">
-              <div className="tw-flex-[.8] 2xl:tw-flex-[.6] tw-p-6 tw-rounded-2xl tw-backdrop-blur">
-                <h1 className={clsx('tw-inline-block tw-text-6xl tw-text-left', styles.heroTitle)}>
+            <div className="tw-flex tw-flex-col lg:tw-flex-row md:tw-justify-around lg:tw-items-center">
+              <div className="tw-flex-[.8] 2xl:tw-flex-[.6] tw-p-6 lg:tw-p-3">
+                <h1
+                  className={clsx(
+                    'tw-inline-block tw-text-5xl xl:tw-text-6xl tw-text-left tw-rounded-2xl tw-backdrop-blur-sm lg:tw-backdrop-blur',
+                    styles.heroTitle
+                  )}
+                >
                   <span>Break</span>
                   <br />
                   Your System
                   <br />
                   <span>Constructively.</span>
                 </h1>
-                <p className="tw-text-lg tw-font-medium">
+                <p className="lg:tw-text-lg tw-font-medium tw-rounded-2xl tw-backdrop-blur-sm lg:tw-backdrop-blur">
                   {/* TODO: add translation. */}
                   <Translate id="home.description">{description}</Translate>
                 </p>
@@ -67,21 +71,23 @@ function Home() {
                 </Link>
               </div>
 
-              <div className="tw-p-6 tw-backdrop-blur tw-rounded-2xl">
-                <h2 className="tw-text-lg tw-font-semibold">Try it out with the following command 👇</h2>
+              <div className="lg:max-xl:tw-w-[500px] tw-p-6 lg:tw-p-3">
+                <h2 className="tw-inline-block tw-text-base lg:tw-text-lg tw-font-semibold tw-rounded-2xl tw-backdrop-blur-sm lg:tw-backdrop-blur">
+                  Try it out with the following command 👇
+                </h2>
                 <PickVersion>curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash</PickVersion>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="hero tw-pt-8">
-          <div className="tw-container tw-mx-auto tw-text-center">
+        <div className="hero max-lg:tw-pt-0">
+          <div className="tw-container tw-mx-auto tw-px-4 tw-text-center">
             <h2 className="tw-text-lg">
               <Translate id="home.whoisusing">Who is Using Chaos Mesh</Translate>
             </h2>
-            <div className={styles.whiteboard}>
-              <div className="row">
+            <div className={clsx('max-md:tw-overflow-x-auto', styles.whiteboard)}>
+              <div className="row max-md:tw-w-[1280px]">
                 {whoIsUsing.map((w) => (
                   <div key={w.name} className={clsx('col col--1', styles.whiteboardCol)}>
                     <a className="tw-flex tw-justify-center tw-items-center tw-h-[100px]" href={w.href} target="_blank">
@@ -95,7 +101,7 @@ function Home() {
         </div>
 
         <div className="hero">
-          <div className="tw-container tw-mx-auto">
+          <div className="tw-container tw-mx-auto tw-px-4">
             <Feature
               imgUrl="img/features/undraw_server_down_s4lk.svg"
               title={<Translate id="home.easytouse">Easy to Use</Translate>}
@@ -206,7 +212,7 @@ function Home() {
         </div>
 
         <div className="hero">
-          <div className="tw-container tw-mx-auto tw-text-center">
+          <div className="tw-container tw-mx-auto tw-px-4 tw-text-center">
             <h2 className="hero__subtitle">
               Chaos Mesh is a <Link to="https://cncf.io/">Cloud Native Computing Foundation</Link> incubating project
             </h2>

@@ -5,6 +5,10 @@
  * and scoped locally.
  */
 
+:global(.navbar) {
+  box-shadow: none;
+}
+
 .heroTitle {
   background: #10a6fa; /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #f25c7c, #10a6fa); /* Chrome 10-25, Safari 5.1-6 */
@@ -21,25 +25,18 @@
   filter: invert(80%) saturate(0%);
 }
 
-@media screen and (max-width: 768px) {
-  .whiteboard {
-    width: 80%;
-    margin: 3rem auto 0;
-  }
-}
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .whiteboardCol {
-    --ifm-col-width: calc(6 / 12 * 100%) !important;
+    --ifm-col-width: calc(1 / 12 * 100%) !important;
 
     flex: 0 0 var(--ifm-col-width) !important;
     max-width: var(--ifm-col-width) !important;
   }
 }
 
-@media (min-width: 769px) and (max-width: 1023px) {
+@media (min-width: 768px) and (max-width: 1023px) {
   .whiteboardCol {
-    --ifm-col-width: calc(4 / 12 * 100%) !important;
+    --ifm-col-width: calc(2 / 12 * 100%) !important;
 
     flex: 0 0 var(--ifm-col-width) !important;
     max-width: var(--ifm-col-width) !important;
