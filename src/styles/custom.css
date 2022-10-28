@@ -19,8 +19,6 @@
   --ifm-color-primary-light: #19327d;
   --ifm-color-primary-lighter: #1a3483;
   --ifm-color-primary-lightest: #1e3b94;
-
-  --hero-border-color: rgba(0, 0, 0, 0.1);
 }
 
 :root[data-theme='dark'] {
@@ -31,8 +29,6 @@
   --ifm-color-primary-light: #2ab0fb;
   --ifm-color-primary-lighter: #37b5fb;
   --ifm-color-primary-lightest: #5ec3fc;
-
-  --hero-border-color: rgba(255, 255, 255, 0.1);
 }
 
 /* https://github.com/facebook/jest/blob/main/website/src/css/docusaurusTheme.css */
@@ -84,4 +80,8 @@ a.tw-btn:hover {
 
 .DocSearch.DocSearch-Button {
   @apply md:tw-w-[200px] tw-rounded-lg;
+}
+
+.hero {
+  @apply tw-py-12;
 }
