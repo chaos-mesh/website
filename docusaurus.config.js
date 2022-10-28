@@ -61,12 +61,12 @@ module.exports = {
           type: 'localeDropdown',
           position: 'right',
         },
-        {
-          href: 'https://github.com/chaos-mesh/chaos-mesh',
-          className: 'header-github-link',
-          'aria-label': 'GitHub',
-          position: 'right',
-        },
+        // {
+        //   href: 'https://github.com/chaos-mesh/chaos-mesh',
+        //   className: 'header-github-link',
+        //   'aria-label': 'GitHub',
+        //   position: 'right',
+        // },
       ],
     },
     footer: {
@@ -141,7 +141,10 @@ module.exports = {
     },
     prism: {
       theme: {
-        ...draculaTheme,
+        plain: {
+          ...draculaTheme.plain,
+          backgroundColor: 'rgb(61, 68, 81)',
+        },
         styles: [
           ...draculaTheme.styles,
           {
@@ -153,7 +156,10 @@ module.exports = {
         ],
       },
       darkTheme: {
-        ...draculaTheme,
+        plain: {
+          ...draculaTheme.plain,
+          backgroundColor: 'rgb(25, 29, 36)',
+        },
         styles: [
           ...draculaTheme.styles,
           {

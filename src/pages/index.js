@@ -8,6 +8,7 @@ import Layout from '@theme/Layout'
 import clsx from 'clsx'
 import React, { useEffect } from 'react'
 
+import LogoOctocat from '../../static/img/logos/logo-octocat.svg'
 import Mesh from '../components/Mesh'
 import PickVersion from '../components/PickVersion'
 import whoIsUsing from '../data/whoIsUsing'
@@ -66,9 +67,21 @@ function Home() {
                   {/* TODO: add translation. */}
                   <Translate id="home.description">{description}</Translate>
                 </p>
-                <Link to="/docs/production-installation-using-helm" className="tw-btn tw-btn-sm tw-btn-primary">
-                  Get Started →
-                </Link>
+                <div className="tw-flex">
+                  <Link
+                    to="/docs/production-installation-using-helm"
+                    className="tw-btn tw-btn-sm tw-btn-primary tw-mr-3 hover:-tw-translate-y-1"
+                  >
+                    Get Started →
+                  </Link>
+                  <Link
+                    to="https://github.com/chaos-mesh/chaos-mesh"
+                    className="tw-btn tw-btn-sm tw-gap-2 dark:tw-glass hover:-tw-translate-y-1"
+                  >
+                    <LogoOctocat className="tw-w-4 tw-h-4 tw-fill-white dark:tw-fill-black" />
+                    GitHub
+                  </Link>
+                </div>
               </div>
 
               <div className="lg:max-xl:tw-w-[500px] tw-p-6 lg:tw-p-3">
