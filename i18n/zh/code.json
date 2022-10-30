@@ -215,8 +215,11 @@
     "message": "Tags",
     "description": "The title of the tag list page"
   },
-  "home.quickstart": {
-    "message": "快速试用"
+  "home.k8s": {
+    "message": "为 Kubernetes 设计"
+  },
+  "home.k8s.1": {
+    "message": "在 Kubernetes 领域，{crd} 是实现自定义资源的成熟解决方案。 CRD 使 Chaos Mesh 与 Kubernetes 生态系统自然相结合。"
   },
   "home.easytouse": {
     "message": "易于使用"
@@ -228,19 +231,7 @@
     "message": "无需修改应用的部署逻辑，拥有在生产环境中进行混沌实验的能力。"
   },
   "home.easytouse.3": {
-    "message": "轻松编排混沌实验的行为，用户可以实时观察实验自身的状态并且能够快速地对注入的故障进行回滚。"
-  },
-  "home.easytouse.4": {
-    "message": "提供仪表盘。无需手写实验定义，只需点击几步就可以顺利运行一个混沌实验。"
-  },
-  "home.k8s": {
-    "message": "为 Kubernetes 设计"
-  },
-  "home.k8s.1": {
-    "message": "Chaos Mesh 使用 {crd} 来定义混沌实验。"
-  },
-  "home.k8s.2": {
-    "message": "在 Kubernetes 领域，CRD 是实现自定义资源的成熟解决方案。CRD 使 Chaos Mesh 与 Kubernetes 生态系统自然相结合。"
+    "message": "使用仪表板有效地编排混沌实验的行为，允许用户实时观察实验的状态并快速回滚任何注入的故障。"
   },
   "home.failuretypes": {
     "message": "多种多样的故障类型"

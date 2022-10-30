@@ -27,11 +27,22 @@ function Feature({ imgUrl, title, description, className }) {
         className
       )}
     >
-      <div className={clsx('tw-relative tw-flex tw-items-center tw-h-full', isKubernetes && 'tw-flex-col')}>
-        {!isKubernetes && (
-          <div className="tw-flex-1 tw-text-center">
-            <img className="tw-w-[80%]" src={useBaseUrl(imgUrl)} alt={title} />
+      <div
+        className={clsx(
+          'tw-relative tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-h-full',
+          isKubernetes && 'lg:tw-items-start'
+        )}
+      >
+        {!isKubernetes ? (
+          <div className="tw-flex-1 max-lg:tw-mb-6 tw-text-center">
+            <img className="tw-w-[60%] lg:tw-w-[80%]" src={useBaseUrl(imgUrl)} alt={title} />
           </div>
+        ) : (
+          <img
+            className="lg:tw-absolute lg:tw-right-6 lg:-tw-bottom-12 max-lg:tw-w-[40%] lg:tw-h-48 max-lg:tw-mb-6"
+            src={useBaseUrl(imgUrl)}
+            alt={title}
+          />
         )}
         <div className="tw-flex-1">
           <div>
@@ -39,9 +50,6 @@ function Feature({ imgUrl, title, description, className }) {
             <div>{description}</div>
           </div>
         </div>
-        {isKubernetes && (
-          <img className="tw-absolute tw-right-6 -tw-bottom-12 tw-h-48" src={useBaseUrl(imgUrl)} alt={title} />
-        )}
       </div>
     </div>
   )
@@ -63,7 +71,7 @@ function Home() {
         <div className="hero tw-relative tw-h-[768px] tw-pt-0 tw-overflow-hidden">
           <BrowserOnly>{() => <Mesh />}</BrowserOnly>
           <div className="tw-container tw-mx-auto tw-z-10">
-            <div className="tw-flex tw-flex-col lg:tw-flex-row md:tw-justify-between lg:tw-items-center">
+            <div className="tw-flex tw-flex-col lg:tw-flex-row lg:tw-justify-between lg:tw-items-center">
               <div className="tw-flex-[.8] 2xl:tw-flex-[.6] tw-p-6 lg:tw-p-3">
                 <h1
                   className={clsx(
@@ -108,7 +116,7 @@ function Home() {
           </div>
         </div>
 
-        <div className="hero max-lg:tw-pt-0">
+        <div className="hero">
           <div className="tw-container tw-mx-auto tw-px-4 tw-text-center">
             <h2 className="tw-text-lg">
               <Translate id="home.whoisusing">Who is Using Chaos Mesh</Translate>
@@ -139,7 +147,7 @@ function Home() {
               straightforward.
             </h2>
 
-            <div className="tw-grid tw-gap-8 tw-grid-rows-2 tw-grid-cols-6">
+            <div className="tw-grid tw-gap-8 lg:tw-grid-rows-2 lg:tw-grid-cols-6">
               <Feature
                 imgUrl="img/logos/kubernetes.svg"
                 title={<Translate id="home.k8s">Design for Kubernetes</Translate>}
@@ -156,18 +164,14 @@ function Home() {
                           ),
                         }}
                       >
-                        {'Chaos Mesh uses {crd} to define chaos experiments.'}
-                      </Translate>
-                    </p>
-                    <p>
-                      <Translate id="home.k8s.2">
-                        In the Kubernetes realm, CRD is a proven solution for implementing custom resources. CRD enables
-                        the natural integration of Chaos Mesh with the Kubernetes ecosystem.
+                        {
+                          'In the Kubernetes realm, {crd} is a proven solution for implementing custom resources. CRD enables the natural integration of Chaos Mesh with the Kubernetes ecosystem.'
+                        }
                       </Translate>
                     </p>
                   </>
                 }
-                className="tw-col-span-2"
+                className="lg:tw-col-span-2"
               />
               <Feature
                 imgUrl="img/features/undraw_server_down_s4lk.svg"
@@ -196,20 +200,14 @@ function Home() {
                       </li>
                       <li>
                         <Translate id="home.easytouse.3">
-                          Easily orchestrate the behavior of chaos experiments, allowing users to observe the state of
-                          the experiment itself in real time and quickly rollback any injected failures.
-                        </Translate>
-                      </li>
-                      <li>
-                        <Translate id="home.easytouse.4">
-                          Packed with dashboard. No handwritten experiment definitions are required, and a chaos
-                          experiment can be run smoothly in just a few clicks.
+                          Efficiently orchestrate the behavior of chaos experiments with the dashboard, allowing users
+                          to observe the experiment's state in real time and quickly roll back any injected failures.
                         </Translate>
                       </li>
                     </ul>
                   </>
                 }
-                className="tw-col-span-4"
+                className="lg:tw-col-span-4"
               />
               <Feature
                 imgUrl="img/features/undraw_stars_re_6je7.svg"
@@ -224,7 +222,7 @@ function Home() {
                     </Translate>
                   </p>
                 }
-                className="tw-col-span-3"
+                className="lg:tw-col-span-3"
               />
               <Feature
                 imgUrl="img/features/undraw_safe_re_kiil.svg"
@@ -246,7 +244,7 @@ function Home() {
                     </p>
                   </>
                 }
-                className="tw-col-span-3"
+                className="lg:tw-col-span-3"
               />
             </div>
           </div>
