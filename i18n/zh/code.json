@@ -219,7 +219,7 @@
     "message": "为 Kubernetes 设计"
   },
   "home.k8s.1": {
-    "message": "在 Kubernetes 领域，{crd} 是实现自定义资源的成熟解决方案。 CRD 使 Chaos Mesh 与 Kubernetes 生态系统自然相结合。"
+    "message": "在 Kubernetes 领域，{crd} 是实现自定义资源的成熟解决方案。 Chaos Mesh 借助 CRD 实现了与 Kubernetes 生态系统的自然融合。"
   },
   "home.easytouse": {
     "message": "易于使用"
@@ -237,7 +237,7 @@
     "message": "多种多样的故障类型"
   },
   "home.failuretypes.1": {
-    "message": "Chaos Mesh 起初从分布式系统的角度出发，充分考虑了分布式系统可能出现的故障，从而提供更加全面、细粒度的故障类型，全方位地帮助用户对网络、磁盘、文件系统、操作系统等进行故障注入。"
+    "message": "Chaos Mesh 起初从分布式系统的角度出发，充分考虑了分布式系统可能出现的故障，从而提供更加全面、细粒度的故障类型来帮助用户对网络、磁盘、文件系统、操作系统等进行故障注入。"
   },
   "home.safe": {
     "message": "安全可控"

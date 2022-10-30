@@ -142,10 +142,17 @@ function Home() {
 
         <div className="hero">
           <div className="tw-container tw-mx-auto tw-px-4">
-            <h2 className="tw-text-3xl xl:tw-text-4xl tw-max-w-[600px] xl:tw-max-w-[700px] tw-mb-12">
-              Make <span className={styles.heroTitle}>Cloud Native + Chaos Engineering</span> simple and
-              straightforward.
-            </h2>
+            <div className="tw-max-w-[600px] xl:tw-max-w-[800px] tw-mb-12">
+              {/* TODO: add translation. */}
+              <h2 className="tw-text-3xl xl:tw-text-4xl">
+                Make <span className={styles.heroTitle}>Cloud Native + Chaos Engineering</span> simple and
+                straightforward.
+              </h2>
+              <p className="lg:tw-text-lg tw-font-medium">
+                Based on the principles of chaos engineering, Chaos Mesh abstracts real-world events into objects that
+                can be directly applied, hiding the trivial details.
+              </p>
+            </div>
 
             <div className="tw-grid tw-gap-8 lg:tw-grid-rows-2 lg:tw-grid-cols-6">
               <Feature
@@ -165,7 +172,7 @@ function Home() {
                         }}
                       >
                         {
-                          'In the Kubernetes realm, {crd} is a proven solution for implementing custom resources. CRD enables the natural integration of Chaos Mesh with the Kubernetes ecosystem.'
+                          'In the Kubernetes realm, {crd} is a proven solution for implementing custom resources. Chaos Mesh leverages CRDs for natural integration with the Kubernetes ecosystem.'
                         }
                       </Translate>
                     </p>
@@ -217,8 +224,7 @@ function Home() {
                     <Translate id="home.failuretypes.1">
                       Chaos Mesh initially started from a distributed system perspective, fully considering the possible
                       failures of distributed systems, thus providing a more comprehensive and fine-grained fault type
-                      to help users with fault injection for network, disk, file system, operating system, etc. in a
-                      comprehensive manner.
+                      to help users with fault injection for networks, disks, file systems, operating systems, etc.
                     </Translate>
                   </p>
                 }
