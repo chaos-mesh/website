@@ -14,7 +14,7 @@ BlockChaos is in an early stage. The installation and configuration experience o
 
 ## Install kernel module
 
-BlockChaos depends on the [chaos-driver](https://github.com/chaos-mesh/chaos-driver) kernel module. It can only be injected on a machine with this module installed. Currently, you have to compile and install the module manually.
+BlockChaos `delay` action depends on the [chaos-driver](https://github.com/chaos-mesh/chaos-driver) kernel module. It can only be injected on a machine with this module installed. Currently, you have to compile and install the module manually.
 
 1. Download the source code of this module using the following command:
 
@@ -108,4 +108,5 @@ The fields in the YAML configuration file are described in the following table:
 | `value` | string | Provides parameters for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods. | None | No | `1` |
 | `selector` | struct | Specifies the target Pod. For details, refer to [Define the experiment scope](./define-chaos-experiment-scope.md). | None | Yes |  |
 | `volumeName` | string | Specifies the volume to inject in the target pods. There should be a corresponding entry in the pods' `.spec.volumes`. | None | Yes | `hostpath-example` |
-| delay.latency | string | Specifies the latency of the block device. | None | Yes | `500ms` |
+| `action` | string | Indicates the specific type of faults. The available fault types include `delay` and `freeze`. `delay` will simulate the latency of block devices, and `freeze` will simulate that the block device cannot handle any requests | None | Yes | `delay` |
+| `delay.latency` | string | Specifies the latency of the block device. | None | Yes (if `action` is `delay`) | `500ms` |
