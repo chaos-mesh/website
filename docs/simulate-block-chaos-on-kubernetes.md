@@ -1,5 +1,5 @@
 ---
-title: Simulate Block Device Latency
+title: Simulate Block Device Incidents
 ---
 
 ## BlockChaos Introduction
