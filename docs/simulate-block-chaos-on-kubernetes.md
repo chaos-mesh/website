@@ -4,11 +4,18 @@ title: Simulate Block Device Latency
 
 ## BlockChaos Introduction
 
-Chaos Mesh provides the BlockChaos experiment type. You can use this experiment type to simulate a block device latency scenario. This document describes how to install the dependencies of a BlockChaos experiment, and create a BlockChaos.
+Chaos Mesh provides the BlockChaos experiment type. You can use this experiment type to simulate a block device latency or freeze scenario. This document describes how to install the dependencies of a BlockChaos experiment, and create a BlockChaos.
 
 :::note
 
 BlockChaos is in an early stage. The installation and configuration experience of it will continue to improve. If you find any issues, please open an issue in [chaos-mesh/chaos-mesh](https://github.com/chaos-mesh/chaos-mesh) to report.
+
+:::
+
+
+:::note
+
+BlockChaos `freeze` action will affect all processes using the block device, not only the target container.
 
 :::
 
