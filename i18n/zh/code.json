@@ -237,16 +237,16 @@
     "message": "多种多样的故障类型"
   },
   "home.failuretypes.1": {
-    "message": "Chaos Mesh 起初从分布式系统的角度出发，充分考虑了分布式系统可能出现的故障，从而提供更加全面、细粒度的故障类型来帮助用户对网络、磁盘、文件系统、操作系统等进行故障注入。"
+    "message": "Chaos Mesh 起初从分布式系统的角度出发，充分考虑了其可能出现的故障，从而提供更全面、更细粒度的故障类型来帮助用户对网络、磁盘、文件系统、操作系统等进行故障注入。"
   },
   "home.safe": {
     "message": "安全可控"
   },
   "home.safe.1": {
-    "message": "Chaos Mesh 提供基于角色的访问控制，用户可以根据自己需求创建对应权限的角色，例如游客角色，管理角色等。"
+    "message": "Chaos Mesh 提供基于角色的访问控制，用户可以根据需要创建相应权限的角色。"
   },
   "home.safe.2": {
-    "message": "此外，Chaos Mesh 支持设置 Namespace 白名单和黑名单，用户可以通过此功能保护重要的 Namespace，以此更大程度控制实验的“爆炸半径”。"
+    "message": "此外，Chaos Mesh 允许用户设置命名空间（Namespace）的白名单来保护重要的命名空间，从而更大程度地控制实验的“爆炸半径”。"
   },
   "home.whoisusing": {
     "message": "Chaos Mesh 的用户"

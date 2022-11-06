@@ -222,9 +222,9 @@ function Home() {
                 description={
                   <p>
                     <Translate id="home.failuretypes.1">
-                      Chaos Mesh initially started from a distributed system perspective, fully considering the possible
-                      failures of distributed systems, thus providing a more comprehensive and fine-grained fault type
-                      to help users with fault injection for networks, disks, file systems, operating systems, etc.
+                      Chaos Mesh initially started from a distributed system perspective, fully considering its possible
+                      failures, thus providing more comprehensive and fine-grained fault types to help users with fault
+                      injection for networks, disks, file systems, operating systems, etc.
                     </Translate>
                   </p>
                 }
@@ -238,14 +238,13 @@ function Home() {
                     <p>
                       <Translate id="home.safe.1">
                         Chaos Mesh provides role-based access control. Users can create roles with corresponding
-                        permissions according to their needs, such as visitor roles, administrative roles, etc.
+                        permissions according to their needs.
                       </Translate>
                     </p>
                     <p>
                       <Translate id="home.safe.2">
-                        In addition, Chaos Mesh supports setting up Namespace whitelists and blacklists, which allow
-                        users to protect important Namespaces and thus gain greater control over the "blast radius" of
-                        experiments.
+                        In addition, Chaos Mesh supports setting up namespace whitelists, which allow users to protect
+                        important namespaces and thus gain greater control over the "blast radius" of experiments.
                       </Translate>
                     </p>
                   </>
