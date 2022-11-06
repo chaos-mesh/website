@@ -6,6 +6,8 @@ import useBaseUrl from '@docusaurus/useBaseUrl'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import Layout from '@theme/Layout'
 import clsx from 'clsx'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import React, { useEffect } from 'react'
 
 import LogoOctocat from '../../static/img/logos/logo-octocat.svg'
@@ -13,6 +15,8 @@ import Mesh from '../components/Mesh'
 import PickVersion from '../components/PickVersion'
 import whoIsUsing from '../data/whoIsUsing'
 import styles from './index.module.css'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const description =
   'Chaos Mesh brings various types of fault simulation to Kubernetes and has an enormous capability to orchestrate fault scenarios. It helps you conveniently simulate various abnormalities that might occur in reality during the development, testing, and production environments and find potential problems in the system.'
@@ -35,11 +39,11 @@ function Feature({ imgUrl, title, description, className }) {
       >
         {!isKubernetes ? (
           <div className="tw-flex-1 max-lg:tw-mb-6 tw-text-center">
-            <img className="tw-w-[60%] lg:tw-w-[80%]" src={useBaseUrl(imgUrl)} alt={title} />
+            <img className="scroll-to-display tw-w-[60%] lg:tw-w-[80%]" src={useBaseUrl(imgUrl)} alt={title} />
           </div>
         ) : (
           <img
-            className="lg:tw-absolute lg:tw-right-6 lg:-tw-bottom-12 max-lg:tw-w-[40%] lg:tw-h-48 max-lg:tw-mb-6"
+            className="scroll-to-display lg:tw-absolute lg:tw-right-6 lg:-tw-bottom-12 max-lg:tw-w-[40%] lg:tw-h-48 max-lg:tw-mb-6"
             src={useBaseUrl(imgUrl)}
             alt={title}
           />
@@ -60,6 +64,17 @@ function Home() {
 
   useEffect(() => {
     document.querySelector('.navbar__inner').classList.add('tw-container', 'tw-mx-auto')
+
+    gsap.from('.scroll-to-display', {
+      duration: 1,
+      opacity: 0,
+      y: 50,
+      stagger: 0.25,
+      scrollTrigger: {
+        trigger: '.scroll-to-display',
+        toggleActions: 'restart none none none',
+      },
+    })
   }, [])
 
   return (
@@ -117,7 +132,7 @@ function Home() {
         </div>
 
         <div className="hero">
-          <div className="tw-container tw-mx-auto tw-px-4 tw-text-center">
+          <div className="tw-container tw-mx-auto max-lg:tw-px-4 tw-text-center">
             <h2 className="tw-text-lg">
               <Translate id="home.whoisusing">Who is Using Chaos Mesh</Translate>
             </h2>
@@ -141,12 +156,12 @@ function Home() {
         </div>
 
         <div className="hero">
-          <div className="tw-container tw-mx-auto tw-px-4">
+          <div className="tw-container tw-mx-auto max-lg:tw-px-4">
             <div className="tw-max-w-[600px] xl:tw-max-w-[800px] tw-mb-12">
               {/* TODO: add translation. */}
               <h2 className="tw-text-3xl xl:tw-text-4xl">
-                Make <span className={styles.heroTitle}>Cloud Native + Chaos Engineering</span> simple and
-                straightforward.
+                Make <span className={styles.heroTitle}>Cloud Native</span> +{' '}
+                <span className={styles.heroTitle}>Chaos Engineering</span> simple and straightforward.
               </h2>
               <p className="lg:tw-text-lg tw-font-medium">
                 Based on the principles of chaos engineering, Chaos Mesh abstracts real-world events into objects that
@@ -165,7 +180,10 @@ function Home() {
                         id="home.k8s.1"
                         values={{
                           crd: (
-                            <Link to="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">
+                            <Link
+                              className="tw-underline dark:tw-no-underline"
+                              to="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/"
+                            >
                               CustomResourceDefinition (CRD)
                             </Link>
                           ),
@@ -189,8 +207,16 @@ function Home() {
                       <Translate
                         id="home.easytouse.1"
                         values={{
-                          minikube: <Link to="https://minikube.sigs.k8s.io/">minikube</Link>,
-                          kind: <Link to="https://kind.sigs.k8s.io/">kind</Link>,
+                          minikube: (
+                            <Link className="tw-underline dark:tw-no-underline" to="https://minikube.sigs.k8s.io/">
+                              minikube
+                            </Link>
+                          ),
+                          kind: (
+                            <Link className="tw-underline dark:tw-no-underline" to="https://kind.sigs.k8s.io/">
+                              kind
+                            </Link>
+                          ),
                         }}
                       >
                         {
@@ -207,8 +233,8 @@ function Home() {
                       </li>
                       <li>
                         <Translate id="home.easytouse.3">
-                          Efficiently orchestrate the behavior of chaos experiments with the dashboard, allowing users
-                          to observe the experiment's state in real time and quickly roll back any injected failures.
+                          Quickly create chaos experiments through the dashboard, allowing users to observe the
+                          experiment's state in real time and quickly roll back any injected failures.
                         </Translate>
                       </li>
                     </ul>
@@ -256,9 +282,25 @@ function Home() {
         </div>
 
         <div className="hero">
-          <div className="tw-container tw-mx-auto tw-px-4 tw-text-center">
-            <h2 className="hero__subtitle">
-              Chaos Mesh is a <Link to="https://cncf.io/">Cloud Native Computing Foundation</Link> incubating project
+          <div className="tw-container tw-mx-auto max-lg:tw-px-4">
+            <div className="tw-max-w-[500px] xl:tw-max-w-[700px] tw-mb-12">
+              {/* TODO: add translation. */}
+              <h2 className="tw-text-3xl xl:tw-text-4xl">
+                Orchestrate complex fault scenarios with <span className={styles.heroTitle}>Workflows</span>
+              </h2>
+              <p className="lg:tw-text-lg tw-font-medium">...</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="hero">
+          <div className="tw-container tw-mx-auto max-lg:tw-px-4 tw-text-center">
+            <h2 className="tw-text-lg">
+              Chaos Mesh is a{' '}
+              <Link className="tw-underline dark:tw-no-underline" to="https://cncf.io/">
+                Cloud Native Computing Foundation
+              </Link>{' '}
+              incubating project
             </h2>
             <div className="cncf-logo tw-h-16 md:tw-h-24" />
           </div>

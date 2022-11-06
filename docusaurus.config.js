@@ -48,14 +48,21 @@ module.exports = {
           ],
         },
         { to: 'docs', label: 'Documentation' },
+
         {
-          href: 'https://community.cncf.io/chaos-mesh-community/',
-          label: 'Events',
-        },
-        {
-          to: 'blog',
-          label: 'Blog',
+          type: 'dropdown',
+          label: 'Community',
           position: 'right',
+          items: [
+            {
+              to: 'blog',
+              label: 'Blog',
+            },
+            {
+              href: 'https://community.cncf.io/chaos-mesh-community/',
+              label: 'Events',
+            },
+          ],
         },
         {
           type: 'localeDropdown',
@@ -96,8 +103,16 @@ module.exports = {
           title: 'Community',
           items: [
             {
+              label: 'Blog',
+              to: 'blog',
+            },
+            {
               label: 'Events',
               href: 'https://community.cncf.io/chaos-mesh-community/',
+            },
+            {
+              label: 'GitHub',
+              href: 'https://github.com/chaos-mesh/chaos-mesh',
             },
             {
               label: 'Slack (#project-chaos-mesh)',
@@ -106,19 +121,6 @@ module.exports = {
             {
               label: 'Twitter',
               href: 'https://twitter.com/chaos_mesh',
-            },
-          ],
-        },
-        {
-          title: 'More',
-          items: [
-            {
-              label: 'Blog',
-              to: 'blog',
-            },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/chaos-mesh/chaos-mesh',
             },
           ],
         },
@@ -133,7 +135,7 @@ module.exports = {
       ],
       copyright: `
         <br />
-        <strong>© Chaos Mesh Authors ${new Date().getFullYear()} | Documentation Distributed under CC-BY-4.0 </strong>
+        <strong>Copyright © Chaos Mesh Authors ${new Date().getFullYear()} | Documentation Distributed under CC-BY-4.0 </strong>
         <br />
         <br />
         © ${new Date().getFullYear()} The Linux Foundation. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our <a href="https://www.linuxfoundation.org/trademark-usage/"> Trademark Usage</a> page.
