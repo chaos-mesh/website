@@ -25,6 +25,7 @@ module.exports = {
         },
         'manage-user-permissions',
         'configure-enabled-namespace',
+        'remote-cluster-management',
         {
           type: 'category',
           label: 'Run a Single Chaos Experiment',
