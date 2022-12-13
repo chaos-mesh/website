@@ -139,6 +139,11 @@ Common fields are meaningful when the `target` of fault injection is `Request` o
 | `patch.body.value` | string | Specifies the fault of the request body or response body with patch faults. |  | no | "{"foo": "bar"}" |
 | `duration` | string | Specifies the duration of a specific experiment. |  | yes | 30s |
 | `scheduler` | string | Specifies the scheduling rules for the time of a specific experiment. |  | no | 5 \* \* \* \* |
+| `tls.secretName` | string | SecretName represents the name of required secret resource. The secrete must combined with data `{"tls.certName":cert, "tls.KeyName":key, "tls.caName":ca}` |  | no | "http-tls-scr" |
+| `tls.secretNamespace` | string | SecretNamespace represents the namespace of required secret resource,should be the same with deployment/chaos-controller-manager in most cases |  | no | "chaos-mesh" |
+| `tls.certName` | string | CertName represents the data name of cert file in secret, `tls.crt` for example |  | no | "tls.crt" |
+| `tls.KeyName` | string | KeyName represents the data name of key file in secret, `tls.key` for example |  | no | "tls.key" |
+| `tls.caName` | string | CAName represents the data name of ca file in secret, `ca.crt` for example |  | no | "ca.crt" |
 
 :::note
 
@@ -249,6 +254,70 @@ spec:
   request_headers:
     X-Forwarded-Host: 'nginx.host.org'
   abort: true
+```
+
+## TLS
+
+To inject faults inside connection base on TLS, user should use TLS mode. Our proxy play a proxy role here, so in TLS people both need to act as a remote server with a trustful CA , but also need to act as a client trust the server with some ca.
+
+So in the secret data blow user need to create its' TLS keys & CA & CRT on their own.
+
+```
+{
+	"tls.certName":cert,
+    "tls.KeyName":key,
+    "tls.caName":ca
+}
+```
+
+If user need to create a new TLS server and inject the connection to it, they should:
+
+1. Create their own root CA's private key and root CA's certificate:
+
+   ```
+   openssl req -newkey rsa:4096  -x509  -sha512  -days 365 -nodes -out ca.crt -keyout ca.key
+   ```
+
+2. Create their server's Certificate Signing Request:
+
+   ```
+   openssl genrsa -out server.key 2048
+   openssl req -new -key server.key -out server.csr
+
+   ```
+
+3. Write an extension file `server.ext` for the server like:
+
+   ```
+   authorityKeyIdentifier=keyid,issuer
+   basicConstraints=CA:FALSE
+   keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+   subjectAltName = @alt_names
+
+   [alt_names]
+   IP.1 = X.X.X.X
+   ```
+
+4. Generate certificate of server:
+
+   ```
+   openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 365 -sha256 -extfile server.ext
+   ```
+
+5. Add CA `ca.crt` to client.
+
+6. Put `server.key`, `server.crt`, `ca.crt` into a secrete and give it to TLS mode.
+
+If user need to inject a client , they should act the proxy of HTTP Chaos like the remote server , you should just edit `server.ext` above to the specify domain.
+
+Example:
+
+```
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = *.domain.com
+IP.1 = xxx.xxx.xxx.xxx
 ```
 
 ## Local debugging
