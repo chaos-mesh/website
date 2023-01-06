@@ -231,7 +231,7 @@ Setting `action` to `bandwidth` means simulating bandwidth limit fault. You also
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
 | rate | string | Indicates the rate of bandwidth limit |  | Yes | 1mbps |
-| limit | string | Indicates the number of bytes waiting in queue |  | Yes | 1 |
+| limit | int | Indicates the number of bytes waiting in queue |  | Yes | 1 |
 | buffer | uint32 | Indicates the maximum number of bytes that can be sent instantaneously |  | Yes | 1 |
 | peakrate | uint64 | Indicates the maximum consumption of `bucket` (usually not set) |  | No | 1 |
 | minburst | uint32 | Indicates the size of `peakrate bucket` (usually not set) |  | No | 1 |
