@@ -264,7 +264,7 @@ So in the secret data blow user need to create its' TLS keys & CA & CRT on their
 
 ```
 {
-	"tls.certName":cert,
+	  "tls.certName":cert,
     "tls.KeyName":key,
     "tls.caName":ca
 }
