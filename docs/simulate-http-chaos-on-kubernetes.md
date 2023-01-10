@@ -264,9 +264,9 @@ So in the secret data blow user need to create its' TLS keys & CA & CRT on their
 
 ```
 {
-	  "tls.certName":cert,
-    "tls.KeyName":key,
-    "tls.caName":ca
+  "tls.certName":cert,
+  "tls.KeyName":key,
+  "tls.caName":ca
 }
 ```
 
@@ -283,7 +283,6 @@ If user need to create a new TLS server and inject the connection to it, they sh
    ```
    openssl genrsa -out server.key 2048
    openssl req -new -key server.key -out server.csr
-
    ```
 
 3. Write an extension file `server.ext` for the server like:
