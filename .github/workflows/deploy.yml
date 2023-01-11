@@ -4,9 +4,15 @@ on:
   pull_request:
     branches:
       - master
+    paths-ignore:
+      - 'README.md'
+      - 'gitpod.yml'
   push:
     branches:
       - master
+    paths-ignore:
+      - 'README.md'
+      - 'gitpod.yml'
 
 permissions: read-all
 
