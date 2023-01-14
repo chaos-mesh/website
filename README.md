@@ -84,6 +84,7 @@ For patch versions, it's only needed to move some folders and change some text. 
 3. `versioned_sidebars/version-2.1.3-sidebars.json` to `versioned_sidebars/version-2.1.4-sidebars.json` and replace `2.1.3` with `2.1.4` (if have) in json.
 4. `i18n/zh/docusaurus-plugin-content-docs/version-2.1.3` to `i18n/zh/docusaurus-plugin-content-docs/version-2.1.4`.
 5. `i18n/zh/docusaurus-plugin-content-docs/version-2.1.3.json` to `i18n/zh/docusaurus-plugin-content-docs/version-2.1.4.json` and replace `2.1.3` with `2.1.4` in json.
+6. Update `src/data/versions.js`.
 
 Don't forget test the new version build after you've done the above steps!
 
