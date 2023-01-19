@@ -1,5 +1,5 @@
 ---
-title: 快速试用（测试推荐）
+title: 快速试用
 ---
 
 import PickVersion from '@site/src/components/PickVersion'
@@ -10,11 +10,11 @@ import QuickRun from './common/quick-run.md'
 
 本篇文档描述如何在测试环境或本机环境快速试用 Chaos Mesh。
 
-:::note 注意
+:::caution 注意
 
-**本文档提供的 Chaos Mesh 安装方式为脚本安装，仅供快速试用。**
+**在本文档中，Chaos Mesh 是通过脚本安装的，仅供快速试用。**
 
-如果需要在生产环境或者是其他严格的非测试场景下安装，推荐使用 [Helm](https://helm.sh/)，详情请参考[使用 Helm 安装（生产推荐）](production-installation-using-helm.md)。
+如果需要在生产环境或者是其他严格的非测试场景下安装，推荐使用 [Helm](https://helm.sh/)。详情请参考[使用 Helm 安装](production-installation-using-helm.md)。
 
 :::
 

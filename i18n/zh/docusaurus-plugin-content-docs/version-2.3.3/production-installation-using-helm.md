@@ -1,5 +1,5 @@
 ---
-title: 使用 Helm 安装（生产推荐）
+title: 使用 Helm 安装 Chaos Mesh
 ---
 
 import PickVersion from '@site/src/components/PickVersion'

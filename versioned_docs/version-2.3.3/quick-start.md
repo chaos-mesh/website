@@ -1,5 +1,5 @@
 ---
-title: Quick Start (Test Recommended)
+title: Quick Start
 ---
 
 import PickVersion from '@site/src/components/PickVersion'
@@ -8,13 +8,13 @@ import VerifyInstallation from './common/verify-installation.md'
 
 import QuickRun from './common/quick-run.md'
 
-This document describes how to quickly start Chaos Mesh in a test or local environment.
+This document describes how to start Chaos Mesh quickly in a test or local environment.
 
-:::note
+:::caution
 
-**In this document, the Chaos Mesh installation is a script installation for quick trial only.**
+**In this document, Chaos Mesh is installed via a script for quick trial only.**
 
-If you need to install Chaos Mesh in the production environment or other strict non-test scenarios, it is recommended to use [Helm](https://helm.sh/). For details, refer to [Installation using Helm (recommended for production)](production-installation-using-helm.md).
+If you need to install Chaos Mesh in the production environment or other strict non-test scenarios, it is recommended to use [Helm](https://helm.sh/). For more details, refer to [Installation using Helm](production-installation-using-helm.md).
 
 :::
 
