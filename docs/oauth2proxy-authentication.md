@@ -77,7 +77,6 @@ spec:
         - <chaos-mesh-url>
       secretName: <tls-secret-name>
 ```
-
 This way all traffic will go through the OAuth2Proxy first and after a successful authentication a token will be stored in your cockies to avoid authenticating every request. Important here is the **--pass-authorization-header** argument to the OAuth2Proxy deployment/pod, which tells the OAuth2Proxy to pass the ID token to chaos-dashboard. This ID token is the one used for authentication and authorization against k8s. Thus, after authentication, the user will be able to create the specific chaos resources in the specified namespaces allowed by the cluster's RBACs. Note also that the ingress doesn't need any special annotations.
 
 ## Configuring and Starting Chaos Mesh
