@@ -2,15 +2,15 @@
 title: OAuth2Proxy Authentication
 ---
 
-When Chaos Mesh is deployed kubernetes, you can use OAuth2proxy to allow access to the dashboard. Additionally, you could pass the ID token from OAuth2proxy to the dashboard, which then allow users to create experiments in the namespaces made accessiable by that token. This document describes how to enable and configure this function.
+If Chaos Mesh is deployed on Kubernetes, you can use OAuth2proxy to allow access to the dashboard. Additionally, you can pass the ID token from OAuth2proxy to the dashboard, which then allows users to create experiments in the namespaces made accessible by that token. This document describes how to enable and configure this feature.
 
 ## Create OAuth Client
 
-Just like for [GCP OAuth authentication](https://chaos-mesh.org/docs/gcp-authentication/), you'll need to create an OAuth client in your identity provider, which at the end will give you Client ID and Client Secret needed for the following steps.
+As with [GCP OAuth Authentication](https://chaos-mesh.org/docs/gcp-authentication/), you'll need to create an OAuth client with your identity provider, which will end up giving you the Client ID and Client Secret needed for the following steps.
 
 ## Deploy OAuth2proxy
 
-Check out [OAuth2Proxy's installation documentation](https://oauth2-proxy.github.io/oauth2-proxy/docs/) for detailed information, but you'll need a deployment, a service and an ingress similar to the following:
+See [OAuth2Proxy's installation documentation](https://oauth2-proxy.github.io/oauth2-proxy/docs/) for detailed information, but you'll need a deployment, a service, and an ingress similar to the following:
 
 ```yaml
 apiVersion: apps/v1
@@ -78,12 +78,12 @@ spec:
       secretName: <tls-secret-name>
 ```
 
-This way all trafic will go first through the OAuth2Proxy and after a sucessful authentication a token will be saved in your cockies to avoid authenticating every request. Important here is the argument **--pass-authorization-header** for the OAuth2Proxy deployment/pod, which tells OAuth2Proxy to pass the ID token to chaos-dashboard. This ID token is the one used to authenticate and authorize against k8s. Thus, aufter authentication the user will be able to create the specific chaos-resources in the specified namespaces allowed by the cluster's RBACs. Note also that the ingress doesn't need any special annotations.
+This way all traffic will go through the OAuth2Proxy first and after a successful authentication a token will be stored in your cockies to avoid authenticating every request. Important here is the **--pass-authorization-header** argument to the OAuth2Proxy deployment/pod, which tells the OAuth2Proxy to pass the ID token to chaos-dashboard. This ID token is the one used for authentication and authorization against k8s. Thus, after authentication, the user will be able to create the specific chaos resources in the specified namespaces allowed by the cluster's RBACs. Note also that the ingress doesn't need any special annotations.
 
-## Configure and start Chaos Mesh
+## Configuring and Starting Chaos Mesh
 
-Unfortuanetly at the moment there's no option to turn off the login popup in the dashboard without completely disabling authentication. So basically what you need to do after a successful authentication against your IdP is to skip that popup by entering any input, as that input no longer is used given the ID token is passed from OAuth2Proxy.
+Unfortunately, there's currently no way to turn off the login popup in the dashboard without completely disabling authentication. So basically what you need to do after successfully authenticating against your IdP is to skip the popup by entering any input, as that input is no longer used since the ID token is passed from OAuth2Proxy.
 
-## Use the function
+## Using the function
 
-Once you call the chais-mesh url you'll be prompted to for authentication by your IdP and when sucessful, enter any input in chaos-mesh's authentication popup and submit then you're ready to use the dashboard.
+Once you call the chais-mesh url, you will be prompted by your IdP for authentication, and if successful, enter any input in chaos-mesh's authentication popup and submit, then you're ready to use the dashboard.
