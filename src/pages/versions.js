@@ -6,7 +6,7 @@ import React from 'react'
 import { archivedVersions, stableVersions } from '../data/versions'
 import styles from './versions.module.css'
 
-const allVersionsText = 'All versions of Chaos Mesh'
+const allVersionsText = 'All Versions of Chaos Mesh'
 
 export default function Versions() {
   return (
@@ -20,8 +20,7 @@ export default function Versions() {
             official documentation, and the rest will be archived.
           </p>
           <p>
-            You can learn more about our version support via{' '}
-            <Link to="/docs/supported-releases">Supported Releases</Link>.
+            You can learn more about our version support via <Link to="/supported-releases">Supported Releases</Link>.
           </p>
 
           <h2>Development version</h2>
