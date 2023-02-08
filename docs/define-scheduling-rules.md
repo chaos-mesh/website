@@ -97,7 +97,7 @@ Chaos Mesh uses [robfig/cron/v3](https://pkg.go.dev/github.com/robfig/cron/v3) t
 
 :::tip
 
-If you need to generate a schedule, you can also use some web tools such as [crontab.guru](https://crontab.guru).
+If you need to generate a schedule, you can use some web tools such as [crontab.guru](https://crontab.guru).
 
 :::
 
