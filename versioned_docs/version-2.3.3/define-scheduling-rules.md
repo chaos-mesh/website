@@ -43,9 +43,9 @@ spec:
     duration: '12s'
 ```
 
-Save this YAML file as `schedule-networkchaos.yaml`, and then run `kubectl apple-f ./schedule-networkchaos.yaml`.
+Save this YAML file as `schedule-networkchaos.yaml`, and then run `kubectl apply -f ./schedule-networkchaos.yaml`.
 
-Based on this configuration, Chaos Mesh will create the following `NetworkChaos` object in the fifth minute of each hour (such as 0:05, 1:05...):
+Based on this configuration, Chaos Mesh will create the following `NetworkChaos` object in the fifth minute of each hour (such as `0:05`, `1:05`...):
 
 ```yaml
 apiVersion: chaos-mesh.org/v1alpha1
@@ -67,7 +67,7 @@ spec:
   duration: '12s'
 ```
 
-The fields in `Schedule` are described below, mostly similar to fields in Kubernetes `CronJob`. You can refer to [documentation of Kubernetes CronJob](https://kubernetes.io/zh/docs/concepts/workloads/controllers/cron-jobs/) for more information.
+The fields in `Schedule` are described below, mostly similar to fields in Kubernetes `CronJob`. You can refer to the [documentation of Kubernetes CronJob](https://kubernetes.io/zh/docs/concepts/workloads/controllers/cron-jobs/) for more information.
 
 :::note
 
@@ -77,29 +77,59 @@ The timezone in the `schedule` field subjects to the timezone of `chaos-controll
 
 ### `schedule` field
 
-The `schedule` field is used to specify the time when an experiment occurs.
+The `schedule` field is used to specify the time when an experiment is to be run. In other words, the alias for a schedule is a cron job:
 
-```
+```txt
 # ┌───────────── minute (0 - 59)
 # │ ┌───────────── hour (0 - 23)
-# │ │ ┌───────────── day of month (1 - 31)
+# │ │ ┌───────────── day of the month (1 - 31)
 # │ │ │ ┌───────────── month (1 - 12)
-# │ │ │ │ ┌───────────── day of week (0 - 6) (from Sunday to Monday; on some systems, 7 is also Sunday)
+# │ │ │ │ ┌───────────── day of the week (0 - 6) (Sunday to Saturday; 7 is also Sunday on some systems)
 # │ │ │ │ │
 # │ │ │ │ │
 # │ │ │ │ │
-# * * * * *
+# * * * * * <command to execute>
 ```
 
-| Input                 | Description                                    | Equivalence   |
-| --------------------- | ---------------------------------------------- | ------------- |
-| @year (or @annually)  | run at midnight on January 1 of each year      | 0 0 1 1 \*    |
-| @monthly              | run at midnight on the first day of each month | 0 0 1 \* \*   |
-| @weekly               | run at midnight on Sunday of each week         | 0 0 \* \* 0   |
-| @daily (or @midnight) | run at midnight each day                       | 0 0 \* \* \*  |
-| @hourly               | run at the beginning of each hour              | 0 \* \* \* \* |
+> This diagram is taken from <https://en.wikipedia.org/wiki/Cron>.
 
-If you need to generate time expressions, you can also use web tools such as [crontab.guru](https://crontab.guru).
+Chaos Mesh uses [robfig/cron/v3](https://pkg.go.dev/github.com/robfig/cron/v3) to transform the `schedule` field into a cron expression internally.
+
+:::tip
+
+If you need to generate a schedule, you can use some web tools such as [crontab.guru](https://crontab.guru).
+
+:::
+
+#### Predefined schedules
+
+In addition to regular syntax, it also has several pre-defined schedules. You may use one of several pre-defined schedules in place of a cron expression:
+
+| Entry                  | Description                                | Equivalent To |
+| ---------------------- | ------------------------------------------ | ------------- |
+| @yearly (or @annually) | Run once a year, midnight, Jan. 1st        | 0 0 1 1 \*    |
+| @monthly               | Run once a month, midnight, first of month | 0 0 1 \* \*   |
+| @weekly                | Run once a week, midnight between Sat/Sun  | 0 0 \* \* 0   |
+| @daily (or @midnight)  | Run once a day, midnight                   | 0 0 \* \* \*  |
+| @hourly                | Run once an hour, beginning of hour        | 0 \* \* \* \* |
+
+> This table is taken from <https://pkg.go.dev/github.com/robfig/cron/v3#hdr-Predefined_schedules>.
+
+#### Intervals
+
+You may also schedule a job to execute at fixed intervals, starting at the time it's added or cron is run. This is supported by formatting the cron spec like this:
+
+```txt
+@every <duration>
+```
+
+For example, `@every 1h30m10s` would indicate a schedule that activates after 1 hour, 30 minutes, 10 seconds, and then every interval after that.
+
+:::info
+
+The content of `Intervals` is taken from <https://pkg.go.dev/github.com/robfig/cron/v3#hdr-Intervals>. You can refer to the official documentation for more information.
+
+:::
 
 ### `historyLimit` field
 

@@ -45,7 +45,7 @@ spec:
 
 将此 YAML 文件保存至 `schedule-networkchaos.yaml`，运行 `kubectl apply -f ./schedule-networkchaos.yaml` 即可。
 
-依据此配置，Chaos Mesh 将会在每个小时的第五分钟（比如 0:05, 1:05...）创建以下 `NetworkChaos` 对象：
+依据此配置，Chaos Mesh 将会在每个小时的第五分钟（比如 `0:05`, `1:05`...）创建以下 `NetworkChaos` 对象：
 
 ```yaml
 apiVersion: chaos-mesh.org/v1alpha1
