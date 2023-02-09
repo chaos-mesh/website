@@ -4,17 +4,19 @@ title: Manage User Permissions
 
 import PickHelmVersion from '@site/src/components/PickHelmVersion'
 
-This document describes how to manage user permissions in Chaos Mesh, including creating user account of different roles, binding permissions for users, managing tokens, and enable or disable permission authentication.
+This document describes how to manage user permissions in Chaos Mesh, including creating user accounts with different roles, binding permissions to users, managing tokens, and enabling or disabling permission authentication.
 
-Chaos Mesh uses the native [RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) features in Kubernetes to manage user roles and permissions. To create, view and manage Chaos experiments, users need to have the corresponding permissions in the `apiGroups` of `chaos-mesh.org` to customize resources of Chaos experiments.
+Chaos Mesh uses [RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) authorization to manage user roles and permissions. To create, view and manage Chaos Experiments, users must have the appropriate permissions in the `apiGroups` of `chaos-mesh.org` to customise the resources of Chaos Experiments.
 
-:::note
+:::caution
 
-If Chaos Mesh is installed using Helm, permission authentication is enabled by default. For production environments and other scenarios with high security requirements, it is recommended to keep the permission authentication feature enabled. If you just want to give Chaos Mesh a try and quickly create Chaos experiments without enabling the permission authentication feature, you can refer to [Enable or disable permission authentication](#enable-or-disable-permission-authentication) to learn how to disable the feature.
+Chaos Mesh allows you to disable permission authentication, see [Enable or disable permission authentication](#enable-or-disable-permission-authentication) to learn how to disable it.
+
+**Note that we do not recommend disabling permission authentication in production environments.**
 
 :::
 
-### Create user accounts and bind permissions
+## Create user accounts and bind permissions
 
 You can create user accounts and bind permissions directly through the Chaos Mesh Dashboard interface. When you access the Dashboard, a login window pops up. Click the link **Click here to generate**:
 
@@ -131,7 +133,7 @@ The steps to create user accounts and bind permissions are as follows. You need 
 
 :::
 
-### Logout Token
+## Log out
 
 If you need to replace the token with another, click the **Settings** button shown in the left side bar on the Dashboard web page:
 
@@ -139,12 +141,14 @@ If you need to replace the token with another, click the **Settings** button sho
 
 On the most top of the page, you can see the **Logout** button. Click the button to log out the current token.
 
+## FAQ
+
 ### Enable or disable permission authentication
 
-If Chaos Mesh is installed using Helm, the permission authentication feature is enabled by default.For production environments and other scenarios with high security requirements, it is recommended to keep the permission authentication feature enabled.If you just want to give Chaos Mesh a try and quickly create Chaos experiments with the permission authentication feature disabled, you can set `--set dashboard.securityMode=false` in a Helm command. The command is as follows:
+When Chaos Mesh is installed using Helm, Permission Authentication is enabled by default. For production environments and other high security scenarios, it is recommended to leave permission authentication enabled. If you are just trying out Chaos Mesh and want to quickly create Chaos experiments, you can set `--set dashboard.securityMode=false` in a Helm command to disable authentication. The command looks like this:
 
 <PickHelmVersion>
 helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-mesh --version latest --set dashboard.securityMode=false
 </PickHelmVersion>
 
-If you want to enable the permission authentication feature again, then reset `--set dashboard.securityMode=true` in a Helm command.
+If you want to enable the permission authentication again, then reset `--set dashboard.securityMode=true` in a Helm command.
