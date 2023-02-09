@@ -38,7 +38,7 @@ title: 基本功能
 - 支持使用 YAML 文件定义和管理混沌实验场景
 - 支持通过 Web UI 定义和管理混沌实验场景
 
-具体的实验场景配置，参考具体[创建 Chaos Mesh Workflow](create-chaos-mesh-workflow.md)。
+具体的实验场景配置，参考具体[创建 Chaos Mesh 工作流](create-chaos-mesh-workflow.md)。
 
 ## 可视化操作
 
