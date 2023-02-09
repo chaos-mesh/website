@@ -40,21 +40,21 @@ Click **NEW WORKFLOW**.
 
 1. Select an option under **Choose task type** according to your needs.
 
-    In this example, the "Single” type is selected as the task type.
+   In this example, the "Single” type is selected as the task type.
 
-    :::note
+   :::note
 
-    Chaos Dashboard automatically creates a serial node named "entry" as the entry point for this workflow.
+   Chaos Dashboard automatically creates a serial node named "entry" as the entry point for this workflow.
 
-    :::
+   :::
 
-    ![Choose Task Type](./img/choose-task-type.png)
+   ![Choose Task Type](./img/choose-task-type.png)
 
 2. Fill out the experiment information.
 
-    The configuration method is the same as creating a normal chaos experiment. For example, you can set up a "POD KILL" type of "PodChaos" named `kill-nginx`.
+   The configuration method is the same as creating a normal chaos experiment. For example, you can set up a "POD KILL" type of "PodChaos" named `kill-nginx`.
 
-    ![Create podkill in Workflow](./img/create-podkill-in-workflow.png)
+   ![Create podkill in Workflow](./img/create-podkill-in-workflow.png)
 
 ### Step 4. Submit the workflow
 
@@ -215,7 +215,7 @@ When creating a Chaos with a duration in the workflow, you need to fill the dura
 | container | object | Defines a customized task container. See [Container field description](#container-field-description) for details. | None | No |  |
 | volumes | array | If you need to mount a volume in a customized task container, you need to declare the volume in this field. For the detailed definition of a volume, see the [Kubernetes documentation - corev1.Volume](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#volume-v1-core). | None | No |  |
 
-### Conditional branch field description
+### ConditionalBranch field description
 
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |

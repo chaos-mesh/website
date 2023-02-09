@@ -1,14 +1,14 @@
 ---
-title: 创建 Chaos Mesh Workflow
+title: 创建 Chaos Mesh 工作流
 ---
 
-## Chaos Mesh Workflow 简介
+## Chaos Mesh 工作流简介
 
 在 Chaos Mesh 中模拟真实的系统故障时，通常伴随着持续验证。你可能希望在 Chaos Mesh 平台上构建一系列故障，而不是执行单个独立的混沌故障注入操作。
 
-为满足该需求，Chaos Mesh 提供了 Chaos Mesh Workflow，一个内置的工作流引擎。使用该引擎，你可以串行或并行地执行多种不同的 Chaos 实验， 用于模拟生产级别的错误。
+为满足该需求，Chaos Mesh 提供了 Chaos Mesh 工作流，一个内置的工作流引擎。使用该引擎，你可以串行或并行地执行多种不同的 Chaos 实验， 用于模拟生产级别的错误。
 
-目前， Chaos Mesh Workflow 支持以下功能：
+目前， Chaos Mesh 工作流支持以下功能：
 
 - 串行编排
 - 并行编排
@@ -20,11 +20,11 @@ title: 创建 Chaos Mesh Workflow
 - 使用并行编排同时注入多个 NetworkChaos 模拟复杂的网络环境
 - 在串行编排中进行健康检查，使用条件分支决定是否执行剩下的步骤
 
-Chaos Mesh Workflow 在设计时一定程度上参考了 Argo Workflow。如果您熟悉 Argo Workflow 您也能很快地上手 Chaos Mesh Workflow。
+Chaos Mesh 工作流 在设计时一定程度上参考了 Argo 工作流。如果您熟悉 Argo 工作流，您也能很快地上手 Chaos Mesh 工作流。
 
-Github 仓库中含有其他 Workflow 的[示例](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples/workflow).
+Github 仓库中含有其他工作流的[示例](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples/workflow).
 
-## 通过 Chaos Dashboard 创建 Workflow
+## 通过 Chaos Dashboard 创建工作流
 
 ### 第 1 步：打开 Chaos Dashboard
 
@@ -62,21 +62,21 @@ Github 仓库中含有其他 Workflow 的[示例](https://github.com/chaos-mesh/
 
 ![Submit Workflow](./img/submit-workflow.png)
 
-## 使用 YAML 文件与 `kubectl` 创建 Workflow
+## 使用 YAML 文件与 `kubectl` 创建工作流
 
-Workflow 类似于各种类型的 Chaos 对象，同样作为 CRD 存在于 kubernetes 集群中。你可以使用 `kubectl create -f <workflow.yaml>` 创建 Chaos Mesh Workflow。以下为创建的具体示例。使用本地 YAML 文件创建 Workflow：
+工作流 类似于各种类型的 Chaos 对象，同样作为 CRD 存在于 kubernetes 集群中。你可以使用 `kubectl create -f <workflow.yaml>` 创建 Chaos Mesh 工作流。以下为创建的具体示例。使用本地 YAML 文件创建工作流：
 
 ```shell
 kubectl create -f <workflow.yaml>
 ```
 
-使用网络上的 YAML 文件创建 Workflow：
+使用网络上的 YAML 文件创建工作流：
 
 ```shell
 kubectl create -f https://raw.githubusercontent.com/chaos-mesh/chaos-mesh/master/examples/workflow/serial.yaml
 ```
 
-一个简单的 Workflow YAML 文件定义如下所示，这个 Workflow 将会同时注入 `StressChaos`、`NetworkChaos` 与 `PodChaos`：
+一个简单的工作流 YAML 文件定义如下所示，这个工作流将会同时注入 `StressChaos`、`NetworkChaos` 与 `PodChaos`：
 
 ```yaml
 apiVersion: chaos-mesh.org/v1alpha1
@@ -134,9 +134,9 @@ spec:
             options: ['--cpu 1', '--timeout 600']
 ```
 
-其中 `templates` 定义了实验中的各个步骤，`entry` 定义了 Workflow 执行时的入口。
+其中 `templates` 定义了实验中的各个步骤，`entry` 定义了工作流执行时的入口。
 
-`templates` 中的每个元素都代表了一个 Workflow 的步骤，例如:
+`templates` 中的每个元素都代表了一个工作流的步骤，例如:
 
 ```yaml
 name: the-entry
@@ -166,7 +166,7 @@ podChaos:
 
 `templateType: PodChaos` 代表节点的类型为 PodChaos 实验；`deadline: 40s` 代表当前 Chaos 实验将持续 40 秒；`podChaos` 字段是 PodChaos 实验的定义。
 
-通过 YAML 文件与 `kubectl` 创建 Workflow 较为灵活，你可以对串行活并行编排进行嵌套，声明复杂的编排，甚至可以与条件分支组合达到循环的效果。
+通过 YAML 文件与 `kubectl` 创建工作流较为灵活，你可以对串行活并行编排进行嵌套，声明复杂的编排，甚至可以与条件分支组合达到循环的效果。
 
 ## 字段说明
 
@@ -174,8 +174,8 @@ podChaos:
 
 | 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
 | --- | --- | --- | --- | --- | --- |
-| entry | string | 声明 Workflow 的入口，值为 templates 中某一 template 的名称。 | 无 | 是 |  |
-| templates | []Template | 声明 Workflow 中可执行的各个步骤的行为，详见 [Template 字段说明](#template-字段说明) | 无 | 是 |  |
+| entry | string | 声明工作流的入口，值为 templates 中某一 template 的名称。 | 无 | 是 |  |
+| templates | []Template | 声明工作流中可执行的各个步骤的行为，详见 [Template 字段说明](#template-字段说明) | 无 | 是 |  |
 
 ### Template 字段说明
 
@@ -186,7 +186,7 @@ podChaos:
 | deadline | string | template 持续的时间。 | 无 | 否 | '5m30s' |
 | children | []string | 声明该 template 下的子任务，当 type 为 Serial 或 Parallel 时需要配置该字段。 | 无 | 否 | ["any-chaos-1", "another-serial-2", "any-shcedule"] |
 | task | Task | 配置自定义任务，当 type 为 Task 时需要配置该字段。详见 [Task 字段说明](#task-字段说明) | 无 | 否 |  |
-| conditionalBranches | []ConditionalBranch | 配置自定任务后的条件分支，当 type 为 Task 时可选配置该字段。详见 [ConditionalBranch 字段说明](#conditionalBranch-字段说明) | 无 | 否 |  |
+| conditionalBranches | []ConditionalBranch | 配置自定任务后的条件分支，当 type 为 Task 时可选配置该字段。详见 [ConditionalBranch 字段说明](#conditionalbranch-字段说明) | 无 | 否 |  |
 | awsChaos | object | 配置 AWSChaos，当 type 为 AWSChaos 时需要配置该字段。详见 [模拟 AWS 故障](simulate-aws-chaos.md) | 无 | 否 |  |
 | dnsChaos | object | 配置 DNSChaos，当 type 为 DNSChaos 时需要配置该字段。详见 [模拟 DNS 故障](simulate-dns-chaos-on-kubernetes.md) | 无 | 否 |  |
 | gcpChaos | object | 配置 GCPChaos，当 type 为 GCPChaos，当 时需要配置该字段。详见 [模拟 GCP 故障](simulate-gcp-chaos.md) | 无 | 否 |  |
@@ -200,11 +200,11 @@ podChaos:
 | timeChaos | object | 配置 TimeChaos，当 type 为 TimeChaos 时需要配置该字段。详见 [模拟时间故障](simulate-time-chaos-on-kubernetes.md) | 无 | 否 |  |
 | schedule | object | 配置 Schedule ，当 type 为 Schedule 时需要配置该字段。详见 [定义调度规则](define-scheduling-rules.md) | 无 | 否 |  |
 | statusCheck | object | 配置 StatusCheck，当 type 为 StatusCheck 时需要配置该字段。详见 [在工作流中进行状态检查](status-check-in-workflow.md) | 无 | 否 |  |
-| abortWithStatusCheck | bool | 配置当 StatusCheck 失败时是否终止 Workflow，当 type 为 StatusCheck 时可选配置该字段。 | `false` | 否 | `true` |
+| abortWithStatusCheck | bool | 配置当 StatusCheck 失败时是否终止工作流，当 type 为 StatusCheck 时可选配置该字段。 | `false` | 否 | `true` |
 
 :::note 注意
 
-当在 Workflow 中建立有持续时间的 Chaos 时，需要将持续时间填写到外层的 `deadline` 字段中，而不是使用 Chaos 中的 `duration` 字段。
+当在工作流中建立有持续时间的 Chaos 时，需要将持续时间填写到外层的 `deadline` 字段中，而不是使用 Chaos 中的 `duration` 字段。
 
 :::
 
