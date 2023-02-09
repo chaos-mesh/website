@@ -4,9 +4,9 @@ title: Manage User Permissions
 
 import PickHelmVersion from '@site/src/components/PickHelmVersion'
 
-This document describes how to manage user permissions in Chaos Mesh, including creating user accounts with different roles, binding permissions to users, managing tokens, and enabling or disabling permission authentication.
+This document describes how to manage user permissions in Chaos Mesh, including creating user accounts with different roles, binding permissions to user accounts, managing tokens, and enabling or disabling permission authentication.
 
-Chaos Mesh uses [RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) authorization to manage user roles and permissions. To create, view and manage Chaos Experiments, users must have the appropriate permissions in the `apiGroups` of `chaos-mesh.org` to customise the resources of Chaos Experiments.
+Chaos Mesh uses [RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) to manage user permissions. To create, view and manage chaos experiments, users must have the appropriate permissions in the `apiGroups` of `chaos-mesh.org` to refer the resources of chaos experiments.
 
 :::caution
 
@@ -18,134 +18,143 @@ Chaos Mesh allows you to disable permission authentication, see [Enable or disab
 
 ## Create user accounts and bind permissions
 
-You can create user accounts and bind permissions directly through the Chaos Mesh Dashboard interface. When you access the Dashboard, a login window pops up. Click the link **Click here to generate**:
+You can use the Chaos Dashboard to help you create user accounts and bind permissions. When you access the dashboard, a login window will appear. Click on the **Click here to generate** link:
 
 ![Dashboard Token Login 1](img/dashboard_login1.png)
 
-After you click the link, another window pops up as follows:
+When you click on the link, a Token Generator will appear, as follows:
 
 ![Dashboard Token Generator](img/token_helper.png)
 
-The steps to create user accounts and bind permissions are as follows. You need to perform the first three of the following steps in the pop-up window:
+The steps to create user accounts and bind permissions are as follows:
 
-1. Choose the permission scope
+### Choose the scope of permissions
 
-   If you want to give the account the appropriate permissions for all Chaos experiments in Kubernetes, check the **Cluster scoped** box. If you specify a namespace in the **Namespace** dropdown option box, the account only has permissions in that specified namespace.
+If you want to give the account the appropriate permissions for all chaos experiments in the cluster, tick the **Cluster scoped** checkbox. If you specify a namespace in the **Namespace** dropdown, the account will only have permissions in the specified namespace.
 
-2. Choose the user role
+In summary, there are two options to choose from:
 
-   Currently, Chaos Mesh provides the following user roles:
+- `Cluster scoped`: the account has permissions for all chaos experiments in cluster.
+- `Namespace scoped`: the account has permissions for all chaos experiments in the specified namespace.
 
-   - Manager, who has all permissions to create, view, update, and delete Chaos experiments.
-   - Viewer, who has only the view permission for Chaos experiments.
+### Select the role of users
 
-3. Generate RBAC configurations
+Currently, Chaos Mesh provides the following user roles
 
-   After determining the permission scope and user role of the created account, the Dashboard shows the corresponding RBAC configuration on the pop-up window page. For example, the RBAC configurations for a manager account in the namespace `default` looks like this:
+- `Manager`: who has all permissions to create, view, update and delete chaos experiments.
+- `Viewer`: who only has the right to view chaos experiments.
 
-   ```yaml
-   kind: ServiceAccount
-   apiVersion: v1
-   metadata:
-     namespace: default
-     name: account-default-manager-vfmot
+### Generate the permission
 
-   ---
-   kind: Role
-   apiVersion: rbac.authorization.k8s.io/v1
-   metadata:
-     namespace: default
-     name: role-default-manager-vfmot
-   rules:
-   - apiGroups: [""]
-     resources: ["pods", "namespaces"]
-     verbs: ["get", "watch", "list"]
-   - apiGroups:
-     - chaos-mesh.org
-     resources: [ "*" ]
-     verbs: ["get", "list", "watch", "create", "delete", "patch", "update"]
+Once the permission scope and user role have been defined, the Dashboard will display the corresponding RBAC configuration in the Token Generator. For example, the permission for a manager with the `default` namespace will look like this:
 
-    ---
-   apiVersion: rbac.authorization.k8s.io/v1
-   kind: RoleBinding
-   metadata:
-     name: bind-default-manager-vfmot
-     namespace: default
-   subjects:
-   - kind: ServiceAccount
-     name: account-default-manager-vfmot
-     namespace: default
-   roleRef:
-     kind: Role
-     name: role-default-manager-vfmot
-     apiGroup: rbac.authorization.k8s.io
-   ```
+```yaml
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  namespace: default
+  name: account-default-manager-vfmot
 
-   Click **COPY** in the upper right corner of the configuration section in the pop-up window to copy the RBAC configuration and then save the content as `rbac.yaml` locally.
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  namespace: default
+  name: role-default-manager-vfmot
+rules:
+  - apiGroups: ['']
+    resources: ['pods', 'namespaces']
+    verbs: ['get', 'watch', 'list']
+  - apiGroups:
+      - chaos-mesh.org
+    resources: ['*']
+    verbs: ['get', 'list', 'watch', 'create', 'delete', 'patch', 'update']
 
-4. Create the user account and bind permissions
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: bind-default-manager-vfmot
+  namespace: default
+subjects:
+  - kind: ServiceAccount
+    name: account-default-manager-vfmot
+    namespace: default
+roleRef:
+  kind: Role
+  name: role-default-manager-vfmot
+  apiGroup: rbac.authorization.k8s.io
+```
 
-   Run the following command in your terminal:
+Click **COPY** in the top right corner of the configuration section to copy the RBAC configuration and then save the contents locally as `rbac.yaml`.
 
-   ```bash
-   kubectl apply -f rbac.yaml
-   ```
+### Create the user account and bind permissions
 
-5. Generate the token
+Run the following command in your terminal:
 
-   Copy the command shown in the third step on the Token generator page and run the command in your terminal. The following is an example command:
-
-   ```bash
-   kubectl describe -n default secrets account-default-manager-vfmot
-   ```
-
-   The output is as follows:
-
-   ```log
-   Name:         account-default-manager-vfmot-token-n4tg8
-   Namespace:    default
-   Labels:       <none>
-   Annotations:  kubernetes.io/service-account.name: account-default-manager-vfmot
-                 kubernetes.io/service-account.uid: b71b3bf4-cd5e-4efb-8bf6-ff9a55fd7e07
-
-   Type:  kubernetes.io/service-account-token
-
-   Data
-   ====
-   ca.crt:     1111 bytes
-   namespace:  7 bytes
-   token:      eyJhbG...
-   ```
-
-   Copy the token data in the above output and use it for the next step to log in.
-
-6. Sign in to Chaos Mesh with the user account you have created
-
-   **Close** the Token generator window and return to the login window. Enter the token that you have got from the previous step in the **Token** input box and enter a meaningful name for the token in the **Name** input box. It is recommended to use a name consisting of the permission scope and the user role, such as `default-manager`. Once you finish filling these two input boxes, click **Submit** to log in:
-
-   ![Dashboard Token Login 2](img/dashboard_login2.png)
+```bash
+kubectl apply -f rbac.yaml
+```
 
 :::note
 
-- You need to ensure that the local user who executes kubectl has permissions for the cluster so that this user can create user accounts, bind permission for other users, and generate tokens.
-
-- If you have not deployed Chaos Mesh Dashboard, you can also generate RBAC configurations by yourself, then use kubectl to create user accounts and bind permissions.
+You need to ensure that the local user running `kubectl` has permissions to the cluster so that they can create user accounts, bind permissions for other users and generate tokens.
 
 :::
 
-## Log out
+### Get the token
 
-If you need to replace the token with another, click the **Settings** button shown in the left side bar on the Dashboard web page:
+Copy the command shown in the third step to the Token Generator and run it in your terminal. The following is a sample command:
+
+```bash
+kubectl describe -n default secrets account-default-manager-vfmot
+```
+
+The output is as follows:
+
+```log
+Name:         account-default-manager-vfmot-token-n4tg8
+Namespace:    default
+Labels:       <none>
+Annotations:  kubernetes.io/service-account.name: account-default-manager-vfmot
+              kubernetes.io/service-account.uid: b71b3bf4-cd5e-4efb-8bf6-ff9a55fd7e07
+
+Type:  kubernetes.io/service-account-token
+
+Data
+====
+ca.crt:     1111 bytes
+namespace:  7 bytes
+token:      eyJhbG...
+```
+
+Copy the token at the bottom and use it in the next step to login.
+
+## Log in to Chaos Dashboard with the user account you have created
+
+**Close** the Token Generator. In the **Token** field, enter the token you obtained in the previous step and in the **Name** field, enter a meaningful name for the token. It is recommended that you use a name that is a combination of the permission scope and the user role, e.g. `default-manager`. Once you have completed these two fields, click **Submit** to log in:
+
+![Dashboard Token Login 2](img/dashboard_login2.png)
+
+:::info
+
+If you have not deployed Chaos Dashboard, you can also generate RBAC configurations by yourself and then use `kubectl` to create user accounts and bind permissions.
+
+:::
+
+## Log out of Chaos Dashboard
+
+If you need to replace the token with another one, click the **Settings** on the left side bar of the Dashboard:
 
 ![Dashboard Token Logout](img/token_logout.png)
 
-On the most top of the page, you can see the **Logout** button. Click the button to log out the current token.
+At the top of the page you will see the **Logout** button. Click it to log out the current account.
 
 ## FAQ
 
 ### Enable or disable permission authentication
 
-When Chaos Mesh is installed using Helm, Permission Authentication is enabled by default. For production environments and other high security scenarios, it is recommended to leave permission authentication enabled. If you are just trying out Chaos Mesh and want to quickly create Chaos experiments, you can set `--set dashboard.securityMode=false` in a Helm command to disable authentication. The command looks like this:
+When Chaos Mesh is installed using Helm, Permission Authentication is enabled by default. For production environments and other high security scenarios, it is recommended to leave permission authentication enabled. If you are just trying out Chaos Mesh and want to quickly create chaos experiments, you can set `--set dashboard.securityMode=false` in a Helm command to disable authentication. The command looks like this:
 
 <PickHelmVersion>
 helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-mesh --version latest --set dashboard.securityMode=false
