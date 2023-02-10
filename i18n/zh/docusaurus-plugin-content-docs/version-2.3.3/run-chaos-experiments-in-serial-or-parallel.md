@@ -2,7 +2,7 @@
 title: 串行或并行运行实验
 ---
 
-Chaos Mesh Workflow 提供了串行与并行两种实验编排方式。你可以依据实验需求，编排调度多个实验的运行方式。
+Chaos Mesh 工作流提供了串行与并行两种实验编排方式。你可以依据实验需求，编排调度多个实验的运行方式。
 
 - 如果你想要按照顺序进行多个混沌实验，可以使用串行节点。
 - 如果你想要同时进行多个混沌实验，可以使用并行节点。
@@ -11,7 +11,7 @@ Chaos Mesh Workflow 提供了串行与并行两种实验编排方式。你可以
 
 ## 串行运行实验
 
-在 Workflow 中创建 `templates` 时，使用 `templateType: Serial` 便可以声明一个串行节点。
+在工作流中创建 `templates` 时，使用 `templateType: Serial` 便可以声明一个串行节点。
 
 串行节点中另一个必需的字段为 `children`，类型为 `[]string` ，值为串行执行的其他 `template` 名称。例如：
 
@@ -70,7 +70,7 @@ spec:
 
 ## 并行运行实验
 
-在 Workflow 中创建 `templates` 时，使用 `templateType: Parallel` 便可以声明一个并行节点。
+在工作流中创建 `templates` 时，使用 `templateType: Parallel` 便可以声明一个并行节点。
 
 并行节点中另一个必需的字段为 `children`，类型为 `[]string`，值为并行执行的其他 `template` 名称。例如：
 
@@ -123,11 +123,11 @@ spec:
 
 并行节点同样存在 `deadline` 可选字段，类似于串行节点，目的是限制整个并行流程的最长执行时间。若达到了这个时间，其下属的子节点将会被停止。若所有子节点先于 `deadline` 完成了行为，并行节点会立刻被标记为完成，`deadline` 没有任何影响。
 
-## 通过 Chaos Dashboard 创建串行或并行节点的 Workflow
+## 通过 Chaos Dashboard 创建串行或并行节点的工作流
 
 ### 创建串行节点
 
-Chaos Dashboard 会创建一个预定义的串行节点，名为 `entry`。因此，当在 Chaos Dashboard 中创建串行节点的 Workflow 时，默认会在 `entry` 下创建流程。
+Chaos Dashboard 会创建一个预定义的串行节点，名为 `entry`。因此，当在 Chaos Dashboard 中创建串行节点的工作流时，默认会在 `entry` 下创建流程。
 
 ![Create Serial Node On Dashboard](./img/create-serial-node-on-dashboard.png)
 
