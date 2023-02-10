@@ -46,7 +46,7 @@ module.exports = {
           label: 'Orchestrate Multiple Chaos Experiments',
           items: [
             'create-chaos-mesh-workflow',
-            'run-chaos-experiments-in-serial-or-parallel',
+            'run-serial-or-parallel-experiments',
             'send-http-request-on-workflow',
             'check-workflow-status',
             'status-check-in-workflow',
