@@ -36,5 +36,5 @@ Chaos Mesh 基于 Kubernetes CRD (Custom Resource Definition) 构建，根据不
 Chaos Mesh 的整体架构如上图所展示，可以自上而下分为三个部分：
 
 - 用户输入和观测的部分。用户输入以用户操作 (User) 为起点到达 Kubernetes API Server。用户不直接和 Chaos Mesh 的 Controller 交互，一切用户操作最终都将反映为某个 Chaos 资源的变更（比如 NetworkChaos 资源的变更）。
-- 监听资源变化、调度 Workflow 和开展混沌实验的部分。Chaos Mesh 的 Controller 只接受来自 Kubernetes API Server 的事件，这种事件描述某个 Chaos 资源的变更，例如新的 Workflow 对象或者 Chaos 对象被创建。
+- 监听资源变化、调度工作流和开展混沌实验的部分。Chaos Mesh 的 Controller 只接受来自 Kubernetes API Server 的事件，这种事件描述某个 Chaos 资源的变更，例如新的工作流对象或者 Chaos 对象被创建。
 - 具体节点故障的注入部分。该部分主要由 Chaos Daemon 组件负责，接受来自 Chaos Controller Manager 组件的指令，侵入到目标 Pod 的 Namespace 下，执行具体的故障注入。例如设置 TC 网络规则，启动 stress-ng 进程抢占 CPU 或内存资源等。

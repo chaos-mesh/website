@@ -2,7 +2,7 @@
 title: 在工作流中发送 HTTP 请求
 ---
 
-Chaos Mesh Workflow 提供了 `Task` 节点以支持任意工作负载，其功能类似于 Kubernetes 中的 `Job`。 为了提供更好的产品体验，Chaos Dashboard 提供了一个基于 `Task` 的模板。通过此模板，你可以方便地在 WebUI 中创建 HTTP 请求。本文介绍如何通过 Chaos Dashboard 创建 HTTP 请求。
+Chaos Mesh 工作流提供了 `Task` 节点以支持任意工作负载，其功能类似于 Kubernetes 中的 `Job`。 为了提供更好的产品体验，Chaos Dashboard 提供了一个基于 `Task` 的模板。通过此模板，你可以方便地在 WebUI 中创建 HTTP 请求。本文介绍如何通过 Chaos Dashboard 创建 HTTP 请求。
 
 :::note 注意
 
@@ -29,10 +29,11 @@ Chaos Mesh 中不存在属于 `HTTPRequest` 类型的工作流节点。本特性
 ### 第 2 步：配置 HTTP 请求
 
 完成对以下配置的设置：
-  - 节点名称：`send-slack-message`
-  - 请求地址：`https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX` 
-  - 请求方法：`POST`
-  - 请求体： `{"text": "Hello, world."}`，并勾选 "为 JSON 内容"
+
+- 节点名称：`send-slack-message`
+- 请求地址：`https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX`
+- 请求方法：`POST`
+- 请求体： `{"text": "Hello, world."}`，并勾选 "为 JSON 内容"
 
 ![configure-http-request-workflow-node](img/configure-http-request-workflow-node_zh.png)
 

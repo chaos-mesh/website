@@ -6,11 +6,11 @@ title: Check Workflow Status
 
 1. List all workflows in Chaos Dashboard.
 
-![List Workflow On Dashboard](./img/list-workflow-on-dashboard.png)
+   ![List Workflow On Dashboard](./img/list-workflow-on-dashboard.png)
 
 2. Select the workflow you want to check and see the details of the workflow.
 
-![Workflow Status On Dashboard](./img/workflow-status-on-dashboard.png)
+   ![Workflow Status On Dashboard](./img/workflow-status-on-dashboard.png)
 
 ## Check workflow status using `kubectl` commands
 

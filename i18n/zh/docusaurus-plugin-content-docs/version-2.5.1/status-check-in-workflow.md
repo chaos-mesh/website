@@ -2,7 +2,7 @@
 title: 在工作流中进行状态检查
 ---
 
-在 Workflow 中，状态检查可对外部系统（比如业务应用系统、监控系统）执行指定的操作来获得系统的状态，并当检查到系统不健康时可以自动地终止 Workflow，其概念类似于 Kubernetes 中的 `Container Probes`。本文介绍如何通过 YAML 的方式在 Workflow 中进行状态检查。
+在工作流中，状态检查可对外部系统（比如业务应用系统、监控系统）执行指定的操作来获得系统的状态，并当检查到系统不健康时可以自动地终止工作流，其概念类似于 Kubernetes 中的 `Container Probes`。本文介绍如何通过 YAML 的方式在工作流中进行状态检查。
 
 :::note 注意
 
@@ -36,7 +36,7 @@ title: 在工作流中进行状态检查
 
 在这个配置文件中，可以看到定义了一个 `HTTP` 类型的 `StatusCheck` 节点。`deadline` 字段指定了该节点最多执行 20 秒。`mode` 字段指定了该 `StatusCheck` 节点会持续性的执行状态检查。`intervalSeconds` 字段指定了重复间隔为 1 秒。`timeoutSeconds` 字段指定了每次执行的超时时间。
 
-当 Workflow 运行到这个节点时，每隔 1 秒会执行一次指定的状态检查行为：使用 `GET` 方法向 `http://123.123.123.123` 这个 URL 进行 HTTP 请求，如果该请求在 1 秒内响应，且状态码为 `200`，则此次执行成功，反之失败。
+当工作流运行到这个节点时，每隔 1 秒会执行一次指定的状态检查行为：使用 `GET` 方法向 `http://123.123.123.123` 这个 URL 进行 HTTP 请求，如果该请求在 1 秒内响应，且状态码为 `200`，则此次执行成功，反之失败。
 
 ## 检查结果
 
@@ -74,15 +74,15 @@ title: 在工作流中进行状态检查
 
 :::
 
-### 当状态检查不成功时，终止 Workflow
+### 当状态检查不成功时，终止工作流
 
 :::note 注意
 
-目前，`StatusCheck` 节点只支持当状态检查失败时，自动终止 Workflow。不支持暂停 Workflow 和恢复 Workflow 的功能。
+目前，`StatusCheck` 节点只支持当状态检查失败时，自动终止工作流。不支持暂停工作流和恢复工作流的功能。
 
 :::
 
-当执行混沌实验时，应用系统可能会变得“不健康”，如果在某些情况下，想通过快速结束混沌实验来恢复应用系统，则可以使用这个功能。在 `StatusCheck` 节点上将 `abortWithStatusCheck` 字段设置为 `true`，那么当状态检查失败时，就会自动的终止 Workflow。
+当执行混沌实验时，应用系统可能会变得“不健康”，如果在某些情况下，想通过快速结束混沌实验来恢复应用系统，则可以使用这个功能。在 `StatusCheck` 节点上将 `abortWithStatusCheck` 字段设置为 `true`，那么当状态检查失败时，就会自动的终止工作流。
 
 ```yaml
 - name: workflow-status-check
@@ -163,44 +163,44 @@ title: 在工作流中进行状态检查
 
 相同点：
 
-- `StatusCheck` 节点和 `HTTP Request Task` 节点（用来执行 HTTP 请求的 `Task` 节点）都属于 Workflow 的一种节点类型
+- `StatusCheck` 节点和 `HTTP Request Task` 节点（用来执行 HTTP 请求的 `Task` 节点）都属于工作流的一种节点类型
 - `StatusCheck` 节点和 `HTTP Request Task` 节点都可以通过 HTTP 请求来获得外部系统的信息
 
 不同点：
 
 - `HTTP Request Task` 节点只能发送一次请求，而不能持续性的发送请求
-- `HTTP Request Task` 节点在请求失败时，无法对 Workflow 的执行状态产生影响（比如终止 Workflow）
+- `HTTP Request Task` 节点在请求失败时，无法对工作流的执行状态产生影响（比如终止工作流）
 
 ## 字段说明
 
-Workflow 和 Template 字段说明参考[创建 Chaos Mesh Workflow](create-chaos-mesh-workflow.md#字段说明)。
+Workflow 和 Template 字段说明参考[创建 Chaos Mesh 工作流](create-chaos-mesh-workflow.md#字段说明)。
 
 ### StatusCheck 字段说明
 
 | 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
 | --- | --- | --- | --- | --- | --- |
-| mode | string | 状态检查的模式，可选值有：`Synchronous`/`Continuous`。 | 无 | 是 | `Synchronous` |
-| type | string | 状态检查的类型，可选值有：`HTTP`。 | `HTTP` | 是 | `HTTP` |
-| duration | string | 当失败的执行次数小于 `failureThreshold` 时状态检查的持续时间。对于 `Synchronous` 和 `Continuous` 模式的状态检查都适用。 | 无 | 否 | `100s` |
-| timeoutSeconds | int | 状态检查单次执行的超时秒数。 | `1` | 否 | `1` |
-| intervalSeconds | int | 状态检查的间隔时间（秒）。 | `1` | 否 | `1` |
-| failureThreshold | int | 决定状态检查失败的最小连续失败次数。 | `3` | 否 | `3` |
-| successThreshold | int | 决定状态检查成功的最小连续成功次数。 | `1` | 否 | `1` |
-| recordsHistoryLimit | int | 保存历史执行记录的条数。 | `100` | 否 | `100` |
-| http | HTTPStatusCheck | 配置执行 HTTP 请求的具体细节。 | 无 | 否 |  |
+| mode | `string` | 状态检查的模式，可选值有：`Synchronous`/`Continuous`。 | 无 | 是 | `Synchronous` |
+| type | `string` | 状态检查的类型，可选值有：`HTTP`。 | `HTTP` | 是 | `HTTP` |
+| duration | `string` | 当失败的执行次数小于 `failureThreshold` 时状态检查的持续时间。对于 `Synchronous` 和 `Continuous` 模式的状态检查都适用。 | 无 | 否 | `100s` |
+| timeoutSeconds | `int` | 状态检查单次执行的超时秒数。 | `1` | 否 | `1` |
+| intervalSeconds | `int` | 状态检查的间隔时间（秒）。 | `1` | 否 | `1` |
+| failureThreshold | `int` | 决定状态检查失败的最小连续失败次数。 | `3` | 否 | `3` |
+| successThreshold | `int` | 决定状态检查成功的最小连续成功次数。 | `1` | 否 | `1` |
+| recordsHistoryLimit | `int` | 保存历史执行记录的条数。 | `100` | 否 | `100` |
+| http | `HTTPStatusCheck` | 配置执行 HTTP 请求的具体细节。 | 无 | 否 |  |
 
 ### HTTPStatusCheck 字段说明
 
 | 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
 | --- | --- | --- | --- | --- | --- |
-| url | string | HTTP 请求的 URL。 | 无 | 是 | `http://123.123.123.123` |
-| method | string | HTTP 请求的方法，可选值有：`GET`/`POST`。 | `GET` | 否 | `GET` |
-| headers | map[string][]string | HTTP 请求的请求头。 | 无 | 否 |  |
-| body | string | HTTP 请求的请求体。 | 无 | 否 | `{"a":"b"}` |
-| criteria | HTTPCriteria | 定义如何判断 HTTP StatusCheck 执行的结果。 | 无 | 是 |  |
+| url | `string` | HTTP 请求的 URL。 | 无 | 是 | `http://123.123.123.123` |
+| method | `string` | HTTP 请求的方法，可选值有：`GET`/`POST`。 | `GET` | 否 | `GET` |
+| headers | `map[string][]string` | HTTP 请求的请求头。 | 无 | 否 |  |
+| body | `string` | HTTP 请求的请求体。 | 无 | 否 | `{"a":"b"}` |
+| criteria | `HTTPCriteria` | 定义如何判断 HTTP StatusCheck 执行的结果。 | 无 | 是 |  |
 
 ### HTTPCriteria 字段说明
 
 | 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
 | --- | --- | --- | --- | --- | --- |
-| statusCode | string | HTTP 请求预期的状态码。取值可以是单一的数字（比如 `200`），或者也可以是一个范围（比如 `200-400`，这里，`200` 和 `400` 都被包括在范围内）。 | 无 | 是 | `200` |
+| statusCode | `string` | HTTP 请求预期的状态码。取值可以是单一的数字（比如 `200`），或者也可以是一个范围（比如 `200-400`，这里，`200` 和 `400` 都被包括在范围内）。 | 无 | 是 | `200` |

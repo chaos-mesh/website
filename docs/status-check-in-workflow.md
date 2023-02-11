@@ -31,7 +31,7 @@ A `StatusCheck` node sends `GET` or `POST` HTTP requests to the specific URL, wi
       url: http://123.123.123.123
       method: GET
       criteria:
-        statusCode: "200"
+        statusCode: '200'
 ```
 
 In the configuration, you can see a `StatusCheck` node with `HTTP` type. The `deadline` field specifies that this node could be executed for a maximum of 20 seconds. The `mode` field specifies that this node will execute status checks continuously. The `intervalSeconds` field specifies a repetition interval of 1 second. The `timeoutSeconds` field specifies the timeout for each execution.
@@ -60,7 +60,7 @@ The `StatusCheck` node has `failureThreshold` and `successThreshold` two fields:
       url: http://123.123.123.123
       method: GET
       criteria:
-        statusCode: "200"
+        statusCode: '200'
 ```
 
 In the configuration, the `StatusCheck` node will execute status checks continuously:
@@ -96,7 +96,7 @@ When executing chaos experiments, the application system might become `unhealthy
       url: http://123.123.123.123
       method: GET
       criteria:
-        statusCode: "200"
+        statusCode: '200'
 ```
 
 The status check is considered unsuccessful when any of the following conditions are met:
@@ -124,7 +124,7 @@ When the `mode` field is `Continuous`, it means this `StatusCheck` node will exe
       url: http://123.123.123.123
       method: GET
       criteria:
-        statusCode: "200"
+        statusCode: '200'
 ```
 
 In the configuration, the `StatusCheck` node will execute status checks every second, and exit when any of the following conditions are met:
@@ -150,7 +150,7 @@ When the `mode` field is `Synchronous`, it means that this `StatusCheck` node wi
       url: http://123.123.123.123
       method: GET
       criteria:
-        statusCode: "200"
+        statusCode: '200'
 ```
 
 In the configuration, the `StatusCheck` node will execute status checks every second, and exit when any of the following conditions are met:
@@ -179,28 +179,28 @@ For more information about Workflow and Template, refer to [Create Chaos Mesh Wo
 
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
-| mode | string | The execution mode of the status check. Support value: `Synchronous`/`Continuous`. | None | Yes | `Synchronous` |
-| type | string | The type of the status check. Support value: `HTTP`. | `HTTP` | Yes | `HTTP` |
-| duration | string | The duration of the whole status check if the number of failed execution does not exceed the `failureThreshold`. It is available in both `Synchronous` and `Continuous` modes. | None | No | `100s` |
-| timeoutSeconds | int | The timeout seconds when the status check fails. | `1` | No | `1` |
-| intervalSeconds | int | Defines how often (in seconds) to perform an execution of status check. | `1` | No | `1` |
-| failureThreshold | int | The minimum consecutive failure for the status check to be considered failed. | `3` | No | `3` |
-| successThreshold | int | The minimum consecutive successes for the status check to be considered successful. | `1` | No | `1` |
-| recordsHistoryLimit | int | The number of records to retain. | `100` | No | `100` |
-| http | HTTPStatusCheck | Configure the detail of the HTTP request to execute. | None | No |  |
+| mode | `string` | The execution mode of the status check. Support value: `Synchronous`/`Continuous`. | None | Yes | `Synchronous` |
+| type | `string` | The type of the status check. Support value: `HTTP`. | `HTTP` | Yes | `HTTP` |
+| duration | `string` | The duration of the whole status check if the number of failed execution does not exceed the `failureThreshold`. It is available in both `Synchronous` and `Continuous` modes. | None | No | `100s` |
+| timeoutSeconds | `int` | The timeout seconds when the status check fails. | `1` | No | `1` |
+| intervalSeconds | `int` | Defines how often (in seconds) to perform an execution of status check. | `1` | No | `1` |
+| failureThreshold | `int` | The minimum consecutive failure for the status check to be considered failed. | `3` | No | `3` |
+| successThreshold | `int` | The minimum consecutive successes for the status check to be considered successful. | `1` | No | `1` |
+| recordsHistoryLimit | `int` | The number of records to retain. | `100` | No | `100` |
+| http | `HTTPStatusCheck` | Configure the detail of the HTTP request to execute. | None | No |  |
 
 ### HTTPStatusCheck field description
 
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
-| url | string | The URL of the HTTP request. | None | Yes | `http://123.123.123.123` |
-| method | string | The method of the HTTP request. Support value: `GET`/`POST`. | `GET` | No | `GET` |
-| headers | map[string][]string | The headers of the HTTP request. | None | No | |
-| body | string | The body of the HTTP request. | None | No | `{"a":"b"}` |
-| criteria | HTTPCriteria | Defines how to determine the result of the HTTP StatusCheck. | None | Yes |  |
+| url | `string` | The URL of the HTTP request. | None | Yes | `http://123.123.123.123` |
+| method | `string` | The method of the HTTP request. Support value: `GET`/`POST`. | `GET` | No | `GET` |
+| headers | `map[string][]string` | The headers of the HTTP request. | None | No |  |
+| body | `string` | The body of the HTTP request. | None | No | `{"a":"b"}` |
+| criteria | `HTTPCriteria` | Defines how to determine the result of the HTTP StatusCheck. | None | Yes |  |
 
 ### HTTPCriteria field description
 
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
-| statusCode | string | The expected http status code for the request. A statusCode string could be a single code (e.g. `200`), or an inclusive range (e.g. `200-400`, both `200` and `400` are included). | None | Yes | `200` |
+| statusCode | `string` | The expected http status code for the request. A statusCode string could be a single code (e.g. `200`), or an inclusive range (e.g. `200-400`, both `200` and `400` are included). | None | Yes | `200` |
