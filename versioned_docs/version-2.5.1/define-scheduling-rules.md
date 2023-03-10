@@ -137,7 +137,7 @@ After an experiment ends, the corresponding history will not be deleted so you c
 
 When there are more than `historyLimit` tasks, Chaos Mesh will delete the earliest created tasks sequentially. If those tasks continue to run, they will be skipped and not deleted.
 
-### `ConciliationPolicy` field
+### `concurrencyPolicy` field
 
 The values available for this field are `"Forbid"`, `"Allow"`, and `""`.
 
