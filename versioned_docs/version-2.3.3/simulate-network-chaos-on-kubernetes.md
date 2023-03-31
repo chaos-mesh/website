@@ -29,7 +29,7 @@ Before creating NetworkChaos experiments, ensure the following:
 
    ![NetworkChaos Experiments](./img/networkchaos-exp.png)
 
-   For details of specific configuration fields, refer to [Field description](#field description).
+   For details of specific configuration fields, refer to [Field description](#field-description).
 
 3. Fill out the experiment information, and specify the experiment scope and the scheduled experiment duration.
 
