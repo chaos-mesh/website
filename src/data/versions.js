@@ -4,12 +4,12 @@ export const stableVersions = [
     date: '2023.01.14',
   },
   {
-    version: '2.4.1',
-    date: '2022.09.27',
+    version: '2.4.3',
+    date: '2022.11.20',
   },
   {
-    version: '2.3.2',
-    date: '2021.09.20',
+    version: '2.3.3',
+    date: '2022.11.07',
   },
 ]
 
