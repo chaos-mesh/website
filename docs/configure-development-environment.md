@@ -18,7 +18,7 @@ Before configuring, we suggest to install the development tools for Chaos Mesh.
 - [gcc](https://gcc.gnu.org/)
 - [helm](https://helm.sh/), v3.9.0 or later versions
 - [minikube](https://minikube.sigs.k8s.io/docs/start/)
-- [nodejs](https://nodejs.org/en/) and [yarn](https://yarnpkg.com/lang/en/), for developing Chaos Dashboard
+- [nodejs](https://nodejs.org/en/) and [pnpm](https://pnpm.io/), for developing Chaos Dashboard
 
 ## Compiling Chaos Mesh
 

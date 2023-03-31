@@ -13,7 +13,7 @@ title: 配置开发环境
 - [gcc](https://gcc.gnu.org/)
 - [helm](https://helm.sh/) 版本不低于 v2.8.2
 - [kind](https://github.com/kubernetes-sigs/kind)
-- [nodejs](https://nodejs.org/en/) 和 [yarn](https://yarnpkg.com/lang/en/) (以开发 Chaos Dashboard)
+- [nodejs](https://nodejs.org/en/) 和 [pnpm](https://pnpm.io/) (用于开发 Chaos Dashboard)
 
 ## 准备工具链
 
@@ -49,7 +49,7 @@ title: 配置开发环境
 
    ```bash
     node -v
-    yarn -v
+    pnpm -v
    ```
 
 6. 尝试编译 Chaos Mesh：
@@ -77,9 +77,9 @@ kind delete cluster --name=kind
 如需启动 Chaos Dashboard，请运行以下命令：
 
 ```bash
-cd ui && yarn
+cd ui && pnpm i
 # 启动
-yarn workspace @ui/app start:default # cross-env REACT_APP_API_URL=http://localhost:2333 BROWSER=none react-scripts start
+pnpm -F @ui/app start:default # cross-env REACT_APP_API_URL=http://localhost:2333 BROWSER=none react-scripts start
 ```
 
 ## 下一步

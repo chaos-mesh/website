@@ -13,7 +13,7 @@ title: 配置开发环境
 - [gcc](https://gcc.gnu.org/)
 - [helm](https://helm.sh/) 版本不低于 v2.8.2
 - [kind](https://github.com/kubernetes-sigs/kind)
-- [nodejs](https://nodejs.org/en/) 和 [yarn](https://yarnpkg.com/lang/en/) (以开发 Chaos Dashboard)
+- [nodejs](https://nodejs.org/en/) 和 [yarn](https://yarnpkg.com/lang/en/) (用于开发 Chaos Dashboard)
 
 ## 准备工具链
 

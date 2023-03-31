@@ -20,8 +20,8 @@
 ## How to develop
 
 ```sh
-yarn # install deps
-yarn start
+pnpm i # install deps
+pnpm start
 ```
 
 This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
@@ -29,13 +29,13 @@ This command starts a local development server and opens up a browser window. Mo
 By default, the `start` command will only preview documents in English. If you want to preview documents in other languages, such as Chinese, then add `--locale` after the command:
 
 ```sh
-yarn start --locale zh
+pnpm start --locale zh
 ```
 
 ## Build
 
 ```sh
-yarn build
+pnpm build
 ```
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
@@ -45,7 +45,7 @@ This command generates static content into the `build` directory and can be serv
 ### Major or minor
 
 ```sh
-yarn docusaurus docs:version x.x.x
+pnpm docusaurus docs:version x.x.x
 ```
 
 The versions of the all docs split into two parts, one is the **latest (in `docs/`)** and the others are **versioned (in `versioned_docs/`)**. When a version has been released, the current latest `docs/` will be copied into `versioned_docs/` (by running the command above).
