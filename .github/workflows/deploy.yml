@@ -46,4 +46,4 @@ jobs:
         run: |
           git config --global user.email "${{ secrets.GH_PAGES_DEPLOY_EMAIL }}"
           git config --global user.name "${{ secrets.GH_PAGES_DEPLOY_NAME }}"
-          DEPLOYMENT_BRANCH=master pnpm deploy
+          DEPLOYMENT_BRANCH=master pnpm run deploy
