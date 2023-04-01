@@ -6,17 +6,25 @@ import PickHelmVersion from '@site/src/components/PickHelmVersion'
 
 This document describes how to create DNSChaos experiments in Chaos Mesh to simulate DNS faults.
 
+:::info
+
+To simluate DNS faults, you need to deploy a special DNS service called Chaos DNS Server.
+
+In the latest version, Chaos Mesh will deploy Chaos DNS Server by default. If you don't need to simulate DNS faults, you can set `dnsServer.create` to `false` when installing Chaos Mesh:
+
+<PickHelmVersion className="language-bash">
+helm install chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-mesh --version latest --set dnsServer.create=false
+</PickHelmVersion>
+
+:::
+
 ## DNSChaos Introduction
 
 DNSChaos is used to simulate wrong DNS responses. For example, DNSChaos can return an error or return a random IP address when receiving a DNS request.
 
-## Deploy Chaos DNS Service
+## Check if Chaos DNS Server is deployed
 
-Before creating a DNSChaos experiment using Chaos Mesh, you need to deploy a special DNS service to inject faults:
-
-<PickHelmVersion className="language-bash">{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-mesh --version latest --set dnsServer.create=true`}</PickHelmVersion>
-
-After executing the above commands, check if the DNS service status is normal:
+Check if Chaos DNS Server is deployed by running the following command:
 
 ```bash
 kubectl get pods -n chaos-mesh -l app.kubernetes.io/component=chaos-dns-server
