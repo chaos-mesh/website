@@ -1,7 +1,7 @@
 export const stableVersions = [
   {
-    version: '2.5.1',
-    date: '2023.01.14',
+    version: '2.5.2',
+    date: '2023.04.13',
   },
   {
     version: '2.4.3',
