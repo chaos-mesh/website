@@ -5,11 +5,11 @@ author: Anurag Paliwal
 author_title: Contributor of Chaos Mesh
 author_url: https://github.com/anuragpaliwal80
 author_image_url: https://avatars.githubusercontent.com/u/3283882?v=4
-image: /img/chaos-engineering-tools-as-a-service.jpeg
+image: /img/blog/chaos-engineering-tools-as-a-service.jpeg
 tags: [Chaos Mesh, Chaos Engineering]
 ---
 
-![Chaos engineering tools](/img/chaos-mesh-restrict-authorization.jpeg)
+![Chaos engineering tools](/img/blog/chaos-mesh-restrict-authorization.jpeg)
 
 A [multi-tenant](https://cloud.google.com/kubernetes-engine/docs/concepts/multitenancy-overview) cluster is shared by multiple users and/or workloads which are referred to as "tenants".The operators of multi-tenant clusters must isolate tenants from each other to minimize the damage that a compromised or malicious tenant can do to the cluster and other tenants.
 
@@ -19,8 +19,7 @@ A [multi-tenant](https://cloud.google.com/kubernetes-engine/docs/concepts/multit
 
 When you plan a multi-tenant architecture, you should consider the layers of resource isolation in Kubernetes: cluster, namespace, node, Pod, and container.
 
-Although Kubernetes cannot guarantee perfectly secure isolation between tenants, it does offer features that may be sufficient for specific use cases. You can separate each tenant and their Kubernetes resources into their own [namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/).
-Kubernetes supports multiple virtual clusters backed by the same physical cluster. These virtual clusters are called namespaces. [Namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) are intended for use in environments with many users spread across multiple teams, or projects.
+Although Kubernetes cannot guarantee perfectly secure isolation between tenants, it does offer features that may be sufficient for specific use cases. You can separate each tenant and their Kubernetes resources into their own [namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/). Kubernetes supports multiple virtual clusters backed by the same physical cluster. These virtual clusters are called namespaces. [Namespaces](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) are intended for use in environments with many users spread across multiple teams, or projects.
 
 ## Cluster having Chaos Mesh
 
@@ -32,14 +31,14 @@ You enabled Chaos Mesh ([Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh) i
 
 <!--truncate-->
 
-Suppose one of the tenant users wants to perform pod kill operations in his/her namespace i.e. chaos-testing. To achieve the same, the user created the below Chaos Mesh YAML file:
+Suppose one of the tenant users wants to perform pod kill operations in his/her namespace i.e. chaos-mesh. To achieve the same, the user created the below Chaos Mesh YAML file:
 
 ```yml
 apiVersion: chaos-mesh.org/v1alpha1
 kind: PodChaos
 metadata:
   name: pod-kill
-  namespace: chaos-testing
+  namespace: chaos-mesh
 spec:
   action: pod-kill
   mode: one
@@ -52,7 +51,7 @@ spec:
     cron: '@every 1m'
 ```
 
-The user has required rights to namespace chaos-testing, but does not have rights on tidb-cluster-demo namespace. When the user applies the above YAML file using kubectl, it will create the pod-kill Chaos Mesh resource in chaos-testing namespace. As we can see in the selector section, the user has specified some other namespace (tidb-cluster-demo), which means the pods which will be selected for this chaos operation will be from tidb-cluster-demo namespace, and not from the one for which the user has access i.e. chaos-testing. This means that this user is able to impact the other namespace for which (s)he does not have the rights. **Problem!!!**
+The user has required rights to namespace chaos-mesh, but does not have rights on tidb-cluster-demo namespace. When the user applies the above YAML file using kubectl, it will create the pod-kill Chaos Mesh resource in chaos-mesh namespace. As we can see in the selector section, the user has specified some other namespace (tidb-cluster-demo), which means the pods which will be selected for this chaos operation will be from tidb-cluster-demo namespace, and not from the one for which the user has access i.e. chaos-mesh. This means that this user is able to impact the other namespace for which (s)he does not have the rights. **Problem!!!**
 
 <!--truncate-->
 

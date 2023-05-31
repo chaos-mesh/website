@@ -4,11 +4,11 @@ title: 'Chaos Mesh 1.0: Chaos Engineering on Kubernetes Made Easier'
 author: Chaos Mesh Maintainers
 author_url: https://github.com/chaos-mesh
 author_image_url: https://avatars1.githubusercontent.com/u/59082378?v=4
-image: /img/chaos-mesh-1.0.png
+image: /img/blog/chaos-mesh-1.0.png
 tags: [Announcement, Chaos Mesh, Chaos Engineering]
 ---
 
-![Chaos-Mesh-1.0 - Chaos-Engineering-on-Kubernetes-Made-Easier](/img/chaos-mesh-1.0.png)
+![Chaos-Mesh-1.0 - Chaos-Engineering-on-Kubernetes-Made-Easier](/img/blog/chaos-mesh-1.0.png)
 
 Today, we are proud to announce the general availability of Chaos Mesh 1.0, following its entry into CNCF as a [sandbox project](https://pingcap.com/blog/announcing-chaos-mesh-as-a-cncf-sandbox-project) in July, 2020.
 
@@ -42,13 +42,13 @@ Chaos Mesh 1.0 supports the following fault types:
 
 The Chaos Dashboard component is a one-stop web interface for Chaos Mesh users to orchestrate chaos experiments. Previously, Chaos Dashboard was only available for testing TiDB. With Chaos Mesh 1.0, it is available to everyone. Chaos Dashboard greatly simplifies the complexity of chaos experiments. With only a few mouse clicks, you can define the scope of the chaos experiment, specify the type of chaos injection, define scheduling rules, and observe the results of the chaos experiment—all in the same web interface.
 
-![Chaos Dashboard](/img/chaos-dashboard.gif)
+![Chaos Dashboard](/img/blog/chaos-dashboard.gif)
 
 ## Grafana plug-in for enhanced observability
 
 To further improve the observability of chaos experiments, Chaos Mesh 1.0 includes a Grafana plug-in to allow you to directly display real-time chaos experiment information on your application monitoring panel. Currently, the chaos experiment information is displayed as annotations. This way, you can simultaneously observe the running status of the application and the current chaos experiment information.
 
-![Chaos status and application status on Grafana](/img/chaos-status.png)
+![Chaos status and application status on Grafana](/img/blog/chaos-status.png)
 
 ## Safe and controllable chaos
 
@@ -56,7 +56,13 @@ When we conduct chaos experiments, it is vital that we keep strict control over 
 
 ## Try it out now
 
-You can quickly deploy Chaos Mesh in your Kubernetes environment through the `install.sh` script or the Helm tool. For specific installation steps, please refer to the [Chaos Mesh Getting Started](https://chaos-mesh.org/docs/1.2.4/user_guides/installation) document. In addition, thanks to the [Katakoda interactive tutorial](https://chaos-mesh.org/interactive-tutorial), you can also quickly get your hands on Chaos Mesh without having to deploy it.
+:::note
+
+2022-10-24: Because of <https://www.oreilly.com/online-learning/leveraging-katacoda-technology.html>, and refer to [#356](https://github.com/chaos-mesh/website/pull/356), the interactive tutorial is temporarily unavailable.
+
+:::
+
+You can quickly deploy Chaos Mesh in your Kubernetes environment through the `install.sh` script or the Helm tool. For specific installation steps, please refer to the [Chaos Mesh Getting Started](https://chaos-mesh-website-archived.netlify.app/docs/1.2.4/user_guides/installation) document. In addition, thanks to the `Katakoda interactive tutorial`, you can also quickly get your hands on Chaos Mesh without having to deploy it.
 
 If you haven’t upgraded to 1.0 GA, please refer to the [1.0 Release Notes](https://github.com/chaos-mesh/chaos-mesh/releases/tag/v1.0.0) for the changes and upgrade guidelines.
 

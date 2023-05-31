@@ -4,11 +4,11 @@ title: 'Share your #ChaosMeshStory!'
 author: Chaos Mesh Community
 author_url: https://github.com/chaos-mesh
 author_image_url: https://avatars1.githubusercontent.com/u/59082378?v=4
-image: /img/chaos-mesh-story.jpeg
+image: /img/blog/chaos-mesh-story.jpeg
 tags: [Chaos Mesh, community, event]
 ---
 
-![Share your #ChaosMeshStory!](/img/chaos-mesh-story.jpeg)
+![Share your #ChaosMeshStory!](/img/blog/chaos-mesh-story.jpeg)
 
 Hey community,
 

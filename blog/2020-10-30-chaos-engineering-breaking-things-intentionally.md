@@ -4,11 +4,11 @@ title: Chaos Engineering - Breaking things Intentionally
 author: Manish Dangi
 author_url: https://www.linkedin.com/in/manishdangi/
 author_image_url: https://avatars1.githubusercontent.com/u/43807816?s=400
-image: /img/chaos-engineering2.png
+image: /img/blog/chaos-engineering2.png
 tags: [Chaos Engineering, Chaos Mesh, Open Source]
 ---
 
-![Chaos-Engineering-Breaking-things-Intentionally](/img/chaos-engineering2.png)
+![Chaos-Engineering-Breaking-things-Intentionally](/img/blog/chaos-engineering2.png)
 
 “Necessity is the mother of invention”; similarly, Netflix is not only a platform for online media streaming. Netflix gave birth to Chaos engineering because of their necessity.
 
@@ -36,8 +36,13 @@ They are probably right, but over the period, Chaos engineering has evolved so m
 
 ## Chaos-Mesh
 
-To test the resiliency and reliability of [TiDB](https://pingcap.com/products/tidb), engineers at [PingCAP](https://pingcap.com/) came up with a fantastic tool for Chaos testing called [Chaos Mesh](https://chaos-mesh.org/), a cloud-native Chaos Engineering platform that orchestrates chaos on Kubernetes environments.
-Chaos Mesh takes into account the possible faults of a distributed system, covering the pod, the network, system I/O, and the kernel.
+:::note
+
+2022-10-24: Because of <https://www.oreilly.com/online-learning/leveraging-katacoda-technology.html>, and refer to [#356](https://github.com/chaos-mesh/website/pull/356), the interactive tutorial is temporarily unavailable.
+
+:::
+
+To test the resiliency and reliability of [TiDB](https://pingcap.com/products/tidb), engineers at [PingCAP](https://pingcap.com/) came up with a fantastic tool for Chaos testing called [Chaos Mesh](https://chaos-mesh.org/), a cloud-native Chaos Engineering platform that orchestrates chaos on Kubernetes environments. Chaos Mesh takes into account the possible faults of a distributed system, covering the pod, the network, system I/O, and the kernel.
 
 Chaos Mesh provides many fault injection methods:
 
@@ -61,7 +66,7 @@ Chaos Mesh mainly focuses on the simplicity of how all chaos tests are done quic
 
 The recent [1.0 release](https://chaos-mesh.org/blog/chaos-mesh-1.0-chaos-engineering-on-kubernetes-made-easier/) provides the general availability of Chaos Dashboard, which Chaos simplifies the complexities of chaos experiment. With a few mouse clicks, you can define the Chaos experiment's scope, specify the type of chaos injection, define scheduling rules, and observe the chaos experiment results- all in the dashboard of Chaos Mesh.
 
-In case you want to try Chaos Mesh in your browser, checkout [Katakoda interactive tutorial](https://chaos-mesh.org/interactive-tutorial), where you can get your hands on Chaos Mesh without even deploying it. To understand the design principles and how Chaos Mesh works, read [this blog](https://chaos-mesh.org/blog/chaos_mesh_your_chaos_engineering_solution) by the project's maintainer, [Cwen Yin](https://www.linkedin.com/in/cwen-yin-81985318b/).
+In case you want to try Chaos Mesh in your browser, checkout `Katakoda interactive tutorial`, where you can get your hands on Chaos Mesh without even deploying it. To understand the design principles and how Chaos Mesh works, read [this blog](https://chaos-mesh.org/blog/chaos_mesh_your_chaos_engineering_solution) by the project's maintainer, [Cwen Yin](https://www.linkedin.com/in/cwen-yin-81985318b/).
 
 ## Join the community
 

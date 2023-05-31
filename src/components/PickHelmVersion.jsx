@@ -1,10 +1,11 @@
 import BrowserOnly from '@docusaurus/BrowserOnly'
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
+import { usePluginData } from '@docusaurus/useGlobalData'
 import CodeBlock from '@theme/CodeBlock'
 import React from 'react'
 import semver from 'semver'
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
+
 import { usePickVersion } from './PickVersion'
-import { usePluginData } from '@docusaurus/useGlobalData'
 
 const calcHelmChartVersion = (version) => {
   if (semver.satisfies(version, '>=2.0.3')) {

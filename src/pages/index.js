@@ -1,13 +1,14 @@
-import Layout from '@theme/Layout'
 import Link from '@docusaurus/Link'
-import PickVersion from '../components/PickVersion'
-import React from 'react'
 import Translate from '@docusaurus/Translate'
-import clsx from 'clsx'
-import styles from './index.module.css'
 import useBaseUrl from '@docusaurus/useBaseUrl'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
+import Layout from '@theme/Layout'
+import clsx from 'clsx'
+import React from 'react'
+
+import PickVersion from '../components/PickVersion'
 import whoIsUsing from '../data/whoIsUsing'
+import styles from './index.module.css'
 
 function Feature({ imgUrl, title, description, reverse }) {
   return (
@@ -43,6 +44,8 @@ function Home() {
           </div>
         </div>
 
+        <div className="hero-divider" />
+
         <div className="hero">
           <div className="container text--center">
             <h2 className="hero__subtitle">
@@ -51,6 +54,8 @@ function Home() {
             <PickVersion>curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash</PickVersion>
           </div>
         </div>
+
+        <div className="hero-divider" />
 
         <div className="hero">
           <div className="container">
@@ -163,6 +168,8 @@ function Home() {
           </div>
         </div>
 
+        <div className="hero-divider" />
+
         <div className="hero">
           <div className="container text--center">
             <h2 className="hero__subtitle">
@@ -181,6 +188,8 @@ function Home() {
             </div>
           </div>
         </div>
+
+        <div className="hero-divider" />
 
         <div className="hero">
           <div className="container text--center">

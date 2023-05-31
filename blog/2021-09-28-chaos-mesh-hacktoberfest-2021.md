@@ -4,11 +4,11 @@ title: 'Hacktoberfest 2021: hack with Chaos Mesh!'
 author: Chaos Mesh Community
 author_url: https://github.com/chaos-mesh
 author_image_url: https://avatars1.githubusercontent.com/u/59082378?v=4
-image: /img/chaos-mesh-hacktoberfest-2021.png
+image: /img/blog/chaos-mesh-hacktoberfest-2021.png
 tags: [Chaos Mesh, Chaos Engineering, open source]
 ---
 
-![Chaos Mesh x Hacktoberfest 2021](/img/chaos-mesh-hacktoberfest-2021.png)
+![Chaos Mesh x Hacktoberfest 2021](/img/blog/chaos-mesh-hacktoberfest-2021.png)
 
 Happy [Hacktoberfest](https://hacktoberfest.digitalocean.com/) 2021! We are excited to announce that [Chaos Mesh](https://github.com/chaos-mesh) will be participating in the 8th annual Hacktoberfest hosted by DigitalOcean. During the month of October, anyone is welcome to join in on this global celebration of open-source by contributing changes, and earn one of 55,000 custom-made Hacktoberfest T-shirts!
 
@@ -26,7 +26,7 @@ If you are interested in chaos engineering, open-source, trying to come up with 
 
 ## Quick start
 
-Here’s a quick run-through of how to be part of Hacktoberfest 2021, and you can check out a detailed how to be part of Hacktoberfest on the [official website](https://hacktoberfest.digitalocean.com/resources/participation):
+Here’s a quick run-through of how to be part of Hacktoberfest 2021, and you can check out a detailed how to be part of Hacktoberfest on the [official website](https://hacktoberfest.digitalocean.com/participation):
 
 1. Sign up for [Hacktoberfest](https://hacktoberfest.digitalocean.com/) anytime between Oct 1 and Oct 31.
 2. Join the #project-chaos-mesh channel under [CNCF Slack](https://slack.cncf.io/), just in case you have any questions, or need help.

@@ -4,11 +4,11 @@ title: 'Chaos Mesh Q&A'
 author: Chaos Mesh Community
 author_url: https://github.com/chaos-mesh
 author_image_url: https://avatars1.githubusercontent.com/u/59082378?v=4
-image: /img/chaos-mesh-q&a.jpeg
+image: /img/blog/chaos-mesh-q&a.jpeg
 tags: [Chaos Mesh, Chaos Engineering]
 ---
 
-![Chaos Mesh Q&A](/img/chaos-mesh-q&a.jpeg)
+![Chaos Mesh Q&A](/img/blog/chaos-mesh-q&a.jpeg)
 
 At KubeCon EU 2021, the [Chaos Mesh](https://chaos-mesh.org/) team hosted two “office hours sessions” where newcomers, community members, and project maintainers had a chance to chat, get to know each other, and learn more about the project.
 
@@ -22,13 +22,13 @@ Big thanks to the more than 200 of you who joined us! We received so many great 
 
 **A:** Yes, you can use Chaos Mesh in the Service Mesh environment. At one of our [previous community meetings](https://www.youtube.com/watch?v=paIgJYOhdGw), Sergio Méndez and Jossie Castrillo from the University of San Carlos of Guatemala shared how they used Linkerd and Chaos Mesh to conduct chaos experiments for their project, “[COVID-19 Realtime Vaccinated People Visualizer](https://github.com/sergioarmgpl/operating-systems-usac-course/blob/master/lang/en/projects/project1v3/project1.md)”.
 
-![Project Architecture](/img/chaos-mesh-linkerd-architecture.png)
+![Project Architecture](/img/blog/chaos-mesh-linkerd-architecture.png)
 
 <p className="caption-center">Project Architecture</p>
 
 **Q: Can I use Chaos Mesh on-premises or do I need Amazon Web Services (AWS) or Google Cloud Platform (GCP)?**
 
-**A:** You can do either! You can deploy Chaos Mesh on your Kubernetes cluster, so it does not matter whether you manage it yourself or have it hosted on AWS or GCP. However, if you would like to use it in a Kubernetes environment, you need to [set relevant parameters](https://chaos-mesh.org/docs/1.2.4/user_guides/installation) during installation.
+**A:** You can do either! You can deploy Chaos Mesh on your Kubernetes cluster, so it does not matter whether you manage it yourself or have it hosted on AWS or GCP. However, if you would like to use it in a Kubernetes environment, you need to [set relevant parameters](https://chaos-mesh-website-archived.netlify.app/docs/1.2.4/user_guides/installation) during installation.
 
 **Q: How do "chaos actions" work?**
 

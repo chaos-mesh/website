@@ -5,11 +5,11 @@ author: Mayo Cream
 author_title: Kubernetes Member, CNCF Security TAG Member, OSS Contributor
 author_url: https://github.com/mayocream
 author_image_url: https://avatars.githubusercontent.com/u/35420264?v=4
-image: /img/implement-chaos-engineering-in-k8s.png
+image: /img/blog/implement-chaos-engineering-in-k8s.png
 tags: [Chaos Mesh, Chaos Engineering]
 ---
 
-![Implementing Chaos Engineering in K8s](/img/implement-chaos-engineering-in-k8s.png)
+![Implementing Chaos Engineering in K8s](/img/blog/implement-chaos-engineering-in-k8s.png)
 
 [Chaos Mesh](https://chaos-mesh.org/docs/) is an open-source, cloud-native Chaos Engineering platform built on Kubernetes (K8s) custom resource definitions (CRDs). Chaos Mesh can simulate various types of faults and has an enormous capability to orchestrate fault scenarios. You can use Chaos Mesh to conveniently simulate various abnormalities that might occur in development, testing, and production environments and find potential problems in the system.
 
@@ -553,7 +553,7 @@ Now, I'll describe the server side code required to build an end-user-oriented c
 
 As shown in the Chaos Mesh workflow below, we need to implement a server that sends YAML to the Kubernetes API. Chaos Controller Manager implements complex rule verification and rule delivery to Chaos Daemon. If you want to use Chaos Mesh with your own platform, you only need to connect to the process of creating CRD resources.
 
-![Chaos Mesh's basic workflow](/img/chaos-mesh-basic-workflow.png)
+![Chaos Mesh's basic workflow](/img/blog/chaos-mesh-basic-workflow.png)
 
 <p className="caption-center">Chaos Mesh's basic workflow</p>
 
@@ -742,7 +742,7 @@ This example uses the manager. This mode prevents the cache mechanism from repet
 
 3. Update the cache when the watch data changes.
 
-![List request](/img/list-request.png)
+![List request](/img/blog/list-request.png)
 
 <p className="caption-center">List request</p>
 
@@ -756,7 +756,7 @@ Chaos Controller Manager does most of the work for us. The control plane mainly 
 
 The following figure shows Chaos Mesh Dashboard. We need to consider what features the platform should provide to end users.
 
-![Chaos Mesh Dashboard](/img/chaos-mesh-dashboard-k8s.png)
+![Chaos Mesh Dashboard](/img/blog/chaos-mesh-dashboard-k8s.png)
 
 <p className="caption-center">Chaos Mesh Dashboard</p>
 

@@ -6,10 +6,10 @@ This document describes how to simulate HTTP faults by creating HTTPChaos experi
 
 ## HTTPChaos introduction
 
-HTTPChaos is a fault type provided by Chaos Mesh. By creating HTTPChaos experiments, you can simulate the fault scenarios of the **HTTP server** during the HTTP request and response processing. Currently, HTTPChaos supports simulating the following fault types:
+HTTPChaos is a fault type provided by Chaos Mesh. By creating HTTPChaos experiments, you can simulate the fault scenarios during the HTTP request and response processing. Currently, HTTPChaos supports simulating the following fault types:
 
-- `abort`: interrupts server connection
-- `delay`: injects latency into the target process
+- `abort`: interrupts the connection
+- `delay`: injects latency into the request or response
 - `replace`: replaces part of content in HTTP request or response messages
 - `patch`: adds additional content to HTTP request or response messages
 
@@ -22,6 +22,7 @@ For the detailed description of HTTPChaos configuration, see [Field description]
 Before injecting the faults supported by HTTPChaos, note the followings:
 
 - There is no control manager of Chaos Mesh running on the target Pod.
+- The rules will affect both of clients and servers in the Pod, if you want to affect only one side, please refer to the [specify side](#specify-side) section.
 - HTTPS accesses should be disabled, because injecting HTTPS connections is not supported currently.
 - For HTTPChaos injection to take effect, the client should avoid reusing TCP socket. This is because HTTPChaos does not affect the HTTP requests that are sent via TCP socket before the fault injection.
 - Use non-idempotent requests (such as most of the POST requests) with caution in production environments. If such requests are used, the target service may not return to normal status by repeating requests after the fault injection.
@@ -129,7 +130,7 @@ Common fields are meaningful when the `target` of fault injection is `Request` o
 | `path` | string | The URI path of the target request. Supports [Matching wildcards](https://www.wikiwand.com/en/Matching_wildcards). | Takes effect on all paths by default. | no | /api/\* |
 | `method` | string | The HTTP method of the target request method. | Takes effect for all methods by default. | no | GET |
 | `request_headers` | map[string]string | Matches request headers to the target service. | Takes effect for all requests by default. | no | Content-Type: application/json |
-| `abort` | bool | Indicates whether to inject the fault that interrupts server connection. | false | no | true |
+| `abort` | bool | Indicates whether to inject the fault that interrupts the connection. | false | no | true |
 | `delay` | string | Specifies the time for a latency fault. | 0 | no | 10s |
 | `replace.headers` | map[string]string | Specifies the key pair used to replace the request headers or response headers. |  | no | Content-Type: application/xml |
 | `replace.body` | []byte | Specifies request body or response body to replace the fault (Base64 encoded). |  | no | eyJmb28iOiAiYmFyIn0K |
@@ -138,6 +139,23 @@ Common fields are meaningful when the `target` of fault injection is `Request` o
 | `patch.body.value` | string | Specifies the fault of the request body or response body with patch faults. |  | no | "{"foo": "bar"}" |
 | `duration` | string | Specifies the duration of a specific experiment. |  | yes | 30s |
 | `scheduler` | string | Specifies the scheduling rules for the time of a specific experiment. |  | no | 5 \* \* \* \* |
+| `tls.secretName` | string | SecretName represents the name of required secret resource. The secrete must combined with data `{"tls.certName":cert, "tls.KeyName":key, "tls.caName":ca}` |  | no | "http-tls-scr" |
+| `tls.secretNamespace` | string | SecretNamespace represents the namespace of required secret resource,should be the same with deployment/chaos-controller-manager in most cases |  | no | "chaos-mesh" |
+| `tls.certName` | string | CertName represents the data name of cert file in secret, `tls.crt` for example |  | no | "tls.crt" |
+| `tls.KeyName` | string | KeyName represents the data name of key file in secret, `tls.key` for example |  | no | "tls.key" |
+| `tls.caName` | string | CAName represents the data name of ca file in secret, `ca.crt` for example |  | no | "ca.crt" |
+
+:::note
+
+- When creating experiments with YAML files, `replace.body` must be the base64 encoding of the replacement content.
+
+- When creating experiments with the Kubernetes API, there is no need to encode the replacement content, just convert it to `[]byte` and put it into the `httpchaos.Spec.Replace.Body` field. The following is an example:
+
+```golang
+httpchaos.Spec.Replace.Body = []byte(`{"foo": "bar"}`)
+```
+
+:::
 
 ### Description for `target`-related fields
 
@@ -159,9 +177,148 @@ The `Response` is a meaningful when the `target` set to `Response` during the fa
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
 | `code` | int32 | Specifies the status code responded by `target`. | Takes effect for all status codes by default. | no | 200 |
-| `response_heads` | map[string]string | Matches request headers to `target`. | Takes effect for all responses by default. | no | Content-Type: application/json |
+| `response_headers` | map[string]string | Matches request headers to `target`. | Takes effect for all responses by default. | no | Content-Type: application/json |
 | `replace.code` | int32 | Specifies the replaced content of the response status code. |  | no | 404 |
+
+## Specify side
+
+The rules will affect both of clients and servers in the Pod by default, but you can affect only one side by selecting the request headers.
+
+This section provides some examples to specify the affected side, you can adjust the header selector in rules depend on your particular cases.
+
+### Client side
+
+To inject faults into clients in the Pod without affecting servers, you can select the request/response by the `Host` header in the request.
+
+For example, if you want to interrupt all requests to `http://example.com/`, you can apply the following YAML config:
+
+```yaml
+apiVersion: chaos-mesh.org/v1alpha1
+kind: HTTPChaos
+metadata:
+  name: test-http-client
+spec:
+  mode: all
+  selector:
+    labelSelectors:
+      app: some-http-client
+  target: Request
+  port: 80
+  path: '*'
+  request_headers:
+    Host: 'example.com'
+  abort: true
+```
+
+### Server side
+
+To inject faults into servers in the Pod without affecting clients, you can also select the request/response by the `Host` header in the request.
+
+For example, if you want to interrupt all requests to your server behind service `nginx.nginx.svc`, you can apply the following YAML config:
+
+```yaml
+apiVersion: chaos-mesh.org/v1alpha1
+kind: HTTPChaos
+metadata:
+  name: test-http-server
+spec:
+  mode: all
+  selector:
+    labelSelectors:
+      app: nginx
+  target: Request
+  port: 80
+  path: '*'
+  request_headers:
+    Host: 'nginx.nginx.svc'
+  abort: true
+```
+
+In other cases, especially when injecting the inbound request from outside, you may select the request/response by the `X-Forwarded-Host` header in the request.
+
+For example, if you want to interrupt all requests to your server behind a public gateway `nginx.host.org`, you can apply the following YAML config:
+
+```yaml
+apiVersion: chaos-mesh.org/v1alpha1
+kind: HTTPChaos
+metadata:
+  name: test-http-server
+spec:
+  mode: all
+  selector:
+    labelSelectors:
+      app: nginx
+  target: Request
+  port: 80
+  path: '*'
+  request_headers:
+    X-Forwarded-Host: 'nginx.host.org'
+  abort: true
+```
+
+## TLS
+
+To inject faults inside connection base on TLS, user should use TLS mode. Our proxy play a proxy role here, so in TLS people both need to act as a remote server with a trustful CA , but also need to act as a client trust the server with some ca.
+
+So in the secret data blow user need to create its' TLS keys & CA & CRT on their own.
+
+```
+{
+  "tls.certName":cert,
+  "tls.KeyName":key,
+  "tls.caName":ca
+}
+```
+
+If user need to create a new TLS server and inject the connection to it, they should:
+
+1. Create their own root CA's private key and root CA's certificate:
+
+   ```
+   openssl req -newkey rsa:4096  -x509  -sha512  -days 365 -nodes -out ca.crt -keyout ca.key
+   ```
+
+2. Create their server's Certificate Signing Request:
+
+   ```
+   openssl genrsa -out server.key 2048
+   openssl req -new -key server.key -out server.csr
+   ```
+
+3. Write an extension file `server.ext` for the server like:
+
+   ```
+   authorityKeyIdentifier=keyid,issuer
+   basicConstraints=CA:FALSE
+   keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+   subjectAltName = @alt_names
+
+   [alt_names]
+   IP.1 = X.X.X.X
+   ```
+
+4. Generate certificate of server:
+
+   ```
+   openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 365 -sha256 -extfile server.ext
+   ```
+
+5. Add CA `ca.crt` to client.
+
+6. Put `server.key`, `server.crt`, `ca.crt` into a secrete and give it to TLS mode.
+
+If user need to inject a client , they should act the proxy of HTTP Chaos like the remote server , you should just edit `server.ext` above to the specify domain.
+
+Example:
+
+```
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = *.domain.com
+IP.1 = xxx.xxx.xxx.xxx
+```
 
 ## Local debugging
 
-If you are not sure of the effects of certain fault injections, you can also test the corresponding features locally using [rs-tproxy](https://github.com/chaos-mesh/rs-tproxy). Chaos Mesh also provides HTTPChaos by using rs-tproxy.
+If you are not sure of the effects of certain fault injections, you can also test the corresponding features locally using [rs-tproxy](https://github.com/chaos-mesh/rs-tproxy). Chaos Mesh also provides HTTP Chaos by using chaos-tproxy.

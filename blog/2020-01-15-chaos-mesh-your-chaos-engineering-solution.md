@@ -5,11 +5,11 @@ author: Cwen Yin
 author_title: Maintainer of Chaos Mesh
 author_url: https://github.com/cwen0
 author_image_url: https://avatars1.githubusercontent.com/u/22956341?v=4
-image: /img/chaos-engineering.png
+image: /img/blog/chaos-engineering.png
 tags: [Chaos Mesh, Chaos Engineering, Kubernetes]
 ---
 
-![Chaos Engineering](/img/chaos-engineering.png)
+![Chaos Engineering](/img/blog/chaos-engineering.png)
 
 ## Why Chaos Mesh?
 
@@ -27,9 +27,9 @@ In the following sections, I will share with you what Chaos Mesh is, how we desi
 
 Chaos Mesh is a versatile Chaos Engineering platform that features all-around fault injection methods for complex systems on Kubernetes, covering faults in Pod, network, file system, and even the kernel.
 
-Here is an example of how we use Chaos Mesh to locate a TiDB system bug. In this example, we simulate Pod downtime with our distributed storage engine ([TiKV](https://pingcap.com/docs/stable/architecture/#tikv-server)) and observe changes in queries per second (QPS). Regularly, if one TiKV node is down, the QPS may experience a transient jitter before it returns to the level before the failure. This is how we guarantee high availability.
+Here is an example of how we use Chaos Mesh to locate a TiDB system bug. In this example, we simulate Pod downtime with our distributed storage engine ([TiKV](https://docs.pingcap.com/tidb/stable/tidb-architecture#tikv-server)) and observe changes in queries per second (QPS). Regularly, if one TiKV node is down, the QPS may experience a transient jitter before it returns to the level before the failure. This is how we guarantee high availability.
 
-![Chaos Mesh discovers downtime recovery exceptions in TiKV](/img/chaos-mesh-discovers-downtime-recovery-exceptions-in-tikv.png)
+![Chaos Mesh discovers downtime recovery exceptions in TiKV](/img/blog/chaos-mesh-discovers-downtime-recovery-exceptions-in-tikv.png)
 
 <div className="caption-center"> Chaos Mesh discovers downtime recovery exceptions in TiKV</div>
 
@@ -127,7 +127,7 @@ With the CRD design settled, let's look at the big picture on how Chaos Mesh wor
 
   Runs as a special type of container that is dynamically injected into the target Pod by the admission-webhooks. For example, the `chaosfs` sidecar container runs a fuse-daemon to hijack the I/O operation of the application container.
 
-![Chaos Mesh workflow](/img/chaos-mesh-workflow.png)
+![Chaos Mesh workflow](/img/blog/chaos-mesh-workflow.png)
 
 <div className="caption-center"> Chaos Mesh workflow </div>
 
@@ -170,14 +170,14 @@ Chaos Mesh runs on Kubernetes v1.12 or later. Helm, a Kubernetes package managem
    // create CRD resource
    kubectl apply -f manifests/
    // install chaos-mesh
-   helm install helm/chaos-mesh --name=chaos-mesh --namespace=chaos-testing
+   helm install helm/chaos-mesh --name=chaos-mesh --namespace=chaos-mesh
    ```
 
    Wait until all components are installed, and check the installation status using:
 
    ```bash
    // check chaos-mesh status
-   kubectl get pods --namespace chaos-testing -l app.kubernetes.io/instance=chaos-mesh
+   kubectl get pods --namespace chaos-mesh -l app.kubernetes.io/instance=chaos-mesh
    ```
 
    If the installation is successful, you can see all pods up and running. Now, time to play.
@@ -198,7 +198,7 @@ You can define your own chaos experiments through the YAML file method, which pr
    kind: PodChaos
    metadata:
      name: pod-kill-chaos-demo
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: pod-kill
      mode: one
@@ -216,7 +216,7 @@ You can define your own chaos experiments through the YAML file method, which pr
 
 The following chaos experiment simulates the TiKV Pods being frequently killed in the `chaos-demo-1` cluster:
 
-![Chaos experiment running](/img/chaos-experiment-running.gif)
+![Chaos experiment running](/img/blog/chaos-experiment-running.gif)
 
 <div className="caption-center"> Chaos experiment running </div>
 

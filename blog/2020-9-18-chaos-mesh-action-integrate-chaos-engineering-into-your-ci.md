@@ -5,11 +5,11 @@ author: Xiang Wang
 author_title: Contributor of Chaos Mesh
 author_url: https://github.com/WangXiangUSTC
 author_image_url: https://avatars3.githubusercontent.com/u/5793595?v=4
-image: /img/chaos-mesh-action.png
+image: /img/blog/chaos-mesh-action.png
 tags: [Chaos Mesh, Chaos Engineering, GitHub Action, CI]
 ---
 
-![chaos-mesh-action - Integrate Chaos Engineering into Your CI](/img/chaos-mesh-action.png)
+![chaos-mesh-action - Integrate Chaos Engineering into Your CI](/img/blog/chaos-mesh-action.png)
 
 [Chaos Mesh](https://chaos-mesh.org) is a cloud-native chaos testing platform that orchestrates chaos in Kubernetes environments. While it’s well received in the community with its rich fault injection types and easy-to-use dashboard, it was difficult to use Chaos Mesh with end-to-end testing or the continuous integration (CI) process. As a result, problems introduced during system development could not be discovered before the release.
 
@@ -25,7 +25,7 @@ chaos-mesh-action is available on [GitHub market](https://github.com/marketplace
 
 Combined with GitHub actions, Chaos Mesh can be more easily integrated into the daily development and testing of the system, thus guaranteeing that each code submission on GitHub is bug-free and won’t damage existing code. The following figure shows chaos-mesh-action integrated into the CI workflow:
 
-![chaos-mesh-action integration in the CI workflow](/img/chaos-mesh-action-integrate-in-the-ci-workflow.png)
+![chaos-mesh-action integration in the CI workflow](/img/blog/chaos-mesh-action-integrate-in-the-ci-workflow.png)
 
 ## Using chaos-mesh-action in GitHub workflow
 
@@ -56,7 +56,7 @@ After you design the workflow, the next step is to create it.
 1. Navigate to the GitHub repository that contains the software you want to test.
 2. To start creating a workflow, click **Actions**, and then click the **New workflow** button:
 
-![Creating a workflow](/img/creating-a-workflow.png)
+![Creating a workflow](/img/blog/creating-a-workflow.png)
 
 A workflow is essentially the configuration of jobs that take place sequentially and automatically. Note that the jobs are configured in a single file. For better illustration, we split the script into different job groups as shown below:
 

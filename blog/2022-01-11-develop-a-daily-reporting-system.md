@@ -5,11 +5,11 @@ author: Lei Li
 author_title: Senior software engineer at Digital China
 author_url: https://github.com/lileiaab
 author_image_url: https://avatars.githubusercontent.com/u/88825087?v=4
-image: /img/chaos-mesh-digitalchina-banner.png
+image: /img/blog/chaos-mesh-digitalchina-banner.png
 tags: [Chaos Mesh, Chaos Engineering, Use case]
 ---
 
-![How to Develop a Daily Reporting System to Track Chaos Testing Results](/img/chaos-mesh-digitalchina-banner.png)
+![How to Develop a Daily Reporting System to Track Chaos Testing Results](/img/blog/chaos-mesh-digitalchina-banner.png)
 
 Chaos Mesh is a cloud-native chaos engineering platform that orchestrates chaos experiments on Kubernetes environments. It allows you to test the resilience of your system by simulating problems such as network faults, file system faults, and Pod faults. After each chaos experiment, you can review the testing results by checking the logs. But this is neither direct nor efficient. Therefore, I decided to develop a daily reporting system that would automatically analyze logs and generate reports. This way, it’s easy to examine the logs and identify the issues.
 
@@ -94,7 +94,7 @@ In this step, you have to filter error messages and warning messages from logs. 
 
 For plotting, I used [gnuplot](http://www.gnuplot.info/), a Linux command-line graphing utility. In the example below, I imported the pressure measurement results and created a line graph to show how queries per second (QPS) were affected when a specific Pod became unavailable. Since the chaos experiment was executed periodically, the number of QPS exhibited a pattern: it would drop abruptly and then quickly return to normal.
 
-![QPS line graph](/img/qps-line-graph.png)
+![QPS line graph](/img/blog/qps-line-graph.png)
 
 <p class="caption-center">QPS line graph</p>
 
@@ -114,13 +114,13 @@ In my case, I used [Vue.js](https://github.com/vuejs/vue) to scaffold the web ap
 
 Below is an example of a web application that I developed for daily reporting. The red card indicates that I should take a look at the testing report because exceptions are thrown after running chaos experiments.
 
-![Web application for daily reporting](/img/web-app-for-daily-reporting.png)
+![Web application for daily reporting](/img/blog/web-app-for-daily-reporting.png)
 
 <p class="caption-center">Web application for daily reporting</p>
 
 Clicking the red card will open the report, as shown below. I used [pdf.js](https://github.com/mozilla/pdf.js) to view the PDF.
 
-![Daily report in PDF](/img/daily-report-pdf.png)
+![Daily report in PDF](/img/blog/daily-report-pdf.png)
 
 <p class="caption-center">Daily report in PDF</p>
 

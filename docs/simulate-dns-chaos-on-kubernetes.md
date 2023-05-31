@@ -6,20 +6,28 @@ import PickHelmVersion from '@site/src/components/PickHelmVersion'
 
 This document describes how to create DNSChaos experiments in Chaos Mesh to simulate DNS faults.
 
+:::info
+
+To simluate DNS faults, you need to deploy a special DNS service called Chaos DNS Server.
+
+In the latest version, Chaos Mesh will deploy Chaos DNS Server by default. If you don't need to simulate DNS faults, you can set `dnsServer.create` to `false` when installing Chaos Mesh:
+
+<PickHelmVersion className="language-bash">
+helm install chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-mesh --version latest --set dnsServer.create=false
+</PickHelmVersion>
+
+:::
+
 ## DNSChaos Introduction
 
 DNSChaos is used to simulate wrong DNS responses. For example, DNSChaos can return an error or return a random IP address when receiving a DNS request.
 
-## Deploy Chaos DNS Service
+## Check if Chaos DNS Server is deployed
 
-Before creating a DNSChaos experiment using Chaos Mesh, you need to deploy a special DNS service to inject faults:
-
-<PickHelmVersion className="language-bash">{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing --version latest --set dnsServer.create=true`}</PickHelmVersion>
-
-After executing the above commands, check if the DNS service status is normal:
+Check if Chaos DNS Server is deployed by running the following command:
 
 ```bash
-kubectl get pods -n chaos-testing -l app.kubernetes.io/component=chaos-dns-server
+kubectl get pods -n chaos-mesh -l app.kubernetes.io/component=chaos-dns-server
 ```
 
 Make sure that the Pod status is `Running`.
@@ -31,7 +39,7 @@ Make sure that the Pod status is `Running`.
 2. The chaos DNS service runs CoreDNS with the [k8s_dns_chaos](https://github.com/chaos-mesh/k8s_dns_chaos) plugin. If the CoreDNS service in your Kubernetes cluster contains some special configurations, you can edit configMap `dns-server-config` to make the configuration of the chaos DNS service consistent with that of the K8s CoreDNS service using the following command:
 
    ```bash
-   kubectl edit configmap dns-server-config -n chaos-testing
+   kubectl edit configmap dns-server-config -n chaos-mesh
    ```
 
 ## Create experiments using Chaos Dashboard
@@ -61,7 +69,7 @@ Make sure that the Pod status is `Running`.
    kind: DNSChaos
    metadata:
      name: dns-chaos-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: random
      mode: all

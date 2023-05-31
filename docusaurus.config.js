@@ -22,16 +22,9 @@ module.exports = {
   themeConfig: {
     image: 'chaos-mesh-social-preview.png',
     algolia: {
-      apiKey: '49739571d4f89670b12f39d5ad135f5a',
+      appId: '3BY0S3HQX6',
+      apiKey: '99bb3af44d57f0e8f6d7e019d7e2c2d7',
       indexName: 'chaos-mesh',
-    },
-    googleAnalytics: {
-      trackingID: 'UA-90760217-2',
-    },
-    announcementBar: {
-      content:
-        'Chaos Mesh is now a CNCF Incubating project 🥳, check out <a href="https://www.cncf.io/blog/2022/02/16/chaos-mesh-moves-to-the-cncf-incubator/" target="_blank">the announcement</a>!',
-      backgroundColor: '#37b5fb',
     },
     navbar: {
       hideOnScroll: true,
@@ -42,17 +35,25 @@ module.exports = {
         srcDark: 'img/logos/logo-mini-white.svg',
       },
       items: [
-        { type: 'docsVersionDropdown' },
-        { to: 'docs', label: 'Documentation' },
-        { to: 'interactive-tutorial', label: 'Interactive Tutorial' },
         {
-          to: 'blog',
-          label: 'Blog',
-          position: 'right',
+          type: 'docsVersionDropdown',
+          dropdownItemsAfter: [
+            {
+              type: 'html',
+              value: '<hr style="margin: .5em 0;" />',
+            },
+            { to: '/versions', label: 'All Versions' },
+            { to: '/supported-releases', label: 'Supported Releases' },
+          ],
         },
+        { to: 'docs', label: 'Documentation' },
         {
           href: 'https://community.cncf.io/chaos-mesh-community/',
           label: 'Events',
+        },
+        {
+          to: 'blog',
+          label: 'Blog',
           position: 'right',
         },
         {
@@ -94,16 +95,16 @@ module.exports = {
           title: 'Community',
           items: [
             {
-              label: 'Twitter',
-              href: 'https://twitter.com/chaos_mesh',
+              label: 'Events',
+              href: 'https://community.cncf.io/chaos-mesh-community/',
             },
             {
               label: 'Slack (#project-chaos-mesh)',
               href: 'https://slack.cncf.io/',
             },
             {
-              label: 'Events',
-              href: 'https://community.cncf.io/chaos-mesh-community/',
+              label: 'Twitter',
+              href: 'https://twitter.com/chaos_mesh',
             },
           ],
         },
@@ -111,17 +112,17 @@ module.exports = {
           title: 'More',
           items: [
             {
-              label: 'GitHub',
-              href: 'https://github.com/chaos-mesh/chaos-mesh',
-            },
-            {
               label: 'Blog',
               to: 'blog',
+            },
+            {
+              label: 'GitHub',
+              href: 'https://github.com/chaos-mesh/chaos-mesh',
             },
           ],
         },
         {
-          title: 'Others',
+          title: 'Thanks',
           items: [
             {
               html: '<a href="https://www.netlify.com"><img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" /></a>',
@@ -146,6 +147,9 @@ module.exports = {
     [
       '@docusaurus/preset-classic',
       {
+        googleAnalytics: {
+          trackingID: 'UA-90760217-2',
+        },
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.

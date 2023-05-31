@@ -5,11 +5,11 @@ author: Cwen Yin
 author_title: Maintainer of Chaos Mesh
 author_url: https://github.com/cwen0
 author_image_url: https://avatars1.githubusercontent.com/u/22956341?v=4
-image: /img/run-first-chaos-experiment-in-ten-minutes.jpg
+image: /img/blog/run-first-chaos-experiment-in-ten-minutes.jpg
 tags: [Chaos Mesh, Chaos Engineering, Kubernetes]
 ---
 
-![Run your first chaos experiment in 10 minutes](/img/run-first-chaos-experiment-in-ten-minutes.jpg)
+![Run your first chaos experiment in 10 minutes](/img/blog/run-first-chaos-experiment-in-ten-minutes.jpg)
 
 Chaos Engineering is a way to test a production software system's robustness by simulating unusual or disruptive conditions. For many people, however, the transition from learning Chaos Engineering to practicing it on their own systems is daunting. It sounds like one of those big ideas that require a fully-equipped team to plan ahead. Well, it doesn't have to be. To get started with chaos experimenting, you may be just one suitable platform away.
 
@@ -25,7 +25,7 @@ Chaos experiments are similar to experiments we do in a science class. It's perf
 
 The following clip shows the process of installing Chaos Mesh, deploying web-show, and creating the chaos experiment within a few commands:
 
-![The whole process of the chaos experiment](/img/whole-process-of-chaos-experiment.gif)
+![The whole process of the chaos experiment](/img/blog/whole-process-of-chaos-experiment.gif)
 
 <div className="caption-center"> The whole process of the chaos experiment </div>
 
@@ -148,7 +148,7 @@ To start NetworkChaos, do the following:
 
    From the line graph, you can tell that there is a 10 ms network delay every 60 seconds.
 
-![Using Chaos Mesh to insert delays in web-show](/img/using-chaos-mesh-to-insert-delays-in-web-show.png)
+![Using Chaos Mesh to insert delays in web-show](/img/blog/using-chaos-mesh-to-insert-delays-in-web-show.png)
 
 <div className="caption-center"> Using Chaos Mesh to insert delays in web-show </div>
 
@@ -169,7 +169,7 @@ Once you're finished testing, terminate the chaos experiment.
 
 From the line graph, you can see the network latency level is back to normal.
 
-![Network latency level is back to normal](/img/network-latency-level-is-back-to-normal.png)
+![Network latency level is back to normal](/img/blog/network-latency-level-is-back-to-normal.png)
 
 <div className="caption-center"> Network latency level is back to normal </div>
 

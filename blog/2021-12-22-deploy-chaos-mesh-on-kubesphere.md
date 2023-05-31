@@ -5,17 +5,17 @@ author: Cwen Yin
 author_title: Chaos Mesh Maintainer
 author_url: https://github.com/cwen0
 author_image_url: https://avatars.githubusercontent.com/u/22956341?v=4
-image: /img/chaos-mesh-kubesphere-banner.png
+image: /img/blog/chaos-mesh-kubesphere-banner.png
 tags: [Chaos Mesh, Chaos Engineering, community]
 ---
 
-![Deploy Chaos Mesh on KubeSphere](/img/chaos-mesh-kubesphere-banner.png)
+![Deploy Chaos Mesh on KubeSphere](/img/blog/chaos-mesh-kubesphere-banner.png)
 
 [Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh) is a cloud-native Chaos Engineering platform that orchestrates chaos in Kubernetes environments. With Chaos Mesh, you can test your system's resilience and robustness on Kubernetes by injecting various types of faults into Pods, network, file system, and even the kernel.
 
 <!--truncate-->
 
-![Chaos Mesh architecture](/img/chaos-mesh-architecture-2.0.png)
+![Chaos Mesh architecture](/img/blog/chaos-mesh-architecture-2.0.png)
 
 ## What’s KubeSphere
 
@@ -35,33 +35,33 @@ KubeSphere 3.2.0 adds the feature of dynamically loading community-developed Hel
 
 1. Login KubeSphere as `project-regular`, search for **chaos-mesh** in the **App Store**, and click on the search result to enter the app.
 
-   ![Chaos Mesh app](/img/chaos-mesh-app.png)
+   ![Chaos Mesh app](/img/blog/chaos-mesh-app.png)
 
 2. In the **App Information** page, click **Install** on the upper right corner.
 
-   ![Install Chaos Mesh](/img/install-chaos-mesh.png)
+   ![Install Chaos Mesh](/img/blog/install-chaos-mesh.png)
 
 3. In the **App Settings** page, set the application **Name,** **Location** (as your Namespace), and **App Version**, and then click **Next** on the upper right corner.
 
-   ![Chaos Mesh basic information](/img/chaos-mesh-basic-info.png)
+   ![Chaos Mesh basic information](/img/blog/chaos-mesh-basic-info.png)
 
 4. Configure the `values.yaml` file as needed, or click **Install** to use the default configuration.
 
-   ![Chaos Mesh configurations](/img/chaos-mesh-config.png)
+   ![Chaos Mesh configurations](/img/blog/chaos-mesh-config.png)
 
 5. Wait for the deployment to be finished. Upon completion, Chaos Mesh will be shown as **Running** in KubeSphere.
 
-   ![Chaos Mesh deployed](/img/chaos-mesh-deployed.png)
+   ![Chaos Mesh deployed](/img/blog/chaos-mesh-deployed.png)
 
 ### Step 2: Visit Chaos Dashboard
 
 1. In the **Resource Status** page, copy the **NodePort **of `chaos-dashboard`.
 
-   ![Chaos Mesh NodePort](/img/chaos-mesh-nodeport.png)
+   ![Chaos Mesh NodePort](/img/blog/chaos-mesh-nodeport.png)
 
 2. Access the Chaos Dashboard by entering `${NodeIP}:${NODEPORT}` in your browser. Refer to [Manage User Permissions](https://chaos-mesh.org/docs/manage-user-permissions/) to generate a Token and log into Chaos Dashboard.
 
-   ![Login to Chaos Dashboard](/img/login-to-dashboard.png)
+   ![Login to Chaos Dashboard](/img/blog/login-to-dashboard.png)
 
 ### Step 3: Create a chaos experiment
 
@@ -75,24 +75,23 @@ curl -sSL https://mirrors.chaos-mesh.org/latest/web-show/deploy.sh | bash
 
 1. From your web browser, visit `${NodeIP}:8081` to access the **Web Show** application.
 
-   ![Chaos Mesh web show app](/img/web-show-app.png)
+   ![Chaos Mesh web show app](/img/blog/web-show-app.png)
 
 2. Log in to Chaos Dashboard to create a chaos experiment. To observe the effect of network latency on the application, we set the **Target **as "Network Attack" to simulate a network delay scenario.
 
-   ![Chaos Dashboard](/img/chaos-dashboard-networkchaos.png)
+   ![Chaos Dashboard](/img/blog/chaos-dashboard-networkchaos.png)
 
    The **Scope** of the experiment is set to `app: web-show`.
 
-   ![Chaos Experiment scope](/img/chaos-experiment-scope.png)  
-
+   ![Chaos Experiment scope](/img/blog/chaos-experiment-scope.png)
 
 3. Start the chaos experiment by submitting it.
 
-   ![Submit Chaos Experiment](/img/start-chaos-experiment.png)
+   ![Submit Chaos Experiment](/img/blog/start-chaos-experiment.png)
 
 Now, you should be able to visit **Web Show** to observe experiment results:
 
-![Chaos Experiment result](/img/experiment-result.png)
+![Chaos Experiment result](/img/blog/experiment-result.png)
 
 ## To summarize
 

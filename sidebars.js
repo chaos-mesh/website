@@ -20,11 +20,16 @@ module.exports = {
             'offline-installation',
             'persistence-dashboard',
             'uninstallation',
-            'supported-releases'
+            {
+              type: 'link',
+              label: 'Supported Releases',
+              href: '/supported-releases',
+            },
           ],
         },
         'manage-user-permissions',
         'configure-enabled-namespace',
+        'remote-cluster-management',
         {
           type: 'category',
           label: 'Run a Single Chaos Experiment',
@@ -41,19 +46,12 @@ module.exports = {
           label: 'Orchestrate Multiple Chaos Experiments',
           items: [
             'create-chaos-mesh-workflow',
-            'run-chaos-experiments-in-serial-or-parallel',
+            'run-serial-or-parallel-experiments',
             'send-http-request-on-workflow',
             'check-workflow-status',
+            'status-check-in-workflow',
           ],
         },
-      ],
-    },
-    {
-      type: 'category',
-      label: 'Tutorials',
-      collapsed: false,
-      items: [
-        'the-guide-to-chaos-mesh-v21',
       ],
     },
     {
@@ -73,8 +71,10 @@ module.exports = {
             'simulate-jvm-application-chaos',
             'simulate-kernel-chaos-on-kubernetes',
             'simulate-aws-chaos',
+            'simulate-azure-chaos',
             'simulate-gcp-chaos',
             'simulate-http-chaos-on-kubernetes',
+            'simulate-block-chaos-on-kubernetes',
           ],
         },
         {
@@ -91,6 +91,7 @@ module.exports = {
             'simulate-jvm-application-chaos-in-physical-nodes',
             'simulate-time-chaos-on-physical-nodes',
             'simulate-file-chaos-in-physical-nodes',
+            'simulate-redis-chaos-on-physical-nodes',
             'chaosd-search-recover',
           ],
         },
@@ -99,15 +100,8 @@ module.exports = {
     {
       type: 'category',
       label: 'Authentication',
-      items: [
-        "gcp-authentication",
-      ]
+      items: ['gcp-authentication'],
     },
-    // {
-    //   type: 'category',
-    //   label: 'Use Cases',
-    //   items: ['multi-data-center-scenario'],
-    // },
     {
       type: 'category',
       label: 'Tools Integration',
@@ -127,31 +121,24 @@ module.exports = {
         'add-new-chaos-experiment-type',
         'extend-chaos-daemon-interface',
         'extend-chaosd',
-        // {
-        //   type: 'category',
-        //   label: 'Clients',
-        //   items: ['go-client', 'rust-client', 'java-client', 'python-client'],
-        // },
       ],
     },
-    // {
-    //   type: 'category',
-    //   label: 'Reference Guides',
-    //   items: ['architecture', 'chaos-engineering-principles', 'chaosctl-tool', 'glossary'],
-    // },
     {
       type: 'category',
       label: 'FAQs and Troubleshooting',
+      items: ['faqs', 'upgrade-to-2.0', 'upgrade-from-2.1-to-2.2'],
+    },
+    {
+      type: 'category',
+      label: 'Release',
       items: [
-        'faqs',
-        // 'troubleshooting-guide',
-        'upgrade-to-2.0',
+        'release-cycle',
+        {
+          type: 'category',
+          label: 'Release Tracking',
+          items: ['release-2.5-tracking'],
+        },
       ],
     },
-    // {
-    //   type: 'category',
-    //   label: 'Release Notes',
-    //   items: ['release-2.0.0', 'release-1.0.0', 'release-0.0.9', 'release-0.0.8'],
-    // },
   ],
 }

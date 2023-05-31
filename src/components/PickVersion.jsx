@@ -1,13 +1,20 @@
 import BrowserOnly from '@docusaurus/BrowserOnly'
-import CodeBlock from '@theme/CodeBlock'
-import React from 'react'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import { usePluginData } from '@docusaurus/useGlobalData'
+import CodeBlock from '@theme/CodeBlock'
+import React from 'react'
 
+/**
+ *
+ * @param {*} siteConfig
+ * @param {object[]} versions
+ * @returns
+ */
 export const usePickVersion = (siteConfig, versions) => {
   const pathname = window.location.pathname
 
   let preferred = window.localStorage.getItem('docs-preferred-version-default')
+  // Get the last selected version from local storage on the homepage.
   if (pathname === siteConfig.baseUrl && preferred) {
     return preferred === 'current' ? 'latest' : preferred
   }
@@ -16,17 +23,25 @@ export const usePickVersion = (siteConfig, versions) => {
     return 'latest'
   }
 
-  const latestStableVersion = versions.filter((d) => d.isLast)[0].name
-  const activeVersion = versions.filter((d) => pathname.includes(d.name)).map((d) => d.name)[0]
+  const latestStableVersion = versions.find((d) => d.isLast)
+  const activeVersion = versions.find((d) => pathname.includes(d.name))
 
-  return activeVersion || latestStableVersion
+  return activeVersion ? activeVersion.name : latestStableVersion.name
 }
 
 function versionToGitHubRef(version) {
   return version === 'latest' ? 'refs/heads/master' : `refs/tags/v${version}`
 }
 
-const PickVersion = ({ children, replaced = 'latest', isArchive = false, className = 'language-bash' }) => {
+const PickVersion = ({
+  children,
+  // replaced represent the string would be replaced in the original content
+  replaced = 'latest',
+  // when `isArchive` is true, it would be replaced as patterns like `refs/heads/master` or `refs/tags/vX.Y.Z`
+  // when `isArchive` is false, it would be replaced with `vX.Y.Z`
+  isArchive = false,
+  className = 'language-bash',
+}) => {
   const { siteConfig } = useDocusaurusContext()
   const { versions } = usePluginData('docusaurus-plugin-content-docs')
 
