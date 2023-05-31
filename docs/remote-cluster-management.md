@@ -40,6 +40,7 @@ It will install the `chaos-mesh` helm chart with the `KUBECONFIG` provided in th
 | kubeConfig.secretRef.name | string | The name of the secret, which is used to store the kubeconfig of remote cluster. This kubeconfig will be used to install chaos-mesh components and inject errors | None | Yes | `chaos-mesh-02.kubeconfig` |
 | kubeConfig.secretRef.namespace | string | The name of the kubeconfig secret. | None | Yes | `default` |
 | kubeConfig.secretRef.key | string | The key of the kubeconfig in the secret. | None | Yes | `kubeconfig` |
+| configOverride | string | The helm value to be overridden after base64 encoding | None | No | `{"dashboard":{"create":true}}` |
 
 ## Inject errors in the remote cluster
 
