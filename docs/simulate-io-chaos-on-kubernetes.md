@@ -143,7 +143,7 @@ For specific features, refer to [Create experiments using the YAML files](#creat
    metadata:
      name: io-mistake-example
      namespace: chaos-mesh
-   secp:
+   spec:
      action: mistake
      mode: one
      selector:
