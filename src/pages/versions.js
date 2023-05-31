@@ -52,7 +52,10 @@ export default function Versions() {
               <div key={version.version} className={clsx('col col--4', styles.cardCol)}>
                 <div className="card shadow--md">
                   <div className="card__header">
-                    <h3>v{version.version}</h3>
+                    <h3>
+                      v{version.version}
+                      {i === stableVersions.length - 1 && ' (Unsupported)'}
+                    </h3>
                   </div>
                   <div className="card__body">
                     <p>
