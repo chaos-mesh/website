@@ -138,12 +138,12 @@ For specific features, refer to [Create experiments using the YAML files](#creat
 1. Write the experiment configuration to the `io-mistake.yaml` file:
 
    ```yaml
-   apiVersion: chaos-mesh. rg/v1alpha1
-   ind: IOChaos
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: IOChaos
    metadata:
      name: io-mistake-example
      namespace: chaos-mesh
-   special:
+   secp:
      action: mistake
      mode: one
      selector:
