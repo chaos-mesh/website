@@ -127,6 +127,8 @@ kubectl create ns chaos-mesh
 
 为了保证高可用性，Chaos Mesh 默认开启了 `leader-election` 特性。如果不需要这个特性，请通过 `--set controllerManager.leaderElection.enabled=false` 手动关闭该特性。
 
+> 如果版本 `<2.6.1`，你仍然需要设置 `--set controllerManager.replicaCount=1` 来将控制器管理器减少到一个副本。
+
 :::
 
 ## 验证安装

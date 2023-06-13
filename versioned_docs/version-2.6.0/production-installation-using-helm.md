@@ -127,6 +127,8 @@ To install Chaos Mesh of a specific version, add the `--version x.y.z` parameter
 
 To ensure high availability, Chaos Mesh turns on `leader-election` feature by default. If you do not need to use this feature, you can disable it manually with `--set controllerManager.leaderElection.enabled=false`.
 
+> If version `<2.6.1`, you still need to set `--set controllerManager.replicaCount=1` to reduce the controller manager to one replica.
+
 :::
 
 ## Verify the installation
