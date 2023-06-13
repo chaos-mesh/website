@@ -2,6 +2,10 @@
 title: 使用 Helm 安装 Chaos Mesh
 ---
 
+import Tabs from '@theme/Tabs'
+
+import TabItem from '@theme/TabItem'
+
 import PickVersion from '@site/src/components/PickVersion'
 
 import PickHelmVersion from '@site/src/components/PickHelmVersion'
@@ -82,40 +86,44 @@ kubectl create ns chaos-mesh
 
 :::
 
-由于不同容器运行时的守护进程所监听的 socket path 不同，在安装时需要设置不同的值，可以根据不同的环境来运行如下的安装命令。
+由于不同容器运行时的守护进程所监听的 socket path 不同，你需要在安装时设置适当的值。你可以根据不同的环境来运行以下的安装命令。
 
-#### Docker
+<!-- prettier-ignore -->
+<Tabs defaultValue="docker" values={[
+  {label: 'Docker', value: 'docker'},
+  {label: 'Containerd', value: 'containerd'},
+  {label: 'K3s', value: 'k3s'},
+  {label: 'CRI-O', value: 'cri-o'}
+]}>
+  <TabItem value="docker">
+    <PickHelmVersion>
+      {`\# Default to /var/run/docker.sock\nhelm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version latest`}
+    </PickHelmVersion>
+  </TabItem>
+  <TabItem value="containerd">
+    <PickHelmVersion>
+      helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --version latest
+    </PickHelmVersion>
+  </TabItem>
+  <TabItem value="k3s">
+    <PickHelmVersion>
+      helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock --version latest
+    </PickHelmVersion>
+  </TabItem>
+  <TabItem value="cri-o">
+    <PickHelmVersion>
+      helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=crio --set chaosDaemon.socketPath=/var/run/crio/crio.sock --version latest
+    </PickHelmVersion>
+  </TabItem>
+</Tabs>
 
-<PickHelmVersion>
-{`\# 默认为 /var/run/docker.sock
-helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version latest}
-</PickHelmVersion>
-
-#### containerd
-
-<PickHelmVersion>
-helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --version latest
-</PickHelmVersion>
-
-#### K3s
-
-<PickHelmVersion>
-helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock --version latest
-</PickHelmVersion>
-
-#### CRI-O
-
-<PickHelmVersion>
-helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=crio --set chaosDaemon.socketPath=/var/run/crio/crio.sock --version latest
-</PickHelmVersion>
-
-:::note 注意
+:::info 提示
 
 如需安装特定版本的 Chaos Mesh，请在 `helm install/upgrade` 后添加 `--version x.y.z` 参数，如 `helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version 2.0.0`。
 
 :::
 
-:::note 注意
+:::tip 小贴士
 
 为了保证高可用性，Chaos Mesh 默认开启了 `leader-election` 特性。如果不需要这个特性，请通过 `--set controllerManager.leaderElection.enabled=false` 手动关闭该特性。
 
