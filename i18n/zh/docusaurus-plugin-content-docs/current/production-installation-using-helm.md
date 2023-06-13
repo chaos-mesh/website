@@ -119,7 +119,7 @@ kubectl create ns chaos-mesh
 
 :::info 提示
 
-如需安装特定版本的 Chaos Mesh，请在 `helm install/upgrade` 后添加 `--version x.y.z` 参数，如 `helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version 2.0.0`。
+如需安装特定版本的 Chaos Mesh，请在 `helm install/upgrade` 后添加 `--version x.y.z` 参数，如 `helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version 2.1.0`。
 
 :::
 

@@ -119,7 +119,7 @@ As the daemons of different container runtimes listen on different socket paths,
 
 :::info
 
-To install Chaos Mesh of a specific version, add the `--version x.y.z` parameter after `helm install/upgrade`, for example, `helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version 2.0.0`.
+To install Chaos Mesh of a specific version, add the `--version x.y.z` parameter after `helm install/upgrade`, for example, `helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version 2.1.0`.
 
 :::
 
