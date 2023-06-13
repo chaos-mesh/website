@@ -86,36 +86,38 @@ kubectl create ns chaos-mesh
 
 #### Docker
 
-```bash
-# 默认为 /var/run/docker.sock
-helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh
-```
+<PickHelmVersion>
+{`\# 默认为 /var/run/docker.sock
+helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version latest}
+</PickHelmVersion>
 
 #### containerd
 
-```bash
-helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock
-```
+<PickHelmVersion>
+helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --version latest
+</PickHelmVersion>
 
 #### K3s
 
-```bash
-helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock
-```
+<PickHelmVersion>
+helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock --version latest
+</PickHelmVersion>
 
 #### CRI-O
 
-<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=crio --set chaosDaemon.socketPath=/var/run/crio/crio.sock --version latest`}</PickHelmVersion>
+<PickHelmVersion>
+helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=crio --set chaosDaemon.socketPath=/var/run/crio/crio.sock --version latest
+</PickHelmVersion>
 
 :::note 注意
 
-如要安装特定版本的 Chaos Mesh，请在 `helm install` 后添加 `--version xxx` 参数，如 `--version v2.0.0`。
+如需安装特定版本的 Chaos Mesh，请在 `helm install/upgrade` 后添加 `--version x.y.z` 参数，如 `helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version 2.0.0`。
 
 :::
 
 :::note 注意
 
-为了保证高可用性，Chaos Mesh 默认开启了 `leader-election` 特性。如果不需要这个特性，请通过 `--set controllerManager.leaderElection.enabled=false --set controllerManager.replicaCount=1` 手动关闭该特性。
+为了保证高可用性，Chaos Mesh 默认开启了 `leader-election` 特性。如果不需要这个特性，请通过 `--set controllerManager.leaderElection.enabled=false` 手动关闭该特性。
 
 :::
 

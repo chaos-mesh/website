@@ -86,32 +86,38 @@ Because socket paths are listened to by the daemons of different running contain
 
 #### Docker
 
-<!-- prettier-ignore -->
-<PickHelmVersion className="language-bash">{`\# Default to /var/run/docker.sock
+<PickHelmVersion>
+{`\# Default to /var/run/docker.sock
 helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version latest`}
 </PickHelmVersion>
 
 #### Containerd
 
-<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --version latest`}</PickHelmVersion>
+<PickHelmVersion>
+helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --version latest
+</PickHelmVersion>
 
 #### K3s
 
-<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock --version latest`}</PickHelmVersion>
+<PickHelmVersion>
+helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock --version latest
+</PickHelmVersion>
 
 #### CRI-O
 
-<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=crio --set chaosDaemon.socketPath=/var/run/crio/crio.sock --version latest`}</PickHelmVersion>
+<PickHelmVersion>
+helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=crio --set chaosDaemon.socketPath=/var/run/crio/crio.sock --version latest
+</PickHelmVersion>
 
 :::note
 
-To install Chaos Mesh of a specific version, add the `--version xxx` parameter after `helm upgrade`, for example, `--version 2.0.0`.
+To install Chaos Mesh of a specific version, add the `--version x.y.z` parameter after `helm install/upgrade`, for example, `helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version 2.0.0`.
 
 :::
 
 :::note
 
-To ensure high availability, Chaos Mesh turns on `leader-election` feature by default. If you do not need to use this feature, you can manually turn it off through `--set controllerManager.leaderElection.enabled=false --set controllerManager.replicaCount=1`.
+To ensure high availability, Chaos Mesh turns on `leader-election` feature by default. If you do not need to use this feature, you can disable it manually with `--set controllerManager.leaderElection.enabled=false`.
 
 :::
 
