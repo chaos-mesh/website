@@ -20,11 +20,11 @@ To register a remote cluster into the Chaos Mesh installed on the current cluste
 apiVersion: chaos-mesh.org/v1alpha1
 kind: RemoteCluster
 metadata:
- name: cluster-xxxxxxx
+  name: cluster-xxxxxxx
 spec:
- namespace: "chaos-mesh"
- kubeConfig:
-   secretRef:
+  namespace: 'chaos-mesh'
+  kubeConfig:
+    secretRef:
       name: chaos-mesh-02.kubeconfig
       namespace: default
       key: kubeconfig
@@ -49,19 +49,19 @@ To inject the errors to a remote cluster using the registered `RemoteCluster`, y
 apiVersion: chaos-mesh.org/v1alpha1
 kind: StressChaos
 metadata:
- name: burn-cpu
+  name: burn-cpu
 spec:
- remoteCluster: cluster-xxxxxxx
- mode: one
- selector:
-   labelSelectors:
-     "app.kubernetes.io/component": "tikv"
- stressors:
-   cpu:
-     workers: 1
-     load: 100
-     options: ["--cpu 2", "--timeout 600", "--hdd 1"]
- duration: "30s"
+  remoteCluster: cluster-xxxxxxx
+  mode: one
+  selector:
+    labelSelectors:
+      'app.kubernetes.io/component': 'tikv'
+  stressors:
+    cpu:
+      workers: 1
+      load: 100
+      options: ['--cpu 2', '--timeout 600', '--hdd 1']
+  duration: '30s'
 ```
 
 The Chaos Mesh will inject the errors to the remote cluster using the kubeconfig registered with the `RemoteCluster` named `cluster-xxxxxxx`. The corresponding `StressChaos` will be automatically created in the remote cluster, and the status is synchronized back to the current cluster, so that you can manage the chaos injection for multiple different clusters in a single kubernetes.

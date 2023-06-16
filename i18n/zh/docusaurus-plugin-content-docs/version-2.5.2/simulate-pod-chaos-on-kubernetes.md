@@ -25,7 +25,7 @@ Chaos Mesh 可以向任一 Pod 注入 PodChaos，无论其 Pod 是否绑定至 D
 
 ## 使用 Chaos Dashboard 方式创建实验
 
-:::note 注意
+:::note 提示
 
 在使用 Chaos Dashboard 创建实验前：
 

@@ -42,7 +42,7 @@ Github 仓库中含有其他工作流的[示例](https://github.com/chaos-mesh/c
 
    在本示例中选择的任务类型为”单一“。
 
-   :::note 注意
+   :::note 提示
 
    Chaos Dashboard 会自动创建一个命名为 "entry" 的串行节点，作其用为该工作流的入口。
 
@@ -202,7 +202,7 @@ podChaos:
 | statusCheck | object | 配置 StatusCheck，当 type 为 StatusCheck 时需要配置该字段。详见 [在工作流中进行状态检查](status-check-in-workflow.md) | 无 | 否 |  |
 | abortWithStatusCheck | bool | 配置当 StatusCheck 失败时是否终止工作流，当 type 为 StatusCheck 时可选配置该字段。 | `false` | 否 | `true` |
 
-:::note 注意
+:::note 提示
 
 当在工作流中建立有持续时间的 Chaos 时，需要将持续时间填写到外层的 `deadline` 字段中，而不是使用 Chaos 中的 `duration` 字段。
 

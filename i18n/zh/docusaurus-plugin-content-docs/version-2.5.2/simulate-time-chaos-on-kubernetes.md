@@ -6,7 +6,7 @@ title: 模拟时间故障
 
 Chaos Mesh 提供的 TimeChaos 实验类型可用于模拟时间偏移的场景。本文档介绍如何创建 TimeChaos 实验以及相关的配置文件说明。
 
-:::note 注意
+:::note 提示
 
 TimeChaos 只影响容器中 PID 命名空间的 PID `1` 进程，以及 PID `1` 的子进程。例如，通过`kubectl exec` 启动的进程不会被影响。
 

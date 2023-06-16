@@ -67,7 +67,7 @@ Global Flags:
 | 配置项 | 配置缩写 | 说明 | 值 |
 | :-- | :-- | :-- | :-- |
 | `process` | p | 需要注入故障的进程的名字或者进程的标识符 | string 类型，默认为 `""` |
-| `recover-cmd` | r | 需要在实验恢复时执行的命令 | string 类型，默认为 `""`|
+| `recover-cmd` | r | 需要在实验恢复时执行的命令 | string 类型，默认为 `""` |
 | `signal` | s | 所提供的进程信号值 | int 类型，默认为 `9`。目前只支持 `SIGKILL`、`SIGTERM` 和 `SIGSTOP` 三种信号值。 |
 
 #### 模拟进程被终止示例
@@ -82,7 +82,7 @@ chaosd attack process kill -p python
 Attack process python successfully, uid: 10e633ac-0a37-41ba-8b4a-cd5ab92099f9
 ```
 
-:::note 注意
+:::note 提示
 
 只有 `signal` 为 `SIGSTOP` 的实验支持被恢复。
 
@@ -148,7 +148,7 @@ Attack process python successfully, uid: 9cb6b3be-4f5b-4ecb-ae05-51050fcd0010
 
 在上述命令中，你需要按照故障类型在 `fault-configuration` 中进行配置。有关对应的配置参数，请参考下文中各个类型故障的相关参数说明和命令示例。
 
-:::note 注意
+:::note 提示
 
 在运行实验时，请注意保存实验的 UID 信息。当要结束 UID 对应的实验时，需要向 Chaosd 服务的路径 `/api/attack/{uid}` 发送 `DELETE` HTTP 请求。
 
@@ -189,7 +189,7 @@ curl -X POST 172.16.112.130:31767/api/attack/process -H "Content-Type:applicatio
 {"status":200,"message":"attack successfully","uid":"a00cca2b-eba7-4716-86b3-3e66f94880f7"}
 ```
 
-:::note 注意
+:::note 提示
 
 只有 `signal` 为 `SIGSTOP` 的实验支持被恢复。
 

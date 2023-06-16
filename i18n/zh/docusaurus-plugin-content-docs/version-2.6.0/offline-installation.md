@@ -47,7 +47,7 @@ docker save ghcr.io/chaos-mesh/chaos-daemon:${CHAOS_MESH_VERSION} > image-chaos-
 docker save ghcr.io/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION} > image-chaos-dashboard.tar
 ```
 
-:::note 注意
+:::note 提示
 
 如需模拟 DNS 故障（例如，使 DNS 响应返回随机的错误 IP 地址），请额外拉取 [`pingcap/coredns`](https://hub.docker.com/r/pingcap/coredns) 镜像。
 
@@ -86,7 +86,7 @@ docker load < image-chaos-dashboard.tar
 
 ### 第 2 步：推送镜像至 Registry
 
-:::note 注意
+:::note 提示
 
 在推送镜像前，请确保离线环境中已经部署 Registry。如果尚未部署，请参考 [Docker Registry](https://docs.docker.com/registry/) 进行部署。
 
@@ -126,7 +126,7 @@ docker push $CHAOS_DASHBOARD_IMAGE
 unzip chaos-mesh.zip -d chaos-mesh && cd chaos-mesh
 ```
 
-:::note 注意
+:::note 提示
 
 如果你正在安装在 Kubernetes v1.15（或更低版本）中安装 Chaos Mesh，请通过 `kubectl create -f manifests/crd-v1beta1.yaml` 手动安装 CRD。 具体细节，请参考 [FAQ](./faqs.md#q-failed-to-install-chaos-mesh-with-message-no-matches-for-kind-customresourcedefinition-in-version-apiextensionsk8siov1)。
 

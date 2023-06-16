@@ -8,7 +8,7 @@ import PickHelmVersion from '@site/src/components/PickHelmVersion'
 
 Chaos Mesh 使用 Kubernetes 原生的 [RBAC](https://kubernetes.io/zh/docs/reference/access-authn-authz/rbac/) 功能来管理用户角色和权限。用户在创建、查看、管理混沌实验时，需要拥有 `chaos-mesh.org` 这个 `apiGroups` 下混沌实验自定义资源的相应权限。
 
-:::note 注意
+:::note 提示
 
 使用 Helm 安装 Chaos Mesh 时，默认开启权限验证功能。对于生产环境及其他安全要求较高的场景，建议保持权限验证功能开启。如果只是想体验 Chaos Mesh 的功能，希望关闭权限验证从而快速创建混沌实验，可以直接参阅[权限验证功能的开启及关闭](#开启或关闭权限验证功能)部分了解如何关闭权限验证。
 
@@ -123,7 +123,7 @@ Chaos Mesh 使用 Kubernetes 原生的 [RBAC](https://kubernetes.io/zh/docs/refe
 
    ![Dashboard 令牌登录 2](img/dashboard_login2.png)
 
-:::note 注意
+:::note 提示
 
 - 需要保证执行 kubectl 的本地用户具有集群的管理权限，从而可以创建用户、绑定不同的权限、并获取 token。
 

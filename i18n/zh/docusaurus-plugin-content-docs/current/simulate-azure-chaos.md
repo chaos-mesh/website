@@ -37,7 +37,7 @@ stringData:
 - **client_secret** 存储 Azure 应用注册的应用程序（客户端）的机密值。
 - **tenant_id** 存储 Azure 应用注册的目录（租户）ID。 `client_id` 及 `client_secret` 的获取请参考[机密客户端应用程序](https://docs.microsoft.com/zh-cn/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app)。
 
-:::note 注意
+:::note 提示
 
 请确保 Secret 文件中的应用注册已作为参与者或所有者添加到指定 VM 实例的访问控制（IAM）中。
 

@@ -4,13 +4,13 @@ title: 在工作流中发送 HTTP 请求
 
 Chaos Mesh 工作流提供了 `Task` 节点以支持任意工作负载，其功能类似于 Kubernetes 中的 `Job`。 为了提供更好的产品体验，Chaos Dashboard 提供了一个基于 `Task` 的模板。通过此模板，你可以方便地在 WebUI 中创建 HTTP 请求。本文介绍如何通过 Chaos Dashboard 创建 HTTP 请求。
 
-:::note 注意
+:::note 提示
 
 Chaos Mesh 中不存在属于 `HTTPRequest` 类型的工作流节点。本特性基于 `Task` 节点，用于更方便地发送 HTTP 请求。
 
 :::
 
-:::note 注意
+:::note 提示
 
 当前该功能为实验特性，不建议在生产环境中使用，其配置与行为可能会在未来的版本中发生变化。
 

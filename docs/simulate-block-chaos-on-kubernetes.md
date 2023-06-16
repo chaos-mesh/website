@@ -12,7 +12,6 @@ BlockChaos is in an early stage. The installation and configuration experience o
 
 :::
 
-
 :::note
 
 BlockChaos `freeze` action will affect all processes using the block device, not only the target container.

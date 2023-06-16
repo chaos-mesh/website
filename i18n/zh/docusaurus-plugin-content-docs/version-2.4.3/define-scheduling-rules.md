@@ -8,7 +8,7 @@ title: 定义调度规则
 
 在 Kubernetes 中，Chaos Mesh 使用 `Schedule` 对象来描述定时任务。
 
-:::note 注意
+:::note 提示
 
 一个 `Schedule` 对象名不应超过 57 字符，因为它创建的混沌实验将在名字后额外添加 6 位随机字符。一个包含有 `Workflow` 的 `Schedule` 对象名不应超过 51 字符，因为 Workflow 也将在创建的名字后额外添加 6 位随机字符。
 
@@ -69,7 +69,7 @@ spec:
 
 在后文中会对 `Schedule` 中的字段进行描述，大多与 Kubernetes `CronJob` 的字段等价。可以参考 Kubernetes CronJob 的[文档](https://kubernetes.io/zh/docs/concepts/workloads/controllers/cron-jobs/)。
 
-:::note 注意
+:::note 提示
 
 `Schedule` 中 `schedule` 字段对应的时区以 `chaos-controller-manager` 的时区为准。
 
@@ -136,7 +136,7 @@ spec:
 
 如果设置 `concurrencyPolicy: "Allow"`，则表现为在每分钟中存在 10 秒有 20 毫秒的延迟，而其他 50 秒将存在 10 毫秒的延迟；如果设置 `concurrencyPolicy: "Forbid"`，则表现为一直有 10 毫秒的延迟。
 
-:::note 注意
+:::note 提示
 
 并非所有实验类型均支持多个实验对同一 Pod 生效。详见各实验类型的文档。
 
