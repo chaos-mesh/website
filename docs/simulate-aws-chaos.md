@@ -28,12 +28,14 @@ type: Opaque
 stringData:
   aws_access_key_id: your-aws-access-key-id
   aws_secret_access_key: your-aws-secret-access-key
+  aws_session_token: your-aws-session-token
 ```
 
 - **name** means the Kubernetes Secret object.
 - **namespace** means the namespace of the Kubernetes Secret object.
 - **aws_access_key_id** stores the ID of the access key to the AWS cluster.
-- **aws_secret_access_key** stores the secrete access key to the AWS cluster.
+- **aws_secret_access_key** stores the secret access key to the AWS cluster.
+- **aws_session_token** stores the aws session token to the AWS cluster. (required when using [temporary AWS credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html))
 
 ## Create experiments using Chaos Dashboard
 
