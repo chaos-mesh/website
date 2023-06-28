@@ -153,6 +153,7 @@ The following table shows the fields in the YAML configuration file.
 | value | string | Provides parameters for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods. | N/A | No | `1` |
 | secretName | string | Specifies the name of the Kubernetes Secret that stores the Azure authentication information. | N/A | No | `cloud-key-secret` |
 | subscriptionID | string | Specifies the VM instacnce's subscription ID. | N/A | Yes | `your-subscription-id` |
+| vmName | string | VMName defines the name of Virtual Machine. | N/A | Yes | `your-vm-name` |
 | resourceGroupName | string | Specifies the Resource group of VM. | N/A | Yes | `your-resource-group-name` |
 | lun | string | This is a required field when the `action` is `disk-detach`, specifies the LUN (Logic Unit Number) of data disk. | N/A | No | `0` |
 | diskName | string | This is a required field when the `action` is `disk-detach`, specifies the name of data disk. | N/A | No | `DATADISK_0` |
