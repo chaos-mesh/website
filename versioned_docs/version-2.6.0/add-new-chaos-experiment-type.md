@@ -64,7 +64,7 @@ The following walks you through an example of HelloWorldChaos, a new chaos exper
    This file defines the schema type of HelloWorldChaos, which can be described in a YAML file:
 
    ```yaml
-   apiVersion: chaos-mesh. rg/v1alpha1
+   apiVersion: chaos-mesh.org/v1alpha1
    kind: HelloWorldChaos
    metadata:
      name: <resource name>
