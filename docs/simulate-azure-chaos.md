@@ -72,6 +72,7 @@ Make sure that App registrations in the Secret file has been added as a contribu
      secretName: 'cloud-key-secret'
      subscriptionID: 'your-subscription-id'
      resourceGroupName: 'your-resource-group-name'
+     vmName: 'your-vm-name'
      duration: '5m'
    ```
 
@@ -100,6 +101,7 @@ Make sure that App registrations in the Secret file has been added as a contribu
      secretName: 'cloud-key-secret'
      subscriptionID: 'your-subscription-id'
      resourceGroupName: 'your-resource-group-name'
+     vmName: 'your-vm-name'
    ```
 
    Based on this configuration example, Chaos Mesh will inject `vm-restart` fault into the specified VM instance so that the VM instance will be restarted.
@@ -127,6 +129,7 @@ Make sure that App registrations in the Secret file has been added as a contribu
      secretName: 'cloud-key-secret'
      subscriptionID: 'your-subscription-id'
      resourceGroupName: 'your-resource-group-name'
+     vmName: 'your-vm-name'
      lun: 'your-disk-lun'
      diskName: 'your-disk-name'
      duration: '5m'
@@ -153,8 +156,8 @@ The following table shows the fields in the YAML configuration file.
 | value | string | Provides parameters for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods. | N/A | No | `1` |
 | secretName | string | Specifies the name of the Kubernetes Secret that stores the Azure authentication information. | N/A | No | `cloud-key-secret` |
 | subscriptionID | string | Specifies the VM instacnce's subscription ID. | N/A | Yes | `your-subscription-id` |
-| vmName | string | VMName defines the name of Virtual Machine. | N/A | Yes | `your-vm-name` |
 | resourceGroupName | string | Specifies the Resource group of VM. | N/A | Yes | `your-resource-group-name` |
+| vmName | string | VMName defines the name of Virtual Machine. | N/A | Yes | `your-vm-name` |
 | lun | string | This is a required field when the `action` is `disk-detach`, specifies the LUN (Logic Unit Number) of data disk. | N/A | No | `0` |
 | diskName | string | This is a required field when the `action` is `disk-detach`, specifies the name of data disk. | N/A | No | `DATADISK_0` |
 | duration | string | Specifies the duration of the experiment. | N/A | Yes | `30s` |
