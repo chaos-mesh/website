@@ -119,7 +119,7 @@ kubectl create ns chaos-mesh
 
 :::info 提示
 
-如需安装特定版本的 Chaos Mesh，请在 `helm install/upgrade` 后添加 `--version x.y.z` 参数，如 `helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version 2.1.0`。
+如需安装特定版本的 Chaos Mesh，请在 `helm install` 后添加 `--version x.y.z` 参数，如 `helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version 2.1.0`。
 
 :::
 
@@ -147,15 +147,15 @@ kubectl create ns chaos-mesh
 helm upgrade chaos-mesh chaos-mesh/chaos-mesh
 ```
 
-:::note 注意
+:::info 提示
 
-如要升级至特定版本的 Chaos Mesh，请在 `helm upgrade` 后添加 `--version xxx` 参数，如 `--version v2.0.0`。
+如需升级至特定版本的 Chaos Mesh，请在 `helm upgrade` 后添加 `--version x.y.z` 参数，如 `helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version 2.1.0`。
 
 :::
 
 :::note 注意
 
-如在非 Docker 环境下进行升级，需如[在不同环境下安装](#在不同环境下安装)所述添加相应的参数。
+如在非 Docker 环境下进行升级，需根据[在不同环境下安装](#第-4-步在不同环境下安装)所述添加相应的参数。
 
 :::
 

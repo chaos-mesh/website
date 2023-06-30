@@ -119,7 +119,7 @@ As the daemons of different container runtimes listen on different socket paths,
 
 :::info
 
-To install a specific version of Chaos Mesh, add the `--version x.y.z` parameter after `helm install/upgrade`. For example, `helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version 2.1.0`.
+To install a specific version of Chaos Mesh, add the `--version x.y.z` parameter after `helm install`. For example, `helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version 2.1.0`.
 
 :::
 
@@ -147,15 +147,15 @@ To upgrade Chaos Mesh, execute the following command:
 helm upgrade chaos-mesh chaos-mesh/chaos-mesh
 ```
 
-:::note
+:::info
 
-To upgrade Chaos Mesh to a specific version, add the `--version xxx` parameter after `helm upgrade`, for example, `--version 2.0.0`.
+To upgrade to a specific version of Chaos Mesh, add the `--version x.y.z` parameter after `helm upgrade`. For example, `helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version 2.1.0`.
 
 :::
 
 :::note
 
-If you have upgraded Chaos Mesh in a non-Docker environment, you need to add the corresponding parameters as described in [Step 4: Install Chaos Mesh in different environments](#step-4-install-chaos-mesh-in-different-environments).
+If you have upgraded Chaos Mesh in a non-Docker environment, you will need to add the appropriate parameters as described in [Step 4: Install Chaos Mesh in different environments](#step-4-install-chaos-mesh-in-different-environments).
 
 :::
 
