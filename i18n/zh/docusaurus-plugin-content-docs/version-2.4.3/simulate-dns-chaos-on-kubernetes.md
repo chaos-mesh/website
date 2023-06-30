@@ -92,7 +92,7 @@ kubectl get pods -n chaos-mesh -l app.kubernetes.io/component=chaos-dns-server
 | `value` | string | 取决与 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 Pod 的百分比 | 无 | 否 | `1` |
 | `selector` | struct | 指定注入故障的目标 Pod，详情请参考[定义实验范围](./define-chaos-experiment-scope.md) | 无 | 是 |  |
 
-:::note 提示
+:::note 注意
 
 - `patterns` 配置中的通配符必须位于字符串的尾部，例如 `chaos-mes*.org` 是不合法的配置。
 

@@ -30,7 +30,7 @@ PhysicalMachineChaos 用于在物理机或虚拟机中模拟网络、磁盘、�
   chaosd server --https-port 31768 --CA=/etc/chaosd/pki/ca.crt --cert=/etc/chaosd/pki/chaosd.crt --key=/etc/chaosd/pki/chaosd.key
   ```
 
-  :::note 提示
+  :::note 注意
 
   使用 Chaosctl 生成的 TLS 证书文件的保存路径为 Chaosctl 的默认输出路径。如果在生成证书时手动指定了其他路径，请手动将命令中的路径替换为对应的文件路径。
 

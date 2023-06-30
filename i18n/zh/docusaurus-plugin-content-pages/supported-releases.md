@@ -22,7 +22,7 @@ v<major>.<minor>.<patch>
 
 ## Chaos Mesh 的支持状况
 
-:::note 提示
+:::note 注意
 
 对 Kubernetes `1.22` 的支持从 `2.0.4` 版本开始提供。
 

@@ -19,7 +19,7 @@ Chaos Mesh 提供了以下两种方式用于控制混沌实验生效的范围：
 helm install chaos-mesh chaos-mesh/chaos-mesh -n chaos-mesh --set controllerManager.enableFilterNamespace=true
 ```
 
-:::note 提示
+:::note 注意
 
 当使用 Helm 进行安装时，不同容器运行时的命令和参数有所区别，详情请参阅[使用 Helm 安装](production-installation-using-helm.md)。
 

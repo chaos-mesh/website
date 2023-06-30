@@ -139,7 +139,7 @@ Chaos Mesh 也支持使用 YAML 配置文件创建 HTTPChaos 实验。在 YAML �
 | `duration` | string | 指定具体实验的持续时间 |  | 是 | 30s |
 | `scheduler` | string | 指定具体实验的运行时间调度规则 |  | 否 | 5 \* \* \* \* |
 
-:::note 提示
+:::note 注意
 
 - 当使用 YAML 文件创建实验时，`replace.body` 必须为替换内容的 Base64 编码。
 

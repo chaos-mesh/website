@@ -4,7 +4,7 @@ title: 模拟网络故障
 
 本文主要介绍如何使用 Chaosd 模拟网络故障场景。该功能通过使用 iptables、ipsets、tc 等工具修改网络路由、流量控制来模拟网络故障。
 
-:::note 提示
+:::note 注意
 
 请确保 Linux 内核中有 `NET_SCH_NETEM` 模块。对于 CentOS，可以通过 `kernel-modules-extra` 包安装该模块，大部分其他发行版默认已安装相应模块。
 

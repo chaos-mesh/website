@@ -36,7 +36,7 @@ import QuickRun from './common/quick-run.md'
 curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash
 </PickVersion>
 
-:::note 提示
+:::note 注意
 
 - 如果当前环境为 [kind](https://kind.sigs.k8s.io/)，请在脚本后添加 `--local kind` 参数。
 

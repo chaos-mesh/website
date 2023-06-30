@@ -4,7 +4,7 @@ title: 使用 Grafana Data Source 插件进行观测
 
 本文档介绍如何在本地 Grafana 安装 Data Source 插件，并使用 Grafana Data Source 进行观测。
 
-:::note 提示
+:::note 注意
 
 - Grafana 应为 v7.0.0 或更高版本。
 - 由于 Grafana 还没有受理 Chaos Mesh Data Source 的插件提交，所以目前无法通过 `grafana-cli` 进行安装。
