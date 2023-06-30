@@ -149,7 +149,7 @@ helm upgrade chaos-mesh chaos-mesh/chaos-mesh
 
 :::info
 
-To upgrade to a specific version of Chaos Mesh, add the `--version x.y.z` parameter after `helm upgrade`. For example, `helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version 2.1.0`.
+To upgrade to a specific version of Chaos Mesh, add the `--version x.y.z` parameter after `helm upgrade`. For example, `helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version 2.1.0`.
 
 :::
 
