@@ -15,12 +15,12 @@ module.exports = {
   tagline: 'A Powerful Chaos Engineering Platform for Kubernetes',
   url: 'https://chaos-mesh.org',
   baseUrl: '/',
-  favicon: 'img/favicon.ico',
+  favicon: '/img/favicon.ico',
   organizationName: 'chaos-mesh', // Usually your GitHub org/user name.
   projectName: 'chaos-mesh.github.io', // Usually your repo name.
   trailingSlash: true,
   themeConfig: {
-    image: 'chaos-mesh-social-preview.png',
+    image: '/img/chaos-mesh-social-preview.png',
     algolia: {
       appId: '3BY0S3HQX6',
       apiKey: '99bb3af44d57f0e8f6d7e019d7e2c2d7',
