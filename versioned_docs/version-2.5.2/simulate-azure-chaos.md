@@ -72,6 +72,7 @@ Make sure that App registrations in the Secret file has been added as a contribu
      secretName: 'cloud-key-secret'
      subscriptionID: 'your-subscription-id'
      resourceGroupName: 'your-resource-group-name'
+     vmName: 'your-vm-name'
      duration: '5m'
    ```
 
@@ -100,6 +101,7 @@ Make sure that App registrations in the Secret file has been added as a contribu
      secretName: 'cloud-key-secret'
      subscriptionID: 'your-subscription-id'
      resourceGroupName: 'your-resource-group-name'
+     vmName: 'your-vm-name'
    ```
 
    Based on this configuration example, Chaos Mesh will inject `vm-restart` fault into the specified VM instance so that the VM instance will be restarted.
@@ -127,8 +129,9 @@ Make sure that App registrations in the Secret file has been added as a contribu
      secretName: 'cloud-key-secret'
      subscriptionID: 'your-subscription-id'
      resourceGroupName: 'your-resource-group-name'
-     lun: 'your-disk-lun'
+     vmName: 'your-vm-name'
      diskName: 'your-disk-name'
+     lun: 'your-disk-lun'
      duration: '5m'
    ```
 
@@ -154,6 +157,7 @@ The following table shows the fields in the YAML configuration file.
 | secretName | string | Specifies the name of the Kubernetes Secret that stores the Azure authentication information. | N/A | No | `cloud-key-secret` |
 | subscriptionID | string | Specifies the VM instacnce's subscription ID. | N/A | Yes | `your-subscription-id` |
 | resourceGroupName | string | Specifies the Resource group of VM. | N/A | Yes | `your-resource-group-name` |
-| lun | string | This is a required field when the `action` is `disk-detach`, specifies the LUN (Logic Unit Number) of data disk. | N/A | No | `0` |
+| vmName | string | VMName defines the name of Virtual Machine. | N/A | Yes | `your-vm-name` |
 | diskName | string | This is a required field when the `action` is `disk-detach`, specifies the name of data disk. | N/A | No | `DATADISK_0` |
+| lun | string | This is a required field when the `action` is `disk-detach`, specifies the LUN (Logic Unit Number) of data disk. | N/A | No | `0` |
 | duration | string | Specifies the duration of the experiment. | N/A | Yes | `30s` |
