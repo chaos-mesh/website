@@ -8,7 +8,7 @@ In [Add new chaos experiment type](add-new-chaos-experiment-type.md), you have a
 
 :::note
 
-It's recommended to read [Chaos Mesh architecture](architecture.md) before you go forward.
+It's recommended to read [the architecture of Chaos Mesh](./overview.md#architecture-overview) before you go forward.
 
 :::
 
