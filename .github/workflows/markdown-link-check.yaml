@@ -6,13 +6,13 @@ on:
       - master
     paths:
       - '**.md'
-      - '.github/workflows/mlc_config.json'
+      - 'mlc_config.json'
   pull_request:
     branches:
       - master
     paths:
       - '**.md'
-      - '.github/workflows/mlc_config.json'
+      - 'mlc_config.json'
 
 permissions: read-all
 
