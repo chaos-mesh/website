@@ -1,3 +1,11 @@
 {
+  "ignorePatterns": [
+    {
+      "pattern": "run-a-chaos-experiment.md"
+    },
+    {
+      "pattern": "^http://localhost"
+    }
+  ],
   "aliveStatusCodes": [200, 403, 500, 502, 503]
 }

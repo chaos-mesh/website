@@ -283,6 +283,6 @@ func (obj *HelloWorldChaos) GetSelectorSpecs() map[string]interface{} {
 
 在完成上述步骤后，HelloWorldChaos 已经成为一种有实际作用的混沌实验。如果你在这一过程中遇到了问题，请在 GitHub 创建一个 [issue](https://github.com/pingcap/chaos-mesh/issues) 向 Chaos Mesh 团队反馈。
 
-你可能很好奇这一切是如何生效的。可以试着看看 `controllers` 目录下的各类 `controller`，它们有自己的 README（如 [controllers/common/README.md](https://github.com/chaos-mesh/chaos-mesh/blob/master/controllers/common/README.md)）。你可以通过这些 README 了解每个 controller 的功能，也可以阅读 [Chaos Mesh  架构](architecture.md)了解 Chaos Mesh 背后的原理。
+如果您想知道所有这些是如何工作的，您可以稍后阅读 [controllers/README.md](https://github.com/chaos-mesh/chaos-mesh/blob/master/controllers/README.md) 和不同控制器的代码。
 
 你已经准备好成为一名真正的 Chaos Mesh 开发者了！到 [Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh) 里找一找练手的任务吧！推荐你先从简单的入手，例如这些 [good first issues](https://github.com/chaos-mesh/chaos-mesh/labels/good%20first%20issue)。
