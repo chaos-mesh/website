@@ -54,6 +54,12 @@ After installing, follow the steps below to compile Chaos Mesh.
 
    :::
 
+   :::tip
+
+   If you want to specify the tag of the image, you can use `UI=1 make IMAGE_TAG=dev image`.
+
+   :::
+
    After compiling, you should get the following container images:
 
    - `ghcr.io/chaos-mesh/chaos-dashboard:latest`
