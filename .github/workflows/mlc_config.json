@@ -1,6 +1,9 @@
 {
   "ignorePatterns": [
     {
+      "pattern": "^/img/"
+    },
+    {
       "pattern": "run-a-chaos-experiment.md"
     },
     {

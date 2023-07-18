@@ -6,7 +6,7 @@ title: 拓展 Chaos Daemon 接口
 
 :::note 注意
 
-一些关于 Chaos Mesh 架构的知识对于帮助你理解这一文档非常有用，例如 [Chaos Mesh  架构](architecture.md)。
+一些关于 Chaos Mesh 架构的知识对于帮助你理解这一文档非常有用，例如 [Chaos Mesh 架构](architecture.md)。
 
 :::
 
