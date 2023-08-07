@@ -246,6 +246,6 @@ Now you can verify the output of `HelloWorldChaos`:
 
 If you encounter any problems during the process, create an [issue](https://github.com/chaos-mesh/chaos-mesh/issues) in the Chaos Mesh repository.
 
-If you are curious about how all this works, you can read the [controllers/README.md](https://github.com/chaos-mesh/chaos-mesh/blob/master/controllers/README.md) and related files next.
+If you are curious about how all this works, you can read the [controllers/README.md](https://github.com/chaos-mesh/chaos-mesh/blob/master/controllers/README.md) and code for different controllers next.
 
 You are now ready to become a Chaos Mesh developer! Feel free to visit the [Chaos Mesh issues](https://github.com/chaos-mesh/chaos-mesh/issues) to find a [good first issue](https://github.com/chaos-mesh/chaos-mesh/labels/good%20first%20issue) and get started!

@@ -283,6 +283,6 @@ To verify the experiment, perform the following steps.
 
 If you encounter any problems in this process, create an [issue](https://github.com/pingcap/chaos-mesh/issues) in the Chaos Mesh repository.
 
-If you are curious about how all of these come into effect, you can read the README files of different `controllers` in the `controller` directory to learn their functionalities. For example, [controllers/common/README.md](https://github.com/chaos-mesh/chaos-mesh/blob/master/controllers/common/README.md).
+If you are curious about how all of these come into effect, you can read the README files of different `controllers` in the `controller` directory to learn their functionalities. For example, [controllers/README.md](https://github.com/chaos-mesh/chaos-mesh/blob/master/controllers/README.md).
 
 Now you are ready to become a Chaos Mesh developer! You are welcome to visit the [Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh) repository to find a [good first issue](https://github.com/chaos-mesh/chaos-mesh/labels/good%20first%20issue) and get started!
