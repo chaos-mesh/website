@@ -8,7 +8,7 @@ Chaos Mesh Workflow provides a `Task` node to support any workload, which functi
 
 :::note
 
-Chaos Mesh does *NOT* have the workflow node of the type `HTTPRequest`. This feature is based on `Task` node, and you can send HTTP requests more conveniently by using the feature.
+Chaos Mesh does _NOT_ have the workflow node of the type `HTTPRequest`. This feature is based on `Task` node, and you can send HTTP requests more conveniently by using the feature.
 
 :::
 
@@ -31,10 +31,11 @@ Select "HTTP Request" as the task type:
 ### Step 2. Configure an HTTP request
 
 Configure the followings:
-  - node name: `send-slack-message`
-  - request URL: `https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX`
-  - request method: `POST`
-  - request body: `{"text": "Hello, world."}` , then check "For JSON content".
+
+- node name: `send-slack-message`
+- request URL: `https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX`
+- request method: `POST`
+- request body: `{"text": "Hello, world."}` , then check "For JSON content".
 
 ![configure-http-request-workflow-node](img/configure-http-request-workflow-node.png)
 

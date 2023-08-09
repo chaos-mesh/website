@@ -353,7 +353,6 @@ The related configuration items are described as follows:
 | ip | i | Only impact egress traffic to these IP addresses. `hostname` and `ip` cannot be empty at the same time. When `hostname` and `ip` are set at the same time, the configuration item affects both the specified `hostname` and `ip`. | string, such as "192.168.123.123". |
 | protocol | p | Only impact traffic using this IP protocol | string. It supports the following protocol types: "tcp", "udp", "icmp", "all" (all network protocols). |
 
-
 #### Example for simulating network partition using the command-line mode
 
 Run the following command to simulate network partition:
@@ -399,7 +398,7 @@ The related configuration items are described as follows:
 
 | Configuration item | Abbreviation | Description | Value |
 | :-- | :-- | :-- | :-- |
-| dns-domain-name | d | Map this host to specified IP(dns-ip) | string, such as "chaos-mesh.org".  |
+| dns-domain-name | d | Map this host to specified IP(dns-ip) | string, such as "chaos-mesh.org". |
 | dns-ip | i | Map specified host(dns-domain-name) to this IP address | string, such as "123.123.123.123" |
 | dns-server | N/A | Update the DNS server in /etc/resolv.conf with this value | string, default is "123.123.123.123" |
 
@@ -509,9 +508,9 @@ Global Flags:
 
 The related configuration items are described as follows:
 
-| Configuration item | Abbreviation | Description | Value |
-| :-- | :-- | :-- | :-- |
-| port | p | The specified port to be occupied | int, such as 8080, required |
+| Configuration item | Abbreviation | Description                       | Value                       |
+| :----------------- | :----------- | :-------------------------------- | :-------------------------- |
+| port               | p            | The specified port to be occupied | int, such as 8080, required |
 
 #### Example for simulating port occupation using the command-line mode
 
@@ -552,11 +551,11 @@ When running an experiment, remember to record the UID of the experiment. When y
 | Parameter | Description | Value |
 | --- | --- | --- |
 | action | Action of the experiment. | set to "corrupt" |
-| correlation | The correlation between the current latency and the previous one. |  string. It is a percentage ranging from 0 to 100 (10 is 10%) ("0" by default). |
+| correlation | The correlation between the current latency and the previous one. | string. It is a percentage ranging from 0 to 100 (10 is 10%) ("0" by default). |
 | device | Name of the impacted network interface card. | string, such as "eth0", required. |
 | egress-port | The egress traffic which only impact specific destination ports. It can only be configured when the protocol is TCP or UDP. | string. You need to use a `,` to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
 | hostname | The host name impacted by traffic. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "chaos-mesh.org". |
-| ip-address | The IP address impacted by egress traffic. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "123.123.123.123".  |
+| ip-address | The IP address impacted by egress traffic. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "123.123.123.123". |
 | ip-protocol | The IP protocol impacted by traffic. | string. Supported protocols: tcp, udp, icmp, all (all network protocols). |
 | source-port | The egress traffic which only impact specific source ports. It can only be configured when the protocol is TCP or UDP. | string. Use a `,` to delimit the specific port or to indicate the range of the ports, such as "80,8001:8010". |
 
@@ -599,7 +598,7 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 | correlation | The correlation between the percentage of current duplication occurrence and the previous one. | string. It is a percentage which range is 0 to 100 (10 is 10%) (default "0"). |
 | device | Name of the impacted network interface card. | string, such as "eth0", required. |
 | egress-port | The egress traffic that only impacts specified destination ports. It can only be configured when the protocol is TCP or UDP. | string. You need to use a `,` to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
-| hostname | The host name impacted by traffic. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`.  | string, such as "chaos-mesh.org". |
+| hostname | The host name impacted by traffic. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "chaos-mesh.org". |
 | ip-address | The IP address impacted by egress traffic. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "123.123.123.123". |
 | percent | Ratio of network packet duplicate. | string. It is a percentage which range is 0 to 100 (10 is 10%) (default "1"). |
 | ip-protocol | The IP protocol impacted by traffic. | string. It supports the following protocol types: "tcp", "udp", "icmp", "all" (all network protocols). |
@@ -627,7 +626,6 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 | ip-protocol | Only impact traffic using this IP protocol. | string, it supports the following protocol types: "tcp", "udp", "icmp", "all" (all network protocols). |
 | source-port | The egress traffic which only impact specific source ports. It can only be configured when the protocol is TCP or UDP. | string. You need to use a `,` to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
 
-
 #### Example for simulating network loss using the service mode
 
 ```bash
@@ -646,7 +644,7 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 | direction | Specifies the partition direction, values can be 'to', 'from' or 'both'. 'from' means packets coming from the 'ip-address' or 'hostname' and going to your server, 'to' means packets originating from your server and going to the 'ip-address' or 'hostname'. | string, values can be "to", "from" or "both" (default "both") |
 | hostname | Only impact traffic to these hostnames. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "chaos-mesh.org". |
 | ip-address | Only impact egress traffic to these IP addresses. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "192.168.123.123". |
-| ip-protocol | Only impact traffic using this IP protocol | string. It supports the following protocol types: tcp, udp, icmp, all (all network protocols).  |
+| ip-protocol | Only impact traffic using this IP protocol | string. It supports the following protocol types: tcp, udp, icmp, all (all network protocols). |
 
 #### Example for simulating network partition using the service mode
 
@@ -661,7 +659,7 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 | Parameter | Description | Value |
 | --- | --- | --- |
 | action | Action of the experiment. | set to "dns" |
-| dns-domain-name | Map this host to specified IP(dns-ip) | string, such as "chaos-mesh.org".  |
+| dns-domain-name | Map this host to specified IP(dns-ip) | string, such as "chaos-mesh.org". |
 | dns-ip | Map specified host(dns-domain-name) to this IP address | string, such as "123.123.123.123" |
 | dns-server | Update the DNS server in /etc/resolv.conf with this value | string, such as "123.123.123.123" (default "123.123.123.123") |
 
@@ -695,12 +693,12 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 
 ### Simulate port occupation using the service mode
 
-#### Parameters for simulating port occupation 
+#### Parameters for simulating port occupation
 
-| Parameter | Description | Value |
-| --- | --- | --- |
-| action | Action of the experiment. | set to "occupied" |
-| port | The specified port to be occupied. | int, such as 8080, required |
+| Parameter | Description                        | Value                       |
+| --------- | ---------------------------------- | --------------------------- |
+| action    | Action of the experiment.          | set to "occupied"           |
+| port      | The specified port to be occupied. | int, such as 8080, required |
 
 #### Example for simulating port occupation using the service mode
 

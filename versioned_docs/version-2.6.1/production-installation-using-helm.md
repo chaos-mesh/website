@@ -2,6 +2,10 @@
 title: Install Chaos Mesh using Helm
 ---
 
+import Tabs from '@theme/Tabs'
+
+import TabItem from '@theme/TabItem'
+
 import PickVersion from '@site/src/components/PickVersion'
 
 import PickHelmVersion from '@site/src/components/PickHelmVersion'
@@ -82,36 +86,48 @@ When installing Chaos Mesh on Kubernetes v1.15(or an earlier version), you need 
 
 :::
 
-Because socket paths are listened to by the daemons of different running containers, you need to set different values for socket paths during installation. You can execute the following installation commands according to different environments.
-
-#### Docker
+As the daemons of different container runtimes listen on different socket paths, you need to set the appropriate values during installation. You can run the following installation commands according to different environments.
 
 <!-- prettier-ignore -->
-<PickHelmVersion className="language-bash">{`\# Default to /var/run/docker.sock
-helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version latest`}
-</PickHelmVersion>
+<Tabs defaultValue="docker" values={[
+  {label: 'Docker', value: 'docker'},
+  {label: 'Containerd', value: 'containerd'},
+  {label: 'K3s', value: 'k3s'},
+  {label: 'CRI-O', value: 'cri-o'}
+]}>
+  <TabItem value="docker">
+    <PickHelmVersion>
+      {`\# Default to /var/run/docker.sock\nhelm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version latest`}
+    </PickHelmVersion>
+  </TabItem>
+  <TabItem value="containerd">
+    <PickHelmVersion>
+      helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --version latest
+    </PickHelmVersion>
+  </TabItem>
+  <TabItem value="k3s">
+    <PickHelmVersion>
+      helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock --version latest
+    </PickHelmVersion>
+  </TabItem>
+  <TabItem value="cri-o">
+    <PickHelmVersion>
+      helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=crio --set chaosDaemon.socketPath=/var/run/crio/crio.sock --version latest
+    </PickHelmVersion>
+  </TabItem>
+</Tabs>
 
-#### Containerd
+:::info
 
-<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --version latest`}</PickHelmVersion>
-
-#### K3s
-
-<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock --version latest`}</PickHelmVersion>
-
-#### CRI-O
-
-<PickHelmVersion className="language-bash">{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=crio --set chaosDaemon.socketPath=/var/run/crio/crio.sock --version latest`}</PickHelmVersion>
-
-:::note
-
-To install Chaos Mesh of a specific version, add the `--version xxx` parameter after `helm upgrade`, for example, `--version 2.0.0`.
+To install a specific version of Chaos Mesh, add the `--version x.y.z` parameter after `helm install`. For example, `helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version 2.1.0`.
 
 :::
 
-:::note
+:::tip
 
-To ensure high availability, Chaos Mesh turns on `leader-election` feature by default. If you do not need to use this feature, you can manually turn it off through `--set controllerManager.leaderElection.enabled=false --set controllerManager.replicaCount=1`.
+To ensure high availability, Chaos Mesh turns on `leader-election` feature by default. If you do not need to use this feature, you can disable it manually with `--set controllerManager.leaderElection.enabled=false`.
+
+> If version `<2.6.1`, you still need to set `--set controllerManager.replicaCount=1` to reduce the controller manager to one replica.
 
 :::
 
@@ -131,15 +147,15 @@ To upgrade Chaos Mesh, execute the following command:
 helm upgrade chaos-mesh chaos-mesh/chaos-mesh
 ```
 
-:::note
+:::info
 
-To upgrade Chaos Mesh to a specific version, add the `--version xxx` parameter after `helm upgrade`, for example, `--version 2.0.0`.
+To upgrade to a specific version of Chaos Mesh, add the `--version x.y.z` parameter after `helm upgrade`. For example, `helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version 2.1.0`.
 
 :::
 
 :::note
 
-If you have upgraded Chaos Mesh in a non-Docker environment, you need to add the corresponding parameters as described in [Step 4: Install Chaos Mesh in different environments](#step-4-install-chaos-mesh-in-different-environments).
+If you have upgraded Chaos Mesh in a non-Docker environment, you will need to add the appropriate parameters as described in [Step 4: Install Chaos Mesh in different environments](#step-4-install-chaos-mesh-in-different-environments).
 
 :::
 

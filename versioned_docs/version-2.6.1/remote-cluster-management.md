@@ -23,6 +23,7 @@ metadata:
   name: cluster-xxxxxxx
 spec:
   namespace: 'chaos-mesh'
+  version: '2.6.1'
   kubeConfig:
     secretRef:
       name: chaos-mesh-02.kubeconfig
@@ -36,7 +37,8 @@ It will install the `chaos-mesh` helm chart with the `KUBECONFIG` provided in th
 
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
-| namespace | string | Represent the namespace to install chaos-mesh components in the remote cluster | None | Yes | chaos-mesh |
+| namespace | string | Represent the namespace to install Chaos Mesh components in the remote cluster | None | Yes | chaos-mesh |
+| version | string | The version of Chaos Mesh to install in the remote cluster | None | Yes | 2.6.1 |
 | kubeConfig.secretRef.name | string | The name of the secret, which is used to store the kubeconfig of remote cluster. This kubeconfig will be used to install chaos-mesh components and inject errors | None | Yes | `chaos-mesh-02.kubeconfig` |
 | kubeConfig.secretRef.namespace | string | The name of the kubeconfig secret. | None | Yes | `default` |
 | kubeConfig.secretRef.key | string | The key of the kubeconfig in the secret. | None | Yes | `kubeconfig` |
