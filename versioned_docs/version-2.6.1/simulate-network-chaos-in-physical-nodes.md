@@ -97,6 +97,7 @@ The related configuration items are described as follows:
 | ip | i | The IP address impacted by egress traffic. `hostname` and `ip` cannot be empty at the same time. When `hostname` and `ip` are set at the same time, the configuration item affects both the specified `hostname` and `ip`. | string, such as "123.123.123.123". |
 | protocol | p | The IP protocol impacted by traffic. | string. Supported protocols: tcp, udp, icmp, all (all network protocols). |
 | source-port | s | The egress traffic which only impact specific source ports. It can only be configured when the protocol is TCP or UDP. | string. Use a `,` to delimit the specific port or to indicate the range of the ports, such as "80,8001:8010". |
+| percent |  | Ratio of network packet corruption. | string. It is a percentage which range is 0 to 100 (10 is 10%) (default "1"). |
 
 #### Example for simulating network corruption using the command mode
 
@@ -558,6 +559,7 @@ When running an experiment, remember to record the UID of the experiment. When y
 | ip-address | The IP address impacted by egress traffic. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "123.123.123.123". |
 | ip-protocol | The IP protocol impacted by traffic. | string. Supported protocols: tcp, udp, icmp, all (all network protocols). |
 | source-port | The egress traffic which only impact specific source ports. It can only be configured when the protocol is TCP or UDP. | string. Use a `,` to delimit the specific port or to indicate the range of the ports, such as "80,8001:8010". |
+| percent | Ratio of network packet corruption. | string. It is a percentage which range is 0 to 100 (10 is 10%) (default "1"). |
 
 #### Example for simulating network corruption using the service mode
 
@@ -565,9 +567,9 @@ When running an experiment, remember to record the UID of the experiment. When y
 curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"corrupt","device":"eth0","ip-address":"172.16.4.4","percent":"50"}'
 ```
 
-### Simulate network corruption using the service mode
+### Simulate network latency using the service mode
 
-#### Parameters for simulating network corruption
+#### Parameters for simulating network latency
 
 | Parameter | Description | Value |
 | --- | --- | --- |
@@ -581,9 +583,8 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 | latency | Length of network delay time. | string. The time units can be: ns, us (μs), ms, s, m, h, such as "1ms". |
 | ip-protocol | The IP protocol impacted by traffic. | string. It supports the following protocol types: "tcp", "udp", "icmp", "all" (all network protocols). |
 | source-port | The egress traffic that only impacts specified source ports. It can only be configured when the protocol is TCP or UDP. | string. You need to use a `,` to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
-| percent | Ratio of network packet corruption. | string. It is a percentage which range is 0 to 100 (10 is 10%) (default "1"). |
 
-#### Example for simulating network corruption using the service mode
+#### Example for simulating network latency using the service mode
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"delay","device":"eth0","ip-address":"172.16.4.4","latency":"10ms"}'
