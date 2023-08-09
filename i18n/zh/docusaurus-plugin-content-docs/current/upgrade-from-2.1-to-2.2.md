@@ -35,7 +35,9 @@ helm show values chaos-mesh/chaos-mesh --version 2.2.0 > values.yaml
 - 改变的值：`webhook.FailurePolicy` 从 `Ignore` 改为 `Fail`。
 
 :::note 注意
+
 你可以在 [README](https://github.com/chaos-mesh/chaos-mesh/blob/v2.2.0/helm/chaos-mesh/README.md) 查看 Helm Chart 配置的详细描述。
+
 :::
 
 ### 第 3 步：更新 CRD
@@ -52,8 +54,10 @@ kubectl replace -f https://mirrors.chaos-mesh.org/v2.2.0/crd.yaml
 kubectl replace -f https://mirrors.chaos-mesh.org/v2.2.0/crd-v1beta1.yaml
 ```
 
-:::note 注意
+:::caution 注意
+
 Chaos Mesh 2.2.x 将会是支持 Kubernetes < 1.19 的最后一系列版本。
+
 :::
 
 ### 第 4 步：使用 `helm upgrade` 升级 Chaos Mesh

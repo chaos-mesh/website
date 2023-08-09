@@ -1,7 +1,7 @@
 name: Init environment
 
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
     - uses: pnpm/action-setup@v2.2.4
       with:

@@ -2,6 +2,12 @@
 title: 开发指南概览
 ---
 
+:::danger
+
+中文版开发指南的内容已经过时，请参考 [英文版开发指南](https://chaos-mesh.org/docs/developer-guide-overview)。
+
+:::
+
 本文档介绍如何开发 Chaos Mesh。在开始之前，推荐阅读以下材料以熟悉整个项目：
 
 - [Chaos Mesh README](https://github.com/chaos-mesh/chaos-mesh/blob/master/README.md)

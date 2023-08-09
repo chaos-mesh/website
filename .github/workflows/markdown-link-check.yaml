@@ -6,13 +6,13 @@ on:
       - master
     paths:
       - '**.md'
-      - '.github/workflows/markdown-link-check.json'
+      - 'mlc_config.json'
   pull_request:
     branches:
       - master
     paths:
       - '**.md'
-      - '.github/workflows/markdown-link-check.json'
+      - 'mlc_config.json'
 
 permissions: read-all
 
@@ -20,8 +20,8 @@ jobs:
   markdown-link-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v3
       - uses: gaurav-nelson/github-action-markdown-link-check@v1
         with:
           use-quiet-mode: 'yes'
-          config-file: '.github/workflows/markdown-link-check.json'
+          check-modified-files-only: 'yes'

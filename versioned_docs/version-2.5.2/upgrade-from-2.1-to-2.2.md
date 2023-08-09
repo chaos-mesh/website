@@ -34,7 +34,11 @@ Here is a list of Helm Chart changes:
 - value changed: `dashboard.serviceAccount` changed from `chaos-controller-manager` to `chaos-dashboard`
 - value changed: `webhook.FailurePolicy` changed from `Ignore` to `Fail`
 
-:::note For more information about the detailed description, see [README](https://github.com/chaos-mesh/chaos-mesh/blob/v2.2.0/helm/chaos-mesh/README.md). :::
+:::note
+
+For more information about the detailed description, see [README](https://github.com/chaos-mesh/chaos-mesh/blob/v2.2.0/helm/chaos-mesh/README.md).
+
+:::
 
 ### Step 3: Update the CRD
 
@@ -50,7 +54,11 @@ For Kubernetes version <= 1.15, you can apply the latest CRD by executing the fo
 kubectl replace -f https://mirrors.chaos-mesh.org/v2.2.0/crd-v1beta1.yaml
 ```
 
-:::note Chaos Mesh 2.2.x would be the last series of releases that support Kubernetes < 1.19. :::
+:::caution
+
+Chaos Mesh 2.2.x would be the last series of releases that support Kubernetes < 1.19.
+
+:::
 
 ### Step 4: Upgrade Chaos Mesh by `helm upgrade`
 

@@ -24,7 +24,7 @@ Within only 7 months since it was open-sourced on December 31st, 2019, Chaos Mes
 - [NetEase Fuxi Lab](https://fuxi.163.com/fuxi-introduction)
 - [JuiceFS](http://juicefs.com/en)
 - [Dailymotion](https://www.dailymotion.com/)
-- [Meituan-Dianping](https://about.meituan.com/en)
+- [Meituan](https://www.meituan.com/en-US/about-us)
 - [Celo](https://celo.org/)
 
 Being a CNCF Sandbox project marks a major step forward for the project. It means that Chaos Mesh has become part of the great vendor-neutral cloud-native community. With the guidance and help from CNCF, Chaos Mesh will strive to develop a community with transparent, meritocracy-based governance for open communication and open collaboration, while driving the project forward, towards our ultimate goal of establishing the Chaos Engineering standards on Cloud. Currently, Chaos Mesh is in active development for 1.0 GA. Going forward, we will be focusing on the following aspects:

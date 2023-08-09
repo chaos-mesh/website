@@ -37,9 +37,9 @@ stringData:
 - **client_secret** 存储 Azure 应用注册的应用程序（客户端）的机密值。
 - **tenant_id** 存储 Azure 应用注册的目录（租户）ID。 `client_id` 及 `client_secret` 的获取请参考[机密客户端应用程序](https://docs.microsoft.com/zh-cn/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app)。
 
-:::note
+:::note 注意
 
-注意请确保 Secret 文件中的应用注册已作为参与者或所有者添加到指定 VM 实例的访问控制（IAM）中。
+请确保 Secret 文件中的应用注册已作为参与者或所有者添加到指定 VM 实例的访问控制（IAM）中。
 
 :::
 
@@ -72,6 +72,7 @@ stringData:
      secretName: 'cloud-key-secret'
      subscriptionID: 'your-subscription-id'
      resourceGroupName: 'your-resource-group-name'
+     vmName: 'your-vm-name'
      duration: '5m'
    ```
 
@@ -100,6 +101,7 @@ stringData:
      secretName: 'cloud-key-secret'
      subscriptionID: 'your-subscription-id'
      resourceGroupName: 'your-resource-group-name'
+     vmName: 'your-vm-name'
    ```
 
    依据此配置示例，Chaos Mesh 将向指定的 VM 实例中注入 `vm-restart` 故障，该 VM 实例将重启一次。
@@ -127,12 +129,13 @@ stringData:
      secretName: 'cloud-key-secret'
      subscriptionID: 'your-subscription-id'
      resourceGroupName: 'your-resource-group-name'
-     lun: 'your-disk-lun'
+     vmName: 'your-vm-name'
      diskName: 'your-disk-name'
+     lun: 'your-disk-lun'
      duration: '5m'
    ```
 
-   依据此配置示例，Chaos Mesh 将向指定的 VM 实例中注入 `disk-detach `故障，使该 VM 实例在 5 分钟内与指定数据磁盘分离。
+   依据此配置示例，Chaos Mesh 将向指定的 VM 实例中注入 `disk-detach` 故障，使该 VM 实例在 5 分钟内与指定数据磁盘分离。
 
    查看更多关于分离 Azure 数据磁盘的消息，可以参考[分离数据磁盘](https://docs.microsoft.com/zh-cn/azure/devtest-labs/devtest-lab-attach-detach-data-disk#detach-a-data-disk)。
 
@@ -154,6 +157,7 @@ stringData:
 | secretName | string | 指定存储 Azure 认证信息的 Kubernetes Secret 名字 | 无 | 否 | `cloud-key-secret` |
 | subscriptionID | string | 指定 VM 实例的订阅 ID | 无 | 是 | `your-subscription-id` |
 | resourceGroupName | string | 指定 VM 实例所属的资源组的名称 | 无 | 是 | `your-resource-group-name` |
-| lun | string | 当 action 为 `disk-detach` 时必填，指定硬盘的 LUN (Logic Unit Number) | 无 | 否 | `0` |
+| vmName | string | 指定 VM 的名称 | N/A | Yes | `your-vm-name` |
 | diskName | string | 当 action 为 `disk-detach` 时必填，指定设备名 | 无 | 否 | `DATADISK_0` |
+| lun | string | 当 action 为 `disk-detach` 时必填，指定硬盘的 LUN (Logic Unit Number) | 无 | 否 | `0` |
 | duration | string | 指定实验的持续时间 | 无 | 是 | `30s` |
