@@ -40,7 +40,7 @@ It will install the `chaos-mesh` helm chart with the `KUBECONFIG` provided in th
 | namespace | string | Represent the namespace to install Chaos Mesh components in the remote cluster | None | Yes | chaos-mesh |
 | version | string | The version of Chaos Mesh to install in the remote cluster | None | Yes | 2.6.1 |
 | kubeConfig.secretRef.name | string | The name of the secret, which is used to store the kubeconfig of remote cluster. This kubeconfig will be used to install chaos-mesh components and inject errors | None | Yes | `chaos-mesh-02.kubeconfig` |
-| kubeConfig.secretRef.namespace | string | The name of the kubeconfig secret. | None | Yes | `default` |
+| kubeConfig.secretRef.namespace | string | The namespace of the kubeconfig secret. | None | Yes | `default` |
 | kubeConfig.secretRef.key | string | The key of the kubeconfig in the secret. | None | Yes | `kubeconfig` |
 
 ## Inject errors in the remote cluster
@@ -66,4 +66,4 @@ spec:
   duration: '30s'
 ```
 
-The Chaos Mesh will inject the errors to the remote cluster using the kubeconfig registered with the `RemoteCluster` named `cluster-xxxxxxx`. The corresponding `StressChaos` will be automatically created in the remote cluster, and the status is synchronized back to the current cluster, so that you can manage the chaos injection for multiple different clusters in a single kubernetes.
+The Chaos Mesh will inject the errors to the remote cluster using the kubeconfig registered with the `RemoteCluster` named `cluster-xxxxxxx`. The corresponding `StressChaos` will be automatically created in the remote cluster, and the status is synchronized back to the current cluster, so that you can manage the chaos injection for multiple different clusters in a single Kubernetes cluster.
