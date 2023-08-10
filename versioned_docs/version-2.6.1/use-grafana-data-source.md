@@ -24,13 +24,13 @@ As an alternative, you can also install the Data Source plugin locally in Grafan
 1. Download the plugin zip package with the following command, or visit <https://github.com/chaos-mesh/datasource/releases> to download the package:
 
    ```shell
-   curl -LO https://github.com/chaos-mesh/datasource/releases/download/v2.1.0/chaosmeshorg-datasource-2.1.0.zip
+   curl -LO https://github.com/chaos-mesh/datasource/releases/download/v2.2.3/chaosmeshorg-datasource-2.2.3.zip
    ```
 
    After downloading, extract the plugin to the Grafana plugin directory:
 
    ```shell
-   unzip chaosmeshorg-datasource-2.1.0.zip -d YOUR_PLUGIN_DIR
+   unzip chaosmeshorg-datasource-2.2.3.zip -d YOUR_PLUGIN_DIR
    ```
 
    :::tip
