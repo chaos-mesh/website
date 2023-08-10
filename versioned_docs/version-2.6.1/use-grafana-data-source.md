@@ -6,14 +6,20 @@ This document describes how to install the Data Source plugin locally in Grafana
 
 :::note
 
-- Grafana should be in 7.0.0 or later versions.
-- The Data Source plugin cannot be installed through `grafana-cli` at this time, because Grafana has not yet accepted the plugin submission for Chaos Mesh Data Source.
+- Minimum supported version for Grafana is 7.0.0
+- Minimum supported version for Chaos Mesh is 2.1.0
 
 :::
 
-## Install Data Source Plugin
+## Install Data Source Plugin using grafana-cli
 
-You can install the Data Source plugin locally in Grafana by following these steps:
+  ```shell
+   grafana-cli plugins install chaosmeshorg-datasource
+   ```
+
+## Manual installation
+
+As an alternative, you can also install the Data Source plugin locally in Grafana by following these steps:
 
 1. Download the plugin zip package with the following command, or visit <https://github.com/chaos-mesh/datasource/releases> to download the package:
 
