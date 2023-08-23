@@ -13,9 +13,9 @@ This document describes how to install the Data Source plugin locally in Grafana
 
 ## Install Data Source Plugin using grafana-cli
 
-  ```shell
-   grafana-cli plugins install chaosmeshorg-datasource
-   ```
+```shell
+ grafana-cli plugins install chaosmeshorg-datasource
+```
 
 ## Manual installation
 
