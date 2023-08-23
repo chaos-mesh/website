@@ -18,6 +18,7 @@ module.exports = {
             'quick-start',
             'production-installation-using-helm',
             'offline-installation',
+            'expose-dashboard-with-ingress',
             'persistence-dashboard',
             'uninstallation',
             {
