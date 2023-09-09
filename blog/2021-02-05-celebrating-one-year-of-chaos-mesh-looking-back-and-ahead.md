@@ -79,11 +79,17 @@ Cloud native has been in the DNA of Chaos Mesh since the very beginning. Joining
 
 ### A friendly and supportive community
 
+:::note
+
+2022-10-24: Because of <https://www.oreilly.com/online-learning/leveraging-katacoda-technology.html>, and refer to [#356](https://github.com/chaos-mesh/website/pull/356), the interactive tutorial is temporarily unavailable.
+
+:::
+
 The quality of the open source community determines whether our adopters and contributors are willing to stick around and get involved in the community for the long run. In this regard, we’ve been working hard on:
 
-- Continuously enriching documentation and optimizing its structure. So far, we have developed a complete set of documentation for different groups of audiences, including [a user guide](https://chaos-mesh.org/docs/1.2.4/user_guides/installation) and [developer guide](https://chaos-mesh.org/docs/1.2.4/development_guides/development_overview), [quick start guides](https://chaos-mesh.org/docs/1.2.4/get_started/get_started_on_kind), [use cases](https://chaos-mesh.org/docs/1.2.4/use_cases/multi_data_centers), and [a contributing guide](https://github.com/chaos-mesh/chaos-mesh/blob/master/CONTRIBUTING.md). All are constantly updated per each release.
+- Continuously enriching documentation and optimizing its structure. So far, we have developed a complete set of documentation for different groups of audiences, including [a user guide](https://chaos-mesh-website-archived.netlify.app/docs/1.2.4/user_guides/installation) and [developer guide](https://chaos-mesh-website-archived.netlify.app/docs/1.2.4/development_guides/development_overview), [quick start guides](https://chaos-mesh-website-archived.netlify.app/docs/1.2.4/get_started/get_started_on_kind), [use cases](https://chaos-mesh-website-archived.netlify.app/docs/1.2.4/use_cases/multi_data_centers), and [a contributing guide](https://github.com/chaos-mesh/chaos-mesh/blob/master/CONTRIBUTING.md). All are constantly updated per each release.
 
-- Working with the community to publish blog posts, tutorials, use cases, and chaos engineering practices. So far, we’ve produced 26 Chaos Mesh related articles. Among them is [an interactive tutorial](https://chaos-mesh.org/interactive-tutorial), published on O’Reilly’s Katakoda site. These materials make a great complement to the documentation.
+- Working with the community to publish blog posts, tutorials, use cases, and chaos engineering practices. So far, we’ve produced 26 Chaos Mesh related articles. Among them is `an interactive tutorial`, published on O’Reilly’s Katakoda site. These materials make a great complement to the documentation.
 
 - Repurposing and amplifying videos and tutorials generated in community meetings, webinars, and meetups. Valuing and responding to community feedback and queries.
 

@@ -107,13 +107,13 @@ function Home() {
                 <div className="tw-flex">
                   <Link
                     to="/docs/production-installation-using-helm"
-                    className="tw-btn tw-btn-sm tw-btn-primary tw-mr-3 hover:-tw-translate-y-1"
+                    className="tw-btn tw-btn-primary tw-btn-sm tw-mr-3 hover:-tw-translate-y-1"
                   >
                     Get Started →
                   </Link>
                   <Link
                     to="https://github.com/chaos-mesh/chaos-mesh"
-                    className="tw-btn tw-btn-sm tw-gap-2 dark:tw-glass hover:-tw-translate-y-1"
+                    className="tw-btn tw-btn-neutral tw-btn-sm tw-gap-2 dark:tw-glass hover:-tw-translate-y-1"
                   >
                     <LogoOctocat className="tw-w-4 tw-h-4 tw-fill-white dark:tw-fill-black" />
                     GitHub

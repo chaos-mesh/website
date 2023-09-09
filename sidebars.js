@@ -18,13 +18,19 @@ module.exports = {
             'quick-start',
             'production-installation-using-helm',
             'offline-installation',
+            'expose-dashboard-with-ingress',
             'persistence-dashboard',
             'uninstallation',
-            'supported-releases',
+            {
+              type: 'link',
+              label: 'Supported Releases',
+              href: '/supported-releases',
+            },
           ],
         },
         'manage-user-permissions',
         'configure-enabled-namespace',
+        'remote-cluster-management',
         {
           type: 'category',
           label: 'Run a Single Chaos Experiment',
@@ -41,7 +47,7 @@ module.exports = {
           label: 'Orchestrate Multiple Chaos Experiments',
           items: [
             'create-chaos-mesh-workflow',
-            'run-chaos-experiments-in-serial-or-parallel',
+            'run-serial-or-parallel-experiments',
             'send-http-request-on-workflow',
             'check-workflow-status',
             'status-check-in-workflow',
@@ -131,7 +137,7 @@ module.exports = {
         {
           type: 'category',
           label: 'Release Tracking',
-          items: ['release-2.4-tracking'],
+          items: ['release-2.5-tracking'],
         },
       ],
     },

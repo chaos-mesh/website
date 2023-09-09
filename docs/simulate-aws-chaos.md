@@ -23,17 +23,19 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: cloud-key-secret
-  namespace: chaos-testing
+  namespace: chaos-mesh
 type: Opaque
 stringData:
   aws_access_key_id: your-aws-access-key-id
   aws_secret_access_key: your-aws-secret-access-key
+  aws_session_token: your-aws-session-token
 ```
 
 - **name** means the Kubernetes Secret object.
 - **namespace** means the namespace of the Kubernetes Secret object.
 - **aws_access_key_id** stores the ID of the access key to the AWS cluster.
-- **aws_secret_access_key** stores the secrete access key to the AWS cluster.
+- **aws_secret_access_key** stores the secret access key to the AWS cluster.
+- **aws_session_token** stores the aws session token to the AWS cluster. (required when using [temporary AWS credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html))
 
 ## Create experiments using Chaos Dashboard
 
@@ -45,7 +47,7 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
 2. Chaos Dashboard can be accessed via `kubectl port-forward`:
 
    ```bash
-    kubectl port-forward -n chaos-testing svc/chaos-dashboard 2333:2333
+    kubectl port-forward -n chaos-mesh svc/chaos-dashboard 2333:2333
    ```
 
    Then you can access the dashboard via [`http://localhost:2333`](http://localhost:2333) in your browser.
@@ -73,7 +75,7 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
    kind: AWSChaos
    metadata:
      name: ec2-stop-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: ec2-stop
      secretName: 'cloud-key-secret'
@@ -101,7 +103,7 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
    kind: AWSChaos
    metadata:
      name: ec2-restart-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: ec2-restart
      secretName: 'cloud-key-secret'
@@ -128,7 +130,7 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
    kind: AWSChaos
    metadata:
      name: ec2-detach-volume-example
-     namespace: chaos-testing
+     namespace: chaos-mesh
    spec:
      action: ec2-stop
      secretName: 'cloud-key-secret'

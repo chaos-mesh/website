@@ -29,7 +29,7 @@ Before creating NetworkChaos experiments, ensure the following:
 
    ![NetworkChaos Experiments](./img/networkchaos-exp.png)
 
-   For details of specific configuration fields, refer to [Field description](#field description).
+   For details of specific configuration fields, refer to [Field description](#field-description).
 
 3. Fill out the experiment information, and specify the experiment scope and the scheduled experiment duration.
 
@@ -145,7 +145,6 @@ Before creating NetworkChaos experiments, ensure the following:
 | direction | enum | Indicates the direction of `target` packets. Available vaules include `from` (the packets from `target`), `to` (the packets to `target`), and `both` ( the packets from or to `target`). This parameter makes Chaos only take effect for a specific direction of packets. | to | No | both |
 | mode | string | Specifies the mode of the experiment. The mode options include `one` (selecting a random Pod), `all` (selecting all eligible Pods), `fixed` (selecting a specified number of eligible Pods), `fixed-percent` (selecting a specified percentage of Pods from the eligible Pods), and `random-max-percent` (selecting the maximum percentage of Pods from the eligible Pods). | None | Yes | `one` |
 | value | string | Provides a parameter for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods. | None | No | 1 |
-| containerNames | []string | Specifies the name of the container into which the fault is injected. | None | No | ["nginx"] |
 | selector | struct | Specifies the target Pod. For details, refer to [Define the experiment scope](./define-chaos-experiment-scope.md). | None | Yes |  |
 | externalTargets | []string | Indicates the network targets except for Kubernetes, which can be IPv4 addresses or domains. This parameter only works with `direction: to`. | None | No | 1.1.1.1, www.google.com |
 | device | string | Specifies the affected network interface | None | No | "eth0" |
@@ -231,8 +230,8 @@ Setting `action` to `bandwidth` means simulating bandwidth limit fault. You also
 
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
-| rate | string | Indicates the rate of bandwidth limit |  | Yes | 1mbps |
-| limit | string | Indicates the number of bytes waiting in queue |  | Yes | 1 |
+| rate | string | Indicates the rate of bandwidth limit. Allows bit, kbit, mbit, gbit, tbit, bps, kbps, mbps, gbps, tbps unit. bps means bytes per second |  | Yes | 1mbps |
+| limit | uint32 | Indicates the number of bytes waiting in queue |  | Yes | 1 |
 | buffer | uint32 | Indicates the maximum number of bytes that can be sent instantaneously |  | Yes | 1 |
 | peakrate | uint64 | Indicates the maximum consumption of `bucket` (usually not set) |  | No | 1 |
 | minburst | uint32 | Indicates the size of `peakrate bucket` (usually not set) |  | No | 1 |

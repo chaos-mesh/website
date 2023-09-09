@@ -1,13 +1,16 @@
 name: Init environment
 
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
-    - uses: actions/setup-node@v2
+    - uses: pnpm/action-setup@v2.2.4
       with:
-        node-version: 16
-        cache: 'yarn'
+        version: 8
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 18
+        cache: 'pnpm'
 
     - name: Install dependencies
-      run: yarn --frozen-lockfile
+      run: pnpm i --frozen-lockfile
       shell: bash

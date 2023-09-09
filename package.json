@@ -1,6 +1,6 @@
 {
   "name": "chaos-mesh-website",
-  "version": "2.4.0",
+  "version": "2.6.2",
   "private": true,
   "scripts": {
     "start": "docusaurus start",
@@ -12,15 +12,14 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.1.0",
-    "@docusaurus/preset-classic": "^2.1.0",
-    "clsx": "^1.1.1",
-    "daisyui": "^2.31.0",
-    "gsap": "^3.11.3",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "semver": "^7.3.5",
-    "typewriter-effect": "^2.19.0"
+    "@docusaurus/core": "^2.4.1",
+    "@docusaurus/preset-classic": "^2.4.1",
+    "clsx": "^1.2.1",
+    "gsap": "^3.12.2",
+    "react": "17",
+    "react-dom": "17",
+    "semver": "^7.3.8",
+    "typewriter-effect": "^2.20.1"
   },
   "browserslist": {
     "production": [
@@ -35,14 +34,17 @@
     ]
   },
   "devDependencies": {
-    "@trivago/prettier-plugin-sort-imports": "^3.3.0",
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.3",
-    "postcss-import": "^15.0.0",
-    "prettier": "^2.4.1",
-    "tailwindcss": "^3.2.1"
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
+    "autoprefixer": "^10.4.15",
+    "daisyui": "^3.7.3",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.0",
+    "postcss": "^8.4.29",
+    "prettier": "^2.8.7",
+    "tailwindcss": "^3.3.3"
   },
   "lint-staged": {
     "*.(js|md)": "prettier --write"
-  }
+  },
+  "packageManager": "pnpm@8.6.2"
 }

@@ -6,7 +6,7 @@ import React from 'react'
 import { archivedVersions, stableVersions } from '../data/versions'
 import styles from './versions.module.css'
 
-const allVersionsText = 'All versions of Chaos Mesh'
+const allVersionsText = 'All Versions of Chaos Mesh'
 
 export default function Versions() {
   return (
@@ -20,8 +20,7 @@ export default function Versions() {
             official documentation, and the rest will be archived.
           </p>
           <p>
-            You can learn more about our version support via{' '}
-            <Link to="/docs/supported-releases">Supported Releases</Link>.
+            You can learn more about our version support via <Link to="/supported-releases">Supported Releases</Link>.
           </p>
 
           <h2>Development version</h2>
@@ -53,7 +52,10 @@ export default function Versions() {
               <div key={version.version} className={clsx('col col--4', styles.cardCol)}>
                 <div className="card shadow--md">
                   <div className="card__header">
-                    <h3>v{version.version}</h3>
+                    <h3>
+                      v{version.version}
+                      {i === stableVersions.length - 1 && ' (Unsupported)'}
+                    </h3>
                   </div>
                   <div className="card__body">
                     <p>

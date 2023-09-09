@@ -4,21 +4,29 @@ on:
   pull_request:
     branches:
       - master
+    paths-ignore:
+      - 'README.md'
+      - 'gitpod.yml'
   push:
     branches:
       - master
+    paths-ignore:
+      - 'README.md'
+      - 'gitpod.yml'
+
+permissions: read-all
 
 jobs:
   test:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Init environment
         uses: ./.github/actions/init
 
       - name: Test build
-        run: yarn build
+        run: pnpm build
   deploy:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
@@ -38,4 +46,4 @@ jobs:
         run: |
           git config --global user.email "${{ secrets.GH_PAGES_DEPLOY_EMAIL }}"
           git config --global user.name "${{ secrets.GH_PAGES_DEPLOY_NAME }}"
-          DEPLOYMENT_BRANCH=master yarn deploy
+          DEPLOYMENT_BRANCH=master pnpm run deploy

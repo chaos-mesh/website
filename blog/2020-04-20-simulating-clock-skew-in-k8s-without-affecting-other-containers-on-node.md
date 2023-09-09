@@ -98,7 +98,7 @@ The chart above is the process of **TimeChaos**, an implementation of clock skew
 4. Use ptrace to modify the `clock_gettime` function in vDSO and redirect to the `fake_clock_gettime` function.
 5. Use ptrace to detach the PID process.
 
-If you are interested in the details, see the [Chaos Mesh GitHub repository](https://github.com/chaos-mesh/chaos-mesh/blob/master/pkg/time/time_linux.go).
+If you are interested in the details, see the [Chaos Mesh GitHub repository](https://github.com/chaos-mesh/chaos-mesh/blob/release-1.0/pkg/time/time_linux.go).
 
 ## Simulating clock skew on a distributed SQL database
 

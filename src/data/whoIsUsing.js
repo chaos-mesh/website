@@ -69,9 +69,9 @@ const whoisUsing = [
     href: 'https://www.maycur.com/',
   },
   {
-    name: 'Meituan Dianping',
-    img: 'img/logos/meituandianping.png',
-    href: 'https://about.meituan.com/',
+    name: 'Meituan',
+    img: 'img/logos/meituan.svg',
+    href: 'https://www.meituan.com/en-US/about-us',
   },
   {
     name: 'NETSTARS',
