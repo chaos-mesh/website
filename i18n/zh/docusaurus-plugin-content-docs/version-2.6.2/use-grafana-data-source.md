@@ -7,24 +7,30 @@ title: 使用 Grafana Data Source 插件进行观测
 :::note 注意
 
 - Grafana 应为 v7.0.0 或更高版本。
-- 由于 Grafana 还没有受理 Chaos Mesh Data Source 的插件提交，所以目前无法通过 `grafana-cli` 进行安装。
+- Chaos Mesh应为 v2.1.0 或更高版本。
 
 :::
 
-## 安装 Data Source 插件
+## 使用 grafana-cli 安装 Data Source 插件
 
-可以通过以下步骤在本地 Grafana 安装 Data Source 插件：
+```shell
+ grafana-cli plugins install chaosmeshorg-datasource
+```
+
+## 手动安装 Data Source 插件
+
+作为备选，你也可以通过以下步骤在本地 Grafana 安装 Data Source 插件：
 
 1. 通过如下命令下载插件 zip 包，或前往 <https://github.com/chaos-mesh/datasource/releases> 下载该压缩包：
 
    ```shell
-   curl -LO https://github.com/chaos-mesh/datasource/releases/download/v2.1.0/chaosmeshorg-datasource-2.1.0.zip
+   curl -LO https://github.com/chaos-mesh/datasource/releases/download/v2.2.3/chaosmeshorg-datasource-2.2.3.zip
    ```
 
    下载完成后，将插件解压至 Grafana 插件目录：
 
    ```shell
-   unzip chaosmeshorg-datasource-2.1.0.zip -d YOUR_PLUGIN_DIR
+   unzip chaosmeshorg-datasource-2.2.3.zip -d YOUR_PLUGIN_DIR
    ```
 
    :::tip 小贴士
