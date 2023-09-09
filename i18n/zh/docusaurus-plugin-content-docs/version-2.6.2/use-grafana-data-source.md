@@ -7,14 +7,14 @@ title: 使用 Grafana Data Source 插件进行观测
 :::note 注意
 
 - Grafana 应为 v7.0.0 或更高版本。
-- Chaos Mesh应为 v2.1.0 或更高版本。
+- Chaos Mesh 应为 v2.1.0 或更高版本。
 
 :::
 
 ## 使用 grafana-cli 安装 Data Source 插件
 
 ```shell
- grafana-cli plugins install chaosmeshorg-datasource
+grafana-cli plugins install chaosmeshorg-datasource
 ```
 
 ## 手动安装 Data Source 插件
