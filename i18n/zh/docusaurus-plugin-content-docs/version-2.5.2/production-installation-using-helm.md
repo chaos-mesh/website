@@ -93,7 +93,7 @@ kubectl create ns chaos-mesh
   {label: 'Docker', value: 'docker'},
   {label: 'Containerd', value: 'containerd'},
   {label: 'K3s', value: 'k3s'},
-  {label: 'MicroK8s', value: 'microk8s'}
+  {label: 'MicroK8s', value: 'microk8s'},
   {label: 'CRI-O', value: 'cri-o'}
 ]}>
   <TabItem value="docker">
