@@ -93,6 +93,7 @@ As the daemons of different container runtimes listen on different socket paths,
   {label: 'Docker', value: 'docker'},
   {label: 'Containerd', value: 'containerd'},
   {label: 'K3s', value: 'k3s'},
+  {label: 'MicroK8s', value: 'microk8s'},
   {label: 'CRI-O', value: 'cri-o'}
 ]}>
   <TabItem value="docker">
@@ -108,6 +109,11 @@ As the daemons of different container runtimes listen on different socket paths,
   <TabItem value="k3s">
     <PickHelmVersion>
       helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock --version latest
+    </PickHelmVersion>
+  </TabItem>
+  <TabItem value="microk8s">
+    <PickHelmVersion>
+      helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/var/snap/microk8s/common/run/containerd.sock --version latest
     </PickHelmVersion>
   </TabItem>
   <TabItem value="cri-o">
