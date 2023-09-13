@@ -122,6 +122,7 @@ As the daemons of different container runtimes listen on different socket paths,
     </PickHelmVersion>
   </TabItem>
 </Tabs>
+
 :::info
 
 To install a specific version of Chaos Mesh, add the `--version x.y.z` parameter after `helm install`. For example, `helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version 2.1.0`.
