@@ -19,7 +19,7 @@ As our community grows, Apache APISIX's features more frequently interact with e
 
 ![Apache APISIX architecture](/img/blog/apache-apisix-architecture.jpg)
 
-<p className="caption-center"> Apache APISIX architecture </p>
+<p className="caption"> Apache APISIX architecture </p>
 
 In this post, we'll share how we use [Chaos Mesh](https://chaos-mesh.org/) to improve our system stability.
 
@@ -58,7 +58,7 @@ We deployed a Chaos Engineering experiment using the following steps:
 
 ![High network latency occurs between etcd and Apache APISIX](/img/blog/high-network-latency-between-etcd-and-apache-apisix.jpg)
 
-<p className="caption-center"> High network latency occurs between etcd and Apache APISIX </p>
+<p className="caption"> High network latency occurs between etcd and Apache APISIX </p>
 
 ### Scenario #2
 
@@ -72,7 +72,7 @@ After we fixed this problem, we added a health check to the etcd Lua API to ensu
 
 ![Error Reported from etcd Node Interaction](/img/blog/error-reported-from-etcd-node-interaction.jpg)
 
-<p className="caption-center"> An error is reported from one etcd node's interaction with the Apache APISIX admin API </p>
+<p className="caption"> An error is reported from one etcd node's interaction with the Apache APISIX admin API </p>
 
 ## Our future plans
 

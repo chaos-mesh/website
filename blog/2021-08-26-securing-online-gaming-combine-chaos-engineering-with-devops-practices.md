@@ -44,7 +44,7 @@ IEG officially launched its chaos engineering project over a year ago. We wanted
 
 ![A comparison of chaos engineering tools](/img/blog/comparison-of-chaos-engineering-tools.png)
 
-<p className="caption-center"> A comparison of chaos engineering tools </p>
+<p className="caption"> A comparison of chaos engineering tools </p>
 
 > Note: This comparison is outdated and is intended simply to compare fault injection features supported by Chaos Mesh with other well-known chaos engineering platforms. It is not intended to favor or position one project over another. Any corrections are welcome.
 
@@ -54,7 +54,7 @@ Our chaos engineering team embedded Chaos Mesh into our continuous integration a
 
 ![Chaos Mesh embedded in IEG's operation platform](/img/blog/chaos-mesh-embedded-in-IEG's-operation-platform.png)
 
-<p className="caption-center">Chaos Mesh embedded in IEG's operation platform</p>
+<p className="caption">Chaos Mesh embedded in IEG's operation platform</p>
 
 In IEG, **chaos engineering is generally summarized as a closed loop with several key phases**:
 
@@ -80,7 +80,7 @@ In IEG, **chaos engineering is generally summarized as a closed loop with severa
 
 ![Five phases of chaos engineering in IEG](/img/blog/five-phases-of-chaos-engineering-in-IEG.png)
 
-<p className="caption-center">Five phases of chaos engineering in IEG</p>
+<p className="caption">Five phases of chaos engineering in IEG</p>
 
 We frequently **test the performance of services under high CPU usage**, for example. We begin by orchestrating and scheduling experiments. Following that, we run experiments and monitor the performance of related services. Multiple monitoring metrics, such as QPS, latency, response success, are immediately visible through the operation platform. The platform then generates reports for us to review, so we can check whether these experiments met our expectations.
 
@@ -98,7 +98,7 @@ Understandably, our team members grew bored of regular chaos experiments. After 
 
 ![The red teaming process in IEG](/img/blog/red-teaming-process-in-IEG.png)
 
-<p className="caption-center">The red teaming process in IEG</p>
+<p className="caption">The red teaming process in IEG</p>
 
 ### Dependency analysis
 
@@ -116,6 +116,6 @@ Gone are the days when performing fault injection requires a handwritten script,
 
 ![Chaos engineering with DevOps ensures efficient fault injection](/img/blog/chaos-engineering-with-devops.png)
 
-<p className="caption-center">Chaos engineering with DevOps ensures efficient fault injection</p>
+<p className="caption">Chaos engineering with DevOps ensures efficient fault injection</p>
 
 Thanks to full-featured chaos engineering tools and streamlined DevOps processes, we estimate that the efficiency of fault injection and chaos-based optimization at IEG has been improved at least by 10 times in the last six months. If you were unsure about implementing chaos engineering in your business, I hope our experience can be of some help.

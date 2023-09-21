@@ -96,7 +96,7 @@ For plotting, I used [gnuplot](http://www.gnuplot.info/), a Linux command-line g
 
 ![QPS line graph](/img/blog/qps-line-graph.png)
 
-<p class="caption-center">QPS line graph</p>
+<p class="caption">QPS line graph</p>
 
 ### Generate the report in PDF
 
@@ -116,13 +116,13 @@ Below is an example of a web application that I developed for daily reporting. T
 
 ![Web application for daily reporting](/img/blog/web-app-for-daily-reporting.png)
 
-<p class="caption-center">Web application for daily reporting</p>
+<p class="caption">Web application for daily reporting</p>
 
 Clicking the red card will open the report, as shown below. I used [pdf.js](https://github.com/mozilla/pdf.js) to view the PDF.
 
 ![Daily report in PDF](/img/blog/daily-report-pdf.png)
 
-<p class="caption-center">Daily report in PDF</p>
+<p class="caption">Daily report in PDF</p>
 
 ## Summary
 

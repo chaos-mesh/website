@@ -109,7 +109,7 @@ We will continue to enhance its usability and implement more functionalities suc
 
 ![Chaos Mesh's optimized architecture](/img/blog/chaos-mesh-optimized-architecture.png)
 
-<p className="caption-center">Chaos Mesh's optimized architecture</p>
+<p className="caption">Chaos Mesh's optimized architecture</p>
 
 For more, check out [Chaos Mesh's optimized architecture](https://pingcap.com/blog/chaos-mesh-remake-one-step-closer-toward-chaos-as-a-service#developing-chaos-mesh-towards-caas).
 

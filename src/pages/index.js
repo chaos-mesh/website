@@ -21,7 +21,7 @@ gsap.registerPlugin(ScrollTrigger)
 const description =
   'Chaos Mesh brings various types of fault simulation to Kubernetes and has an enormous capability to orchestrate fault scenarios. It helps you conveniently simulate various abnormalities that might occur in reality during the development, testing, and production environments and find potential problems in the system.'
 
-function Feature({ imgUrl, title, description, className }) {
+function Feature({ imgUrl, title, description, className, imageWidth }) {
   const isKubernetes = imgUrl === 'img/logos/kubernetes.svg'
 
   return (
@@ -39,13 +39,12 @@ function Feature({ imgUrl, title, description, className }) {
       >
         {!isKubernetes ? (
           <div className="tw-flex-1 max-lg:tw-mb-6 tw-text-center">
-            <img className="scroll-to-display tw-w-[60%] lg:tw-w-[80%]" src={useBaseUrl(imgUrl)} alt={title} />
+            <img className="scroll-to-display tw-w-[60%]" style={{ width: imageWidth }} src={useBaseUrl(imgUrl)} />
           </div>
         ) : (
           <img
             className="scroll-to-display lg:tw-absolute lg:tw-right-6 lg:-tw-bottom-12 max-lg:tw-w-[40%] lg:tw-h-48 max-lg:tw-mb-6"
             src={useBaseUrl(imgUrl)}
-            alt={title}
           />
         )}
         <div className="tw-flex-1">
@@ -107,13 +106,13 @@ function Home() {
                 <div className="tw-flex">
                   <Link
                     to="/docs/production-installation-using-helm"
-                    className="tw-btn tw-btn-primary tw-btn-sm tw-mr-3 hover:-tw-translate-y-1"
+                    className="tw-btn tw-btn-primary tw-mr-3 hover:-tw-translate-y-1"
                   >
                     Get Started →
                   </Link>
                   <Link
                     to="https://github.com/chaos-mesh/chaos-mesh"
-                    className="tw-btn tw-btn-neutral tw-btn-sm tw-gap-2 dark:tw-glass hover:-tw-translate-y-1"
+                    className="tw-btn tw-btn-neutral tw-gap-2 dark:tw-glass hover:-tw-translate-y-1"
                   >
                     <LogoOctocat className="tw-w-4 tw-h-4 tw-fill-white dark:tw-fill-black" />
                     GitHub
@@ -136,12 +135,12 @@ function Home() {
             <h2 className="tw-text-lg">
               <Translate id="home.whoisusing">Who is Using Chaos Mesh</Translate>
             </h2>
-            <div className={clsx('max-md:tw-overflow-x-auto', styles.whiteboard)}>
+            <div className="max-md:tw-overflow-x-auto dark:tw-invert dark:tw-saturate-0">
               <div className="row max-md:tw-w-[1280px]">
                 {whoIsUsing.map((w) => (
                   <div key={w.name} className={clsx('col col--1', styles.whiteboardCol)}>
                     <a
-                      className="tw-flex tw-justify-center tw-items-center tw-h-[100px]"
+                      className="tw-flex tw-justify-center tw-items-center tw-h-[100px] tw-select-none"
                       href={w.href}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -157,14 +156,14 @@ function Home() {
 
         <div className="hero">
           <div className="tw-container tw-mx-auto max-lg:tw-px-4">
-            <div className="tw-max-w-[600px] xl:tw-max-w-[800px] tw-mb-12">
+            <div className="tw-max-w-[800px] tw-mb-12 tw-mx-auto tw-text-center">
               {/* TODO: add translation. */}
-              <h2 className="tw-text-3xl xl:tw-text-4xl">
-                Make <span className={styles.heroTitle}>Cloud Native</span> +{' '}
-                <span className={styles.heroTitle}>Chaos Engineering</span> simple and straightforward.
+              <h2 className="tw-text-4xl xl:tw-text-5xl">
+                Make <span className={styles.heroTitle}>Cloud Native + Chaos Engineering</span> simple and
+                straightforward.
               </h2>
               <p className="lg:tw-text-lg tw-font-medium">
-                Based on the principles of chaos engineering, Chaos Mesh abstracts real-world events into objects that
+                Based on the principles of Chaos Engineering, Chaos Mesh abstracts real-world events into objects that
                 can be directly applied, hiding the trivial details.
               </p>
             </div>
@@ -174,32 +173,30 @@ function Home() {
                 imgUrl="img/logos/kubernetes.svg"
                 title={<Translate id="home.k8s">Design for Kubernetes</Translate>}
                 description={
-                  <>
-                    <p>
-                      <Translate
-                        id="home.k8s.1"
-                        values={{
-                          crd: (
-                            <Link
-                              className="tw-underline dark:tw-no-underline"
-                              to="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/"
-                            >
-                              CustomResourceDefinition (CRD)
-                            </Link>
-                          ),
-                        }}
-                      >
-                        {
-                          'In the Kubernetes realm, {crd} is a proven solution for implementing custom resources. Chaos Mesh leverages CRDs for natural integration with the Kubernetes ecosystem.'
-                        }
-                      </Translate>
-                    </p>
-                  </>
+                  <p>
+                    <Translate
+                      id="home.k8s.1"
+                      values={{
+                        crd: (
+                          <Link
+                            className="tw-underline dark:tw-no-underline"
+                            to="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/"
+                          >
+                            CustomResourceDefinition (CRD)
+                          </Link>
+                        ),
+                      }}
+                    >
+                      {
+                        'In the Kubernetes realm, {crd} is a proven solution for implementing custom resources. Chaos Mesh leverages CRDs for natural integration with the Kubernetes ecosystem.'
+                      }
+                    </Translate>
+                  </p>
                 }
                 className="lg:tw-col-span-2"
               />
               <Feature
-                imgUrl="img/features/undraw_server_down_s4lk.svg"
+                imgUrl="img/features/easy-to-use.svg"
                 title={<Translate id="home.easytouse">Easy to Use</Translate>}
                 description={
                   <>
@@ -228,7 +225,7 @@ function Home() {
                       <li>
                         <Translate id="home.easytouse.2">
                           Ability to perform chaos experiments in production environments without modifying the
-                          deployment logic of the application.
+                          deployment logic of applications.
                         </Translate>
                       </li>
                       <li>
@@ -243,50 +240,84 @@ function Home() {
                 className="lg:tw-col-span-4"
               />
               <Feature
-                imgUrl="img/features/undraw_stars_re_6je7.svg"
-                title={<Translate id="home.failuretypes">A wide variety of failure types</Translate>}
-                description={
-                  <p>
-                    <Translate id="home.failuretypes.1">
-                      Chaos Mesh initially started from a distributed system perspective, fully considering its possible
-                      failures, thus providing more comprehensive and fine-grained fault types to help users with fault
-                      injection for networks, disks, file systems, operating systems, etc.
-                    </Translate>
-                  </p>
-                }
-                className="lg:tw-col-span-3"
-              />
-              <Feature
-                imgUrl="img/features/undraw_safe_re_kiil.svg"
-                title={<Translate id="home.safe">Safe and Controllable</Translate>}
+                imgUrl="img/features/flexible-scope.svg"
+                title={<Translate id="home.flexiblescope">Flexible Scope</Translate>}
                 description={
                   <>
                     <p>
-                      <Translate id="home.safe.1">
-                        Chaos Mesh provides role-based access control. Users can create roles with corresponding
-                        permissions according to their needs.
+                      <Translate id="home.flexiblescope.1">
+                        Chaos Mesh provides multiple filtering rules that allow selecting injection targets based on
+                        labels, annotations, and so on. They are collectively called selectors.
                       </Translate>
                     </p>
                     <p>
-                      <Translate id="home.safe.2">
-                        In addition, Chaos Mesh supports setting up namespace whitelists, which allow users to protect
-                        important namespaces and thus gain greater control over the "blast radius" of experiments.
+                      <Translate id="home.flexiblescope.2">
+                        In addition, users can also set a namespace whitelist to greater control the "blast radius" of
+                        the experiment.
                       </Translate>
                     </p>
                   </>
                 }
                 className="lg:tw-col-span-3"
               />
+              <Feature
+                imgUrl="img/features/security-first.svg"
+                title={<Translate id="home.securityfirst">Security First</Translate>}
+                description={
+                  <p>
+                    <Translate id="home.securityfirst.1">
+                      Role-based access control (RBAC) is enabled by default to restrict malicious operations. Users
+                      must be authorized with specific privileges to access the dashboard.
+                    </Translate>
+                  </p>
+                }
+                className="lg:tw-col-span-3"
+                imageWidth="75%"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="hero">
+          <div className="tw-relative tw-container tw-mx-auto max-lg:tw-px-4">
+            <div className="tw-max-w-[800px] tw-mx-auto tw-text-center">
+              {/* TODO: add translation. */}
+              <h2 className="tw-text-4xl xl:tw-text-5xl">
+                <span className={styles.heroTitle}>Wide variety</span> of failure types.
+              </h2>
+              <p className="lg:tw-text-lg tw-font-medium">
+                <Translate id="home.failuretypes.1">
+                  Chaos Mesh initially started from a distributed system perspective, fully considering its possible
+                  failures, thus providing more comprehensive and fine-grained fault types to help users with fault
+                  injection for networks, disks, file systems, operating systems, etc.
+                </Translate>
+              </p>
+            </div>
+            <img
+              className="tw-block tw-mx-auto tw-select-none dark:tw-invert-[.85] dark:tw-saturate-0"
+              src="img/chaos-category.svg"
+              alt="Chaos Category"
+            />
+          </div>
+        </div>
+
+        <div className="hero">
+          <div className="tw-container tw-mx-auto max-lg:tw-px-4">
+            <div className="tw-max-w-[800px] tw-mb-12 tw-mx-auto tw-text-center">
+              {/* TODO: add translation. */}
+              <h2 className="tw-text-4xl xl:tw-text-5xl">
+                Orchestrate complex fault scenarios with <span className={styles.heroTitle}>Workflows</span>.
+              </h2>
+              <p className="lg:tw-text-lg tw-font-medium">...</p>
             </div>
           </div>
         </div>
 
         <div className="hero">
           <div className="tw-container tw-mx-auto max-lg:tw-px-4">
-            <div className="tw-max-w-[500px] xl:tw-max-w-[700px] tw-mb-12">
+            <div className="tw-max-w-[800px] tw-mb-12 tw-mx-auto tw-text-center">
               {/* TODO: add translation. */}
-              <h2 className="tw-text-3xl xl:tw-text-4xl">
-                Orchestrate complex fault scenarios with <span className={styles.heroTitle}>Workflows</span>
+              <h2 className="tw-text-4xl xl:tw-text-5xl">
+                Meet <span className={styles.heroTitle}>Chaosd</span>. A Chaos Toolkit for Physical Machines.
               </h2>
               <p className="lg:tw-text-lg tw-font-medium">...</p>
             </div>

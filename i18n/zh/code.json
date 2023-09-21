@@ -215,6 +215,9 @@
     "message": "Tags",
     "description": "The title of the tag list page"
   },
+  "home.whoisusing": {
+    "message": "Chaos Mesh 的用户"
+  },
   "home.k8s": {
     "message": "为 Kubernetes 设计"
   },
@@ -233,22 +236,25 @@
   "home.easytouse.3": {
     "message": "通过仪表盘快速创建混沌实验，允许用户实时观察实验的状态并快速回滚任何注入的故障。"
   },
+  "home.flexiblescope": {
+    "message": "灵活的范围"
+  },
+  "home.flexiblescope.1": {
+    "message": "Chaos Mesh 提供了多种过滤规则，允许根据标签、注释等选择注入目标。它们统称为选择器。"
+  },
+  "home.flexiblescope.2": {
+    "message": "此外，用户还可以设置命名空间白名单，以更大程度地控制实验的“爆炸半径”。"
+  },
+  "home.securityfirst": {
+    "message": "安全至上"
+  },
+  "home.securityfirst.1": {
+    "message": "默认启用基于角色的访问控制（RBAC）以限制恶意操作。用户必须被授予特定权限才能访问仪表板。"
+  },
   "home.failuretypes": {
     "message": "多种多样的故障类型"
   },
   "home.failuretypes.1": {
     "message": "Chaos Mesh 起初从分布式系统的角度出发，充分考虑了其可能出现的故障，从而提供更全面、更细粒度的故障类型来帮助用户对网络、磁盘、文件系统、操作系统等进行故障注入。"
-  },
-  "home.safe": {
-    "message": "安全可控"
-  },
-  "home.safe.1": {
-    "message": "Chaos Mesh 提供基于角色的访问控制，用户可以根据需要创建相应权限的角色。"
-  },
-  "home.safe.2": {
-    "message": "此外，Chaos Mesh 允许用户设置命名空间（Namespace）的白名单来保护重要的命名空间，从而更大程度地控制实验的“爆炸半径”。"
-  },
-  "home.whoisusing": {
-    "message": "Chaos Mesh 的用户"
   }
 }

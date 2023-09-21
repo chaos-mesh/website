@@ -88,7 +88,7 @@ We can see that the whole vDSO is like a `.so` file, so we can use an executable
 
 ![TimeChaos workflow](/img/blog/timechaos-workflow.jpg)
 
-<div className="caption-center"> TimeChaos workflow </div>
+<div className="caption"> TimeChaos workflow </div>
 
 The chart above is the process of **TimeChaos**, an implementation of clock skew in Chaos Mesh.
 
@@ -172,7 +172,7 @@ That's encouraging. But does TimeChaos affect services other than PD? We can che
 
 ![Chaos Dashboard](/img/blog/chaos-dashboard.jpg)
 
-<div className="caption-center"> Chaos Dashboard </div>
+<div className="caption"> Chaos Dashboard </div>
 
 It's clear that in the monitor, TimeChaos was injected every 1 millisecond and the whole duration lasted 10 seconds. What's more, TiDB was not affected by that injection. The bank program ran normally, and performance was not affected.
 
