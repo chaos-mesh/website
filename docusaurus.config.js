@@ -1,4 +1,5 @@
-const draculaTheme = require('prism-react-renderer/themes/dracula')
+const vsLightTheme = require('prism-react-renderer/themes/vsLight')
+const vsDarkTheme = require('prism-react-renderer/themes/vsDark')
 
 module.exports = {
   i18n: {
@@ -37,6 +38,16 @@ module.exports = {
         srcDark: 'img/logos/logo-mini-white.svg',
       },
       items: [
+        { to: 'docs', label: 'Documentation' },
+        {
+          to: 'blog',
+          label: 'Blog',
+        },
+        {
+          href: 'https://community.cncf.io/chaos-mesh-community/',
+          label: 'Community Group',
+        },
+
         {
           type: 'docsVersionDropdown',
           dropdownItemsAfter: [
@@ -47,34 +58,18 @@ module.exports = {
             { to: '/versions', label: 'All Versions' },
             { to: '/supported-releases', label: 'Supported Releases' },
           ],
-        },
-        { to: 'docs', label: 'Documentation' },
-
-        {
-          type: 'dropdown',
-          label: 'Community',
           position: 'right',
-          items: [
-            {
-              to: 'blog',
-              label: 'Blog',
-            },
-            {
-              href: 'https://community.cncf.io/chaos-mesh-community/',
-              label: 'Events',
-            },
-          ],
         },
         {
           type: 'localeDropdown',
           position: 'right',
         },
-        // {
-        //   href: 'https://github.com/chaos-mesh/chaos-mesh',
-        //   className: 'header-github-link',
-        //   'aria-label': 'GitHub',
-        //   position: 'right',
-        // },
+        {
+          href: 'https://github.com/chaos-mesh/chaos-mesh',
+          className: 'header-github-link',
+          'aria-label': 'GitHub',
+          position: 'right',
+        },
       ],
     },
     footer: {
@@ -108,7 +103,7 @@ module.exports = {
               to: 'blog',
             },
             {
-              label: 'Events',
+              label: 'CNCF Community Group',
               href: 'https://community.cncf.io/chaos-mesh-community/',
             },
             {
@@ -143,13 +138,11 @@ module.exports = {
       `,
     },
     prism: {
+      darkTheme: require('prism-react-renderer/themes/vsDark'),
       theme: {
-        plain: {
-          ...draculaTheme.plain,
-          backgroundColor: 'rgb(61, 68, 81)',
-        },
+        plain: vsLightTheme.plain,
         styles: [
-          ...draculaTheme.styles,
+          ...vsLightTheme.styles,
           {
             types: ['function', 'keyword'],
             style: {
@@ -159,12 +152,9 @@ module.exports = {
         ],
       },
       darkTheme: {
-        plain: {
-          ...draculaTheme.plain,
-          backgroundColor: 'rgb(25, 29, 36)',
-        },
+        plain: vsDarkTheme.plain,
         styles: [
-          ...draculaTheme.styles,
+          ...vsDarkTheme.styles,
           {
             types: ['function', 'keyword'],
             style: {
@@ -173,6 +163,7 @@ module.exports = {
           },
         ],
       },
+      additionalLanguages: ['bash'],
     },
   },
   onBrokenLinks: 'warn',

@@ -12,14 +12,14 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.4.1",
-    "@docusaurus/preset-classic": "^2.4.1",
-    "clsx": "^1.2.1",
+    "@docusaurus/core": "^2.4.3",
+    "@docusaurus/preset-classic": "^2.4.3",
+    "clsx": "^2.0.0",
     "gsap": "^3.12.2",
     "react": "17",
     "react-dom": "17",
-    "semver": "^7.3.8",
-    "typewriter-effect": "^2.20.1"
+    "semver": "^7.5.4",
+    "typewriter-effect": "^2.21.0"
   },
   "browserslist": {
     "production": [
@@ -34,12 +34,12 @@
     ]
   },
   "devDependencies": {
-    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
-    "autoprefixer": "^10.4.15",
-    "daisyui": "^3.7.3",
+    "@trivago/prettier-plugin-sort-imports": "^4.2.0",
+    "autoprefixer": "^10.4.16",
+    "daisyui": "^3.7.7",
     "husky": "^8.0.3",
-    "lint-staged": "^13.2.0",
-    "postcss": "^8.4.29",
+    "lint-staged": "^14.0.1",
+    "postcss": "^8.4.30",
     "prettier": "^2.8.7",
     "tailwindcss": "^3.3.3"
   },
