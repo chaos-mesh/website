@@ -22,8 +22,6 @@
 }
 
 :root[data-theme='dark'] {
-  --ifm-background-surface-color: #262626;
-
   --ifm-color-primary: #10a6fa;
   --ifm-color-primary-dark: #0598ea;
   --ifm-color-primary-darker: #0590dd;

@@ -154,7 +154,10 @@ function Home() {
               </p>
             </div>
             <img
-              className="tw-block tw-mx-auto tw-select-none dark:tw-invert-[.85] dark:tw-saturate-0"
+              className={clsx(
+                'tw-block tw-mx-auto tw-select-none dark:tw-invert-[.85] dark:tw-saturate-0',
+                styles.chaosCategory
+              )}
               src="img/chaos-category.svg"
               alt="Chaos Category"
             />
@@ -178,7 +181,7 @@ function Home() {
             <div className="tw-max-w-[800px] tw-mb-12 tw-mx-auto tw-text-center">
               {/* TODO: add translation. */}
               <h2 className="tw-text-4xl xl:tw-text-5xl">
-                Meet <span className={styles.heroTitle}>Chaosd</span>. A Chaos Toolkit for Physical Machines.
+                Meet <span className={styles.heroTitle}>Chaosd</span>: A Chaos Toolkit for Physical Machines.
               </h2>
               <p className="lg:tw-text-lg tw-font-medium">...</p>
             </div>

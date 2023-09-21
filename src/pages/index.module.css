@@ -32,3 +32,7 @@
     --ifm-col-width: calc(2 / 12 * 100%) !important;
   }
 }
+
+.chaosCategory {
+  mask-image: linear-gradient(to top, transparent 1%, #fff 60%, #000 100%);
+}
