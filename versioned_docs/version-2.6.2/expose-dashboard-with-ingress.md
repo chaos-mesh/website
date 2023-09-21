@@ -1,4 +1,4 @@
-# Expose Chaos Dashbaord with Ingress
+# Expose Chaos Dashboard with Ingress
 
 At times, you may need to make the Chaos Dashboard accessible to external users, while placing it under the subpath of your current monitoring dashboard.
 
