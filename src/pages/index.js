@@ -10,7 +10,12 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import React, { useEffect } from 'react'
 
-import LogoOctocat from '../../static/img/logos/logo-octocat.svg'
+import IconLibrary from '../../static/img/icons/library.svg'
+import IconOctocat from '../../static/img/icons/octocat.svg'
+import IconPlay from '../../static/img/icons/play.svg'
+import Card from '../components/Card'
+import ChaosdFeatures from '../components/ChaosdFeatures'
+import CodeGrid from '../components/CodeGrid'
 import Features from '../components/Features'
 import Mesh from '../components/Mesh'
 import PickVersion from '../components/PickVersion'
@@ -35,6 +40,18 @@ function Home() {
       stagger: 0.25,
       scrollTrigger: {
         trigger: '.scroll-to-display',
+        toggleActions: 'restart none none none',
+      },
+    })
+
+    gsap.from('.scroll-to-display-x', {
+      duration: 1,
+      opacity: 0,
+      x: 75,
+      y: 100,
+      stagger: 0.25,
+      scrollTrigger: {
+        trigger: '.scroll-to-display-x',
         toggleActions: 'restart none none none',
       },
     })
@@ -78,7 +95,7 @@ function Home() {
                     to="https://github.com/chaos-mesh/chaos-mesh"
                     className="tw-btn tw-btn-neutral tw-gap-2 dark:tw-glass hover:-tw-translate-y-1"
                   >
-                    <LogoOctocat className="tw-w-4 tw-h-4 tw-fill-white dark:tw-fill-black" />
+                    <IconOctocat className="tw-w-4 tw-h-4 tw-fill-white" />
                     GitHub
                   </Link>
                 </div>
@@ -138,8 +155,8 @@ function Home() {
           </div>
         </div>
 
-        <div className="hero">
-          <div className="tw-relative tw-container tw-mx-auto max-lg:tw-px-4">
+        <div className="hero tw-relative">
+          <div className="tw-container tw-mx-auto max-lg:tw-px-4">
             <div className="tw-max-w-[800px] tw-mx-auto tw-text-center">
               {/* TODO: add translation. */}
               <h2 className="tw-text-4xl xl:tw-text-5xl">
@@ -158,37 +175,86 @@ function Home() {
                 'tw-block tw-mx-auto tw-select-none dark:tw-invert-[.85] dark:tw-saturate-0',
                 styles.chaosCategory
               )}
-              src="img/chaos-category.svg"
+              src="img/home/chaos-category.svg"
               alt="Chaos Category"
             />
+
+            <div className="tw-flex tw-justify-center tw-mt-12">
+              <Link
+                to="/docs/simulate-pod-chaos-on-kubernetes"
+                className="tw-btn tw-btn-primary tw-gap-2 hover:-tw-translate-y-1"
+              >
+                <IconLibrary className="tw-w-4 tw-h-4 tw-fill-white" />
+                Explore More
+              </Link>
+            </div>
+            <div className="tw-grid tw-gap-8 lg:tw-grid-cols-3 tw-my-12">
+              <CodeGrid />
+            </div>
+          </div>
+
+          <div className="tw-absolute tw-left-0 tw-bottom-[-100px] lg:tw-bottom-[-500px] tw-w-full">
+            <img src="/img/home/curve-divider.svg" />
           </div>
         </div>
 
         <div className="hero">
           <div className="tw-container tw-mx-auto max-lg:tw-px-4">
-            <div className="tw-max-w-[800px] tw-mb-12 tw-mx-auto tw-text-center">
-              {/* TODO: add translation. */}
-              <h2 className="tw-text-4xl xl:tw-text-5xl">
-                Orchestrate complex fault scenarios with <span className={styles.heroTitle}>Workflows</span>.
-              </h2>
-              <p className="lg:tw-text-lg tw-font-medium">...</p>
+            <div className="tw-flex tw-flex-col lg:tw-flex-row lg:tw-items-center tw-gap-8">
+              <div className="tw-flex-1">
+                {/* TODO: add translation. */}
+                <h2 className="tw-text-4xl xl:tw-text-5xl">
+                  Orchestrate complex fault scenarios with <span className={styles.heroTitle}>Workflows</span>.
+                </h2>
+                <p className="lg:tw-text-lg tw-font-medium">
+                  Real-world failures are often not isolated causes.Chaos Mesh has built-in workflows that allow you to
+                  experiment serially or in parallel at will to build walkthroughs that fit the architecture.
+                </p>
+                <div className="tw-flex tw-gap-4"></div>
+                <Link
+                  to="/docs/create-chaos-mesh-workflow/"
+                  className="tw-btn tw-btn-primary tw-gap-2 hover:-tw-translate-y-1"
+                >
+                  <IconPlay className="tw-w-4 tw-h-4 tw-fill-white" />
+                  Start Creating
+                </Link>
+              </div>
+              <div className={clsx('tw-flex-[1.5] tw-h-[640px] tw-p-0 tw-rounded-2xl', styles.workflowsImg)} />
             </div>
           </div>
         </div>
 
         <div className="hero">
           <div className="tw-container tw-mx-auto max-lg:tw-px-4">
-            <div className="tw-max-w-[800px] tw-mb-12 tw-mx-auto tw-text-center">
-              {/* TODO: add translation. */}
-              <h2 className="tw-text-4xl xl:tw-text-5xl">
-                Meet <span className={styles.heroTitle}>Chaosd</span>: A Chaos Toolkit for Physical Machines.
-              </h2>
-              <p className="lg:tw-text-lg tw-font-medium">...</p>
+            <div className="tw-flex tw-flex-col lg:tw-flex-row lg:tw-items-center tw-gap-8">
+              <div className={clsx('tw-flex-1 tw-flex tw-items-center tw-h-[640px]')}>
+                <div
+                  className={clsx(
+                    'tw-flex tw-justify-center tw-items-center lg:tw-w-[75%] lg:tw-h-[100%]',
+                    styles.chaosdBg
+                  )}
+                >
+                  <ChaosdFeatures />
+                </div>
+              </div>
+              <div className="tw-flex-[1.5]">
+                {/* TODO: add translation. */}
+                <h2 className="tw-text-4xl xl:tw-text-5xl">
+                  Meet <span className={styles.heroTitle}>Chaosd</span>: A Chaos Toolkit for Physical Machines.
+                </h2>
+                <p className="lg:tw-text-lg tw-font-medium">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                  officia deserunt mollit anim id est laborum.
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="hero">
+        {/* <div className="hero">
           <div className="tw-container tw-mx-auto max-lg:tw-px-4 tw-text-center">
             <h2 className="tw-text-lg">
               Chaos Mesh is a{' '}
@@ -199,7 +265,7 @@ function Home() {
             </h2>
             <div className="cncf-logo tw-h-16 md:tw-h-24" />
           </div>
-        </div>
+        </div> */}
       </main>
     </Layout>
   )

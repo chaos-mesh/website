@@ -3,17 +3,13 @@ import Translate from '@docusaurus/Translate'
 import useBaseUrl from '@docusaurus/useBaseUrl'
 import clsx from 'clsx'
 import React from 'react'
+import Card from './Card'
 
 function Feature({ imgUrl, title, description, className, imageWidth }) {
   const isKubernetes = imgUrl === 'img/logos/kubernetes.svg'
 
   return (
-    <div
-      className={clsx(
-        'tw-p-6 tw-border-solid tw-border-1 tw-border-base-content tw-border-opacity-10 tw-rounded-2xl',
-        className
-      )}
-    >
+    <Card className={className}>
       <div
         className={clsx(
           'tw-relative tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-h-full',
@@ -37,7 +33,7 @@ function Feature({ imgUrl, title, description, className, imageWidth }) {
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   )
 }
 
