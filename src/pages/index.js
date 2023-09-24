@@ -198,7 +198,7 @@ function Home() {
           </div>
         </div>
 
-        <div className="hero">
+        <div className="hero tw-relative tw-z-10 tw-bg-transparent">
           <div className="tw-container tw-mx-auto max-lg:tw-px-4">
             <div className="tw-flex tw-flex-col lg:tw-flex-row lg:tw-items-center tw-gap-8">
               <div className="tw-flex-1">
@@ -210,7 +210,16 @@ function Home() {
                   Real-world failures are often not isolated causes.Chaos Mesh has built-in workflows that allow you to
                   experiment serially or in parallel at will to build walkthroughs that fit the architecture.
                 </p>
-                <div className="tw-flex tw-gap-4"></div>
+                <div className="tw-flex tw-gap-4 tw-mb-6">
+                  <Card>
+                    <h4 className="text-lg">Suspend</h4>
+                    <p>You can also use the suspend node to simulate a temporary recovery.</p>
+                  </Card>
+                  <Card>
+                    <h4 className="text-lg">Status Check</h4>
+                    <p>You can also use customized status checks to inform the cluster status.</p>
+                  </Card>
+                </div>
                 <Link
                   to="/docs/create-chaos-mesh-workflow/"
                   className="tw-btn tw-btn-primary tw-gap-2 hover:-tw-translate-y-1"
@@ -219,7 +228,7 @@ function Home() {
                   Start Creating
                 </Link>
               </div>
-              <div className={clsx('tw-flex-[1.5] tw-h-[640px] tw-p-0 tw-rounded-2xl', styles.workflowsImg)} />
+              <div className={clsx('tw-flex-[1.5] tw-rounded-2xl', styles.workflowsImg)} />
             </div>
           </div>
         </div>
