@@ -1,6 +1,6 @@
 import { useColorMode } from '@docusaurus/theme-common'
 import { gsap } from 'gsap'
-import React, { useEffect, useRef } from 'react'
+import React, { useLayoutEffect, useRef } from 'react'
 import Typewriter from 'typewriter-effect/dist/core'
 
 import { useDidMountEffect } from '../utils/hooks'
@@ -31,7 +31,7 @@ export default function Mesh() {
 
   const { colorMode } = useColorMode()
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const pts = []
       let i = 0
@@ -296,6 +296,10 @@ export default function Mesh() {
     }, svgEl)
 
     window.gsapCtx = ctx
+
+    return () => {
+      ctx.kill()
+    }
   }, [])
 
   useDidMountEffect(() => {

@@ -193,5 +193,4 @@ module.exports = {
     ],
   ],
   plugins: ['./docusaurus-tailwind-v3'],
-  clientModules: [require.resolve('./customClientModule.js')],
 }
