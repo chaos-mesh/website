@@ -239,8 +239,8 @@ function Home() {
         <div className="hero">
           <div className="tw-container tw-mx-auto max-lg:tw-px-4">
             <div className="tw-flex tw-flex-col lg:tw-flex-row lg:tw-items-center tw-gap-8">
-              <div className={clsx('tw-relative tw-flex-1 tw-flex tw-items-center xl:tw-h-[640px]')}>
-                <img className="tw-absolute md:max-lg:tw-w-[45%] tw-w-[90%]" src="/img/home/chaosd-bg.svg" />
+              <div className={clsx('tw-relative tw-flex-1 tw-flex tw-items-center tw-overflow-hidden xl:tw-h-[640px]')}>
+                <img className="tw-absolute tw-w-[90%]" src="/img/home/chaosd-bg.svg" />
                 <div className="tw-flex tw-justify-center tw-items-center xl:tw-w-[75%] lg:tw-h-[100%]">
                   <ChaosdFeatures />
                 </div>
