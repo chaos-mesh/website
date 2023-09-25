@@ -94,4 +94,4 @@ Mostly you only need to modify the content in the `docs/`, but if you want some 
 
 ## License
 
-Same as [Chaos Mesh](https://github.com/chaos-mesh/chaos-mesh).
+Distributed under [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/).

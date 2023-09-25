@@ -58,7 +58,3 @@
     box-shadow: 75px 75px 75px -25px rgba(255, 255, 255, 0.1);
   }
 }
-
-.chaosdBg {
-  background: url(/img/home/chaosd-bg.svg) top left / cover no-repeat;
-}

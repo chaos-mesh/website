@@ -12,6 +12,8 @@ import React, { useEffect } from 'react'
 
 import IconLibrary from '../../static/img/icons/library.svg'
 import IconOctocat from '../../static/img/icons/octocat.svg'
+import IconGithub from '../../static/img/icons/github.svg'
+import IconHelp from '../../static/img/icons/help.svg'
 import IconPlay from '../../static/img/icons/play.svg'
 import Card from '../components/Card'
 import ChaosdFeatures from '../components/ChaosdFeatures'
@@ -84,16 +86,16 @@ function Home() {
                   {/* TODO: add translation. */}
                   <Translate id="home.description">{description}</Translate>
                 </p>
-                <div className="tw-flex">
+                <div className="tw-flex tw-gap-3">
                   <Link
                     to="/docs/production-installation-using-helm"
-                    className="tw-btn tw-btn-primary tw-mr-3 hover:-tw-translate-y-1"
+                    className="tw-btn tw-btn-primary hover:tw-text-white hover:-tw-translate-y-1"
                   >
                     Get Started →
                   </Link>
                   <Link
                     to="https://github.com/chaos-mesh/chaos-mesh"
-                    className="tw-btn tw-btn-neutral tw-gap-2 dark:tw-glass hover:-tw-translate-y-1"
+                    className="tw-btn tw-btn-neutral tw-gap-2 dark:tw-glass hover:tw-text-white hover:-tw-translate-y-1"
                   >
                     <IconOctocat className="tw-w-4 tw-h-4 tw-fill-white" />
                     GitHub
@@ -114,7 +116,7 @@ function Home() {
         <div className="hero">
           <div className="tw-container tw-mx-auto max-lg:tw-px-4 tw-text-center">
             <h2 className="tw-text-lg">
-              <Translate id="home.whoisusing">Who is Using Chaos Mesh</Translate>
+              <Translate id="home.whoisusing">Users of Chaos Mesh</Translate>
             </h2>
             <div className="max-md:tw-overflow-x-auto dark:tw-invert dark:tw-saturate-0">
               <div className="row max-md:tw-w-[1280px]">
@@ -182,7 +184,7 @@ function Home() {
             <div className="tw-flex tw-justify-center tw-mt-12">
               <Link
                 to="/docs/simulate-pod-chaos-on-kubernetes"
-                className="tw-btn tw-btn-primary tw-gap-2 hover:-tw-translate-y-1"
+                className="tw-btn tw-btn-primary tw-gap-2 hover:tw-text-white hover:-tw-translate-y-1"
               >
                 <IconLibrary className="tw-w-4 tw-h-4 tw-fill-white" />
                 Explore More
@@ -222,7 +224,7 @@ function Home() {
                 </div>
                 <Link
                   to="/docs/create-chaos-mesh-workflow/"
-                  className="tw-btn tw-btn-primary tw-gap-2 hover:-tw-translate-y-1"
+                  className="tw-btn tw-btn-primary tw-gap-2 hover:tw-text-white hover:-tw-translate-y-1"
                 >
                   <IconPlay className="tw-w-4 tw-h-4 tw-fill-white" />
                   Start Creating
@@ -236,45 +238,97 @@ function Home() {
         <div className="hero">
           <div className="tw-container tw-mx-auto max-lg:tw-px-4">
             <div className="tw-flex tw-flex-col lg:tw-flex-row lg:tw-items-center tw-gap-8">
-              <div className={clsx('tw-flex-1 tw-flex tw-items-center tw-h-[640px]')}>
-                <div
-                  className={clsx(
-                    'tw-flex tw-justify-center tw-items-center lg:tw-w-[75%] lg:tw-h-[100%]',
-                    styles.chaosdBg
-                  )}
-                >
+              <div className={clsx('tw-relative tw-flex-1 tw-flex tw-items-center xl:tw-h-[640px]')}>
+                <img className="tw-absolute tw-w-[90%]" src="/img/home/chaosd-bg.svg" />
+                <div className="tw-flex tw-justify-center tw-items-center xl:tw-w-[75%] lg:tw-h-[100%]">
                   <ChaosdFeatures />
                 </div>
               </div>
               <div className="tw-flex-[1.5]">
+                <span className="tw-badge tw-badge-primary">Experimental</span>
                 {/* TODO: add translation. */}
                 <h2 className="tw-text-4xl xl:tw-text-5xl">
-                  Meet <span className={styles.heroTitle}>Chaosd</span>: A Chaos Toolkit for Physical Machines.
+                  Meet
+                  <span className={styles.heroTitle}>Chaosd</span>: A Chaos Toolkit for Physical Machines.
                 </h2>
                 <p className="lg:tw-text-lg tw-font-medium">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                  dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                  aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-                  officia deserunt mollit anim id est laborum.
+                  Even if you are not using Kubernetes, you can still take advantage of the features offered by Chaos
+                  Mesh. One of our experimental tools, Chaosd, is specifically designed to test chaos on physical
+                  machines. Moreover, you can use{' '}
+                  <Link className="tw-underline dark:tw-no-underline" to="/docs/simulate-physical-machine-chaos">
+                    PhysicalMachineChaos
+                  </Link>{' '}
+                  in Chaos Mesh to remotely invoke Chaosd for conducting experiments on physical machines.
                 </p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* <div className="hero">
-          <div className="tw-container tw-mx-auto max-lg:tw-px-4 tw-text-center">
-            <h2 className="tw-text-lg">
+        <div className="hero">
+          <div className="tw-container tw-mx-auto max-lg:tw-px-4">
+            <div className="tw-max-w-[800px] tw-mb-12 tw-mx-auto tw-text-center">
+              {/* TODO: add translation. */}
+              <h2 className="tw-text-4xl xl:tw-text-5xl">
+                Building the Whole Community <span className={styles.heroTitle}>Together</span>.
+              </h2>
+              <p className="lg:tw-text-lg tw-font-medium">
+                <Translate id="home.buildcommunity.1">
+                  Join the community and talk to the maintainers and other users, your suggestions can make Chaos Mesh
+                  even better.
+                </Translate>
+              </p>
+            </div>
+            <div className="tw-grid lg:tw-grid-cols-3 tw-gap-8 tw-mb-12 lg:tw-w-[80%] lg:tw-mx-auto">
+              <Card>
+                <IconGithub className="tw-w-12 tw-h-12 dark:tw-fill-white" />
+                <p>Join our contributors in building the future of Chaos Mesh.</p>
+                <Link
+                  to="https://github.com/chaos-mesh/chaos-mesh"
+                  className="tw-btn tw-normal-case dark:tw-glass dark:hover:tw-text-white"
+                >
+                  Star on GitHub
+                </Link>
+              </Card>
+              <Card>
+                <IconHelp className="tw-w-12 tw-h-12 dark:tw-fill-white" />
+                <p>Experiencing any issues? Don't hesitate to reach out to us for assistance.</p>
+                <div className="tw-flex tw-gap-3">
+                  <Link
+                    to="https://github.com/chaos-mesh/chaos-mesh/issues"
+                    className="tw-btn tw-normal-case dark:tw-glass dark:hover:tw-text-white"
+                  >
+                    Issues
+                  </Link>
+                  <Link
+                    to="https://github.com/chaos-mesh/chaos-mesh/discussions"
+                    className="tw-btn tw-normal-case dark:tw-glass dark:hover:tw-text-white"
+                  >
+                    Discussions
+                  </Link>
+                </div>
+              </Card>
+              <Card>
+                <img className="tw-w-12 tw-h-12 tw-scale-150" src="/img/icons/slack.svg" alt="Slack" />
+                <p>Connect with other users on our Slack channel (#project-chaos-mesh).</p>
+                <Link
+                  to="https://slack.cncf.io"
+                  className="tw-btn tw-normal-case dark:tw-glass dark:hover:tw-text-white"
+                >
+                  Join Slack channel
+                </Link>
+              </Card>
+            </div>
+            <p className="tw-font-medium tw-text-center">
               Chaos Mesh is a{' '}
               <Link className="tw-underline dark:tw-no-underline" to="https://cncf.io/">
                 Cloud Native Computing Foundation
               </Link>{' '}
-              incubating project
-            </h2>
-            <div className="cncf-logo tw-h-16 md:tw-h-24" />
+              incubating project.
+            </p>
+            <div className="cncf-logo tw-h-16" />
           </div>
-        </div> */}
+        </div>
       </main>
     </Layout>
   )

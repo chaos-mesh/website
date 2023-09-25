@@ -212,7 +212,7 @@
     "description": "The ARIA label and placeholder for search button"
   },
   "theme.tags.tagsPageTitle": {
-    "message": "Tags",
+    "message": "标签",
     "description": "The title of the tag list page"
   },
   "home.whoisusing": {
@@ -256,5 +256,11 @@
   },
   "home.failuretypes.1": {
     "message": "Chaos Mesh 起初从分布式系统的角度出发，充分考虑了其可能出现的故障，从而提供更全面、更细粒度的故障类型来帮助用户对网络、磁盘、文件系统、操作系统等进行故障注入。"
+  },
+  "home.buildcommunity": {
+    "message": "共建整个社区"
+  },
+  "home.buildcommunity.1": {
+    "message": "加入社区和维护者及其他用户一起交流，你的建议可以让 Chaos Mesh 变得更好。"
   }
 }
