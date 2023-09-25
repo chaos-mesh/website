@@ -204,31 +204,33 @@ function Home() {
           <div className="tw-container tw-mx-auto max-lg:tw-px-4">
             <div className="tw-flex tw-flex-col lg:tw-flex-row lg:tw-items-center tw-gap-8">
               <div className="tw-flex-1">
-                {/* TODO: add translation. */}
-                <h2 className="tw-text-4xl xl:tw-text-5xl">
-                  Orchestrate complex fault scenarios with <span className={styles.heroTitle}>Workflows</span>.
-                </h2>
-                <p className="lg:tw-text-lg tw-font-medium">
-                  Real-world failures are often not isolated causes.Chaos Mesh has built-in workflows that allow you to
-                  experiment serially or in parallel at will to build walkthroughs that fit the architecture.
-                </p>
-                <div className="tw-flex tw-gap-4 tw-mb-6">
-                  <Card>
-                    <h4 className="text-lg">Suspend</h4>
-                    <p>You can also use the suspend node to simulate a temporary recovery.</p>
-                  </Card>
-                  <Card>
-                    <h4 className="text-lg">Status Check</h4>
-                    <p>You can also use customized status checks to inform the cluster status.</p>
-                  </Card>
+                <div className="xl:tw-w-[90%]">
+                  {/* TODO: add translation. */}
+                  <h2 className="tw-text-4xl xl:tw-text-5xl">
+                    Orchestrate complex fault scenarios with <span className={styles.heroTitle}>Workflows</span>.
+                  </h2>
+                  <p className="lg:tw-text-lg tw-font-medium">
+                    Real-world failures are often not isolated causes.Chaos Mesh has built-in workflows that allow you
+                    to experiment serially or in parallel at will to build walkthroughs that fit the architecture.
+                  </p>
+                  <div className="tw-flex tw-gap-4 tw-mb-6">
+                    <Card>
+                      <h4 className="text-lg">Suspend</h4>
+                      <p>You can also use the suspend node to simulate a temporary recovery.</p>
+                    </Card>
+                    <Card>
+                      <h4 className="text-lg">Status Check</h4>
+                      <p>You can also use customized status checks to inform the cluster status.</p>
+                    </Card>
+                  </div>
+                  <Link
+                    to="/docs/create-chaos-mesh-workflow/"
+                    className="tw-btn tw-btn-primary tw-gap-2 hover:tw-text-white hover:-tw-translate-y-1"
+                  >
+                    <IconPlay className="tw-w-4 tw-h-4 tw-fill-white" />
+                    Start Creating
+                  </Link>
                 </div>
-                <Link
-                  to="/docs/create-chaos-mesh-workflow/"
-                  className="tw-btn tw-btn-primary tw-gap-2 hover:tw-text-white hover:-tw-translate-y-1"
-                >
-                  <IconPlay className="tw-w-4 tw-h-4 tw-fill-white" />
-                  Start Creating
-                </Link>
               </div>
               <div className={clsx('tw-flex-[1.5] tw-rounded-2xl', styles.workflowsImg)} />
             </div>
@@ -239,7 +241,7 @@ function Home() {
           <div className="tw-container tw-mx-auto max-lg:tw-px-4">
             <div className="tw-flex tw-flex-col lg:tw-flex-row lg:tw-items-center tw-gap-8">
               <div className={clsx('tw-relative tw-flex-1 tw-flex tw-items-center xl:tw-h-[640px]')}>
-                <img className="tw-absolute tw-w-[90%]" src="/img/home/chaosd-bg.svg" />
+                <img className="tw-absolute md:max-lg:tw-w-[45%] tw-w-[90%]" src="/img/home/chaosd-bg.svg" />
                 <div className="tw-flex tw-justify-center tw-items-center xl:tw-w-[75%] lg:tw-h-[100%]">
                   <ChaosdFeatures />
                 </div>
