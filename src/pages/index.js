@@ -286,7 +286,7 @@ function Home() {
                 <p>Join our contributors in building the future of Chaos Mesh.</p>
                 <Link
                   to="https://github.com/chaos-mesh/chaos-mesh"
-                  className="tw-btn tw-bg-[#f2f2f2] tw-text-[#1f2937] hover:!tw-bg-[#e6e6e6] tw-normal-case dark:tw-glass dark:hover:!tw-bg-transparent dark:hover:tw-text-white"
+                  className="tw-btn tw-bg-[#f2f2f2] tw-text-[#1f2937] dark:tw-text-[#a6adba] hover:!tw-bg-[#e6e6e6] tw-normal-case dark:tw-glass dark:hover:!tw-bg-transparent dark:hover:tw-text-white"
                 >
                   Star on GitHub
                 </Link>
@@ -297,13 +297,13 @@ function Home() {
                 <div className="tw-flex tw-gap-3">
                   <Link
                     to="https://github.com/chaos-mesh/chaos-mesh/issues"
-                    className="tw-btn tw-bg-[#f2f2f2] tw-text-[#1f2937] hover:!tw-bg-[#e6e6e6] tw-normal-case dark:tw-glass dark:hover:!tw-bg-transparent dark:hover:tw-text-white"
+                    className="tw-btn tw-bg-[#f2f2f2] tw-text-[#1f2937] dark:tw-text-[#a6adba] hover:!tw-bg-[#e6e6e6] tw-normal-case dark:tw-glass dark:hover:!tw-bg-transparent dark:hover:tw-text-white"
                   >
                     Issues
                   </Link>
                   <Link
                     to="https://github.com/chaos-mesh/chaos-mesh/discussions"
-                    className="tw-btn tw-bg-[#f2f2f2] tw-text-[#1f2937] hover:!tw-bg-[#e6e6e6] tw-normal-case dark:tw-glass dark:hover:!tw-bg-transparent dark:hover:tw-text-white"
+                    className="tw-btn tw-bg-[#f2f2f2] tw-text-[#1f2937] dark:tw-text-[#a6adba] hover:!tw-bg-[#e6e6e6] tw-normal-case dark:tw-glass dark:hover:!tw-bg-transparent dark:hover:tw-text-white"
                   >
                     Discussions
                   </Link>
@@ -314,7 +314,7 @@ function Home() {
                 <p>Connect with other users on our Slack channel (#project-chaos-mesh).</p>
                 <Link
                   to="https://slack.cncf.io"
-                  className="tw-btn tw-bg-[#f2f2f2] tw-text-[#1f2937] hover:!tw-bg-[#e6e6e6] tw-normal-case dark:tw-glass dark:hover:!tw-bg-transparent dark:hover:tw-text-white"
+                  className="tw-btn tw-bg-[#f2f2f2] tw-text-[#1f2937] dark:tw-text-[#a6adba] hover:!tw-bg-[#e6e6e6] tw-normal-case dark:tw-glass dark:hover:!tw-bg-transparent dark:hover:tw-text-white"
                 >
                   Join Slack channel
                 </Link>
