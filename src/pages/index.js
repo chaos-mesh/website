@@ -157,7 +157,7 @@ function Home() {
           </div>
         </div>
 
-        <div className="hero tw-relative">
+        <div className="hero">
           <div className="tw-container tw-mx-auto max-lg:tw-px-4">
             <div className="tw-max-w-[800px] tw-mx-auto tw-text-center">
               {/* TODO: add translation. */}
@@ -194,15 +194,14 @@ function Home() {
               <CodeGrid />
             </div>
           </div>
-
-          <div className="tw-absolute tw-left-0 tw-bottom-[-100px] lg:tw-bottom-[-500px] tw-w-full">
-            <img src="/img/home/curve-divider.svg" />
-          </div>
         </div>
 
-        <div className="hero tw-relative tw-z-10 tw-bg-transparent">
+        <div className="hero tw-relative">
+          <div className="tw-absolute tw-top-[-50px] tw-left-0 md:tw-top-[-100px] xl:tw-top-[-200px] tw-w-full">
+            <img src="/img/home/curve-divider.svg" />
+          </div>
           <div className="tw-container tw-mx-auto max-lg:tw-px-4">
-            <div className="tw-flex tw-flex-col lg:tw-flex-row lg:tw-items-center tw-gap-8">
+            <div className="tw-relative tw-flex tw-flex-col lg:tw-flex-row lg:tw-items-center tw-gap-8">
               <div className="tw-flex-1">
                 <div className="xl:tw-w-[90%]">
                   {/* TODO: add translation. */}
@@ -287,7 +286,7 @@ function Home() {
                 <p>Join our contributors in building the future of Chaos Mesh.</p>
                 <Link
                   to="https://github.com/chaos-mesh/chaos-mesh"
-                  className="tw-btn tw-normal-case dark:tw-glass dark:hover:tw-text-white"
+                  className="tw-btn tw-bg-[#f2f2f2] tw-text-[#1f2937] hover:!tw-bg-[#e6e6e6] tw-normal-case dark:tw-glass dark:hover:!tw-bg-transparent dark:hover:tw-text-white"
                 >
                   Star on GitHub
                 </Link>
@@ -298,13 +297,13 @@ function Home() {
                 <div className="tw-flex tw-gap-3">
                   <Link
                     to="https://github.com/chaos-mesh/chaos-mesh/issues"
-                    className="tw-btn tw-normal-case dark:tw-glass dark:hover:tw-text-white"
+                    className="tw-btn tw-bg-[#f2f2f2] tw-text-[#1f2937] hover:!tw-bg-[#e6e6e6] tw-normal-case dark:tw-glass dark:hover:!tw-bg-transparent dark:hover:tw-text-white"
                   >
                     Issues
                   </Link>
                   <Link
                     to="https://github.com/chaos-mesh/chaos-mesh/discussions"
-                    className="tw-btn tw-normal-case dark:tw-glass dark:hover:tw-text-white"
+                    className="tw-btn tw-bg-[#f2f2f2] tw-text-[#1f2937] hover:!tw-bg-[#e6e6e6] tw-normal-case dark:tw-glass dark:hover:!tw-bg-transparent dark:hover:tw-text-white"
                   >
                     Discussions
                   </Link>
@@ -315,7 +314,7 @@ function Home() {
                 <p>Connect with other users on our Slack channel (#project-chaos-mesh).</p>
                 <Link
                   to="https://slack.cncf.io"
-                  className="tw-btn tw-normal-case dark:tw-glass dark:hover:tw-text-white"
+                  className="tw-btn tw-bg-[#f2f2f2] tw-text-[#1f2937] hover:!tw-bg-[#e6e6e6] tw-normal-case dark:tw-glass dark:hover:!tw-bg-transparent dark:hover:tw-text-white"
                 >
                   Join Slack channel
                 </Link>

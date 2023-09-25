@@ -39,7 +39,7 @@ export default function ChaosdFeatures() {
   return (
     <div className="tw-grid tw-grid-cols-3 tw-gap-8 tw-z-10">
       {iconList.map(({ name, Icon }) => (
-        <Card key={name} className="tw-flex tw-bg-base-200">
+        <Card key={name} className="tw-flex tw-bg-[#f2f2f2] dark:tw-bg-black">
           <Icon className="tw-min-w-8 tw-h-8 tw-select-none dark:tw-fill-white" />
         </Card>
       ))}

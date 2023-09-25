@@ -23,6 +23,9 @@ module.exports = {
   projectName: 'chaos-mesh.github.io', // Usually your repo name.
   trailingSlash: true,
   themeConfig: {
+    colorMode: {
+      respectPrefersColorScheme: true,
+    },
     image: '/img/chaos-mesh-social-preview.png',
     algolia: {
       appId: '3BY0S3HQX6',
