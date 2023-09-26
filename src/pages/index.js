@@ -49,7 +49,7 @@ function Home() {
     gsap.from('.scroll-to-display-x', {
       duration: 1,
       opacity: 0,
-      x: 75,
+      x: 0,
       y: 100,
       stagger: 0.25,
       scrollTrigger: {
