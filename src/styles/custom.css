@@ -84,3 +84,11 @@ a.tw-btn:hover {
 .hero {
   @apply tw-py-12;
 }
+
+.codegrid-block.language-yaml {
+  background: unset;
+}
+
+.codegrid-block.language-yaml pre {
+  background: unset;
+}

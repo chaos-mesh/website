@@ -10,10 +10,10 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import React, { useEffect } from 'react'
 
-import IconLibrary from '../../static/img/icons/library.svg'
-import IconOctocat from '../../static/img/icons/octocat.svg'
 import IconGithub from '../../static/img/icons/github.svg'
 import IconHelp from '../../static/img/icons/help.svg'
+import IconLibrary from '../../static/img/icons/library.svg'
+import IconOctocat from '../../static/img/icons/octocat.svg'
 import IconPlay from '../../static/img/icons/play.svg'
 import Card from '../components/Card'
 import ChaosdFeatures from '../components/ChaosdFeatures'
@@ -89,13 +89,13 @@ function Home() {
                 <div className="tw-flex tw-gap-3">
                   <Link
                     to="/docs/production-installation-using-helm"
-                    className="tw-btn tw-btn-primary hover:tw-text-white hover:-tw-translate-y-1"
+                    className="tw-btn tw-btn-primary hover:tw-text-white hover:-tw-translate-y-[3px]"
                   >
                     Get Started →
                   </Link>
                   <Link
                     to="https://github.com/chaos-mesh/chaos-mesh"
-                    className="tw-btn tw-btn-neutral tw-gap-2 dark:tw-glass hover:tw-text-white hover:-tw-translate-y-1"
+                    className="tw-btn tw-btn-neutral tw-gap-2 dark:tw-glass hover:tw-text-white hover:-tw-translate-y-[3px]"
                   >
                     <IconOctocat className="tw-w-4 tw-h-4 tw-fill-white" />
                     GitHub
@@ -107,7 +107,9 @@ function Home() {
                 <h2 className="tw-inline-block tw-text-base lg:tw-text-lg tw-font-semibold tw-rounded-2xl tw-backdrop-blur-sm lg:tw-backdrop-blur">
                   Try it out with the following command 👇
                 </h2>
-                <PickVersion>curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash</PickVersion>
+                <PickVersion className="!tw-mb-0">
+                  curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash
+                </PickVersion>
               </div>
             </div>
           </div>
@@ -184,7 +186,7 @@ function Home() {
             <div className="tw-flex tw-justify-center tw-mt-12">
               <Link
                 to="/docs/simulate-pod-chaos-on-kubernetes"
-                className="tw-btn tw-btn-primary tw-gap-2 hover:tw-text-white hover:-tw-translate-y-1"
+                className="tw-btn tw-btn-primary tw-gap-2 hover:tw-text-white hover:-tw-translate-y-[3px]"
               >
                 <IconLibrary className="tw-w-4 tw-h-4 tw-fill-white" />
                 Explore More
@@ -224,7 +226,7 @@ function Home() {
                   </div>
                   <Link
                     to="/docs/create-chaos-mesh-workflow/"
-                    className="tw-btn tw-btn-primary tw-gap-2 hover:tw-text-white hover:-tw-translate-y-1"
+                    className="tw-btn tw-btn-primary tw-gap-2 hover:tw-text-white hover:-tw-translate-y-[3px]"
                   >
                     <IconPlay className="tw-w-4 tw-h-4 tw-fill-white" />
                     Start Creating
