@@ -251,8 +251,7 @@ function Home() {
                 <span className="tw-badge tw-badge-primary">Experimental</span>
                 {/* TODO: add translation. */}
                 <h2 className="tw-text-4xl xl:tw-text-5xl">
-                  Meet
-                  <span className={styles.heroTitle}>Chaosd</span>: A Chaos Toolkit for Physical Machines.
+                  Meet <span className={styles.heroTitle}>Chaosd</span>: A Chaos Toolkit for Physical Machines.
                 </h2>
                 <p className="lg:tw-text-lg tw-font-medium">
                   Even if you are not using Kubernetes, you can still take advantage of the features offered by Chaos
