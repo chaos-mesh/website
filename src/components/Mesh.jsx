@@ -190,6 +190,11 @@ export default function Mesh() {
       })
 
       function injectChaos() {
+        // Stop in mobile devices.
+        if (!window.matchMedia('(min-width: 768px)').matches) {
+          return
+        }
+
         if (!scaling) {
           curve2 = curve2Range[Math.floor(Math.random() * curve2Range.length)]
           injectedDot = injectedDots[Math.floor(Math.random() * injectedDots.length)]
@@ -287,12 +292,10 @@ export default function Mesh() {
         }
       }
 
-      svgEl.current.addEventListener('click', () => {
-        // Stop in mobile devices.
-        if (window.matchMedia('(min-width: 768px)').matches) {
-          injectChaos()
-        }
-      })
+      svgEl.current.addEventListener('click', injectChaos)
+      setTimeout(() => {
+        injectChaos()
+      }, 1500)
     }, svgEl)
 
     window.gsapCtx = ctx
