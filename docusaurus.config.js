@@ -24,7 +24,7 @@ module.exports = {
   trailingSlash: true,
   themeConfig: {
     colorMode: {
-      respectPrefersColorScheme: true,
+      // respectPrefersColorScheme: true,
     },
     image: '/img/chaos-mesh-social-preview.png',
     algolia: {
