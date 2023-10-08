@@ -14,7 +14,6 @@ import IconGithub from '../../static/img/icons/github.svg'
 import IconHelp from '../../static/img/icons/help.svg'
 import IconLibrary from '../../static/img/icons/library.svg'
 import IconOctocat from '../../static/img/icons/octocat.svg'
-import IconPlay from '../../static/img/icons/play.svg'
 import Card from '../components/Card'
 import ChaosdFeatures from '../components/ChaosdFeatures'
 import CodeGrid from '../components/CodeGrid'
@@ -228,8 +227,7 @@ function Home() {
                     to="/docs/create-chaos-mesh-workflow/"
                     className="tw-btn tw-btn-primary tw-gap-2 hover:tw-text-white hover:-tw-translate-y-[3px]"
                   >
-                    <IconPlay className="tw-w-4 tw-h-4 tw-fill-white" />
-                    Start Creating
+                    Start Creating →
                   </Link>
                 </div>
               </div>
@@ -262,6 +260,12 @@ function Home() {
                   </Link>{' '}
                   in Chaos Mesh to remotely invoke Chaosd for conducting experiments on physical machines.
                 </p>
+                <Link
+                  to="/docs/chaosd-overview/"
+                  className="tw-btn tw-btn-primary tw-gap-2 hover:tw-text-white hover:-tw-translate-y-[3px]"
+                >
+                  Overview →
+                </Link>
               </div>
             </div>
           </div>
