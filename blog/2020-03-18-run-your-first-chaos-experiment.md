@@ -27,7 +27,7 @@ The following clip shows the process of installing Chaos Mesh, deploying web-sho
 
 ![The whole process of the chaos experiment](/img/blog/whole-process-of-chaos-experiment.gif)
 
-<div className="caption-center"> The whole process of the chaos experiment </div>
+<div className="caption"> The whole process of the chaos experiment </div>
 
 Now it's your turn! It's time to get your hands dirty.
 
@@ -150,7 +150,7 @@ To start NetworkChaos, do the following:
 
 ![Using Chaos Mesh to insert delays in web-show](/img/blog/using-chaos-mesh-to-insert-delays-in-web-show.png)
 
-<div className="caption-center"> Using Chaos Mesh to insert delays in web-show </div>
+<div className="caption"> Using Chaos Mesh to insert delays in web-show </div>
 
 Congratulations! You just stirred up a little bit of chaos. If you are intrigued and want to try out more chaos experiments with Chaos Mesh, check out [examples/web-show](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples/web-show).
 
@@ -171,7 +171,7 @@ From the line graph, you can see the network latency level is back to normal.
 
 ![Network latency level is back to normal](/img/blog/network-latency-level-is-back-to-normal.png)
 
-<div className="caption-center"> Network latency level is back to normal </div>
+<div className="caption"> Network latency level is back to normal </div>
 
 ### Delete Kubernetes clusters
 

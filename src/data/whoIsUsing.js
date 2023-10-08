@@ -4,7 +4,7 @@ const whoisUsing = [
     img: 'img/logos/apisix.svg',
     href: 'https://apisix.apache.org/',
     style: {
-      height: '80%',
+      height: '50%',
     },
   },
   {
@@ -42,7 +42,7 @@ const whoisUsing = [
     img: 'img/logos/digitalchina.png',
     href: 'http://www.digitalchina.com/',
     style: {
-      width: '60%',
+      width: '85%',
     },
   },
   {
@@ -60,7 +60,7 @@ const whoisUsing = [
     img: 'img/logos/kingnet.png',
     href: 'https://www.kingnet.com/',
     style: {
-      marginBottom: '1rem',
+      marginBottom: '.5rem',
     },
   },
   {
@@ -77,6 +77,9 @@ const whoisUsing = [
     name: 'NETSTARS',
     img: 'img/logos/netstars.png',
     href: 'https://www.netstars.co.jp/',
+    style: {
+      transform: 'scale(1.25)',
+    },
   },
   {
     name: 'Percona',
@@ -118,7 +121,7 @@ const whoisUsing = [
     img: 'img/logos/sj.png',
     href: 'https://www.sjfood.com/',
     style: {
-      width: '40%',
+      height: '50%',
     },
   },
   {
@@ -131,7 +134,7 @@ const whoisUsing = [
     img: 'img/logos/vald.svg',
     href: 'https://vald.vdaas.org/',
     style: {
-      height: '50%',
+      height: '35%',
     },
   },
   {

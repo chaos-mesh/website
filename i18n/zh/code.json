@@ -40,7 +40,7 @@
     "description": "Pluralized label for \"{readingTime} min read\". Use as much plural forms (separated by \"|\") as your language support (see https://www.unicode.org/cldr/cldr-aux/charts/34/supplemental/language_plural_rules.html)"
   },
   "theme.blog.post.readMore": {
-    "message": "Read More",
+    "message": "阅读更多",
     "description": "The label used in blog post item excerpts to link to full blog posts"
   },
   "theme.blog.sidebar.navAriaLabel": {
@@ -84,11 +84,11 @@
     "description": "The copy button label on code blocks"
   },
   "theme.docs.sidebar.expandButtonTitle": {
-    "message": "Expand sidebar",
+    "message": "展开侧边栏",
     "description": "The ARIA label and title attribute for expand button of doc sidebar"
   },
   "theme.docs.sidebar.expandButtonAriaLabel": {
-    "message": "Expand sidebar",
+    "message": "展开侧边栏",
     "description": "The ARIA label and title attribute for expand button of doc sidebar"
   },
   "theme.docs.paginator.navAriaLabel": {
@@ -104,11 +104,11 @@
     "description": "The label used to navigate to the next doc"
   },
   "theme.docs.sidebar.collapseButtonTitle": {
-    "message": "Collapse sidebar",
+    "message": "折叠侧边栏",
     "description": "The title attribute for collapse button of doc sidebar"
   },
   "theme.docs.sidebar.collapseButtonAriaLabel": {
-    "message": "Collapse sidebar",
+    "message": "折叠侧边栏",
     "description": "The title attribute for collapse button of doc sidebar"
   },
   "theme.docs.tagDocListPageTitle.nDocsTagged": {
@@ -132,7 +132,7 @@
     "description": "The label used to tell the user to check the latest version"
   },
   "theme.docs.versions.latestVersionLinkLabel": {
-    "message": "latest version",
+    "message": "最新版本",
     "description": "The label used for the latest version suggestion link label"
   },
   "theme.common.editThisPage": {
@@ -212,14 +212,17 @@
     "description": "The ARIA label and placeholder for search button"
   },
   "theme.tags.tagsPageTitle": {
-    "message": "Tags",
+    "message": "标签",
     "description": "The title of the tag list page"
   },
-  "siteConfig.tagline": {
-    "message": "强大的混沌工程平台"
+  "home.whoisusing": {
+    "message": "Chaos Mesh 的用户"
   },
-  "home.quickstart": {
-    "message": "快速试用"
+  "home.k8s": {
+    "message": "为 Kubernetes 设计"
+  },
+  "home.k8s.1": {
+    "message": "在 Kubernetes 领域，{crd} 是实现自定义资源的成熟解决方案。 Chaos Mesh 借助 CRD 实现了与 Kubernetes 生态系统的自然融合。"
   },
   "home.easytouse": {
     "message": "易于使用"
@@ -231,36 +234,33 @@
     "message": "无需修改应用的部署逻辑，拥有在生产环境中进行混沌实验的能力。"
   },
   "home.easytouse.3": {
-    "message": "轻松编排混沌实验的行为，用户可以实时观察实验自身的状态并且能够快速地对注入的故障进行回滚。"
+    "message": "通过仪表盘快速创建混沌实验，允许用户实时观察实验的状态并快速回滚任何注入的故障。"
   },
-  "home.easytouse.4": {
-    "message": "提供仪表盘。无需手写实验定义，只需点击几步就可以顺利运行一个混沌实验。"
+  "home.flexiblescope": {
+    "message": "灵活的范围"
   },
-  "home.k8s": {
-    "message": "为 Kubernetes 设计"
+  "home.flexiblescope.1": {
+    "message": "Chaos Mesh 提供了多种过滤规则，允许根据标签、注释等选择注入目标。它们统称为选择器。"
   },
-  "home.k8s.1": {
-    "message": "Chaos Mesh 使用 {crd} 来定义混沌实验。"
+  "home.flexiblescope.2": {
+    "message": "此外，用户还可以设置命名空间白名单，以更大程度地控制实验的“爆炸半径”。"
   },
-  "home.k8s.2": {
-    "message": "在 Kubernetes 领域，CRD 是实现自定义资源的成熟解决方案。CRD 使 Chaos Mesh 与 Kubernetes 生态系统自然相结合。"
+  "home.securityfirst": {
+    "message": "安全至上"
+  },
+  "home.securityfirst.1": {
+    "message": "默认启用基于角色的访问控制（RBAC）以限制恶意操作。用户必须被授予特定权限才能访问仪表板。"
   },
   "home.failuretypes": {
     "message": "多种多样的故障类型"
   },
   "home.failuretypes.1": {
-    "message": "Chaos Mesh 起初从分布式系统的角度出发，充分考虑了分布式系统可能出现的故障，从而提供更加全面、细粒度的故障类型，全方位地帮助用户对网络、磁盘、文件系统、操作系统等进行故障注入。"
+    "message": "Chaos Mesh 起初从分布式系统的角度出发，充分考虑了其可能出现的故障，从而提供更全面、更细粒度的故障类型来帮助用户对网络、磁盘、文件系统、操作系统等进行故障注入。"
   },
-  "home.safe": {
-    "message": "安全可控"
+  "home.buildcommunity": {
+    "message": "共建整个社区"
   },
-  "home.safe.1": {
-    "message": "Chaos Mesh 提供基于角色的访问控制，用户可以根据自己需求创建对应权限的角色，例如游客角色，管理角色等。"
-  },
-  "home.safe.2": {
-    "message": "此外，Chaos Mesh 支持设置 Namespace 白名单和黑名单，用户可以通过此功能保护重要的 Namespace，以此更大程度控制实验的“爆炸半径”。"
-  },
-  "home.whoisusing": {
-    "message": "Chaos Mesh 的用户"
+  "home.buildcommunity.1": {
+    "message": "加入社区和维护者及其他用户一起交流，你的建议可以让 Chaos Mesh 变得更好。"
   }
 }

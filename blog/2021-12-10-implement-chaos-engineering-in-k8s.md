@@ -555,7 +555,7 @@ As shown in the Chaos Mesh workflow below, we need to implement a server that se
 
 ![Chaos Mesh's basic workflow](/img/blog/chaos-mesh-basic-workflow.png)
 
-<p className="caption-center">Chaos Mesh's basic workflow</p>
+<p className="caption">Chaos Mesh's basic workflow</p>
 
 Let's take a look at the example on the Chaos Mesh website:
 
@@ -744,7 +744,7 @@ This example uses the manager. This mode prevents the cache mechanism from repet
 
 ![List request](/img/blog/list-request.png)
 
-<p className="caption-center">List request</p>
+<p className="caption">List request</p>
 
 ### Orchestrate chaos
 
@@ -758,7 +758,7 @@ The following figure shows Chaos Mesh Dashboard. We need to consider what featur
 
 ![Chaos Mesh Dashboard](/img/blog/chaos-mesh-dashboard-k8s.png)
 
-<p className="caption-center">Chaos Mesh Dashboard</p>
+<p className="caption">Chaos Mesh Dashboard</p>
 
 From the Dashboard, we know that the platform may have these features:
 

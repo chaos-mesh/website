@@ -5,127 +5,56 @@
  * and scoped locally.
  */
 
-.heroLogoWrapper {
-  position: relative;
-  left: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 192px;
-  height: 192px;
-  margin-bottom: 1.5rem;
-  background: #fff;
-  border-radius: 48px;
-  transform: translateX(-50%);
-}
-
-@media screen and (max-width: 768px) {
-  .heroLogoWrapper {
-    width: 128px;
-    height: 128px;
-  }
-}
-
-.heroLogo {
-  width: 80%;
-  height: 80%;
+:global(.navbar) {
+  box-shadow: none;
 }
 
 .heroTitle {
-  padding-left: 1.5rem;
+  background: #10a6fa; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #f25c7c, #10a6fa); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #f25c7c,
+    #10a6fa
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
-.feature {
-  margin-bottom: 4.5rem;
-}
-
-.feature:last-child {
-  margin-bottom: 0;
-}
-
-@media screen and (max-width: 768px) {
-  .feature {
-    margin-bottom: 1.5rem;
-  }
-}
-
-.featureReverse {
-  flex-direction: row-reverse;
-}
-
-.featureImage {
-  height: 256px;
-}
-
-@media screen and (max-width: 768px) {
-  .featureImage {
-    height: 192px;
-    margin-bottom: 1.5rem;
-  }
-}
-
-.featureContent {
-  display: flex !important;
-  align-items: center;
-}
-
-.whiteboard {
-  margin-top: 3rem;
-}
-
-[data-theme='dark'] .whiteboard {
-  background: #eee;
-  border-radius: 8px;
-}
-
-@media screen and (max-width: 768px) {
-  .whiteboard {
-    width: 80%;
-    margin: 3rem auto 0;
-  }
-}
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 767px) {
   .whiteboardCol {
-    --ifm-col-width: calc(6 / 12 * 100%) !important;
-
-    flex: 0 0 var(--ifm-col-width) !important;
-    max-width: var(--ifm-col-width) !important;
+    --ifm-col-width: calc(1 / 12 * 100%) !important;
   }
 }
 
-@media (min-width: 769px) and (max-width: 1023px) {
+@media (min-width: 768px) and (max-width: 1023px) {
   .whiteboardCol {
-    --ifm-col-width: calc(4 / 12 * 100%) !important;
-
-    flex: 0 0 var(--ifm-col-width) !important;
-    max-width: var(--ifm-col-width) !important;
+    --ifm-col-width: calc(2 / 12 * 100%) !important;
   }
 }
 
-.logoWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 150px;
+.chaosCategory {
+  mask-image: linear-gradient(to top, transparent 1%, #fff 60%, #000 100%);
 }
 
-.logoWrapper img {
-  width: 75%;
-}
-
-@media screen and (max-width: 768px) {
-  .logoWrapper {
-    height: 100px;
+@media (min-width: 1024px) {
+  .workflowsImg {
+    height: 768px;
+    background: url(/img/home/workflows-min.png) top left / cover no-repeat;
+    border: 1px solid hsl(var(--bc) / 0.15);
+    box-shadow: 75px 75px 75px -25px rgba(0, 0, 0, 0.3);
+    transform: perspective(750px) translate3d(0px, 0px, -250px) rotateX(5deg) rotateY(-5deg);
+    transition: 0.3s ease-in-out transform;
   }
-}
 
-.cncfLogo {
-  height: 96px;
-}
+  .workflowsImg:hover {
+    transform: translate3d(0px, 0px, -250px);
+  }
 
-@media screen and (max-width: 768px) {
-  .cncfLogo {
-    height: 64px;
+  [data-theme='dark'] .workflowsImg {
+    background-image: url(/img/home/workflows-dark-min.png);
+    border: 1px solid hsl(var(--bc) / 0.6);
+    box-shadow: 75px 75px 75px -25px rgba(255, 255, 255, 0.1);
   }
 }
