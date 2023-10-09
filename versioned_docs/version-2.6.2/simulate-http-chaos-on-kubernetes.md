@@ -1,5 +1,5 @@
 ---
-title: Simulate HTTP faults
+title: Simulate HTTP Faults
 ---
 
 This document describes how to simulate HTTP faults by creating HTTPChaos experiments in Chaos Mesh.
