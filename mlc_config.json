@@ -8,6 +8,9 @@
     },
     {
       "pattern": "^http://localhost"
+    },
+    {
+      "pattern": "^https://twitter.com"
     }
   ],
   "aliveStatusCodes": [200, 403, 500, 502, 503]
