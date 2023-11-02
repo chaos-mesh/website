@@ -12,11 +12,11 @@ const whoisUsing = [
     img: 'img/logos/authzed.svg',
     href: 'https://authzed.com/',
   },
-  {
-    name: 'ByteDance',
-    img: 'img/logos/bytedance.svg',
-    href: 'https://www.bytedance.com/',
-  },
+  // {
+  //   name: 'ByteDance',
+  //   img: 'img/logos/bytedance.svg',
+  //   href: 'https://www.bytedance.com/',
+  // },
   {
     name: 'Celo',
     img: 'img/logos/celo.png',
