@@ -13,11 +13,6 @@ const whoisUsing = [
     href: 'https://authzed.com/',
   },
   {
-    name: 'ByteDance',
-    img: 'img/logos/bytedance.svg',
-    href: 'https://www.bytedance.com/',
-  },
-  {
     name: 'Celo',
     img: 'img/logos/celo.png',
     href: 'https://celo.org/',
