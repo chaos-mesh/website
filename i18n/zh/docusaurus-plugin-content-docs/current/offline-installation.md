@@ -25,9 +25,7 @@ import QuickRun from './common/quick-run.md'
 
 在有外网连接的机器上，设置 Chaos Mesh 的版本号为环境变量：
 
-<PickVersion>
-export CHAOS_MESH_VERSION=latest
-</PickVersion>
+<PickVersion content="export CHAOS_MESH_VERSION=latest" />
 
 ### 下载 Chaos Mesh 镜像
 
@@ -94,10 +92,7 @@ docker load < image-chaos-dashboard.tar
 
 设置 Chaos Mesh 版本和 Registry 地址为环境变量：
 
-<PickVersion className="language-bash">
-export CHAOS_MESH_VERSION=latest;
-export DOCKER_REGISTRY=localhost:5000
-</PickVersion>
+<PickVersion content="export CHAOS_MESH_VERSION=latest; export DOCKER_REGISTRY=localhost:5000" />
 
 标记镜像使其指向 Registry：
 

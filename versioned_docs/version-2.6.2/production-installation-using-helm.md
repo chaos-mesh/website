@@ -167,7 +167,7 @@ If you have upgraded Chaos Mesh in a non-Docker environment, you will need to ad
 
 To modify the configuration, set different values according to your need. For example, execute the following command to upgrade and uninstall `chaos-dashboard`:
 
-<PickHelmVersion className="language-bash">{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version latest --set dashboard.create=false`}</PickHelmVersion>
+<PickHelmVersion>{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version latest --set dashboard.create=false`}</PickHelmVersion>
 
 :::note
 

@@ -2,7 +2,6 @@ import BrowserOnly from '@docusaurus/BrowserOnly'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import { usePluginData } from '@docusaurus/useGlobalData'
 import CodeBlock from '@theme/CodeBlock'
-import React from 'react'
 
 /**
  *
@@ -35,13 +34,17 @@ function versionToGitHubRef(version) {
 
 const PickVersion = ({
   children,
-  // replaced represent the string would be replaced in the original content
+  // `content` will override the children.
+  // It's used to prevent https://github.com/micromark/micromark-extension-mdxjs-esm#could-not-parse-importexports-with-acorn errors.
+  content,
+  // `replaced` represent the string would be replaced in the original content.
   replaced = 'latest',
-  // when `isArchive` is true, it would be replaced as patterns like `refs/heads/master` or `refs/tags/vX.Y.Z`
-  // when `isArchive` is false, it would be replaced with `vX.Y.Z`
+  // When `isArchive` is true, it would be replaced as patterns like `refs/heads/master` or `refs/tags/vX.Y.Z`.
+  // When `isArchive` is false, it would be replaced with `vX.Y.Z`.
   isArchive = false,
   className = 'language-bash',
 }) => {
+  const _content = content || children
   const { siteConfig } = useDocusaurusContext()
   const { versions } = usePluginData('docusaurus-plugin-content-docs')
 
@@ -50,10 +53,10 @@ const PickVersion = ({
       {() => {
         const version = usePickVersion(siteConfig, versions)
         const rendered = isArchive
-          ? children.replace(replaced, versionToGitHubRef(version))
+          ? _content.replace(replaced, versionToGitHubRef(version))
           : version === 'latest'
-          ? children
-          : children.replace(replaced, 'v' + version)
+          ? _content
+          : _content.replace(replaced, 'v' + version)
 
         return <CodeBlock className={className}>{rendered}</CodeBlock>
       }}

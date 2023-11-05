@@ -27,9 +27,7 @@ Before you install Chaos Mesh offline, you need to download all Chaos Mesh image
 
 Set the version number of Chaos Mesh as the environment variable on the machine with external network connection:
 
-<PickVersion>
-export CHAOS_MESH_VERSION=latest
-</PickVersion>
+<PickVersion content="export CHAOS_MESH_VERSION=latest" />
 
 ### Download Chaos Mesh images
 
@@ -96,9 +94,7 @@ Before pushing images to Registry, make sure that Registry has been deployed in 
 
 Set the Chaos Mesh version and the Registry address as the environment variable:
 
-<PickVersion className="language-bash">
-export CHAOS_MESH_VERSION=latest; export DOCKER_REGISTRY=localhost:5000
-</PickVersion>
+<PickVersion content="export CHAOS_MESH_VERSION=latest; export DOCKER_REGISTRY=localhost:5000" />
 
 Mark the images so that the images point to the Registry:
 

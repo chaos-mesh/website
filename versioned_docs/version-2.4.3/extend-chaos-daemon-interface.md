@@ -210,7 +210,7 @@ To verify the experiment, perform the following steps.
 
 2. Update Chaos Mesh:
 
-   <PickHelmVersion className="language-bash">{`helm upgrade chaos-mesh helm/chaos-mesh --namespace=chaos-mesh --version latest`}</PickHelmVersion>
+   <PickHelmVersion>{`helm upgrade chaos-mesh helm/chaos-mesh --namespace=chaos-mesh --version latest`}</PickHelmVersion>
 
 3. Deploy the target Pod for testing. Skip this step if you have already deployed this Pod:
 

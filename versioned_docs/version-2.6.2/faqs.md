@@ -22,7 +22,7 @@ If everything is in order, maybe you can use the `hostNetwork` parameter to fix 
 
 <PickHelmVersion>{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n chaos-mesh --version latest --set chaosDaemon.hostNetwork=true`}</PickHelmVersion>
 
-Reference: <https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/troubleshooting-kubeadm/#hostport-services-do-not-work>
+Reference: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/troubleshooting-kubeadm/#hostport-services-do-not-work
 
 ### Q: The default administrator Google Cloud user account is forbidden to create chaos experiments. How to fix it?
 

@@ -21,7 +21,7 @@ This document describes how to install the Data Source plugin locally in Grafana
 
 As an alternative, you can also install the Data Source plugin locally in Grafana by following these steps:
 
-1. Download the plugin zip package with the following command, or visit <https://github.com/chaos-mesh/datasource/releases> to download the package:
+1. Download the plugin zip package with the following command, or visit https://github.com/chaos-mesh/datasource/releases to download the package:
 
    ```shell
    curl -LO https://github.com/chaos-mesh/datasource/releases/download/v2.2.3/chaosmeshorg-datasource-2.2.3.zip
@@ -35,7 +35,7 @@ As an alternative, you can also install the Data Source plugin locally in Grafan
 
    :::tip
 
-   To find the plugin directory, refer to <https://grafana.com/docs/grafana/latest/plugins/installation/#install-a-packaged-plugin>.
+   To find the plugin directory, refer to https://grafana.com/docs/grafana/latest/plugins/installation/#install-a-packaged-plugin.
 
    :::
 
@@ -48,7 +48,7 @@ As an alternative, you can also install the Data Source plugin locally in Grafan
 
    :::tip
 
-   To find the configuration file, refer to <https://grafana.com/docs/grafana/latest/administration/configuration/#config-file-locations>.
+   To find the configuration file, refer to https://grafana.com/docs/grafana/latest/administration/configuration/#config-file-locations.
 
    :::
 

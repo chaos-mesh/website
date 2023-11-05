@@ -42,13 +42,13 @@ helm show values chaos-mesh/chaos-mesh --version 2.2.0 > values.yaml
 
 ### 第 3 步：更新 CRD
 
-如果你的 Kubernetes 版本 >= 1.16，你可以使用以下命令更新 Chaos Mesh CRD：
+如果你的 `Kubernetes >= 1.16`，你可以使用以下命令更新 Chaos Mesh CRD：
 
 ```bash
 kubectl replace -f https://mirrors.chaos-mesh.org/v2.2.0/crd.yaml
 ```
 
-如果你的 Kubernetes 版本 <= 1.15，你可以使用以下命令更新 Chaos Mesh CRD：
+如果你的 `Kubernetes <= 1.15`，你可以使用以下命令更新 Chaos Mesh CRD：
 
 ```bash
 kubectl replace -f https://mirrors.chaos-mesh.org/v2.2.0/crd-v1beta1.yaml

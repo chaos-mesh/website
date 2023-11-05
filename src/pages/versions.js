@@ -1,7 +1,6 @@
 import Link from '@docusaurus/Link'
 import Layout from '@theme/Layout'
 import clsx from 'clsx'
-import React from 'react'
 
 import { archivedVersions, stableVersions } from '../data/versions'
 import styles from './versions.module.css'

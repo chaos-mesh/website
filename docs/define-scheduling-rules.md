@@ -91,7 +91,7 @@ The `schedule` field is used to specify the time when an experiment is to be run
 # * * * * * <command to execute>
 ```
 
-> This diagram is taken from <https://en.wikipedia.org/wiki/Cron>.
+> This diagram is taken from https://en.wikipedia.org/wiki/Cron.
 
 Chaos Mesh uses [robfig/cron/v3](https://pkg.go.dev/github.com/robfig/cron/v3) to transform the `schedule` field into a cron expression internally.
 
@@ -113,7 +113,7 @@ In addition to regular syntax, it also has several pre-defined schedules. You ma
 | @daily (or @midnight)  | Run once a day, midnight                   | 0 0 \* \* \*  |
 | @hourly                | Run once an hour, beginning of hour        | 0 \* \* \* \* |
 
-> This table is taken from <https://pkg.go.dev/github.com/robfig/cron/v3#hdr-Predefined_schedules>.
+> This table is taken from https://pkg.go.dev/github.com/robfig/cron/v3#hdr-Predefined_schedules.
 
 #### Intervals
 
@@ -127,7 +127,7 @@ For example, `@every 1h30m10s` would indicate a schedule that activates after 1 
 
 :::info
 
-The content of `Intervals` is taken from <https://pkg.go.dev/github.com/robfig/cron/v3#hdr-Intervals>. You can refer to the official documentation for more information.
+The content of `Intervals` is taken from https://pkg.go.dev/github.com/robfig/cron/v3#hdr-Intervals. You can refer to the official documentation for more information.
 
 :::
 

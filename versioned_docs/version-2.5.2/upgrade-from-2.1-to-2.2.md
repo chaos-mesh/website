@@ -42,13 +42,13 @@ For more information about the detailed description, see [README](https://github
 
 ### Step 3: Update the CRD
 
-For Kubernetes version >= 1.16, you can apply the latest CRD by executing the following command:
+For `Kubernetes >= 1.16`, you can apply the latest CRD by executing the following command:
 
 ```bash
 kubectl replace -f https://mirrors.chaos-mesh.org/v2.2.0/crd.yaml
 ```
 
-For Kubernetes version <= 1.15, you can apply the latest CRD by executing the following command:
+For `Kubernetes <= 1.15`, you can apply the latest CRD by executing the following command:
 
 ```bash
 kubectl replace -f https://mirrors.chaos-mesh.org/v2.2.0/crd-v1beta1.yaml

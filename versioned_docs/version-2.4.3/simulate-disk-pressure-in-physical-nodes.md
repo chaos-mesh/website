@@ -71,7 +71,7 @@ Global Flags:
 | :-- | :-- | :-- | :-- |
 | `path` | p | Specifies the file path to read the data. If this parameter is not specified, or the parameter value is set to an empty string, Chaosd reads from the virtual disk files mounted in the "/" directory. Depending on the permissions to read the files, you might be required to run this program using certain permissions. | type: string; default: `""` |
 | `process-num` | n | Specifies the number of concurrently running [dd](https://man7.org/linux/man-pages/man1/dd.1.html) programs to be used. | type: uint8; default: `1`; range: `1` to `255` |
-| `size` | s | Specifies the volume of data to be read. It is the total size of data that <0>dd</0> reads. | type: string; default: `""`; **required**; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. |
+| `size` | s | Specifies the volume of data to be read. It is the total size of data that dd reads. | type: string; default: `""`; **required**; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. |
 
 #### Example for simulating disk read load
 
@@ -126,7 +126,7 @@ Global Flags:
 | :-- | :-- | :-- | :-- |
 | `path` | p | Specifies the file path to write the data. If this parameter is not specified, or the parameter value is set to an empty string, a temporary file will be created in the program execution directory. Depending on the permissions to write the files, you might be required to run this program using certain permissions. | type: string; default: `""` |
 | `process-num` | n | Specifies the number of concurrently running [dd](https://man7.org/linux/man-pages/man1/dd.1.html) programs to be used. | type: uint8; default: `1`; range: `1` to `255` |
-| `size` | s | Specifies the volume of data to be written. It is the total size of data that <0>dd</0> writes. | type: string; default: `""`; **required**; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. |
+| `size` | s | Specifies the volume of data to be written. It is the total size of data that dd writes. | type: string; default: `""`; **required**; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. |
 
 #### Example for simulating disk write load
 
@@ -215,7 +215,7 @@ Simulating disk read load is a one-time operation, so the experiment does not ne
 | `action` | Actions of the experiment | Set to `"read-payload"` |
 | `path` | Specifies the file path to read the data. If this parameter is not specified, or the parameter value is set to an empty string, Chaosd reads from the virtual disk files mounted in the "/" directory. Depending on the permissions to read the files, you might be required to run this program using certain permissions. | type: string; default: `"""` |
 | `payload-process-num` | Specifies the number of concurrently running [dd](https://man7.org/linux/man-pages/man1/dd.1.html) programs to be used. | type: uint8; default: `1`; range: `1` to `255` |
-| `size` | Specifies the volume of data to be read. It is the total size of data that <0>dd</0> reads. | type: string; default: `""`; **required**; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. |
+| `size` | Specifies the volume of data to be read. It is the total size of data that dd reads. | type: string; default: `""`; **required**; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. |
 
 #### Example for simulating disk read load using the service mode
 
@@ -238,7 +238,7 @@ The result is as follows:
 | `action` | Actions of the experiment | Set to `"write-payload"` |
 | `path` | Specifies the file path to write the data. If this parameter is not specified, or the parameter value is set to an empty string, a temporary file will be created in the program execution directory. Depending on the permissions to write the files, you might be required to run this program using certain permissions. | type: string; default: `""` |
 | `payload-process-num` | Specifies the number of concurrently running [dd](https://man7.org/linux/man-pages/man1/dd.1.html) programs to be used. | type: uint8; default: `1`; range: `1` to `255` |
-| `size` | Specifies the volume of data to be written. It is the total size of data that <0>dd</0> writes. | type: string; default: `""`; **required**; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. |
+| `size` | Specifies the volume of data to be written. It is the total size of data that dd writes. | type: string; default: `""`; **required**; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. |
 
 #### Example for simulating disk write load using the service mode
 

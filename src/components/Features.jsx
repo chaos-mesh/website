@@ -2,7 +2,7 @@ import Link from '@docusaurus/Link'
 import Translate from '@docusaurus/Translate'
 import useBaseUrl from '@docusaurus/useBaseUrl'
 import clsx from 'clsx'
-import React from 'react'
+
 import Card from './Card'
 
 function Feature({ imgUrl, title, description, className, imageWidth }) {

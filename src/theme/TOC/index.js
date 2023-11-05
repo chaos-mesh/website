@@ -1,7 +1,6 @@
 import BrowserOnly from '@docusaurus/BrowserOnly'
 import { useDoc } from '@docusaurus/theme-common/internal'
 import TOC from '@theme-original/TOC'
-import React from 'react'
 
 export default function TOCWrapper(props) {
   return (

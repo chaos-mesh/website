@@ -81,7 +81,7 @@ Cloud native has been in the DNA of Chaos Mesh since the very beginning. Joining
 
 :::note
 
-2022-10-24: Because of <https://www.oreilly.com/online-learning/leveraging-katacoda-technology.html>, and refer to [#356](https://github.com/chaos-mesh/website/pull/356), the interactive tutorial is temporarily unavailable.
+2022-10-24: Because of https://www.oreilly.com/online-learning/leveraging-katacoda-technology.html, and refer to [#356](https://github.com/chaos-mesh/website/pull/356), the interactive tutorial is temporarily unavailable.
 
 :::
 

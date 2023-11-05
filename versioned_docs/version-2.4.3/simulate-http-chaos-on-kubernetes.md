@@ -136,7 +136,7 @@ Common fields are meaningful when the `target` of fault injection is `Request` o
 | `replace.body` | []byte | Specifies request body or response body to replace the fault (Base64 encoded). |  | no | eyJmb28iOiAiYmFyIn0K |
 | `patch.headers` | [][]string | Specifies the attached key pair of the request headers or response headers with patch faults. |  | no | - [Set-Cookie, one cookie] |
 | `patch.body.type` | string | Specifies the type of patch faults of the request body or response body. Currently, it only supports [`JSON`](https://tools.ietf.org/html/rfc7396). |  | no | JSON |
-| `patch.body.value` | string | Specifies the fault of the request body or response body with patch faults. |  | no | "{"foo": "bar"}" |
+| `patch.body.value` | string | Specifies the fault of the request body or response body with patch faults. |  | no | `{"foo": "bar"}` |
 | `duration` | string | Specifies the duration of a specific experiment. |  | yes | 30s |
 | `scheduler` | string | Specifies the scheduling rules for the time of a specific experiment. |  | no | 5 \* \* \* \* |
 

@@ -135,7 +135,7 @@ Chaos Mesh 也支持使用 YAML 配置文件创建 HTTPChaos 实验。在 YAML �
 | `replace.body` | []byte | 指定请求体或响应体替换故障的内容（base64 编码） |  | 否 | eyJmb28iOiAiYmFyIn0K |
 | `patch.headers` | [][]string | 指定请求头或响应头附加故障中附加的键值对 |  | 否 | - [Set-Cookie, one cookie] |
 | `patch.body.type` | string | 指定请求体或响应体附加故障的类型，目前只支持 [`JSON`](https://tools.ietf.org/html/rfc7396) |  | 否 | JSON |
-| `patch.body.value` | string | 指定请求体或响应体附加故障的故障内容 |  | 否 | {"foo": "bar"} |
+| `patch.body.value` | string | 指定请求体或响应体附加故障的故障内容 |  | 否 | `{"foo": "bar"}` |
 | `duration` | string | 指定具体实验的持续时间 |  | 是 | 30s |
 | `scheduler` | string | 指定具体实验的运行时间调度规则 |  | 否 | 5 \* \* \* \* |
 

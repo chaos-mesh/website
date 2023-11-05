@@ -32,7 +32,7 @@ Please ensure that the Kubernetes cluster is deployed in the environment before 
 
 To install Chaos Mesh in a test environment, run the following script:
 
-<PickVersion className="language-bash">
+<PickVersion>
 curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash
 </PickVersion>
 
@@ -40,25 +40,25 @@ curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash
 
 - If the current environment is [kind](https://kind.sigs.k8s.io/), add the `--local kind` parameter at the end of the script.
 
-  <PickVersion className="language-bash">
+  <PickVersion>
   curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --local kind
   </PickVersion>
 
   If you want to specify a `kind` version, add the `--kind-version xx` parameter at the end of the script, for example:
 
-  <PickVersion className="language-bash">
+  <PickVersion>
   curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --local kind --kind-version v0.10.0
   </PickVersion>
 
 - If the current environment is [K3s](https://k3s.io/), add the `--k3s` parameter at the end of the script.
 
-  <PickVersion className="language-bash">
+  <PickVersion>
   curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --k3s
   </PickVersion>
 
 - If the current environment is [Microk8s](https://microk8s.io/), add the `--microk8s` parameter at the end of the script.
 
-  <PickVersion className="language-bash">
+  <PickVersion>
   curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --microk8s
   </PickVersion>
 
@@ -80,7 +80,7 @@ For more installation details, refer to the source code of the [`install.sh`](ht
 
 To uninstall Chaos Mesh, execute the following command:
 
-<PickVersion className="language-bash">
+<PickVersion>
 curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --template | kubectl delete -f -
 </PickVersion>
 

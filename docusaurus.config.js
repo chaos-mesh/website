@@ -1,7 +1,31 @@
-const vsLightTheme = require('prism-react-renderer/themes/vsLight')
-const vsDarkTheme = require('prism-react-renderer/themes/vsDark')
+// @ts-check
+// `@type` JSDoc annotations allow editor autocompletion and type checking
+// (when paired with `@ts-check`).
+// There are various equivalent ways to declare your Docusaurus config.
+// See: https://docusaurus.io/docs/api/docusaurus-config
 
-module.exports = {
+import { themes as prismThemes } from 'prism-react-renderer'
+
+/** @type {import('@docusaurus/types').Config} */
+const config = {
+  title: 'Chaos Mesh',
+  tagline: 'A Powerful Chaos Engineering Platform for Kubernetes',
+  favicon: '/img/favicon.ico',
+
+  // Set the production url of your site here
+  url: 'https://chaos-mesh.org',
+  // Set the /<baseUrl>/ pathname under which your site is served
+  // For GitHub pages deployment, it is often '/<projectName>/'
+  baseUrl: '/',
+
+  // GitHub pages deployment config.
+  // If you aren't using GitHub pages, you don't need these.
+  organizationName: 'chaos-mesh', // Usually your GitHub org/user name.
+  projectName: 'chaos-mesh.github.io', // Usually your repo name.
+
+  onBrokenLinks: 'warn',
+  trailingSlash: true,
+
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'zh'],
@@ -14,14 +38,37 @@ module.exports = {
       },
     },
   },
-  title: 'Chaos Mesh',
-  tagline: 'A Powerful Chaos Engineering Platform for Kubernetes',
-  url: 'https://chaos-mesh.org',
-  baseUrl: '/',
-  favicon: '/img/favicon.ico',
-  organizationName: 'chaos-mesh', // Usually your GitHub org/user name.
-  projectName: 'chaos-mesh.github.io', // Usually your repo name.
-  trailingSlash: true,
+
+  presets: [
+    [
+      'classic',
+      /** @type {import('@docusaurus/preset-classic').Options} */
+      {
+        googleAnalytics: {
+          trackingID: 'UA-90760217-2',
+        },
+        docs: {
+          sidebarPath: './sidebars.js',
+          // Please change this to your repo.
+          // Remove this to remove the "edit this page" links.
+          editUrl: 'https://github.com/chaos-mesh/website/edit/master/',
+          editLocalizedFiles: true,
+        },
+        blog: {
+          showReadingTime: true,
+          // Please change this to your repo.
+          // Remove this to remove the "edit this page" links.
+          editUrl: 'https://github.com/chaos-mesh/website/edit/master/',
+          editLocalizedFiles: true,
+        },
+        theme: {
+          customCss: './src/styles/custom.css',
+        },
+      },
+    ],
+  ],
+
+  /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
   themeConfig: {
     colorMode: {
       respectPrefersColorScheme: true,
@@ -147,11 +194,10 @@ module.exports = {
       `,
     },
     prism: {
-      darkTheme: require('prism-react-renderer/themes/vsDark'),
       theme: {
-        plain: vsLightTheme.plain,
+        plain: prismThemes.vsLight.plain,
         styles: [
-          ...vsLightTheme.styles,
+          ...prismThemes.vsLight.styles,
           {
             types: ['function', 'keyword'],
             style: {
@@ -161,9 +207,9 @@ module.exports = {
         ],
       },
       darkTheme: {
-        plain: vsDarkTheme.plain,
+        plain: prismThemes.vsDark.plain,
         styles: [
-          ...vsDarkTheme.styles,
+          ...prismThemes.vsDark.styles,
           {
             types: ['function', 'keyword'],
             style: {
@@ -175,31 +221,8 @@ module.exports = {
       additionalLanguages: ['bash'],
     },
   },
-  onBrokenLinks: 'warn',
-  presets: [
-    [
-      '@docusaurus/preset-classic',
-      {
-        googleAnalytics: {
-          trackingID: 'UA-90760217-2',
-        },
-        docs: {
-          sidebarPath: require.resolve('./sidebars.js'),
-          // Please change this to your repo.
-          editUrl: 'https://github.com/chaos-mesh/website/edit/master/',
-          editLocalizedFiles: true,
-        },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          editUrl: 'https://github.com/chaos-mesh/website/edit/master/',
-          editLocalizedFiles: true,
-        },
-        theme: {
-          customCss: require.resolve('./src/styles/custom.css'),
-        },
-      },
-    ],
-  ],
+
   plugins: ['./docusaurus-tailwind-v3'],
 }
+
+export default config

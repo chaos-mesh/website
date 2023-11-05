@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import React from 'react'
+
 
 export default function Card({ children, className, ...props }) {
   return (

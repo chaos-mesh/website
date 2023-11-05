@@ -32,7 +32,7 @@ import QuickRun from './common/quick-run.md'
 
 要在试用环境中安装 Chaos Mesh，请运行以下脚本：
 
-<PickVersion className="language-bash">
+<PickVersion>
 curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash
 </PickVersion>
 
@@ -40,25 +40,25 @@ curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash
 
 - 如果当前环境为 [kind](https://kind.sigs.k8s.io/)，请在脚本后添加 `--local kind` 参数。
 
-  <PickVersion className="language-bash">
+  <PickVersion>
   curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --local kind
   </PickVersion>
 
   若需要指定 kind 版本，请在脚本后添加 `--kind-version xxx` 参数，如：
 
-  <PickVersion className="language-bash">
+  <PickVersion>
   curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --local kind --kind-version v0.10.0
   </PickVersion>
 
 - 如果当前环境为 [K3s](https://k3s.io/)，请在脚本后添加 `--k3s` 参数。
 
-  <PickVersion className="language-bash">
+  <PickVersion>
   curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --k3s
   </PickVersion>
 
 - 如果当前环境为 [Microk8s](https://microk8s.io/)，请在脚本后添加 `--microk8s` 参数。
 
-  <PickVersion className="language-bash">
+  <PickVersion>
   curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --microk8s
   </PickVersion>
 
@@ -80,7 +80,7 @@ curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash
 
 如要卸载 Chaos Mesh，请执行以下命令：
 
-<PickVersion className="language-bash">
+<PickVersion>
 curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --template | kubectl delete -f -
 </PickVersion>
 
