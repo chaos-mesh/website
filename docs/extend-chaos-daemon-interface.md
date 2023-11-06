@@ -177,9 +177,7 @@ Now you can verify the output of `HelloWorldChaos`:
 
 2. Update Chaos Mesh:
 
-   <PickHelmVersion>
-   helm upgrade chaos-mesh helm/chaos-mesh -n=chaos-mesh --set controllerManager.leaderElection.enabled=false,dashboard.securityMode=false
-   </PickHelmVersion>
+   <PickHelmVersion>{`helm upgrade chaos-mesh helm/chaos-mesh -n=chaos-mesh --set controllerManager.leaderElection.enabled=false,dashboard.securityMode=false`}</PickHelmVersion>
 
 3. Deploy a Pod for testing:
 

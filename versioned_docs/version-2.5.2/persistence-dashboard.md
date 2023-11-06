@@ -53,7 +53,7 @@ If Chaos Dashboard component restarts without PV, the data of Chaos Dashboard wi
 Chaos Dashboard supports MySQL 5.6 and higher versions as the database engine. The below example demonstrates MySQL database configuration. For details about connection string configuration, refer to the [MySQL-Driver for Go](https://github.com/go-sql-driver/mysql#dsn-data-source-name).
 
 <PickHelmVersion>
-helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version latest --set dashboard.env.DATABASE_DRIVER=mysql --set dashboard.env.DATABASE_DATASOURCE=root:password@tcp(1.2.3.4:3306)/chaos-mesh?parseTime=true
+{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version latest --set dashboard.env.DATABASE_DRIVER=mysql --set dashboard.env.DATABASE_DATASOURCE=root:password@tcp(1.2.3.4:3306)/chaos-mesh?parseTime=true`}
 </PickHelmVersion>
 
 ## PostgreSQL
@@ -61,7 +61,7 @@ helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version latest --s
 Chaos Dashboard supports PostgreSQL 9.6 and higher versions as the database engine. The below example demonstrates PostgreSQL database configuration. For details about connection string configuration, refer to [libpq connect](https://www.postgresql.org/docs/current/static/libpq-connect.html#LIBPQ-CONNSTRING).
 
 <PickHelmVersion>
-helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version latest --set dashboard.env.DATABASE_DRIVER=postgres --set dashboard.env.DATABASE_DATASOURCE=postgres://root:password@1.2.3.4:5432/postgres?sslmode=disable
+{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version latest --set dashboard.env.DATABASE_DRIVER=postgres --set dashboard.env.DATABASE_DATASOURCE=postgres://root:password@1.2.3.4:5432/postgres?sslmode=disable`}
 </PickHelmVersion>
 
 ## Set TTL (Time To Live) for Chaos Dashboard data
@@ -69,5 +69,5 @@ helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version latest --s
 Chaos Dashboard supports setting the expiration time of Chaos Dashboard data. The default `Event` related data expires by `168h`, and the `Experiment` related data defaults to `336h`. If you need to modify it, you can set `dashboard.env.TTL_EVENT` and `dashboard.env.TTL_EXPERIMENT` parameters, like:
 
 <PickHelmVersion>
-helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version latest --set dashboard.env.TTL_EVENT=168h --set dashboard.env.TTL_EXPERIMENT=336h
+{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version latest --set dashboard.env.TTL_EVENT=168h --set dashboard.env.TTL_EXPERIMENT=336h`}
 </PickHelmVersion>

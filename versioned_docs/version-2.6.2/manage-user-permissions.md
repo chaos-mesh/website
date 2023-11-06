@@ -165,7 +165,7 @@ At the top of the page you will see the **Logout** button. Click it to log out t
 When Chaos Mesh is installed using Helm, Permission Authentication is enabled by default. For production environments and other high security scenarios, it is recommended to leave permission authentication enabled. If you are just trying out Chaos Mesh and want to quickly create chaos experiments, you can set `--set dashboard.securityMode=false` in a Helm command to disable authentication. The command looks like this:
 
 <PickHelmVersion>
-helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-mesh --version latest --set dashboard.securityMode=false
+{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-mesh --version latest --set dashboard.securityMode=false`}
 </PickHelmVersion>
 
 If you want to enable the permission authentication again, then reset `--set dashboard.securityMode=true` in a Helm command.

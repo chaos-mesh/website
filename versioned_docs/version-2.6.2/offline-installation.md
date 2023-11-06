@@ -27,7 +27,9 @@ Before you install Chaos Mesh offline, you need to download all Chaos Mesh image
 
 Set the version number of Chaos Mesh as the environment variable on the machine with external network connection:
 
-<PickVersion content="export CHAOS_MESH_VERSION=latest" />
+<PickVersion>
+{`export CHAOS_MESH_VERSION=latest`}
+</PickVersion>
 
 ### Download Chaos Mesh images
 
@@ -58,7 +60,7 @@ To simulate a DNS fault (for example, make the DNS responses return a random wro
 On the machine connected to the external network, download the zip package of Chaos Mesh:
 
 <PickVersion isArchive replaced="refs/heads/master">
-curl -fsSL -o chaos-mesh.zip https://github.com/chaos-mesh/chaos-mesh/archive/refs/heads/master.zip
+{`curl -fsSL -o chaos-mesh.zip https://github.com/chaos-mesh/chaos-mesh/archive/refs/heads/master.zip`}
 </PickVersion>
 
 ### Copy files
@@ -94,7 +96,9 @@ Before pushing images to Registry, make sure that Registry has been deployed in 
 
 Set the Chaos Mesh version and the Registry address as the environment variable:
 
-<PickVersion content="export CHAOS_MESH_VERSION=latest; export DOCKER_REGISTRY=localhost:5000" />
+<PickVersion>
+{`export CHAOS_MESH_VERSION=latest; export DOCKER_REGISTRY=localhost:5000`}
+</PickVersion>
 
 Mark the images so that the images point to the Registry:
 

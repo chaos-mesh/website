@@ -194,18 +194,7 @@ const config = {
       `,
     },
     prism: {
-      theme: {
-        plain: prismThemes.vsLight.plain,
-        styles: [
-          ...prismThemes.vsLight.styles,
-          {
-            types: ['function', 'keyword'],
-            style: {
-              color: '#10a6fa',
-            },
-          },
-        ],
-      },
+      theme: prismThemes.github,
       darkTheme: {
         plain: prismThemes.vsDark.plain,
         styles: [

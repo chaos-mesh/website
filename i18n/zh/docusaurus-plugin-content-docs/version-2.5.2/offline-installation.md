@@ -25,7 +25,9 @@ import QuickRun from './common/quick-run.md'
 
 在有外网连接的机器上，设置 Chaos Mesh 的版本号为环境变量：
 
-<PickVersion content="export CHAOS_MESH_VERSION=latest" />
+<PickVersion>
+{`export CHAOS_MESH_VERSION=latest`}
+</PickVersion>
 
 ### 下载 Chaos Mesh 镜像
 
@@ -55,8 +57,8 @@ docker save ghcr.io/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION} > image-cha
 
 在有外网连接的机器上，下载 Chaos Mesh 的 zip 包：
 
-<PickVersion isArchive replaced="refs/heads/master">
-curl -fsSL -o chaos-mesh.zip https://github.com/chaos-mesh/chaos-mesh/archive/refs/heads/master.zip
+<PickVersion>
+{`curl -fsSL -o chaos-mesh.zip https://github.com/chaos-mesh/chaos-mesh/archive/refs/heads/master.zip`}
 </PickVersion>
 
 ### 拷贝文件
@@ -92,7 +94,9 @@ docker load < image-chaos-dashboard.tar
 
 设置 Chaos Mesh 版本和 Registry 地址为环境变量：
 
-<PickVersion content="export CHAOS_MESH_VERSION=latest; export DOCKER_REGISTRY=localhost:5000" />
+<PickVersion>
+{`export CHAOS_MESH_VERSION=latest; export DOCKER_REGISTRY=localhost:5000`}
+</PickVersion>
 
 标记镜像使其指向 Registry：
 

@@ -18,8 +18,7 @@ const calcHelmChartVersion = (version) => {
   return 'v' + helmChartVersionStartPart.toFixed(1) + version.slice(3)
 }
 
-const PickHelmVersion = ({ children, content, className = 'language-bash' }) => {
-  const _content = content || children
+const PickHelmVersion = ({ children, className = 'language-bash' }) => {
   const { siteConfig } = useDocusaurusContext()
   const { versions } = usePluginData('docusaurus-plugin-content-docs')
 
@@ -29,7 +28,7 @@ const PickHelmVersion = ({ children, content, className = 'language-bash' }) => 
         const version = usePickVersion(siteConfig, versions)
         const realVersion = version === 'latest' ? '' : `--version ${calcHelmChartVersion(version)}`
 
-        return <CodeBlock className={className}>{_content.replace('--version latest', realVersion).trim()}</CodeBlock>
+        return <CodeBlock className={className}>{children.replace('--version latest', realVersion).trim()}</CodeBlock>
       }}
     </BrowserOnly>
   )
