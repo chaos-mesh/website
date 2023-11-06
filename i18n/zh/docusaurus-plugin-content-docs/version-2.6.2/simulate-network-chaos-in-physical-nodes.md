@@ -462,7 +462,7 @@ Global Flags:
 | hostname | H | 只影响到指定的主机名 | string 类型，如 `"chaos-mesh.org"`。`hostname` 与 `ip` 不能同时为空。同时设置 `hostname` 与 `ip` 时，配置项对指定的主机名和 IP 地址均产生影响 |
 | ip-address | i | 仅影响到指定的 IP 地址 | string 类型，如 `"123.123.123.123"`。`hostname` 与 `ip` 不能同时为空。同时设置 `hostname` 与 `ip` 时，配置项对指定的主机名和 IP 地址均产生影响 |
 | limit | i | 在队列中等待的字节数 | uint32 类型，如：`10000`。必须要设置 |
-| minburst | m | peakrate bucket 的大小 | uint32 类型，如：`10000` |
+| minburst | `m` | peakrate bucket 的大小 | uint32 类型，如：`10000` |
 | peakrate | 无 | bucket 的最大消耗率 | uint64 类型，如：`10000` |
 | rate | r | 带宽限制的速率 | string 类型，如 `"1mbps"`。必须要设置 |
 
@@ -523,7 +523,7 @@ Global Flags:
    ```bash
    chaosd server --port 31767
    ```
-2. 向 chaosd 服务的路径 /api/attack/network 发送 HTTP POTST 请求。 `bash curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{fault-configuration}' ` 其中 `fault-configuration` 需要按照故障类型进行配置，对应的配置参数请参考下文中各个类型故障的相关参数说明和命令示例。 在运行实验时，请注意保存实验的 uid 信息，当要结束 uid 对应的实验时，需要向 chaosd 服务的路径 /api/attack/{uid} 发送 HTTP DELETE 请求。
+2. 向 chaosd 服务的路径 /api/attack/network 发送 HTTP POTST 请求。 `bash curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{fault-configuration}' ` 其中 `fault-configuration` 需要按照故障类型进行配置，对应的配置参数请参考下文中各个类型故障的相关参数说明和命令示例。 在运行实验时，请注意保存实验的 uid 信息，当要结束 uid 对应的实验时，需要向 chaosd 服务的路径 `/api/attack/{uid}` 发送 HTTP DELETE 请求。
 
 ### 使用服务模式模拟网络包错误
 

@@ -228,7 +228,7 @@ IOChaos 是 Chaos Mesh 中的一种故障类型。通过创建 IOChaos 类型的
   | kind | string | 文件类型，详见 [fuser::FileType](https://docs.rs/fuser/0.7.0/fuser/enum.FileType.html) |  | 否 |  |
   | perm | int | 文件权限的十进制表示 |  | 否 | 72（八进制下为 110） |
   | nlink | int | 硬链接数量 |  | 否 |  |
-  | uid | int | 所有者的用户 ID |  | 否 |  |
+  | `uid` | int | 所有者的用户 ID |  | 否 |  |
   | gid | int | 所有者的组 ID |  | 否 |  |
   | rdev | int | 设备 ID |  | 否 |  |
 

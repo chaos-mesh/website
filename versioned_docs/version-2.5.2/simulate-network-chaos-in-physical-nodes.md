@@ -464,7 +464,7 @@ The related configuration items are described as follows:
 | hostname | H | Only impact traffic to these hostnames. `hostname` and `ip` cannot be empty at the same time. When `hostname` and `ip` are set at the same time, the configuration item affects both the specified `hostname` and `ip`. | string, such as "chaos-mesh.org". |
 | ip | i | Only impact egress traffic to these IP addresses. `hostname` and `ip` cannot be empty at the same time. When `hostname` and `ip` are set at the same time, the configuration item affects both the specified `hostname` and `ip`. | string, such as "123.123.123.123". |
 | limit | l | The number of bytes that can be queued waiting for tokens to become available | int, such as `10000`, required |
-| minburst | m | Specifies the size of the peakrate bucket | int, such as `10000` |
+| minburst | `m` | Specifies the size of the peakrate bucket | int, such as `10000` |
 | peakrate | N/A | The maximum depletion rate of the bucket | int, such as `10000` |
 | rate | r | The speed knob, allows bps, kbps, mbps, gbps, tbps unit. The bps unit means bytes per second. | string, such as "1mbps", required |
 

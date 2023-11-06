@@ -224,7 +224,7 @@ The following are specific information about fields corresponding to action:
   | kind | string | File type, see [fuser::FileType](https://docs.rs/fuser/0.7.0/fuser/enum.FileType.html) |  | No |  |
   | perm | int | File permissions in decimal |  | No | 72 (110 in octal) |
   | nlink | int | Number of hard links |  | No |  |
-  | uid | int | User ID of the owner |  | No |  |
+  | `uid` | int | User ID of the owner |  | No |  |
   | gid | int | Group ID of the owner |  | No |  |
   | rdev | int | Device ID |  | No |  |
 

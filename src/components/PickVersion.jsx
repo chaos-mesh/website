@@ -41,7 +41,6 @@ const PickVersion = ({
   isArchive = false,
   className = 'language-bash',
 }) => {
-  console.log(children);
   const { siteConfig } = useDocusaurusContext()
   const { versions } = usePluginData('docusaurus-plugin-content-docs')
 

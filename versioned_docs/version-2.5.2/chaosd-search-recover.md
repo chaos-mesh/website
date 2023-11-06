@@ -116,21 +116,20 @@ The following example shows how to recover an experiment using the service mode.
 
 1. Send a `POST` HTTP request to the Chaosd service to create a CPU stress experiment:
 
-````bash
-    curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{"load":10, "action":"cpu","workers":1}'
-    ```
+   ```bash
+   curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{"load":10, "action":"cpu","workers":1}'
+   ```
 
-    The result is as follows:
+   The result is as follows:
 
-    ```bash
-    {"status":200,"message":"attack successfully","uid":"c3c519bf-819a-4a7b-97fb-e3d0814481fa"}
-    ```
+   ```bash
+   {"status":200,"message":"attack successfully","uid":"c3c519bf-819a-4a7b-97fb-e3d0814481fa"}
+   ```
 
-    Save the experiment UID for later use.
+   Save the experiment UID for later use.
 
 2. When you do not need to simulate the CPU stress scenario anymore, run the following command to recover the experiment corresponding to the UID:
 
-    ```bash
-    curl -X DELETE 172.16.112.130:31767/api/attack/c3c519bf-819a-4a7b-97fb-e3d0814481fa
-    ```
-````
+   ```bash
+   curl -X DELETE 172.16.112.130:31767/api/attack/c3c519bf-819a-4a7b-97fb-e3d0814481fa
+   ```

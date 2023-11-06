@@ -88,10 +88,10 @@ Global Flags:
 | :-- | :-- | :-- | :-- |
 | `class` | `c` | The name of the Java class | string type, required |
 | `exception` | None | The thrown custom exception | string type, required |
-| method | m | The name of the method | string type, required to be configured |
+| method | `m` | The name of the method | string type, required to be configured |
 | `pid` | None | The Java process ID where the fault is to be injected | int type, required |
 | `port` | None | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int type. The default value is `9288`. |
-| uid | None | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
+| `uid` | None | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
 
 #### Example for throwing custom exceptions
 
@@ -245,11 +245,11 @@ Global Flags:
 | Configuration item | Abbreviation | Description | Value |
 | :-- | :-- | :-- | :-- |
 | class | c | The name of the Java class | string type, required to be configured |
-| method | m | The name of the method | string type, required to be configured |
+| method | `m` | The name of the method | string type, required to be configured |
 | value | None | Specifies the return value of the method | string type, required to be configured. Currently, the item can be numeric and string types. If the item (return value) is string, double quotes are required, like "chaos". |
 | pid | None | The Java process ID where the fault is needed to be injected | int type, required to be configured |
 | port | None | The port number attached to the Java process agent. The faults is injected into the Java process through this port number. | int type. The default value is `9288`. |
-| uid | None | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
+| `uid` | None | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
 
 #### Example for simulating the scenario of modifying return values of a method
 
