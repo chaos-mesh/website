@@ -47,7 +47,7 @@ To install Chaos Mesh in a test environment, run the following script:
   If you want to specify a `kind` version, add the `--kind-version xx` parameter at the end of the script, for example:
 
   <PickVersion>
-  {`curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --local kind --kind-version v0.10.0`}
+  {`curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --local kind --kind-version v0.20.0`}
   </PickVersion>
 
 - If the current environment is [K3s](https://k3s.io/), add the `--k3s` parameter at the end of the script.

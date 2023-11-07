@@ -47,7 +47,7 @@ import QuickRun from './common/quick-run.md'
   若需要指定 kind 版本，请在脚本后添加 `--kind-version xxx` 参数，如：
 
   <PickVersion>
-  {`curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --local kind --kind-version v0.10.0`}
+  {`curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --local kind --kind-version v0.20.0`}
   </PickVersion>
 
 - 如果当前环境为 [K3s](https://k3s.io/)，请在脚本后添加 `--k3s` 参数。
