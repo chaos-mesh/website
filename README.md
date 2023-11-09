@@ -7,7 +7,7 @@
 </p>
 <h1 align="center">Website</h1>
 <p align="center">
-  Built using <a href="https://v2.docusaurus.io/" target="_blank">Docusaurus 2</a>, a modern static website generator.
+  Built using <a href="https://docusaurus.io/" target="_blank">Docusaurus 3</a>, a modern static website generator.
 </p>
 
 <a href="https://gitpod.io/#<your-repository-url>">
