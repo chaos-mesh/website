@@ -97,29 +97,19 @@ As the daemons of different container runtimes listen on different socket paths,
   {label: 'CRI-O', value: 'cri-o'}
 ]}>
   <TabItem value="docker">
-    <PickHelmVersion>
-      {`\# Default to /var/run/docker.sock\nhelm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version latest`}
-    </PickHelmVersion>
+    <PickHelmVersion>{`\# Default to /var/run/docker.sock\nhelm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version latest`}</PickHelmVersion>
   </TabItem>
   <TabItem value="containerd">
-    <PickHelmVersion>
-      helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --version latest
-    </PickHelmVersion>
+    <PickHelmVersion>{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock --version latest`}</PickHelmVersion>
   </TabItem>
   <TabItem value="k3s">
-    <PickHelmVersion>
-      helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock --version latest
-    </PickHelmVersion>
+    <PickHelmVersion>{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/k3s/containerd/containerd.sock --version latest`}</PickHelmVersion>
   </TabItem>
   <TabItem value="microk8s">
-    <PickHelmVersion>
-      helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/var/snap/microk8s/common/run/containerd.sock --version latest
-    </PickHelmVersion>
+    <PickHelmVersion>{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/var/snap/microk8s/common/run/containerd.sock --version latest`}</PickHelmVersion>
   </TabItem>
   <TabItem value="cri-o">
-    <PickHelmVersion>
-      helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=crio --set chaosDaemon.socketPath=/var/run/crio/crio.sock --version latest
-    </PickHelmVersion>
+    <PickHelmVersion>{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set chaosDaemon.runtime=crio --set chaosDaemon.socketPath=/var/run/crio/crio.sock --version latest`}</PickHelmVersion>
   </TabItem>
 </Tabs>
 
@@ -167,7 +157,7 @@ If you have upgraded Chaos Mesh in a non-Docker environment, you will need to ad
 
 To modify the configuration, set different values according to your need. For example, execute the following command to upgrade and uninstall `chaos-dashboard`:
 
-<PickHelmVersion className="language-bash">{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version latest --set dashboard.create=false`}</PickHelmVersion>
+<PickHelmVersion>{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version latest --set dashboard.create=false`}</PickHelmVersion>
 
 :::note
 
@@ -180,7 +170,7 @@ For more values and their usages, refer to [all values](https://github.com/chaos
 Currently, the latest CustomResourceDefinition (CRD) is not applied during the Helm upgrading, which might cause errors. To avoid this situation, you can apply the latest CRD manually:
 
 <PickVersion>
-curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl create -f -
+{`curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl create -f -`}
 </PickVersion>
 
 :::
@@ -212,7 +202,7 @@ helm install chaos-mesh helm/chaos-mesh -n=chaos-mesh
 Safe mode allows you to disable authentication to the Chaos Mesh dashboard, and should only be used for non-production deployments. Safe mode is **enabled** by default. To disable the safe mode, specify `dashboard.securityMode` as `false` during the installation or upgrade:
 
 <PickHelmVersion>
-helm install chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-mesh --set dashboard.securityMode=false --version latest
+{`helm install chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-mesh --set dashboard.securityMode=false --version latest`}
 </PickHelmVersion>
 
 ### How can I persist Chaos Dashboard data

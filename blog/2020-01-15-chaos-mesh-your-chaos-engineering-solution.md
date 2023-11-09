@@ -222,7 +222,7 @@ The following chaos experiment simulates the TiKV Pods being frequently killed i
 
 We use a sysbench program to monitor the real-time QPS changes in the TiDB cluster. When errors are injected into the cluster, the QPS show a drastic jitter, which means a specific TiKV Pod has been deleted, and Kubernetes then re-creates a new TiKV Pod.
 
-For more YAML file examples, see <https://github.com/chaos-mesh/chaos-mesh/tree/master/examples>.
+For more YAML file examples, see https://github.com/chaos-mesh/chaos-mesh/tree/master/examples.
 
 ### Running chaos using the Kubernetes API
 

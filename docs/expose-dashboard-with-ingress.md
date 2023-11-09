@@ -28,4 +28,4 @@ spec:
                   number: 2333
 ```
 
-You can also find this example in <https://github.com/chaos-mesh/chaos-mesh/blob/master/examples/dashboard/ingress-subpath.yaml>.
+You can also find this example in https://github.com/chaos-mesh/chaos-mesh/blob/master/examples/dashboard/ingress-subpath.yaml.

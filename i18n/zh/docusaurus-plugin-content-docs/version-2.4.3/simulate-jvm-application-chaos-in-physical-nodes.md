@@ -91,7 +91,7 @@ Global Flags:
 | :-- | :-- | :-- | :-- |
 | `class` | c | Java 类的名称 | string 类型，必须配置 |
 | `exception` | 无 | 抛出的自定义异常 | string 类型，必须配置 |
-| `method` | m | 方法名称 | string 类型，必须配置 |
+| `method` | `m` | 方法名称 | string 类型，必须配置 |
 | `pid` | 无 | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
 | `port` | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
 | `uid` | 无 | 实验的编号 | string 类型，可以不配置，因为 Chaosd 会随机生成一个 |
@@ -193,7 +193,7 @@ Global Flags:
 | :-- | :-- | :-- | :-- |
 | `class` | c | Java 类的名称 | string 类型，必须配置 |
 | `latency` | 无 | 增加方法的延迟时间 | int 类型，必须配置，单位为 ms |
-| `method` | m | 方法名称 | string 类型，必须配置 |
+| `method` | `m` | 方法名称 | string 类型，必须配置 |
 | `pid` | 无 | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
 | `port` | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
 | `uid` | 无 | 实验的编号 | string 类型，可以不配置，Chaosd 会随机生成一个 |
@@ -244,7 +244,7 @@ Global Flags:
 | 配置项 | 配置缩写 | 说明 | 值 |
 | :-- | :-- | :-- | :-- |
 | `class` | c | Java 类的名称 | string 类型，必须配置 |
-| `method` | m | 方法名称 | string 类型，必须配置 |
+| `method` | `m` | 方法名称 | string 类型，必须配置 |
 | `value` | 无 | 指定方法的返回值 | string 类型，必须配置。目前支持数字和字符串类型的返回值，如果为字符串，则需要使用双引号，例如："chaos"。 |
 | `pid` | 无 | 需要注入故障的 Java 进程号 | int 类型，必须配置 |
 | `port` | 无 | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型，默认为 `9288` |
@@ -521,7 +521,7 @@ Global Flags:
 
 :::note 注意
 
-在运行实验时，请注意保存实验的 UID 信息。当要结束 UID 对应的实验时，需要向 Chaosd 服务的路径 /api/attack/{uid} 发送 `DELETE` HTTP 请求。
+在运行实验时，请注意保存实验的 UID 信息。当要结束 UID 对应的实验时，需要向 Chaosd 服务的路径 `/api/attack/{uid}` 发送 `DELETE` HTTP 请求。
 
 :::
 

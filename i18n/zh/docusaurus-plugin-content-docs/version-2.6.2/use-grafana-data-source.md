@@ -21,7 +21,7 @@ grafana-cli plugins install chaosmeshorg-datasource
 
 作为备选，你也可以通过以下步骤在本地 Grafana 安装 Data Source 插件：
 
-1. 通过如下命令下载插件 zip 包，或前往 <https://github.com/chaos-mesh/datasource/releases> 下载该压缩包：
+1. 通过如下命令下载插件 zip 包，或前往 https://github.com/chaos-mesh/datasource/releases 下载该压缩包：
 
    ```shell
    curl -LO https://github.com/chaos-mesh/datasource/releases/download/v2.2.3/chaosmeshorg-datasource-2.2.3.zip
@@ -35,7 +35,7 @@ grafana-cli plugins install chaosmeshorg-datasource
 
    :::tip 小贴士
 
-   如需查找插件目录，可参考 <https://grafana.com/docs/grafana/latest/plugins/installation/#install-a-packaged-plugin>。
+   如需查找插件目录，可参考 https://grafana.com/docs/grafana/latest/plugins/installation/#install-a-packaged-plugin。
 
    :::
 
@@ -48,7 +48,7 @@ grafana-cli plugins install chaosmeshorg-datasource
 
    :::tip 小贴士
 
-   如需查找配置文件，可参考 <https://grafana.com/docs/grafana/latest/administration/configuration/#config-file-locations>。
+   如需查找配置文件，可参考 https://grafana.com/docs/grafana/latest/administration/configuration/#config-file-locations。
 
    :::
 

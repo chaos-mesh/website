@@ -2,7 +2,6 @@ import BrowserOnly from '@docusaurus/BrowserOnly'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import { usePluginData } from '@docusaurus/useGlobalData'
 import CodeBlock from '@theme/CodeBlock'
-import React from 'react'
 
 /**
  *
@@ -35,10 +34,10 @@ function versionToGitHubRef(version) {
 
 const PickVersion = ({
   children,
-  // replaced represent the string would be replaced in the original content
+  // `replaced` represent the string would be replaced in the original content.
   replaced = 'latest',
-  // when `isArchive` is true, it would be replaced as patterns like `refs/heads/master` or `refs/tags/vX.Y.Z`
-  // when `isArchive` is false, it would be replaced with `vX.Y.Z`
+  // When `isArchive` is true, it would be replaced as patterns like `refs/heads/master` or `refs/tags/vX.Y.Z`.
+  // When `isArchive` is false, it would be replaced with `vX.Y.Z`.
   isArchive = false,
   className = 'language-bash',
 }) => {

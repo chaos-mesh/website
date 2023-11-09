@@ -1,4 +1,4 @@
-import React from 'react'
+
 import Card from './Card'
 
 import IconDisk from '../../static/img/icons/disk.svg'

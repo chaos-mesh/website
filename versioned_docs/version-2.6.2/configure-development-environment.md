@@ -168,7 +168,7 @@ After finishing the above preparation, you can try to [Add a New Chaos Experimen
 
 ### Run make fail with `error obtaining VCS status: exit status 128` in MacOS
 
-The reason is related to <https://github.blog/2022-04-12-git-security-vulnerability-announced/>. It's recommended you to read it first.
+The reason is related to https://github.blog/2022-04-12-git-security-vulnerability-announced/. It's recommended you to read it first.
 
 Chaos Mesh will start the container (`dev-env` or `build-env`) with the current user (when you call `make`). You can find the appropriate `--user` flag in [get_env_shell.py#L81C10-L81C10](https://github.com/chaos-mesh/chaos-mesh/blob/813b650c02e0b065ae5c4707725c346929ab1847/build/get_env_shell.py#L81C10-L81C10). So when Git is looking for a top-level `.git` directory, it will stop if its directory traversal changes ownership from the current user.
 
