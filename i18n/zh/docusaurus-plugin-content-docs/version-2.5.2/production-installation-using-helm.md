@@ -204,7 +204,7 @@ helm install chaos-mesh helm/chaos-mesh -n=chaos-mesh
 安全模式是默认启用的。如需关闭，请在安装或升级时指定 `dashboard.securityMode` 为 `false`：
 
 <PickHelmVersion>
-helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set dashboard.securityMode=false --version latest
+{`helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set dashboard.securityMode=false --version latest`}
 </PickHelmVersion>
 
 ### 如何持久化 Chaos Dashboard 数据
