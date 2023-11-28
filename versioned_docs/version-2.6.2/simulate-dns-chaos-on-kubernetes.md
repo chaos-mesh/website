@@ -12,9 +12,7 @@ To simluate DNS faults, you need to deploy a special DNS service called Chaos DN
 
 In the latest version, Chaos Mesh will deploy Chaos DNS Server by default. If you don't need to simulate DNS faults, you can set `dnsServer.create` to `false` when installing Chaos Mesh:
 
-<PickHelmVersion>
-helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version latest --set dnsServer.create=false
-</PickHelmVersion>
+<PickHelmVersion>{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-mesh --version latest --set dnsServer.create=true`}</PickHelmVersion>
 
 :::
 
