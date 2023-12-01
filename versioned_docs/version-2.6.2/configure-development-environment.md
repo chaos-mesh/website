@@ -106,10 +106,10 @@ UI=1 make image
 
 We could use [delve](https://github.com/go-delve/delve) with remote debugging to debug the Chaos Mesh in local environment.
 
-1. Compile Chaos Mesh with `DEBUG=1`:
+1. Compile Chaos Mesh with `DEBUGGER=1`:
 
    ```bash
-   UI=1 DEBUG=1 make image
+   UI=1 DEBUGGER=1 make image
    ```
 
 2. Load container images into minikube:
