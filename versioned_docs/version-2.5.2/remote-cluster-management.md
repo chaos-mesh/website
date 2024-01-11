@@ -20,7 +20,7 @@ To register a remote cluster into the Chaos Mesh installed on the current cluste
 apiVersion: chaos-mesh.org/v1alpha1
 kind: RemoteCluster
 metadata:
-  name: cluster-xxxxxxx
+  name: cluster-xxx
 spec:
   namespace: 'chaos-mesh'
   kubeConfig:
@@ -38,7 +38,7 @@ It will install the `chaos-mesh` helm chart with the `KUBECONFIG` provided in th
 | --- | --- | --- | --- | --- | --- |
 | namespace | string | Represent the namespace to install chaos-mesh components in the remote cluster | None | Yes | chaos-mesh |
 | kubeConfig.secretRef.name | string | The name of the secret, which is used to store the kubeconfig of remote cluster. This kubeconfig will be used to install chaos-mesh components and inject errors | None | Yes | `remote-chaos-mesh.kubeconfig` |
-| kubeConfig.secretRef.namespace | string | The name of the kubeconfig secret. | None | Yes | `default` |
+| kubeConfig.secretRef.namespace | string | The name of the namespace of the kubeconfig secret. | None | Yes | `default` |
 | kubeConfig.secretRef.key | string | The key of the kubeconfig in the secret. | None | Yes | `kubeconfig` |
 
 ## Inject errors in the remote cluster
@@ -51,7 +51,7 @@ kind: StressChaos
 metadata:
   name: burn-cpu
 spec:
-  remoteCluster: cluster-xxxxxxx
+  remoteCluster: cluster-xxx
   mode: one
   selector:
     labelSelectors:
@@ -64,4 +64,4 @@ spec:
   duration: '30s'
 ```
 
-The Chaos Mesh will inject the errors to the remote cluster using the kubeconfig registered with the `RemoteCluster` named `cluster-xxxxxxx`. The corresponding `StressChaos` will be automatically created in the remote cluster, and the status is synchronized back to the current cluster, so that you can manage the chaos injection for multiple different clusters in a single kubernetes.
+The Chaos Mesh will inject the errors to the remote cluster using the kubeconfig registered with the `RemoteCluster` named `cluster-xxx`. The corresponding `StressChaos` will be automatically created in the remote cluster, and the status is synchronized back to the current cluster, so that you can manage the chaos injection for multiple different clusters in a single kubernetes.
