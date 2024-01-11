@@ -6,11 +6,11 @@ import PickHelmVersion from '@site/src/components/PickHelmVersion'
 
 ## 问题
 
-### Q: If I do not have deployed Kubernetes clusters, can I use Chaos Mesh to create chaos experiments?
+### If I do not have deployed Kubernetes clusters, can I use Chaos Mesh to create chaos experiments?
 
 No. Instead, you could use [`chaosd`](https://github.com/chaos-mesh/chaosd/) to inject failures without kubernetes.
 
-### Q: I have deployed Chaos Mesh and created PodChaos experiments successfully, but I still failed in creating NetworkChaos/TimeChaos Experiment. The log is shown as below:
+### I have deployed Chaos Mesh and created PodChaos experiments successfully, but I still failed in creating NetworkChaos/TimeChaos Experiment. The log is shown as below:
 
 ```console
 2020-06-18T02:49:15.160Z ERROR controllers.TimeChaos failed to apply chaos on all pods {"reconciler": "timechaos", "error": "rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial tcp xx.xx.xx.xx:xxxx: connect: connection refused\""}
@@ -24,7 +24,7 @@ If everything is in order, maybe you can use the `hostNetwork` parameter to fix 
 
 Reference: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/troubleshooting-kubeadm/#hostport-services-do-not-work
 
-### Q: The default administrator Google Cloud user account is forbidden to create chaos experiments. How to fix it?
+### The default administrator Google Cloud user account is forbidden to create chaos experiments. How to fix it?
 
 The default administrator Google Cloud user cannot be checked by `AdmissionReview`. You need to create an administrator role and assign the role to your account to grant the privilege of creating chaos experiments to it. For example:
 
@@ -59,7 +59,7 @@ roleRef:
 
 The `USER_ACCOUNT` above should be your Google Cloud user email.
 
-### Q: Daemon throws an error similar to `version 1.41 is too new. The maximum supported API version is 1.39`
+### Daemon throws an error similar to `version 1.41 is too new. The maximum supported API version is 1.39`
 
 This indicates that the maximum API version that the Docker daemon can accept is `1.39`, but the client in `chaos-daemon` uses `1.41` by default. You can choose the following options to solve this problem:
 
@@ -68,7 +68,7 @@ This indicates that the maximum API version that the Docker daemon can accept is
 
 ## DNSChaos
 
-### Q: While trying to run DNSChaos in OpenShift, the problems regarding authorization blocked the process
+### While trying to run DNSChaos in OpenShift, the problems regarding authorization blocked the process
 
 If the error message is similar to the following:
 
@@ -84,7 +84,7 @@ oc adm policy add-scc-to-user privileged -n chaos-mesh -z chaos-dns-server
 
 ## 安装
 
-### Q: While trying to install Chaos Mesh in OpenShift, the problems regarding authorization blocked the installation process
+### While trying to install Chaos Mesh in OpenShift, the problems regarding authorization blocked the installation process
 
 If the error message is similar to the following:
 
@@ -107,7 +107,7 @@ You need to add privileged scc to default.
 oc adm policy add-scc-to-user privileged -n chaos-mesh -z chaos-daemon
 ```
 
-### Q: Failed to install Chaos Mesh with the message: no matches for kind "CustomResourceDefinition" in version "apiextensions.k8s.io/v1"
+### Failed to install Chaos Mesh with the message: no matches for kind "CustomResourceDefinition" in version "apiextensions.k8s.io/v1"
 
 This issue occurs when you install Chaos Mesh on Kubernetes v1.15 or an earlier version. We use `apiextensions.k8s.io/v1` by default, but it was introduced in Kubernetes v1.16 on 2019-09-19.
 

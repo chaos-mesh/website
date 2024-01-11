@@ -82,7 +82,7 @@ kubectl create ns chaos-mesh
 
 :::note
 
-When installing Chaos Mesh on Kubernetes v1.15(or an earlier version), you need to manually install CRD. For more information, see [FAQ](./faqs.md#q-failed-to-install-chaos-mesh-with-message-no-matches-for-kind-customresourcedefinition-in-version-apiextensionsk8siov1).
+When installing Chaos Mesh on Kubernetes v1.15(or an earlier version), you need to manually install CRD. For more information, see [FAQ](./faqs.md#failed-to-install-chaos-mesh-with-the-message-no-matches-for-kind-customresourcedefinition-in-version-apiextensionsk8siov1).
 
 :::
 
