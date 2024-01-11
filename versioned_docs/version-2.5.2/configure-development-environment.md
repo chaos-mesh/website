@@ -88,7 +88,7 @@ We could use [delve](https://github.com/go-delve/delve) with remote debugging to
 1. Compile Chaos Mesh with Debug Info
 
    ```bash
-   UI=1 DEBUG=1 make
+   UI=1 DEBUGGER=1 make
    ```
 
 2. Load container images into minikube
