@@ -1,5 +1,4 @@
-import clsx from 'clsx'
-
+import { clsx } from 'clsx'
 
 export default function Card({ children, className, ...props }) {
   return (

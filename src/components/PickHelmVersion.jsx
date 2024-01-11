@@ -2,7 +2,6 @@ import BrowserOnly from '@docusaurus/BrowserOnly'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import { usePluginData } from '@docusaurus/useGlobalData'
 import CodeBlock from '@theme/CodeBlock'
-
 import semver from 'semver'
 
 import { usePickVersion } from './PickVersion'

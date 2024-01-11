@@ -1,12 +1,10 @@
-
-import Card from './Card'
-
 import IconDisk from '../../static/img/icons/disk.svg'
 import IconJava from '../../static/img/icons/java.svg'
 import IconNetwork from '../../static/img/icons/network.svg'
 import IconProcess from '../../static/img/icons/process.svg'
 import IconStress from '../../static/img/icons/stress.svg'
 import IconTime from '../../static/img/icons/time.svg'
+import Card from './Card'
 
 const iconList = [
   {

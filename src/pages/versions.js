@@ -1,6 +1,6 @@
 import Link from '@docusaurus/Link'
 import Layout from '@theme/Layout'
-import clsx from 'clsx'
+import { clsx } from 'clsx'
 
 import { archivedVersions, stableVersions } from '../data/versions'
 import styles from './versions.module.css'

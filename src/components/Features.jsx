@@ -1,7 +1,7 @@
 import Link from '@docusaurus/Link'
 import Translate from '@docusaurus/Translate'
 import useBaseUrl from '@docusaurus/useBaseUrl'
-import clsx from 'clsx'
+import { clsx } from 'clsx'
 
 import Card from './Card'
 

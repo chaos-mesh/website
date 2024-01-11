@@ -15,12 +15,12 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@docusaurus/core": "3.0.0",
-    "@docusaurus/preset-classic": "3.0.0",
+    "@docusaurus/core": "3.1.0",
+    "@docusaurus/preset-classic": "3.1.0",
     "@mdx-js/react": "^3.0.0",
-    "clsx": "^2.0.0",
-    "gsap": "^3.12.2",
-    "prism-react-renderer": "^2.1.0",
+    "clsx": "^2.1.0",
+    "gsap": "^3.12.4",
+    "prism-react-renderer": "^2.3.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "semver": "^7.5.4",
@@ -39,8 +39,8 @@
     ]
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.0.0",
-    "@docusaurus/types": "3.0.0",
+    "@docusaurus/module-type-aliases": "3.1.0",
+    "@docusaurus/types": "3.1.0",
     "@trivago/prettier-plugin-sort-imports": "^4.2.0",
     "autoprefixer": "^10.4.16",
     "daisyui": "^3.7.7",
