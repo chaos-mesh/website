@@ -4,8 +4,6 @@ title: FAQs
 
 import PickHelmVersion from '@site/src/components/PickHelmVersion'
 
-## Questions
-
 ### If I do not have deployed Kubernetes clusters, can I use Chaos Mesh to create chaos experiments?
 
 No. Instead, you could use [`chaosd`](https://github.com/chaos-mesh/chaosd/) to inject failures without kubernetes.
