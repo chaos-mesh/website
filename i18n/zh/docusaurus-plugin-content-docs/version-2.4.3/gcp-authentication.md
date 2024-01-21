@@ -1,10 +1,10 @@
 ---
-title: GCP 身份验证接入
+title: GCP OAuth 验证
 ---
 
 如果 Chaos Mesh 集群部署于 Google Cloud Platform，用户将能够通过 Google OAuth 验证登入 Chaos Dashboard。本文档将介绍如何配置和启用这项功能。
 
-## 创建用于登陆验证的 OAuth Client
+## 创建 OAuth Client
 
 根据 [Setting up OAuth 2.0](https://support.google.com/cloud/answer/6158849?hl=en) 创建用于接入 GCP 的 OAuth 2.0 客户端，并获得 Client ID 与 Client Secret。
 
@@ -31,7 +31,7 @@ title: GCP 身份验证接入
 
 ## 使用
 
-打开 Chaos Dashboard，点击验证窗口下方的 Google Icon。
+打开 Chaos Dashboard，点击验证窗口下方的 Google 图标。
 
 ![img](./img/google-auth.png)
 

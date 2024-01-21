@@ -12,26 +12,43 @@ Create GCP OAuth client and get the Client ID and Client Secret according to [Se
 2. From the projects list, select a project or create a new one.
 3. If the APIs & services page was not loaded automatically, open the console left side menu and select "APIs & services" manually.
 4. Click "Credentials" on the left.
-5. Click "New Credentials", then select "OAuth client ID".
-6. Select "Web Application" as the application type, and enter additional information and the redirect URL of Chaos dashboard, which is `ROOT_URL/api/auth/gcp/callback`. In this part, `ROOT_URL` is the root URL of Chaos dashboard, like "http://localhost:2333". This URL can be set through the configuration item `dashboard.rootUrl` by`helm`.
-7. Click "Create Client ID".
+5. Click "Create Credentials", then select "OAuth client ID".
+6. Select "Web Application" as the application type, and enter additional information and the redirect URL of Chaos dashboard, which is `ROOT_URL/api/auth/gcp/callback`. In this part, `ROOT_URL` is the root URL of Chaos dashboard, like `http://localhost:2333`. This URL can be set through the configuration item `dashboard.rootUrl` by `helm`.
+7. Click "Create".
 
 After creating the client, remember to save the Client ID and Client Secret for the following steps.
 
-## Configure and start Chaos Mesh
+## Configure and Start Chaos Mesh
+
+:::info
+
+Update: Since `v2.7.0`, you can provide a **Secret** to store the Client ID and Client Secret. **We recommend you to use this method**.
+
+This change is to avoid exposing the Client ID and Client Secret to the public. In the previous versions, the Client ID and Client Secret are specified in the values directly, which is not safe in general.
+
+For more information, see https://github.com/chaos-mesh/chaos-mesh/issues/4206.
+
+:::
 
 To enable the function, you need to set the configuration items in helm charts as follows:
 
-1. Set `dashboard.gcpSecurityMode` to `true`.
-2. Set `dashboard.gcpClientId` to the Client ID from the former section.
-3. Set `dashboard.gcpClientSecret` to the Client Secret from the former section.
-4. Set `dashboard.rootUrl` to the root address of Chaos Dashboard.
+```yaml
+dashboard:
+  rootUrl: http://localhost:2333
+  gcpSecurityMode:
+    enabled: true
+    # Old configuration items for compatibility.
+    clientId: ''
+    clientSecret: ''
+    # References existing Kubernetes secret containing `GCP_CLIENT_ID` and `GCP_CLIENT_SECRET`.
+    existingSecret: ''
+```
 
 If Chaos Mesh has been installed, you can update the configuration items through `helm upgrade`. If not, you can install Chaos Mesh through `helm install`.
 
-## Use the function
+## Login with Google
 
-Open Chaos Dashboard, and click the google icon under the authentication window.
+Open Chaos Dashboard, and click the Google icon under the authentication window.
 
 ![img](./img/google-auth.png)
 
