@@ -39,7 +39,7 @@ Before creating NetworkChaos experiments, ensure the following:
 
 ## Create experiments using the YAML files
 
-### Net emulation example
+### Delay example
 
 1. Write the experiment configuration to the `network-delay.yaml` file, as shown below:
 
@@ -136,6 +136,39 @@ Before creating NetworkChaos experiments, ensure the following:
    kubectl apply -f ./network-bandwidth.yaml
    ```
 
+### Network Emulation example
+
+1. Write the experiment configuration to the `netem.yaml` file, as shown below:
+
+   ```yaml
+   apiVersion: chaos-mesh.org/v1alpha1
+   kind: NetworkChaos
+   metadata:
+     name: network-emulation
+   spec:
+     action: netem
+     mode: all
+     selector:
+       namespaces:
+         - default
+       labelSelectors:
+         'app': 'web-show'
+     delay:
+       latency: '10ms'
+       correlation: '100'
+       jitter: '0ms'
+      rate:
+       rate: '10mbps'
+   ```
+
+   This configuration causes a latency of 10 milliseconds and a bandwidth limit of 10mbps in the network connections of the target Pods. In addition to latency and rate, the `netem` action also supports packet loss, reorder and corruption.
+
+2. After the configuration file is prepared, use `kubectl` to create an experiment:
+
+   ```bash
+   kubectl apply -f ./netem.yaml
+   ```
+
 ## Field description
 
 | Parameter | Type | Description | Default value | Required | Example |
@@ -153,7 +186,7 @@ Before creating NetworkChaos experiments, ensure the following:
 
 For the Net Emulation and Bandwidth fault types, you can further configure the `action` related parameters according to the following description.
 
-- Net Emulation type: `delay`, `loss`, `duplicated`, `corrupt`
+- Net Emulation type: `delay`, `loss`, `duplicated`, `corrupt`, `rate`
 - Bandwidth type: `bandwidth`
 
 #### delay
@@ -224,9 +257,17 @@ Setting `action` to `corrupt` means simulating package corruption fault. You can
 
 For occasional events such as `reorder`, `loss`, `duplicate`, and `corrupt`, the `correlation` is more complicated. For specific model description, refer to [NetemCLG](http://web.archive.org/web/20200120162102/http://netgroup.uniroma2.it/twiki/bin/view.cgi/Main/NetemCLG).
 
+#### rate
+
+Setting `action` to `rate` means simulating bandwidth limit fault. This actions is similar to [bandwidth](####bandwidth) below, however, the key distiction is that this action can be combined with other `NetEm` actions listed above. However, if you require more control over the bandwidth simulation such as limiting the buffer size, check the `bandwidth` action.
+
+| Parameter | Type | Description | Default value | Required | Example |
+| --- | --- | --- | --- | --- | --- |
+| rate | string | Indicates the rate of bandwidth limit. Allows bit, kbit, mbit, gbit, tbit, bps, kbps, mbps, gbps, tbps unit. bps means bytes per second |  | Yes | 1mbps |
+
 #### bandwidth
 
-Setting `action` to `bandwidth` means simulating bandwidth limit fault. You also need to configure the following parameters.
+Setting `action` to `bandwidth` means simulating bandwidth limit fault. You also need to configure the following parameters. _Note that this action is mutually exclusive with any `NetEm` action defined above. One can either inject `bandwidth` or any of the `NetEm` actions. If you need to inject bandwidth fault along with other network failures such as corruption, use the `rate` action instead._
 
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
