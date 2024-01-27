@@ -149,14 +149,14 @@ Before creating NetworkChaos experiments, ensure the following:
 | externalTargets | []string | Indicates the network targets except for Kubernetes, which can be IPv4 addresses or domains. This parameter only works with `direction: to`. | None | No | 1.1.1.1, google.com |
 | device | string | Specifies the affected network interface | None | No | "eth0" |
 
-### Description for `action`-related fields
+## Description for `action`-related fields
 
 For the Net Emulation and Bandwidth fault types, you can further configure the `action` related parameters according to the following description.
 
 - Net Emulation type: `delay`, `loss`, `duplicated`, `corrupt`
 - Bandwidth type: `bandwidth`
 
-#### delay
+### delay
 
 Setting `action` to `delay` means simulating network delay fault. You can also configure the following parameters.
 
@@ -185,7 +185,7 @@ The computational model for `correlation` is as follows:
 
    In the above command, `sigma` is `jitter` and `mu` is `latency`.
 
-#### reorder
+### reorder
 
 Setting `action` to `reorder` means simulating network packet reordering fault. You can also configure the following parameters.
 
@@ -195,7 +195,7 @@ Setting `action` to `reorder` means simulating network packet reordering fault. 
 | correlation | string | Indicates the correlation between this time's length of delay time and the previous time's length of delay time. Range of value: [0, 100] | 0 | No | 50 |
 | gap | int | Indicates the gap before and after packet reordering | 0 | No | 5 |
 
-#### loss
+### loss
 
 Setting `action` to `loss` means simulating packet loss fault. You can also configure the following parameters.
 
@@ -204,7 +204,7 @@ Setting `action` to `loss` means simulating packet loss fault. You can also conf
 | loss | string | Indicates the probability of packet loss. Range of value: [0, 100] | 0 | No | 50 |
 | correlation | string | Indicates the correlation between the probability of current packet loss and the previous time's packet loss. Range of value: [0, 100] | 0 | No | 50 |
 
-#### duplicate
+### duplicate
 
 Set `action` to `duplicate`, meaning simulating package duplication. At this point, you can also set the following parameters.
 
@@ -213,7 +213,7 @@ Set `action` to `duplicate`, meaning simulating package duplication. At this poi
 | duplicate | string | Indicates the probability of packet duplicating. Range of value: [0, 100] | 0 | No | 50 |
 | correlation | string | Indicates the correlation between the probability of current packet duplicating and the previous time's packet duplicating. Range of value: [0, 100] | 0 | No | 50 |
 
-#### corrupt
+### corrupt
 
 Setting `action` to `corrupt` means simulating package corruption fault. You can also configure the following parameters.
 
@@ -224,7 +224,7 @@ Setting `action` to `corrupt` means simulating package corruption fault. You can
 
 For occasional events such as `reorder`, `loss`, `duplicate`, and `corrupt`, the `correlation` is more complicated. For specific model description, refer to [NetemCLG](http://web.archive.org/web/20200120162102/http://netgroup.uniroma2.it/twiki/bin/view.cgi/Main/NetemCLG).
 
-#### bandwidth
+### bandwidth
 
 Setting `action` to `bandwidth` means simulating bandwidth limit fault. You also need to configure the following parameters.
 
