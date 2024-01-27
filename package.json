@@ -12,11 +12,11 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
-    "@docusaurus/core": "3.1.0",
-    "@docusaurus/preset-classic": "3.1.0",
+    "@docusaurus/core": "3.1.1",
+    "@docusaurus/preset-classic": "3.1.1",
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.1.0",
     "gsap": "^3.12.4",
@@ -41,14 +41,14 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.1.0",
     "@docusaurus/types": "3.1.0",
-    "@trivago/prettier-plugin-sort-imports": "^4.2.0",
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "autoprefixer": "^10.4.16",
     "daisyui": "^3.7.7",
-    "husky": "^8.0.3",
-    "lint-staged": "^14.0.1",
+    "husky": "^9.0.6",
+    "lint-staged": "^15.2.0",
     "postcss": "^8.4.30",
     "prettier": "^2.8.7",
-    "tailwindcss": "^3.3.3"
+    "tailwindcss": "^3.4.1"
   },
   "engines": {
     "node": ">=18.0"
