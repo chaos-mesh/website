@@ -157,7 +157,7 @@ Before creating NetworkChaos experiments, ensure the following:
        latency: '10ms'
        correlation: '100'
        jitter: '0ms'
-      rate:
+     rate:
        rate: '10mbps'
    ```
 
@@ -173,13 +173,13 @@ Before creating NetworkChaos experiments, ensure the following:
 
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
-| action | string | Indicates the specific fault type. Available types include: `netem`, `delay` (network delay), `loss` (packet loss), `duplicate` (packet duplicating), `corrupt` (packet corrupt), `partition` (network partition), and `bandwidth` (network bandwidth limit).After you specify `action` field, refer to [Description for `action`-related fields](#description-for-action-related-fields) for other necessary field configuration. | None | Yes | Partition |
+| action | string | Indicates the specific fault type. Available types include: `netem`, `delay` (network delay), `loss` (packet loss), `duplicate` (packet duplicating), `corrupt` (packet corrupt), `partition` (network partition), and `bandwidth` (network bandwidth limit). After you specify `action` field, refer to [Description for `action`-related fields](#description-for-action-related-fields) for other necessary field configuration. | None | Yes | Partition |
 | target | Selector | Used in combination with direction, making Chaos only effective for some packets. | None | No |  |
 | direction | enum | Indicates the direction of `target` packets. Available vaules include `from` (the packets from `target`), `to` (the packets to `target`), and `both` ( the packets from or to `target`). This parameter makes Chaos only take effect for a specific direction of packets. | to | No | both |
 | mode | string | Specifies the mode of the experiment. The mode options include `one` (selecting a random Pod), `all` (selecting all eligible Pods), `fixed` (selecting a specified number of eligible Pods), `fixed-percent` (selecting a specified percentage of Pods from the eligible Pods), and `random-max-percent` (selecting the maximum percentage of Pods from the eligible Pods). | None | Yes | `one` |
 | value | string | Provides a parameter for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods. | None | No | 1 |
 | selector | struct | Specifies the target Pod. For details, refer to [Define the experiment scope](./define-chaos-experiment-scope.md). | None | Yes |  |
-| externalTargets | []string | Indicates the network targets except for Kubernetes, which can be IPv4 addresses or domains. This parameter only works with `direction: to`. | None | No | 1.1.1.1, www.google.com |
+| externalTargets | []string | Indicates the network targets except for Kubernetes, which can be IPv4 addresses or domains. This parameter only works with `direction: to`. | None | No | 1.1.1.1, google.com |
 | device | string | Specifies the affected network interface | None | No | "eth0" |
 
 ### Description for `action`-related fields
@@ -259,7 +259,7 @@ For occasional events such as `reorder`, `loss`, `duplicate`, and `corrupt`, the
 
 #### rate
 
-Setting `action` to `rate` means simulating bandwidth limit fault. This actions is similar to [bandwidth](####bandwidth) below, however, the key distiction is that this action can be combined with other `NetEm` actions listed above. However, if you require more control over the bandwidth simulation such as limiting the buffer size, check the `bandwidth` action.
+Setting `action` to `rate` means simulating bandwidth rate fault. This action is similar to [bandwidth/rate](#bandwidth) below, however, **the key distinction is that this action can combine with other `netem` actions listed above**. However, if you require more control over the bandwidth simulation such as limiting the buffer size, check the [bandwidth](#bandwidth) action.
 
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
@@ -267,7 +267,13 @@ Setting `action` to `rate` means simulating bandwidth limit fault. This actions 
 
 #### bandwidth
 
-Setting `action` to `bandwidth` means simulating bandwidth limit fault. You also need to configure the following parameters. _Note that this action is mutually exclusive with any `NetEm` action defined above. One can either inject `bandwidth` or any of the `NetEm` actions. If you need to inject bandwidth fault along with other network failures such as corruption, use the `rate` action instead._
+Setting `action` to `bandwidth` means simulating bandwidth limit fault. You also need to configure the following parameters.
+
+:::info
+
+This action is mutually exclusive with any `netem` action defined above. If you need to inject bandwidth rate along with other network failures such as corruption, use the [rate](#rate) action instead.
+
+:::
 
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
