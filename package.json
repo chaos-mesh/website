@@ -1,6 +1,6 @@
 {
   "name": "chaos-mesh-website",
-  "version": "2.6.2",
+  "version": "2.6.3",
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
@@ -39,14 +39,14 @@
     ]
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.1.0",
-    "@docusaurus/types": "3.1.0",
+    "@docusaurus/module-type-aliases": "3.1.1",
+    "@docusaurus/types": "3.1.1",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
-    "autoprefixer": "^10.4.16",
-    "daisyui": "^3.7.7",
-    "husky": "^9.0.6",
-    "lint-staged": "^15.2.0",
-    "postcss": "^8.4.30",
+    "autoprefixer": "^10.4.17",
+    "daisyui": "^4.7.2",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "postcss": "^8.4.35",
     "prettier": "^2.8.7",
     "tailwindcss": "^3.4.1"
   },

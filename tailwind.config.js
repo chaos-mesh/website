@@ -12,14 +12,14 @@ module.exports = {
     themes: [
       {
         light: {
-          ...require('daisyui/src/theming/themes')['[data-theme=light]'],
+          ...require('daisyui/src/theming/themes')['light'],
           primary: '#10a6fa',
           'primary-content': '#ffffff',
         },
       },
       {
         dark: {
-          ...require('daisyui/src/theming/themes')['[data-theme=dark]'],
+          ...require('daisyui/src/theming/themes')['dark'],
           primary: '#10a6fa',
         },
       },
