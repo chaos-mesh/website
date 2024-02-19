@@ -42,7 +42,7 @@
   .workflowsImg {
     height: 768px;
     background: url(/img/home/workflows-min.png) top left / cover no-repeat;
-    border: 1px solid hsl(var(--bc) / 0.15);
+    border: 1px solid oklch(var(--bc) / 0.15);
     box-shadow: 75px 75px 75px -25px rgba(0, 0, 0, 0.3);
     transform: perspective(750px) translate3d(0px, 0px, -250px) rotateX(5deg) rotateY(-5deg);
     transition: 0.3s ease-in-out transform;
@@ -54,7 +54,7 @@
 
   [data-theme='dark'] .workflowsImg {
     background-image: url(/img/home/workflows-dark-min.png);
-    border: 1px solid hsl(var(--bc) / 0.6);
+    border: 1px solid oklch(var(--bc) / 0.6);
     box-shadow: 75px 75px 75px -25px rgba(255, 255, 255, 0.1);
   }
 }
