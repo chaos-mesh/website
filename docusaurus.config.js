@@ -3,7 +3,6 @@
 // (when paired with `@ts-check`).
 // There are various equivalent ways to declare your Docusaurus config.
 // See: https://docusaurus.io/docs/api/docusaurus-config
-
 import { themes as prismThemes } from 'prism-react-renderer'
 
 /** @type {import('@docusaurus/types').Config} */
@@ -211,7 +210,10 @@ const config = {
     },
   },
 
-  plugins: ['./docusaurus-tailwind-v3'],
+  plugins: [
+    './docusaurus-tailwind-v3',
+    ['@gracefullight/docusaurus-plugin-microsoft-clarity', { projectId: 'lggqck9srz' }],
+  ],
 }
 
 export default config
