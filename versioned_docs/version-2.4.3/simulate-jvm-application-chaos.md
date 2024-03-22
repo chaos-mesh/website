@@ -188,10 +188,10 @@ For different `action` values, there are different configuration items that can 
 ### Parameters for `return`
 
 | Parameter | Type | Description | Required |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- |
 | `class` | string | The name of the Java class | Yes |
 | `method` | string | The name of the method | Yes |
-| `value` | string | Specifies the return value of the method | string type, required. Currently, the item can be numeric and string types. If the item (return value) is string, double quotes are required, like "chaos". | Yes |
+| `value` | string | Specifies the return value of the method. Currently, the item can be numeric and string types. If the item (return value) is string, double quotes are required, like "chaos". | Yes |
 | `port` | int | The port ID attached to the Java process agent. The faults are injected into the Java process through this ID. | No |
 
 ### Parameters for `exception`

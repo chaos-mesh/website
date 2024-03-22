@@ -135,7 +135,7 @@ kubectl -n helloworld logs -f helloworld
          - helloworld
    ```
 
-JVMChaos 将 `getnum` 方法的返回值修改为数字 `9999`，也就是让 `helloworld` 的每行输出的编号都设置为 `9999`。
+   JVMChaos 将 `getnum` 方法的返回值修改为数字 `9999`，也就是让 `helloworld` 的每行输出的编号都设置为 `9999`。
 
 2. 注入指定返回值的 JVMChaos：
 
