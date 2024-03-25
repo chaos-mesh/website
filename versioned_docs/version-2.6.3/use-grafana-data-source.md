@@ -2,113 +2,148 @@
 title: Use Grafana Data Source Plugin for Observations
 ---
 
-This document describes how to install the Data Source plugin locally in Grafana and make observations using Grafana Data Source.
+This document describes how to install the Data Source plugin for Grafana and setup the plugin to observe Chaos Mesh events.
 
 :::note
 
-- Minimum supported version for Grafana is 7.0.0
-- Minimum supported version for Chaos Mesh is 2.1.0
+This plugin requires Chaos Mesh **>=2.1**, Grafana >= **10.0**.
+
+We only test the plugin on Grafana 10.0.3, it may support lower versions, but we are not sure. Upgrading to Grafana v10 is because of the [Angular support deprecation](https://github.com/chaos-mesh/datasource/issues/55). If you encounter any problems, please open an issue to let us know.
 
 :::
 
-## Install Data Source Plugin using grafana-cli
+## Installation
 
-```shell
- grafana-cli plugins install chaosmeshorg-datasource
+### With dashboard
+
+[https://grafana.com/docs/grafana/latest/administration/plugin-management/#install-a-plugin](https://grafana.com/docs/grafana/latest/administration/plugin-management/#install-a-plugin)
+
+### With cli
+
+```sh
+grafana-cli plugins install chaosmeshorg-datasource
 ```
 
-## Manual installation
+### Manual installation
 
-As an alternative, you can also install the Data Source plugin locally in Grafana by following these steps:
+Download the plugin zip package with the following command or go to https://github.com/chaos-mesh/datasource/releases to download:
 
-1. Download the plugin zip package with the following command, or visit https://github.com/chaos-mesh/datasource/releases to download the package:
+```shell
+curl -LO https://github.com/chaos-mesh/datasource/releases/download/v3.0.0/chaosmeshorg-datasource-3.0.0.zip
+```
 
-   ```shell
-   curl -LO https://github.com/chaos-mesh/datasource/releases/download/v2.2.3/chaosmeshorg-datasource-2.2.3.zip
-   ```
+After downloading, unzip:
 
-   After downloading, extract the plugin to the Grafana plugin directory:
+```shell
+unzip chaosmeshorg-datasource-3.0.0.zip -d YOUR_PLUGIN_DIR
+```
 
-   ```shell
-   unzip chaosmeshorg-datasource-2.2.3.zip -d YOUR_PLUGIN_DIR
-   ```
+:::tip
 
-   :::tip
+To find the plugin directory, refer to https://grafana.com/docs/grafana/latest/plugins/installation/#install-a-packaged-plugin.
 
-   To find the plugin directory, refer to https://grafana.com/docs/grafana/latest/plugins/installation/#install-a-packaged-plugin.
+:::
 
-   :::
+Then update and save the `grafana.ini` file:
 
-2. Update and save the configuration file `grafana.ini` of Grafana. Then, add the plugin to `allow_loading_unsigned_plugins` to ensure that Grafana can load the unsigned plugin:
+```ini
+[plugins]
+  allow_loading_unsigned_plugins = chaosmeshorg-datasource
+```
 
-   ```ini
-   [plugins]
-     allow_loading_unsigned_plugins = chaosmeshorg-datasource
-   ```
+:::tip
 
-   :::tip
+To find the configuration file, refer to https://grafana.com/docs/grafana/latest/administration/configuration/#config-file-locations.
 
-   To find the configuration file, refer to https://grafana.com/docs/grafana/latest/administration/configuration/#config-file-locations.
+:::
 
-   :::
+Finally, restart Grafana to load the plugin.
 
-3. Finally, restart Grafana to load the Data Source plugin.
+## Setup
 
-## Set up Data Source Plugin
+Once installed, go to **Administration -> Data sources** and add Chaos Mesh, then go to the configuration page:
 
-1. After you have successfully installed the Data Source plugin locally in Grafana, go to **Configuration -> Data sources** and add Chaos Mesh to there, then visit the following configuration page:
+![Settings](img/grafana/settings.png)
 
-   ![Configuration page](img/grafana/settings.png)
+Assuming you have Chaos Mesh installed locally, the Chaos Dashboard will export the API on port `2333` by default. So, if you haven't changed anything, you can fill in `http://localhost:2333`.
 
-   On this page, only the `URL` field needs to be filled in, and the other fields can be ignored.
+Then use the `port-forward` command to make the API externally accessible:
 
-   Suppose that you have installed Chaos Mesh locally. In this case, Dashboard exports the API on port `2333` by default. Therefore, if you have not changed anything, you can write `http://localhost:2333` in `URL`.
+```shell
+kubectl port-forward -n chaos-mesh svc/chaos-dashboard 2333:2333
+```
 
-2. Then use the `port-forward` command to make the API externally accessible:
+Finally, click **Save & test** to test the connection. If it shows a successful notification, the setup is complete.
 
-   ```shell
-   kubectl port-forward -n chaos-mesh svc/chaos-dashboard 2333:2333
-   ```
+### Authentication
 
-3. Click **Save & Test** to test the connection. If it shows a successful notification, the set-up is complete.
+If you deploy Chaos Mesh with [permission authentication](./manage-user-permissions.md), you need to add the `Authorization` header to the configuration. You can follow the steps below to add the header:
+
+1. Click the **Add header** button.
+2. Fill in the `Authorization` in the **Header** field.
+3. Follow [this section](./manage-user-permissions.md#get-the-token) to get the token.
+4. Fill in the `Bearer YOUR_TOKEN` in the **Value** field.
+
+Then don't forget to click **Save & test** to test the connection.
 
 ## Query
 
-The Data Source plugin observes Chaos Mesh from the perspective of events. The following options are responsible for filtering different events:
+The data source plugin looks at the Chaos Mesh through the lens of events, and the following options are responsible for filtering the different events:
 
-- `Object ID`: Filter by object UUID
-- `Namespace`: Filter by different namespace
-- `Name`: Filter by object name
-- `Kind`: Filter by kind (PodChaos, Schedule, and so on)
-- `Limit`: Limit the number of events
+- **Object ID**
 
-The settings for these options are passed as parameters to the `/api/events` API.
+  > Filter by object uuid.
 
-## Annotations
+- **Namespace**
 
-You can integrate Chaos Mesh events into the panel by setting up Annotations. For example:
+  > Filter by different namespace.
 
-![Annotations](img/grafana/annotations.png)
+- **Name**
 
-For information on how to fill in the fields in annotations, refer to [Query](#query).
+  > Filter by object name.
+
+- **Kind**
+
+  > Filter by kind (PodChaos, NetworkChaos, Schedule...). You can also input an arbitrary kind if you implement a new kind in Chaos Mesh.
+
+- **Limit**
+
+  > Limit the number of events.
+
+All of them will be passed as parameters to the `/api/events` API.
 
 ## Variables
 
-You can query Chaos Mesh for events dynamically by setting different variables.
+The data source plugin supports adding query variables by different metrics:
 
-![Variables](https://raw.githubusercontent.com/chaos-mesh/datasource/master/src/img/variables.png)
+![Variables](img/grafana/variables.png)
 
-The types of variables provided by the plugin are as follows:
+- **Namespace**
 
-- `Namespace`: After your selection, all available namespaces are displayed directly at the bottom of the page under `Preview of values`.
-- `Kind`: Same as **Namespace**. It can get all kinds.
-- `Experiment`: Same as **Namespace**. It can get the names of all experiments.
-- `Schedule`: Same as **Namespace**. It can get the names of all schedules.
+  > After selection, all available namespaces will show in the **Preview of values** directly.
+
+- **Kind**
+
+  > Same as **Namespace**. Retrieve all kinds.
+
+- **Experiment/Schedule/Workflow**
+
+  > Same as **Namespace**. Retrieve current all experiments/schedules/workflows.
+  >
+  > You can also specify the `queries` to further filter the values, for example, `?namespace=default` will only retrieve the experiments/schedules/workflows in the `default` namespace.
+
+## Annotations
+
+You can integrate events into panels via annotations, the following is a sample creation, it will retrieve all PodChaos events:
+
+![Annotations](img/grafana/annotations.png)
+
+Please refer to [Query](#query) to fill in the corresponding fields.
 
 ## Questions and feedback
 
-If you encounter problems during installation or set-up, you are welcome to ask questions to the community at [CNCF Slack](https://cloud-native.slack.com/archives/C0193VAV272), or create an [GitHub issue](https://github.com/chaos-mesh/datasource/issues) to communicate with the Chaos Mesh team.
+If you encounter problems during installation or setup, you are welcome to ask questions to the community at [CNCF Slack](https://cloud-native.slack.com/archives/C0193VAV272), or create an [GitHub issue](https://github.com/chaos-mesh/datasource/issues) to communicate with the Chaos Mesh team.
 
 ## What's next
 
-If you want to learn more details about the Data Source plugin, feel free to check out the source code for the plugin at [chaos-mesh/datasource](https://github.com/chaos-mesh/datasource).
+If you want to learn more details about the Data Source plugin, feel free to check out the source code at [chaos-mesh/datasource](https://github.com/chaos-mesh/datasource).

@@ -2,7 +2,7 @@
 title: Use Grafana Data Source Plugin for Observations
 ---
 
-This document describes how to install the Data Source plugin locally in Grafana and make observations using Grafana Data Source.
+This document describes how to install the Data Source plugin for Grafana and set up the plugin to observe Chaos Mesh events.
 
 :::note
 
