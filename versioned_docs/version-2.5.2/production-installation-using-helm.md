@@ -36,7 +36,7 @@ If your actual output is similar to the expected output with `Version`, `GitComm
 
 :::note
 
-In this document, Helm v3 is used in commands to make operations on Chaos Mesh. If Helm v2 is used in your environment, refer to [Migrate Helm v2 to v3](https://helm.sh/docs/topics/v2_v3_migration/) or modify the Helm version to the v2 format.
+In this document, Helm v3 is used in commands to make operations on Chaos Mesh. If Helm v2 is used in your environment, refer to [Migrating Helm v2 to v3](https://helm.sh/docs/topics/v2_v3_migration/) or modify the Helm version to the v2 format.
 
 :::
 
