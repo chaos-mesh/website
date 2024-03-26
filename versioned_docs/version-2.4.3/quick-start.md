@@ -2,6 +2,10 @@
 title: Quick Start
 ---
 
+import Tabs from '@theme/Tabs'
+
+import TabItem from '@theme/TabItem'
+
 import PickVersion from '@site/src/components/PickVersion'
 
 import VerifyInstallation from './common/verify-installation.md'
@@ -32,39 +36,41 @@ Please ensure that the Kubernetes cluster is deployed in the environment before 
 
 To install Chaos Mesh in a test environment, run the following script:
 
-<PickVersion>
-{`curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash`}
-</PickVersion>
+<!-- prettier-ignore -->
+<Tabs defaultValue="k8s" values={[
+  {label: 'K8s', value: 'k8s'},
+  {label: 'kind', value: 'kind'},
+  {label: 'K3s', value: 'k3s'},
+  {label: 'MicroK8s', value: 'microk8s'}
+]}>
+  <TabItem value="k8s">
+    <PickVersion>
+    {`curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash`}
+    </PickVersion>
+  </TabItem>
+  <TabItem value="kind">
+    <PickVersion>{`curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --local kind`}</PickVersion>
 
-:::note
+    If you want to specify a `kind` version, add the `--kind-version xx` parameter at the end of the script, for example:
 
-- If the current environment is [kind](https://kind.sigs.k8s.io/), add the `--local kind` parameter at the end of the script.
+    <PickVersion>
+    {`curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --local kind --kind-version v0.20.0`}
+    </PickVersion>
 
-  <PickVersion>
-  {`curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --local kind`}
-  </PickVersion>
+  </TabItem>
+  <TabItem value="k3s">
+    <PickVersion>
+    {`curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --k3s`}
+    </PickVersion>
+  </TabItem>
+  <TabItem value="microk8s">
+    <PickVersion>
+    {`curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --microk8s`}
+    </PickVersion>
+  </TabItem>
+</Tabs>
 
-  If you want to specify a `kind` version, add the `--kind-version xx` parameter at the end of the script, for example:
-
-  <PickVersion>
-  {`curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --local kind --kind-version v0.20.0`}
-  </PickVersion>
-
-- If the current environment is [K3s](https://k3s.io/), add the `--k3s` parameter at the end of the script.
-
-  <PickVersion>
-  {`curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --k3s`}
-  </PickVersion>
-
-- If the current environment is [Microk8s](https://microk8s.io/), add the `--microk8s` parameter at the end of the script.
-
-  <PickVersion>
-  {`curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --microk8s`}
-  </PickVersion>
-
-:::
-
-After running this script, Chaos Mesh automatically installs the CustomResourceDefining (CRD) that matches the version, all required components, and related Service Account configurations.
+After running, Chaos Mesh will automatically install the appropriate version of CustomResourceDefinitions and the required components.
 
 For more installation details, refer to the source code of the [`install.sh`](https://github.com/chaos-mesh/chaos-mesh/blob/master/install.sh).
 
