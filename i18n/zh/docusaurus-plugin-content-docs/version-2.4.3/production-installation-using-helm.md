@@ -10,9 +10,9 @@ import PickVersion from '@site/src/components/PickVersion'
 
 import PickHelmVersion from '@site/src/components/PickHelmVersion'
 
-import VerifyInstallation from './common/verify-installation.md'
+import VerifyInstallation from './common/\_verify-installation.md'
 
-import QuickRun from './common/quick-run.md'
+import QuickRun from './common/\_quick-run.md'
 
 本篇文档描述如何在生产环境安装 Chaos Mesh。
 

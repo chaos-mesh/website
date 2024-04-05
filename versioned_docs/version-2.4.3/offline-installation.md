@@ -6,9 +6,9 @@ import PickVersion from '@site/src/components/PickVersion'
 
 import PickHelmVersion from '@site/src/components/PickHelmVersion'
 
-import VerifyInstallation from './common/verify-installation.md'
+import VerifyInstallation from './common/\_verify-installation.md'
 
-import QuickRun from './common/quick-run.md'
+import QuickRun from './common/\_quick-run.md'
 
 This document describes how to install Chaos Mesh offline.
 

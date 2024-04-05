@@ -8,9 +8,9 @@ import TabItem from '@theme/TabItem'
 
 import PickVersion from '@site/src/components/PickVersion'
 
-import VerifyInstallation from './common/verify-installation.md'
+import VerifyInstallation from './common/\_verify-installation.md'
 
-import QuickRun from './common/quick-run.md'
+import QuickRun from './common/\_quick-run.md'
 
 This document describes how to start Chaos Mesh quickly in a test or local environment.
 
