@@ -42,9 +42,9 @@ const config = {
     [
       'classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
-      {
-        googleAnalytics: {
-          trackingID: 'UA-90760217-2',
+      ({
+        gtag: {
+          trackingID: 'G-T31S4LR9LL',
         },
         docs: {
           sidebarPath: './sidebars.js',
@@ -63,7 +63,7 @@ const config = {
         theme: {
           customCss: './src/styles/custom.css',
         },
-      },
+      }),
     ],
   ],
 
