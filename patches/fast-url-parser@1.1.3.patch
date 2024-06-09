@@ -1,0 +1,13 @@
+diff --git a/src/urlparser.js b/src/urlparser.js
+index a78d7f50043a835ce7242fd81cc02ff622a04581..263c5944eea13ab6784a0608890536c5f2303678 100644
+--- a/src/urlparser.js
++++ b/src/urlparser.js
+@@ -398,7 +398,7 @@ Url.prototype.resolveObject = function Url$resolveObject(relative) {
+     return result;
+ };
+ 
+-var punycode = require("punycode");
++var punycode = require("punycode/");
+ Url.prototype._hostIdna = function Url$_hostIdna(hostname) {
+     // IDNA Support: Returns a punycoded representation of "domain".
+     // It only converts parts of the domain name that

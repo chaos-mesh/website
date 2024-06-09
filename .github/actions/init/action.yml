@@ -3,12 +3,10 @@ name: Init environment
 runs:
   using: 'composite'
   steps:
-    - uses: pnpm/action-setup@v2.2.4
+    - uses: pnpm/action-setup@v4
+    - uses: actions/setup-node@v4
       with:
-        version: 8
-    - uses: actions/setup-node@v3
-      with:
-        node-version: 18
+        node-version: 20
         cache: 'pnpm'
 
     - name: Install dependencies
