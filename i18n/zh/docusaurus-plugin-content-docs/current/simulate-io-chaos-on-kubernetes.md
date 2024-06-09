@@ -186,7 +186,7 @@ IOChaos 是 Chaos Mesh 中的一种故障类型。通过创建 IOChaos 类型的
 | value | string | 取决与 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 Pod 的百分比 | 无 | 否 | 1 |
 | volumePath | string | volume 在目标容器内的挂载点，必须为挂载的根目录 |  | 是 | /var/run/etcd |
 | path | string | 注入错误的生效范围，可以是通配符，也可以是单个文件 | 默认对所有文件生效 | 否 | /var/run/etcd/\*_/_ |
-| methods | []string | 需要注入故障的文件系统调用类型，具体支持的类型见[附录 A](#附录-a：methods-类型) | 所有类型 | 否 | READ |
+| methods | []string | 需要注入故障的文件系统调用类型，具体支持的类型见[附录 A](#附录-amethods-类型) | 所有类型 | 否 | READ |
 | percent | int | 每次操作发生故障的概率，单位为% | 100 | 否 | 100 |
 | containerNames | []string | 指定注入的容器名 |  | 否 |  |
 | duration | string | 指定具体实验的持续时间 |  | 是 | 30s |
@@ -207,7 +207,7 @@ IOChaos 是 Chaos Mesh 中的一种故障类型。通过创建 IOChaos 类型的
   | ----- | ---- | ------------ | ------ | -------- | ---- |
   | errno | int  | 返回的错误号 |        | 是       | 22   |
 
-  常见的错误号见[附录 B](#附录-b：常见错误号)
+  常见的错误号见[附录 B](#附录-b常见错误号)
 
 - attrOverride
 
