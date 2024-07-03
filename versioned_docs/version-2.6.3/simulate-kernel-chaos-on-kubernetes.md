@@ -15,7 +15,7 @@ The simulation of Linux kernel faults is disabled by default. Do not use this fe
 ## Prerequisites
 
 - Linux kernel version >= 4.18.
-- The Linux kernel configuration [CONFOG_BPF_KPROBE_OVERRIDE](https://cateee.net/lkddb/web-lkddb/BPF_KPROBE_OVERRIDE.html) is enabled.
+- The Linux kernel configuration [CONFIG_BPF_KPROBE_OVERRIDE](https://cateee.net/lkddb/web-lkddb/BPF_KPROBE_OVERRIDE.html) is enabled.
 - The `bpfki.create` configuration value in [values.yaml](https://github.com/chaos-mesh/chaos-mesh/blob/master/helm/chaos-mesh/values.yaml) is `true`.
 
 ## Configuration file

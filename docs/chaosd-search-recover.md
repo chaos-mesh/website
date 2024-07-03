@@ -3,7 +3,7 @@ title: Search and Recover Experiments of Chaosd
 summary: Describes how to search and recover the experiments of Chaosd, and provide related examples.
 ---
 
-You can search experiments by conditions and recover the experiments corresponding to specified UIDs using Chaosd. This document describes how to search and recover experiments of Chaosd, and provides releated examples.
+You can search experiments by conditions and recover the experiments corresponding to specified UIDs using Chaosd. This document describes how to search and recover experiments of Chaosd, and provides related examples.
 
 ## Search experiments of Chaosd
 

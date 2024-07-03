@@ -191,7 +191,7 @@ Global Flags:
 | Configuration item | Abbreviation | Description | Value |
 | :-- | :-- | :-- | :-- |
 | `class` | `c` | The name of the Java class | string type, required |
-| `latency` | None | The duration of increasing method latency | int type, required. The unit is milisecond. |
+| `latency` | None | The duration of increasing method latency | int type, required. The unit is millisecond. |
 | `method` | `m` | The name of the method | string type, required |
 | `pid` | None | The Java process ID where the fault is to be injected | int type, required |
 | `port` | None | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int type. The default value is `9288`. |
@@ -471,7 +471,7 @@ Triggering garbage collection is a one-time operation. The experiment does not r
 | :-- | :-- | :-- |
 | `action` | The action of the experiment | Set to "latency" |
 | `class` | The name of the Java class | string type, required |
-| `latency` | The duration of increasing method latency | int type, required. The unit is milisecond. |
+| `latency` | The duration of increasing method latency | int type, required. The unit is millisecond. |
 | `method` | The name of the method | string type, required |
 | `pid` | The Java process ID where the fault is to be injected | int type, required |
 | `port` | The Java process ID where the fault is needed to be injected | int type, required |
@@ -517,7 +517,7 @@ The result is as follows:
 
 ### Trigger faults by setting Byteman configuration files using service mode
 
-You can set the fault rules according to the Byteman rule configuration. Regarding to the Byteman rule configuration, refer to [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language).
+You can set the fault rules according to the Byteman rule configuration. For more information about the Byteman rule configuration,, refer to [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language).
 
 #### Parameters for triggering faults by setting Byteman configuration files
 

@@ -182,7 +182,7 @@ For different `action` values, there are different configuration items that can 
 | --- | --- | --- | --- |
 | `class` | string | The name of the Java class | Yes |
 | `method` | string | The name of the method | Yes |
-| `latency` | int | The duration of increasing method latency. The unit is milisecond. | Yes |
+| `latency` | int | The duration of increasing method latency. The unit is millisecond. | Yes |
 | `port` | int | The port ID attached to the Java process agent. The faults are injected into the Java process through this ID. | No |
 
 ### Parameters for `return`
@@ -221,7 +221,7 @@ For different `action` values, there are different configuration items that can 
 
 | Parameter | Type | Description | Required |
 | --- | --- | --- | --- |
-| `ruleData` | srting | Specifies the Byteman configuration data | Yes |
+| `ruleData` | string | Specifies the Byteman configuration data | Yes |
 | `port` | int | The port ID attached to the Java process agent. The faults are injected into the Java process through this ID. | No |
 
 When you write the rule configuration file, take into account the specific Java program and the [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language). For example:
