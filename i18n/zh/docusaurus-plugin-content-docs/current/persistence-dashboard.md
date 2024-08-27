@@ -42,7 +42,7 @@ dashboard:
     subPath: ""
 ```
 
-:::warning 注意
+:::warning 警告
 
 如果不配置 PV 的情况下，Chaos Dashboard 发生重启，数据将出现丢失，并且无法找回。
 
