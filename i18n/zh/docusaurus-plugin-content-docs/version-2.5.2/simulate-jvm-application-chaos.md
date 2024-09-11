@@ -224,7 +224,7 @@ kubectl -n helloworld logs -f helloworld
 
 | 参数       | 类型        | 说明                                                                | 是否必填 |
 | ---------- | ----------- | ------------------------------------------------------------------- | -------- |
-| `ruleData` | srting 类型 | 指定 Byteman 配置数据                                               | 是       |
+| `ruleData` | string 类型 | 指定 Byteman 配置数据                                               | 是       |
 | `port`     | int 类型    | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | 否       |
 
 当编写规则配置文件时，你需要根据具体的 Java 程序，并参考 [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language)。例如：

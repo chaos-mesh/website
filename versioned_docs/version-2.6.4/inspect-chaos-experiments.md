@@ -87,7 +87,7 @@ The above output contains two parts:
   - `Paused`: indicates the chaos experiment is in the "Paused" step.
   - `Selected`: indicates the chaos experiment had correctly selected the target pods where to inject chaos actions.
   - `AllInjected`: indicates the faults have been successfully injected to all target pods.
-  - `AllRecoverd`: indicates the injected faults have been succesfully restored from all target pods.
+  - `AllRecoverd`: indicates the injected faults have been successfully restored from all target pods.
 
   The actual running status of current chaos experiments can be inferred from these four types of status records. For example:
 

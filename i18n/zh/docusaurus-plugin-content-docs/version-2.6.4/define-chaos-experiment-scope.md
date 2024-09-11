@@ -179,8 +179,8 @@ spec:
   selector:
     physicalMachines:
       default: # namespace of the target PhysicalMachines
-        - physcial-machine-a
-        - physcial-machine-b
+        - physical-machine-a
+        - physical-machine-b
 ```
 
 ## 在 Dashboard 上定义实验范围
