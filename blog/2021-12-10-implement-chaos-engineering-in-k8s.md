@@ -1,10 +1,7 @@
 ---
 slug: /implement-chaos-engineering-in-k8s
 title: 'Implementing Chaos Engineering in K8s: Chaos Mesh Principle Analysis and Control Plane Development'
-author: Mayo Cream
-author_title: Kubernetes Member, CNCF Security TAG Member, OSS Contributor
-author_url: https://github.com/mayocream
-author_image_url: https://avatars.githubusercontent.com/u/35420264?v=4
+authors: mayocream
 image: /img/blog/implement-chaos-engineering-in-k8s.png
 tags: [Chaos Mesh, Chaos Engineering]
 ---

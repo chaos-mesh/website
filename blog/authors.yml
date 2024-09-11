@@ -1,0 +1,77 @@
+chaos-mesh:
+  name: Chaos Mesh Authors
+  title: All maintainers of Chaos Mesh
+  url: https://github.com/chaos-mesh
+  image_url: https://avatars.githubusercontent.com/u/59082378?v=4
+  socials:
+    x: chaos_mesh
+cwen:
+  name: Cwen Yin
+  title: Maintainer of Chaos Mesh
+  url: https://github.com/cwen0
+  image_url: https://avatars.githubusercontent.com/u/22956341?v=4
+  email: cwenyin0@gmail.com
+  socials:
+    x: CWenYin
+xiangwang:
+  name: Xiang Wang
+  title: Committer of Chaos Mesh
+  url: https://github.com/WangXiangUSTC
+  image_url: https://avatars.githubusercontent.com/u/5793595?v=4
+manishdangi:
+  name: Manish Dangi
+  url: https://www.linkedin.com/in/manishdangi
+  image_url: https://avatars.githubusercontent.com/u/43807816?v=4
+huizhang:
+  name: Hui Zhang
+  title: Fuxi Lab, NetEase
+keaoyang:
+  name: Keao Yang
+  title: Maintainer of Chaos Mesh
+  url: https://github.com/YangKeao
+  image_url: https://avatars.githubusercontent.com/u/5244316?v=4
+debabratapanigrahi:
+  name: Debabrata Panigrahi
+  title: LFX Mentee at Chaos Mesh
+  url: https://github.com/Debanitrkl
+  image_url: https://avatars.githubusercontent.com/u/50622005?v=4
+yinghaowang:
+  name: Yinghao Wang
+  title: Contributor of Chaos Mesh
+  url: https://github.com/AsterNighT
+  image_url: https://avatars.githubusercontent.com/u/22937027?v=4
+anuragpaliwal:
+  name: Anurag Paliwal
+  title: Contributor of Chaos Mesh
+  url: https://github.com/anuragpaliwal80
+  image_url: https://avatars.githubusercontent.com/u/3283882?v=4
+shuyangwu:
+  name: Shuyang Wu
+  title: Committer of Chaos Mesh
+  url: https://github.com/Yiyiyimu
+  image_url: https://avatars.githubusercontent.com/u/34589752?v=4
+zhaojunwu:
+  name: Zhaojun Wu
+  title: Senior DevOps Engineer at Tencent Interactive Entertainment Group
+mayocream:
+  name: Mayo Cream
+  title: Kubernetes Member, CNCF Security TAG Member, OSS Contributor
+  url: https://github.com/mayocream
+  image_url: https://avatars.githubusercontent.com/u/35420264?v=4
+ningxuanwang:
+  name: Ningxuan Wang
+  title: Contributor of Chaos Mesh
+  url: https://github.com/FingerLeader
+  image_url: https://avatars.githubusercontent.com/u/43462394?v=4
+leili:
+  name: Lei Li
+  title: Senior software engineer at Digital China
+  url: https://github.com/lileiaab
+  image_url: https://avatars.githubusercontent.com/u/88825087?v=4
+chunxuzhang:
+  name: Chunxu Zhang
+  title: LFX Mentee at Chaos Mesh
+  url: https://github.com/TangliziGit
+  image_url: https://avatars.githubusercontent.com/u/40566218?v=4
+changyu:
+  name: Chang Yu

@@ -1,12 +1,9 @@
 ---
 slug: /deploy-chaos-mesh-on-kubesphere
 title: 'Deploy Chaos Mesh on KubeSphere'
-author: Cwen Yin
-author_title: Chaos Mesh Maintainer
-author_url: https://github.com/cwen0
-author_image_url: https://avatars.githubusercontent.com/u/22956341?v=4
+authors: cwen
 image: /img/blog/chaos-mesh-kubesphere-banner.png
-tags: [Chaos Mesh, Chaos Engineering, community]
+tags: [Chaos Mesh, Chaos Engineering, Community]
 ---
 
 ![Deploy Chaos Mesh on KubeSphere](/img/blog/chaos-mesh-kubesphere-banner.png)

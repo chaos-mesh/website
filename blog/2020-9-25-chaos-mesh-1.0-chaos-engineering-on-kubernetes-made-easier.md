@@ -1,11 +1,9 @@
 ﻿---
 slug: /chaos-mesh-1.0-chaos-engineering-on-kubernetes-made-easier
 title: 'Chaos Mesh 1.0: Chaos Engineering on Kubernetes Made Easier'
-author: Chaos Mesh Maintainers
-author_url: https://github.com/chaos-mesh
-author_image_url: https://avatars1.githubusercontent.com/u/59082378?v=4
+authors: chaos-mesh
 image: /img/blog/chaos-mesh-1.0.png
-tags: [Announcement, Chaos Mesh, Chaos Engineering]
+tags: [Chaos Mesh, Chaos Engineering, Announcement]
 ---
 
 ![Chaos-Mesh-1.0 - Chaos-Engineering-on-Kubernetes-Made-Easier](/img/blog/chaos-mesh-1.0.png)

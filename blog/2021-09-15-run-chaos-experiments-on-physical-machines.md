@@ -1,12 +1,9 @@
 ---
 slug: /run-chaos-experiments-on-physical-machines
 title: 'How to run chaos experiments on your physical machine'
-author: Xiang Wang
-author_title: Chaos Mesh Committer
-author_url: https://github.com/WangXiangUSTC
-author_image_url: https://avatars.githubusercontent.com/u/5793595?v=4
+authors: xiangwang
 image: /img/blog/chaosd-banner.png
-tags: [Chaos Mesh, Chaos Engineering, chaosd]
+tags: [Chaos Mesh, Chaos Engineering, Chaosd]
 ---
 
 ![How to run chaos experiments on your physical machine](/img/blog/chaosd-banner.png)

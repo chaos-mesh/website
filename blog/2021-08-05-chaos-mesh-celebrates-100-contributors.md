@@ -1,11 +1,9 @@
 ---
 slug: /chaos-mesh-celebrates-100th-contributor
 title: 'Chaos Mesh Celebrates 100th Contributor'
-author: Chaos Mesh Maintainers
-author_url: https://github.com/chaos-mesh/chaos-mesh/blob/master/MAINTAINERS.md
-author_image_url: https://avatars1.githubusercontent.com/u/59082378?v=4
+authors: chaos-mesh
 image: /img/blog/chaos-mesh-celebrates-100-contributors.png
-tags: [Chaos Mesh, Chaos Engineering, community]
+tags: [Chaos Mesh, Chaos Engineering, Community]
 ---
 
 ![Chaos Mesh Celebrates 100th Contributor](/img/blog/chaos-mesh-celebrates-100-contributors.png)

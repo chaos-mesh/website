@@ -1,7 +1,7 @@
 ---
 slug: /how-a-top-game-company-uses-chaos-engineering-to-improve-testing
 title: 'How a Top Game Company Uses Chaos Engineering to Improve Testing'
-author: Hui Zhang @ Fuxi Lab, NetEase
+authors: huizhang
 image: /img/blog/fuxi-case-banner.jpg
 tags: [Chaos Mesh, Chaos Engineering]
 ---

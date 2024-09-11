@@ -1,9 +1,7 @@
 ﻿---
 slug: /chaos-mesh-x-hacktoberfest-2020
 title: Chaos Mesh X Hacktoberfest 2020 - An Invitation to Open Source
-author: Chaos Mesh Community
-author_url: https://github.com/chaos-mesh
-author_image_url: https://avatars1.githubusercontent.com/u/59082378?v=4
+authors: chaos-mesh
 image: /img/blog/chaos-mesh-x-hacktoberfest.jpg
 tags: [Chaos Mesh, Chaos Engineering, Open Source]
 ---

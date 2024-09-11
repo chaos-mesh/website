@@ -1,10 +1,7 @@
 ---
 slug: /chaos-mesh-join-cncf-sandbox-project
 title: Chaos Mesh Joins CNCF as a Sandbox Project
-author: Chaos Mesh Authors
-author_title: Maintainer of Chaos Mesh
-author_url: https://github.com/chaos-mesh
-author_image_url: https://avatars1.githubusercontent.com/u/59082378?v=4
+authors: chaos-mesh
 image: /img/blog/chaos-mesh-cncf.png
 tags: [Chaos Mesh, Chaos Engineering, Kubernetes, CNCF, Cloud Native]
 ---

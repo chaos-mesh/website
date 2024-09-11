@@ -1,10 +1,7 @@
 ---
 slug: /experience-as-a-chaos-mesh-lfx-mentee
 title: 'Experience as an LFX Mentee for Chaos Mesh'
-author: Chunxu Zhang
-author_title: LFX mentee
-author_url: https://github.com/TangliziGit
-author_image_url: https://avatars.githubusercontent.com/u/40566218?v=4
+authors: chunxuzhang
 image: /img/blog/lfx-mentee-experience-banner.png
 tags: [Chaos Mesh, Chaos Engineering, LFX Mentorship, Monitoring Metrics]
 ---

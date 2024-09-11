@@ -15,15 +15,15 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@docusaurus/core": "3.4.0",
-    "@docusaurus/preset-classic": "3.4.0",
+    "@docusaurus/core": "3.5.2",
+    "@docusaurus/preset-classic": "3.5.2",
     "@gracefullight/docusaurus-plugin-microsoft-clarity": "^1.0.0",
     "@mdx-js/react": "^3.0.0",
     "clsx": "^2.1.0",
     "gsap": "^3.12.4",
-    "prism-react-renderer": "^2.3.1",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
+    "prism-react-renderer": "^2.4.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "semver": "^7.6.0",
     "typewriter-effect": "^2.21.0"
   },
@@ -40,16 +40,16 @@
     ]
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.4.0",
-    "@docusaurus/types": "3.4.0",
+    "@docusaurus/module-type-aliases": "3.5.2",
+    "@docusaurus/types": "3.5.2",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "autoprefixer": "^10.4.17",
-    "daisyui": "^4.10.1",
+    "daisyui": "^4.12.10",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
     "postcss": "^8.4.35",
     "prettier": "^2.8.7",
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.10"
   },
   "engines": {
     "node": ">=18.0"
