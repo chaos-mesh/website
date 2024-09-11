@@ -1,5 +1,5 @@
 import BrowserOnly from '@docusaurus/BrowserOnly'
-import { useDoc } from '@docusaurus/theme-common/internal'
+import { useDoc } from '@docusaurus/plugin-content-docs/client'
 import TOC from '@theme-original/TOC'
 
 export default function TOCWrapper(props) {

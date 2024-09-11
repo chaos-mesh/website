@@ -1,11 +1,9 @@
 ---
 slug: /share-your-chaos-mesh-story
 title: 'Share your #ChaosMeshStory!'
-author: Chaos Mesh Community
-author_url: https://github.com/chaos-mesh
-author_image_url: https://avatars1.githubusercontent.com/u/59082378?v=4
+authors: chaos-mesh
 image: /img/blog/chaos-mesh-story.jpeg
-tags: [Chaos Mesh, community, event]
+tags: [Chaos Mesh, Community]
 ---
 
 ![Share your #ChaosMeshStory!](/img/blog/chaos-mesh-story.jpeg)

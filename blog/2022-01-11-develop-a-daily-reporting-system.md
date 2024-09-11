@@ -1,12 +1,9 @@
 ---
 slug: /develop-a-daily-reporting-system
 title: 'How to Develop a Daily Reporting System to Track Chaos Testing Results'
-author: Lei Li
-author_title: Senior software engineer at Digital China
-author_url: https://github.com/lileiaab
-author_image_url: https://avatars.githubusercontent.com/u/88825087?v=4
+authors: leili
 image: /img/blog/chaos-mesh-digitalchina-banner.png
-tags: [Chaos Mesh, Chaos Engineering, Use case]
+tags: [Chaos Mesh, Chaos Engineering, Use Cases]
 ---
 
 ![How to Develop a Daily Reporting System to Track Chaos Testing Results](/img/blog/chaos-mesh-digitalchina-banner.png)

@@ -1,10 +1,7 @@
 ---
 slug: /lfx-mentorship-enriching-awschaos
 title: From a Newbie in Software Engineering to a Graduated LFX-Mentee
-author: Debabrata Panigrahi
-author_title: LFX Mentee at Chaos Mesh
-author_url: https://github.com/Debanitrkl
-author_image_url: https://avatars.githubusercontent.com/u/50622005?v=4
+authors: debabratapanigrahi
 image: /img/blog/mentorship_experience.png
 tags: [Chaos Mesh, Chaos Engineering, LFX Mentorship, AWS Chaos]
 ---

@@ -1,10 +1,7 @@
 ---
 slug: /run_your_first_chaos_experiment
 title: Run Your First Chaos Experiment in 10 Minutes
-author: Cwen Yin
-author_title: Maintainer of Chaos Mesh
-author_url: https://github.com/cwen0
-author_image_url: https://avatars1.githubusercontent.com/u/22956341?v=4
+authors: cwen
 image: /img/blog/run-first-chaos-experiment-in-ten-minutes.jpg
 tags: [Chaos Mesh, Chaos Engineering, Kubernetes]
 ---

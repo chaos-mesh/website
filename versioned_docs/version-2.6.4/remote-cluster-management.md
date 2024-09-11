@@ -22,12 +22,12 @@ kind: RemoteCluster
 metadata:
   name: cluster-xxx
 spec:
-  namespace: 'chaos-mesh'
-  version: '2.6.2'
+  namespace: chaos-mesh
+  version: 2.6.2
   kubeConfig:
     secretRef:
       name: remote-chaos-mesh.kubeconfig
-      namespace: default
+      namespace: chaos-mesh
       key: kubeconfig
   # configOverride:
   #   dashboard:

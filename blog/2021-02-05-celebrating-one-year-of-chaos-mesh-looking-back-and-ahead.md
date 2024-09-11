@@ -1,10 +1,7 @@
 ---
 slug: /celebrating-one-year-of-chaos-mesh-looking-back-and-ahead
 title: 'Celebrating One Year of Chaos Mesh: Looking Back and Ahead'
-author: Cwen Yin, Calvin Weng
-author_title: Maintainer of Chaos Mesh
-author_url: https://github.com/chaos-mesh/chaos-mesh/blob/master/MAINTAINERS.md
-author_image_url: https://avatars1.githubusercontent.com/u/59082378?v=4
+authors: chaos-mesh
 image: /img/blog/celebrating-one-year-of-chaos-mesh-looking-back-and-ahead.jpg
 tags: [Chaos Mesh, Chaos Engineering]
 ---

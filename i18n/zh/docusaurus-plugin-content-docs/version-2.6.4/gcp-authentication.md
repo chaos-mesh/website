@@ -20,12 +20,29 @@ title: GCP OAuth 验证
 
 ## 填写配置并启动 Chaos Mesh
 
+:::info
+
+更新：从 `v2.7.0` 开始，你可以通过提供一个 **Secret** 来存储 Client ID 与 Client Secret。**我们推荐你使用这种方式**。
+
+这一改动是为了避免将 Client ID 与 Client Secret 暴露在公共环境中。在之前的版本中，Client ID 与 Client Secret 是直接写在 values 中的，这一做法在一般情况下是不安全的。
+
+了解更多信息请参考 https://github.com/chaos-mesh/chaos-mesh/issues/4206。
+
+:::
+
 要启动这项功能，需要打开 Chaos Mesh 的 helm charts ，设置以下配置项：
 
-1. `dashboard.gcpSecurityMode` 需要设置为 `true`
-2. `dashboard.gcpClientId` 需要设置为上一步骤中获得的 Client ID
-3. `dashboard.gcpClientSecret` 需要设置为上一步骤中获得的 Client Secret
-4. `dashboard.rootUrl` 需要设置为 Chaos Dashboard 的根地址
+```yaml
+dashboard:
+  rootUrl: http://localhost:2333
+  gcpSecurityMode:
+    enabled: true
+    # Old configuration items for compatibility.
+    clientId: ''
+    clientSecret: ''
+    # References existing Kubernetes secret containing `GCP_CLIENT_ID` and `GCP_CLIENT_SECRET`.
+    existingSecret: ''
+```
 
 如果已经安装并运行了 Chaos Mesh，可以通过 `helm upgrade` 命令来更新配置；如果还未安装 Chaos Mesh，则可以通过 `helm install` 进行安装。
 

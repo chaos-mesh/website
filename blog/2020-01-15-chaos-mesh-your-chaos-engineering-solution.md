@@ -1,10 +1,7 @@
 ---
 slug: /chaos_mesh_your_chaos_engineering_solution
 title: Chaos Mesh - Your Chaos Engineering Solution for System Resiliency on Kubernetes
-author: Cwen Yin
-author_title: Maintainer of Chaos Mesh
-author_url: https://github.com/cwen0
-author_image_url: https://avatars1.githubusercontent.com/u/22956341?v=4
+authors: cwen
 image: /img/blog/chaos-engineering.png
 tags: [Chaos Mesh, Chaos Engineering, Kubernetes]
 ---
@@ -232,22 +229,24 @@ In the [test-infra](https://github.com/pingcap/tipocket/tree/35206e8483b66f9728b
 
 The following is a Chaos Mesh sample script using the Kubernetes API:
 
-```
+```go
 import (
-    "context"
+  "context"
 
- "github.com/chaos-mesh/chaos-mesh/api/v1alpha1"
-    "sigs.k8s.io/controller-runtime/pkg/client"
+  "github.com/chaos-mesh/chaos-mesh/api/v1alpha1"
+  "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
 func main() {
-  ...
+  // ...
   delay := &chaosv1alpha1.NetworkChaos{
-  Spec: chaosv1alpha1.NetworkChaosSpec{...},
-      }
-      k8sClient := client.New(conf, client.Options{ Scheme: scheme.Scheme })
+    Spec: chaosv1alpha1.NetworkChaosSpec{
+      // ...
+    },
+  }
+  k8sClient := client.New(conf, client.Options{ Scheme: scheme.Scheme })
   k8sClient.Create(context.TODO(), delay)
-      k8sClient.Delete(context.TODO(), delay)
+  k8sClient.Delete(context.TODO(), delay)
 }
 ```
 

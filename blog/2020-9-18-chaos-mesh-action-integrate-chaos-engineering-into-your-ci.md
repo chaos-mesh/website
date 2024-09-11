@@ -1,12 +1,9 @@
 ---
 slug: /chaos-mesh-action-integrate-chaos-engineering-into-your-ci
 title: 'chaos-mesh-action: Integrate Chaos Engineering into Your CI'
-author: Xiang Wang
-author_title: Contributor of Chaos Mesh
-author_url: https://github.com/WangXiangUSTC
-author_image_url: https://avatars3.githubusercontent.com/u/5793595?v=4
+authors: xiangwang
 image: /img/blog/chaos-mesh-action.png
-tags: [Chaos Mesh, Chaos Engineering, GitHub Action, CI]
+tags: [Chaos Mesh, Chaos Engineering, GitHub Actions, CI]
 ---
 
 ![chaos-mesh-action - Integrate Chaos Engineering into Your CI](/img/blog/chaos-mesh-action.png)
@@ -21,9 +18,9 @@ chaos-mesh-action is available on [GitHub market](https://github.com/marketplace
 
 ## Design of chaos-mesh-action
 
-[GitHub Action](https://docs.github.com/en/actions) is a CI/CD feature natively supported by GitHub, through which we can easily build automated and customized software development workflows in the GitHub repository.
+[GitHub Actions](https://docs.github.com/en/actions) is a CI/CD feature natively supported by GitHub, through which we can easily build automated and customized software development workflows in the GitHub repository.
 
-Combined with GitHub actions, Chaos Mesh can be more easily integrated into the daily development and testing of the system, thus guaranteeing that each code submission on GitHub is bug-free and won’t damage existing code. The following figure shows chaos-mesh-action integrated into the CI workflow:
+Combined with GitHub Actions, Chaos Mesh can be more easily integrated into the daily development and testing of the system, thus guaranteeing that each code submission on GitHub is bug-free and won’t damage existing code. The following figure shows chaos-mesh-action integrated into the CI workflow:
 
 ![chaos-mesh-action integration in the CI workflow](/img/blog/chaos-mesh-action-integrate-in-the-ci-workflow.png)
 

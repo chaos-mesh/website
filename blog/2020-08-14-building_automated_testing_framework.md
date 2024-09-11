@@ -1,10 +1,7 @@
 ---
 slug: /building_automated_testing_framework
 title: Building an Automated Testing Framework Based on Chaos Mesh and Argo
-author: Ben Ye, Chengwen Yin
-author_title: Maintainer of Chaos Mesh
-author_url: https://github.com/chaos-mesh/chaos-mesh/blob/master/MAINTAINERS.md
-author_image_url: https://avatars1.githubusercontent.com/u/59082378?v=4
+authors: chaos-mesh
 image: /img/blog/automated_testing_framework.png
 tags: [Chaos Mesh, Chaos Engineering, Test Automation]
 ---

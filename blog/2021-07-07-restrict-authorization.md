@@ -1,10 +1,7 @@
 ---
 slug: /securing-tenant-namespaces-using-restrict-authorization-feature
 title: 'Securing tenant namespaces using restrict authorization feature in Chaos Mesh'
-author: Anurag Paliwal
-author_title: Contributor of Chaos Mesh
-author_url: https://github.com/anuragpaliwal80
-author_image_url: https://avatars.githubusercontent.com/u/3283882?v=4
+authors: anuragpaliwal
 image: /img/blog/chaos-engineering-tools-as-a-service.jpeg
 tags: [Chaos Mesh, Chaos Engineering]
 ---

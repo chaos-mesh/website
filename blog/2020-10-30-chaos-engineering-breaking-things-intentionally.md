@@ -1,9 +1,7 @@
 ---
 slug: /chaos-engineering-breaking-things-intentionally
 title: Chaos Engineering - Breaking things Intentionally
-author: Manish Dangi
-author_url: https://www.linkedin.com/in/manishdangi/
-author_image_url: https://avatars1.githubusercontent.com/u/43807816?s=400
+authors: manishdangi
 image: /img/blog/chaos-engineering2.png
 tags: [Chaos Engineering, Chaos Mesh, Open Source]
 ---

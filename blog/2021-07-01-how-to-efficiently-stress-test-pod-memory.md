@@ -1,10 +1,7 @@
 ---
 slug: /how-to-efficiently-stress-test-pod-memory
 title: 'How to efficiently stress test Pod memory'
-author: Yinghao Wang
-author_title: Contributor of Chaos Mesh
-author_url: https://github.com/AsterNighT
-author_image_url: https://avatars.githubusercontent.com/u/22937027?v=4
+authors: yinghaowang
 image: /img/blog/how-to-efficiently-stress-test-pod-memory-banner.jpg
 tags: [Chaos Mesh, Chaos Engineering, StressChaos, Stress Testing]
 ---

@@ -1,10 +1,9 @@
 ---
 slug: /chaos-mesh-remake-one-step-closer-towards-chaos-as-a-service
 title: 'Chaos Mesh Remake: One Step Closer toward Chaos as a Service'
-author: Chang Yu, Xiang Wang
-author_title: Contributor of Chaos Mesh
-author_url: https://github.com/chaos-mesh/chaos-mesh/blob/master/MAINTAINERS.md
-author_image_url: https://avatars1.githubusercontent.com/u/59082378?v=4
+authors:
+  - xiangwang
+  - changyu
 image: /img/blog/chaos-engineering-tools-as-a-service.jpeg
 tags: [Chaos Mesh, Chaos Engineering]
 ---

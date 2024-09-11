@@ -1,11 +1,9 @@
 ---
 slug: /chaos-mesh-hacktoberfest-2021
 title: 'Hacktoberfest 2021: hack with Chaos Mesh!'
-author: Chaos Mesh Community
-author_url: https://github.com/chaos-mesh
-author_image_url: https://avatars1.githubusercontent.com/u/59082378?v=4
+authors: chaos-mesh
 image: /img/blog/chaos-mesh-hacktoberfest-2021.png
-tags: [Chaos Mesh, Chaos Engineering, open source]
+tags: [Chaos Mesh, Chaos Engineering, Open Source]
 ---
 
 ![Chaos Mesh x Hacktoberfest 2021](/img/blog/chaos-mesh-hacktoberfest-2021.png)

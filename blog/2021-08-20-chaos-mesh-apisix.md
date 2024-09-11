@@ -1,10 +1,7 @@
 ---
 slug: /How-Chaos-Mesh-Helps-Apache-APISIX-Improve-System-Stability
 title: 'How Chaos Mesh Helps Apache APISIX Improve System Stability'
-author: Shuyang Wu
-author_title: Chaos Mesh Committer
-author_url: https://github.com/Yiyiyimu
-author_image_url: https://avatars.githubusercontent.com/u/34589752?v=4
+authors: shuyangwu
 image: /img/blog/chaos-mesh-apisix.jpeg
 tags: [Chaos Mesh, Chaos Engineering]
 ---

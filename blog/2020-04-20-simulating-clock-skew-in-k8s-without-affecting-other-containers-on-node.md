@@ -1,10 +1,7 @@
 ---
 slug: /simulating-clock-skew-in-k8s-without-affecting-other-containers-on-node
 title: Simulating Clock Skew in K8s Without Affecting Other Containers on the Node
-author: Cwen Yin
-author_title: Maintainer of Chaos Mesh
-author_url: https://github.com/cwen0
-author_image_url: https://avatars1.githubusercontent.com/u/22956341?v=4
+authors: cwen
 image: /img/blog/clock-sync-chaos-engineering-k8s.jpg
 tags: [Chaos Mesh, Chaos Engineering, Kubernetes, Distributed System]
 ---

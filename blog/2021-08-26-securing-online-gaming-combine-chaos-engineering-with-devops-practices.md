@@ -1,11 +1,9 @@
 ---
 slug: /Securing-Online-Gaming-Combine-Chaos-Engineering-with-DevOps-Practices
 title: 'Securing Online Gaming: Combine Chaos Engineering with DevOps Practices'
-author: Zhaojun Wu
-author_title: Senior DevOps Engineer at Tencent Interactive Entertainment Group
-author_image_url: https://avatars1.githubusercontent.com/u/59082378?v=4
+authors: zhaojunwu
 image: /img/blog/chaos-mesh-tencent-ieg.jpeg
-tags: [Chaos Mesh, Chaos Engineering, Use case]
+tags: [Chaos Mesh, Chaos Engineering, Use Cases]
 ---
 
 ![Securing Online Gaming: Combine Chaos Engineering with DevOps Practices](/img/blog/chaos-mesh-tencent-ieg.jpeg)

@@ -1,9 +1,7 @@
 ---
 slug: /chaos-mesh-qa-at-kubecon-eu-2022
 title: 'Chaos Mesh Q&A at KUBECON EU 2022'
-author: Chaos Mesh Community
-author_url: https://github.com/chaos-mesh
-author_image_url: https://avatars1.githubusercontent.com/u/59082378?v=4
+authors: chaos-mesh
 image: /img/blog/chaos-mesh-q&a.jpeg
 tags: [Chaos Mesh, Chaos Engineering, KubeCon, CloudNativeCon]
 ---
