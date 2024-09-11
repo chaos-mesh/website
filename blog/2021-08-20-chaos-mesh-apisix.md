@@ -16,8 +16,6 @@ As our community grows, Apache APISIX's features more frequently interact with e
 
 ![Apache APISIX architecture](/img/blog/apache-apisix-architecture.jpg)
 
-<p className="caption"> Apache APISIX architecture </p>
-
 In this post, we'll share how we use [Chaos Mesh](https://chaos-mesh.org/) to improve our system stability.
 
 ## Our pain points
@@ -55,8 +53,6 @@ We deployed a Chaos Engineering experiment using the following steps:
 
 ![High network latency occurs between etcd and Apache APISIX](/img/blog/high-network-latency-between-etcd-and-apache-apisix.jpg)
 
-<p className="caption"> High network latency occurs between etcd and Apache APISIX </p>
-
 ### Scenario #2
 
 After we conducted the same experiment as above in the control group, we introduced pod-kill chaos and reproduced the expected error. When we randomly deleted a small number of etcd nodes in the cluster, sometimes APISIX could connect to etcd and sometimes not, and the log printed a large number of connection rejection errors.
@@ -68,8 +64,6 @@ Our troubleshooting revealed that the etcd Lua API used by Apache APISIX selecte
 After we fixed this problem, we added a health check to the etcd Lua API to ensure that a large number of requests would not be sent to the disconnected etcd node. To avoid flooding the log with errors, we added a fallback mechanism when the etcd cluster was completely disconnected.
 
 ![Error Reported from etcd Node Interaction](/img/blog/error-reported-from-etcd-node-interaction.jpg)
-
-<p className="caption"> An error is reported from one etcd node's interaction with the Apache APISIX admin API </p>
 
 ## Our future plans
 

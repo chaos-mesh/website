@@ -28,8 +28,6 @@ Here is an example of how we use Chaos Mesh to locate a TiDB system bug. In this
 
 ![Chaos Mesh discovers downtime recovery exceptions in TiKV](/img/blog/chaos-mesh-discovers-downtime-recovery-exceptions-in-tikv.png)
 
-<div className="caption"> Chaos Mesh discovers downtime recovery exceptions in TiKV</div>
-
 As you can see from the dashboard:
 
 - During the first two downtimes, the QPS returns to normal after about 1 minute.
@@ -126,8 +124,6 @@ With the CRD design settled, let's look at the big picture on how Chaos Mesh wor
 
 ![Chaos Mesh workflow](/img/blog/chaos-mesh-workflow.png)
 
-<div className="caption"> Chaos Mesh workflow </div>
-
 Here is how these components streamline a chaos experiment:
 
 1. Using a YAML file or Kubernetes client, the user creates or updates chaos objects to the Kubernetes API server.
@@ -214,8 +210,6 @@ You can define your own chaos experiments through the YAML file method, which pr
 The following chaos experiment simulates the TiKV Pods being frequently killed in the `chaos-demo-1` cluster:
 
 ![Chaos experiment running](/img/blog/chaos-experiment-running.gif)
-
-<div className="caption"> Chaos experiment running </div>
 
 We use a sysbench program to monitor the real-time QPS changes in the TiDB cluster. When errors are injected into the cluster, the QPS show a drastic jitter, which means a specific TiKV Pod has been deleted, and Kubernetes then re-creates a new TiKV Pod.
 

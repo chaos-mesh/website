@@ -22,8 +22,6 @@ Big thanks to the more than 200 of you who joined us! We received so many great 
 
 ![Project Architecture](/img/blog/chaos-mesh-linkerd-architecture.png)
 
-<p className="caption">Project Architecture</p>
-
 **Q: Can I use Chaos Mesh on-premises or do I need Amazon Web Services (AWS) or Google Cloud Platform (GCP)?**
 
 **A:** You can do either! You can deploy Chaos Mesh on your Kubernetes cluster, so it does not matter whether you manage it yourself or have it hosted on AWS or GCP. However, if you would like to use it in a Kubernetes environment, you need to [set relevant parameters](https://chaos-mesh-website-archived.netlify.app/docs/1.2.4/user_guides/installation) during installation.

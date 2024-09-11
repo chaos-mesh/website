@@ -70,12 +70,6 @@
   text-decoration-thickness: 2px;
 }
 
-.caption {
-  color: var(--ifm-color-emphasis-700);
-  font-style: italic;
-  text-align: center;
-}
-
 /* Integrate tailwindcss. */
 @tailwind base;
 @tailwind components;

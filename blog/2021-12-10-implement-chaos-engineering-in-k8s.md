@@ -552,8 +552,6 @@ As shown in the Chaos Mesh workflow below, we need to implement a server that se
 
 ![Chaos Mesh's basic workflow](/img/blog/chaos-mesh-basic-workflow.png)
 
-<p className="caption">Chaos Mesh's basic workflow</p>
-
 Let's take a look at the example on the Chaos Mesh website:
 
 ```go
@@ -741,8 +739,6 @@ This example uses the manager. This mode prevents the cache mechanism from repet
 
 ![List request](/img/blog/list-request.png)
 
-<p className="caption">List request</p>
-
 ### Orchestrate chaos
 
 The container runtime interface (CRI) container runtime provides strong underlying isolation capabilities that can support the stable operation of the container. But for more complex and scalable scenarios, container orchestration is required. Chaos Mesh also provides [`Schedule`](https://chaos-mesh.org/docs/define-scheduling-rules/) and [`Workflow`](https://chaos-mesh.org/docs/create-chaos-mesh-workflow/) features. Based on the set `Cron` time, `Schedule` can trigger faults regularly and at intervals. `Workflow` can schedule multiple fault tests like Argo Workflows.
@@ -754,8 +750,6 @@ Chaos Controller Manager does most of the work for us. The control plane mainly 
 The following figure shows Chaos Mesh Dashboard. We need to consider what features the platform should provide to end users.
 
 ![Chaos Mesh Dashboard](/img/blog/chaos-mesh-dashboard-k8s.png)
-
-<p className="caption">Chaos Mesh Dashboard</p>
 
 From the Dashboard, we know that the platform may have these features:
 

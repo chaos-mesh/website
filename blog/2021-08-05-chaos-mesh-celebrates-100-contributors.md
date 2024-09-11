@@ -18,8 +18,6 @@ So far, Chaos Mesh has brought out 35 releases, received 1,500+ commits from 100
 
 ![Chaos Mesh contributors](/img/blog/chaos-mesh-all-contributors.jpeg)
 
-<p className="caption">Chaos Mesh contributors (as of 2021.08.02)</p>
-
 Here are a few of our favourite contributions to highlight:
 
 - [@YangKeao](https://github.com/YangKeao) introduced `kubebuilder` to Chaos Mesh, an SDK for building Kubernetes APIs using CRD, which simplified the steps to implement the Controller.

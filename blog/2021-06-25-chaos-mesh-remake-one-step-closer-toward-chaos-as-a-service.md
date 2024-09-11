@@ -47,8 +47,6 @@ The current Chaos Mesh architecture is suited for individual Kubernetes clusters
 
 ![Chaos Mesh architecture](/img/blog/chaos-mesh-remake-architecture.jpeg)
 
-<p className="caption">The current Chaos Mesh architecture</p>
-
 During this refactor, **to allow Chaos Dashboard to manage multiple Kubernetes clusters, we separate Chaos Dashboard from the main architecture**. Now, if you deploy Chaos Dashboard outside of the Kubernetes cluster, you can add the cluster to Chaos Dashboard via the web UI. If you deploy Chaos Dashboard inside the cluster, it automatically obtains the cluster information through environment variables.
 
 You can register Chaos Mesh (technically, the Kubernetes configuration) in Chaos Dashboard or ask `chaos-controller-manager` to report to Chaos Dashboard via configuration. Chaos Dashboard and `chaos-controller-manager` interact via CustomResourceDefinitions (CRDs). When `chaos-controller-manager` finds a Chaos Mesh CRD event, it invokes `chaos-daemon` to carry out the related chaos experiment. Therefore, Chaos Dashboard can manage experiments by operating on CRDs.
@@ -59,8 +57,6 @@ chaosd is a toolkit for running chaos experiments on physical machines. Previous
 
 ![chaosd, a Chaos Engineering command line tool](/img/blog/chaosd-chaos-engineering-command-line-tool.jpeg)
 
-<p className="caption">Previously, chaosd was a command line tool</p>
-
 During the refactoring, **we enabled chaosd to support the RESTful API and enhanced its services so that it can configure chaos experiments by parsing CRD-format JSON or YAML files**.
 
 Now, chaosd can register itself to Chaos Dashboard via configuration and send regular heartbeats to Chaos Dashboard. With the heartbeat signals, Chaos Dashboard can manage the chaosd node status. You can also add chaosd nodes to Chaos Dashboard via the web UI.
@@ -70,8 +66,6 @@ Moreover, **chaosd can now schedule chaos experiments at specified time and mana
 With new Chaos Dashboard and chaosd, the optimized architecture of Chaos Mesh is as follows:
 
 ![Chaos Mesh's optimized architecture](/img/blog/chaos-mesh-optimized-architecture.jpeg)
-
-<p className="caption">Chaos Mesh's optimized architecture</p>
 
 ### Improve observability
 
@@ -105,8 +99,6 @@ Because of the limited time at Hackathon, we didn't finish all our plans. Here a
 A closed loop of Chaos Engineering includes four steps: exploring chaos, discovering deficiencies in the system, analyzing root causes, and sending feedback for improvement.
 
 ![A closed loop of Chaos Engineering](/img/blog/closed-loop-of-chaos-engineering.jpeg)
-
-<p className="caption">A closed loop of Chaos Engineering</p>
 
 However, **most of the current open source Chaos Engineering tools only focus on exploration and do not provide pragmatic feedback.** Based on the improved observability component, we can monitor chaos experiments in real time and compare and analyze the experiment results.
 
