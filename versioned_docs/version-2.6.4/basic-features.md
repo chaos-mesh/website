@@ -46,7 +46,7 @@ Chaos Mesh provides the Chaos Dashboard component for visualized operations, whi
 
 ![Chaos workflow](img/dashboard-overview.png)
 
-## Security guarantee
+## Security guarantees
 
 Chaos Mesh manages permissions using the native [RBAC](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) feature in Kubernetes.
 
