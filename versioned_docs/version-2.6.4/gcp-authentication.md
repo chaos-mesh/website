@@ -20,12 +20,29 @@ After creating the client, remember to save the Client ID and Client Secret for 
 
 ## Configure and Start Chaos Mesh
 
+:::info
+
+Update: Since `v2.7.0`, you can provide a **Secret** to store the Client ID and Client Secret. **We recommend you to use this method**.
+
+This change is to avoid exposing the Client ID and Client Secret to the public. In the previous versions, the Client ID and Client Secret are specified in the values directly, which is not safe in general.
+
+For more information, see https://github.com/chaos-mesh/chaos-mesh/issues/4206.
+
+:::
+
 To enable the function, you need to set the configuration items in helm charts as follows:
 
-1. Set `dashboard.gcpSecurityMode` to `true`.
-2. Set `dashboard.gcpClientId` to the Client ID from the former section.
-3. Set `dashboard.gcpClientSecret` to the Client Secret from the former section.
-4. Set `dashboard.rootUrl` to the root address of Chaos Dashboard.
+```yaml
+dashboard:
+  rootUrl: http://localhost:2333
+  gcpSecurityMode:
+    enabled: true
+    # Old configuration items for compatibility.
+    clientId: ''
+    clientSecret: ''
+    # References existing Kubernetes secret containing `GCP_CLIENT_ID` and `GCP_CLIENT_SECRET`.
+    existingSecret: ''
+```
 
 If Chaos Mesh has been installed, you can update the configuration items through `helm upgrade`. If not, you can install Chaos Mesh through `helm install`.
 
