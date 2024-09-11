@@ -88,7 +88,7 @@ Global Flags:
 | :-- | :-- | :-- | :-- |
 | `class` | `c` | The name of the Java class | string type, required |
 | `exception` | None | The thrown custom exception | string type, required |
-| method | `m` | The name of the method | string type, required to be configured |
+| `method` | `m` | The name of the method | string type, required to be configured |
 | `pid` | None | The Java process ID where the fault is to be injected | int type, required |
 | `port` | None | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int type. The default value is `9288`. |
 | `uid` | None | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
