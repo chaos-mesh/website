@@ -8,9 +8,9 @@ This page lists the status, timeline and policies for currently supported releas
 
 ~~Each release is supported for a period of **six months**, and we create a new release **every three months**.~~
 
-Update in 2024-02-01:
+Updated in 2024-02-01:
 
-As we currently haven't had enough maintainers to support the release cycle, We will release new versions from time to time, with a cycle of about **6 months**.
+As we currently haven't had enough maintainers to support the release cycle, we will release new versions from time to time, with a cycle of about **6 months**.
 
 :::
 
@@ -41,8 +41,9 @@ The `2.6` version also theoretically works fine on the `1.26`, `1.27`, and `1.28
 | Version | Currently Supported   | Release Date | End of Life  | Supported Kubernetes versions                        |
 | :------ | :-------------------- | :----------- | :----------- | :--------------------------------------------------- |
 | master  | No, development only  | -            | -            | 1.26, 1.27, 1.28                                     |
+| 2.7     | `Yes`                 | Sep 20, 2024 | -            | 1.26, 1.27, 1.28                                     |
 | 2.6     | `Yes`                 | May 31, 2023 | -            | 1.20, 1.21, 1.22, 1.23, 1.24, 1.25, 1.26, 1.27, 1.28 |
-| 2.5     | `Yes`                 | Nov 22, 2022 | -            | 1.20, 1.21, 1.22, 1.23, 1.24, 1.25                   |
+| 2.5     | No                    | Nov 22, 2022 | Sep 20, 2024 | 1.20, 1.21, 1.22, 1.23, 1.24, 1.25                   |
 | 2.4     | No                    | Sep 23, 2022 | May 31, 2023 | 1.20, 1.21, 1.22, 1.23, 1.24, 1.25                   |
 | 2.3     | No                    | Jul 29, 2022 | Nov 22, 2022 | 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22       |
 | 2.2     | No                    | Apr 29, 2022 | Sep 23, 2022 | 1.15, 1.16, 1.17, 1.18, 1.19, 1.20, 1.21, 1.22       |
@@ -84,6 +85,6 @@ Below are Kubernetes versions covered by each version of the E2E tests:
 | Version | Tested kubernetes Versions |
 | :------ | :------------------------- |
 | master  | 1.26.13, 1.27.10, 1.28.6   |
+| 2.7     | 1.26.13, 1.27.10, 1.28.6   |
 | 2.6     | 1.20.15, 1.23.4, 1.25.1    |
 | 2.5     | 1.20, 1.23, 1.25           |
-| 2.4     | 1.20, 1.23, 1.25           |
