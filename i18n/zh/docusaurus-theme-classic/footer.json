@@ -39,10 +39,6 @@
     "message": "Slack (#project-chaos-mesh)",
     "description": "The label of footer link with label=Slack (#project-chaos-mesh) linking to https://slack.cncf.io/"
   },
-  "link.item.label.Events": {
-    "message": "Events",
-    "description": "The label of footer link with label=Events linking to https://community.cncf.io/chaos-mesh-community/"
-  },
   "link.item.label.GitHub": {
     "message": "GitHub",
     "description": "The label of footer link with label=GitHub linking to https://github.com/chaos-mesh/chaos-mesh"
@@ -50,9 +46,5 @@
   "link.item.label.Blog": {
     "message": "博客",
     "description": "The label of footer link with label=Blog linking to blog"
-  },
-  "copyright": {
-    "message": "\n        <br />\n        <strong>© Chaos Mesh Authors 2021 | Documentation Distributed under CC-BY-4.0 </strong>\n        <br />\n        <br />\n        © 2021 The Linux Foundation. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our <a href=\"https://www.linuxfoundation.org/trademark-usage/\"> Trademark Usage</a> page.\n      ",
-    "description": "The footer copyright"
   }
 }

@@ -175,13 +175,13 @@ const config = {
             {
               html: `
               <ul>
-              <li>
-              <p style="font-size: 0.875rem;">Thanks to netlify's Open Source Plan.</p>
-              <a href="https://www.netlify.com" target="_blank"><img src="https://www.netlify.com/v3/img/components/netlify-color-bg.svg" alt="Deploys by Netlify" /></a>
-              </li>
-              <li>
-              <p>Thanks for the <a href="https://storyset.com/technology">Technology illustrations by Storyset</a>.</p>
-              </li>
+                <li>
+                  <p>Thanks to netlify's Open Source Plan.</p>
+                  <a href="https://www.netlify.com" target="_blank"><img src="https://www.netlify.com/v3/img/components/netlify-color-bg.svg" alt="Deploys by Netlify" /></a>
+                </li>
+                <li>
+                  <p>Thanks for the <a href="https://storyset.com/technology">Technology illustrations by Storyset</a>.</p>
+                </li>
               </ul>`,
             },
           ],

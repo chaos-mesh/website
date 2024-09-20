@@ -7,9 +7,9 @@
     "message": "文档",
     "description": "Navbar item with label Documentation"
   },
-  "item.label.Events": {
-    "message": "活动",
-    "description": "Navbar item with label Events"
+  "item.label.Community Group": {
+    "message": "社团",
+    "description": "Navbar item with label Community Group"
   },
   "item.label.Blog": {
     "message": "博客",
