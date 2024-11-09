@@ -125,7 +125,7 @@ Common fields are meaningful when the `target` of fault injection is `Request` o
 | --- | --- | --- | --- | --- | --- |
 | `mode` | string | Specifies the mode of the experiment. The mode options include `one` (selecting a random pod), `all` (selecting all eligible pods), `fixed` (selecting a specified number of eligible pods), `fixed-percent` (selecting a specified percentage of Pods from the eligible pods), and `random-max-percent` (selecting the maximum percentage of Pods from the eligible pods). |  | yes | `one` |
 | `value` | string | Provides parameters for the `mode` configuration depending on the value of `mode`. |  | no | 1 |
-| `target` | string | Specifies whether the target of fault injuection is `Request` or `Response`. The [`target`-related fields](#Description-for-`target`-related-fields) should be configured at the same time. |  | yes | Request |
+| `target` | string | Specifies whether the target of fault injuection is `Request` or `Response`. The [`target`-related fields](#description-for-target-related-fields) should be configured at the same time. |  | yes | Request |
 | `port` | int32 | The TCP port that the target service listens on. |  | yes | 80 |
 | `path` | string | The URI path of the target request. Supports [Matching wildcards](https://www.wikiwand.com/en/Matching_wildcards). | Takes effect on all paths by default. | no | /api/\* |
 | `method` | string | The HTTP method of the target request method. | Takes effect for all methods by default. | no | GET |

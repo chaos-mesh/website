@@ -203,7 +203,7 @@ The following are specific information about fields corresponding to action:
   | --------- | ---- | --------------------- | ------------- | -------- | ------- |
   | errno     | int  | returned error number |               | Yes      | 22      |
 
-  For common error numbers, see [Appendix B](#appendix-b:common-error-numbers).
+  For common error numbers, see [Appendix B](#appendix-b-common-error-numbers).
 
 - attrOverride
 
