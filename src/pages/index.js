@@ -88,13 +88,13 @@ function Home() {
                 <div className="tw-flex tw-gap-3">
                   <Link
                     to="/docs/production-installation-using-helm"
-                    className="tw-btn tw-btn-primary hover:tw-text-white hover:-tw-translate-y-[3px]"
+                    className="tw-btn !tw-btn-primary hover:-tw-translate-y-[3px]"
                   >
                     Get Started →
                   </Link>
                   <Link
                     to="https://github.com/chaos-mesh/chaos-mesh"
-                    className="tw-btn tw-btn-neutral tw-gap-2 dark:tw-glass hover:tw-text-white hover:-tw-translate-y-[3px]"
+                    className="tw-btn !tw-btn-neutral tw-gap-2 dark:tw-glass hover:-tw-translate-y-[3px]"
                   >
                     <IconOctocat className="tw-w-4 tw-h-4 tw-fill-white" />
                     GitHub
@@ -185,9 +185,9 @@ function Home() {
             <div className="tw-flex tw-justify-center tw-mt-12">
               <Link
                 to="/docs/simulate-pod-chaos-on-kubernetes"
-                className="tw-btn tw-btn-primary tw-gap-2 hover:tw-text-white hover:-tw-translate-y-[3px]"
+                className="tw-btn !tw-btn-primary tw-gap-2 hover:-tw-translate-y-[3px]"
               >
-                <IconLibrary className="tw-w-4 tw-h-4 tw-fill-white" />
+                <IconLibrary className="tw-w-4 tw-h-4 tw-fill-primary-content" />
                 Explore More
               </Link>
             </div>
@@ -225,7 +225,7 @@ function Home() {
                   </div>
                   <Link
                     to="/docs/create-chaos-mesh-workflow/"
-                    className="tw-btn tw-btn-primary tw-gap-2 hover:tw-text-white hover:-tw-translate-y-[3px]"
+                    className="tw-btn !tw-btn-primary tw-gap-2 hover:-tw-translate-y-[3px]"
                   >
                     Start Creating →
                   </Link>
@@ -262,7 +262,7 @@ function Home() {
                 </p>
                 <Link
                   to="/docs/chaosd-overview/"
-                  className="tw-btn tw-btn-primary tw-gap-2 hover:tw-text-white hover:-tw-translate-y-[3px]"
+                  className="tw-btn !tw-btn-primary tw-gap-2 hover:-tw-translate-y-[3px]"
                 >
                   Overview →
                 </Link>

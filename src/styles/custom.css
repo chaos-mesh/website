@@ -70,14 +70,14 @@
   text-decoration-thickness: 2px;
 }
 
+a.tw-btn {
+  text-decoration: none
+}
+
 /* Integrate tailwindcss. */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-a.tw-btn:hover {
-  @apply tw-no-underline;
-}
 
 .navbar .navbar__item {
   @apply tw-px-4;
@@ -96,5 +96,7 @@ a.tw-btn:hover {
 }
 
 .codegrid-block.language-yaml pre {
+  padding: 1rem;
+  padding-top: 0;
   background: unset;
 }
