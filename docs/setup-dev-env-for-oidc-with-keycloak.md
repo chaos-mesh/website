@@ -149,6 +149,7 @@ Before you start, it is recommended to first read the [Configure Development Env
    # print message for user
    echo "Keycloak OIDC Client ID: $CLIENT_NAME"
    echo "Keycloak OIDC Client Secret: $client_secret"
+   echo "Keycloak OIDC Issue URL: https://$KEYCLOAK_HOST/realms/kubernetes-oidc"
    echo "username: $USERNAME, password: password"
    ```
 
@@ -188,3 +189,41 @@ Before you start, it is recommended to first read the [Configure Development Env
      --oidc-client-secret $client_secret \
      --certificate-authority ca.crt
    ```
+
+   The `kubectl oidc-login setup` command would give you some instruction to setup, and we already patched the `kube-apiserver`, one more more thing we need to do is grant the user `cluster-admin` role for easier development, by following the instruction:
+
+   ```bash
+   ## 3. Bind a cluster role
+
+   Run the following command:
+
+   kubectl create clusterrolebinding oidc-cluster-admin --clusterrole=cluster-admin --user='https://keycloak.192.168.49.2.nip.io/realms/kubernetes-oidc#xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx'
+   ```
+
+   Configure the `kubectl` with the following command, switch to the OIDC user:
+
+   ```bash
+   kubectl config set-context --current --user=oidc
+   kubectl whoami
+   ```
+
+   You should see the username is the OIDC user you created in step 3, like
+
+   ```text
+   https://keycloak.192.168.49.2.nip.io/realms/kubernetes-oidc#xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx
+   ```
+
+   Update Chaos Mesh helm installation with
+
+   ```bash
+   KEYCLOAK_HOST=keycloak.$(minikube ip).nip.io
+   helm upgrade chaos-mesh-debug ./helm/chaos-mesh \
+     --namespace=chaos-mesh-debug \
+     --reuse-values \
+     --set dashboard.oidcSecurityMode.enabled=true \
+     --set dashboard.oidcSecurityMode.clientId=<replace-me-with-client-id-in-step-3> \
+     --set dashboard.oidcSecurityMode.clientSecret=<replace-me-with-client-secret-in-step-3> \
+     --set dashboard.oidcSecurityMode.issuerUrl=https://$KEYCLOAK_HOST/realms/kubernetes-oidc
+   ```
+
+   Then we have completed the setup of OIDC with Keycloak, and we could use the OIDC user to develop Chaos Mesh with OIDC integration.
