@@ -182,7 +182,12 @@ const config = {
                 <li>
                   <p>Thanks for the <a href="https://storyset.com/technology">Technology illustrations by Storyset</a>.</p>
                 </li>
-              </ul>`,
+              </ul>
+              <img
+                referrerpolicy="no-referrer-when-downgrade"
+                src="https://static.scarf.sh/a.png?x-pxid=3103bfa4-2073-4b9a-bdac-f36f63d979a4"
+              />
+              `,
             },
           ],
         },
