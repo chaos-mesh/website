@@ -71,7 +71,7 @@
 }
 
 a.tw-btn {
-  text-decoration: none
+  text-decoration: none;
 }
 
 /* Integrate tailwindcss. */
@@ -91,12 +91,11 @@ a.tw-btn {
   @apply tw-py-12;
 }
 
-.codegrid-block.language-yaml {
-  background: unset;
+.codecard {
+  width: calc(100% - 2rem);
 }
 
 .codegrid-block.language-yaml pre {
   padding: 1rem;
   padding-top: 0;
-  background: unset;
 }
