@@ -173,20 +173,22 @@ const config = {
           title: 'Acknowledgements',
           items: [
             {
+              label: 'Thanks for the technology illustrations by Storyset',
+              href: 'https://storyset.com/technology',
+            },
+            {
               html: `
-              <ul>
-                <li>
-                  <p>Thanks to netlify's Open Source Plan.</p>
-                  <a href="https://www.netlify.com" target="_blank"><img src="https://www.netlify.com/v3/img/components/netlify-color-bg.svg" alt="Deploys by Netlify" /></a>
-                </li>
-                <li>
-                  <p>Thanks for the <a href="https://storyset.com/technology">Technology illustrations by Storyset</a>.</p>
-                </li>
-              </ul>
-              <img
-                referrerpolicy="no-referrer-when-downgrade"
-                src="https://static.scarf.sh/a.png?x-pxid=3103bfa4-2073-4b9a-bdac-f36f63d979a4"
-              />
+                <a href="https://www.netlify.com">
+                  <img src="https://www.netlify.com/v3/img/components/netlify-color-bg.svg" alt="Deploys by Netlify" />
+                </a>
+              `,
+            },
+            {
+              html: `
+                <img
+                  referrerpolicy="no-referrer-when-downgrade"
+                  src="https://static.scarf.sh/a.png?x-pxid=3103bfa4-2073-4b9a-bdac-f36f63d979a4"
+                />
               `,
             },
           ],
