@@ -1,7 +1,7 @@
 {
   "version.label": {
     "message": "2.7.0",
-    "description": "The label for version current"
+    "description": "The label for version 2.7.0"
   },
   "sidebar.docs.category.About Chaos Mesh": {
     "message": "关于 Chaos Mesh",
@@ -21,7 +21,7 @@
   },
   "sidebar.docs.category.Orchestrate Multiple Chaos Experiments": {
     "message": "编排多个混沌实验",
-    "description": "The label for category  Orchestrate Multiple Chaos Experiments in sidebar docs"
+    "description": "The label for category Orchestrate Multiple Chaos Experiments in sidebar docs"
   },
   "sidebar.docs.category.Types of Chaos Experiments": {
     "message": "混沌实验类型",
@@ -50,5 +50,17 @@
   "sidebar.docs.category.FAQs and Troubleshooting": {
     "message": "常见问题与故障",
     "description": "The label for category FAQs and Troubleshooting in sidebar docs"
+  },
+  "sidebar.docs.category.Release": {
+    "message": "Release",
+    "description": "The label for category Release in sidebar docs"
+  },
+  "sidebar.docs.category.Release Tracking": {
+    "message": "Release Tracking",
+    "description": "The label for category Release Tracking in sidebar docs"
+  },
+  "sidebar.docs.link.Supported Releases": {
+    "message": "Supported Releases",
+    "description": "The label for link Supported Releases in sidebar docs, linking to /supported-releases"
   }
 }
