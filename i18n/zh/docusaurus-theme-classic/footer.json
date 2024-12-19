@@ -3,9 +3,17 @@
     "message": "文档",
     "description": "The title of the footer links column with title=Documentation in the footer"
   },
+  "link.title.Community": {
+    "message": "社区",
+    "description": "The title of the footer links column with title=Community in the footer"
+  },
+  "link.title.Acknowledgements": {
+    "message": "致谢",
+    "description": "The title of the footer links column with title=Acknowledgements in the footer"
+  },
   "link.item.label.Quick Start": {
-    "message": "快速试用（测试推荐）",
-    "description": "The label of footer link with label=Quick Start linking to docs/quick_start"
+    "message": "快速试用",
+    "description": "The label of footer link with label=Quick Start linking to docs/quick-start"
   },
   "link.item.label.Run a Chaos Experiment": {
     "message": "运行实验",
@@ -16,15 +24,35 @@
     "description": "The label of footer link with label=Developer Guide Overview linking to docs/developer-guide-overview"
   },
   "link.item.label.FAQs": {
-    "message": "FAQs",
+    "message": "常见问题",
     "description": "The label of footer link with label=FAQs linking to docs/faqs"
-  },
-  "link.title.Community": {
-    "message": "社区",
-    "description": "The title of the footer links column with title=Community in the footer"
   },
   "link.item.label.Blog": {
     "message": "博客",
     "description": "The label of footer link with label=Blog linking to blog"
+  },
+  "link.item.label.CNCF Community Group": {
+    "message": "CNCF 社团",
+    "description": "The label of footer link with label=CNCF Community Group linking to https://community.cncf.io/chaos-mesh-community/"
+  },
+  "link.item.label.GitHub": {
+    "message": "GitHub",
+    "description": "The label of footer link with label=GitHub linking to https://github.com/chaos-mesh/chaos-mesh"
+  },
+  "link.item.label.Slack (#project-chaos-mesh)": {
+    "message": "Slack (#project-chaos-mesh)",
+    "description": "The label of footer link with label=Slack (#project-chaos-mesh) linking to https://slack.cncf.io/"
+  },
+  "link.item.label.Twitter": {
+    "message": "Twitter",
+    "description": "The label of footer link with label=Twitter linking to https://twitter.com/chaos_mesh"
+  },
+  "link.item.label.Thanks for the technology illustrations by Storyset": {
+    "message": "Thanks for the technology illustrations by Storyset",
+    "description": "The label of footer link with label=Thanks for the technology illustrations by Storyset linking to https://storyset.com/technology"
+  },
+  "copyright": {
+    "message": "\n        <p style=\"font-weight: 500;\">Copyright © Chaos Mesh Authors 2024 | Documentation Distributed under CC-BY-4.0</p>\n        © 2024 The Linux Foundation. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our <a href=\"https://www.linuxfoundation.org/trademark-usage/\"> Trademark Usage</a> page.\n      ",
+    "description": "The footer copyright"
   }
 }

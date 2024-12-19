@@ -42,11 +42,11 @@ export default function Features() {
     <>
       <Feature
         imgUrl="img/logos/kubernetes.svg"
-        title={<Translate id="home.k8s">Design for Kubernetes</Translate>}
+        title={<Translate id="home.features.k8s">Design for Kubernetes</Translate>}
         description={
           <p>
             <Translate
-              id="home.k8s.1"
+              id="home.features.k8s.desc"
               values={{
                 crd: (
                   <Link
@@ -68,12 +68,12 @@ export default function Features() {
       />
       <Feature
         imgUrl="img/features/easy-to-use.svg"
-        title={<Translate id="home.easytouse">Easy to Use</Translate>}
+        title={<Translate id="home.features.easytouse">Easy to Use</Translate>}
         description={
           <>
             <p>
               <Translate
-                id="home.easytouse.1"
+                id="home.features.easytouse.desc"
                 values={{
                   minikube: (
                     <Link className="tw-underline dark:tw-no-underline" to="https://minikube.sigs.k8s.io/">
@@ -94,13 +94,13 @@ export default function Features() {
             </p>
             <ul>
               <li>
-                <Translate id="home.easytouse.2">
+                <Translate id="home.features.easytouse.list.1">
                   Ability to perform chaos experiments in production environments without modifying the deployment logic
                   of applications.
                 </Translate>
               </li>
               <li>
-                <Translate id="home.easytouse.3">
+                <Translate id="home.features.easytouse.list.2">
                   Quickly create chaos experiments through the dashboard, allowing users to observe the experiment's
                   state in real time and quickly roll back any injected failures.
                 </Translate>
@@ -112,17 +112,17 @@ export default function Features() {
       />
       <Feature
         imgUrl="img/features/flexible-scope.svg"
-        title={<Translate id="home.flexiblescope">Flexible Scope</Translate>}
+        title={<Translate id="home.features.flexiblescope">Flexible Scope</Translate>}
         description={
           <>
             <p>
-              <Translate id="home.flexiblescope.1">
+              <Translate id="home.features.flexiblescope.desc.1">
                 Chaos Mesh provides multiple filtering rules that allow selecting injection targets based on labels,
                 annotations, and so on. They are collectively called selectors.
               </Translate>
             </p>
             <p>
-              <Translate id="home.flexiblescope.2">
+              <Translate id="home.features.flexiblescope.desc.2">
                 In addition, users can also set a namespace whitelist to greater control the "blast radius" of the
                 experiment.
               </Translate>
@@ -133,10 +133,10 @@ export default function Features() {
       />
       <Feature
         imgUrl="img/features/security-first.svg"
-        title={<Translate id="home.securityfirst">Security First</Translate>}
+        title={<Translate id="home.features.securityfirst">Security First</Translate>}
         description={
           <p>
-            <Translate id="home.securityfirst.1">
+            <Translate id="home.features.securityfirst.desc">
               Role-based access control (RBAC) is enabled by default to restrict malicious operations. Users must be
               authorized with specific privileges to access the dashboard.
             </Translate>
