@@ -32,7 +32,7 @@
     "description": "The label for category Kubernetes in sidebar docs"
   },
   "sidebar.docs.category.Physical Nodes": {
-    "message": "物理机",
+    "message": "物理节点",
     "description": "The label for category Physical Nodes in sidebar docs"
   },
   "sidebar.docs.category.Authentication": {
@@ -40,7 +40,7 @@
     "description": "The label for category Authentication in sidebar docs"
   },
   "sidebar.docs.category.Tools Integration": {
-    "message": "工具整合",
+    "message": "工具集成",
     "description": "The label for category Tools Integration in sidebar docs"
   },
   "sidebar.docs.category.Development Guides": {
@@ -52,15 +52,15 @@
     "description": "The label for category FAQs and Troubleshooting in sidebar docs"
   },
   "sidebar.docs.category.Release": {
-    "message": "Release",
+    "message": "发布",
     "description": "The label for category Release in sidebar docs"
   },
   "sidebar.docs.category.Release Tracking": {
-    "message": "Release Tracking",
+    "message": "发布跟踪",
     "description": "The label for category Release Tracking in sidebar docs"
   },
   "sidebar.docs.link.Supported Releases": {
-    "message": "Supported Releases",
+    "message": "支持的版本",
     "description": "The label for link Supported Releases in sidebar docs, linking to /supported-releases"
   }
 }
