@@ -17,6 +17,18 @@
   />
 </a>
 
+## Table of Contents
+
+- [How to develop](#how-to-develop)
+- [Build](#build)
+- [Release a new version](#release-a-new-version)
+  - [Release a major or minor version](#release-a-major-or-minor-version)
+    - [Update i18n](#update-i18n)
+  - [Release a patch version](#release-a-patch-version)
+- [How to add a new language translation](#how-to-add-a-new-language-translation)
+- [How to contribute](#how-to-contribute)
+- [License](#license)
+
 ## How to develop
 
 ```sh
@@ -42,15 +54,15 @@ This command generates static content into the `build` directory and can be serv
 
 ## Release a new version
 
-### Major or minor
+### Release a major or minor version
 
 ```sh
 pnpm docusaurus docs:version x.x.x
 ```
 
-The versions of the all docs split into two parts, one is the **latest (in `docs/`)** and the others are **versioned (in `versioned_docs/`)**. When a version has been released, the current latest `docs/` will be copied into `versioned_docs/` (by running the command above).
+The doc versions are split into two parts, one is the **latest (in `docs/`)** and the others are **versioned (in `versioned_docs/`)**. When a new version has been released, the current latest `docs/` will be copied into `versioned_docs/` (by running the command above).
 
-#### i18n
+#### Update i18n
 
 All translated docs won't be copied automatically. You have to handle them manually. For example, release `2.2.0`:
 
@@ -75,7 +87,7 @@ All translated docs won't be copied automatically. You have to handle them manua
 
 Don't forget test the new version build after you've done the above steps!
 
-### Patch
+### Release a patch version
 
 For patch versions, it's only needed to move some folders and change some text. For example, `v2.1.3` to `v2.1.4`:
 
@@ -88,9 +100,45 @@ For patch versions, it's only needed to move some folders and change some text. 
 
 Don't forget test the new version build after you've done the above steps!
 
+## How to add a new language translation
+
+Please refer to <https://docusaurus.io/docs/i18n/tutorial> for the basic steps.
+
+Below are some specific points:
+
+1. Some translations are not placed in the `i18n/code.json` because they are not simple strings. For example, below is the translation for the slogan in the homepage:
+
+   ```jsx
+   {
+     /* Due to the below texts are not simple strings, so we can't use <Translate /> here. */
+   }
+   {
+     i18n.currentLocale === 'en' && (
+       <>
+         <span>Break</span>
+         <br />
+         <span>Your System</span>
+         <br />
+         <span>Constructively</span>
+       </>
+     )
+   }
+   {
+     i18n.currentLocale === 'zh' && (
+       <>
+         <span>破而后立</span>
+         <br />
+         <span className="tw-text-3xl">建设性地解构与优化你的系统</span>
+       </>
+     )
+   }
+   ```
+
+   You can find the above code in `src/pages/index.js`. For all these cases, search for `i18n.currentLocale` in the codebase.
+
 ## How to contribute
 
-Mostly you only need to modify the content in the `docs/`, but if you want some versions to take effect as the latest, please also update the same files in the `versioned_docs/` dir.
+You usually only need to modify the content in the `docs/` directory, but if some old versions have updates, please update the related content in the `versioned_docs/` directory.
 
 ## License
 
