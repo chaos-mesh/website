@@ -65,7 +65,7 @@ function Home() {
       </Head>
       <main>
         <div className="hero tw-relative tw-h-[768px] tw-pt-0 tw-overflow-hidden">
-          {/* <BrowserOnly>{() => <Mesh />}</BrowserOnly> */}
+          <BrowserOnly>{() => <Mesh />}</BrowserOnly>
           <div className="tw-container tw-mx-auto tw-z-10">
             <div className="tw-flex tw-flex-col lg:tw-flex-row lg:tw-justify-between lg:tw-items-center">
               <div className="tw-flex-[.8] 2xl:tw-flex-[.6] tw-p-6 lg:tw-p-3">
