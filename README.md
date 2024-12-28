@@ -60,7 +60,7 @@ This command generates static content into the `build` directory and can be serv
 pnpm docusaurus docs:version x.x.x
 ```
 
-The doc versions are split into two parts, one is the **latest (in `docs/`)** and the others are **versioned (in `versioned_docs/`)**. When a new version has been released, the current latest `docs/` will be copied into `versioned_docs/` (by running the command above).
+The doc versions are split into two parts, one is the **latest (in `docs/`)** and the others are **versioned (in `versioned_docs/`)**. When releasing a new version, the current latest `docs/` will be copied into `versioned_docs/` (by running the command above).
 
 #### Update i18n
 
@@ -138,7 +138,7 @@ Below are some specific points:
 
 ## How to contribute
 
-You usually only need to modify the content in the `docs/` directory, but if some old versions have updates, please update the related content in the `versioned_docs/` directory.
+You usually only need to modify the content in the `docs/` directory, but if some old versions also need to be updated, please update the related content in the `versioned_docs/` directory.
 
 ## License
 
