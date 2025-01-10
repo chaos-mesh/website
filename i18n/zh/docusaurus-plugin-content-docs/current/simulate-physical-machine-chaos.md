@@ -170,7 +170,7 @@ PhysicalMachineChaos 用于在物理机或虚拟机中模拟网络、磁盘、�
 
 #### JVM 应用使用 Byteman 配置文件触发故障
 
-JVM 应用使用 Byteman 配置触发故障，将 action 设置为 "jvm-rule-data"，对应的配置可参考[设置 Byteman 配置触发故障相关参数说明](simulate-jvm-application-chaos-in-physical-nodes.md#设置-Byteman-配置触发故障相关参数说明)。
+JVM 应用使用 Byteman 配置触发故障，将 action 设置为 "jvm-rule-data"，对应的配置可参考[设置 Byteman 配置文件触发故障相关配置说明](simulate-jvm-application-chaos-in-physical-nodes.md#设置-Byteman-配置文件触发故障相关配置说明)。
 
 #### 时间偏移
 
