@@ -215,7 +215,7 @@ export default function Mesh() {
               opacity: 1,
               top: top - 50,
               left: left + 25,
-            }
+            },
           )
           new Typewriter('.mesh-text', { delay: 50 })
             .typeString('Injecting NetworkChaos/loss...')
@@ -240,7 +240,7 @@ export default function Mesh() {
                   opacity: 0,
                   top,
                   left: left + 25,
-                }
+                },
               )
             })
             .start()

@@ -72,7 +72,7 @@ function Home() {
                 <h1
                   className={clsx(
                     'tw-inline-block tw-text-5xl xl:tw-text-6xl tw-text-left tw-rounded-2xl tw-backdrop-blur-sm lg:tw-backdrop-blur',
-                    styles.heroTitle
+                    styles.heroTitle,
                   )}
                 >
                   {/* Due to the below texts are not simple strings, so we can't use <Translate /> here. */}
@@ -207,7 +207,7 @@ function Home() {
             <img
               className={clsx(
                 'tw-block tw-mx-auto tw-select-none dark:tw-invert-[.85] dark:tw-saturate-0',
-                styles.chaosCategory
+                styles.chaosCategory,
               )}
               src="img/home/chaos-category.svg"
               alt="Chaos Category"
