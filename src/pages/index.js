@@ -379,7 +379,6 @@ function Home() {
                   to="https://github.com/chaos-mesh/chaos-mesh"
                   className="tw-btn tw-bg-[#f2f2f2] tw-text-[#1f2937] dark:tw-text-[#a6adba] hover:!tw-bg-[#e6e6e6] tw-normal-case dark:tw-glass dark:hover:!tw-bg-transparent dark:hover:tw-text-white"
                 >
-                  <IconOctocat className="tw-w-4 tw-h-4 dark:tw-fill-white" />
                   GitHub
                 </Link>
               </Card>
