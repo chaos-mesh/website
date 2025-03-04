@@ -66,7 +66,7 @@ After compiling Chaos Mesh, you can run Chaos Mesh in a local Kubernetes cluster
 3. Install Chaos Mesh by Helm
 
    ```bash
-   helm upgrade --install chaos-mesh-debug ./helm/chaos-mesh --namespace=chaos-mesh-debug --create-namespace
+   helm upgrade --install chaos-mesh-debug ./helm/chaos-mesh -n=chaos-mesh-debug --create-namespace
    ```
 
 :::note
@@ -102,7 +102,7 @@ We could use [delve](https://github.com/go-delve/delve) with remote debugging to
 3. Install Chaos Mesh by Helm with Enabling Remote Debugging
 
    ```bash
-   helm upgrade --install chaos-mesh-debug ./helm/chaos-mesh --namespace=chaos-mesh-debug --create-namespace --set chaosDlv.enable=true --set controllerManager.replicaCount=1
+   helm upgrade --install chaos-mesh-debug ./helm/chaos-mesh -n=chaos-mesh-debug --create-namespace --set chaosDlv.enable=true --set controllerManager.replicaCount=1
    ```
 
    :::note

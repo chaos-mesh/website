@@ -72,7 +72,7 @@ function Home() {
                 <h1
                   className={clsx(
                     'tw-inline-block tw-text-5xl xl:tw-text-6xl tw-text-left tw-rounded-2xl tw-backdrop-blur-sm lg:tw-backdrop-blur',
-                    styles.heroTitle
+                    styles.heroTitle,
                   )}
                 >
                   {/* Due to the below texts are not simple strings, so we can't use <Translate /> here. */}
@@ -207,7 +207,7 @@ function Home() {
             <img
               className={clsx(
                 'tw-block tw-mx-auto tw-select-none dark:tw-invert-[.85] dark:tw-saturate-0',
-                styles.chaosCategory
+                styles.chaosCategory,
               )}
               src="img/home/chaos-category.svg"
               alt="Chaos Category"
@@ -379,7 +379,6 @@ function Home() {
                   to="https://github.com/chaos-mesh/chaos-mesh"
                   className="tw-btn tw-bg-[#f2f2f2] tw-text-[#1f2937] dark:tw-text-[#a6adba] hover:!tw-bg-[#e6e6e6] tw-normal-case dark:tw-glass dark:hover:!tw-bg-transparent dark:hover:tw-text-white"
                 >
-                  <IconOctocat className="tw-w-4 tw-h-4 dark:tw-fill-white" />
                   GitHub
                 </Link>
               </Card>

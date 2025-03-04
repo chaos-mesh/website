@@ -13,7 +13,7 @@ function Feature({ imgUrl, title, description, className, imageWidth }) {
       <div
         className={clsx(
           'tw-relative tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-h-full',
-          isKubernetes && 'lg:tw-items-start'
+          isKubernetes && 'lg:tw-items-start',
         )}
       >
         {!isKubernetes ? (

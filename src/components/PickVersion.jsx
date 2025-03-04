@@ -51,8 +51,8 @@ const PickVersion = ({
         const rendered = isArchive
           ? children.replace(replaced, versionToGitHubRef(version))
           : version === 'latest'
-          ? children
-          : children.replace(replaced, 'v' + version)
+            ? children
+            : children.replace(replaced, 'v' + version)
 
         return <CodeBlock className={className}>{rendered}</CodeBlock>
       }}
