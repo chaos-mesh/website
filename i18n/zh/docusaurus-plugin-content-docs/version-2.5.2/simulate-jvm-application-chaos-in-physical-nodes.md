@@ -19,7 +19,7 @@ Chaosd 可以通过 [Byteman](https://github.com/chaos-mesh/byteman) 模拟 JVM 
 
 本节介绍如何在命令行模式中创建 JVM 应用故障实验。
 
-在创建JVM 应用故障实验前，可运行以下命令行查看 Chaosd 支持的 JVM 应用故障类型：
+在创建 JVM 应用故障实验前，可运行以下命令行查看 Chaosd 支持的 JVM 应用故障类型：
 
 ```bash
 chaosd attack jvm -h
