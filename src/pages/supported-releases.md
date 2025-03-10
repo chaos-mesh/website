@@ -40,7 +40,7 @@ The `2.6` version also theoretically works fine on the `1.26`, `1.27`, and `1.28
 
 | Version | Currently Supported   | Release Date | End of Life  | Supported Kubernetes versions                        |
 | :------ | :-------------------- | :----------- | :----------- | :--------------------------------------------------- |
-| master  | No, development only  | -            | -            | 1.26, 1.27, 1.28                                     |
+| master  | No, development only  | -            | -            | 1.30, 1.31, 1.32                                     |
 | 2.7     | `Yes`                 | Sep 20, 2024 | -            | 1.26, 1.27, 1.28                                     |
 | 2.6     | `Yes`                 | May 31, 2023 | -            | 1.20, 1.21, 1.22, 1.23, 1.24, 1.25, 1.26, 1.27, 1.28 |
 | 2.5     | No                    | Nov 22, 2022 | Sep 20, 2024 | 1.20, 1.21, 1.22, 1.23, 1.24, 1.25                   |
@@ -84,7 +84,7 @@ Below are Kubernetes versions covered by each version of the E2E tests:
 
 | Version | Tested kubernetes Versions |
 | :------ | :------------------------- |
-| master  | 1.26.13, 1.27.10, 1.28.6   |
+| master  | 1.30.10, 1.31.6, 1.32.2    |
 | 2.7     | 1.26.13, 1.27.10, 1.28.6   |
 | 2.6     | 1.20.15, 1.23.4, 1.25.1    |
 | 2.5     | 1.20, 1.23, 1.25           |
