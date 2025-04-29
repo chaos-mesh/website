@@ -45,27 +45,27 @@ To install Chaos Mesh in a test environment, run the following script:
 ]}>
   <TabItem value="k8s">
     <PickVersion>
-    {`curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash`}
+    {`curl -sSL https://github.com/chaos-mesh/chaos-mesh/raw/refs/heads/master/install.sh | bash`}
     </PickVersion>
   </TabItem>
   <TabItem value="kind">
-    <PickVersion>{`curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --local kind`}</PickVersion>
+    <PickVersion>{`curl -sSL https://github.com/chaos-mesh/chaos-mesh/raw/refs/heads/master/install.sh | bash -s -- --local kind`}</PickVersion>
 
     If you want to specify a `kind` version, add the `--kind-version xx` parameter at the end of the script, for example:
 
     <PickVersion>
-    {`curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --local kind --kind-version v0.20.0`}
+    {`curl -sSL https://github.com/chaos-mesh/chaos-mesh/raw/refs/heads/master/install.sh | bash -s -- --local kind --kind-version v0.20.0`}
     </PickVersion>
 
   </TabItem>
   <TabItem value="k3s">
     <PickVersion>
-    {`curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --k3s`}
+    {`curl -sSL https://github.com/chaos-mesh/chaos-mesh/raw/refs/heads/master/install.sh | bash -s -- --k3s`}
     </PickVersion>
   </TabItem>
   <TabItem value="microk8s">
     <PickVersion>
-    {`curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --microk8s`}
+    {`curl -sSL https://github.com/chaos-mesh/chaos-mesh/raw/refs/heads/master/install.sh | bash -s -- --microk8s`}
     </PickVersion>
   </TabItem>
 </Tabs>
@@ -87,7 +87,7 @@ For more installation details, refer to the source code of the [`install.sh`](ht
 To uninstall Chaos Mesh, execute the following command:
 
 <PickVersion>
-{`curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --template | kubectl delete -f -`}
+{`curl -sSL https://github.com/chaos-mesh/chaos-mesh/raw/refs/heads/master/install.sh | bash -s -- --template | kubectl delete -f -`}
 </PickVersion>
 
 You can also delete the `chaos-mesh` namespace to directly uninstall Chaos Mesh:

@@ -118,7 +118,7 @@ function Home() {
                   <Translate id="home.tryitout">Try it out with the following command 👇</Translate>
                 </h2>
                 <PickVersion className="!tw-mb-0">
-                  curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash
+                  curl -sSL https://github.com/chaos-mesh/chaos-mesh/raw/refs/heads/master/install.sh | bash
                 </PickVersion>
               </div>
             </div>
