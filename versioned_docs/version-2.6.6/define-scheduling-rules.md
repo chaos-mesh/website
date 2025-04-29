@@ -176,7 +176,7 @@ Not all experiment types support multiple experiments on the same Pod. For detai
 
 The default value of `startingDeadlineSeconds` is `nil`.
 
-When `startingDeadlineSeconds` is set to `nil`, Chaos Mesh will check if any experiments are missed from the last time of the scheduling to now (this might happen when you close Chaos Mesh, suspend Schedule for a long time, or set `concertencyPolicy` to `Forbid`).
+When `startingDeadlineSeconds` is set to `nil`, Chaos Mesh will check if any experiments are missed from the last time of the scheduling to now (this might happen when you close Chaos Mesh, suspend Schedule for a long time, or set `concurrencyPolicy` to `Forbid`).
 
 When `startingDeadlineSeconds` is set and larger than `0`, Chaos Mesh will check if any experiments are missed for the past `startingDeadlineSeconds` seconds since the current time. If the value of `startingDeadlineSeconds` is too small, some experiments might be missed. For example:
 
