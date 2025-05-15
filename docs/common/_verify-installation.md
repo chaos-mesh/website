@@ -1,19 +1,22 @@
 To check the running status of Chaos Mesh, execute the following command:
 
 ```sh
-kubectl get po -n chaos-mesh
+kubectl get pods -n chaos-mesh -l app.kubernetes.io/instance=chaos-mesh
 ```
 
 The expected output is as follows:
 
-```sh
-NAME                                        READY   STATUS    RESTARTS   AGE
-chaos-controller-manager-69fd5c46c8-xlqpc   3/3     Running   0          2d5h
-chaos-daemon-jb8xh                          1/1     Running   0          2d5h
-chaos-dashboard-98c4c5f97-tx5ds             1/1     Running   0          2d5h
+```txt
+NAME                                       READY   STATUS    RESTARTS   AGE
+chaos-controller-manager-7b8c86cc9-44dzf   1/1     Running   0          17m
+chaos-controller-manager-7b8c86cc9-mxw99   1/1     Running   0          17m
+chaos-controller-manager-7b8c86cc9-xmc5v   1/1     Running   0          17m
+chaos-daemon-sg2k2                         1/1     Running   0          17m
+chaos-dashboard-b9dbc6b68-hln25            1/1     Running   0          17m
+chaos-dns-server-546675d89d-qkjqq          1/1     Running   0          17m
 ```
 
-If your actual output is similar to the expected output with `NAME`, `READY`, `STATUS`, `RESTARTS`, and `AGE`, it means that Helm is installed successfully.
+If your actual output is similar to the expected output, then Chaos Mesh has been successfully installed.
 
 :::note
 
@@ -21,20 +24,21 @@ If the `STATUS` of your actual output is not `Running`, then execute the followi
 
 ```sh
 # Take the chaos-controller as an example
-kubectl describe po -n chaos-mesh chaos-controller-manager-69fd5c46c8-xlqpc
+kubectl describe po -n chaos-mesh chaos-controller-manager-7b8c86cc9-44dzf
 ```
 
 :::
 
 :::note
 
-If `leader-election` feature is turned off manually, `chaos-controller-manager` should only have 1 replication.
+If leader election is turned off, `chaos-controller-manager` should only have 1 replication.
 
-```sh
+```txt
 NAME                                        READY   STATUS    RESTARTS   AGE
-chaos-controller-manager-69fd5c46c8-xlqpc   1/1     Running   0          2d5h
-chaos-daemon-jb8xh                          1/1     Running   0          2d5h
-chaos-dashboard-98c4c5f97-tx5ds             1/1     Running   0          2d5h
+chaos-controller-manager-676d8567c7-ndr5j   1/1     Running   0          24m
+chaos-daemon-6l55b                          1/1     Running   0          24m
+chaos-dashboard-b9dbc6b68-hln25             1/1     Running   0          44m
+chaos-dns-server-546675d89d-qkjqq           1/1     Running   0          44m
 ```
 
 :::
