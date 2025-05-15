@@ -10,7 +10,7 @@ This document describes how to create DNSChaos experiments in Chaos Mesh to simu
 
 To simulate DNS faults, you need to deploy a special DNS service called Chaos DNS Server.
 
-In the latest version, Chaos Mesh will deploy Chaos DNS Server by default. If you don't need to simulate DNS faults, you can set `dnsServer.create` to `false` when installing Chaos Mesh:
+After `v2.6`, Chaos Mesh will deploy Chaos DNS Server by default. If you don't need to simulate DNS faults, you can set `dnsServer.create` to `false` when installing Chaos Mesh:
 
 <PickHelmVersion>{`helm install chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-mesh --version latest --set dnsServer.create=false`}</PickHelmVersion>
 
