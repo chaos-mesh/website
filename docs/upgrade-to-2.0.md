@@ -2,6 +2,14 @@
 title: Upgrade to Chaos Mesh 2.0
 ---
 
+:::warning
+
+We have ceased uploading migration files with each version release, as Chaos Mesh 2.0 has been released for a long time.
+
+The last upload was at `v2.7.2`.
+
+:::
+
 This document provides detailed instruction for upgrading Chaos Mesh from 1.x to 2.0. Chaos Mesh 2.0 introduced some new features and fixed many issues. Because in Chaos Mesh 2.0, some code has been rebuilt, you need to perform extra actions for the upgrade.
 
 ## Upgrade tools
