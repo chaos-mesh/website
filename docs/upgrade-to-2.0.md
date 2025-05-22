@@ -4,7 +4,9 @@ title: Upgrade to Chaos Mesh 2.0
 
 :::warning
 
-We are no longer uploading migration files because Chaos Mesh 2.0 has been released for a long time, and these files have not been modified for a long time.
+We have ceased uploading migration files with each version release, as Chaos Mesh 2.0 has been released for a long time.
+
+The last upload was at `v2.7.2`.
 
 :::
 
