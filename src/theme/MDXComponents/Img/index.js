@@ -3,7 +3,7 @@ import React from 'react'
 
 export default function ImgWrapper(props) {
   return (
-    <figure>
+    <figure style={{ margin: 0 }}>
       <Img {...props} />
       <figcaption
         className="text--italic text--center"

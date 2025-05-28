@@ -70,10 +70,6 @@
   text-decoration-thickness: 2px;
 }
 
-a.tw-btn {
-  text-decoration: none;
-}
-
 /* Integrate tailwindcss. */
 @tailwind base;
 @tailwind components;
