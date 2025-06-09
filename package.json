@@ -15,16 +15,16 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@docusaurus/core": "3.8.0",
-    "@docusaurus/faster": "^3.8.0",
-    "@docusaurus/preset-classic": "3.8.0",
+    "@docusaurus/core": "3.8.1",
+    "@docusaurus/faster": "^3.8.1",
+    "@docusaurus/preset-classic": "3.8.1",
     "@gracefullight/docusaurus-plugin-microsoft-clarity": "^1.0.0",
     "@mdx-js/react": "^3.1.0",
     "clsx": "^2.1.1",
     "gsap": "^3.12.5",
     "prism-react-renderer": "^2.4.1",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
     "semver": "^7.6.3",
     "typewriter-effect": "^2.21.0"
   },
@@ -41,8 +41,8 @@
     ]
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.8.0",
-    "@docusaurus/types": "3.8.0",
+    "@docusaurus/module-type-aliases": "3.8.1",
+    "@docusaurus/types": "3.8.1",
     "@trivago/prettier-plugin-sort-imports": "^5.2.1",
     "autoprefixer": "^10.4.20",
     "cross-env": "^7.0.3",

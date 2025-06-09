@@ -21,10 +21,6 @@
   --ifm-color-primary-lightest: #1e3b94;
 }
 
-:root[data-theme='light'] {
-  color-scheme: light !important;
-}
-
 :root[data-theme='dark'] {
   --ifm-color-primary: #10a6fa;
   --ifm-color-primary-dark: #0598ea;
