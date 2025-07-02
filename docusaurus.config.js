@@ -100,6 +100,10 @@ const config = {
           href: 'https://community.cncf.io/chaos-mesh-community/',
           label: 'Community Group',
         },
+        {
+          to: 'contact',
+          label: 'Contact Us',
+        },
 
         {
           type: 'docsVersionDropdown',
@@ -224,6 +228,13 @@ const config = {
   plugins: [
     './docusaurus-tailwind-v3',
     ['@gracefullight/docusaurus-plugin-microsoft-clarity', { projectId: 'lggqck9srz' }],
+  ],
+
+  scripts: [
+    {
+      src: '/js/cal-floating-button.js',
+      async: true,
+    },
   ],
 }
 
