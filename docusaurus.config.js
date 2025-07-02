@@ -100,6 +100,10 @@ const config = {
           href: 'https://community.cncf.io/chaos-mesh-community/',
           label: 'Community Group',
         },
+        {
+          to: 'contact',
+          label: 'Contact Us',
+        },
 
         {
           type: 'docsVersionDropdown',
