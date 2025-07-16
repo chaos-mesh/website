@@ -181,12 +181,12 @@ const config = {
           title: 'Acknowledgements',
           items: [
             {
-              label: 'Thanks for the technology illustrations by Storyset',
+              label: 'Technology illustrations by Storyset',
               href: 'https://storyset.com/technology',
             },
             {
               html: `
-                <a href="https://www.netlify.com">
+                <a href="https://www.netlify.com" target="_blank" rel="noopener noreferrer">
                   <img src="https://www.netlify.com/v3/img/components/netlify-color-bg.svg" alt="Deploys by Netlify" />
                 </a>
               `,
