@@ -1,7 +1,6 @@
 import Cal, { getCalApi } from '@calcom/embed-react'
 import { useEffect } from 'react'
 
-
 export default function CalComInlineEmbed() {
   useEffect(() => {
     ;(async function () {
@@ -9,6 +8,7 @@ export default function CalComInlineEmbed() {
       cal('ui', { hideEventTypeDetails: false, layout: 'month_view' })
     })()
   }, [])
+
   return (
     <Cal
       namespace="talk-to-chaos-mesh-maintainers"

@@ -25,7 +25,7 @@ export default function Contact() {
             questions you might have.
           </p>
 
-          <div style={{ margin: '2rem 0', textAlign: 'center' }}>
+          <div className="tw-my-8">
             <CalComInlineEmbed />
           </div>
 
