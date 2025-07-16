@@ -229,13 +229,6 @@ const config = {
     './docusaurus-tailwind-v3',
     ['@gracefullight/docusaurus-plugin-microsoft-clarity', { projectId: 'lggqck9srz' }],
   ],
-
-  scripts: [
-    {
-      src: '/js/cal-floating-button.js',
-      async: true,
-    },
-  ],
 }
 
 export default config

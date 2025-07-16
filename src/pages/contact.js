@@ -1,5 +1,7 @@
 import Layout from '@theme/Layout'
 
+import CalComInlineEmbed from '../components/CalComInlineEmbed'
+
 const contactText = 'Contact Us'
 
 export default function Contact() {
@@ -24,18 +26,7 @@ export default function Contact() {
           </p>
 
           <div style={{ margin: '2rem 0', textAlign: 'center' }}>
-            <iframe
-              src="https://cal.com/strrl/talk-to-chaos-mesh-maintainers?overlayCalendar=true"
-              width="100%"
-              height="600"
-              frameBorder="0"
-              title="Schedule a meeting with Chaos Mesh maintainers"
-              style={{
-                border: '1px solid #e1e5e9',
-                borderRadius: '8px',
-                minHeight: '600px',
-              }}
-            />
+            <CalComInlineEmbed />
           </div>
 
           <h2>Other Ways to Connect</h2>
