@@ -66,6 +66,10 @@
   text-decoration-thickness: 2px;
 }
 
+button {
+  border-style: unset;
+}
+
 /* Integrate tailwindcss. */
 @tailwind base;
 @tailwind components;
