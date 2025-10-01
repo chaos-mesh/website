@@ -55,11 +55,15 @@ pnpm docusaurus docs:version x.x.x
 
 The doc versions are split into two parts, one is the **latest (in `docs/`)** and the others are **versioned (in `versioned_docs/`)**. When releasing a new version, the current latest `docs/` will be copied into `versioned_docs/` (by running the command above).
 
+After running the command, you need to do the following steps:
+
+1. Update `src/data/versions.js`.
+
 #### Update i18n
 
 All translated docs won't be copied automatically. You have to handle them manually. For example, release `2.2.0`:
 
-1. Copy `i18n/zh/docusaurus-plugin-content-docs/current.json` to the same folder and rename it to `i18n/zh/docusaurus-plugin-content-docs/version-2.2.0.json`.
+1. Copy `i18n/zh/docusaurus-plugin-content-docs/current.json` to the same folder and rename it to `i18n/zh/docusaurus-plugin-content-docs/version-2.2.0.json` (Newly Docusaurus versions will do this automatically).
 2. The replace `Next` and `current` in `version-2.2.0.json`, e.g.:
 
    ```json
