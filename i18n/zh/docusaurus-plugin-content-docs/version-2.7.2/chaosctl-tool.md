@@ -4,6 +4,14 @@ title: Chaosctl
 
 Chaosctl 是一个用于辅助调试 Chaos Mesh 的工具。我们希望利用 Chaosctl 简化开发调试新 chaos 类型，以及提交 issue 相关日志的流程。
 
+:::info 注意
+
+在 Chaos Mesh 2.7.3 版本中，您需要手动启用 ctrlserver 才能使用 Chaosctl，默认情况下它是禁用的。
+
+如果您使用 Helm 部署 Chaos Mesh，可以通过将 `enableCtrlServer` 参数设置为 `true` 来启用 ctrlserver。
+
+:::
+
 ## 获取 Chaosctl
 
 我们为 Linux 提供了可执行文件。你可以直接下载 Chaosctl：
@@ -110,7 +118,7 @@ chaosctl logs -t 100 # 输出所有组件的最后100行日志
 
 ## 问题反馈
 
-Chaosctl 的代码目前托管于 Chaos Mesh 项目中。更多信息，请参阅 [chaos-mesh/pkg/chaosctl](https://github.com/chaos-mesh/chaos-mesh/tree/master/pkg/chaosctl) 。
+Chaosctl 的代码目前托管于 Chaos Mesh 项目中。更多信息，请参阅 [chaos-mesh/pkg/chaosctl](https://github.com/chaos-mesh/chaos-mesh/tree/release-2.7/pkg/chaosctl) 。
 
 如果在操作的过程中遇到了问题，或有兴趣帮助我们改进这一工具，欢迎在 [CNCF Slack](https://cloud-native.slack.com/archives/C0193VAV272) 向 Chaos Mesh 团队反馈，或者直接在 GitHub 创建一个 [issue](https://github.com/chaos-mesh/chaos-mesh/issues)。
 

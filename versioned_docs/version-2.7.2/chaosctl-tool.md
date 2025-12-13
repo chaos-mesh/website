@@ -4,6 +4,14 @@ title: Chaosctl
 
 Chaosctl is a tool to assist in debugging Chaos Mesh. With Chaosctl, you can simplify the process of developing and debugging new chaos types, and provide references for other developers when raising an issue.
 
+:::info
+
+In Chaos Mesh version 2.7.3, you need to manually enable ctrlserver to use Chaosctl, it is disabled by default.
+
+If you are using Helm to deploy Chaos Mesh, you can enable ctrlserver by setting the `enableCtrlServer` parameter to `true`.
+
+:::
+
 ## Get Chaosctl
 
 For Linux users, you can directly download the executable file for Chaosctl.
@@ -110,7 +118,7 @@ Run the following commands to complete the operations:
 
 ## Questions and feedback
 
-The code of Chaosctl is currently hosted in the Chaos Mesh project. For details, refer to [chaos-mesh/pkg/chaosctl](https://github.com/chaos-mesh/chaos-mesh/tree/master/pkg/chaosctl).
+The code of Chaosctl is currently hosted in the Chaos Mesh project. For details, refer to [chaos-mesh/pkg/chaosctl](https://github.com/chaos-mesh/chaos-mesh/tree/release-2.7/pkg/chaosctl).
 
 If you encounter problems during performing operations, or you are interested in helping us improve this tool, you are welcome to contact the Chaos Mesh team through [CNCF Slack](https://cloud-native.slack.com/archives/C0193VAV272), or create an [GitHub issue](https://github.com/chaos-mesh/chaos-mesh/issues).
 
