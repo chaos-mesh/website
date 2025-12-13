@@ -118,7 +118,7 @@ Run the following commands to complete the operations:
 
 ## Questions and feedback
 
-The code of Chaosctl is currently hosted in the Chaos Mesh project. For details, refer to [chaos-mesh/pkg/chaosctl](https://github.com/chaos-mesh/chaos-mesh/tree/master/pkg/chaosctl).
+The code of Chaosctl is currently hosted in the Chaos Mesh project. For details, refer to [chaos-mesh/pkg/chaosctl](https://github.com/chaos-mesh/chaos-mesh/tree/release-2.7/pkg/chaosctl).
 
 If you encounter problems during performing operations, or you are interested in helping us improve this tool, you are welcome to contact the Chaos Mesh team through [CNCF Slack](https://cloud-native.slack.com/archives/C0193VAV272), or create an [GitHub issue](https://github.com/chaos-mesh/chaos-mesh/issues).
 

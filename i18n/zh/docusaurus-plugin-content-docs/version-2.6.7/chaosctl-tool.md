@@ -118,7 +118,7 @@ chaosctl logs -t 100 # 输出所有组件的最后100行日志
 
 ## 问题反馈
 
-Chaosctl 的代码目前托管于 Chaos Mesh 项目中。更多信息，请参阅 [chaos-mesh/pkg/chaosctl](https://github.com/chaos-mesh/chaos-mesh/tree/master/pkg/chaosctl) 。
+Chaosctl 的代码目前托管于 Chaos Mesh 项目中。更多信息，请参阅 [chaos-mesh/pkg/chaosctl](https://github.com/chaos-mesh/chaos-mesh/tree/release-2.7/pkg/chaosctl) 。
 
 如果在操作的过程中遇到了问题，或有兴趣帮助我们改进这一工具，欢迎在 [CNCF Slack](https://cloud-native.slack.com/archives/C0193VAV272) 向 Chaos Mesh 团队反馈，或者直接在 GitHub 创建一个 [issue](https://github.com/chaos-mesh/chaos-mesh/issues)。
 
