@@ -93,8 +93,8 @@ Global Flags:
 | correlation | c | 表示包错误发生的概率与前一次是否发生的相关性 | int 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 0 |
 | device | d | 影响的网卡设备名称 | string 类型，例如 "eth0"，必须要设置 |
 | egress-port | e | 仅影响到指定目的端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
-| hostname | H | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org" |
-| ip | i | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123" |
+| hostname | H | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org"，可以使用逗号分隔来指定多个值，如 "chaos-mesh.org,example.com" |
+| ip | i | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123"，可以使用逗号分隔来指定多个值，如 "123.123.123.123,124.124.124.124" |
 | protocol | p | 只影响指定的 IP 协议 | string 类型，支持协议类型包括：tcp、 udp、icmp、all（表示影响所有网络协议） |
 | source-port | s | 仅影响到指定目的端口的入口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
 | percent | 无 | 网络包错误的比例 | string 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 1 |
@@ -158,8 +158,8 @@ Global Flags:
 | correlation | c | 表示延迟时间的时间长度与前一次延迟时长的相关性 | int 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 0 |
 | device | d | 影响的网卡设备名称 | string 类型，例如 "eth0"，必须要设置 |
 | egress-port | e | 仅影响到指定目的端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
-| hostname | H | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org" |
-| ip | i | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123" |
+| hostname | H | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org"，可以使用逗号分隔来指定多个值，如 "chaos-mesh.org,example.com" |
+| ip | i | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123"，可以使用逗号分隔来指定多个值，如 "123.123.123.123,124.124.124.124" |
 | jitter | j | 延迟时间的变化范围 | string 类型，可使用的时间单位包括：ns、us (µs)、ms、s、m、h，如 "1ms" |
 | latency | l | 表示延迟的时间长度 | string 类型，可使用的时间单位包括：ns、us (µs)、ms、s、m、h，如 "1ms" |
 | protocol | p | 只影响指定的 IP 协议 | string 类型，支持协议类型包括：tcp、 udp、icmp、all（表示影响所有网络协议） |
@@ -223,8 +223,8 @@ Global Flags:
 | correlation | c | 表示包重复发生的概率与前一次是否发生的相关性性 | int 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 0 |
 | device | d | 影响的网卡设备名称 | string 类型，例如 "eth0"，必须要设置 |
 | egress-port | e | 仅影响到指定目的端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
-| hostname | H | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org" |
-| ip | i | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123" |
+| hostname | H | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org"，可以使用逗号分隔来指定多个值，如 "chaos-mesh.org,example.com" |
+| ip | i | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123"，可以使用逗号分隔来指定多个值，如 "123.123.123.123,124.124.124.124" |
 | percent | 无 | 网络包重复的比例 | int 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 1 |
 | protocol | p | 只影响指定的 IP 协议 | string 类型，支持协议类型包括：tcp、 udp、icmp、all（表示影响所有网络协议） |
 | source-port | s | 仅影响到指定目的端口的入口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
@@ -287,8 +287,8 @@ Global Flags:
 | correlation | c | 表示丢包发生的概率与前一次是否发生的相关性 | int 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 0 |
 | device | d | 影响的网卡设备名称 | string 类型，例如 "eth0"，必须要设置 |
 | egress-port | e | 仅影响到指定目的端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
-| hostname | H | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org" |
-| ip | i | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123" |
+| hostname | H | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org"，可以使用逗号分隔来指定多个值，如 "chaos-mesh.org,example.com" |
+| ip | i | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123"，可以使用逗号分隔来指定多个值，如 "123.123.123.123,124.124.124.124" |
 | percent | 无 | 网络丢包的比例 | int 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 1 |
 | protocol | p | 只影响指定的 IP 协议 | string 类型，支持协议类型包括：tcp、 udp、icmp、all（表示影响所有网络协议） |
 | source-port | s | 仅影响到指定目的端口的入口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
@@ -350,8 +350,8 @@ Global Flags:
 | accept-tcp-flags | 无 | 表示接收包含指定标志的的 tcp 数据包，其他的则丢弃。具体配置规则参考 iptables 的 tcp-flags。仅当 protocol 为 tcp 时可以配置。 | string 类型，例如："SYN,ACK SYN,ACK" |
 | device | d | 影响的网卡设备名称 | string 类型，例如 "eth0"，必须要设置 |
 | direction | 无 | 指定分区的方向，对来自/发送到 hostname 指定的主机或者 ip 指定的地址的数据包进行分区 | string 类型，可选值为 "from" 或者 "to" |
-| hostname | H | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org" |
-| ip | i | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123" |
+| hostname | H | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org"，可以使用逗号分隔来指定多个值，如 "chaos-mesh.org,example.com" |
+| ip | i | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123"，可以使用逗号分隔来指定多个值，如 "123.123.123.123,124.124.124.124" |
 | protocol | p | 只影响指定的 IP 协议 | string 类型，支持协议类型包括：tcp、udp、icmp、all（表示影响所有网络协议） |
 
 #### 网络分区命令示例
@@ -459,8 +459,8 @@ Global Flags:
 | :-- | :-- | :-- | :-- |
 | buffer | b | 能够瞬间发送的最大字节数 | uint32 类型，如：`10000`。必须要设置 |
 | device | d | 影响的网卡设备名称 | string 类型，如 `"eth0"`，必须要设置 |
-| hostname | H | 只影响到指定的主机名 | string 类型，如 `"chaos-mesh.org"`。`hostname` 与 `ip` 不能同时为空。同时设置 `hostname` 与 `ip` 时，配置项对指定的主机名和 IP 地址均产生影响 |
-| ip-address | i | 仅影响到指定的 IP 地址 | string 类型，如 `"123.123.123.123"`。`hostname` 与 `ip` 不能同时为空。同时设置 `hostname` 与 `ip` 时，配置项对指定的主机名和 IP 地址均产生影响 |
+| hostname | H | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org"，可以使用逗号分隔来指定多个值，如 "chaos-mesh.org,example.com"。`hostname` 与 `ip` 不能同时为空。同时设置 `hostname` 与 `ip` 时，配置项对指定的主机名和 IP 地址均产生影响 |
+| ip-address | i | 仅影响到指定的 IP 地址 | string 类型，如 "123.123.123.123"，可以使用逗号分隔来指定多个值，如 "123.123.123.123,124.124.124.124"。`hostname` 与 `ip` 不能同时为空。同时设置 `hostname` 与 `ip` 时，配置项对指定的主机名和 IP 地址均产生影响 |
 | limit | i | 在队列中等待的字节数 | uint32 类型，如：`10000`。必须要设置 |
 | minburst | `m` | peakrate bucket 的大小 | uint32 类型，如：`10000` |
 | peakrate | 无 | bucket 的最大消耗率 | uint64 类型，如：`10000` |
@@ -541,8 +541,8 @@ Global Flags:
 | correlation | 表示包错误发生的概率与前一次是否发生的相关性 | int 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 0 |
 | device | 影响的网卡设备名称 | string 类型，例如 "eth0"，必须要设置 |
 | egress-port | 仅影响到指定目的端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
-| hostname | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org" |
-| ip-address | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123" |
+| hostname | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org"，可以使用逗号分隔来指定多个值，如 "chaos-mesh.org,example.com" |
+| ip-address | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123"，可以使用逗号分隔来指定多个值，如 "123.123.123.123,124.124.124.124" |
 | ip-protocol | 只影响指定的 IP 协议 | string 类型，支持协议类型包括：tcp、 udp、icmp、all（表示影响所有网络协议） |
 | source-port | 仅影响到指定目的端口的入口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
 | percent | 网络包错误的比例 | string 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 1 |
@@ -567,8 +567,8 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 | correlation | 表示延迟时间的时间长度与前一次延迟时长的相关性 | int 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 0 |
 | device | 影响的网卡设备名称 | string 类型，例如 "eth0"，必须要设置 |
 | egress-port | 仅影响到指定目的端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
-| hostname | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org" |
-| ip-address | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123" |
+| hostname | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org"，可以使用逗号分隔来指定多个值，如 "chaos-mesh.org,example.com" |
+| ip-address | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123"，可以使用逗号分隔来指定多个值，如 "123.123.123.123,124.124.124.124" |
 | jitter | 延迟时间的变化范围 | string 类型，可使用的时间单位包括：ns、us (µs)、ms、s、m、h，如 "1ms" |
 | latency | 表示延迟的时间长度 | string 类型，可使用的时间单位包括：ns、us (µs)、ms、s、m、h，如 "1ms" |
 | ip-protocol | 只影响指定的 IP 协议 | string 类型，支持协议类型包括：tcp、 udp、icmp、all（表示影响所有网络协议） |
@@ -594,8 +594,8 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 | correlation | 表示包重复发生的概率与前一次是否发生的相关性性 | int 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 0 |
 | device | 影响的网卡设备名称 | string 类型，例如 "eth0"，必须要设置 |
 | egress-port | 仅影响到指定目的端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
-| hostname | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org" |
-| ip-address | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123" |
+| hostname | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org"，可以使用逗号分隔来指定多个值，如 "chaos-mesh.org,example.com" |
+| ip-address | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123"，可以使用逗号分隔来指定多个值，如 "123.123.123.123,124.124.124.124" |
 | percent | 网络包重复的比例 | int 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 1 |
 | ip-protocol | 只影响指定的 IP 协议 | string 类型，支持协议类型包括：tcp、 udp、icmp、all（表示影响所有网络协议） |
 | source-port | 仅影响到指定目的端口的入口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
@@ -620,8 +620,8 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 | correlation | 表示丢包发生的概率与前一次是否发生的相关性 | int 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 0 |
 | device | 影响的网卡设备名称 | string 类型，例如 "eth0"，必须要设置 |
 | egress-port | 仅影响到指定目的端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
-| hostname | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org" |
-| ip-address | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123" |
+| hostname | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org"，可以使用逗号分隔来指定多个值，如 "chaos-mesh.org,example.com" |
+| ip-address | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123"，可以使用逗号分隔来指定多个值，如 "123.123.123.123,124.124.124.124" |
 | percent | 网络丢包的比例 | int 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 1 |
 | ip-protocol | 只影响指定的 IP 协议 | string 类型，支持协议类型包括：tcp、 udp、icmp、all（表示影响所有网络协议） |
 | source-port | 仅影响到指定目的端口的入口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
@@ -646,8 +646,8 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 | accept-tcp-flags | 表示接收包含指定标志的的 tcp 数据包，其他的则丢弃。具体配置规则参考 iptables 的 tcp-flags。仅当 protocol 为 tcp 时可以配置。 | string 类型，例如："SYN,ACK SYN,ACK" |
 | device | 影响的网卡设备名称 | string 类型，例如 "eth0"，必须要设置 |
 | direction | 指定分区的方向，对来自/发送到 hostname 指定的主机或者 ip 指定的地址的数据包进行分区 | string 类型，可选值为 "from" 或者 "to" |
-| hostname | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org" |
-| ip-address | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123" |
+| hostname | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org"，可以使用逗号分隔来指定多个值，如 "chaos-mesh.org,example.com" |
+| ip-address | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123"，可以使用逗号分隔来指定多个值，如 "123.123.123.123,124.124.124.124" |
 | protocol | 只影响指定的 IP 协议 | string 类型，支持协议类型包括：tcp、udp、icmp、all（表示影响所有网络协议） |
 
 #### 服务模式网络分区命令示例
@@ -689,8 +689,8 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 | :-- | :-- | :-- |
 | buffer | 能够瞬间发送的最大字节数 | uint32 类型，如：`10000`。必须要设置 |
 | device | 影响的网卡设备名称 | string 类型，如 `"eth0"`，必须要设置 |
-| hostname | 仅影响到指定的主机名 | string 类型，如 `"chaos-mesh.org"`。 `hostname` 与 `ip` 不能同时为空；同时设置 `hostname` 与 `ip` 时，配置项对指定的主机名和 IP 地址均产生影响 |
-| ip-address | 只影响到指定的 IP 地址 | string 类型，如 `"123.123.123.123"`。`hostname` 与 `ip` 不能都为空；同时设置 `hostname` 与 `ip` 时，配置项对指定的主机名和 IP 地址均产生影响 |
+| hostname | 仅影响到指定的主机名 | string 类型，如 "chaos-mesh.org"，可以使用逗号分隔来指定多个值，如 "chaos-mesh.org,example.com"。 `hostname` 与 `ip` 不能同时为空；同时设置 `hostname` 与 `ip` 时，配置项对指定的主机名和 IP 地址均产生影响 |
+| ip-address | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123"，可以使用逗号分隔来指定多个值，如 "123.123.123.123,124.124.124.124"。`hostname` 与 `ip` 不能都为空；同时设置 `hostname` 与 `ip` 时，配置项对指定的主机名和 IP 地址均产生影响 |
 | limit | 在队列中等待的字节数 | uint32 类型，如：`10000`。必须要设置 |
 | minburst | peakrate bucket 的大小 | uint32 类型，如：`10000` |
 | peakrate | bucket 的最大消耗率 | uint64 类型，如：`10000` |
