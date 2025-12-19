@@ -30,10 +30,10 @@ glibc 必须为 2.17 及以上版本。
 
 ### 下载和部署
 
-1. 将要下载的 Chaosd 版本设置为环境变量，例如 v1.0.0：
+1. 将要下载的 Chaosd 版本设置为环境变量，例如 v1.4.0：
 
    ```bash
-   export CHAOSD_VERSION=v1.0.0
+   export CHAOSD_VERSION=v1.4.0
    ```
 
    如果要查看所有已发布的 Chaosd 版本，请参阅 [releases](https://github.com/chaos-mesh/chaosd/releases) 。
@@ -68,3 +68,56 @@ glibc 必须为 2.17 及以上版本。
 
 - 命令行模式：将 Chaosd 作为命令行工具，直接运行即可注入故障、恢复故障。
 - 服务模式：将 Chaosd 作为服务运行在后台，通过发送 HTTP 请求来注入故障、恢复故障。
+
+#### 使用 systemd 运行 Chaosd 服务
+
+在 Linux 系统上，你可以将 Chaosd 配置为 systemd 服务以服务模式运行。以下是配置示例：
+
+1. 在 `/etc/systemd/system/chaosd.service` 创建 systemd 服务文件：
+
+   ```ini
+   [Unit]
+   Description=Chaos Mesh chaosd - Physical Machine Chaos Experiment Tool
+   Documentation=https://chaos-mesh.org/zh/docs/simulate-physical-machine-chaos/
+   After=network.target
+   Wants=network.target
+
+   [Service]
+   Type=simple
+   ExecStart=/usr/local/chaosd-v1.4.0-linux-amd64/chaosd server
+   User=root
+   Group=root
+   Restart=on-failure
+   RestartSec=5s
+   StandardOutput=journal
+   StandardError=journal
+
+   [Install]
+   WantedBy=multi-user.target
+   ```
+
+   **注意**：请将 `ExecStart` 路径中的 `v1.4.0` 替换为你实际安装的 Chaosd 版本。
+
+2. 重新加载 systemd 以识别新的服务：
+
+   ```bash
+   sudo systemctl daemon-reload
+   ```
+
+3. 设置服务开机自启：
+
+   ```bash
+   sudo systemctl enable chaosd
+   ```
+
+4. 启动 Chaosd 服务：
+
+   ```bash
+   sudo systemctl start chaosd
+   ```
+
+5. 查看服务状态：
+
+   ```bash
+   sudo systemctl status chaosd
+   ```

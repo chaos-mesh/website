@@ -30,10 +30,10 @@ Your glibc version must be v2.17 or later versions.
 
 ### Download and deploy
 
-1. Set the version of Chaosd to be downloaded as the environment variable. For example, v1.0.0:
+1. Set the version of Chaosd to be downloaded as the environment variable. For example, v1.4.0:
 
    ```bash
-   export CHAOSD_VERSION=v1.0.0
+   export CHAOSD_VERSION=v1.4.0
    ```
 
    To view all released versions of Chaosd, refer to [releases](https://github.com/chaos-mesh/chaosd/releases).
@@ -68,3 +68,56 @@ You can use Chaosd in the following modes:
 
 - Command-line mode: Run Chaosd directly as a command-line tool to inject and recover faults.
 - Service mode: Run Chaosd as a service in the background, to inject and recover faults by sending HTTP requests.
+
+#### Running Chaosd as a systemd service
+
+To run Chaosd in service mode as a systemd service on Linux, you can create a systemd unit file. Here's an example configuration:
+
+1. Create a systemd service file at `/etc/systemd/system/chaosd.service`:
+
+   ```ini
+   [Unit]
+   Description=Chaos Mesh chaosd - Physical Machine Chaos Experiment Tool
+   Documentation=https://chaos-mesh.org/docs/simulate-physical-machine-chaos/
+   After=network.target
+   Wants=network.target
+
+   [Service]
+   Type=simple
+   ExecStart=/usr/local/chaosd-v1.4.0-linux-amd64/chaosd server
+   User=root
+   Group=root
+   Restart=on-failure
+   RestartSec=5s
+   StandardOutput=journal
+   StandardError=journal
+
+   [Install]
+   WantedBy=multi-user.target
+   ```
+
+   **Note**: Replace `v1.4.0` in the `ExecStart` path with your actual Chaosd version.
+
+2. Reload systemd to recognize the new service:
+
+   ```bash
+   sudo systemctl daemon-reload
+   ```
+
+3. Enable the service to start on boot:
+
+   ```bash
+   sudo systemctl enable chaosd
+   ```
+
+4. Start the Chaosd service:
+
+   ```bash
+   sudo systemctl start chaosd
+   ```
+
+5. Check the service status:
+
+   ```bash
+   sudo systemctl status chaosd
+   ```
