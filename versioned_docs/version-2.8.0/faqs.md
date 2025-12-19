@@ -116,3 +116,42 @@ When you install Chaos Mesh on Kubernetes lower than v1.16, you need to follow t
 3. Use Helm to finish the rest process of installation, and append `--skip-crds` with `helm install` command.
 
 We suggest upgrading your Kubernetes cluster by referencing Kubernetes [Version Skew Policy](https://kubernetes.io/releases/version-skew-policy/).
+
+## Chaosd
+
+### Failed with error: attempt to write a readonly database
+
+When running chaosd using either command mode or service mode, if the current user lacks write permissions to the SQLite database file used by chaosd, this error will occur. By default, the database file is located in the chaosd installation directory at `/usr/local/chaosd-v$VERSION-$OS-$ARCH/chaosd.db` (e.g., `/usr/local/chaosd-v1.4.0-linux-amd64/chaosd.db`).
+
+To resolve this issue, you need to grant write permissions to the database file:
+
+```bash
+# Replace the path with your actual chaosd installation directory
+sudo chmod 666 /usr/local/chaosd-v*/chaosd.db
+# Also ensure the directory is writable
+sudo chmod 775 /usr/local/chaosd-v*/
+```
+
+Alternatively, you can run chaosd with appropriate privileges or change the ownership of the database file to your current user.
+
+### Network chaos experiments involving tc and iptables require sudo privileges
+
+When creating network chaos experiments that use `tc` (traffic control) or `iptables`, you must execute chaosd commands with `sudo` or root privileges. Without proper permissions, the chaos attack will fail to apply and recovery operations will also fail.
+
+Examples of network chaos that require sudo:
+
+- Network delay, loss, duplicate, or corrupt
+- Network bandwidth limitation
+- Network partition
+
+To run these experiments:
+
+```bash
+# Command mode
+sudo chaosd attack network delay --device eth0 --latency 100ms
+
+# Service mode - start the service with sudo
+sudo chaosd server
+```
+
+If you don't use sudo, you may see errors like "permission denied" or "operation not permitted" when attempting to modify network configurations.

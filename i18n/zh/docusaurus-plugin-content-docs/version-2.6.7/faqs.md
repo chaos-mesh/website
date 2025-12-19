@@ -116,3 +116,42 @@ When you install Chaos Mesh on Kubernetes lower than v1.16, you need to follow t
 3. Use Helm to finish the rest process of installation, and append `--skip-crds` with `helm install` command.
 
 We suggest upgrading your Kubernetes cluster by referencing Kubernetes [Version Skew Policy](https://kubernetes.io/releases/version-skew-policy/).
+
+## Chaosd
+
+### 运行失败，错误信息：attempt to write a readonly database
+
+无论是使用命令模式还是服务模式运行 chaosd，如果当前用户无法写入 chaosd 使用的 SQLite 数据库文件，就会出现此错误。默认情况下，数据库文件位于 chaosd 的安装目录中，路径为 `/usr/local/chaosd-v$VERSION-$OS-$ARCH/chaosd.db`（例如 `/usr/local/chaosd-v1.4.0-linux-amd64/chaosd.db`）。
+
+要解决此问题，你需要为数据库文件授予写权限：
+
+```bash
+# 将路径替换为你实际的 chaosd 安装目录
+sudo chmod 666 /usr/local/chaosd-v*/chaosd.db
+# 同时确保目录可写
+sudo chmod 775 /usr/local/chaosd-v*/
+```
+
+或者，你可以使用适当的权限运行 chaosd，或将数据库文件的所有权更改为当前用户。
+
+### 涉及 tc 和 iptables 的网络故障实验需要使用 sudo 执行
+
+在创建使用 `tc`（流量控制）或 `iptables` 的网络混沌实验时，必须使用 `sudo` 或 root 权限执行 chaosd 命令。如果没有适当的权限，混沌攻击将无法应用，恢复操作也会失败。
+
+需要 sudo 权限的网络混沌实验包括：
+
+- 网络延迟、丢包、重复或损坏
+- 网络带宽限制
+- 网络分区
+
+运行这些实验的方法：
+
+```bash
+# 命令模式
+sudo chaosd attack network delay --device eth0 --latency 100ms
+
+# 服务模式 - 使用 sudo 启动服务
+sudo chaosd server
+```
+
+如果不使用 sudo，在尝试修改网络配置时可能会看到类似 "permission denied" 或 "operation not permitted" 的错误。
