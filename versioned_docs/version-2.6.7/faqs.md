@@ -64,6 +64,53 @@ This indicates that the maximum API version that the Docker daemon can accept is
 1. Upgrade your Docker to a newer version.
 2. Helm install/upgrade with `--set chaosDaemon.env.DOCKER_API_VERSION=1.39`.
 
+### When running chaos experiments, I encounter errors like "too many open files"
+
+This error typically occurs when the `chaos-daemon` process reaches the system's file descriptor limit. This can happen when:
+
+- Running many chaos experiments simultaneously
+- Running IOChaos experiments that handle many file descriptors
+- The system's ulimit for open files is set too low
+
+**Solutions:**
+
+1. **Increase the file descriptor limit for chaos-daemon pods** by adding resource limits in your Helm values:
+
+   ```yaml
+   chaosDaemon:
+     podSecurityContext:
+       sysctls:
+         - name: fs.file-max
+           value: '65536'
+   ```
+
+2. **Increase the system-wide file descriptor limit** on your Kubernetes nodes:
+
+   ```bash
+   # Check current limit
+   ulimit -n
+
+   # Increase the limit (temporary, for current session)
+   ulimit -n 65536
+   ```
+
+   For a permanent solution, modify `/etc/security/limits.conf` on your nodes:
+
+   ```
+   * soft nofile 65536
+   * hard nofile 65536
+   ```
+
+3. **Reduce the number of concurrent chaos experiments** or stagger their execution to avoid overwhelming the system with too many open file descriptors.
+
+4. **Check for file descriptor leaks** by examining the chaos-daemon logs:
+
+   ```bash
+   kubectl logs -n chaos-mesh <chaos-daemon-pod-name>
+   ```
+
+If you're running IOChaos experiments specifically, consider limiting the scope of the experiments or the number of target pods to reduce file descriptor usage.
+
 ## DNSChaos
 
 ### While trying to run DNSChaos in OpenShift, the problems regarding authorization blocked the process
