@@ -16,9 +16,13 @@ This document describes how to start Chaos Mesh quickly in a test or local envir
 
 :::warning
 
-**In this document, Chaos Mesh is installed via a script for quick trial only.**
+Starting with versions `v2.8.2` and `v2.9`, the `install.sh` script has been deprecated.
 
-If you need to install Chaos Mesh in the production environment or other strict non-test scenarios, it is recommended to use [Helm](https://helm.sh/). For more details, refer to [Installation using Helm](production-installation-using-helm.md).
+The `install.sh` script was originally designed for quick trials only, it was not built with full functionality.
+
+Given the widespread use and mature ecosystem of [Helm](https://helm.sh/), we no longer recommend managing Chaos Mesh via scripts. So please refer to [Installation using Helm](production-installation-using-helm.md) for installation in test or production environments.
+
+You can still get the `install.sh` script for versions before `v2.8.2`.
 
 :::
 

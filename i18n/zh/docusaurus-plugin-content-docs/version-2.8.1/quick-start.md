@@ -12,9 +12,13 @@ import QuickRun from './common/\_quick-run.md'
 
 :::warning
 
-**在本文档中，Chaos Mesh 是通过脚本安装的，仅供快速试用。**
+从 `v2.8.2` 和 `v2.9` 开始，`install.sh` 脚本已被弃用。
 
-如果需要在生产环境或者是其他严格的非测试场景下安装，推荐使用 [Helm](https://helm.sh/)。详情请参考[使用 Helm 安装](production-installation-using-helm.md)。
+`install.sh` 脚本最初仅为快速试用设计，并不具备完整功能。
+
+鉴于 [Helm](https://helm.sh/) 的广泛使用和成熟生态，我们不再建议通过脚本管理 Chaos Mesh。请参考[使用 Helm 安装](production-installation-using-helm.md)，在测试或生产环境中安装 Chaos Mesh。
+
+你仍然可以获取 `v2.8.2` 之前版本的 `install.sh` 脚本。
 
 :::
 
