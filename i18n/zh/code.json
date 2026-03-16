@@ -130,10 +130,6 @@
     "message": "选择版本",
     "description": "The label for the navbar versions dropdown on mobile view"
   },
-  "theme.admonition.caution": {
-    "message": "警告",
-    "description": "The default label used for the Caution admonition (:::caution)"
-  },
   "theme.admonition.danger": {
     "message": "危险",
     "description": "The default label used for the Danger admonition (:::danger)"

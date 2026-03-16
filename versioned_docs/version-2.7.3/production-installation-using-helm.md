@@ -165,7 +165,7 @@ For more values and their usages, refer to [all values](https://github.com/chaos
 
 :::
 
-:::caution
+:::warning
 
 Currently, the latest CustomResourceDefinition (CRD) is not applied during the Helm upgrading, which might cause errors. To avoid this situation, you can apply the latest CRD manually:
 

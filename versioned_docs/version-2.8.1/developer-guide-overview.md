@@ -2,7 +2,7 @@
 title: Developer Guide Overview
 ---
 
-:::caution
+:::warning
 
 The developer manual section may be out of date. If you find any problems or have any questions, please [create an issue](https://github.com/chaos-mesh/chaos-mesh/issues/new/choose) and let us know. Thank you for your contribution!
 

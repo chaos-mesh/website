@@ -93,7 +93,7 @@ Chaos Mesh 提供 `Schedule` 对象，帮助创建定时混沌实验和循环混
 
    示例 YAML 文件中定义了一个可以在每个小时的第 5 分钟自动运行的网络延迟故障。更详细的调度规则定义，请参考[定义调度规则](define-scheduling-rules.md)。
 
-   :::caution 注意
+   :::warning
 
    如果不设置 `duration` 参数，表示故障行为会一直持续下去，直到暂停或者删除混沌实验。
 

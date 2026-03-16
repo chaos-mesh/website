@@ -6,7 +6,7 @@ title: 远程集群管理
 
 Chaos Mesh 提供集群范围的 `RemoteCluster` 资源，帮助您管理故障并将故障注入远程 Kubernetes 集群。本文档描述了如何创建 `RemoteCluster` 对象并使用它来注入故障。
 
-:::note 注意
+:::note
 
 `RemoteCluster` 尚处于早期阶段。它的配置和功能（例如配置迁移、版本管理和认证）将不断完善。如果您遇到任何问题，请在 [chaos-mesh/chaos-mesh](https://github.com/chaos-mesh/chaos-mesh) 中打开一个 issue 进行报告。
 

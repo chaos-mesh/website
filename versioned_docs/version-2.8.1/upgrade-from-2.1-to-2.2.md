@@ -54,7 +54,7 @@ For `Kubernetes <= 1.15`, you can apply the latest CRD by executing the followin
 kubectl replace -f https://mirrors.chaos-mesh.org/v2.2.0/crd-v1beta1.yaml
 ```
 
-:::caution
+:::warning
 
 Chaos Mesh 2.2.x would be the last series of releases that support Kubernetes < 1.19.
 

@@ -2,7 +2,7 @@
 title: 升级至 Chaos Mesh 2.0
 ---
 
-:::warning 警告
+:::warning
 
 由于 Chaos Mesh 2.0 已发布许久，我们已停止在每个版本发布时上传迁移文件。
 

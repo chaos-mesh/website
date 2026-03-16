@@ -18,7 +18,7 @@ chaos-dns-server-546675d89d-qkjqq          1/1     Running   0          17m
 
 如果你的实际输出与预期输出相符，则表示 Chaos Mesh 已经成功安装。
 
-:::note 注意
+:::note
 
 如果实际输出的 `STATUS` 状态不是 `Running`，则可以运行以下命令查看 Pod 的详细信息，然后依据错误提示排查并解决问题。
 
@@ -29,7 +29,7 @@ kubectl describe po -n chaos-mesh chaos-controller-manager-7b8c86cc9-44dzf
 
 :::
 
-:::note 注意
+:::note
 
 如果 leader election 是关闭的，`chaos-controller-manager` 应只有 1 个实例。
 

@@ -8,7 +8,7 @@ This document describes how to manage user permissions in Chaos Mesh, including 
 
 Chaos Mesh uses [RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) to manage user permissions. To create, view and manage chaos experiments, users must have the appropriate permissions in the `apiGroups` of `chaos-mesh.org` to refer the resources of chaos experiments.
 
-:::caution
+:::warning
 
 Chaos Mesh allows you to disable permission authentication, see [Enable or disable permission authentication](#enable-or-disable-permission-authentication) to learn how to disable it.
 

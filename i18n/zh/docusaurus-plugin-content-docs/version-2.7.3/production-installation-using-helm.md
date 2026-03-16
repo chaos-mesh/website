@@ -34,7 +34,7 @@ version.BuildInfo{Version:"v3.5.4", GitCommit:"1b5edb69df3d3a08df77c9902dc17af86
 
 如果你的实际输出与预期输出一致，表示 Helm 已经成功安装。
 
-:::note 注意
+:::note
 
 本文中的命令将会使用 Helm v3 来操作 Chaos Mesh。如果你的环境中 Helm 的版本为 v2，请参考[将 Helm v2 迁移到 v3](https://helm.sh/docs/topics/v2_v3_migration/)或按照 v2 的格式进行修改。
 
@@ -58,7 +58,7 @@ helm repo add chaos-mesh https://charts.chaos-mesh.org
 helm search repo chaos-mesh
 ```
 
-:::note 注意
+:::note
 
 上述命令会输出最新发布的 chart，如需安装历史版本，请执行如下命令查看所有的版本：
 
@@ -80,7 +80,7 @@ kubectl create ns chaos-mesh
 
 ### 第 4 步：在不同环境下安装
 
-:::note 注意
+:::note
 
 如果你正在 Kubernetes v1.15（或更低版本）中安装 Chaos Mesh，请手动安装 CRD。 具体细节，请参考 [FAQ](./faqs.md#failed-to-install-chaos-mesh-with-the-message-no-matches-for-kind-customresourcedefinition-in-version-apiextensionsk8siov1)。
 
@@ -113,13 +113,13 @@ kubectl create ns chaos-mesh
   </TabItem>
 </Tabs>
 
-:::info 提示
+:::info
 
 如需安装特定版本的 Chaos Mesh，请在 `helm install` 后添加 `--version x.y.z` 参数，如 `helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version 2.1.0`。
 
 :::
 
-:::tip 小贴士
+:::tip
 
 为了保证高可用性，Chaos Mesh 默认开启了 `leader-election` 特性。如果不需要这个特性，请通过 `--set controllerManager.leaderElection.enabled=false` 手动关闭该特性。
 
@@ -143,13 +143,13 @@ kubectl create ns chaos-mesh
 helm upgrade chaos-mesh chaos-mesh/chaos-mesh
 ```
 
-:::info 提示
+:::info
 
 如需升级至特定版本的 Chaos Mesh，请在 `helm upgrade` 后添加 `--version x.y.z` 参数，如 `helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version 2.1.0`。
 
 :::
 
-:::note 注意
+:::note
 
 如在非 Docker 环境下进行升级，需根据[在不同环境下安装](#第-4-步在不同环境下安装)所述添加相应的参数。
 
@@ -161,13 +161,13 @@ helm upgrade chaos-mesh chaos-mesh/chaos-mesh
 helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --set dashboard.create=false
 ```
 
-:::note 注意
+:::note
 
 如果想了解更多的值及其相关的用法，请参考[所有的值](https://github.com/chaos-mesh/chaos-mesh/blob/master/helm/chaos-mesh/values.yaml)。
 
 :::
 
-:::caution 警告
+:::warning
 
 目前，Helm 在升级时不会应用最新的 CustomResourceDefinition (CRD)，这可能会导致一些错误的发生。为了避免这种情况，请手动应用最新的 CRD：
 

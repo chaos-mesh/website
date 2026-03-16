@@ -14,7 +14,7 @@ import QuickRun from './common/\_quick-run.md'
 
 This document describes how to start Chaos Mesh quickly in a test or local environment.
 
-:::caution
+:::warning
 
 **In this document, Chaos Mesh is installed via a script for quick trial only.**
 

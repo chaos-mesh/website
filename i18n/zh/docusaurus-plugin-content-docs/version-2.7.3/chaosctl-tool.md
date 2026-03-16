@@ -4,7 +4,7 @@ title: Chaosctl
 
 Chaosctl 是一个用于辅助调试 Chaos Mesh 的工具。我们希望利用 Chaosctl 简化开发调试新 chaos 类型，以及提交 issue 相关日志的流程。
 
-:::info 注意
+:::info
 
 在 Chaos Mesh 2.7.3 版本中，您需要手动启用 ctrlserver 才能使用 Chaosctl，默认情况下它是禁用的。
 

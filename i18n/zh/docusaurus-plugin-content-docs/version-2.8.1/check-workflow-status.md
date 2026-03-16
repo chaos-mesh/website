@@ -26,7 +26,7 @@ title: 检查工作流状态
    kubectl -n <namespace> get workflownode --selector="chaos-mesh.org/workflow=<workflow-name>"
    ```
 
-   :::info 提示
+   :::info
 
    工作流在执行过程中的步骤会以 WorkflowNode 这一 CustomResource 来表示。
 
