@@ -49,7 +49,7 @@ docker save ghcr.io/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION} > image-cha
 
 :::note 注意
 
-如需模拟 DNS 故障（例如，使 DNS 响应返回随机的错误 IP 地址），请额外拉取 [`pingcap/coredns`](https://hub.docker.com/r/pingcap/coredns) 镜像。
+如需模拟 DNS 故障（例如，使 DNS 响应返回随机的错误 IP 地址），请额外拉取 [`chaos-mesh/chaos-coredns`](https://github.com/chaos-mesh/k8s_dns_chaos/pkgs/container/chaos-coredns) 镜像。
 
 :::
 

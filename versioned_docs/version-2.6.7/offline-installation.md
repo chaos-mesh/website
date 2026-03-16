@@ -51,7 +51,7 @@ docker save ghcr.io/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION} > image-cha
 
 :::note
 
-To simulate a DNS fault (for example, make the DNS responses return a random wrong IP address), you need to pull the additional [`pingcap/coredns`](https://hub.docker.com/r/pingcap/coredns) images.
+To simulate a DNS fault (for example, make the DNS responses return a random wrong IP address), you need to pull the additional [`chaos-mesh/chaos-coredns`](https://github.com/chaos-mesh/k8s_dns_chaos/pkgs/container/chaos-coredns) image.
 
 :::
 
