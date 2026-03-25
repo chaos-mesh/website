@@ -168,7 +168,7 @@ spec:
 
 :::note
 
-`PhysicalMachine` 是一种代表物理机的 CRD (CustomResourcesDefinition)。通常情况下，Chaos Mesh 会使用 [chaosctl](chaosctl-tool.md#为-chaosd-生成-tls-证书) 创建 `PhysicalMachine`。
+`PhysicalMachine` 是一种代表物理机的 CRD (CustomResourcesDefinition)。通常情况下，Chaos Mesh 会使用 [chaosctl](chaosctl-tool.md) 创建 `PhysicalMachine`。
 
 :::
 
