@@ -4,11 +4,12 @@ import Link from '@docusaurus/Link'
 import Translate, { translate } from '@docusaurus/Translate'
 import useBaseUrl from '@docusaurus/useBaseUrl'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
+import CodeBlock from '@theme/CodeBlock'
 import Layout from '@theme/Layout'
 import { clsx } from 'clsx'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 
 import IconGithub from '../../static/img/icons/github.svg'
 import IconHelp from '../../static/img/icons/help.svg'
@@ -19,7 +20,6 @@ import ChaosdFeatures from '../components/ChaosdFeatures'
 import CodeGrid from '../components/CodeGrid'
 import Features from '../components/Features'
 import Mesh from '../components/Mesh'
-import PickVersion from '../components/PickVersion'
 import whoIsUsing from '../data/whoIsUsing'
 import styles from './index.module.css'
 
@@ -115,11 +115,12 @@ function Home() {
 
               <div className="lg:max-xl:tw-w-[500px] tw-p-6 lg:tw-p-3">
                 <h2 className="tw-inline-block tw-text-base lg:tw-text-lg tw-font-semibold tw-rounded-2xl tw-backdrop-blur-sm lg:tw-backdrop-blur">
-                  <Translate id="home.tryitout">Try it out with the following command 👇</Translate>
+                  <Translate id="home.tryitout">Try it out with following commands 👇</Translate>
                 </h2>
-                <PickVersion className="!tw-mb-0">
-                  curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash
-                </PickVersion>
+                <CodeBlock>
+                  {`helm repo add chaos-mesh https://charts.chaos-mesh.org
+helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --create-namespace`}
+                </CodeBlock>
               </div>
             </div>
           </div>
