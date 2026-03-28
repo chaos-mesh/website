@@ -50,9 +50,5 @@
   "link.item.label.Thanks for the technology illustrations by Storyset": {
     "message": "Thanks for the technology illustrations by Storyset",
     "description": "The label of footer link with label=Thanks for the technology illustrations by Storyset linking to https://storyset.com/technology"
-  },
-  "copyright": {
-    "message": "\n        <p style=\"font-weight: 500;\">Copyright © Chaos Mesh Authors 2024 | Documentation Distributed under CC-BY-4.0</p>\n        © 2024 The Linux Foundation. All rights reserved. The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our <a href=\"https://www.linuxfoundation.org/trademark-usage/\"> Trademark Usage</a> page.\n      ",
-    "description": "The footer copyright"
   }
 }
