@@ -85,8 +85,10 @@ kubectl create ns chaos-mesh
 The mission runs the install with runtime-specific flags. Pick the runtime that matches your cluster and the mission shows the exact command. For a Docker-runtime cluster, the default command is:
 
 ```bash
-helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --version latest
+helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh
 ```
+
+To pin a specific chart version, append `--version x.y.z` (Helm's `--version` takes a semver constraint, not the literal word `latest`).
 
 For containerd, K3s, MicroK8s, or CRI-O, the mission sets the appropriate `chaosDaemon.runtime` and `chaosDaemon.socketPath` values. See [Install Chaos Mesh using Helm](./production-installation-using-helm.md#step-4-install-chaos-mesh-in-different-environments) for the full list of per-runtime commands — the mission uses the same values.
 
