@@ -60,5 +60,5 @@
   "lint-staged": {
     "*.(js|md)": "prettier --write"
   },
-  "packageManager": "pnpm@10.18.1"
+  "packageManager": "pnpm@11.10.0"
 }
