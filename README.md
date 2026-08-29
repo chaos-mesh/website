@@ -125,7 +125,7 @@ Below are some specific points:
        <>
          <span>破而后立</span>
          <br />
-         <span className="tw-text-3xl">建设性地解构与优化你的系统</span>
+         <span className="tw:text-3xl">建设性地解构与优化你的系统</span>
        </>
      )
    }

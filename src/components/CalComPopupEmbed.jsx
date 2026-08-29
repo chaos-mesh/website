@@ -13,12 +13,12 @@ export default function CalComPopupEmbed() {
 
   return (
     <button
-      className="tw-fixed tw-bottom-4 tw-right-4 tw-btn tw-btn-sm md:tw-btn-md tw-btn-primary tw-z-50 hover:-tw-translate-y-[3px]"
+      className="tw:fixed tw:bottom-4 tw:right-4 tw:btn tw:btn-sm tw:md:btn-md tw:btn-primary tw:z-50 tw:hover:translate-y-[-3px]"
       data-cal-namespace="talk-to-chaos-mesh-maintainers"
       data-cal-link="strrl/talk-to-chaos-mesh-maintainers"
       data-cal-config='{"layout":"month_view"}'
     >
-      <IconCal className="tw-w-4 tw-h-4 tw-mb-0.5 tw-fill-primary-content" />
+      <IconCal className="tw:w-4 tw:h-4 tw:mb-0.5 tw:fill-primary-content" />
       Schedule a Meeting
     </button>
   )

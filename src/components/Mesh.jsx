@@ -331,7 +331,7 @@ export default function Mesh() {
     <>
       <svg
         ref={svgEl}
-        className="mesh tw-absolute tw-top-[-10%] 2xl:tw-left-[-100px] tw-w-[1024px] lg:tw-w-full tw-h-[125%]"
+        className="mesh tw:absolute tw:top-[-10%] tw:2xl:left-[-100px] tw:w-[1024px] tw:lg:w-full tw:h-[125%]"
         style={{
           transform: 'rotate3d(3, -.6, -1, 30deg)',
         }}
@@ -341,7 +341,9 @@ export default function Mesh() {
         <g ref={pathsGroup} />
         <g ref={dotsGroup} />
       </svg>
-      <div className={`mesh-text tw-absolute tw-px-2 tw-py-1 tw-bg-primary tw-text-white tw-rounded tw-opacity-0`} />
+      <div
+        className={`mesh-text tw:absolute tw:px-2 tw:py-1 tw:bg-primary tw:text-primary-content tw:rounded-sm tw:opacity-0`}
+      />
     </>
   )
 }
