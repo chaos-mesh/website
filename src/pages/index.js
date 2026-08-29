@@ -390,7 +390,7 @@ helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --create-namespace`}
                     Experiencing any issues? Don't hesitate to reach out to us for assistance.
                   </Translate>
                 </p>
-                <div className="tw:flex tw:gap-3">
+                <div className="tw:flex tw:flex-wrap tw:gap-3">
                   <Link
                     to="https://github.com/chaos-mesh/chaos-mesh/issues"
                     className="tw:btn tw:bg-[#f2f2f2] tw:text-[#1f2937] tw:dark:text-[#a6adba] tw:hover:bg-[#e6e6e6]! tw:normal-case tw:dark:glass tw:dark:hover:bg-transparent! tw:dark:hover:text-white"
