@@ -506,9 +506,6 @@
   "home.workflows.statuscheck.desc": {
     "message": "您还可以使用自定义的状态检查来告知集群状态。"
   },
-  "home.startcreating": {
-    "message": "开始创建 →"
-  },
   "home.experimental": {
     "message": "实验性功能"
   },
