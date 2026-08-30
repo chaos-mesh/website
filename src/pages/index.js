@@ -9,7 +9,7 @@ import Layout from '@theme/Layout'
 import { clsx } from 'clsx'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useEffect } from 'react'
+import { useEffect, useLayoutEffect, useRef } from 'react'
 
 import IconGithub from '../../static/img/icons/github.svg'
 import IconHelp from '../../static/img/icons/help.svg'
@@ -25,37 +25,54 @@ import styles from './index.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
+
 const description =
   'Chaos Mesh brings various types of fault simulation to Kubernetes and has an enormous capability to orchestrate fault scenarios. It helps you conveniently simulate various abnormalities that might occur in reality during the development, testing, and production environments and find potential problems in the system.'
 
 function Home() {
+  const homeRef = useRef(null)
   const { siteConfig, i18n } = useDocusaurusContext()
 
-  useEffect(() => {
-    document.querySelector('.navbar__inner').classList.add('tw:container', 'tw:mx-auto')
+  useIsomorphicLayoutEffect(() => {
+    const navbarInner = document.querySelector('.navbar__inner')
+    const addedContainerClass = navbarInner && !navbarInner.classList.contains('tw:container')
+    const addedMarginClass = navbarInner && !navbarInner.classList.contains('tw:mx-auto')
 
-    gsap.from('.scroll-to-display', {
-      duration: 1,
-      opacity: 0,
-      y: 50,
-      stagger: 0.25,
-      scrollTrigger: {
-        trigger: '.scroll-to-display',
-        toggleActions: 'restart none none none',
-      },
+    navbarInner?.classList.add('tw:container', 'tw:mx-auto')
+
+    const mm = gsap.matchMedia(homeRef)
+
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      const revealBatch = (selector, y) => {
+        const elements = gsap.utils.toArray(selector)
+
+        gsap.set(elements, { opacity: 0, y })
+        ScrollTrigger.batch(elements, {
+          start: 'top 90%',
+          once: true,
+          onEnter: (batch) =>
+            gsap.to(batch, {
+              duration: 1,
+              opacity: 1,
+              y: 0,
+              stagger: 0.25,
+              ease: 'power2.out',
+              overwrite: 'auto',
+              clearProps: 'opacity,transform',
+            }),
+        })
+      }
+
+      revealBatch('.scroll-to-display', 50)
+      revealBatch('.scroll-to-display-card', 100)
     })
 
-    gsap.from('.scroll-to-display-x', {
-      duration: 1,
-      opacity: 0,
-      x: 0,
-      y: 100,
-      stagger: 0.25,
-      scrollTrigger: {
-        trigger: '.scroll-to-display-x',
-        toggleActions: 'restart none none none',
-      },
-    })
+    return () => {
+      mm.revert()
+      addedContainerClass && navbarInner?.classList.remove('tw:container')
+      addedMarginClass && navbarInner?.classList.remove('tw:mx-auto')
+    }
   }, [])
 
   return (
@@ -63,7 +80,7 @@ function Home() {
       <Head>
         <title>Chaos Mesh: {siteConfig.tagline}</title>
       </Head>
-      <main>
+      <main ref={homeRef}>
         <div className="hero tw:relative tw:h-192 tw:pt-0 tw:overflow-hidden">
           <BrowserOnly>{() => <Mesh />}</BrowserOnly>
           <div className="tw:container tw:mx-auto tw:z-10">
@@ -283,7 +300,7 @@ helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --create-namespace`}
                     to="/docs/create-chaos-mesh-workflow/"
                     className="tw:btn tw:btn-primary! tw:gap-2 tw:hover:translate-y-[-3px]"
                   >
-                    <Translate id="home.startcreating">Start Creating →</Translate>
+                    <Translate id="home.learnmore">Learn More →</Translate>
                   </Link>
                 </div>
               </div>
