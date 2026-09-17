@@ -2,7 +2,7 @@
 title: 升级至 Chaos Mesh 2.0
 ---
 
-本文介绍从 Chaos Mesh 1.x 升级至 2.0 的详细步骤。Chaos Mesh 2.0 引入了一些新功能，并修复了许多问题。Chaos Mesh 2.0 重构了一部分代码，因此需要做一些额外的操作从 Chaos Mesh 1.x 升级到 2.0。
+本文介绍从 Chaos Mesh 1.x 升级至 2.0 的详细步骤。Chaos Mesh 2.0 引入了一些新功能，并修复了许多问题。Chaos Mesh 2.0 重构了一部分代码，因此升级时需要执行一些额外的操作。
 
 ## 升级工具
 
@@ -13,19 +13,19 @@ CRD 在 Chaos Mesh 2.0 中发生了变化，旧版本实验的 YAML 文件无法
 - `migrate.sh`：用于自动导出并升级实验 YAML 文件、升级 CRD、导入升级后的 YAML 文件。
 - `schedule-migration`：用于将指定的旧版 YAML 文件更新为新版 YAML 文件。
 
-要获取升级工具，建议将 Chaos Mesh 项目克隆至本地执行 `make schedule-migration.tar.gz`，或是从 https://mirrors.chaos-mesh.org/v2.0.0/schedule-migration.tar.gz 下载。使用以下命令将其解压，即可得到上述两个工具：
+要获取升级工具，建议将 Chaos Mesh 项目克隆到本地并执行 `make schedule-migration.tar.gz`，或是从 https://mirrors.chaos-mesh.org/v2.0.0/schedule-migration.tar.gz 下载。使用以下命令将其解压，即可得到上述两个工具：
 
 ```bash
 tar xvf ./schedule-migration.tar.gz
 ```
 
-该压缩包打包的 `schedule-migration` 工具仅适用于 Linux x86_64 平台，其他操作系统 / 架构的用户需要自行编译。
+该压缩包打包的 `schedule-migration` 工具仅适用于 Linux x86_64 平台，其他操作系统/架构的用户需要自行编译。
 
 ## 第 1 步：导出并升级实验
 
 你可以使用升级工具 `migrate.sh` 自动导出并升级实验。在运行之前，请确保当前用户有足够的权限访问集群。
 
-假设 `migrate.sh` 位于当前目录下，并且 `schedule-migration` 工具也置于该目录下，请执行以下命令导出并升级实验：
+如果 `migrate.sh` 位于当前目录下，请将 `schedule-migration` 工具也放在该目录下，然后执行以下命令导出并升级实验：
 
 ```bash
 bash migrate.sh -e
@@ -43,7 +43,7 @@ bash migrate.sh -e
 
 ## 第 2 步：升级 CRD
 
-当使用 Helm 升级 Chaos Mesh 前，为了能最大程度保证升级成功，请运行以下命令手动升级 CRD：
+在使用 Helm 升级 Chaos Mesh 之前，为了能最大程度保证升级成功，请运行以下命令手动升级 CRD：
 
 ```bash
 bash migrate.sh -c
@@ -67,4 +67,4 @@ bash migrate.sh -i
 
 ## 问题反馈
 
-如果在升级过程中遇到任何问题，请将命令行输出提交至 [slack](https://cloud-native.slack.com/archives/C0193VAV272) 或在 Github 上新建一个 [issue](https://github.com/pingcap/chaos-mesh/issues)。感谢你的反馈，Chaos Mesh 团队很乐意帮助解决。
+如果在升级过程中遇到任何问题，请将命令行输出提交至 [Slack](https://cloud-native.slack.com/archives/C0193VAV272) 或在 GitHub 上新建一个 [issue](https://github.com/chaos-mesh/chaos-mesh/issues)。感谢你的反馈，Chaos Mesh 团队很乐意帮助你解决问题。
