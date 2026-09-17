@@ -2,9 +2,9 @@
 title: 开发指南概览
 ---
 
-:::danger
+:::warning
 
-中文版开发指南的内容已经过时，请参考 [英文版开发指南](https://chaos-mesh.org/docs/developer-guide-overview)。
+开发手册部分可能已经过时。如果你发现任何问题或有任何疑问，请[创建 issue](https://github.com/chaos-mesh/chaos-mesh/issues/new/choose) 告诉我们。感谢你的贡献！
 
 :::
 
