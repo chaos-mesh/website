@@ -72,10 +72,24 @@ chaosd attack clock -p $PID -t 11s
 
 | Parameter | Type | Note | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
-| timeOffset | string | Specifies the length of time offset. | None | Yes | `-5m` |
-| clockIds | []string | Specifies the ID of clock that will be offset. See the [clock_gettime documentation](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) for details. | `["CLOCK_REALTIME"]` | No | `["CLOCK_REALTIME", "CLOCK_MONOTONIC"]` |
-| pid | string | The identifier of the process. | None | Yes | `1` |
+| time-offset | string | Specifies the length of time offset. | None | Yes | `-5m` |
+| clock-ids-slice | string | Specifies the ID of the clock that will be offset. Multiple clock IDs should be separated by a comma. See the [clock_gettime documentation](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) for details. | `CLOCK_REALTIME` | No | `"CLOCK_REALTIME,CLOCK_MONOTONIC"` |
+| pid | int | The identifier of the process. | None | Yes | `1` |
 
-### Create experiments using service mode
+## Create experiments using service mode
 
-(ongoing update)
+### Parameters for simulating time faults
+
+| Parameter | Description | Value |
+| :-- | :-- | :-- |
+| pid | The identifier of the process. | int type |
+| time-offset | Specifies the length of time offset. | string type, such as "-5m" |
+| clock-ids-slice | Specifies the ID of the clock that will be offset. See the [clock_gettime documentation](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) for details. | string type. The default value is `"CLOCK_REALTIME"` |
+
+### Example for simulating time faults using the service mode
+
+Run the test program in [Quick Example](#quick-example), and then use the following command to create a time fault experiment:
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/clock -H "Content-Type:application/json" -d '{"pid":123, "time-offset":"11s"}'
+```

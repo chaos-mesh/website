@@ -25,6 +25,7 @@ Flags:
 
 Global Flags:
       --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
+      --uid string         the experiment ID
 ```
 
 ## Create a host shutdown experiment

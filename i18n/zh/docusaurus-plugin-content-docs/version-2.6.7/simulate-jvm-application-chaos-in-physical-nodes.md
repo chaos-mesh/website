@@ -390,7 +390,7 @@ Chaosd 支持在 MySQL 的 Java 客户端执行指定类型的 SQL 语句时对�
 #### 注入故障命令
 
 ```bash
-chaosd attack jvm stress --help
+chaosd attack jvm mysql --help
 ```
 
 输出如下所示：

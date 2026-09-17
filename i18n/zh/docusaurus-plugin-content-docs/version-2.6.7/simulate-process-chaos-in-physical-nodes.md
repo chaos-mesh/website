@@ -84,7 +84,7 @@ Attack process python successfully, uid: 10e633ac-0a37-41ba-8b4a-cd5ab92099f9
 
 :::note
 
-只有 `signal` 为 `SIGSTOP` 的实验支持被恢复。
+只有 `signal` 为 `SIGSTOP`，或配置了 `recover-cmd` 的实验支持被恢复。
 
 :::
 
@@ -191,6 +191,6 @@ curl -X POST 172.16.112.130:31767/api/attack/process -H "Content-Type:applicatio
 
 :::note
 
-只有 `signal` 为 `SIGSTOP` 的实验支持被恢复。
+只有 `signal` 为 `SIGSTOP`，或配置了 `recover-cmd` 的实验支持被恢复。
 
 :::

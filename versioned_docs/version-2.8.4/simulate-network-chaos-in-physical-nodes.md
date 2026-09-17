@@ -32,7 +32,7 @@ Available Commands:
   bandwidth   limit network bandwidth
   corrupt     corrupt network packet
   delay       delay network
-  dns attack  DNS server or map specified host to specified IP
+  dns         attack DNS server or map specified host to specified IP
   duplicate   duplicate network packet
   loss        loss network packet
   partition   partition
@@ -47,7 +47,7 @@ Global Flags:
 Use "chaosd attack network [command] --help" for more information about a command.
 ```
 
-Currently, you can simulate four experimental scenarios using Chaosd: network corruption, network latency, network duplication, and network loss.
+Currently, you can simulate the following experimental scenarios using Chaosd: network corruption, network latency, network duplication, network loss, network partition, DNS fault, network bandwidth limitation, and port occupation.
 
 ### Simulate network corruption using the command-line mode
 
@@ -90,14 +90,14 @@ The related configuration items are described as follows:
 
 | Configuration item | Abbreviation | Description | Value |
 | :-- | :-- | :-- | :-- |
-| correlation | c | The correlation between the percentage of current corrupt occurrence and the previous occurrence. | int. It is a percentage ranging from 0 to 100 (10 is 10%) ("0" by default ). |
+| correlation | c | The correlation between the percentage of current corrupt occurrence and the previous occurrence. | string. It is a percentage ranging from 0 to 100 (10 is 10%) ("0" by default ). |
 | device | d | Name of the impacted network interface card. | string, such as "eth0", required. |
 | egress-port | e | The egress traffic that only impacts specific destination ports. It can only be configured when the protocol is TCP or UDP. | string. You need to use a `,` to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
 | hostname | H | The host name impacted by traffic. `hostname` and `ip` cannot be empty at the same time. When `hostname` and `ip` are set at the same time, the configuration item affects both the specified `hostname` and `ip`. | string, such as "chaos-mesh.org". |
 | ip | i | The IP address impacted by egress traffic. `hostname` and `ip` cannot be empty at the same time. When `hostname` and `ip` are set at the same time, the configuration item affects both the specified `hostname` and `ip`. | string, such as "123.123.123.123". |
 | protocol | p | The IP protocol impacted by traffic. | string. Supported protocols: tcp, udp, icmp, all (all network protocols). |
 | source-port | s | The egress traffic which only impact specific source ports. It can only be configured when the protocol is TCP or UDP. | string. Use a `,` to delimit the specific port or to indicate the range of the ports, such as "80,8001:8010". |
-| percent |  | Ratio of network packet corruption. | string. It is a percentage which range is 0 to 100 (10 is 10%) (default "1"). |
+| percent | N/A | Ratio of network packet corruption. | string. It is a percentage which range is 0 to 100 (10 is 10%) (default "1"). |
 
 #### Example for simulating network corruption using the command mode
 
@@ -161,7 +161,7 @@ The related configuration items are described as follows:
 | hostname | H | The host name impacted by traffic. `hostname` and `ip` cannot be empty at the same time. When `hostname` and `ip` are set at the same time, the configuration item affects both the specified `hostname` and `ip`. | string, such as "chaos-mesh.org". |
 | ip | i | The IP address impacted by egress traffic. `hostname` and `ip` cannot be empty at the same time. When `hostname` and `ip` are set at the same time, the configuration item affects both the specified `hostname` and `ip`. | string, such as "123.123.123.123". |
 | jitter | j | Range of the length of network delay time. | string. The time units can be: ns, us (µs), ms, s, m, h, such as "1ms". |
-| latency | l | Length of network delay time. | string. The time units can be: ns, us (μs), ms, s, m, h, such as "1ms". |
+| latency | l | Length of network delay time. | string. The time units can be: ns, us (µs), ms, s, m, h, such as "1ms". |
 | protocol | p | The IP protocol impacted by traffic. | string. It supports the following protocol types: "tcp", "udp", "icmp", "all" (all network protocols). |
 | source-port | s | The egress traffic that only impacts specified source ports. It can only be configured when the protocol is TCP or UDP. | string. You need to use a `,` to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
 
@@ -349,7 +349,7 @@ The related configuration items are described as follows:
 | :-- | :-- | :-- | :-- |
 | accept-tcp-flags | N/A | Only the packet which matches the tcp flag can be accepted, others will be dropped. Only set when the protocol is tcp. | string, such as "SYN,ACK SYN,ACK" |
 | device | d | the network interface to impact | string, such as "eth0", required |
-| direction | d | Specifies the partition direction, values can be 'to', 'from' or 'both'. 'from' means packets coming from the 'ip' or 'hostname' and going to your server, 'to' means packets originating from your server and going to the 'ip' or 'hostname'. | string, values can be "to", "from" or "both" (default "both") |
+| direction | N/A | Specifies the partition direction, values can be 'to', 'from' or 'both'. 'from' means packets coming from the 'ip' or 'hostname' and going to your server, 'to' means packets originating from your server and going to the 'ip' or 'hostname'. | string, values can be "to", "from" or "both" (default "both") |
 | hostname | H | Only impact traffic to these hostnames. `hostname` and `ip` cannot be empty at the same time. When `hostname` and `ip` are set at the same time, the configuration item affects both the specified `hostname` and `ip`. | string, such as "chaos-mesh.org". |
 | ip | i | Only impact egress traffic to these IP addresses. `hostname` and `ip` cannot be empty at the same time. When `hostname` and `ip` are set at the same time, the configuration item affects both the specified `hostname` and `ip`. | string, such as "192.168.123.123". |
 | protocol | p | Only impact traffic using this IP protocol | string. It supports the following protocol types: "tcp", "udp", "icmp", "all" (all network protocols). |
@@ -399,8 +399,8 @@ The related configuration items are described as follows:
 
 | Configuration item | Abbreviation | Description | Value |
 | :-- | :-- | :-- | :-- |
-| dns-domain-name | d | Map this host to specified IP(dns-ip) | string, such as "chaos-mesh.org". |
-| dns-ip | i | Map specified host(dns-domain-name) to this IP address | string, such as "123.123.123.123" |
+| dns-domain-name | d | Map this host to specified IP (dns-ip) | string, such as "chaos-mesh.org". |
+| dns-ip | i | Map specified host (dns-domain-name) to this IP address | string, such as "123.123.123.123" |
 | dns-server | N/A | Update the DNS server in /etc/resolv.conf with this value | string, default is "123.123.123.123" |
 
 #### Example for simulating DNS fault using the command-line mode
@@ -445,7 +445,7 @@ Flags:
   -i, --ip string         only impact egress traffic to these IP addresses
   -l, --limit uint32      the number of bytes that can be queued waiting for tokens to become available
   -m, --minburst uint32   specifies the size of the peakrate bucket
-      --peakrate uint     the maximum depletion rate of the bucket
+      --peakrate uint64   the maximum depletion rate of the bucket
   -r, --rate string       the speed knob, allows bps, kbps, mbps, gbps, tbps unit. bps means bytes per second
 
 Global Flags:
@@ -459,13 +459,13 @@ The related configuration items are described as follows:
 
 | Configuration item | Abbreviation | Description | Value |
 | :-- | :-- | :-- | :-- |
-| buffer | b | The maximum amount of bytes that tokens can be available for instantaneously | int, such as `10000`, required |
+| buffer | b | The maximum amount of bytes that tokens can be available for instantaneously | uint32, such as `10000`, required |
 | device | d | The network interface to impact | string, such as "eth0", required |
 | hostname | H | Only impact traffic to these hostnames. `hostname` and `ip` cannot be empty at the same time. When `hostname` and `ip` are set at the same time, the configuration item affects both the specified `hostname` and `ip`. | string, such as "chaos-mesh.org". |
 | ip | i | Only impact egress traffic to these IP addresses. `hostname` and `ip` cannot be empty at the same time. When `hostname` and `ip` are set at the same time, the configuration item affects both the specified `hostname` and `ip`. | string, such as "123.123.123.123". |
-| limit | l | The number of bytes that can be queued waiting for tokens to become available | int, such as `10000`, required |
-| minburst | `m` | Specifies the size of the peakrate bucket | int, such as `10000` |
-| peakrate | N/A | The maximum depletion rate of the bucket | int, such as `10000` |
+| limit | l | The number of bytes that can be queued waiting for tokens to become available | uint32, such as `10000`, required |
+| minburst | `m` | Specifies the size of the peakrate bucket | uint32, such as `10000` |
+| peakrate | N/A | The maximum depletion rate of the bucket | uint64, such as `10000` |
 | rate | r | The speed knob, allows bps, kbps, mbps, gbps, tbps unit. The bps unit means bytes per second. | string, such as "1mbps", required |
 
 #### Example for simulating network bandwidth using the command-line mode
@@ -515,7 +515,7 @@ The related configuration items are described as follows:
 
 #### Example for simulating port occupation using the command-line mode
 
-Run the following command to simulate network bandwidth:
+Run the following command to simulate port occupation:
 
 ```bash
 chaosd attack network port --port 8080
@@ -531,10 +531,10 @@ To create experiments using the service mode, follow the instructions below:
    chaosd server --port 31767
    ```
 
-2. Send a `POST` HTTP request to the `/api/attack/process` path of the Chaosd service.
+2. Send a `POST` HTTP request to the `/api/attack/network` path of the Chaosd service.
 
    ```bash
-   curl -X POST 172.16.112.130:31767/api/attack/process -H "Content-Type:application/json" -d '{fault-configuration}'
+   curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{fault-configuration}'
    ```
 
    In the above command, you need to configure `fault-configuration` according to the fault types. For the corresponding parameters, refer to the parameters and examples of each fault type in the following sections.
@@ -552,11 +552,11 @@ When running an experiment, remember to record the UID of the experiment. When y
 | Parameter | Description | Value |
 | --- | --- | --- |
 | action | Action of the experiment. | set to "corrupt" |
-| correlation | The correlation between the current latency and the previous one. | string. It is a percentage ranging from 0 to 100 (10 is 10%) ("0" by default). |
+| correlation | The correlation between the percentage of current corrupt occurrence and the previous one. | string. It is a percentage ranging from 0 to 100 (10 is 10%) ("0" by default). |
 | device | Name of the impacted network interface card. | string, such as "eth0", required. |
 | egress-port | The egress traffic which only impact specific destination ports. It can only be configured when the protocol is TCP or UDP. | string. You need to use a `,` to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
-| hostname | The host name impacted by traffic. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "chaos-mesh.org". |
-| ip-address | The IP address impacted by egress traffic. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "123.123.123.123". |
+| hostname | The host name impacted by traffic. `hostname` and `ip-address` cannot be empty at the same time. When `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "chaos-mesh.org". |
+| ip-address | The IP address impacted by egress traffic. `hostname` and `ip-address` cannot be empty at the same time. When `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "123.123.123.123". |
 | ip-protocol | The IP protocol impacted by traffic. | string. Supported protocols: tcp, udp, icmp, all (all network protocols). |
 | source-port | The egress traffic which only impact specific source ports. It can only be configured when the protocol is TCP or UDP. | string. Use a `,` to delimit the specific port or to indicate the range of the ports, such as "80,8001:8010". |
 | percent | Ratio of network packet corruption. | string. It is a percentage which range is 0 to 100 (10 is 10%) (default "1"). |
@@ -580,7 +580,7 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 | hostname | The host name impacted by traffic. `hostname` and `ip-address` cannot be empty at the same time. When `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "chaos-mesh.org". |
 | ip-address | The IP address impacted by egress traffic. `hostname` and `ip-address` cannot be empty at the same time. When `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "123.123.123.123". |
 | jitter | Range of the length of network delay time. | string. The time units can be: ns, us (µs), ms, s, m, h, such as "1ms". |
-| latency | Length of network delay time. | string. The time units can be: ns, us (μs), ms, s, m, h, such as "1ms". |
+| latency | Length of network delay time. | string. The time units can be: ns, us (µs), ms, s, m, h, such as "1ms". |
 | ip-protocol | The IP protocol impacted by traffic. | string. It supports the following protocol types: "tcp", "udp", "icmp", "all" (all network protocols). |
 | source-port | The egress traffic that only impacts specified source ports. It can only be configured when the protocol is TCP or UDP. | string. You need to use a `,` to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
 
@@ -600,8 +600,8 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 | correlation | The correlation between the percentage of current duplication occurrence and the previous one. | string. It is a percentage which range is 0 to 100 (10 is 10%) (default "0"). |
 | device | Name of the impacted network interface card. | string, such as "eth0", required. |
 | egress-port | The egress traffic that only impacts specified destination ports. It can only be configured when the protocol is TCP or UDP. | string. You need to use a `,` to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
-| hostname | The host name impacted by traffic. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "chaos-mesh.org". |
-| ip-address | The IP address impacted by egress traffic. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "123.123.123.123". |
+| hostname | The host name impacted by traffic. `hostname` and `ip-address` cannot be empty at the same time. When `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "chaos-mesh.org". |
+| ip-address | The IP address impacted by egress traffic. `hostname` and `ip-address` cannot be empty at the same time. When `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "123.123.123.123". |
 | percent | Ratio of network packet duplicate. | string. It is a percentage which range is 0 to 100 (10 is 10%) (default "1"). |
 | ip-protocol | The IP protocol impacted by traffic. | string. It supports the following protocol types: "tcp", "udp", "icmp", "all" (all network protocols). |
 | source-port | The egress traffic which only impact specific source ports. It can only be configured when the protocol is TCP or UDP. | string. You need to use a `,` to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
@@ -622,8 +622,8 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 | correlation | The correlation between the percentage of the current network loss and the previous one. | string, it is a percentage which range is 0 to 100 (10 is 10%) (default "0"). |
 | device | Name of the impacted network interface card. | string, such as "eth0", required. |
 | egress-port | The egress traffic that only impacts specified destination ports. It can only be configured when the protocol is TCP or UDP. | string. You need to use a `,` to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
-| hostname | The host name impacted by traffic. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "chaos-mesh.org". |
-| ip-address | The IP address impacted by egress traffic. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "123.123.123.123". |
+| hostname | The host name impacted by traffic. `hostname` and `ip-address` cannot be empty at the same time. When `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "chaos-mesh.org". |
+| ip-address | The IP address impacted by egress traffic. `hostname` and `ip-address` cannot be empty at the same time. When `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "123.123.123.123". |
 | percent | Ratio of network packet loss. | string. It is a percentage which range is 0 to 100 (10 is 10%) (default "1"). |
 | ip-protocol | Only impact traffic using this IP protocol. | string, it supports the following protocol types: "tcp", "udp", "icmp", "all" (all network protocols). |
 | source-port | The egress traffic which only impact specific source ports. It can only be configured when the protocol is TCP or UDP. | string. You need to use a `,` to separate the specific port or to indicate the range of the port, such as "80,8001:8010". |
@@ -644,8 +644,8 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 | accept-tcp-flags | Only the packet which match the tcp flag can be accepted, others will be dropped. Only set when the protocol is tcp. | string, such as "SYN,ACK SYN,ACK" |
 | device | The network interface to impact | string, such as "eth0", required |
 | direction | Specifies the partition direction, values can be 'to', 'from' or 'both'. 'from' means packets coming from the 'ip-address' or 'hostname' and going to your server, 'to' means packets originating from your server and going to the 'ip-address' or 'hostname'. | string, values can be "to", "from" or "both" (default "both") |
-| hostname | Only impact traffic to these hostnames. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "chaos-mesh.org". |
-| ip-address | Only impact egress traffic to these IP addresses. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "192.168.123.123". |
+| hostname | Only impact traffic to these hostnames. `hostname` and `ip-address` cannot be empty at the same time. When `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "chaos-mesh.org". |
+| ip-address | Only impact egress traffic to these IP addresses. `hostname` and `ip-address` cannot be empty at the same time. When `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "192.168.123.123". |
 | ip-protocol | Only impact traffic using this IP protocol | string. It supports the following protocol types: tcp, udp, icmp, all (all network protocols). |
 
 #### Example for simulating network partition using the service mode
@@ -661,8 +661,8 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 | Parameter | Description | Value |
 | --- | --- | --- |
 | action | Action of the experiment. | set to "dns" |
-| dns-domain-name | Map this host to specified IP(dns-ip) | string, such as "chaos-mesh.org". |
-| dns-ip | Map specified host(dns-domain-name) to this IP address | string, such as "123.123.123.123" |
+| dns-domain-name | Map this host to specified IP (dns-ip) | string, such as "chaos-mesh.org". |
+| dns-ip | Map specified host (dns-domain-name) to this IP address | string, such as "123.123.123.123" |
 | dns-server | Update the DNS server in /etc/resolv.conf with this value | string, such as "123.123.123.123" (default "123.123.123.123") |
 
 #### Example for simulating DNS fault using the service mode
@@ -678,13 +678,13 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 | Parameter | Description | Value |
 | --- | --- | --- |
 | action | Action of the experiment. | set to "bandwidth" |
-| buffer | The maximum amount of bytes that tokens can be available for instantaneously | int, such as `10000`, required |
+| buffer | The maximum amount of bytes that tokens can be available for instantaneously | uint32, such as `10000`, required |
 | device | The network interface to impact | string, such as "eth0", required |
-| hostname | Only impact traffic to these hostnames. `hostname` and `ip-address` cannot be empty at the same time. when `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "chaos-mesh.org". |
+| hostname | Only impact traffic to these hostnames. `hostname` and `ip-address` cannot be empty at the same time. When `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "chaos-mesh.org". |
 | ip-address | Only impact egress traffic to these IP addresses. `hostname` and `ip-address` cannot be empty at the same time. When `hostname` and `ip-address` are set at the same time, the configuration item affects both the specified `hostname` and `ip-address`. | string, such as "123.123.123.123". |
-| limit | The number of bytes that can be queued waiting for tokens to become available | int, such as `10000`, required |
-| minburst | Specifies the size of the peakrate bucket | int, such as `10000` |
-| peakrate | The maximum depletion rate of the bucket | int, such as `10000` |
+| limit | The number of bytes that can be queued waiting for tokens to become available | uint32, such as `10000`, required |
+| minburst | Specifies the size of the peakrate bucket | uint32, such as `10000` |
+| peakrate | The maximum depletion rate of the bucket | uint64, such as `10000` |
 | rate | The speed knob, allows bps, kbps, mbps, gbps, tbps unit. The bps unit means bytes per second. | string, such as "1mbps", required |
 
 #### Example for simulating network bandwidth using the service mode

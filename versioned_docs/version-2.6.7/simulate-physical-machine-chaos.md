@@ -58,7 +58,7 @@ Before creating PhysicalMachineChaos experiments using Chaos Mesh, you need to d
 
 4. Submit the experiment.
 
-## Create experiments using an YAML file
+## Create experiments using a YAML file
 
 1. Write the experimental configurations to the "physicalmachine.yaml" file. For example:
 

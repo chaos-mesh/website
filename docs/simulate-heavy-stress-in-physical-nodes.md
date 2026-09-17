@@ -135,7 +135,7 @@ The result is as follows:
 Attack stress mem successfully, uid: c2bff2f5-3aac-4ace-b7a6-322946ae6f13
 ```
 
-When running the experiment, you need to save the uid information of the experiment. When a stress simulation is not needed, you can use `recover` to terminate the uid-related experiment::
+When running the experiment, you need to save the uid information of the experiment. When a stress simulation is not needed, you can use `recover` to terminate the uid-related experiment:
 
 ```bash
 chaosd recover c2bff2f5-3aac-4ace-b7a6-322946ae6f13
@@ -157,10 +157,10 @@ To create experiments using the service mode, follow the instructions below:
    chaosd server --port 31767
    ```
 
-2. Send a `POST` HTTP request to the `/api/attack/{uid}` path of Chaosd service.
+2. Send a `POST` HTTP request to the `/api/attack/stress` path of the Chaosd service.
 
    ```bash
-   curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{fault-configuration}'
+   curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{fault-configuration}'
    ```
 
    For the `fault-configuration` part in the above command, you need to configure it according to the fault types. For the corresponding parameters, refer to the parameters and examples of each fault type in the following sections.

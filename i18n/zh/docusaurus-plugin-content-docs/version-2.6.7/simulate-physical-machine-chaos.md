@@ -24,7 +24,7 @@ PhysicalMachineChaos 用于在物理机或虚拟机中模拟网络、磁盘、�
 
 2. 运行 Chaosd：
 
-   - 使用 Chaosctl 生成了 TSL 证书文件后，可以运行以下命令，启动服务模式的 Chaosd：
+   - 使用 Chaosctl 生成了 TLS 证书文件后，可以运行以下命令，启动服务模式的 Chaosd：
 
      ```bash
      chaosd server --https-port 31768 --CA=/etc/chaosd/pki/ca.crt --cert=/etc/chaosd/pki/chaosd.crt --key=/etc/chaosd/pki/chaosd.key
@@ -118,7 +118,7 @@ PhysicalMachineChaos 用于在物理机或虚拟机中模拟网络、磁盘、�
 
 #### 磁盘写负载
 
-模拟磁盘读负载，将 action 设置为 "disk-write-payload"，对应的配置可参考[模拟磁盘写负载相关参数说明](simulate-disk-pressure-in-physical-nodes.md#模拟磁盘写负载相关参数说明)。
+模拟磁盘写负载，将 action 设置为 "disk-write-payload"，对应的配置可参考[模拟磁盘写负载相关参数说明](simulate-disk-pressure-in-physical-nodes.md#模拟磁盘写负载相关参数说明)。
 
 #### 磁盘填充
 
@@ -146,7 +146,7 @@ PhysicalMachineChaos 用于在物理机或虚拟机中模拟网络、磁盘、�
 
 #### DNS 故障
 
-模拟 DNS 故障， 将 action 设置为 "network-dns"，对应的配置可参考 [DNS 故障相关参数说明](simulate-network-chaos-in-physical-nodes.md#dns-故障相关参数说明)。
+模拟 DNS 故障，将 action 设置为 "network-dns"，对应的配置可参考 [DNS 故障相关参数说明](simulate-network-chaos-in-physical-nodes.md#dns-故障相关参数说明)。
 
 #### 进程故障
 

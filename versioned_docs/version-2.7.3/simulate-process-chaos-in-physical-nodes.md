@@ -66,7 +66,7 @@ Global Flags:
 
 | Configuration item | Abbreviation | Description | Value |
 | :-- | :-- | :-- | :-- |
-| `process` | p | The name or the identifier of the process to be injected faults | string; the default value is `""`. |
+| `process` | p | The name or the identifier of the process into which faults are injected | string; the default value is `""`. |
 | `recover-cmd` | r | The command to be run when recovering experiment | string; the default value is `""`. |
 | `signal` | s | The provided value of the process signal | int; the default value is `9`. Currently, only `SIGKILL`, `SIGTERM`, and `SIGSTOP` are supported. |
 
@@ -84,7 +84,7 @@ Attack process python successfully, uid: 10e633ac-0a37-41ba-8b4a-cd5ab92099f9
 
 :::note
 
-Only the experiments whose `signal` is `SIGSTOP` can be recovered.
+Only the experiments whose `signal` is `SIGSTOP` or that configure `recover-cmd` can be recovered.
 
 :::
 
@@ -160,7 +160,7 @@ When running an experiment, remember to record the UID of the experiment. When y
 
 | Parameter | Description                                                     | Value                              |
 | :-------- | :-------------------------------------------------------------- | :--------------------------------- |
-| `process` | The name or the identifier of the process to be injected faults | string; the default value is `""`. |
+| `process` | The name or the identifier of the process into which faults are injected | string; the default value is `""`. |
 | `signal`  | The provided value of the process signal                        | int; the default value is `9`      |
 
 #### Examples for simulating process faults using the service mode
@@ -191,6 +191,6 @@ The result is as follows:
 
 :::note
 
-Only the experiments whose `signal` is `SIGSTOP` can be recovered.
+Only the experiments whose `signal` is `SIGSTOP` or that configure `recover-cmd` can be recovered.
 
 :::
