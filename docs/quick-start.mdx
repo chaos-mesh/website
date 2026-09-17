@@ -18,9 +18,9 @@ This document describes how to start Chaos Mesh quickly in a test or local envir
 
 Starting with versions `v2.8.2` and `v2.9`, the `install.sh` script has been deprecated.
 
-The `install.sh` script was originally designed for quick trials only, it was not built with full functionality.
+The `install.sh` script was originally designed for quick trials only and does not provide full functionality.
 
-Given the widespread use and mature ecosystem of [Helm](https://helm.sh/), we no longer recommend managing Chaos Mesh via scripts. So please refer to [Installation using Helm](production-installation-using-helm.mdx) for installation in test or production environments.
+Given the widespread use and mature ecosystem of [Helm](https://helm.sh/), we no longer recommend managing Chaos Mesh via scripts. To install Chaos Mesh in test or production environments, refer to [Installation using Helm](production-installation-using-helm.mdx).
 
 You can still get the `install.sh` script for versions before `v2.8.2`.
 
@@ -93,7 +93,7 @@ To uninstall Chaos Mesh, execute the following command:
   {`curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash -s -- --template | kubectl delete -f -`}
 </PickVersion>
 
-You can also delete the `chaos-mesh` namespace to directly uninstall Chaos Mesh:
+You can also uninstall Chaos Mesh directly by deleting the `chaos-mesh` namespace:
 
 ```sh
 kubectl delete ns chaos-mesh
@@ -101,6 +101,6 @@ kubectl delete ns chaos-mesh
 
 ## FAQ
 
-### Why the `local` directory appears in the root directory after installation?
+### Why does the `local` directory appear in the root directory after installation?
 
-If you don't install `kind` in the existing environment, and you use the `--local kind` parameter when executing the installation command, the `install.sh` script will automatically install the `kind` in the `local` directory under the root directory.
+If `kind` is not installed in the current environment and you use the `--local kind` parameter when running the installation command, the `install.sh` script automatically installs `kind` into the `local` directory under the root directory.
