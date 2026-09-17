@@ -52,9 +52,9 @@ Configuration description:
   - `random-max-percent`: selects the maximum percentage of eligible Pods.
 
 - **selector** specifies the target Pod for fault injection.
-- **FailedkernRequest** specifies the fault mode (such as kmallo and bio). It also specifies a specific call chain path and the optional filtering conditions. The configuration items are as follows:
+- **`failKernRequest`** specifies the fault mode (such as kmalloc and bio). It also specifies a specific call chain path and the optional filtering conditions. The configuration items are as follows:
 
-  - **Failtype** specifies the fault type. The value options are as follows:
+  - **failtype** specifies the fault type. The value options are as follows:
 
     - '0': injects the slab allocation error should_failslab.
     - '1': injects the memory page allocation error should_fail_alloc_page.
@@ -62,7 +62,7 @@ Configuration description:
 
     For more information on these three fault types, refer to [fault-injection](https://www.kernel.org/doc/html/latest/fault-injection/fault-injection.html) and [inject_example](http://github.com/iovisor/bcc/blob/master/tools/inject_example.txt).
 
-  - **Callchain** specifies a specific call chain. For example:
+  - **callchain** specifies a specific call chain. For example:
 
     ```c
     ext4_mount
@@ -71,13 +71,13 @@ Configuration description:
         -> should_failslab
     ```
 
-    You can also use the function parameters as filtering rules to inject more fine-grained faults. Refer to [call chain and predicate examples](https://github.com/chaos-mesh/bpfki/tree/develop/examples) for more information. If no call chain is specified, keep the `callchain` field empty, indicating that faults will be injected to any path on which slab alloc is called (for example, kmallo).
+    You can also use the function parameters as filtering rules to inject more fine-grained faults. Refer to [call chain and predicate examples](https://github.com/chaos-mesh/bpfki/tree/develop/examples) for more information. If no call chain is specified, keep the `callchain` field empty, indicating that faults will be injected on any path where slab allocation is called (for example, kmalloc).
 
     The call chain type is a frame array, consisting of the following three parts:
 
     - **funcname**, which can be found from the kernel source code or from `/proc/kallsyms`, such as `ext4_mount`.
     - **parameters**, which is used for filtering. If you want to inject a slab error on the `d_alloc_parallel(struct dentry *parent, const struct qstr *name)` with a special name `bananas` path, you need to set the `parameters` to `struct dentry *parent, const struct qstr *name`. Otherwise, omit this configuration.
-    - **predicate**, which is used to access the parameters of the frame array. Taking **parameters** as an example, you can set it to `STRNCMP(name->name, "bananas", 8)` to control the path of fault injection, or you can leave it empty for all call paths that execute `d_allo_parallel` receive the slab fault injection.
+    - **predicate**, which is used to access the parameters of the frame array. Taking **parameters** as an example, you can set it to `STRNCMP(name->name, "bananas", 8)` to control the path of fault injection, or you can leave it empty so that all call paths that execute `d_alloc_parallel` receive the slab fault injection.
 
   - **headers** specifies the kernel header file you need. For example, "linux/mmzone.h" and "linux/blkdev.h".
   - **probability** specifies the probability of faults. If you want the probability of 1%, set to '1'.

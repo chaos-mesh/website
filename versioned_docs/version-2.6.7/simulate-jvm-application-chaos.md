@@ -11,6 +11,8 @@ Chaos Mesh simulates the faults of JVM application through [Byteman](https://git
 - Trigger faults by setting Byteman configuration files
 - Increase JVM pressure
 
+In addition, Chaos Mesh supports injecting the above faults into commonly used services or their Java clients. For example, when a MySQL Java client executes a specified type of SQL statement (`SELECT`, `UPDATE`, `INSERT`, `REPLACE`, or `DELETE`), you can use the JVM fault injection feature to inject latency or throw exceptions in this client.
+
 This document describes how to use Chaos Mesh to create the above fault types of JVM experiments.
 
 :::note
@@ -29,7 +31,7 @@ Your Linux kernel must be v4.1 or later.
 
    ![JVMChaos experiments](./img/jvmchaos-exp.png)
 
-   For information about how to fill out the configurations, refer to [Field Description] (#field-description).
+   For information about how to fill out the configurations, refer to [Field Description](#field-description).
 
 3. Fill out the experiment information, and specify the experiment scope and the scheduled experiment duration.
 
@@ -39,7 +41,7 @@ Your Linux kernel must be v4.1 or later.
 
 ## Create experiments using YAML files
 
-The following example shows the usage and effects of JVMChaos. The example specifies the return values of a method. The YAML files referred to in the following steps can be found in [examples/jvm](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples/jvm). The default work directory for the following steps is also `examples/jvm`. The default namespace where Chaos Mesh is installed is `chaos-mesh`.
+The following example shows the usage and effects of JVMChaos. The example specifies the return values of a method. The YAML files referred to in the following steps can be found in [examples/jvm](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples/jvm). The default working directory for the following steps is also `examples/jvm`. The default namespace where Chaos Mesh is installed is `chaos-mesh`.
 
 ### Step 1. Create the target application
 
@@ -173,6 +175,7 @@ The meanings of the different `action` values are as follows:
 | `stress` | Increase CPU usage of Java process, or cause memory overflow (support heap overflow and stack overflow) |
 | `gc` | Trigger garbage collection |
 | `ruleData` | Trigger faults by setting Byteman configuration files |
+| `mysql` | Inject faults into MySQL Java clients |
 
 For different `action` values, there are different configuration items that can be filled in.
 
@@ -242,3 +245,15 @@ You need to escape the line breaks in the configuration file to the newline char
 ```txt
 \nRULE modify return value\nCLASS Main\nMETHOD getnum\nAT ENTRY\nIF true\nDO return 9999\nENDRULE\n"
 ```
+
+### Parameters for `mysql`
+
+| Parameter | Type | Description | Required |
+| --- | --- | --- | --- |
+| `mysqlConnectorVersion` | string | The version of the MySQL client (`mysql-connector-java`) used. Set it to `"5"` for the 5.X.X versions, and to `"8"` for the 8.X.X versions. The default value is `"8"`. | No |
+| `database` | string | The name of the database to match. The default value is `""`, which matches all databases. | No |
+| `table` | string | The name of the table to match. The default value is `""`, which matches all tables. | No |
+| `sqlType` | string | The type of SQL to match. The available values are `"select"`, `"update"`, `"insert"`, `"replace"`, and `"delete"`. The default value is `""`, which matches all types of SQL. | No |
+| `exception` | string | The thrown custom exception message, such as `"BOOM"`. You must configure one of `exception` and `latency`. | No |
+| `latency` | int | The latency of executing the SQL. The unit is millisecond. You must configure one of `exception` and `latency`. | No |
+| `port` | int | The port ID attached to the Java process agent. The faults are injected into the Java process through this ID. | No |
