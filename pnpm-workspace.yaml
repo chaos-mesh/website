@@ -1,0 +1,6 @@
+allowBuilds:
+  '@swc/core': true
+  core-js: true
+publicHoistPattern:
+  - '@docusaurus/plugin-content-docs*'
+  - '@docusaurus/theme-common*'

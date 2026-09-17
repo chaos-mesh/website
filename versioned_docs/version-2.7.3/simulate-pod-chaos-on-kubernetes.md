@@ -2,14 +2,14 @@
 title: Simulate Pod Faults
 ---
 
-This document describes how to use Chaos Mesh to inject faults into Kubernetes Pod to simulate Pod or container faults. Chaos Dashboard and YAML files are provided to create PodChaos experiments.
+This document describes how to use Chaos Mesh to inject faults into Kubernetes Pods to simulate Pod or container faults. Chaos Dashboard and YAML files are provided to create PodChaos experiments.
 
 ## PodChaos introduction
 
 PodChaos is a fault type in Chaos Mesh. By creating a PodChaos experiment, you can simulate fault scenarios of the specified Pods or containers. Currently, PodChaos supports the following fault types:
 
 - **Pod Failure**: injects fault into a specified Pod to make the Pod unavailable for a period of time.
-- **Pod Kill**: kills a specified Pod.To ensure that the Pod can be successfully restarted, you need to configure ReplicaSet or similar mechanisms.
+- **Pod Kill**: kills a specified Pod. To ensure that the Pod can be successfully restarted, you need to configure ReplicaSet or similar mechanisms.
 - **Container Kill**: kills the specified container in the target Pod.
 
 ## Usage restrictions
@@ -21,7 +21,7 @@ Chaos Mesh can inject PodChaos into any Pod, no matter whether the Pod is bound 
 Before creating PodChaos experiments, ensure the following:
 
 - There is no Control Manager of Chaos Mesh running on the target Pod.
-- If the fault type is Pod Kill, replicaSet or a similar mechanism is configured to ensure that Pod can restart automatically.
+- If the fault type is Pod Kill, ReplicaSet or a similar mechanism is configured to ensure that Pod can restart automatically.
 
 ## Create Experiments Using Chaos Dashboard
 
@@ -136,21 +136,21 @@ The following table describes the fields in the YAML configuration file.
 | --- | --- | --- | --- | --- | --- |
 | action | string | Specifies the fault type to inject. The supported types include `pod-failure`, `pod-kill`, and `container-kill`. | None | Yes | `pod-kill` |
 | mode | string | Specifies the mode of the experiment. The mode options include `one` (selecting a random Pod), `all` (selecting all eligible Pods), `fixed` (selecting a specified number of eligible Pods), `fixed-percent` (selecting a specified percentage of Pods from the eligible Pods), and `random-max-percent` (selecting the maximum percentage of Pods from the eligible Pods). | None | Yes | `one` |
-| value | string | Provides parameters for the `mode` configuration, depending on `mode`.For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods. | None | No | 1 |
+| value | string | Provides parameters for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods. | None | No | 1 |
 | selector | struct | Specifies the target Pod. For details, refer to [Define the experiment scope](./define-chaos-experiment-scope.md). | None | Yes |  |
 | containerNames | []string | When you configure `action` to `container-kill`, this configuration is mandatory to specify the target container name for injecting faults. | None | No | ['prometheus'] |
-| gracePeriod | int64 | When you configure `action` to `pod-kill`, this configuration is mandatory to specify the duration before deleting Pod. | 0 | No | 0 |
+| gracePeriod | int64 | When you configure `action` to `pod-kill`, you can specify the grace period before the Pod is deleted. | 0 | No | 0 |
 | duration | string | Specifies the duration of the experiment. | None | Yes | 30s |
 
-## Some Notes for "Pod Failure" Chaos Experiment
+## Notes on the "Pod Failure" Chaos Experiment
 
-TLDR; There are several suggestions for using "Pod Failure" chaos experiment:
+TL;DR: There are several suggestions for using "Pod Failure" chaos experiment:
 
 - Change to an available "pause image" if you are operating an air-gapped Kubernetes cluster.
-- Setup `livenessProbe` and `readinessProbe` for containers.
+- Set up `livenessProbe` and `readinessProbe` for containers.
 
-Pod Failure Chaos Experiment would change the `image` of each container in the target Pod to the "pause image", which is a special image that does not perform any operations. We use `gcr.io/google-containers/pause:latest` as the default image as "pause image", and you could change it to any other image in helm values `controllerManager.podChaos.podFailure.pauseImage`.
+The "Pod Failure" Chaos experiment changes the `image` of each container in the target Pod to the "pause image", a special image that does not perform any operations. We use `gcr.io/google-containers/pause:latest` as the default "pause image", and you can change it to any other image in helm values `controllerManager.podChaos.podFailure.pauseImage`.
 
-Downloading `pause image` would consume time, and that duration would be counted in the experiment duration. So you might find that the "actual effected duration" might be shorter than the configured duration. That's another reason why recommend to setup available "pause image".
+Downloading the "pause image" consumes time, and that duration is counted into the experiment duration. You might find that the "actual effective duration" is shorter than the configured duration. That is another reason why it is recommended to set up an available "pause image".
 
-Another ambiguous point is that "pause image" could work "properly well" with unconfigured `command` in the container. So if the container is configured without `command`, `livenessProbe` and `readinessProbe`, the container would be inspected as `Running` and `Ready`, although it had been changed to the "pause image", and actually does not provide functionalities as normal or not-available. So setup `livenessProbe` and `readinessProbe` for containers is recommended.
+Another ambiguous point is that the "pause image" works "properly well" in containers without a configured `command`. If a container is created without `command`, `livenessProbe`, and `readinessProbe`, it is inspected as `Running` and `Ready` even after it has been changed to the "pause image", even though it no longer provides normal functionality. Therefore, it is recommended to set up `livenessProbe` and `readinessProbe` for containers.

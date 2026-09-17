@@ -10,8 +10,8 @@ In Chaos Mesh, the life cycle of a chaos experiment is divided into four steps, 
 
 - Injecting: Chaos experiment is in the process of fault injection. Normally, this step lasts for a short time. If the "Injecting" step lasts a long time, it may be due to some exceptions in the chaos experiment. In this case, you can check `Events` to find the cause of the exceptions.
 - Running: After the faults have been successfully injected into all target pods, the chaos experiment starts running.
-- Paused: when executing a [paused](run-a-chaos-experiment.md#pause-chaos-experiments) process for a running chaos experiment, Chaos Mesh restores the injected faults from all target pods, which indicates the experiment is paused.
-- Finished: if the `duration` parameter of the experiment is configured, and when the experiment runs it up, Chaos Mesh restores the injected faults from all target pods, which indicates that the experiment is finished.
+- Paused: when you pause a running chaos experiment, Chaos Mesh restores the injected faults from all target pods, which indicates that the experiment is paused.
+- Finished: if the `duration` parameter of the experiment is configured, Chaos Mesh restores the injected faults from all target pods when the experiment reaches the configured `duration`, which indicates that the experiment is finished.
 
 ## Check results using Chaos Dashboard
 
@@ -85,13 +85,13 @@ The above output contains two parts:
   Based on the running process of the chaos experiment, the `Status` provides four types of status records:
 
   - `Paused`: indicates the chaos experiment is in the "Paused" step.
-  - `Selected`: indicates the chaos experiment had correctly selected the target pods where to inject chaos actions.
+  - `Selected`: indicates the chaos experiment has correctly selected the target pods where to inject chaos actions.
   - `AllInjected`: indicates the faults have been successfully injected to all target pods.
-  - `AllRecoverd`: indicates the injected faults have been successfully restored from all target pods.
+  - `AllRecovered`: indicates the injected faults have been successfully restored from all target pods.
 
   The actual running status of current chaos experiments can be inferred from these four types of status records. For example:
 
-  - When `Paused`、`Selected`、`AllRecoverd` is `True` and `AllInjected` is `False`, it indicates the current chaos experiment is paused.
+  - When `Paused`、`Selected`、`AllRecovered` is `True` and `AllInjected` is `False`, it indicates the current chaos experiment is paused.
   - When `Paused` is `True`, it indicates the current chaos experiment is paused. However, if the `Selected` is `False` at the same time, then it means the current experiment cannot select the target pods where to inject chaos actions.
 
   :::note

@@ -18,7 +18,7 @@ export default function TOCWrapper(props) {
 
           return (
             <a
-              className="tw-block tw-mb-4"
+              className="tw:block tw:mb-4"
               href={`https://gitpod.io/#${editUrl.replace('edit', 'blob')}`}
               target="_blank"
               rel="noreferrer noopener"

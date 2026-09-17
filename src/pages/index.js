@@ -3,13 +3,12 @@ import Head from '@docusaurus/Head'
 import Link from '@docusaurus/Link'
 import Translate, { translate } from '@docusaurus/Translate'
 import useBaseUrl from '@docusaurus/useBaseUrl'
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import CodeBlock from '@theme/CodeBlock'
 import Layout from '@theme/Layout'
 import { clsx } from 'clsx'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { useEffect } from 'react'
+import { useEffect, useLayoutEffect, useRef } from 'react'
 
 import IconGithub from '../../static/img/icons/github.svg'
 import IconHelp from '../../static/img/icons/help.svg'
@@ -25,96 +24,114 @@ import styles from './index.module.css'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const description =
-  'Chaos Mesh brings various types of fault simulation to Kubernetes and has an enormous capability to orchestrate fault scenarios. It helps you conveniently simulate various abnormalities that might occur in reality during the development, testing, and production environments and find potential problems in the system.'
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? useLayoutEffect : useEffect
 
 function Home() {
-  const { siteConfig, i18n } = useDocusaurusContext()
+  const homeRef = useRef(null)
+  const homeDescription = translate({
+    id: 'home.desc',
+    message:
+      'Chaos Mesh brings various types of fault simulation to Kubernetes and has an enormous capability to orchestrate fault scenarios. It helps you conveniently simulate various abnormalities that might occur in reality during the development, testing, and production environments and find potential problems in the system.',
+  })
+  const homeTagline = translate({
+    id: 'home.meta.tagline',
+    message: 'A Powerful Chaos Engineering Platform for Kubernetes',
+  })
 
-  useEffect(() => {
-    document.querySelector('.navbar__inner').classList.add('tw-container', 'tw-mx-auto')
+  useIsomorphicLayoutEffect(() => {
+    const navbarInner = document.querySelector('.navbar__inner')
+    const addedContainerClass = navbarInner && !navbarInner.classList.contains('tw:container')
+    const addedMarginClass = navbarInner && !navbarInner.classList.contains('tw:mx-auto')
 
-    gsap.from('.scroll-to-display', {
-      duration: 1,
-      opacity: 0,
-      y: 50,
-      stagger: 0.25,
-      scrollTrigger: {
-        trigger: '.scroll-to-display',
-        toggleActions: 'restart none none none',
-      },
+    navbarInner?.classList.add('tw:container', 'tw:mx-auto')
+
+    const mm = gsap.matchMedia(homeRef)
+
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
+      const revealBatch = (selector, y) => {
+        const elements = gsap.utils.toArray(selector)
+
+        gsap.set(elements, { opacity: 0, y })
+        ScrollTrigger.batch(elements, {
+          start: 'top 90%',
+          once: true,
+          onEnter: (batch) =>
+            gsap.to(batch, {
+              duration: 1,
+              opacity: 1,
+              y: 0,
+              stagger: 0.25,
+              ease: 'power2.out',
+              overwrite: 'auto',
+              clearProps: 'opacity,transform',
+            }),
+        })
+      }
+
+      revealBatch('.scroll-to-display', 50)
+      revealBatch('.scroll-to-display-card', 100)
     })
 
-    gsap.from('.scroll-to-display-x', {
-      duration: 1,
-      opacity: 0,
-      x: 0,
-      y: 100,
-      stagger: 0.25,
-      scrollTrigger: {
-        trigger: '.scroll-to-display-x',
-        toggleActions: 'restart none none none',
-      },
-    })
+    return () => {
+      mm.revert()
+      addedContainerClass && navbarInner?.classList.remove('tw:container')
+      addedMarginClass && navbarInner?.classList.remove('tw:mx-auto')
+    }
   }, [])
 
   return (
-    <Layout description={translate({ message: description, id: 'home.desc' })}>
+    <Layout description={homeDescription}>
       <Head>
-        <title>Chaos Mesh: {siteConfig.tagline}</title>
+        <title>Chaos Mesh: {homeTagline}</title>
       </Head>
-      <main>
-        <div className="hero tw-relative tw-h-[768px] tw-pt-0 tw-overflow-hidden">
+      <main ref={homeRef}>
+        <div className="hero tw:relative tw:h-192 tw:pt-0 tw:overflow-hidden">
           <BrowserOnly>{() => <Mesh />}</BrowserOnly>
-          <div className="tw-container tw-mx-auto tw-z-10">
-            <div className="tw-flex tw-flex-col lg:tw-flex-row lg:tw-justify-between lg:tw-items-center">
-              <div className="tw-flex-[.8] 2xl:tw-flex-[.6] tw-p-6 lg:tw-p-3">
+          <div className="tw:container tw:mx-auto tw:z-10">
+            <div className="tw:flex tw:flex-col tw:lg:flex-row tw:lg:justify-between tw:lg:items-center">
+              <div className="tw:flex-[.8] tw:2xl:flex-[.6] tw:p-6 tw:lg:p-3">
                 <h1
                   className={clsx(
-                    'tw-inline-block tw-text-5xl xl:tw-text-6xl tw-text-left tw-rounded-2xl tw-backdrop-blur-sm lg:tw-backdrop-blur',
+                    'tw:inline-block tw:text-5xl tw:xl:text-6xl tw:text-left tw:rounded-2xl tw:backdrop-blur-sm tw:lg:backdrop-blur',
                     styles.heroTitle,
                   )}
                 >
-                  {/* Due to the below texts are not simple strings, so we can't use <Translate /> here. */}
-                  {i18n.currentLocale === 'en' && (
-                    <>
-                      <span>Break</span>
-                      <br />
-                      <span>Your System</span>
-                      <br />
-                      <span>Constructively</span>
-                    </>
-                  )}
-                  {i18n.currentLocale === 'zh' && (
-                    <>
-                      <span>破而后立</span>
-                      <br />
-                      <span className="tw-text-3xl">建设性地解构与优化你的系统</span>
-                    </>
-                  )}
+                  <Translate
+                    id="home.hero.title"
+                    values={{
+                      lineBreak: <br />,
+                      subtitle: (
+                        <span className={styles.heroSubtitle}>
+                          <Translate id="home.hero.title.subtitle">Constructively</Translate>
+                        </span>
+                      ),
+                    }}
+                  >
+                    {'Break{lineBreak}Your System{lineBreak}{subtitle}'}
+                  </Translate>
                 </h1>
-                <p className="lg:tw-text-lg tw-font-medium tw-rounded-2xl tw-backdrop-blur-sm lg:tw-backdrop-blur">
-                  <Translate id="home.desc">{description}</Translate>
+                <p className="tw:lg:text-lg tw:font-medium tw:rounded-2xl tw:backdrop-blur-sm tw:lg:backdrop-blur">
+                  {homeDescription}
                 </p>
-                <div className="tw-flex tw-gap-3">
+                <div className="tw:flex tw:gap-3">
                   <Link
                     to="/docs/production-installation-using-helm"
-                    className="tw-btn !tw-btn-primary hover:-tw-translate-y-[3px]"
+                    className="tw:btn tw:btn-primary! tw:hover:-translate-y-0.75"
                   >
                     <Translate id="home.getstarted">Get Started →</Translate>
                   </Link>
                   <Link
                     to="https://github.com/chaos-mesh/chaos-mesh"
-                    className="tw-btn !tw-btn-neutral tw-gap-2 dark:tw-glass hover:-tw-translate-y-[3px]"
+                    className="tw:btn tw:btn-neutral! tw:gap-2 tw:dark:glass tw:hover:-translate-y-0.75"
                   >
-                    <IconOctocat className="tw-w-4 tw-h-4 tw-fill-white" />
+                    <IconOctocat className="tw:w-4 tw:h-4 tw:fill-white" />
                     GitHub
                   </Link>
                 </div>
               </div>
 
-              <div className="lg:max-xl:tw-w-[500px] tw-p-6 lg:tw-p-3">
-                <h2 className="tw-inline-block tw-text-base lg:tw-text-lg tw-font-semibold tw-rounded-2xl tw-backdrop-blur-sm lg:tw-backdrop-blur">
+              <div className="tw:lg:max-xl:w-125 tw:p-6 tw:lg:p-3">
+                <h2 className="tw:inline-block tw:text-base tw:lg:text-lg tw:font-semibold tw:rounded-2xl tw:backdrop-blur-sm tw:lg:backdrop-blur">
                   <Translate id="home.tryitout">Try it out with following commands 👇</Translate>
                 </h2>
                 <CodeBlock>
@@ -127,16 +144,16 @@ helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --create-namespace`}
         </div>
 
         <div className="hero">
-          <div className="tw-container tw-mx-auto max-lg:tw-px-4 tw-text-center">
-            <h2 className="tw-text-lg">
+          <div className="tw:container tw:mx-auto tw:max-lg:px-4 tw:text-center">
+            <h2 className="tw:text-lg">
               <Translate id="home.whoisusing">Users of Chaos Mesh</Translate>
             </h2>
-            <div className="max-md:tw-overflow-x-auto dark:tw-invert dark:tw-saturate-0">
-              <div className="row max-md:tw-w-[1280px]">
+            <div className="tw:max-md:overflow-x-auto tw:dark:invert tw:dark:saturate-0">
+              <div className="row tw:max-md:w-[1280px]">
                 {whoIsUsing.map((w) => (
                   <div key={w.name} className={clsx('col col--1', styles.whiteboardCol)}>
                     <a
-                      className="tw-flex tw-justify-center tw-items-center tw-h-[100px] tw-select-none"
+                      className="tw:flex tw:justify-center tw:items-center tw:h-[100px] tw:select-none"
                       href={w.href}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -151,23 +168,23 @@ helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --create-namespace`}
         </div>
 
         <div className="hero">
-          <div className="tw-container tw-mx-auto max-lg:tw-px-4">
-            <div className="tw-max-w-[800px] tw-mb-12 tw-mx-auto tw-text-center">
-              <h2 className="tw-text-4xl xl:tw-text-5xl">
-                {/* Due to the below texts are not simple strings, so we can't use <Translate /> here. */}
-                {i18n.currentLocale === 'en' && (
-                  <span>
-                    Make <span className={styles.heroTitle}>Cloud Native + Chaos Engineering</span> simple and
-                    straightforward
-                  </span>
-                )}
-                {i18n.currentLocale === 'zh' && (
-                  <span>
-                    让<span className={styles.heroTitle}>云原生 + 混沌工程</span>变得简单直接
-                  </span>
-                )}
+          <div className="tw:container tw:mx-auto tw:max-lg:px-4">
+            <div className="tw:max-w-[800px] tw:mb-12 tw:mx-auto tw:text-center">
+              <h2 className="tw:text-4xl tw:xl:text-5xl">
+                <Translate
+                  id="home.features.title"
+                  values={{
+                    emphasis: (
+                      <span className={styles.heroTitle}>
+                        <Translate id="home.features.title.emphasis">Cloud Native + Chaos Engineering</Translate>
+                      </span>
+                    ),
+                  }}
+                >
+                  {'Make {emphasis} simple and straightforward'}
+                </Translate>
               </h2>
-              <p className="lg:tw-text-lg tw-font-medium">
+              <p className="tw:lg:text-lg tw:font-medium">
                 <Translate id="home.features.desc">
                   Based on the principles of Chaos Engineering, Chaos Mesh abstracts real-world events into objects that
                   can be directly applied, hiding the trivial details.
@@ -175,29 +192,30 @@ helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --create-namespace`}
               </p>
             </div>
 
-            <div className="tw-grid tw-gap-8 lg:tw-grid-rows-2 lg:tw-grid-cols-6">
+            <div className="tw:grid tw:gap-8 tw:lg:grid-rows-2 tw:lg:grid-cols-6">
               <Features />
             </div>
           </div>
         </div>
 
         <div className="hero">
-          <div className="tw-container tw-mx-auto max-lg:tw-px-4">
-            <div className="tw-max-w-[800px] tw-mx-auto tw-text-center">
-              <h2 className="tw-text-4xl xl:tw-text-5xl">
-                {/* Due to the below texts are not simple strings, so we can't use <Translate /> here. */}
-                {i18n.currentLocale === 'en' && (
-                  <span>
-                    <span className={styles.heroTitle}>Wide variety</span> of failure types
-                  </span>
-                )}
-                {i18n.currentLocale === 'zh' && (
-                  <span>
-                    <span className={styles.heroTitle}>多样化</span>的故障类型
-                  </span>
-                )}
+          <div className="tw:container tw:mx-auto tw:max-lg:px-4">
+            <div className="tw:max-w-[800px] tw:mx-auto tw:text-center">
+              <h2 className="tw:text-4xl tw:xl:text-5xl">
+                <Translate
+                  id="home.failuretypes.title"
+                  values={{
+                    emphasis: (
+                      <span className={styles.heroTitle}>
+                        <Translate id="home.failuretypes.title.emphasis">Wide variety</Translate>
+                      </span>
+                    ),
+                  }}
+                >
+                  {'{emphasis} of failure types'}
+                </Translate>
               </h2>
-              <p className="lg:tw-text-lg tw-font-medium">
+              <p className="tw:lg:text-lg tw:font-medium">
                 <Translate id="home.failuretypes.desc">
                   Chaos Mesh initially started from a distributed system perspective, fully considering its possible
                   failures, thus providing more comprehensive and fine-grained fault types to help users with fault
@@ -207,57 +225,60 @@ helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --create-namespace`}
             </div>
             <img
               className={clsx(
-                'tw-block tw-mx-auto tw-select-none dark:tw-invert-[.85] dark:tw-saturate-0',
+                'tw:block tw:mx-auto tw:select-none tw:dark:invert-[.85] tw:dark:saturate-0',
                 styles.chaosCategory,
               )}
               src="img/home/chaos-category.svg"
-              alt="Chaos Category"
+              alt={translate({
+                id: 'home.failuretypes.imageAlt',
+                message: 'Chaos Mesh failure categories',
+              })}
             />
 
-            <div className="tw-flex tw-justify-center tw-mt-12">
+            <div className="tw:flex tw:justify-center tw:mt-12">
               <Link
                 to="/docs/simulate-pod-chaos-on-kubernetes"
-                className="tw-btn !tw-btn-primary tw-gap-2 hover:-tw-translate-y-[3px]"
+                className="tw:btn tw:btn-primary! tw:gap-2 tw:hover:translate-y-[-3px]"
               >
-                <IconLibrary className="tw-w-4 tw-h-4 tw-fill-primary-content" />
+                <IconLibrary className="tw:w-4 tw:h-4 tw:fill-primary-content" />
                 <Translate id="home.exploremore">Explore More</Translate>
               </Link>
             </div>
-            <div className="tw-grid tw-gap-8 lg:tw-grid-cols-3 tw-my-12">
+            <div className="tw:grid tw:gap-8 tw:lg:grid-cols-3 tw:my-12">
               <CodeGrid />
             </div>
           </div>
         </div>
 
-        <div className="hero tw-relative">
-          <div className="tw-absolute tw-top-[-50px] tw-left-0 md:tw-top-[-100px] xl:tw-top-[-200px] tw-w-full">
+        <div className="hero tw:relative">
+          <div className="tw:absolute tw:top-[-50px] tw:left-0 tw:md:top-[-100px] tw:xl:top-[-200px] tw:w-full">
             <img src="/img/home/curve-divider.svg" />
           </div>
-          <div className="tw-container tw-mx-auto max-lg:tw-px-4">
-            <div className="tw-relative tw-flex tw-flex-col lg:tw-flex-row lg:tw-items-center tw-gap-8">
-              <div className="tw-flex-1">
-                <div className="xl:tw-w-[90%]">
-                  {/* TODO: add translation. */}
-                  <h2 className="tw-text-4xl xl:tw-text-5xl">
-                    {/* Due to the below texts are not simple strings, so we can't use <Translate /> here. */}
-                    {i18n.currentLocale === 'en' && (
-                      <span>
-                        Orchestrate complex fault scenarios with <span className={styles.heroTitle}>Workflows</span>
-                      </span>
-                    )}
-                    {i18n.currentLocale === 'zh' && (
-                      <span>
-                        使用<span className={styles.heroTitle}>工作流</span>编排复杂的故障场景
-                      </span>
-                    )}
+          <div className="tw:container tw:mx-auto tw:max-lg:px-4">
+            <div className="tw:relative tw:flex tw:flex-col tw:lg:flex-row tw:lg:items-center tw:gap-8">
+              <div className="tw:flex-1">
+                <div className="tw:xl:w-[90%]">
+                  <h2 className="tw:text-4xl tw:xl:text-5xl">
+                    <Translate
+                      id="home.workflows.title"
+                      values={{
+                        emphasis: (
+                          <span className={styles.heroTitle}>
+                            <Translate id="home.workflows.title.emphasis">Workflows</Translate>
+                          </span>
+                        ),
+                      }}
+                    >
+                      {'Orchestrate complex fault scenarios with {emphasis}'}
+                    </Translate>
                   </h2>
-                  <p className="lg:tw-text-lg tw-font-medium">
+                  <p className="tw:lg:text-lg tw:font-medium">
                     <Translate id="home.workflows.desc">
                       Real-world failures are often not isolated causes.Chaos Mesh has built-in workflows that allow you
                       to experiment serially or in parallel at will to build walkthroughs that fit the architecture.
                     </Translate>
                   </p>
-                  <div className="tw-flex tw-gap-4 tw-mb-6">
+                  <div className="tw:flex tw:gap-4 tw:mb-6">
                     <Card>
                       <h4 className="text-lg">
                         <Translate id="home.workflows.suspend">Suspend</Translate>
@@ -281,49 +302,50 @@ helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --create-namespace`}
                   </div>
                   <Link
                     to="/docs/create-chaos-mesh-workflow/"
-                    className="tw-btn !tw-btn-primary tw-gap-2 hover:-tw-translate-y-[3px]"
+                    className="tw:btn tw:btn-primary! tw:gap-2 tw:hover:translate-y-[-3px]"
                   >
-                    <Translate id="home.startcreating">Start Creating →</Translate>
+                    <Translate id="home.learnmore">Learn More →</Translate>
                   </Link>
                 </div>
               </div>
-              <div className={clsx('tw-flex-[1.5] tw-rounded-2xl', styles.workflowsImg)} />
+              <div className={clsx('tw:flex-[1.5] tw:rounded-2xl', styles.workflowsImg)} />
             </div>
           </div>
         </div>
 
         <div className="hero">
-          <div className="tw-container tw-mx-auto max-lg:tw-px-4">
-            <div className="tw-flex tw-flex-col lg:tw-flex-row lg:tw-items-center tw-gap-8">
-              <div className={clsx('tw-relative tw-flex-1 tw-flex tw-items-center tw-overflow-hidden xl:tw-h-[640px]')}>
-                <img className="tw-absolute tw-w-[90%]" src="/img/home/chaosd-bg.svg" />
-                <div className="tw-flex tw-justify-center tw-items-center xl:tw-w-[75%] lg:tw-h-[100%]">
+          <div className="tw:container tw:mx-auto tw:max-lg:px-4">
+            <div className="tw:flex tw:flex-col tw:lg:flex-row tw:lg:items-center tw:gap-8">
+              <div className={clsx('tw:relative tw:flex-1 tw:flex tw:items-center tw:overflow-hidden tw:xl:h-[640px]')}>
+                <img className="tw:absolute tw:w-[90%]" src="/img/home/chaosd-bg.svg" />
+                <div className="tw:flex tw:justify-center tw:items-center tw:xl:w-[75%] tw:lg:h-full">
                   <ChaosdFeatures />
                 </div>
               </div>
-              <div className="tw-flex-[1.5] tw-z-10">
-                <span className="tw-badge tw-badge-primary">
+              <div className="tw:flex-[1.5] tw:z-10">
+                <span className="tw:badge tw:badge-primary">
                   <Translate id="home.experimental">Experimental</Translate>
                 </span>
-                <h2 className="tw-text-4xl xl:tw-text-5xl">
-                  {/* Due to the below texts are not simple strings, so we can't use <Translate /> here. */}
-                  {i18n.currentLocale === 'en' && (
-                    <span>
-                      Meet <span className={styles.heroTitle}>Chaosd</span>: A Chaos Toolkit for Physical Machines
-                    </span>
-                  )}
-                  {i18n.currentLocale === 'zh' && (
-                    <span>
-                      认识<span className={styles.heroTitle}>Chaosd</span>：物理机混沌工具箱
-                    </span>
-                  )}
+                <h2 className="tw:text-4xl tw:xl:text-5xl">
+                  <Translate
+                    id="home.chaosd.title"
+                    values={{
+                      emphasis: (
+                        <span className={styles.heroTitle}>
+                          <Translate id="home.chaosd.title.emphasis">Chaosd</Translate>
+                        </span>
+                      ),
+                    }}
+                  >
+                    {'Meet {emphasis}: A Chaos Toolkit for Physical Machines'}
+                  </Translate>
                 </h2>
-                <p className="lg:tw-text-lg tw-font-medium">
+                <p className="tw:lg:text-lg tw:font-medium">
                   <Translate
                     id="home.chaosd.desc"
                     values={{
                       link: (
-                        <Link className="tw-underline dark:tw-no-underline" to="/docs/simulate-physical-machine-chaos">
+                        <Link className="tw:underline" to="/docs/simulate-physical-machine-chaos">
                           PhysicalMachineChaos
                         </Link>
                       ),
@@ -336,7 +358,7 @@ helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --create-namespace`}
                 </p>
                 <Link
                   to="/docs/chaosd-overview/"
-                  className="tw-btn !tw-btn-primary tw-gap-2 hover:-tw-translate-y-[3px]"
+                  className="tw:btn tw:btn-primary! tw:gap-2 tw:hover:translate-y-[-3px]"
                 >
                   <Translate id="home.learnmore">Learn More →</Translate>
                 </Link>
@@ -346,31 +368,32 @@ helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --create-namespace`}
         </div>
 
         <div className="hero">
-          <div className="tw-container tw-mx-auto max-lg:tw-px-4">
-            <div className="tw-max-w-[800px] tw-mb-12 tw-mx-auto tw-text-center">
-              <h2 className="tw-text-4xl xl:tw-text-5xl">
-                {/* Due to the below texts are not simple strings, so we can't use <Translate /> here. */}
-                {i18n.currentLocale === 'en' && (
-                  <span>
-                    Building the Whole Community <span className={styles.heroTitle}>Together</span>
-                  </span>
-                )}
-                {i18n.currentLocale === 'zh' && (
-                  <span>
-                    <span className={styles.heroTitle}>共建</span>社区，共同前行
-                  </span>
-                )}
+          <div className="tw:container tw:mx-auto tw:max-lg:px-4">
+            <div className="tw:max-w-[800px] tw:mb-12 tw:mx-auto tw:text-center">
+              <h2 className="tw:text-4xl tw:xl:text-5xl">
+                <Translate
+                  id="home.buildcommunity.title"
+                  values={{
+                    emphasis: (
+                      <span className={styles.heroTitle}>
+                        <Translate id="home.buildcommunity.title.emphasis">Together</Translate>
+                      </span>
+                    ),
+                  }}
+                >
+                  {'Building the Whole Community {emphasis}'}
+                </Translate>
               </h2>
-              <p className="lg:tw-text-lg tw-font-medium">
+              <p className="tw:lg:text-lg tw:font-medium">
                 <Translate id="home.buildcommunity.desc">
                   Join the community and interact with maintainers and other users. Your suggestions can make Chaos Mesh
                   better.
                 </Translate>
               </p>
             </div>
-            <div className="tw-grid lg:tw-grid-cols-3 tw-gap-8 tw-mb-12 lg:tw-w-[80%] lg:tw-mx-auto">
+            <div className="tw:grid tw:lg:grid-cols-3 tw:gap-8 tw:mb-12 tw:lg:w-[80%] tw:lg:mx-auto">
               <Card>
-                <IconGithub className="tw-w-12 tw-h-12 dark:tw-fill-white" />
+                <IconGithub className="tw:w-12 tw:h-12 tw:dark:fill-white" />
                 <p>
                   <Translate id="home.buildcommunity.beacontributor">
                     Be a contributor to building the future of Chaos Mesh.
@@ -378,35 +401,35 @@ helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --create-namespace`}
                 </p>
                 <Link
                   to="https://github.com/chaos-mesh/chaos-mesh"
-                  className="tw-btn tw-bg-[#f2f2f2] tw-text-[#1f2937] dark:tw-text-[#a6adba] hover:!tw-bg-[#e6e6e6] tw-normal-case dark:tw-glass dark:hover:!tw-bg-transparent dark:hover:tw-text-white"
+                  className="tw:btn tw:bg-[#f2f2f2] tw:text-[#1f2937] tw:dark:text-[#a6adba] tw:hover:bg-[#e6e6e6]! tw:normal-case tw:dark:glass tw:dark:hover:bg-transparent! tw:dark:hover:text-white"
                 >
                   GitHub
                 </Link>
               </Card>
               <Card>
-                <IconHelp className="tw-w-12 tw-h-12 dark:tw-fill-white" />
+                <IconHelp className="tw:w-12 tw:h-12 tw:dark:fill-white" />
                 <p>
                   <Translate id="home.buildcommunity.help">
                     Experiencing any issues? Don't hesitate to reach out to us for assistance.
                   </Translate>
                 </p>
-                <div className="tw-flex tw-gap-3">
+                <div className="tw:flex tw:flex-wrap tw:gap-3">
                   <Link
                     to="https://github.com/chaos-mesh/chaos-mesh/issues"
-                    className="tw-btn tw-bg-[#f2f2f2] tw-text-[#1f2937] dark:tw-text-[#a6adba] hover:!tw-bg-[#e6e6e6] tw-normal-case dark:tw-glass dark:hover:!tw-bg-transparent dark:hover:tw-text-white"
+                    className="tw:btn tw:bg-[#f2f2f2] tw:text-[#1f2937] tw:dark:text-[#a6adba] tw:hover:bg-[#e6e6e6]! tw:normal-case tw:dark:glass tw:dark:hover:bg-transparent! tw:dark:hover:text-white"
                   >
                     GitHub Issues
                   </Link>
                   <Link
                     to="https://github.com/chaos-mesh/chaos-mesh/discussions"
-                    className="tw-btn tw-bg-[#f2f2f2] tw-text-[#1f2937] dark:tw-text-[#a6adba] hover:!tw-bg-[#e6e6e6] tw-normal-case dark:tw-glass dark:hover:!tw-bg-transparent dark:hover:tw-text-white"
+                    className="tw:btn tw:bg-[#f2f2f2] tw:text-[#1f2937] tw:dark:text-[#a6adba] tw:hover:bg-[#e6e6e6]! tw:normal-case tw:dark:glass tw:dark:hover:bg-transparent! tw:dark:hover:text-white"
                   >
                     GitHub Discussions
                   </Link>
                 </div>
               </Card>
               <Card>
-                <img className="tw-w-12 tw-h-12 tw-scale-150" src="/img/icons/slack.svg" alt="Slack" />
+                <img className="tw:w-12 tw:h-12 tw:scale-150" src="/img/icons/slack.svg" alt="Slack" />
                 <p>
                   <Translate id="home.buildcommunity.slack">
                     Connect with other users on our Slack channel (#project-chaos-mesh).
@@ -414,20 +437,27 @@ helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --create-namespace`}
                 </p>
                 <Link
                   to="https://slack.cncf.io"
-                  className="tw-btn tw-bg-[#f2f2f2] tw-text-[#1f2937] dark:tw-text-[#a6adba] hover:!tw-bg-[#e6e6e6] tw-normal-case dark:tw-glass dark:hover:!tw-bg-transparent dark:hover:tw-text-white"
+                  className="tw:btn tw:bg-[#f2f2f2] tw:text-[#1f2937] tw:dark:text-[#a6adba] tw:hover:bg-[#e6e6e6]! tw:normal-case tw:dark:glass tw:dark:hover:bg-transparent! tw:dark:hover:text-white"
                 >
                   <Translate id="home.buildcommunity.slack.join">Join Slack channel</Translate>
                 </Link>
               </Card>
             </div>
-            <p className="tw-font-medium tw-text-center">
-              Chaos Mesh is a{' '}
-              <Link className="tw-underline dark:tw-no-underline" to="https://cncf.io/">
-                Cloud Native Computing Foundation
-              </Link>{' '}
-              incubating project.
+            <p className="tw:font-medium tw:text-center">
+              <Translate
+                id="home.cncf.desc"
+                values={{
+                  cncfLink: (
+                    <Link className="tw:underline" to="https://cncf.io/">
+                      <Translate id="home.cncf.name">Cloud Native Computing Foundation</Translate>
+                    </Link>
+                  ),
+                }}
+              >
+                {'Chaos Mesh is a {cncfLink} incubating project.'}
+              </Translate>
             </p>
-            <div className="cncf-logo tw-h-16" />
+            <div className="cncf-logo tw:h-16" />
           </div>
         </div>
       </main>
