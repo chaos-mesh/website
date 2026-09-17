@@ -114,7 +114,7 @@ Make sure that the app registrations in the Secret file have been added as a con
    kubectl apply -f azurechaos-vm-restart.yaml
    ```
 
-### A `detach-volume` configuration example
+### A `disk-detach` configuration example
 
 1. Write the experiment configuration to the `azurechaos-disk-detach.yaml` file:
 
