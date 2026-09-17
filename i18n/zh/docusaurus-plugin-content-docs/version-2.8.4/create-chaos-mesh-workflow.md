@@ -6,7 +6,7 @@ title: 创建 Chaos Mesh 工作流
 
 在 Chaos Mesh 中模拟真实的系统故障时，通常伴随着持续验证。你可能希望在 Chaos Mesh 平台上构建一系列故障，而不是执行单个独立的混沌故障注入操作。
 
-为满足该需求，Chaos Mesh 提供了 Chaos Mesh 工作流，一个内置的工作流引擎。使用该引擎，你可以串行或并行地执行多种不同的 Chaos 实验， 用于模拟生产级别的错误。
+为满足该需求，Chaos Mesh 提供了 Chaos Mesh 工作流，一个内置的工作流引擎。使用该引擎，你可以串行或并行地执行多种不同的 Chaos 实验，用于模拟生产级别的故障。
 
 目前， Chaos Mesh 工作流支持以下功能：
 
@@ -20,9 +20,9 @@ title: 创建 Chaos Mesh 工作流
 - 使用并行编排同时注入多个 NetworkChaos 模拟复杂的网络环境
 - 在串行编排中进行健康检查，使用条件分支决定是否执行剩下的步骤
 
-Chaos Mesh 工作流 在设计时一定程度上参考了 Argo 工作流。如果您熟悉 Argo 工作流，您也能很快地上手 Chaos Mesh 工作流。
+Chaos Mesh 工作流在设计时一定程度上参考了 Argo 工作流。如果您熟悉 Argo 工作流，您也能很快地上手 Chaos Mesh 工作流。
 
-Github 仓库中含有其他工作流的[示例](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples/workflow).
+更多工作流示例可在 [Chaos Mesh GitHub 仓库](https://github.com/chaos-mesh/chaos-mesh/tree/master/examples/workflow) 中获取。
 
 ## 通过 Chaos Dashboard 创建工作流
 
@@ -40,11 +40,11 @@ Github 仓库中含有其他工作流的[示例](https://github.com/chaos-mesh/c
 
 1. 根据需求选择**选择任务类型**
 
-   在本示例中选择的任务类型为”单一“。
+   在本示例中选择的任务类型为“单一”。
 
    :::note
 
-   Chaos Dashboard 会自动创建一个命名为 "entry" 的串行节点，作其用为该工作流的入口。
+   Chaos Dashboard 会自动创建一个名为 "entry" 的串行节点，用作该工作流的入口。
 
    :::
 
@@ -64,7 +64,7 @@ Github 仓库中含有其他工作流的[示例](https://github.com/chaos-mesh/c
 
 ## 使用 YAML 文件与 `kubectl` 创建工作流
 
-工作流 类似于各种类型的 Chaos 对象，同样作为 CRD 存在于 kubernetes 集群中。你可以使用 `kubectl create -f <workflow.yaml>` 创建 Chaos Mesh 工作流。以下为创建的具体示例。使用本地 YAML 文件创建工作流：
+工作流类似于各种类型的 Chaos 对象，同样作为 CRD 存在于 Kubernetes 集群中。你可以使用 `kubectl create -f <workflow.yaml>` 创建 Chaos Mesh 工作流。以下为创建的具体示例。使用本地 YAML 文件创建工作流：
 
 ```shell
 kubectl create -f <workflow.yaml>
@@ -184,21 +184,21 @@ podChaos:
 | name | string | template 的名称，需要符合 DNS-1123 命名规范。 | 无 | 是 | any-name |
 | type | string | template 的类型。可选值有: Task、Serial、Parallel、Suspend、Schedule、AWSChaos、DNSChaos、GCPChaos、HTTPChaos、IOChaos、JVMChaos、KernelChaos、NetworkChaos、PodChaos、StressChaos、TimeChaos、StatusCheck | 无 | 是 | PodChaos |
 | deadline | string | template 持续的时间。 | 无 | 否 | '5m30s' |
-| children | []string | 声明该 template 下的子任务，当 type 为 Serial 或 Parallel 时需要配置该字段。 | 无 | 否 | ["any-chaos-1", "another-serial-2", "any-shcedule"] |
+| children | []string | 声明该 template 下的子任务，当 type 为 Serial 或 Parallel 时需要配置该字段。 | 无 | 否 | ["any-chaos-1", "another-serial-2", "any-schedule"] |
 | task | Task | 配置自定义任务，当 type 为 Task 时需要配置该字段。详见 [Task 字段说明](#task-字段说明) | 无 | 否 |  |
 | conditionalBranches | []ConditionalBranch | 配置自定任务后的条件分支，当 type 为 Task 时可选配置该字段。详见 [ConditionalBranch 字段说明](#conditionalbranch-字段说明) | 无 | 否 |  |
 | awsChaos | object | 配置 AWSChaos，当 type 为 AWSChaos 时需要配置该字段。详见 [模拟 AWS 故障](simulate-aws-chaos.md) | 无 | 否 |  |
 | dnsChaos | object | 配置 DNSChaos，当 type 为 DNSChaos 时需要配置该字段。详见 [模拟 DNS 故障](simulate-dns-chaos-on-kubernetes.md) | 无 | 否 |  |
-| gcpChaos | object | 配置 GCPChaos，当 type 为 GCPChaos，当 时需要配置该字段。详见 [模拟 GCP 故障](simulate-gcp-chaos.md) | 无 | 否 |  |
+| gcpChaos | object | 配置 GCPChaos，当 type 为 GCPChaos 时需要配置该字段。详见 [模拟 GCP 故障](simulate-gcp-chaos.md) | 无 | 否 |  |
 | httpChaos | object | 配置 HTTPChaos，当 type 为 HTTPChaos 时需要配置该字段。详见 [模拟 HTTP 故障](simulate-http-chaos-on-kubernetes.md) | 无 | 否 |  |
 | ioChaos | object | 配置 IOChaos，当 type 为 IOChaos 时需要配置该字段。详见 [模拟文件 I/O 故障](simulate-io-chaos-on-kubernetes.md) | 无 | 否 |  |
 | jvmChaos | object | 配置 JVMChaos，当 type 为 JVMChaos 时需要配置该字段。详见 [模拟 JVM 应用故障](simulate-jvm-application-chaos.md) | 无 | 否 |  |
 | kernelChaos | object | 配置 KernelChaos，当 type 为 KernelChaos 时需要配置该字段。详见 [模拟内核故障](simulate-kernel-chaos-on-kubernetes.md) | 无 | 否 |  |
 | networkChaos | object | 配置 NetworkChaos，当 type 为 NetworkChaos 时需要配置该字段。详见 [模拟网络故障](simulate-network-chaos-on-kubernetes.md) | 无 | 否 |  |
-| podChaos | object | 配置 PodChaos ，当 type 为 PodChaos 时需要配置该字段。详见 [模拟 Pod 故障](simulate-pod-chaos-on-kubernetes.md) | 无 | 否 |  |
+| podChaos | object | 配置 PodChaos，当 type 为 PodChaos 时需要配置该字段。详见 [模拟 Pod 故障](simulate-pod-chaos-on-kubernetes.md) | 无 | 否 |  |
 | stressChaos | object | 配置 StressChaos，当 type 为 StressChaos 时需要配置该字段。详见 [模拟压力场景](simulate-heavy-stress-on-kubernetes.md) | 无 | 否 |  |
 | timeChaos | object | 配置 TimeChaos，当 type 为 TimeChaos 时需要配置该字段。详见 [模拟时间故障](simulate-time-chaos-on-kubernetes.md) | 无 | 否 |  |
-| schedule | object | 配置 Schedule ，当 type 为 Schedule 时需要配置该字段。详见 [定义调度规则](define-scheduling-rules.md) | 无 | 否 |  |
+| schedule | object | 配置 Schedule，当 type 为 Schedule 时需要配置该字段。详见 [定义调度规则](define-scheduling-rules.md) | 无 | 否 |  |
 | statusCheck | object | 配置 StatusCheck，当 type 为 StatusCheck 时需要配置该字段。详见 [在工作流中进行状态检查](status-check-in-workflow.md) | 无 | 否 |  |
 | abortWithStatusCheck | bool | 配置当 StatusCheck 失败时是否终止工作流，当 type 为 StatusCheck 时可选配置该字段。 | `false` | 否 | `true` |
 
