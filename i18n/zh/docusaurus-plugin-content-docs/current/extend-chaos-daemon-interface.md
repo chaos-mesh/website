@@ -19,17 +19,21 @@ title: 拓展 Chaos Daemon 接口
 
 ## 选择器
 
-回顾一下你在 `api/v1alpha1/helloworldchaos_type.go` 中定义的 `HelloWorldSpec` 这一结构，其中包括了一项 `ContainerSelector`。
+回顾一下你在 `api/v1alpha1/helloworldchaos_types.go` 中定义的 `HelloWorldChaosSpec` 这一结构，其中包括了一项 `ContainerSelector`。
 
 ```go
-// HelloWorldChaosSpec is the content of the specification for a HelloWorldChaos
+// HelloWorldChaosSpec defines the desired state of HelloWorldChaos
 type HelloWorldChaosSpec struct {
-	// ContainerSelector specifies target
+	// ContainerSelector specifies the target for injection
 	ContainerSelector `json:",inline"`
 
-	// Duration represents the duration of the chaos action
+	// Duration represents the duration of the chaos
 	// +optional
 	Duration *string `json:"duration,omitempty"`
+
+	// RemoteCluster represents the remote cluster where the chaos will be deployed
+	// +optional
+	RemoteCluster string `json:"remoteCluster,omitempty"`
 }
 
 ...
@@ -51,7 +55,7 @@ func (obj *HelloWorldChaos) GetSelectorSpecs() map[string]interface{} {
 1. 在 `pkg/chaosdaemon/pb/chaosdaemon.proto` 中加上新的 RPC。
 
    ```proto
-   service chaosDaemon {
+   service ChaosDaemon {
        ...
 
        rpc ExecHelloWorldChaos(ExecHelloWorldRequest) returns (google.protobuf.Empty) {}
@@ -139,7 +143,7 @@ func (obj *HelloWorldChaos) GetSelectorSpecs() map[string]interface{} {
       decoder *utils.ContainerRecordDecoder
    }
 
-   // Apply applies KernelChaos
+   // Apply applies HelloWorldChaos
    func (impl *Impl) Apply(ctx context.Context, index int, records []*v1alpha1.Record, obj v1alpha1.InnerObject) (v1alpha1.Phase, error) {
       impl.Log.Info("Apply helloworld chaos")
       decodedContainer, err := impl.decoder.DecodeContainerRecord(ctx, records[index], obj)
@@ -161,7 +165,7 @@ func (obj *HelloWorldChaos) GetSelectorSpecs() map[string]interface{} {
 
    // Recover means the reconciler recovers the chaos action
    func (impl *Impl) Recover(ctx context.Context, index int, records []*v1alpha1.Record, obj v1alpha1.InnerObject) (v1alpha1.Phase, error) {
-      mpl.Log.Info("Recover helloworld chaos")
+      impl.Log.Info("Recover helloworld chaos")
       return v1alpha1.NotInjected, nil
    }
 
@@ -201,9 +205,9 @@ func (obj *HelloWorldChaos) GetSelectorSpecs() map[string]interface{} {
    ```bash
    make image
    make docker-push
-   kind load docker-image localhost:5000/pingcap/chaos-mesh:latest
-   kind load docker-image localhost:5000/pingcap/chaos-daemon:latest
-   kind load docker-image localhost:5000/pingcap/chaos-dashboard:latest
+   kind load docker-image localhost:5000/chaos-mesh/chaos-mesh:latest
+   kind load docker-image localhost:5000/chaos-mesh/chaos-daemon:latest
+   kind load docker-image localhost:5000/chaos-mesh/chaos-dashboard:latest
    ```
 
 2. 更新 Chaos Mesh：
@@ -281,7 +285,7 @@ func (obj *HelloWorldChaos) GetSelectorSpecs() map[string]interface{} {
 
 ## 探索更多
 
-在完成上述步骤后，HelloWorldChaos 已经成为一种有实际作用的混沌实验。如果你在这一过程中遇到了问题，请在 GitHub 创建一个 [issue](https://github.com/pingcap/chaos-mesh/issues) 向 Chaos Mesh 团队反馈。
+在完成上述步骤后，HelloWorldChaos 已经成为一种有实际作用的混沌实验。如果你在这一过程中遇到了问题，请在 GitHub 创建一个 [issue](https://github.com/chaos-mesh/chaos-mesh/issues) 向 Chaos Mesh 团队反馈。
 
 如果您想知道所有这些是如何工作的，您可以稍后阅读 [controllers/README.md](https://github.com/chaos-mesh/chaos-mesh/blob/master/controllers/README.md) 和不同控制器的代码。
 
