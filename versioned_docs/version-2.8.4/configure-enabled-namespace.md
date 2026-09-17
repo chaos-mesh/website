@@ -4,13 +4,13 @@ title: Configure namespace for Chaos experiments
 
 import PickHelmVersion from '@site/src/components/PickHelmVersion'
 
-This chapter walks you through how to configure Chaos experiments to only take effect in the specified namespace, and protect other unspecified namespaces against fault injection.
+This chapter explains how to configure Chaos experiments to take effect only in the specified namespace, and how to protect other namespaces from fault injection.
 
 ## Control the scope where the Chaos experiment takes effect
 
 Chaos Mesh offers two ways to control the scope of the Chaos experiment to take effect:
 
-- To configure Chaos experiments to only take effect in the specified namespace, you need to enable the FilterNamespace feature (which is off by default). This feature takes effect on a global scope. After this feature is enabled, you can add annotations to the namespace in which Chaos experiments are allowed to take effect. Other namespaces without annotations are protected against fault injection.
+- To configure Chaos experiments to only take effect in the specified namespace, you need to enable the FilterNamespace feature (which is off by default). This feature takes effect globally. After this feature is enabled, you can add the annotation to the namespaces in which Chaos experiments are allowed to take effect. Other namespaces without the annotation are protected against fault injection.
 - To specify the scope for a single Chaos experiment to take effect, refer to [Define the scope of a Chaos experiment](define-chaos-experiment-scope.md).
 
 ## Enable FilterNamespace
@@ -29,9 +29,9 @@ If you have installed Chaos Mesh using Helm, you can enable this feature by upgr
 
 <PickHelmVersion>{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n chaos-mesh --version latest --set controllerManager.enableFilterNamespace=true`}</PickHelmVersion>
 
-For `helm upgrade`, you can set multiple parameters by adding multiple `--set` in the command. Later settings override previous settings. For example, if you add `--set controllerManager.enableFilterNamespace=false -set controllerManager.enableFilterNamespace=true` in the command, it still enables this feature.
+For `helm upgrade`, you can set multiple parameters by adding multiple `--set` to the command. Later settings override previous settings. For example, if you add `--set controllerManager.enableFilterNamespace=false --set controllerManager.enableFilterNamespace=true` to the command, this feature is still enabled.
 
-You can also specify a YAML file using the `-f` parameter to describe the configuration. Refer to [Helm upgrade](https://helm.sh/zh/docs/helm/helm_upgrade/#%E7%AE%80%E4%BB%8B) for more information.
+You can also specify a YAML file using the `-f` parameter to describe the configuration. Refer to [Helm upgrade](https://helm.sh/docs/helm/helm_upgrade/) for more information.
 
 ## Add annotations to namespaces for Chaos experiments
 
@@ -63,7 +63,7 @@ namespace/$NAMESPACE annotated
 
 ## Check all namespaces where Chaos experiments take effect
 
-You can list all the namespaces that allows Chaos experiments using the following command:
+You can list all the namespaces where Chaos experiments are allowed using the following command:
 
 ```bash
 kubectl get ns -o jsonpath='{.items[?(@.metadata.annotations.chaos-mesh\.org/inject=="enabled")].metadata.name}'
