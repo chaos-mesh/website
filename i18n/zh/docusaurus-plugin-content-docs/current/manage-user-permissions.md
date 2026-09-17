@@ -121,7 +121,7 @@ Chaos Mesh 允许关闭权限验证功能，如何关闭请参阅[开启或关�
 
    :::info
 
-   Kubernetes v1.22 之前的版本会自动为访问 Kubernetes API 创建长期凭证。在较新的 Kubernetes 版本中，你需要手动创建服务账户令牌 Secret。
+   Kubernetes v1.24 之前的版本会自动为访问 Kubernetes API 创建长期凭证。在较新的 Kubernetes 版本中，你需要手动创建服务账户令牌 Secret。
 
    更多详情，请参见[为 ServiceAccount 手动创建 API 令牌](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#manually-create-an-api-token-for-a-serviceaccount)。
 

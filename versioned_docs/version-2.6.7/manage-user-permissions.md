@@ -106,7 +106,7 @@ You need to ensure that the local user running `kubectl` has permissions to the 
 
 :::info
 
-Versions of Kubernetes before v1.22 automatically created long-term credentials for accessing the Kubernetes API. In recent versions of Kubernetes, you must manually create a service account token Secret.
+Versions of Kubernetes before v1.24 automatically created long-term credentials for accessing the Kubernetes API. In recent versions of Kubernetes, you must manually create a service account token Secret.
 
 For more details, see [Manually create an API token for a ServiceAccount](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#manually-create-an-api-token-for-a-serviceaccount).
 
