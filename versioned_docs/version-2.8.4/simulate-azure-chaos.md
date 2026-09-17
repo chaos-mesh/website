@@ -10,7 +10,7 @@ AzureChaos can help you simulate fault scenarios on the specified Azure instance
 
 - **VM Stop**: stops the specified VM instance.
 - **VM Restart**: restarts the specified VM instance.
-- **Disk Detach**: uninstalls the data disk from the specified VM instance.
+- **Disk Detach**: detaches the data disk from the specified VM instance.
 
 ## `Secret` file
 
@@ -33,13 +33,13 @@ stringData:
 
 - **name** means the Kubernetes Secret object.
 - **namespace** means the namespace of the Kubernetes Secret object.
-- **client_id** stores Application (client) ID of Azure App registrations.
-- **client_secret** stores Application (client) secret value of Azure App registrations.
-- **tenant_id** stores Directory (tenant) ID of Azure App registrations. For `client_id` and `client_secret`, please refer to [Confidential client application](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app).
+- **client_id** stores the Application (client) ID of the Azure app registration.
+- **client_secret** stores the Application (client) secret value of the Azure app registration.
+- **tenant_id** stores the Directory (tenant) ID of the Azure app registration. For `client_id` and `client_secret`, please refer to [Confidential client application](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app).
 
 :::note
 
-Make sure that App registrations in the Secret file has been added as a contributor or owner to the access control (IAM) of the VM instance.
+Make sure that the app registrations in the Secret file have been added as a contributor or owner to the access control (IAM) of the VM instance.
 
 :::
 
@@ -114,7 +114,7 @@ Make sure that App registrations in the Secret file has been added as a contribu
    kubectl apply -f azurechaos-vm-restart.yaml
    ```
 
-### A `detach-volume` configuration example
+### A `disk-detach` configuration example
 
 1. Write the experiment configuration to the `azurechaos-disk-detach.yaml` file:
 
@@ -155,9 +155,9 @@ The following table shows the fields in the YAML configuration file.
 | mode | string | Specifies the mode of the experiment. The mode options include `one` (selecting a random Pod), `all` (selecting all eligible Pods), `fixed` (selecting a specified number of eligible Pods), `fixed-percent` (selecting a specified percentage of Pods from the eligible Pods), and `random-max-percent` (selecting the maximum percentage of Pods from the eligible Pods). | N/A | Yes | `one` |
 | value | string | Provides parameters for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods. | N/A | No | `1` |
 | secretName | string | Specifies the name of the Kubernetes Secret that stores the Azure authentication information. | N/A | No | `cloud-key-secret` |
-| subscriptionID | string | Specifies the VM instacnce's subscription ID. | N/A | Yes | `your-subscription-id` |
-| resourceGroupName | string | Specifies the Resource group of VM. | N/A | Yes | `your-resource-group-name` |
-| vmName | string | VMName defines the name of Virtual Machine. | N/A | Yes | `your-vm-name` |
-| diskName | string | This is a required field when the `action` is `disk-detach`, specifies the name of data disk. | N/A | No | `DATADISK_0` |
-| lun | string | This is a required field when the `action` is `disk-detach`, specifies the LUN (Logic Unit Number) of data disk. | N/A | No | `0` |
+| subscriptionID | string | Specifies the subscription ID of the VM instance. | N/A | Yes | `your-subscription-id` |
+| resourceGroupName | string | Specifies the resource group of the VM instance. | N/A | Yes | `your-resource-group-name` |
+| vmName | string | Specifies the name of the VM instance. | N/A | Yes | `your-vm-name` |
+| diskName | string | This is a required field when the `action` is `disk-detach`. This field specifies the name of the data disk. | N/A | No | `DATADISK_0` |
+| lun | string | This is a required field when the `action` is `disk-detach`. This field specifies the LUN (Logical Unit Number) of the data disk. | N/A | No | `0` |
 | duration | string | Specifies the duration of the experiment. | N/A | Yes | `30s` |
