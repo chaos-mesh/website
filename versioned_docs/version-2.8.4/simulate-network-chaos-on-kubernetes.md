@@ -198,7 +198,7 @@ Setting `action` to `delay` means simulating network delay fault. You can also c
 | latency | string | Indicates the network latency |  | Yes | 2ms |
 | correlation | string | Indicates the correlation between the current latency and the previous one. Range of value: [0, 100] | 0 | No | 50 |
 | jitter | string | Indicates the range of the network latency | 0ms | No | 1ms |
-| reorder | [Reorder](#reorder) | Indicates the status of network packet reordering |  | No |  |
+| reorder | [reorder](#reorder) | Indicates the status of network packet reordering |  | No |  |
 
 The computational model for `correlation` is as follows:
 
