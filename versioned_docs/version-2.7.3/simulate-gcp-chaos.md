@@ -148,7 +148,7 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
 
    Based on this configuration example, Chaos Mesh will inject a `disk-loss` fault into the specified GCP instance so that the GCP instance is detached from the specified storage volume within 5 minutes.
 
-   For more information about detaching GCP instances, refer to [Detach GCP storage](https://cloud.google.com/compute/docs/reference/rest/v1/instances/detachDisk).
+   For more information about detaching GCP disks, refer to [Detach GCP storage](https://cloud.google.com/compute/docs/reference/rest/v1/instances/detachDisk).
 
 2. After the configuration file is prepared, use `kubectl` to create an experiment:
 
@@ -169,5 +169,5 @@ The following table shows the fields in the YAML configuration file.
 | project | string | Indicates the ID of GCP project. | None | Yes | real-testing-project |
 | zone | string | Indicates the zone of the GCP instance. | None | Yes | us-central1-a |
 | instance | string | Indicates the name of GCP instance. | None | Yes | gke-xxx-cluster--default-pool-xxx-yyy |
-| deviceNames | []string | This is a required field when the `action` is `disk-loss`. This field specifies the device names of the disks to detach. | None | no | ["your-disk-id"] |
+| deviceNames | []string | This is a required field when the `action` is `disk-loss`. This field specifies the device names of the disks to detach. | None | No | ["disk-name"] |
 | duration | string | Indicates the duration of the experiment. | None | Yes | 30s |

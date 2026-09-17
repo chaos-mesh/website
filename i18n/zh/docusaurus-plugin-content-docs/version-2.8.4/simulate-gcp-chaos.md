@@ -169,5 +169,5 @@ stringData:
 | project | string | 指定 GCP 项目的 ID | 无 | 是 | real-testing-project |
 | zone | string | 指定 GCP 实例所属的可用区 | 无 | 是 | us-central1-a |
 | instance | string | 指定 GCP 实例的名称 | 无 | 是 | gke-xxx-cluster--default-pool-xxx-yyy |
-| deviceNames | []string | 当 action 为 disk-loss 必填，指定要分离的磁盘设备名称 | 无 | 否 | ["your-disk-id"] |
+| deviceNames | []string | 当 action 为 disk-loss 必填，指定要分离的磁盘设备名称 | 无 | 否 | ["disk-name"] |
 | duration | string | 指定实验的持续时间 | 无 | 是 | 30s |

@@ -34,7 +34,7 @@ stringData:
 - **name** means the Kubernetes Secret object.
 - **namespace** means the namespace of the Kubernetes Secret object.
 - **client_id** stores the Application (client) ID of the Azure app registration.
-- **client_secret** stores Application (client) secret value of Azure App registrations.
+- **client_secret** stores the Application (client) secret value of the Azure app registration.
 - **tenant_id** stores the Directory (tenant) ID of the Azure app registration. For `client_id` and `client_secret`, please refer to [Confidential client application](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app).
 
 :::note
@@ -159,5 +159,5 @@ The following table shows the fields in the YAML configuration file.
 | resourceGroupName | string | Specifies the resource group of the VM instance. | N/A | Yes | `your-resource-group-name` |
 | vmName | string | Specifies the name of the VM instance. | N/A | Yes | `your-vm-name` |
 | diskName | string | This is a required field when the `action` is `disk-detach`. This field specifies the name of the data disk. | N/A | No | `DATADISK_0` |
-| lun | string | This is a required field when the `action` is `disk-detach`, specifies the LUN (Logical Unit Number) of the data disk. | N/A | No | `0` |
+| lun | string | This is a required field when the `action` is `disk-detach`. This field specifies the LUN (Logical Unit Number) of the data disk. | N/A | No | `0` |
 | duration | string | Specifies the duration of the experiment. | N/A | Yes | `30s` |
