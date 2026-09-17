@@ -25,14 +25,14 @@ You can fetch the default `values.yaml` by the following command:
 helm show values chaos-mesh/chaos-mesh --version 2.2.0 > values.yaml
 ```
 
-If you do not recognize the changed configurations, you might not rely on that specific feature, it is usually safe to ignore them.
+If you do not recognize the changed configurations, you might not rely on those specific features, and it is usually safe to ignore them.
 
 Here is a list of Helm Chart changes:
 
-- new configuration: `chaosDaemon.mtls.enabled` represents using mtls bwteen chaos-controller-manager and chaos-daemon.
+- new configuration: `chaosDaemon.mtls.enabled` represents using mTLS between chaos-controller-manager and chaos-daemon.
 - new configuration: `webhook.caBundlePEM` represents the CA bundle used to serve the webhook server.
-- value changed: `dashboard.serviceAccount` changed from `chaos-controller-manager` to `chaos-dashboard`
-- value changed: `webhook.FailurePolicy` changed from `Ignore` to `Fail`
+- value changed: `dashboard.serviceAccount` changed from `chaos-controller-manager` to `chaos-dashboard`.
+- value changed: `webhook.FailurePolicy` changed from `Ignore` to `Fail`.
 
 :::note
 
