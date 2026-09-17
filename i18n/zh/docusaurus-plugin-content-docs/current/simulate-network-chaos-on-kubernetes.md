@@ -165,7 +165,7 @@ NetworkChaos 用于模拟集群中网络故障的场景，目前支持以下几�
 | latency | string | 表示延迟的时间长度 | 无 | 是 | 2ms |
 | correlation | string | 表示延迟时间的时间长度与前一次延迟时长的相关性。取值范围：[0, 100] | 0 | 否 | 50 |
 | jitter | string | 表示延迟时间的变化范围 | 0ms | 否 | 1ms |
-| reorder | Reorder(#reorder) | 表示网络包乱序的状态 |  | 否 |  |
+| reorder | [Reorder](#reorder) | 表示网络包乱序的状态 |  | 否 |  |
 
 `correlation` 的计算模型如下：
 
