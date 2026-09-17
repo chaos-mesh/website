@@ -3,10 +3,7 @@
     {
       "type": "category",
       "label": "About Chaos Mesh",
-      "items": [
-        "overview",
-        "basic-features"
-      ]
+      "items": ["overview", "basic-features"]
     },
     {
       "type": "category",
@@ -21,8 +18,6 @@
             "quick-start",
             "production-installation-using-helm",
             "offline-installation",
-            "expose-dashboard-with-ingress",
-            "persistence-dashboard",
             "uninstallation",
             {
               "type": "link",
@@ -36,12 +31,13 @@
         "remote-cluster-management",
         {
           "type": "category",
-          "label": "Run a Single Chaos Experiment",
+          "label": "Run Chaos Experiments",
           "items": [
             "define-chaos-experiment-scope",
             "define-scheduling-rules",
             "run-a-chaos-experiment",
-            "inspect-chaos-experiments"
+            "inspect-chaos-experiments",
+            "clean-up-chaos-experiments"
           ]
         },
         {
@@ -54,6 +50,11 @@
             "check-workflow-status",
             "status-check-in-workflow"
           ]
+        },
+        {
+          "type": "category",
+          "label": "Chaos Dashboard",
+          "items": ["expose-dashboard-with-ingress", "persistence-dashboard"]
         }
       ]
     },
@@ -103,18 +104,12 @@
     {
       "type": "category",
       "label": "Authentication",
-      "items": [
-        "gcp-authentication"
-      ]
+      "items": ["gcp-authentication"]
     },
     {
       "type": "category",
       "label": "Tools Integration",
-      "items": [
-        "integrate-chaos-mesh-into-github-actions",
-        "use-grafana-data-source",
-        "chaosctl-tool"
-      ]
+      "items": ["integrate-chaos-mesh-into-github-actions", "use-grafana-data-source", "chaosctl-tool"]
     },
     {
       "type": "category",
@@ -130,11 +125,7 @@
     {
       "type": "category",
       "label": "FAQs and Troubleshooting",
-      "items": [
-        "faqs",
-        "upgrade-to-2.0",
-        "upgrade-from-2.1-to-2.2"
-      ]
+      "items": ["faqs", "upgrade-to-2.0", "upgrade-from-2.1-to-2.2"]
     },
     {
       "type": "category",
@@ -144,9 +135,7 @@
         {
           "type": "category",
           "label": "Release Tracking",
-          "items": [
-            "release-2.5-tracking"
-          ]
+          "items": ["release-2.5-tracking"]
         }
       ]
     }

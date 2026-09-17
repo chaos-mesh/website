@@ -18,8 +18,6 @@ module.exports = {
             'quick-start',
             'production-installation-using-helm',
             'offline-installation',
-            'expose-dashboard-with-ingress',
-            'persistence-dashboard',
             'uninstallation',
             {
               type: 'link',
@@ -33,13 +31,13 @@ module.exports = {
         'remote-cluster-management',
         {
           type: 'category',
-          label: 'Run a Single Chaos Experiment',
+          label: 'Run Chaos Experiments',
           items: [
             'define-chaos-experiment-scope',
             'define-scheduling-rules',
             'run-a-chaos-experiment',
             'inspect-chaos-experiments',
-            // 'clean-up-chaos-experiments',
+            'clean-up-chaos-experiments',
           ],
         },
         {
@@ -52,6 +50,11 @@ module.exports = {
             'check-workflow-status',
             'status-check-in-workflow',
           ],
+        },
+        {
+          type: 'category',
+          label: 'Chaos Dashboard',
+          items: ['expose-dashboard-with-ingress', 'persistence-dashboard'],
         },
       ],
     },

@@ -15,9 +15,13 @@
     "message": "安装部署",
     "description": "The label for category Installation and Deployment in sidebar docs"
   },
-  "sidebar.docs.category.Run a Single Chaos Experiment": {
-    "message": "运行单个混沌实验",
-    "description": "The label for category Run a Single Chaos Experiment in sidebar docs"
+  "sidebar.docs.category.Run Chaos Experiments": {
+    "message": "运行混沌实验",
+    "description": "The label for category Run Chaos Experiments in sidebar docs"
+  },
+  "sidebar.docs.category.Chaos Dashboard": {
+    "message": "Chaos Dashboard",
+    "description": "The label for category Chaos Dashboard in sidebar docs"
   },
   "sidebar.docs.category.Orchestrate Multiple Chaos Experiments": {
     "message": "编排多个混沌实验",
