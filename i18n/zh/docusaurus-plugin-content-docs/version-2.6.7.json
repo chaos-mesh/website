@@ -59,10 +59,6 @@
     "message": "发布",
     "description": "The label for category Release in sidebar docs"
   },
-  "sidebar.docs.category.Release Tracking": {
-    "message": "发布跟踪",
-    "description": "The label for category Release Tracking in sidebar docs"
-  },
   "sidebar.docs.link.Supported Releases": {
     "message": "支持的版本",
     "description": "The label for link Supported Releases in sidebar docs, linking to /supported-releases"
