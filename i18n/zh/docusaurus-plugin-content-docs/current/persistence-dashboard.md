@@ -10,7 +10,7 @@ Chaos Dashboard 支持 `SQLite`、`MySQL` 和 `PostgreSQL` 作为后端数据存
 
 ## SQLite（默认存储）
 
-Chaos Mesh 默认使用 `SQLite` 作为后端存储，并推荐为 `SQLite` 配置单独的[持久卷 (PV)](https://kubernetes.io/zh/docs/concepts/storage/persistent-volumes/)。如需要配置 PV，请在安装的时候指定 `dashboard.persistentVolume.enabled` 为 `true` 和设置其他 PV 相关的配置。[`values.yaml`](https://github.com/chaos-mesh/chaos-mesh/blob/master/helm/chaos-mesh/values.yaml#L255-L282) 中 PV 相关的配置如下：
+Chaos Dashboard 默认使用 `SQLite` 作为后端存储，并推荐为 `SQLite` 配置单独的[持久卷 (PV)](https://kubernetes.io/zh/docs/concepts/storage/persistent-volumes/)。如需要配置 PV，请在安装的时候指定 `dashboard.persistentVolume.enabled` 为 `true` 和设置其他 PV 相关的配置。[`values.yaml`](https://github.com/chaos-mesh/chaos-mesh/blob/master/helm/chaos-mesh/values.yaml#L255-L282) 中 PV 相关的配置如下：
 
 ```yaml
 dashboard:
