@@ -164,7 +164,7 @@ kubectl delete networkchaos network-delay
 If the delete operation is blocked, this means that some fault behaviors of the target object cannot be restored. You can check the Chaos Mesh logs for troubleshooting or directly create a [GitHub issue](https://github.com/pingcap/chaos-mesh/issues) to report this problem to the Chaos Mesh team. Besides, you can forcibly delete the Chaos experiment with the following command:
 
 ```sh
-kubectl annotate networkchaos web-show-network-delay chaos-mesh.chaos-mesh.org/cleanFinalizer=forced
+kubectl annotate networkchaos network-delay chaos-mesh.chaos-mesh.org/cleanFinalizer=forced
 ```
 
 ### Delete Chaos experiments using Chaos Dashboard

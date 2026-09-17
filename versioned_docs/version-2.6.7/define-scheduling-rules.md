@@ -10,7 +10,7 @@ In Kubernetes, Chaos Mesh uses `Schedule` to describe scheduled tasks.
 
 :::note
 
-The name of a `Schedule` object should not exceed 57 characters because the created Chaos experiment will add 6 additional random characters to the end of the name.The name of the `Schedule` object with `Workflow` should not exceed 51 characters because Workflow will add 6 additional random characters to the end of the name.
+The name of a `Schedule` object should not exceed 57 characters because the created Chaos experiment will add 6 additional random characters to the end of the name. The name of a `Schedule` object that creates a `Workflow` should not exceed 51 characters because the `Workflow` will also add 6 additional random characters to the end of the name.
 
 :::
 
@@ -141,7 +141,7 @@ When there are more than `historyLimit` tasks, Chaos Mesh will delete the earlie
 
 The values available for this field are `"Forbid"`, `"Allow"`, and `""`.
 
-This field is used to specify whether to allow this `Schedule` object to create multiple concurrent experiments. For example, with the `schedule: * * * * *` configuration, one experiment will be created every minute. If the `duration` of the experiment is configured to be 70 seconds, multiple experiments will be created simtaneously.
+This field is used to specify whether to allow this `Schedule` object to create multiple concurrent experiments. For example, with the `schedule: * * * * *` configuration, one experiment will be created every minute. If the `duration` of the experiment is configured to be 70 seconds, multiple experiments will be created simultaneously.
 
 By default, the `concurrencyPolicy` field is set to `Forbid`, which means multiple experiments are not allowed to be created simultaneously. If you set the value of the `concurrencyPolicy` field to `Allow`, multiple experiments are allowed to be created simultaneously.
 
@@ -198,9 +198,9 @@ spec:
     duration: '70s'
 ```
 
-In the above example, due to `concurrencyPolicy` is set to `Forbid`, creating new tasks is forbidden at the beginning of the minute. And in the tenth second of this minute, the last created Chaos experiment has finished running. But due to the limits of `startingDeadlineSeconds` and the set of `concurrencyPolicy`, the missing events will not be retrieved and no Chaos experiments will be created. New Chaos experiment will only be created at the beginning of the next minute.
+In the above example, because `concurrencyPolicy` is set to `Forbid`, creating new tasks is forbidden at the beginning of the minute. In the tenth second of this minute, the last created Chaos experiment has finished running. However, due to the limits of `startingDeadlineSeconds` and `concurrencyPolicy`, the missed events will not be retrieved and no Chaos experiment will be created. A new Chaos experiment will only be created at the beginning of the next minute.
 
-If `startingDeadlineSeconds` is not set (or is set to `nil`), there will always be a delay of 10 milliseconds. This is because after the running task is done, Chaos Mesh finds a previous missing task (due to `concurrencyPolicy` is set to `Forbid`), and immediately creates a new task.
+If `startingDeadlineSeconds` is not set (or is set to `nil`), there will always be a delay of 10 milliseconds. This is because after the running task is done, Chaos Mesh finds a previously missed task (because `concurrencyPolicy` is set to `Forbid`) and immediately creates a new task.
 
 To learn more examples and similar explanations of this field, see [Kubernetes CronJob documents](https://kubernetes.io/zh/docs/concepts/workloads/controllers/cron-jobs/#cron-job-limitations).
 

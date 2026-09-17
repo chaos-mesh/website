@@ -166,7 +166,7 @@ kubectl delete networkchaos network-delay
 如果删除操作被阻塞，这意味着有一些目标对象的故障行为无法恢复。你可以查看 Chaos Mesh 的日志进行故障排查，或者直接在 GitHub 创建一个 [issue](https://github.com/pingcap/chaos-mesh/issues) 向 Chaos Mesh 团队反馈问题。此外，你也可以通过以下命令强制删除混沌实验：
 
 ```yaml
-kubectl annotate networkchaos web-show-network-delay chaos-mesh.chaos-mesh.org/cleanFinalizer=forced
+kubectl annotate networkchaos network-delay chaos-mesh.chaos-mesh.org/cleanFinalizer=forced
 ```
 
 ### 使用 Dashboard 删除混沌实验
