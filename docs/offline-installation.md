@@ -14,7 +14,7 @@ This document describes how to install Chaos Mesh offline.
 
 ## Prerequisites
 
-Before installing Chaos Mesh, make sure that Docker is installed and the Kubernetes cluster is deployed in the offline environment. If the environment is not prepared, refer to the following documents to install Docker and deploy the Kubernetes cluster:
+Before installing Chaos Mesh, make sure that Docker is installed and the Kubernetes cluster is deployed in the offline environment. The Kubernetes cluster must run version `>= v1.16`; Chaos Mesh is continuously tested in CI against Kubernetes up to `v1.35.x` (see [Supported Releases](/supported-releases)). If the environment is not prepared, refer to the following documents to install Docker and deploy the Kubernetes cluster:
 
 - [Docker](https://www.docker.com/get-started)
 - [Kubernetes](https://kubernetes.io/docs/setup/)
@@ -126,12 +126,6 @@ Unpack the zip package of Chaos Mesh:
 ```bash
 unzip chaos-mesh.zip -d chaos-mesh && cd chaos-mesh
 ```
-
-:::note
-
-When installing Chaos Mesh on Kubernetes v1.15 (or an earlier version), you need to manually install CRD first by using `kubectl create -f manifests/crd-v1beta1.yaml`. For more information, see [FAQ](./faqs.md#failed-to-install-chaos-mesh-with-the-message-no-matches-for-kind-customresourcedefinition-in-version-apiextensionsk8siov1).
-
-:::
 
 Create the namespace:
 
