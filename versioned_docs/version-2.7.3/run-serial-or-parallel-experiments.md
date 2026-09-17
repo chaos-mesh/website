@@ -11,9 +11,9 @@ Chaos Mesh uses [composite pattern](https://en.wikipedia.org/wiki/Composite_patt
 
 ## Serial experiments
 
-When you create `templates` in Workflow, use `templateType: Serial` to claim a serial node.
+When you create `templates` in Workflow, use `templateType: Serial` to declare a serial node.
 
-Another required field in serial nodes is `children`. Its type is `[]string` and value is the name of other `template`. For example:
+Another required field in serial nodes is `children`. Its type is `[]string`, and its value is a list of the names of other templates. For example:
 
 ```yaml
 apiVersion: chaos-mesh.org/v1alpha1
@@ -62,17 +62,17 @@ spec:
             options: ['--cpu 1', '--timeout 600']
 ```
 
-The above commands claims a serial node named `serial-of-3-node`. This means Chaos Mesh executes sequentially `workflow-stress-chaos`, `suspending`, and `workflow-network-chaos`. After all tasks are completed, serial nodes are marked as completed.
+The example above declares a serial node named `serial-of-3-node`. This means Chaos Mesh executes `workflow-stress-chaos`, `suspending`, and `workflow-network-chaos` in sequence. After all tasks are completed, serial nodes are marked as completed.
 
-When Chaos Mesh executes the serial node, tasks claimed in `children` are run sequentially to ensure that only one task is running at the same time.
+When Chaos Mesh executes the serial node, the tasks listed in `children` are run sequentially to ensure that only one task is running at the same time.
 
-The `deadline` field in serial nodes is optional to limit the maximum duration of the entire serial process. Once this duration is running out, the sub-nodes are stopped and the nodes that are not executed yet will not be executed. If all sub-nodes finish their work before `deadline` time, serial nodes are immediately marked as completed and `deadline` is not affected.
+The `deadline` field in serial nodes is optional to limit the maximum duration of the entire serial process. Once this duration runs out, the child nodes are stopped, and any nodes not yet executed will not run. If all child nodes finish before the `deadline`, the serial node is immediately marked as completed, and the `deadline` has no effect.
 
 ## Parallel experiments
 
-When you create `templates` in Workflow, use `templateType: Parallel` to claim a parallel node.
+When you create `templates` in Workflow, use `templateType: Parallel` to declare a parallel node.
 
-Another required field in parallel nodes is `children`. Its type is `[]string` and values are the names of other `template`. For example:
+Another required field in parallel nodes is `children`. Its type is `[]string`, and its value is a list of the names of other templates. For example:
 
 ```yaml
 apiVersion: chaos-mesh.org/v1alpha1
@@ -117,11 +117,11 @@ spec:
             options: ['--cpu 1', '--timeout 600']
 ```
 
-The above commands claimed a parallel node named `parallel-of-2-chaos`. This means Chaos Mesh executes simultaneously `workflow-stress-chaos` and `workflow-network-chaos`. After all tasks are completed, parallel nodes are marked as completed.
+The example above declares a parallel node named `parallel-of-2-chaos`. This means Chaos Mesh executes `workflow-stress-chaos` and `workflow-network-chaos` simultaneously. After all tasks are completed, parallel nodes are marked as completed.
 
-When Chaos Mesh executes parallel nodes, all tasks claimed in `children` are executed simultaneously.
+When Chaos Mesh executes parallel nodes, all tasks listed in `children` are executed simultaneously.
 
-Similar to serial nodes, the optional field `deadline` is also available in parallel nodes to limit the maximum execution time of the entire parallel process. If this time is reached, the sub-nodes are stopped. If all sub-nodes finish their work before `deadline` time, parallel nodes are immediately marked as completed and `deadline` is not affected.
+Similar to serial nodes, the optional field `deadline` is also available in parallel nodes to limit the maximum execution time of the entire parallel process. If this time is reached, the child nodes are stopped. If all child nodes finish before the `deadline`, the parallel node is immediately marked as completed, and the `deadline` has no effect.
 
 ## Create a workflow with serial or parallel nodes using Chaos Dashboard
 

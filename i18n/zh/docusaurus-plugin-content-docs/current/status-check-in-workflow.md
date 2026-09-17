@@ -40,11 +40,11 @@ title: 在工作流中进行状态检查
 
 ## 检查结果
 
-每次执行状态检查都将获得一个“执行结果”，Success（成功）或 Failure（失败）。因为单次“执行结果”可能会因为某些条件的波动，并不能反映系统的真实情况，所以最终的“状态检查结果”并不根据单次的“执行结果”来决定。
+每次执行状态检查都将获得一个“执行结果”，Success（成功）或 Failure（失败）。因为单次“执行结果”可能受某些条件波动的影响，并不能反映系统的真实情况，所以最终的“状态检查结果”并不由单次的“执行结果”来决定。
 
 `StatusCheck` 节点中有 `failureThreshold`（失败阈值） 和 `successThreshold`（成功阈值） 两个字段：
 
-- 当出现连续的失败“执行结果”次数超过失败阈值时，则认为“状态检查结果”为失败。当“状态检查结果”为失败时，会直接结束当前 `StatusCheck` 节点的执行。
+- 当出现连续的失败“执行结果”次数超过失败阈值时，则认为“状态检查结果”为失败。
 - 当出现连续的成功“执行结果”次数超过成功阈值时，则认为“状态检查结果”为成功。
 
 ```yaml
@@ -82,7 +82,7 @@ title: 在工作流中进行状态检查
 
 :::
 
-当执行混沌实验时，应用系统可能会变得“不健康”，如果在某些情况下，想通过快速结束混沌实验来恢复应用系统，则可以使用这个功能。在 `StatusCheck` 节点上将 `abortWithStatusCheck` 字段设置为 `true`，那么当状态检查失败时，就会自动的终止工作流。
+当执行混沌实验时，应用系统可能会变得“不健康”，这时你可以通过快速结束混沌实验来恢复应用系统。在 `StatusCheck` 节点上将 `abortWithStatusCheck` 字段设置为 `true`，那么当状态检查失败时，就会自动的终止工作流。
 
 ```yaml
 - name: workflow-status-check
@@ -183,7 +183,7 @@ Workflow 和 Template 字段说明参考[创建 Chaos Mesh 工作流](create-cha
 | type | `string` | 状态检查的类型，可选值有：`HTTP`。 | `HTTP` | 是 | `HTTP` |
 | duration | `string` | 当失败的执行次数小于 `failureThreshold` 时状态检查的持续时间。对于 `Synchronous` 和 `Continuous` 模式的状态检查都适用。 | 无 | 否 | `100s` |
 | timeoutSeconds | `int` | 状态检查单次执行的超时秒数。 | `1` | 否 | `1` |
-| intervalSeconds | `int` | 状态检查的间隔时间（秒）。 | `1` | 否 | `1` |
+| intervalSeconds | `int` | 状态检查的间隔时间（秒）。 | `10` | 否 | `1` |
 | failureThreshold | `int` | 决定状态检查失败的最小连续失败次数。 | `3` | 否 | `3` |
 | successThreshold | `int` | 决定状态检查成功的最小连续成功次数。 | `1` | 否 | `1` |
 | recordsHistoryLimit | `int` | 保存历史执行记录的条数。 | `100` | 否 | `100` |
