@@ -229,7 +229,7 @@ podChaos:
 
 > 更多的上下文变量将在后续补充。
 
-可参考[该文档](https://github.com/antonmedv/expr/blob/master/docs/Language-Definition.md)编写 `expression` 表达式。
+可参考[该文档](https://github.com/expr-lang/expr/blob/master/docs/language-definition.md)编写 `expression` 表达式。
 
 ### Container 字段说明
 

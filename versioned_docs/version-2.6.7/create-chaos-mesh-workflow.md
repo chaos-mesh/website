@@ -229,7 +229,7 @@ Currently, two context variables are provided in `expression`:
 
 > More context variables will be added in later releases.
 
-Refer to [this document](https://github.com/antonmedv/expr/blob/master/docs/Language-Definition.md) write `expression` expressions.
+Refer to [this document](https://github.com/expr-lang/expr/blob/master/docs/language-definition.md) write `expression` expressions.
 
 ### Container field description
 
