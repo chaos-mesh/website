@@ -124,18 +124,18 @@ Global Flags:
 #### Example for simulating memory stress
 
 ```bash
-chaosd attack stress mem --workers 2 --size 100M
+chaosd attack stress mem --size 100M
 ```
 
 The result is as follows:
 
 ```bash
-[2021/05/12 03:37:19.643 +00:00] [INFO] [stress.go:66] ["stressors normalize"] [arguments=" --vm 2 --vm-keep --vm-bytes 100000000"]
-[2021/05/12 03:37:19.654 +00:00] [INFO] [stress.go:82] ["Start stress-ng process successfully"] [command="/usr/bin/stress-ng --vm 2 --vm-keep --vm-bytes 100000000"] [Pid=26799]
+[2021/05/12 03:37:19.643 +00:00] [INFO] [stress.go:88] ["stressors normalize"] [arguments=" --workers 1 --size 100M"]
+[2021/05/12 03:37:19.654 +00:00] [INFO] [stress.go:109] ["Start memStress process successfully"] [command="/usr/local/chaosd-latest-linux-amd64/tools/memStress --workers 1 --size 100M"] [Pid=26799]
 Attack stress mem successfully, uid: c2bff2f5-3aac-4ace-b7a6-322946ae6f13
 ```
 
-When running the experiment, you need to save the uid information of the experiment. When a stress simulation is not needed, you can use `recover` to terminate the uid-related experiment::
+When running the experiment, you need to save the uid information of the experiment. When a stress simulation is not needed, you can use `recover` to terminate the uid-related experiment:
 
 ```bash
 chaosd recover c2bff2f5-3aac-4ace-b7a6-322946ae6f13
@@ -202,12 +202,13 @@ The result is as follows:
 | :-- | :-- | :-- | :-- |
 | `action` | Actions of the experiment |  | Set to "mem" |
 | `size` | Specifies the size of memory per VM worker | string | the memory size in B, KB/KiB, MB/MiB, GB/GiB, TB/TiB. If the size is not set, all available memory is used by default. |
+| `workers` | Specifies the number of workers used to create memory stress | int | Default value: `1` |
 | `options` | The extended parameter of stress-ng, usually not configured. | string | Default value: "" |
 
 #### Example for simulating memory stress using the service mode
 
 ```bash
-curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{"size":"100M", "action":"mem"}'
+curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{"size":"100M", "action":"mem", "workers":2}'
 ```
 
 The result is as follows:
