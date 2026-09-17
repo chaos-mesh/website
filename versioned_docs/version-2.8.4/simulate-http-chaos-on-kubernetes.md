@@ -21,7 +21,7 @@ For the detailed description of HTTPChaos configuration, see [Field description]
 
 Before injecting the faults supported by HTTPChaos, note the following:
 
-- Make sure that no Chaos Mesh control manager is running on the target Pod.
+- There is no Control Manager of Chaos Mesh running on the target Pod.
 - By default, the fault rules affect both the client and the server in the Pod. If you want to affect only one side, refer to the [specify side](#specify-side) section.
 - HTTPS access should be disabled, because injecting HTTPS connections is not currently supported.
 - For HTTPChaos injection to take effect, the client should avoid reusing TCP sockets. HTTPChaos does not affect HTTP requests sent over a TCP connection that was established before fault injection.
