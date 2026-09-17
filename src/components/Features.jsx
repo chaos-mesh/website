@@ -12,21 +12,21 @@ function Feature({ imgUrl, title, description, className, imageWidth }) {
     <Card className={className}>
       <div
         className={clsx(
-          'tw-relative tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-h-full',
-          isKubernetes && 'lg:tw-items-start',
+          'tw:relative tw:flex tw:flex-col tw:lg:flex-row tw:items-center tw:h-full',
+          isKubernetes && 'tw:lg:items-start',
         )}
       >
         {!isKubernetes ? (
-          <div className="tw-flex-1 max-lg:tw-mb-6 tw-text-center">
-            <img className="scroll-to-display tw-w-[60%]" style={{ width: imageWidth }} src={useBaseUrl(imgUrl)} />
+          <div className="tw:flex-1 tw:max-lg:mb-6 tw:text-center">
+            <img className="scroll-to-display tw:w-[60%]" style={{ width: imageWidth }} src={useBaseUrl(imgUrl)} />
           </div>
         ) : (
           <img
-            className="scroll-to-display lg:tw-absolute lg:tw-right-6 lg:-tw-bottom-12 max-lg:tw-w-[40%] lg:tw-h-48 max-lg:tw-mb-6"
+            className="scroll-to-display tw:lg:absolute tw:lg:right-6 tw:lg:-bottom-12 tw:max-lg:w-[40%] tw:lg:h-48 tw:max-lg:mb-6"
             src={useBaseUrl(imgUrl)}
           />
         )}
-        <div className="tw-flex-1">
+        <div className="tw:flex-1">
           <div>
             <h3>{title}</h3>
             <div>{description}</div>
@@ -50,7 +50,7 @@ export default function Features() {
               values={{
                 crd: (
                   <Link
-                    className="tw-underline dark:tw-no-underline"
+                    className="tw:underline"
                     to="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/"
                   >
                     CustomResourceDefinition (CRD)
@@ -64,7 +64,7 @@ export default function Features() {
             </Translate>
           </p>
         }
-        className="lg:tw-col-span-2"
+        className="tw:lg:col-span-2"
       />
       <Feature
         imgUrl="img/features/easy-to-use.svg"
@@ -76,12 +76,12 @@ export default function Features() {
                 id="home.features.easytouse.desc"
                 values={{
                   minikube: (
-                    <Link className="tw-underline dark:tw-no-underline" to="https://minikube.sigs.k8s.io/">
+                    <Link className="tw:underline" to="https://minikube.sigs.k8s.io/">
                       minikube
                     </Link>
                   ),
                   kind: (
-                    <Link className="tw-underline dark:tw-no-underline" to="https://kind.sigs.k8s.io/">
+                    <Link className="tw:underline" to="https://kind.sigs.k8s.io/">
                       kind
                     </Link>
                   ),
@@ -108,7 +108,7 @@ export default function Features() {
             </ul>
           </>
         }
-        className="lg:tw-col-span-4"
+        className="tw:lg:col-span-4"
       />
       <Feature
         imgUrl="img/features/flexible-scope.svg"
@@ -129,7 +129,7 @@ export default function Features() {
             </p>
           </>
         }
-        className="lg:tw-col-span-3"
+        className="tw:lg:col-span-3"
       />
       <Feature
         imgUrl="img/features/security-first.svg"
@@ -142,7 +142,7 @@ export default function Features() {
             </Translate>
           </p>
         }
-        className="lg:tw-col-span-3"
+        className="tw:lg:col-span-3"
         imageWidth="75%"
       />
     </>

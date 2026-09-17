@@ -2,7 +2,7 @@
 title: 卸载 Chaos Mesh
 ---
 
-这篇文档介绍了如何卸载 Chaos Mesh，包括使用 Helm 卸载 Chaos Mesh 和手动卸载 Chaos Mesh。如果你需要从 Kubernetes 集群中手动清除 Chaos Mesh，这篇文档也是非常有用的。
+本文档介绍如何卸载 Chaos Mesh，包括使用 Helm 卸载和手动卸载。如果你需要手动从 Kubernetes 集群中清除 Chaos Mesh，本文档也很有帮助。
 
 ## 通过 Helm 卸载 Chaos Mesh
 
@@ -14,7 +14,7 @@ title: 卸载 Chaos Mesh
 for i in $(kubectl api-resources | grep chaos-mesh | awk '{print $1}'); do kubectl get $i -A; done
 ```
 
-一旦确保所有的混沌实验都已被删除，你可以通过执行以下命令来卸载 Chaos Mesh：
+一旦确定所有的混沌实验都已被删除，就可以卸载 Chaos Mesh。
 
 ### 第 2 步：查看 Helm Release
 
@@ -51,7 +51,7 @@ kubectl delete crd $(kubectl get crd | grep 'chaos-mesh.org' | awk '{print $1}')
 
 ## 手动卸载 Chaos Mesh
 
-如果你通过脚本 `install.sh` 安装了 Chaos Mesh，或者你修改了 Chaos Mesh 的配置和组件，或者你遇到了卸载 Chaos Mesh 时的问题，这里是一些手动卸载 Chaos Mesh 的方法。
+如果你通过 `install.sh` 脚本安装了 Chaos Mesh，或安装后修改了某些配置和组件，或在卸载 Chaos Mesh 时遇到了问题，以下步骤可以帮助你手动卸载 Chaos Mesh。
 
 ### 第 1 步：清理混沌实验
 
@@ -61,7 +61,7 @@ kubectl delete crd $(kubectl get crd | grep 'chaos-mesh.org' | awk '{print $1}')
 for i in $(kubectl api-resources | grep chaos-mesh | awk '{print $1}'); do kubectl get $i -A; done
 ```
 
-一旦确保所有的混沌实验都已被删除，你可以通过执行以下命令来卸载 Chaos Mesh：
+一旦确定所有的混沌实验都已被删除，就可以卸载 Chaos Mesh。
 
 ### 第 2 步：删除 Chaos Mesh 工作负载
 
@@ -74,7 +74,7 @@ for i in $(kubectl api-resources | grep chaos-mesh | awk '{print $1}'); do kubec
 
 你应该删除这些工作负载对象。
 
-然后删除它们的对应的 `Service`：
+然后删除它们对应的 `Service`：
 
 - chaos-daemon
 - chaos-dashboard
@@ -118,7 +118,7 @@ Chaos Mesh 会安装多个 ConfigMaps 和 Secrets：
 - Secret
   - chaos-mesh-webhook-certs
 
-你应该删除这些 ConfigMaps 和 Secrets 对象。
+你应该删除这些 ConfigMap 和 Secret 对象。
 
 ### 第 5 步：删除 Webhook
 
@@ -132,7 +132,7 @@ Chaos Mesh 会安装多个 Webhook：
 
 你应该删除这些 Webhooks。
 
-### Step 6: 删除 CRDs
+### 第 6 步：删除 CRDs
 
 最后，你可以通过执行以下命令来删除 CRDs：
 

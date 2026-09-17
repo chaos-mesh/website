@@ -103,35 +103,46 @@ Please refer to <https://docusaurus.io/docs/i18n/tutorial> for the basic steps.
 
 Below are some specific points:
 
-1. Some translations are not placed in the `i18n/code.json` because they are not simple strings. For example, below is the translation for the slogan in the homepage:
+1. Use Docusaurus translation APIs for all user-facing text in React pages and components:
+
+   - Use `<Translate>` for JSX children.
+   - Use `translate()` for values that must be strings, such as page metadata, `alt`, `aria-label`, and `placeholder` props.
+   - Keep default messages as hardcoded strings so that Docusaurus can extract them statically.
+   - Use `<Translate values={...}>` for rich text. JSX elements such as styled text and links can be passed as placeholders, so do not branch on `i18n.currentLocale`.
+
+   For example, a homepage heading with translated, styled text should use JSX interpolation:
 
    ```jsx
-   {
-     /* Due to the below texts are not simple strings, so we can't use <Translate /> here. */
-   }
-   {
-     i18n.currentLocale === 'en' && (
-       <>
-         <span>Break</span>
-         <br />
-         <span>Your System</span>
-         <br />
-         <span>Constructively</span>
-       </>
-     )
-   }
-   {
-     i18n.currentLocale === 'zh' && (
-       <>
-         <span>破而后立</span>
-         <br />
-         <span className="tw-text-3xl">建设性地解构与优化你的系统</span>
-       </>
-     )
-   }
+   <Translate
+     id="home.features.title"
+     values={{
+       emphasis: (
+         <span className={styles.heroTitle}>
+           <Translate id="home.features.title.emphasis">Cloud Native + Chaos Engineering</Translate>
+         </span>
+       ),
+     }}
+   >
+     {'Make {emphasis} simple and straightforward'}
+   </Translate>
    ```
 
-   You can find the above code in `src/pages/index.js`. For all these cases, search for `i18n.currentLocale` in the codebase.
+2. After adding or changing translatable React text, extract the translation keys:
+
+   ```sh
+   pnpm write-translations --locale zh
+   ```
+
+   Translate the generated entries in `i18n/zh/code.json`. Other locales use the same `i18n/<locale>/code.json` convention. Review the generated diff before committing because the command can also refresh translation metadata from Docusaurus plugins.
+
+3. Preview and verify the translated site:
+
+   ```sh
+   pnpm start --locale zh
+   pnpm build
+   ```
+
+   The production build must succeed for every locale configured in `docusaurus.config.js`.
 
 ## How to contribute
 

@@ -440,6 +440,15 @@
   "home.desc": {
     "message": "Chaos Mesh 为 Kubernetes 带来了各种类型的故障模拟，并拥有强大的故障场景编排能力。它可以帮助你方便地模拟在开发、测试和生产环境中可能发生的各种异常情况，并发现系统中潜在的问题。"
   },
+  "home.meta.tagline": {
+    "message": "面向 Kubernetes 的强大混沌工程平台"
+  },
+  "home.hero.title": {
+    "message": "破而后立{lineBreak}{subtitle}"
+  },
+  "home.hero.title.subtitle": {
+    "message": "建设性地解构与优化你的系统"
+  },
   "home.getstarted": {
     "message": "开始使用 →"
   },
@@ -448,6 +457,12 @@
   },
   "home.whoisusing": {
     "message": "Chaos Mesh 的用户"
+  },
+  "home.features.title": {
+    "message": "让{emphasis}变得简单直接"
+  },
+  "home.features.title.emphasis": {
+    "message": "云原生 + 混沌工程"
   },
   "home.features.desc": {
     "message": "基于混沌工程的原则，Chaos Mesh 将真实世界的事件抽象成可以直接应用的对象，隐藏了琐碎的细节。"
@@ -485,11 +500,26 @@
   "home.features.securityfirst.desc": {
     "message": "默认启用基于角色的访问控制（RBAC）以限制恶意操作。用户必须被授予特定权限才能访问仪表板。"
   },
+  "home.failuretypes.title": {
+    "message": "{emphasis}的故障类型"
+  },
+  "home.failuretypes.title.emphasis": {
+    "message": "多样化"
+  },
   "home.failuretypes.desc": {
     "message": "Chaos Mesh 起初从分布式系统的角度出发，充分考虑了其可能出现的故障，从而提供更全面、更细粒度的故障类型来帮助用户对网络、磁盘、文件系统、操作系统等进行故障注入。"
   },
+  "home.failuretypes.imageAlt": {
+    "message": "Chaos Mesh 故障类型"
+  },
   "home.exploremore": {
     "message": "探索更多"
+  },
+  "home.workflows.title": {
+    "message": "使用{emphasis}编排复杂的故障场景"
+  },
+  "home.workflows.title.emphasis": {
+    "message": "工作流"
   },
   "home.workflows.desc": {
     "message": "现实世界中的故障通常不是孤立的原因造成的。Chaos Mesh 内置了工作流，允许你根据需要串行或并行地进行实验，以构建符合架构的演练。"
@@ -506,17 +536,26 @@
   "home.workflows.statuscheck.desc": {
     "message": "您还可以使用自定义的状态检查来告知集群状态。"
   },
-  "home.startcreating": {
-    "message": "开始创建 →"
-  },
   "home.experimental": {
     "message": "实验性功能"
+  },
+  "home.chaosd.title": {
+    "message": "认识{emphasis}：物理机混沌工具箱"
+  },
+  "home.chaosd.title.emphasis": {
+    "message": "Chaosd"
   },
   "home.chaosd.desc": {
     "message": "即使你没有使用 Kubernetes，你仍然可以利用 Chaos Mesh 的功能。我们其中一个实验性工具 Chaosd 专门用于在物理机上进行混沌测试。此外，你可以在 Chaos Mesh 中使用 {link} 来远程调用 Chaosd，从而在物理机上进行实验。"
   },
   "home.learnmore": {
     "message": "了解更多 →"
+  },
+  "home.buildcommunity.title": {
+    "message": "{emphasis}社区，共同前行"
+  },
+  "home.buildcommunity.title.emphasis": {
+    "message": "共建"
   },
   "home.buildcommunity.desc": {
     "message": "加入社区和维护者及其他用户一起交流。你的建议可以让 Chaos Mesh 变得更好。"
@@ -532,5 +571,11 @@
   },
   "home.buildcommunity.slack.join": {
     "message": "加入 Slack 频道"
+  },
+  "home.cncf.desc": {
+    "message": "Chaos Mesh 是 {cncfLink} 的孵化项目。"
+  },
+  "home.cncf.name": {
+    "message": "云原生计算基金会（CNCF）"
   }
 }

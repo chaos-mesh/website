@@ -25,7 +25,7 @@ export default function Contact() {
             questions you might have.
           </p>
 
-          <div className="tw-my-8">
+          <div className="tw:my-8">
             <CalComInlineEmbed />
           </div>
 

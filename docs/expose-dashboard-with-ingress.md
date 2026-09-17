@@ -6,7 +6,7 @@ Below is an example of how to expose the Chaos Dashboard under the path `/chaos-
 
 :::info
 
-You may need to add below configurations to enable snippet annotations in your Ingress NGINX Controller:
+You may need to add the configurations below to enable snippet annotations in your Ingress NGINX Controller:
 
 ```yaml
 data:
@@ -42,4 +42,4 @@ spec:
                   number: 2333
 ```
 
-You can also find this example in https://github.com/chaos-mesh/chaos-mesh/blob/master/examples/dashboard/ingress-subpath.yaml.
+You can also find this example at https://github.com/chaos-mesh/chaos-mesh/blob/master/examples/dashboard/ingress-subpath.yaml.
