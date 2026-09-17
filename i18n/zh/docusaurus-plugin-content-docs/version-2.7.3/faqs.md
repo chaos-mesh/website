@@ -16,7 +16,7 @@ import PickHelmVersion from '@site/src/components/PickHelmVersion'
 
 原因是 `chaos-controller-manager` 无法连接到 `chaos-daemon`。你需要先检查 Pod 网络及其[策略](https://kubernetes.io/docs/concepts/services-networking/network-policies/)。
 
-如果一切正常，你可以通过以下方式使用 `hostNetwork` 参数解决此问题：
+如果一切正常，你可以尝试通过以下方式使用 `hostNetwork` 参数解决此问题：
 
 <PickHelmVersion>{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n chaos-mesh --version latest --set chaosDaemon.hostNetwork=true`}</PickHelmVersion>
 

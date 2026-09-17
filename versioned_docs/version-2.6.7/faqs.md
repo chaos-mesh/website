@@ -16,7 +16,7 @@ No. Instead, you can use [`chaosd`](https://github.com/chaos-mesh/chaosd/) to in
 
 The reason is that `chaos-controller-manager` failed to connect to `chaos-daemon`. You need to first check the Pod network and its [policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/).
 
-If everything is in order, you can fix this problem by using the `hostNetwork` parameter as follows:
+If everything is in order, you may fix this problem by using the `hostNetwork` parameter as follows:
 
 <PickHelmVersion>{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n chaos-mesh --version latest --set chaosDaemon.hostNetwork=true`}</PickHelmVersion>
 
