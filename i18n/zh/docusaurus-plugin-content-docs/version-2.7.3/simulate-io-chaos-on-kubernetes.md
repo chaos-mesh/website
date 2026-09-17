@@ -166,7 +166,7 @@ IOChaos 是 Chaos Mesh 中的一种故障类型。通过创建 IOChaos 类型的
      duration: '400s'
    ```
 
-   依据此配置示例，Chaos Mesh 将向 `/var/run/etcd` 目录注入读写错误故障，使该目录下的读写操作将有 10% 的概率将发生错误。其中以字节为单位，最大长度为 10 的 1 处随机位置将被替换为 0。
+   依据此配置示例，Chaos Mesh 将向 `/var/run/etcd` 目录注入读写错误故障，使该目录下的读写操作有 10% 的概率发生错误。其中，1 处最大长度为 10 字节的随机位置将被替换为 0。
 
 2. 使用 `kubectl` 创建实验，命令如下：
 
@@ -183,7 +183,7 @@ IOChaos 是 Chaos Mesh 中的一种故障类型。通过创建 IOChaos 类型的
 | action | string | 表示具体的故障类型，仅支持 latency、fault、attrOverride、mistake |  | 是 | latency |
 | mode | string | 指定实验的运行方式，可选择的方式包括：`one`（表示随机选出一个符合条件的 Pod）、`all`（表示选出所有符合条件的 Pod）、`fixed`（表示选出指定数量且符合条件的 Pod）、`fixed-percent`（表示选出占符合条件的 Pod 中指定百分比的 Pod）、`random-max-percent`（表示选出占符合条件的 Pod 中不超过指定百分比的 Pod） | 无 | 是 | `one` |
 | selector | struct | 指定注入故障的目标 Pod，详情请参考[定义实验范围](./define-chaos-experiment-scope.md) | 无 | 是 |  |
-| value | string | 取决与 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 Pod 的百分比 | 无 | 否 | 1 |
+| value | string | 取决于 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 Pod 的百分比 | 无 | 否 | 1 |
 | volumePath | string | volume 在目标容器内的挂载点，必须为挂载的根目录 |  | 是 | /var/run/etcd |
 | path | string | 注入错误的生效范围，可以是通配符，也可以是单个文件 | 默认对所有文件生效 | 否 | /var/run/etcd/\*_/_ |
 | methods | []string | 需要注入故障的文件系统调用类型，具体支持的类型见[附录 A](#附录-amethods-类型) | 所有类型 | 否 | READ |

@@ -16,7 +16,7 @@ NetworkChaos is a fault type in Chaos Mesh. By creating a NetworkChaos experimen
 
 Before creating NetworkChaos experiments, ensure the following:
 
-1. During the network injection process, make sure that the connection between Controller Manager and Chaos Daemon works, otherwise the NetworkChaos cannot be restored anymore.
+1. During the network injection process, make sure that the connection between Controller Manager and Chaos Daemon works, otherwise the injected network faults cannot be recovered.
 2. If you want to simulate Net Emulation fault, make sure the NET_SCH_NETEM module is installed in the Linux kernel. If you are using CentOS, you can install the module through the kernel-modules-extra package. Most other Linux distributions have installed the module already by default.
 
 ## Create experiments using Chaos Dashboard
@@ -25,7 +25,7 @@ Before creating NetworkChaos experiments, ensure the following:
 
    ![Create Experiment](./img/create-new-exp.png)
 
-2. In the **Choose a Target** area, choose **NETWORK ATTACK** and select a specific behavior, such as **LOSS**. Then fill out specific configuration.
+2. In the **Choose a Target** area, choose **NETWORK ATTACK** and select a specific behavior, such as **LOSS**. Then fill out the specific configuration.
 
    ![NetworkChaos Experiments](./img/networkchaos-exp.png)
 
@@ -175,30 +175,30 @@ Before creating NetworkChaos experiments, ensure the following:
 | --- | --- | --- | --- | --- | --- |
 | action | string | Indicates the specific fault type. Available types include: `netem`, `delay` (network delay), `loss` (packet loss), `duplicate` (packet duplicating), `corrupt` (packet corrupt), `partition` (network partition), and `bandwidth` (network bandwidth limit). After you specify `action` field, refer to [Description for `action`-related fields](#description-for-action-related-fields) for other necessary field configuration. | None | Yes | Partition |
 | target | Selector | Used in combination with direction, making Chaos only effective for some packets. | None | No |  |
-| direction | enum | Indicates the direction of `target` packets. Available values include `from` (the packets from `target`), `to` (the packets to `target`), and `both` ( the packets from or to `target`). This parameter makes Chaos only take effect for a specific direction of packets. | to | No | both |
+| direction | enum | Indicates the direction of `target` packets. Available values include `from` (the packets from `target`), `to` (the packets to `target`), and `both` (the packets from or to `target`). This parameter makes Chaos only take effect for a specific direction of packets. | to | No | both |
 | mode | string | Specifies the mode of the experiment. The mode options include `one` (selecting a random Pod), `all` (selecting all eligible Pods), `fixed` (selecting a specified number of eligible Pods), `fixed-percent` (selecting a specified percentage of Pods from the eligible Pods), and `random-max-percent` (selecting the maximum percentage of Pods from the eligible Pods). | None | Yes | `one` |
 | value | string | Provides a parameter for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods. | None | No | 1 |
 | selector | struct | Specifies the target Pod. For details, refer to [Define the experiment scope](./define-chaos-experiment-scope.md). | None | Yes |  |
 | externalTargets | []string | Indicates the network targets except for Kubernetes, which can be IPv4 addresses or domains. This parameter only works with `direction: to`. | None | No | 1.1.1.1, google.com |
-| device | string | Specifies the affected network interface | None | No | "eth0" |
+| device | string | Specifies the affected network interface. | None | No | "eth0" |
 
 ## Description for `action`-related fields
 
 For the Net Emulation and Bandwidth fault types, you can further configure the `action` related parameters according to the following description.
 
-- Net Emulation type: `delay`, `loss`, `duplicated`, `corrupt`, `rate`
+- Net Emulation type: `delay`, `loss`, `duplicate`, `corrupt`, `rate`
 - Bandwidth type: `bandwidth`
 
 ### delay
 
 Setting `action` to `delay` means simulating network delay fault. You can also configure the following parameters.
 
-| Parameter | Type | Description | Required | Required | Example |
+| Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
-| latency | string | Indicates the network latency | No | No | 2ms |
-| correlation | string | Indicates the correlation between the current latency and the previous one. Range of value: [0, 100] | No | No | 50 |
-| jitter | string | Indicates the range of the network latency | No | No | 1ms |
-| reorder | Reorder(#Reorder) | Indicates the status of network packet reordering |  | No |  |
+| latency | string | Indicates the network latency | 0 | No | 2ms |
+| correlation | string | Indicates the correlation between the current latency and the previous one. Range of value: [0, 100] | 0 | No | 50 |
+| jitter | string | Indicates the range of the network latency | 0 | No | 1ms |
+| reorder | Reorder(#reorder) | Indicates the status of network packet reordering |  | No |  |
 
 The computational model for `correlation` is as follows:
 
@@ -208,7 +208,7 @@ The computational model for `correlation` is as follows:
    rnd = value * (1-corr) + last_rnd * corr
    ```
 
-   `rnd` is the random number. `corr` is the `correlation` you fill out before.
+   `rnd` is the random number. `corr` is the `correlation` you configured.
 
 2. Use this random number to determine the delay of the current packet:
 
@@ -239,7 +239,7 @@ Setting `action` to `loss` means simulating packet loss fault. You can also conf
 
 ### duplicate
 
-Set `action` to `duplicate`, meaning simulating package duplication. At this point, you can also set the following parameters.
+Set `action` to `duplicate` to simulate packet duplication. At this point, you can also set the following parameters.
 
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
@@ -248,7 +248,7 @@ Set `action` to `duplicate`, meaning simulating package duplication. At this poi
 
 ### corrupt
 
-Setting `action` to `corrupt` means simulating package corruption fault. You can also configure the following parameters.
+Setting `action` to `corrupt` means simulating packet corruption fault. You can also configure the following parameters.
 
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
@@ -263,7 +263,7 @@ Setting `action` to `rate` means simulating bandwidth rate fault. This action is
 
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
-| rate | string | Indicates the rate of bandwidth limit. Allows bit, kbit, mbit, gbit, tbit, bps, kbps, mbps, gbps, tbps unit. bps means bytes per second |  | Yes | 1mbps |
+| rate | string | Indicates the rate of bandwidth limit. Allows bit, kbit, mbit, gbit, tbit, bps, kbps, mbps, gbps, tbps unit. bps means bytes per second. |  | Yes | 1mbps |
 
 ### bandwidth
 
@@ -277,10 +277,10 @@ This action is mutually exclusive with any `netem` action defined above. If you 
 
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
-| rate | string | Indicates the rate of bandwidth limit. Allows bit, kbit, mbit, gbit, tbit, bps, kbps, mbps, gbps, tbps unit. bps means bytes per second |  | Yes | 1mbps |
+| rate | string | Indicates the rate of bandwidth limit. Allows bit, kbit, mbit, gbit, tbit, bps, kbps, mbps, gbps, tbps unit. bps means bytes per second. |  | Yes | 1mbps |
 | limit | uint32 | Indicates the number of bytes waiting in queue |  | Yes | 1 |
 | buffer | uint32 | Indicates the maximum number of bytes that can be sent instantaneously |  | Yes | 1 |
 | peakrate | uint64 | Indicates the maximum consumption of `bucket` (usually not set) |  | No | 1 |
 | minburst | uint32 | Indicates the size of `peakrate bucket` (usually not set) |  | No | 1 |
 
-For more details of these fields, you can refer to [tc-tbf document](https://man7.org/linux/man-pages/man8/tc-tbf.8.html). The limit is suggested to set to at least `2 * rate * latency`, where the `latency` is the estimated latency between source and target, and it can be estimated through `ping` command. Too small `limit` can cause high loss rate and impact the throughput of the tcp connection.
+For more details of these fields, you can refer to [tc-tbf document](https://man7.org/linux/man-pages/man8/tc-tbf.8.html). The limit is suggested to set to at least `2 * rate * latency`, where the `latency` is the estimated latency between source and target, and it can be estimated through `ping` command. A `limit` that is too small can cause a high loss rate and impact the throughput of the TCP connection.
