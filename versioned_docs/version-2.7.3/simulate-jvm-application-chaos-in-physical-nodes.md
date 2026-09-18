@@ -432,7 +432,7 @@ Global Flags:
 | `database` | `d` | The name of the database to match | string type, such as `"test"`. Default value: `""` (matches all databases). |
 | `exception` | None | The custom exception message to throw | string type, such as `"BOOM"`. You must set one of `exception` or `latency`. |
 | `latency` | None | The latency of executing the SQL statements | int type, in milliseconds, such as `1000`. You must set one of `exception` or `latency`. |
-| `mysql-connector-version` | `v` | The version of the MySQL client (mysql-connector-java) | int type. Set to `5` for `5.X.X` or `8` for `8.X.X`. Default value: `8`. |
+| `mysql-connector-version` | `v` | The version of the MySQL client (mysql-connector-java) | string type. Set to `5` for `5.X.X` or `8` for `8.X.X`. Default value: `8`. |
 | `sql-type` | None | The SQL type to match | string type. Optional values: `"select"`, `"update"`, `"insert"`, `"replace"`, `"delete"`. Default value: `""` (matches all SQL types). |
 | `table` | `t` | The name of the table to match | string type, such as `"t1"`. Default value: `""` (matches all tables). |
 | `pid` | None | The Java process ID where the fault is to be injected | int type, required |
@@ -715,7 +715,7 @@ Chaosd supports injecting latency or throwing exceptions when the MySQL Java cli
 | `database` | The name of the database to match | string type, such as `"test"`. Default value: `""` (matches all databases). |
 | `exception` | The custom exception message to throw | string type, such as `"BOOM"`. You must set one of `exception` or `latency`. |
 | `latency` | The latency of executing the SQL statements | int type, in milliseconds, such as `1000`. You must set one of `exception` or `latency`. |
-| `mysql-connector-version` | The version of the MySQL client (mysql-connector-java) | int type. Set to `5` for `5.X.X` or `8` for `8.X.X`. Default value: `8`. |
+| `mysql-connector-version` | The version of the MySQL client (mysql-connector-java) | string type. Set to `5` for `5.X.X` or `8` for `8.X.X`. Default value: `8`. |
 | `sql-type` | The SQL type to match | string type. Optional values: `"select"`, `"update"`, `"insert"`, `"replace"`, `"delete"`. Default value: `""` (matches all SQL types). |
 | `table` | The name of the table to match | string type, such as `"t1"`. Default value: `""` (matches all tables). |
 | `pid` | The Java process ID where the fault is to be injected | int type, required |
