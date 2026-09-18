@@ -4,10 +4,6 @@ title: Simulate Disk Faults
 
 This document describes how to use Chaosd to simulate disk faults. This feature helps you simulate disk read/write load (via [dd](https://man7.org/linux/man-pages/man1/dd.1.html)) or disk fill (via [dd](https://man7.org/linux/man-pages/man1/dd.1.html) or [fallocate](https://man7.org/linux/man-pages/man1/fallocate.1.html)).
 
-## Create experiments using the command-line mode
-
-This section describes how to create disk fault experiments using the command-line mode.
-
 Before creating an experiment, you can run the following command to check the types of disk faults that are supported by Chaosd:
 
 ```bash
@@ -37,6 +33,35 @@ Use "chaosd attack disk [command] --help" for more information about a command.
 
 Currently, Chaosd supports creating disk read load experiments, disk write load experiments, and disk fill experiments.
 
+To create experiments using the service mode, you need to run Chaosd in the service mode and then send a `POST` HTTP request to the `/api/attack/disk` path of the Chaosd service:
+
+```bash
+chaosd server --port 31767
+```
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{fault-configuration}'
+```
+
+For the `fault-configuration` part in the above command, you need to configure it according to the fault types. For the corresponding parameters and examples, refer to the parameters of each fault type in the following sections.
+
+:::note
+
+When running an experiment, remember to record the UID of the experiment. When you want to end the experiment corresponding to the UID, you need to send a `DELETE` HTTP request to the `/api/attack/{uid}` path of the Chaosd service.
+
+:::
+
+## Simulate disk read load
+
+### Parameters for simulating disk read load
+
+| Configuration item | Abbreviation | Service mode field | Description | Type | Value |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | Actions of the experiment | string | Set to `"read-payload"` |
+| `path` | p | path | Specifies the file path to read the data. If this parameter is not specified, or the parameter value is set to an empty string, Chaosd reads from the virtual disk files mounted in the "/" directory. Depending on the permissions to read the files, you might be required to run this program using certain permissions. | string | Default: `""` |
+| `process-num` | n | payload-process-num | Specifies the number of concurrently running [dd](https://man7.org/linux/man-pages/man1/dd.1.html) programs to be used. | uint8 | Default: `1`; range: `1` to `255` |
+| `size` | s | size | Specifies the volume of data to be read. It is the total size of data that dd reads. | string | Default: `""`; **required**; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. |
+
 ### Simulate disk read load using the command-line mode
 
 Simulating disk read load is a one-time operation, so the experiment does not need to be recovered.
@@ -65,14 +90,6 @@ Global Flags:
       --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
 ```
 
-#### Configuration description for simulating disk read load
-
-| Configuration item | Abbreviation | Description | Value |
-| :-- | :-- | :-- | :-- |
-| `path` | p | Specifies the file path to read the data. If this parameter is not specified, or the parameter value is set to an empty string, Chaosd reads from the virtual disk files mounted in the "/" directory. Depending on the permissions to read the files, you might be required to run this program using certain permissions. | type: string; default: `""` |
-| `process-num` | n | Specifies the number of concurrently running [dd](https://man7.org/linux/man-pages/man1/dd.1.html) programs to be used. | type: uint8; default: `1`; range: `1` to `255` |
-| `size` | s | Specifies the volume of data to be read. It is the total size of data that dd reads. | type: string; default: `""`; **required**; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. |
-
 #### Example for simulating disk read load
 
 ```bash
@@ -93,6 +110,29 @@ andrew@LAPTOP-NUS30NQD:~/chaosd/bin$ ./chaosd attack disk add-payload read -s 10
 [2021/05/20 13:54:47.074 +08:00] [INFO] [disk.go:147] ["146285+0 records in\n146285+0 records out\n153390940160 bytes (153 GB, 143 GiB) copied, 15.7487 s, 9.7 GB/s\n"]
 Read file /dev/zero successfully, uid: 4bc9b74a-5fe2-4038-b4f2-09ae95b57694
 ```
+
+### Simulate disk read load using the service mode
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{"action":"read-payload","path":"/dev/zero", "payload-process-num":7,"size":"1000G"}'
+```
+
+The result is as follows:
+
+```bash
+{"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
+```
+
+## Simulate disk write load
+
+### Parameters for simulating disk write load
+
+| Configuration item | Abbreviation | Service mode field | Description | Type | Value |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | Actions of the experiment | string | Set to `"write-payload"` |
+| `path` | p | path | Specifies the file path to write the data. If this parameter is not specified, or the parameter value is set to an empty string, a temporary file will be created in the program execution directory. Depending on the permissions to write the files, you might be required to run this program using certain permissions. | string | Default: `""` |
+| `process-num` | n | payload-process-num | Specifies the number of concurrently running [dd](https://man7.org/linux/man-pages/man1/dd.1.html) programs to be used. | uint8 | Default: `1`; range: `1` to `255` |
+| `size` | s | size | Specifies the volume of data to be written. It is the total size of data that dd writes. | string | Default: `""`; **required**; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. |
 
 ### Simulate disk write load using the command-line mode
 
@@ -120,14 +160,6 @@ Global Flags:
       --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
 ```
 
-#### Configuration description for simulating disk write load
-
-| Configuration item | Abbreviation | Description | Value |
-| :-- | :-- | :-- | :-- |
-| `path` | p | Specifies the file path to write the data. If this parameter is not specified, or the parameter value is set to an empty string, a temporary file will be created in the program execution directory. Depending on the permissions to write the files, you might be required to run this program using certain permissions. | type: string; default: `""` |
-| `process-num` | n | Specifies the number of concurrently running [dd](https://man7.org/linux/man-pages/man1/dd.1.html) programs to be used. | type: uint8; default: `1`; range: `1` to `255` |
-| `size` | s | Specifies the volume of data to be written. It is the total size of data that dd writes. | type: string; default: `""`; **required**; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. |
-
 #### Example for simulating disk write load
 
 ```bash
@@ -148,6 +180,31 @@ The result is as follows:
 [2021/05/20 14:28:16.794 +08:00] [INFO] [disk.go:147] ["256+0 records in\n256+0 records out\n268435456 bytes (268 MB, 256 MiB) copied, 2.3359 s, 115 MB/s\n"]
 Write file /home/andrew/chaosd/bin/example255569279 successfully, uid: e66afd86-6f3e-43a0-b161-09447ed84856
 ```
+
+### Simulate disk write load using the service mode
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{"action":"write-payload","path":"/tmp/test", "payload-process-num":7,"size":"1000G"}'
+```
+
+The result is as follows:
+
+```bash
+{"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
+```
+
+## Simulate disk fill
+
+### Parameters for simulating disk fill
+
+| Configuration item | Abbreviation | Service mode field | Description | Type | Value |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | Actions of the experiment | string | Set to `"fill"` |
+| `destroy` | d | destroy | If this parameter is set to `true`, the fill file is immediately deleted after being filled. | bool | Default: `false` |
+| `fallocate` | f | fill-by-fallocate | If this parameter is set to `true`, Linux is used to call fallocate to quickly apply for disk space and size must be greater than `0`. If this parameter is set to `false`, Linux is used to call dd to fill disks at a relatively slow pace. | bool | Default: `true` |
+| `path` | p | path | Specifies the file path to write the data. If this parameter is not specified, or the parameter value is set to an empty string, a temporary file will be created in the program execution directory. Depending on the permissions to write the files, you might be required to run this program using certain permissions. | string | Default: `""` |
+| `percent` | c | percent | Specifies the percentage of disk size to be filled. | string | Default: `""`; positive integer of the uint type is acceptable; you must set one of `size` or `percent` (both items **cannot** be `""` at the same time). |
+| `size` | s | size | Specifies the volume of data to be written. | string | Default: `""`; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. You must set one of `size` or `percent` (both items **cannot** be `""` at the same time). |
 
 ### Simulate disk fill using the command-line mode
 
@@ -177,16 +234,6 @@ Global Flags:
       --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
 ```
 
-#### Configuration description for simulating disk fill
-
-| Configuration item | Abbreviation | Description | Value |
-| :-- | :-- | :-- | :-- |
-| `destroy` | d | If this parameter is set to `true`, the fill file is immediately deleted after being filled. | type: bool; default: `false` |
-| `fallocate` | f | If this parameter is set to `true`, Linux is used to call fallocate to quickly apply for disk space and size must be greater than `0`. If this parameter is set to `false`, Linux is used to call dd to fill disks at a relatively slow pace. | type: bool; default: `true` |
-| `path` | p | Specifies the file path to write the data. If this parameter is not specified, or the parameter value is set to an empty string, a temporary file will be created in the program execution directory. Depending on the permissions to write the files, you might be required to run this program using certain permissions. | type: string; default: `""` |
-| `percent` | c | Specifies the percentage of disk size to be filled. | type: string; default: `""`; positive integer of the uint type is acceptable; you must set one of `size` or `percent` (both items **cannot** be `""` at the same time). |
-| `size` | s | Specifies the volume of data to be written. | type: string; default: `""`; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. You must set one of `size` or `percent` (both items **cannot** be `""` at the same time). |
-
 #### Example for simulating disk fill
 
 ```bash
@@ -200,72 +247,7 @@ The result is as follows:
 Fill file /home/andrew/chaosd/bin/example623832242 successfully, uid: 097b4214-8d8e-46ad-8768-c3e0d8cbb326
 ```
 
-## Create experiments using the service mode
-
-This section describes how to create disk fault experiments using the service mode.
-
-### Simulate disk read load using the service mode
-
-Simulating disk read load is a one-time operation, so the experiment does not need to be recovered.
-
-#### Parameters for simulating disk read load
-
-| Parameter | Description | Value |
-| :-- | :-- | :-- |
-| `action` | Actions of the experiment | Set to `"read-payload"` |
-| `path` | Specifies the file path to read the data. If this parameter is not specified, or the parameter value is set to an empty string, Chaosd reads from the virtual disk files mounted in the "/" directory. Depending on the permissions to read the files, you might be required to run this program using certain permissions. | type: string; default: `""` |
-| `payload-process-num` | Specifies the number of concurrently running [dd](https://man7.org/linux/man-pages/man1/dd.1.html) programs to be used. | type: uint8; default: `1`; range: `1` to `255` |
-| `size` | Specifies the volume of data to be read. It is the total size of data that dd reads. | type: string; default: `""`; **required**; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. |
-
-#### Example for simulating disk read load using the service mode
-
-```bash
-curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{"action":"read-payload","path":"/dev/zero", "payload-process-num":7,"size":"1000G"}'
-```
-
-The result is as follows:
-
-```bash
-{"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
-```
-
-### Simulate disk write load using the service mode
-
-#### Parameters for simulating disk write load
-
-| Parameter | Description | Value |
-| :-- | :-- | :-- |
-| `action` | Actions of the experiment | Set to `"write-payload"` |
-| `path` | Specifies the file path to write the data. If this parameter is not specified, or the parameter value is set to an empty string, a temporary file will be created in the program execution directory. Depending on the permissions to write the files, you might be required to run this program using certain permissions. | type: string; default: `""` |
-| `payload-process-num` | Specifies the number of concurrently running [dd](https://man7.org/linux/man-pages/man1/dd.1.html) programs to be used. | type: uint8; default: `1`; range: `1` to `255` |
-| `size` | Specifies the volume of data to be written. It is the total size of data that dd writes. | type: string; default: `""`; **required**; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. |
-
-#### Example for simulating disk write load using the service mode
-
-```bash
-curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{"action":"write-payload","path":"/tmp/test", "payload-process-num":7,"size":"1000G"}'
-```
-
-The result is as follows:
-
-```bash
-{"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
-```
-
 ### Simulate disk fill using the service mode
-
-#### Parameters for simulating disk fill
-
-| Parameter | Description | Value |
-| :-- | :-- | :-- |
-| `action` | Actions of the experiment | Set to `"fill"` |
-| `destroy` | If this parameter is set to `true`, the fill file is immediately deleted after being filled. | type: bool; default: `false` |
-| `fill-by-fallocate` | If this parameter is set to `true`, Chaosd uses Linux to call `fallocate` to apply for disk space quickly, and you must set `size` to a value greater than `0`. If this parameter is set to `false`, Chaosd uses Linux to call dd to fill disks at a relatively slow pace. | type: bool; default: `true` |
-| `path` | Specifies the file path to write the data. If this parameter is not specified, or the parameter value is set to an empty string, a temporary file will be created in the program execution directory. Depending on the permissions to write the files, you might be required to run this program using certain permissions. | type: string; default: `""` |
-| `percent` | Specifies the percentage of disk size to be filled. | type: string; default: ""; positive integer of the uint type is acceptable; you must set one of `size` or `percent` (both items **cannot** be `""` at the same time). |
-| `size` | Specifies the volume of data to be written. | type: string; default: `""`; legal form: the combination of an integer and a unit. For example, 1M, 512kB. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. You must set one of `size` or `percent` (both items **cannot** be `""` at the same time). |
-
-#### Example for simulating disk fill using the service mode
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{"action":"fill","path":"/tmp/test", "fill-by-fallocate":true,"percent":"50"}'

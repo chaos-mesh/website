@@ -15,10 +15,6 @@ Chaosd also supports injecting the above faults into common services or their Ja
 
 This document describes how to use Chaosd to create the above fault types of JVM experiments.
 
-## Create experiments using the command-line mode
-
-This section introduces how to create the experiments of JVM application faults using the command-line mode.
-
 Before creating the experiment, you can run the following command line to see the types of JVM application faults supported by Chaosd:
 
 ```bash
@@ -54,9 +50,39 @@ Global Flags:
 Use "chaosd attack jvm [command] --help" for more information about a command.
 ```
 
-### Throw custom exceptions using the command-line mode
+To create experiments using the service mode, you need to run Chaosd in the service mode and then send a `POST` HTTP request to the `/api/attack/jvm` path of the Chaosd service:
 
-#### Commands for throwing custom exceptions
+```bash
+chaosd server --port 31767
+```
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{fault-configuration}'
+```
+
+For the `fault-configuration` part in the above command, you need to configure it according to the fault types. For the corresponding parameters and examples, refer to the parameters of each fault type in the following sections.
+
+:::note
+
+When running an experiment, remember to save the UID information of the experiment. When you want to end the experiment corresponding to the UID, you need to send an HTTP DELETE request to the `/api/attack/{uid}` path of Chaosd service.
+
+:::
+
+## Throw custom exceptions
+
+### Parameters for throwing custom exceptions
+
+| Configuration item | Abbreviation | Service mode field | Description | Type | Value |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | `action` | The action of the experiment | string | Set to `"exception"` |
+| `class` | `c` | `class` | The name of the Java class | string | Required |
+| `exception` | — | `exception` | The thrown custom exception | string | Required |
+| `method` | `m` | `method` | The name of the method | string | Required |
+| `pid` | — | `pid` | The Java process ID where the fault is to be injected | int | Required |
+| `port` | — | `port` | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int | The default value is `9288`. |
+| `uid` | — | `uid` | The experiment ID | string | This item is not required to be configured, because Chaosd randomly creates one. |
+
+### Throw custom exceptions using the command-line mode
 
 To see the usage and configuration items of the command that throws custom exceptions, run the following command:
 
@@ -85,17 +111,6 @@ Global Flags:
       --uid string         the experiment ID
 ```
 
-#### Configuration description for throwing custom exceptions
-
-| Configuration item | Abbreviation | Description | Value |
-| :-- | :-- | :-- | :-- |
-| `class` | `c` | The name of the Java class | string type, required |
-| `exception` | None | The thrown custom exception | string type, required |
-| `method` | `m` | The name of the method | string type, required to be configured |
-| `pid` | The Java process ID where the fault is to be injected | int type, required |
-| `port` | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int type. The default value is `9288`. |
-| `uid` | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
-
 #### Example for throwing custom exceptions
 
 ```bash
@@ -109,9 +124,34 @@ The result is as follows:
 Attack jvm successfully, uid: 26a45ae2-d395-46f5-a126-2b2c6c85ae9d
 ```
 
-### Trigger garbage collection using the command-line mode
+### Throw custom exceptions using the service mode
 
-#### Commands for triggering garbage collection
+#### Example for throwing custom exceptions using the service mode
+
+Send a `POST` HTTP request to the `/api/attack/jvm` path of the Chaosd service with the following `fault-configuration`:
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"exception","class":"Main","method":"sayhello","exception":"java.io.IOException(\"BOOM\")","pid":1828622}'
+```
+
+The result is as follows:
+
+```bash
+{"status":200,"message":"attack successfully","uid":"c3c519bf-819a-4a7b-97fb-e3d0814481fa"}
+```
+
+## Trigger garbage collection
+
+### Parameters for triggering garbage collection
+
+| Configuration item | Abbreviation | Service mode field | Description | Type | Value |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | `action` | The action of the experiment | string | Set to `"gc"` |
+| `pid` | — | `pid` | The Java process ID where the fault is to be injected | int | Required |
+| `port` | — | `port` | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int | The default value is `9288`. |
+| `uid` | — | `uid` | The experiment ID | string | This item is not required to be configured, because Chaosd randomly creates one. |
+
+### Trigger garbage collection using the command-line mode
 
 To see the usage and configuration items of the command that triggers garbage collection, run the following command:
 
@@ -135,14 +175,6 @@ Global Flags:
       --uid string         the experiment ID
 ```
 
-#### Configuration description for triggering garbage collection
-
-| Configuration item | Abbreviation | Description | Value |
-| :-- | :-- | :-- | :-- |
-| `pid` | The Java process ID where the fault is to be injected | int type, required |
-| `port` | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int type. The default value is `9288`. |
-| `uid` | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
-
 #### Example for triggering garbage collection
 
 ```bash
@@ -158,9 +190,39 @@ Attack jvm successfully, uid: f360e70a-5359-49b6-8526-d7e0a3c6f696
 
 Triggering garbage collection is a one-time operation, and the experiment does not require recovery.
 
-### Increase method latency using the command-line mode
+### Trigger garbage collection using the service mode
 
-#### Commands for increasing method latency
+#### Example for triggering garbage collection using the service mode
+
+Send a `POST` HTTP request to the `/api/attack/jvm` path of the Chaosd service with the following `fault-configuration`:
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"gc","pid":1828622}'
+```
+
+The result is as follows:
+
+```bash
+{"status":200,"message":"attack successfully","uid":"c3c519bf-819a-4a7b-97fb-e3d0814481fa"}
+```
+
+Triggering garbage collection is a one-time operation. The experiment does not require recovery.
+
+## Increase method latency
+
+### Parameters for increasing method latency
+
+| Configuration item | Abbreviation | Service mode field | Description | Type | Value |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | `action` | The action of the experiment | string | Set to `"latency"` |
+| `class` | `c` | `class` | The name of the Java class | string | Required |
+| `latency` | — | `latency` | The duration of increasing method latency | int | Required. The unit is millisecond. |
+| `method` | `m` | `method` | The name of the method | string | Required |
+| `pid` | — | `pid` | The Java process ID where the fault is to be injected | int | Required |
+| `port` | — | `port` | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int | The default value is `9288`. |
+| `uid` | — | `uid` | The experiment ID | string | This item is not required to be configured, because Chaosd randomly creates one. |
+
+### Increase method latency using the command-line mode
 
 To see the usage and configuration items of the command that increases method latency, run the following command:
 
@@ -189,17 +251,6 @@ Global Flags:
       --uid string         the experiment ID
 ```
 
-#### Configuration description for increasing method latency
-
-| Configuration item | Abbreviation | Description | Value |
-| :-- | :-- | :-- | :-- |
-| `class` | `c` | The name of the Java class | string type, required |
-| `latency` | None | The duration of increasing method latency | int type, required. The unit is millisecond. |
-| `method` | `m` | The name of the method | string type, required |
-| `pid` | The Java process ID where the fault is to be injected | int type, required |
-| `port` | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int type. The default value is `9288`. |
-| `uid` | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
-
 #### Example for increasing method latency
 
 ```bash
@@ -214,9 +265,37 @@ The result is as follows:
 Attack jvm successfully, uid: bbe00c57-ac9d-4113-bf0c-2a6f184be261
 ```
 
-### Modify return values of a method using the command-line mode
+### Increase method latency using the service mode
 
-#### Commands for modifying return values of a method
+#### Example for increasing method latency using the service mode
+
+Send a `POST` HTTP request to the `/api/attack/jvm` path of the Chaosd service with the following `fault-configuration`:
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"latency","class":"Main","method":"sayhello","latency":5000,"pid":1828622}'
+```
+
+The result is as follows:
+
+```bash
+{"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
+```
+
+## Modify return values of a method
+
+### Parameters for modifying return values of a method
+
+| Configuration item | Abbreviation | Service mode field | Description | Type | Value |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | `action` | The action of the experiment | string | Set to `"return"` |
+| `class` | `c` | `class` | The name of the Java class | string | Required |
+| `method` | `m` | `method` | The name of the method | string | Required |
+| `value` | — | `value` | Specifies the return value of the method | string | Required. Currently, the item can be numeric and string types. If the item (return value) is string, double quotes are required, like "chaos". |
+| `pid` | — | `pid` | The Java process ID where the fault is to be injected | int | Required |
+| `port` | — | `port` | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int | The default value is `9288`. |
+| `uid` | — | `uid` | The experiment ID | string | This item is not required to be configured, because Chaosd randomly creates one. |
+
+### Modify return values of a method using the command-line mode
 
 To see the usage and configuration items of the command that modifies return values of a method, run the following command:
 
@@ -243,17 +322,6 @@ Global Flags:
       --uid string         the experiment ID
 ```
 
-#### Configuration description for modifying return values of a method
-
-| Configuration item | Abbreviation | Description | Value |
-| :-- | :-- | :-- | :-- |
-| class | c | The name of the Java class | string type, required to be configured |
-| method | `m` | The name of the method | string type, required to be configured |
-| value | None | Specifies the return value of the method | string type, required to be configured. Currently, the item can be numeric and string types. If the item (return value) is string, double quotes are required, like "chaos". |
-| pid | None | The Java process ID where the fault is needed to be injected | int type, required to be configured |
-| port | None | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int type. The default value is `9288`. |
-| `uid` | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
-
 #### Example for simulating the scenario of modifying return values of a method
 
 ```bash
@@ -268,11 +336,38 @@ The result is as follows:
 Attack jvm successfully, uid: e2f204f6-4bed-4d92-aade-2b4a47b02e5d
 ```
 
-### Trigger faults by setting Byteman configuration files using the command-line mode
+### Modify return values of a method using the service mode
+
+#### Example for modifying return values of a method using the service mode
+
+Send a `POST` HTTP request to the `/api/attack/jvm` path of the Chaosd service with the following `fault-configuration`:
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"return","class":"Main","method":"getnum","value":"999","pid":1828622}'
+```
+
+The result is as follows:
+
+```bash
+{"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
+```
+
+## Trigger faults by setting Byteman configuration files
 
 You can set the fault rules in the Byteman rule configuration file, and then inject the faults by specifying the path of the configuration file using Chaosd. Regarding the Byteman rule configuration, refer to [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language).
 
-#### Commands for triggering faults by setting Byteman configuration files
+### Parameters for triggering faults by setting Byteman configuration files
+
+| Configuration item | Abbreviation | Service mode field | Description | Type | Value |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | `action` | The action of the experiment | string | Set to `"rule-data"` |
+| `path` | — | `path` | Specifies the path of the Byteman configuration file | string | Required |
+| `rule-data` | — | `rule-data` | Specifies the Byteman configuration data | string | Required |
+| `pid` | — | `pid` | The Java process ID where the fault is to be injected | int | Required |
+| `port` | — | `port` | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int | The default value is `9288`. |
+| `uid` | — | `uid` | The experiment ID | string | This item is not required to be configured, because Chaosd randomly creates one. |
+
+### Trigger faults by setting Byteman configuration files using the command-line mode
 
 To see the usage and configuration items of the command that triggers faults by setting Byteman configuration files, run the following command:
 
@@ -298,15 +393,6 @@ Global Flags:
       --port int           the port of agent server (default 9288)
       --uid string         the experiment ID
 ```
-
-#### Configuration description for triggering faults by setting Byteman configuration files
-
-| Configuration item | Abbreviation | Description | Value |
-| :-- | :-- | :-- | :-- |
-| `path` | None | Specifies the path of the Byteman configuration file | string type, required |
-| `pid` | The Java process ID where the fault is to be injected | int type, required |
-| `port` | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int type. The default value is `9288`. |
-| `uid` | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
 
 #### Example for triggering faults by setting Byteman configuration files
 
@@ -337,9 +423,51 @@ The result is as follows:
 Attack jvm successfully, uid: 5ca2e06d-a7c6-421d-bb67-0c9908bac17a
 ```
 
-### Increase JVM stress using the command-line mode
+### Trigger faults by setting Byteman configuration files using the service mode
 
-#### Commands for increasing JVM stress
+You can set the fault rules according to the Byteman rule configuration. For more information about the Byteman rule configuration, refer to [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language).
+
+#### Example for triggering faults by setting Byteman configuration files using the service mode
+
+First, based on the specific Java program and referring to [the Byteman rule language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language), write a rule configuration file. For example:
+
+```txt
+RULE modify return value
+CLASS Main
+METHOD getnum
+AT ENTRY
+IF true
+DO
+    return 9999
+ENDRULE
+```
+
+Then, escape the line breaks in the configuration file to the newline character "\n", and use the escaped text as the value of "rule-data". Run the following command:
+
+```bash
+curl -X POST 127.0.0.1:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"rule-data","pid":30045,"rule-data":"\nRULE modify return value\nCLASS Main\nMETHOD getnum\nAT ENTRY\nIF true\nDO return 9999\nENDRULE\n"}'
+```
+
+The result is as follows:
+
+```bash
+{"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
+```
+
+## Increase JVM stress
+
+### Parameters for increasing JVM stress
+
+| Configuration item | Abbreviation | Service mode field | Description | Type | Value |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | `action` | The action of the experiment | string | Set to `"stress"` |
+| `cpu-count` | — | `cpu-count` | The number of CPU cores used for increasing JVM stress | int | You must configure one of `cpu-count` and `mem-type`. |
+| `mem-type` | — | `mem-type` | The type of OOM | string | Currently, both 'stack' and 'heap' OOM types are supported. You must configure one of `cpu-count` and `mem-type`. |
+| `pid` | — | `pid` | The Java process ID where the fault is to be injected | int | Required |
+| `port` | — | `port` | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int | The default value is `9288`. |
+| `uid` | — | `uid` | The experiment ID | string | This item is not required to be configured, because Chaosd randomly creates one. |
+
+### Increase JVM stress using the command-line mode
 
 To see the usage and configuration items of the command that increases JVM stress, run the following command:
 
@@ -367,17 +495,9 @@ Global Flags:
       --uid string         the experiment ID
 ```
 
-#### Configuration description for increasing JVM stress
-
-| Configuration item | Abbreviation | Description | Value |
-| :-- | :-- | :-- | :-- |
-| `cpu-count` | None | The number of CPU cores used for increasing JVM stress | int type. You must configure one of `cpu-count` and `mem-type`. |
-| `mem-type` | None | The type of OOM | string type. Currently, both 'stack' and 'heap' OOM types are supported. You must configure one of `cpu-count` and `mem-type`. |
-| `pid` | The Java process ID where the fault is to be injected | int type, required |
-| `port` | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int type. The default value is `9288`. |
-| `uid` | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
-
 #### Example for increasing JVM stress
+
+The example for increasing JVM stress is as follows:
 
 ```bash
 chaosd attack jvm stress --cpu-count 2 --pid 123546
@@ -391,11 +511,44 @@ The result is as follows:
 Attack jvm successfully, uid: b9b997b5-0a0d-4f1f-9081-d52a32318b84
 ```
 
-### Trigger faults in the MySQL Java client using the command-line mode
+### Increase JVM stress using the service mode
+
+#### Example for increasing JVM stress using the service mode
+
+Send a `POST` HTTP request to the `/api/attack/jvm` path of the Chaosd service with the following `fault-configuration`:
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"stress","cpu-count":1,"pid":1828622}'
+```
+
+The result is as follows:
+
+```bash
+{"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
+```
+
+## Trigger faults in the MySQL Java client
 
 Chaosd supports injecting latency or throwing exceptions when the MySQL Java client executes SQL statements of the specified types.
 
-#### Commands for triggering faults
+### Parameters for triggering faults
+
+| Configuration item | Abbreviation | Service mode field | Description | Type | Value |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | `action` | The action of the experiment | string | Set to `"mysql"` |
+| `database` | `d` | `database` | The name of the database to match | string | Such as `"test"`. Default value: `""` (matches all databases). |
+| `exception` | — | `exception` | The custom exception message to throw | string | Such as `"BOOM"`. You must set one of `exception` or `latency`. |
+| `latency` | — | `latency` | The latency of executing the SQL statements | int | In milliseconds, such as `1000`. You must set one of `exception` or `latency`. |
+| `mysql-connector-version` | `v` | `mysql-connector-version` | The version of the MySQL client (mysql-connector-java) | string | Set to `5` for `5.X.X` or `8` for `8.X.X`. Default value: `8`. |
+| `sql-type` | — | `sql-type` | The SQL type to match | string | Optional values: `"select"`, `"update"`, `"insert"`, `"replace"`, `"delete"`. Default value: `""` (matches all SQL types). |
+| `table` | `t` | `table` | The name of the table to match | string | Such as `"t1"`. Default value: `""` (matches all tables). |
+| `pid` | — | `pid` | The Java process ID where the fault is to be injected | int | Required |
+| `port` | — | `port` | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int | The default value is `9288`. |
+| `uid` | — | `uid` | The experiment ID | string | This item is not required to be configured, because Chaosd randomly creates one. |
+
+### Trigger faults in the MySQL Java client using the command-line mode
+
+To see the usage and configuration items of the command that triggers faults, run the following command:
 
 ```bash
 chaosd attack jvm mysql --help
@@ -425,21 +578,9 @@ Global Flags:
       --uid string         the experiment ID
 ```
 
-#### Configuration description for triggering faults
-
-| Configuration item | Abbreviation | Description | Value |
-| :-- | :-- | :-- | :-- |
-| `database` | `d` | The name of the database to match | string type, such as `"test"`. Default value: `""` (matches all databases). |
-| `exception` | None | The custom exception message to throw | string type, such as `"BOOM"`. You must set one of `exception` or `latency`. |
-| `latency` | None | The latency of executing the SQL statements | int type, in milliseconds, such as `1000`. You must set one of `exception` or `latency`. |
-| `mysql-connector-version` | `v` | The version of the MySQL client (mysql-connector-java) | string type. Set to `5` for `5.X.X` or `8` for `8.X.X`. Default value: `8`. |
-| `sql-type` | None | The SQL type to match | string type. Optional values: `"select"`, `"update"`, `"insert"`, `"replace"`, `"delete"`. Default value: `""` (matches all SQL types). |
-| `table` | `t` | The name of the table to match | string type, such as `"t1"`. Default value: `""` (matches all tables). |
-| `pid` | None | The Java process ID where the fault is to be injected | int type, required |
-| `port` | None | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int type. The default value is `9288`. |
-| `uid` | None | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
-
 #### Example for triggering faults
+
+To trigger faults in the MySQL Java client, follow the instructions below:
 
 1. Deploy TiDB (or MySQL)
 
@@ -509,224 +650,17 @@ Global Flags:
      at java.base/java.lang.Thread.run(Thread.java:832)
    ```
 
-
-## Create experiments using the service mode
-
-You can follow the instructions below to create experiments using the service mode.
-
-1. Execute Chaosd in service mode:
-
-   ```bash
-   chaosd server --port 31767
-   ```
-
-2. Send HTTP POST request to the `/api/attack/jvm` path of Chaosd service.
-
-   ```bash
-   curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{fault-configuration}'
-   ```
-
-   For the `fault-configuration` part in the above command, you need to configure it according to the fault types. For the corresponding parameters, refer to the parameters and examples of each fault type in the following sections.
-
-:::note
-
-When running an experiment, remember to save the UID information of the experiment. When you want to end the experiment corresponding to the UID, you need to send an HTTP DELETE request to the `/api/attack/{uid}` path of Chaosd service.
-
-:::
-
-### Throw custom exceptions using the service mode
-
-#### Parameters for throwing custom exceptions
-
-| Parameter | Description | Value |
-| :-- | :-- | :-- |
-| `action` | The action of the experiment | Set to "exception" |
-| `class` | The name of the Java class | string type, required |
-| `exception` | The thrown custom exception | string type, required |
-| `method` | The name of the method | string type, required |
-| `pid` | The Java process ID where the fault is to be injected | int type, required |
-| `port` | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int type. The default value is `9288`. |
-| `uid` | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
-
-#### Example for throwing custom exceptions using the service mode
-
-```bash
-curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"exception","class":"Main","method":"sayhello","exception":"java.io.IOException(\"BOOM\")","pid":1828622}'
-```
-
-The result is as follows:
-
-```bash
-{"status":200,"message":"attack successfully","uid":"c3c519bf-819a-4a7b-97fb-e3d0814481fa"}
-```
-
-### Trigger garbage collection using service mode
-
-#### Parameters for triggering garbage collection
-
-| Parameter | Description | Value |
-| :-- | :-- | :-- |
-| `action` | The action of the experiment | Set to "gc" |
-| `pid` | The Java process ID where the fault is to be injected | int type, required |
-| `port` | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int type. The default value is `9288`. |
-| `uid` | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
-
-#### Example for triggering garbage collection using the service mode
-
-```bash
-curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"gc","pid":1828622}'
-```
-
-The result is as follows:
-
-```bash
-{"status":200,"message":"attack successfully","uid":"c3c519bf-819a-4a7b-97fb-e3d0814481fa"}
-```
-
-Triggering garbage collection is a one-time operation. The experiment does not require recovery.
-
-### Increase method latency using service mode
-
-#### Parameters for increasing method latency
-
-| Parameter | Description | Value |
-| :-- | :-- | :-- |
-| `action` | The action of the experiment | Set to "latency" |
-| `class` | The name of the Java class | string type, required |
-| `latency` | The duration of increasing method latency | int type, required. The unit is millisecond. |
-| `method` | The name of the method | string type, required |
-| `pid` | The Java process ID where the fault is to be injected | int type, required |
-| `port` | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int type. The default value is `9288`. |
-| `uid` | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
-
-#### Example for increasing method latency using the service mode
-
-```bash
-curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"latency","class":"Main","method":"sayhello","latency":5000,"pid":1828622}'
-```
-
-The result is as follows:
-
-```bash
-{"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
-```
-
-### Modify return values of a method using service mode
-
-#### Parameters for modifying return values of a method
-
-| Parameter | Description | Value |
-| :-- | :-- | :-- |
-| `action` | The action of the experiment | Set to "return" |
-| `class` | The name of the Java class | string type, required |
-| `method` | The name of the method | string type, required |
-| `value` | Specifies the return value of the method | string type, required. Currently, the item can be numeric and string types. If the item (return value) is string, double quotes are required, like "chaos". |
-| `pid` | The Java process ID where the fault is to be injected | int type, required |
-| `port` | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int type. The default value is `9288`. |
-| `uid` | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
-
-#### Example for modifying return values of a method using the service mode
-
-```bash
-curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"return","class":"Main","method":"getnum","value":"999","pid":1828622}'
-```
-
-The result is as follows:
-
-```bash
-{"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
-```
-
-### Trigger faults by setting Byteman configuration files using service mode
-
-You can set the fault rules according to the Byteman rule configuration. For more information about the Byteman rule configuration, refer to [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language).
-
-#### Parameters for triggering faults by setting Byteman configuration files
-
-| Parameter | Description | Value |
-| :-- | :-- | :-- |
-| `action` | The action of the experiment | Set to "rule-data" |
-| `rule-data` | Specifies the Byteman configuration data | string type, required |
-| `pid` | The Java process ID where the fault is to be injected | int type, required |
-| `port` | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int type. The default value is `9288`. |
-| `uid` | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
-
-#### Example for triggering faults by setting Byteman configuration files using the service mode
-
-First, based on the specific Java program and referring to [the Byteman rule language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language), write a rule configuration file. For example:
-
-```txt
-RULE modify return value
-CLASS Main
-METHOD getnum
-AT ENTRY
-IF true
-DO
-    return 9999
-ENDRULE
-```
-
-Then, escape the line breaks in the configuration file to the newline character "\n", and use the escaped text as the value of "rule-data". Run the following command:
-
-```bash
-curl -X POST 127.0.0.1:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"rule-data","pid":30045,"rule-data":"\nRULE modify return value\nCLASS Main\nMETHOD getnum\nAT ENTRY\nIF true\nDO return 9999\nENDRULE\n"}'
-```
-
-The result is as follows:
-
-```bash
-{"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
-```
-
-### Increase JVM stress using the service mode
-
-#### Parameters for increasing JVM stress
-
-| Parameter | Description | Value |
-| :-- | :-- | :-- |
-| `action` | The action of the experiment | Set to "stress" |
-| `cpu-count` | The number of CPU cores used for increasing CPU stress | int type. You must configure one of `cpu-count` and `mem-type`. |
-| `mem-type` | The type of OOM | string type. Currently, both 'stack' and 'heap' OOM types are supported. You must configure one of `cpu-count` and `mem-type`. |
-| `pid` | The Java process ID where the fault is to be injected | int type, required |
-| `port` | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int type. The default value is `9288`. |
-| `uid` | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
-
-#### Example for increasing JVM stress using the service mode
-
-```bash
-curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"stress","cpu-count":1,"pid":1828622}'
-```
-
-The result is as follows:
-
-```bash
-{"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
-```
-
 ### Trigger faults in the MySQL Java client using the service mode
 
 Chaosd supports injecting latency or throwing exceptions when the MySQL Java client executes SQL statements of the specified types.
 
-#### Parameters for triggering faults
-
-| Parameter | Description | Value |
-| :-- | :-- | :-- |
-| `action` | The action of the experiment | Set to "mysql" |
-| `database` | The name of the database to match | string type, such as `"test"`. Default value: `""` (matches all databases). |
-| `exception` | The custom exception message to throw | string type, such as `"BOOM"`. You must set one of `exception` or `latency`. |
-| `latency` | The latency of executing the SQL statements | int type, in milliseconds, such as `1000`. You must set one of `exception` or `latency`. |
-| `mysql-connector-version` | The version of the MySQL client (mysql-connector-java) | string type. Set to `5` for `5.X.X` or `8` for `8.X.X`. Default value: `8`. |
-| `sql-type` | The SQL type to match | string type. Optional values: `"select"`, `"update"`, `"insert"`, `"replace"`, `"delete"`. Default value: `""` (matches all SQL types). |
-| `table` | The name of the table to match | string type, such as `"t1"`. Default value: `""` (matches all tables). |
-| `pid` | The Java process ID where the fault is to be injected | int type, required |
-| `port` | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int type. The default value is `9288`. |
-| `uid` | The experiment ID | string type. This item is not required to be configured, because Chaosd randomly creates one. |
-
 #### Example for triggering faults using the service mode
+
+To trigger faults in the MySQL Java client using the service mode, follow the instructions below:
 
 1. Deploy TiDB (or MySQL) and the demo application
 
-   Before injecting faults, you need to deploy TiDB (or MySQL) and the demo application `mysqldemo` in advance. For the deployment steps, refer to step 1 and step 2 in [the example of triggering faults in the MySQL Java client using the command-line mode](#example-for-triggering-faults).
+   Before injecting faults, you need to deploy TiDB (or MySQL) and the demo application `mysqldemo` in advance. For the deployment steps, refer to step 1 and step 2 in [the example of triggering faults in the MySQL Java client using the command-line mode](#trigger-faults-in-the-mysql-java-client-using-the-command-line-mode).
 
 2. Inject faults
 
@@ -751,9 +685,8 @@ Chaosd supports injecting latency or throwing exceptions when the MySQL Java cli
      at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange$LinkHandler.handle(ServerImpl.java:692)
    at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:77)
      at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange.run(ServerImpl.java:664)
-   at jdk.httpserver/sun.net.httpserver.ServerImpl$DefaultExecutor.execute(ServerImpl.java:159)
+   at jdk.httpserver/com.sun.net.httpserver.ServerImpl$DefaultExecutor.execute(ServerImpl.java:159)
      at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.handle(ServerImpl.java:442)
      at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.run(ServerImpl.java:408)
      at java.base/java.lang.Thread.run(Thread.java:832)
    ```
-

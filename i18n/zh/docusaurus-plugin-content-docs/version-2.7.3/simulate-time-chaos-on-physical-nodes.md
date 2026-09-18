@@ -1,20 +1,45 @@
 ---
 title: 模拟时间故障
+summary: 本文主要介绍如何使用 Chaosd 模拟时间偏移场景。
 ---
 
-本文主要介绍如何使用 Chaosd 模拟时间偏移的场景。本功能支持通过命令行模式或服务模式创建实验。
+本文主要介绍如何使用 Chaosd 模拟时间偏移场景。你可以通过命令行模式或服务模式创建实验。
 
-## 使用命令行模式创建实验
+要使用服务模式创建实验，你需要以服务模式运行 Chaosd，然后向 Chaosd 服务的路径 `/api/attack/clock` 发送 `POST` HTTP 请求：
 
-本节介绍如何在命令行模式中创建时间故障实验。
+```bash
+chaosd server --port 31767
+```
 
-在创建时间故障实验前，可运行以下命令行查看时间故障的相关配置项：
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/clock -H "Content-Type:application/json" -d '{fault-configuration}'
+```
+
+在上述命令中，你需要按照故障类型在 `fault-configuration` 中进行配置。有关对应的配置参数和示例，请参考下文中各个类型故障的相关参数说明。
+
+:::note
+
+在运行实验时，请注意保存实验的 UID 信息。当要结束 UID 对应的实验时，需要向 Chaosd 服务的路径 `/api/attack/{uid}` 发送 `DELETE` HTTP 请求。
+
+:::
+
+## 模拟时间偏移相关参数说明
+
+| 配置项 | 配置缩写 | 服务模式字段 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `time-offset` | — | time-offset | 指定时间偏移的长度 | string 类型 | 默认：无；是否必须：是；示例：`-5m` |
+| `clock-ids-slice` | — | clock-ids-slice | 指定将被偏移的时钟的 ID。多个时钟 ID 之间用逗号分隔。详情请参考 [clock_gettime 文档](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) | string 类型 | 默认：`CLOCK_REALTIME`；是否必须：否；示例：`"CLOCK_REALTIME,CLOCK_MONOTONIC"` |
+| `pid` | — | pid | 进程的标识符 | int 类型 | 默认：无；是否必须：是；示例：`1` |
+
+## 使用命令行模式模拟时间偏移场景
+
+在创建实验前，可运行以下命令行查看时间偏移的选项：
 
 ```
 chaosd attack clock -h
 ```
 
-结果如下所示：
+输出如下所示：
 
 ```bash
 $ chaosd attack clock -h
@@ -36,7 +61,7 @@ Global Flags:
 
 ```
 
-### 快速使用
+### 快速示例
 
 准备测试程序：
 
@@ -61,33 +86,15 @@ EOF
 gcc -o get_time ./time.c
 ```
 
-接下来执行 get_time 并且使用 chaosd 尝试创建时间故障如下：
+然后执行 get_time 并尝试攻击它。示例如下：
 
 ```bash
 chaosd attack clock -p $PID -t 11s
 ```
 
-### 模拟时间故障的相关配置
+## 使用服务模式模拟时间偏移场景
 
-| 配置项 | 类型 | 说明 | 默认值 | 必要项 | 例子 |
-| --- | --- | --- | --- | --- | --- |
-| time-offset | string | 指定时间的偏移量。 | None | 是 | `-5m` |
-| clock-ids-slice | string | 指定时间偏移作用的时钟，多个时钟 ID 以逗号分隔，详见 [clock_gettime documentation](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) 。 | `CLOCK_REALTIME` | 否 | `"CLOCK_REALTIME,CLOCK_MONOTONIC"` |
-| pid | int | 进程的标识符。 | None | 是 | `1` |
-
-## 使用服务模式创建实验
-
-### 模拟时间故障相关参数说明
-
-| 参数 | 说明 | 值 |
-| :-- | :-- | :-- |
-| pid | 进程的标识符。 | int 类型 |
-| time-offset | 指定时间的偏移量。 | string 类型，例如："-5m" |
-| clock-ids-slice | 指定时间偏移作用的时钟，详见 [clock_gettime documentation](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) 。 | string 类型，默认值为 `"CLOCK_REALTIME"` |
-
-### 使用服务模式模拟时间故障示例
-
-运行[快速使用](#快速使用)中的测试程序，使用以下命令创建时间故障：
+运行 [快速示例](#快速示例) 中的测试程序，然后使用以下命令创建时间故障实验：
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/clock -H "Content-Type:application/json" -d '{"pid":123, "time-offset":"11s"}'

@@ -10,10 +10,6 @@ title: 模拟网络故障
 
 :::
 
-## 使用命令行模式创建网络故障实验
-
-本节介绍如何在命令行模式创建网络故障实验。
-
 在创建网络故障实验前，可以运行以下命令查看 Chaosd 支持的网络故障类型：
 
 ```bash
@@ -49,11 +45,41 @@ Use "chaosd attack network [command] --help" for more information about a comman
 
 目前 Chaosd 支持模拟以下实验场景：网络包错误（corrupt）、网络延迟（delay）、网络包重复（duplicate）、网络包丢失（loss）、网络分区（partition）、DNS 故障（dns）、网络带宽限制（bandwidth）以及端口占用（port）。
 
-### 使用命令行模式模拟网络包错误
+要使用服务模式创建实验，你需要以服务模式运行 Chaosd，然后向 Chaosd 服务的路径 `/api/attack/network` 发送 `POST` HTTP 请求：
 
-通过运行网络包错误命令，可以查看模拟网络包错误场景支持的配置。
+```bash
+chaosd server --port 31767
+```
 
-#### 网络包错误命令
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{fault-configuration}'
+```
+
+在上述命令中，你需要按照故障类型在 `fault-configuration` 中进行配置。有关对应的配置参数和示例，请参考下文中各个类型故障的相关参数说明。
+
+:::note
+
+在运行实验时，请注意保存实验的 UID 信息。当要结束 UID 对应的实验时，需要向 Chaosd 服务的路径 `/api/attack/{uid}` 发送 `DELETE` HTTP 请求。
+
+:::
+
+## 模拟网络包错误场景
+
+### 模拟网络包错误相关参数说明
+
+| 配置项 | 配置缩写 | 服务模式字段 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | 实验的行为 | string 类型 | 设置为 "corrupt" |
+| `correlation` | c | correlation | 表示包错误发生的概率与前一次是否发生的相关性 | string 类型 | 取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 0 |
+| `device` | d | device | 影响的网卡设备名称 | string 类型 | 例如 "eth0"，必须要设置 |
+| `egress-port` | e | egress-port | 仅影响到指定目的端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型 | 使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
+| `hostname` | H | hostname | 只影响到指定的主机名 | string 类型 | 如 "chaos-mesh.org" |
+| `ip` | i | ip-address | 只影响到指定的 IP 地址 | string 类型 | 如 "123.123.123.123" |
+| `protocol` | p | ip-protocol | 只影响指定的 IP 协议 | string 类型 | 支持协议类型包括：tcp、udp、icmp、all（表示影响所有网络协议） |
+| `source-port` | s | source-port | 仅影响到来自指定源端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型 | 使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
+| `percent` | 无 | percent | 网络包错误的比例 | string 类型 | 取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 1 |
+
+### 使用命令行模式模拟网络包错误场景
 
 具体命令如下所示：
 
@@ -84,23 +110,6 @@ Global Flags:
       --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
 ```
 
-#### 网络包错误相关配置说明
-
-相关配置说明如下所示：
-
-| 配置项 | 配置缩写 | 说明 | 值 |
-| :-- | :-- | :-- | :-- |
-| correlation | c | 表示包错误发生的概率与前一次是否发生的相关性 | string 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 0 |
-| device | d | 影响的网卡设备名称 | string 类型，例如 "eth0"，必须要设置 |
-| egress-port | e | 仅影响到指定目的端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
-| hostname | H | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org" |
-| ip | i | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123" |
-| protocol | p | 只影响指定的 IP 协议 | string 类型，支持协议类型包括：tcp、 udp、icmp、all（表示影响所有网络协议） |
-| source-port | s | 仅影响到来自指定源端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
-| percent | 无 | 网络包错误的比例 | string 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 1 |
-
-#### 网络包错误示例
-
 运行以下命令，模拟网络包错误：
 
 ```bash
@@ -113,11 +122,32 @@ chaosd attack network corrupt -d eth0 -i 172.16.4.4 --percent 50
 Attack network successfully, uid: 4eab1e62-8d60-45cb-ac85-3c17b8ac4825
 ```
 
-### 使用命令行模式模拟网络包延迟
+### 使用服务模式模拟网络包错误场景
 
-通过运行网络包延迟命令，查看模拟网络延迟场景支持的配置。
+示例如下：
 
-#### 网络包延迟命令
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"corrupt","device":"eth0","ip-address":"172.16.4.4","percent":"50"}'
+```
+
+## 模拟网络包延迟场景
+
+### 模拟网络包延迟相关参数说明
+
+| 配置项 | 配置缩写 | 服务模式字段 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | 实验的行为 | string 类型 | 设置为 "delay" |
+| `correlation` | c | correlation | 表示延迟时间的时间长度与前一次延迟时长的相关性 | string 类型 | 取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 0 |
+| `device` | d | device | 影响的网卡设备名称 | string 类型 | 例如 "eth0"，必须要设置 |
+| `egress-port` | e | egress-port | 仅影响到指定目的端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型 | 使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
+| `hostname` | H | hostname | 只影响到指定的主机名 | string 类型 | 如 "chaos-mesh.org" |
+| `ip` | i | ip-address | 只影响到指定的 IP 地址 | string 类型 | 如 "123.123.123.123" |
+| `jitter` | j | jitter | 延迟时间的变化范围 | string 类型 | 可使用的时间单位包括：ns、us (µs)、ms、s、m、h，如 "1ms" |
+| `latency` | l | latency | 表示延迟的时间长度 | string 类型 | 可使用的时间单位包括：ns、us (µs)、ms、s、m、h，如 "1ms" |
+| `protocol` | p | ip-protocol | 只影响指定的 IP 协议 | string 类型 | 支持协议类型包括：tcp、udp、icmp、all（表示影响所有网络协议） |
+| `source-port` | s | source-port | 仅影响到来自指定源端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型 | 使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
+
+### 使用命令行模式模拟网络包延迟场景
 
 具体命令如下所示：
 
@@ -149,24 +179,6 @@ Global Flags:
       --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
 ```
 
-#### 网络包延迟相关配置说明
-
-相关配置说明如下所示：
-
-| 配置项 | 配置缩写 | 说明 | 值 |
-| :-- | :-- | :-- | :-- |
-| correlation | c | 表示延迟时间的时间长度与前一次延迟时长的相关性 | string 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 0 |
-| device | d | 影响的网卡设备名称 | string 类型，例如 "eth0"，必须要设置 |
-| egress-port | e | 仅影响到指定目的端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
-| hostname | H | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org" |
-| ip | i | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123" |
-| jitter | j | 延迟时间的变化范围 | string 类型，可使用的时间单位包括：ns、us (µs)、ms、s、m、h，如 "1ms" |
-| latency | l | 表示延迟的时间长度 | string 类型，可使用的时间单位包括：ns、us (µs)、ms、s、m、h，如 "1ms" |
-| protocol | p | 只影响指定的 IP 协议 | string 类型，支持协议类型包括：tcp、 udp、icmp、all（表示影响所有网络协议） |
-| source-port | s | 仅影响到来自指定源端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
-
-#### 网络包延迟示例
-
 运行以下命令，模拟网络包延迟：
 
 ```bash
@@ -179,11 +191,31 @@ chaosd attack network delay -d eth0 -i 172.16.4.4 -l 10ms
 Attack network successfully, uid: 4b23a0b5-e193-4b27-90a7-3e04235f32ab
 ```
 
-### 使用命令行模式模拟网络包重复
+### 使用服务模式模拟网络包延迟场景
 
-可以运行网络包重复命令，查看模拟网络包重复场景支持的配置：
+示例如下：
 
-#### 网络包重复命令
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"delay","device":"eth0","ip-address":"172.16.4.4","latency":"10ms"}'
+```
+
+## 模拟网络包重复场景
+
+### 模拟网络包重复相关参数说明
+
+| 配置项 | 配置缩写 | 服务模式字段 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | 实验的行为 | string 类型 | 设置为 "duplicate" |
+| `correlation` | c | correlation | 表示包重复发生的概率与前一次是否发生的相关性 | string 类型 | 取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 0 |
+| `device` | d | device | 影响的网卡设备名称 | string 类型 | 例如 "eth0"，必须要设置 |
+| `egress-port` | e | egress-port | 仅影响到指定目的端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型 | 使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
+| `hostname` | H | hostname | 只影响到指定的主机名 | string 类型 | 如 "chaos-mesh.org" |
+| `ip` | i | ip-address | 只影响到指定的 IP 地址 | string 类型 | 如 "123.123.123.123" |
+| `percent` | 无 | percent | 网络包重复的比例 | string 类型 | 取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 1 |
+| `protocol` | p | ip-protocol | 只影响指定的 IP 协议 | string 类型 | 支持协议类型包括：tcp、udp、icmp、all（表示影响所有网络协议） |
+| `source-port` | s | source-port | 仅影响到来自指定源端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型 | 使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
+
+### 使用命令行模式模拟网络包重复场景
 
 具体命令如下所示：
 
@@ -214,23 +246,6 @@ Global Flags:
       --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
 ```
 
-#### 网络包重复相关配置说明
-
-相关配置说明如下所示：
-
-| 配置项 | 配置缩写 | 说明 | 值 |
-| :-- | :-- | :-- | :-- |
-| correlation | c | 表示包重复发生的概率与前一次是否发生的相关性 | string 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 0 |
-| device | d | 影响的网卡设备名称 | string 类型，例如 "eth0"，必须要设置 |
-| egress-port | e | 仅影响到指定目的端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
-| hostname | H | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org" |
-| ip | i | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123" |
-| percent | 无 | 网络包重复的比例 | string 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 1 |
-| protocol | p | 只影响指定的 IP 协议 | string 类型，支持协议类型包括：tcp、 udp、icmp、all（表示影响所有网络协议） |
-| source-port | s | 仅影响到来自指定源端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
-
-#### 网络包重复示例
-
 运行以下命令，模拟网络包重复：
 
 ```bash
@@ -243,11 +258,31 @@ chaosd attack network duplicate -d eth0 -i 172.16.4.4 --percent 50
 Attack network successfully, uid: 7bcb74ee-9101-4ae4-82f0-e44c8a7f113c
 ```
 
-### 使用命令行模式模拟网络包丢失
+### 使用服务模式模拟网络包重复场景
 
-可以运行网络包丢失命令，查看模拟网络包丢失场景支持的配置：
+示例如下：
 
-#### 使用命令行模式模拟网络包丢失命令
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"duplicate","ip-address":"172.16.4.4","device":"eth0","percent":"50"}'
+```
+
+## 模拟网络包丢失场景
+
+### 模拟网络包丢失相关参数说明
+
+| 配置项 | 配置缩写 | 服务模式字段 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | 实验的行为 | string 类型 | 设置为 "loss" |
+| `correlation` | c | correlation | 表示丢包发生的概率与前一次是否发生的相关性 | string 类型 | 取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 0 |
+| `device` | d | device | 影响的网卡设备名称 | string 类型 | 例如 "eth0"，必须要设置 |
+| `egress-port` | e | egress-port | 仅影响到指定目的端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型 | 使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
+| `hostname` | H | hostname | 只影响到指定的主机名 | string 类型 | 如 "chaos-mesh.org" |
+| `ip` | i | ip-address | 只影响到指定的 IP 地址 | string 类型 | 如 "123.123.123.123" |
+| `percent` | 无 | percent | 网络丢包的比例 | string 类型 | 取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 1 |
+| `protocol` | p | ip-protocol | 只影响指定的 IP 协议 | string 类型 | 支持协议类型包括：tcp、udp、icmp、all（表示影响所有网络协议） |
+| `source-port` | s | source-port | 仅影响到来自指定源端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型 | 使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
+
+### 使用命令行模式模拟网络包丢失场景
 
 具体命令如下所示：
 
@@ -278,23 +313,6 @@ Global Flags:
       --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
 ```
 
-#### 网络包丢失相关配置说明
-
-相关配置说明如下所示：
-
-| 配置项 | 配置缩写 | 说明 | 值 |
-| :-- | :-- | :-- | :-- |
-| correlation | c | 表示丢包发生的概率与前一次是否发生的相关性 | string 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 0 |
-| device | d | 影响的网卡设备名称 | string 类型，例如 "eth0"，必须要设置 |
-| egress-port | e | 仅影响到指定目的端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
-| hostname | H | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org" |
-| ip | i | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123" |
-| percent | 无 | 网络丢包的比例 | string 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 1 |
-| protocol | p | 只影响指定的 IP 协议 | string 类型，支持协议类型包括：tcp、 udp、icmp、all（表示影响所有网络协议） |
-| source-port | s | 仅影响到来自指定源端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
-
-#### 网络包丢失示例
-
 运行以下命令，模拟网络包丢失：
 
 ```bash
@@ -307,11 +325,29 @@ chaosd attack network loss -d eth0 -i 172.16.4.4 --percent 50
 Attack network successfully, uid: 1e818adf-3942-4de4-949b-c8499f120265
 ```
 
-### 使用命令行模式模拟网络分区
+### 使用服务模式模拟网络包丢失场景
 
-可以运行网络分区命令，查看模拟网络分区场景支持的配置。
+示例如下：
 
-#### 网络分区命令
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"loss","ip-address":"172.16.4.4","device":"eth0","percent":"50"}'
+```
+
+## 模拟网络分区场景
+
+### 模拟网络分区相关参数说明
+
+| 配置项 | 配置缩写 | 服务模式字段 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | 实验的行为 | string 类型 | 设置为 "partition" |
+| `accept-tcp-flags` | 无 | accept-tcp-flags | 表示接收包含指定标志的 tcp 数据包，其他的则丢弃。具体配置规则参考 iptables 的 tcp-flags。仅当 protocol 为 tcp 时可以配置。 | string 类型 | 例如："SYN,ACK SYN,ACK" |
+| `device` | d | device | 影响的网卡设备名称 | string 类型 | 例如 "eth0"，必须要设置 |
+| `direction` | 无 | direction | 指定分区的方向，可选值为 "to"、"from" 或 "both"。"from" 表示来自 "ip" 或 "hostname" 指定地址并发往你的服务器的数据包；"to" 表示从你的服务器发出并发往 "ip" 或 "hostname" 指定地址的数据包 | string 类型 | 可选值为 "to"、"from" 或 "both"，默认值为 "both" |
+| `hostname` | H | hostname | 只影响到指定的主机名 | string 类型 | 如 "chaos-mesh.org" |
+| `ip` | i | ip-address | 只影响到指定的 IP 地址 | string 类型 | 如 "123.123.123.123" |
+| `protocol` | p | ip-protocol | 只影响指定的 IP 协议 | string 类型 | 支持协议类型包括：tcp、udp、icmp、all（表示影响所有网络协议） |
+
+### 使用命令行模式模拟网络分区场景
 
 具体命令如下所示：
 
@@ -337,34 +373,36 @@ Flags:
   -p, --protocol string           only impact traffic using this IP protocol, supported: tcp, udp, icmp, all
 
 Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
+      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
       --uid string         the experiment ID
 ```
 
-#### 网络分区相关配置说明
-
-相关配置说明如下所示：
-
-| 配置项 | 配置缩写 | 说明 | 值 |
-| :-- | :-- | :-- | :-- |
-| accept-tcp-flags | 无 | 表示接收包含指定标志的 tcp 数据包，其他的则丢弃。具体配置规则参考 iptables 的 tcp-flags。仅当 protocol 为 tcp 时可以配置。 | string 类型，例如："SYN,ACK SYN,ACK" |
-| device | d | 影响的网卡设备名称 | string 类型，例如 "eth0"，必须要设置 |
-| direction | 无 | 指定分区的方向，可选值为 "to"、"from" 或 "both"。"from" 表示来自 "ip" 或 "hostname" 指定地址并发往你的服务器的数据包；"to" 表示从你的服务器发出并发往 "ip" 或 "hostname" 指定地址的数据包 | string 类型，可选值为 "to"、"from" 或 "both"，默认值为 "both" |
-| hostname | H | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org" |
-| ip | i | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123" |
-| protocol | p | 只影响指定的 IP 协议 | string 类型，支持协议类型包括：tcp、udp、icmp、all（表示影响所有网络协议） |
-
-#### 网络分区命令示例
+运行以下命令，模拟网络分区：
 
 ```bash
-./chaosd attack network partition -i 172.16.4.4 -d eth0 --direction from
+chaosd attack network partition -i 172.16.4.4 -d eth0 --direction from
 ```
 
-### 使用命令行模式模拟 DNS 故障
+### 使用服务模式模拟网络分区场景
 
-可以运行 DNS 故障命令，查看模拟 DNS 故障场景支持的配置。
+示例如下：
 
-#### DNS 故障命令
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"partition","ip-address":"172.16.4.4","device":"eth0","direction":"from"}'
+```
+
+## 模拟 DNS 故障场景
+
+### 模拟 DNS 故障相关参数说明
+
+| 配置项 | 配置缩写 | 服务模式字段 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | 实验的行为 | string 类型 | 设置为 "dns" |
+| `dns-domain-name` | d | dns-domain-name | 表示影响的域名。 | string 类型 | 例如："chaos-mesh.org" |
+| `dns-ip` | i | dns-ip | 表示将影响的域名映射到该地址。 | string 类型 | 例如 "123.123.123.123" |
+| `dns-server` | 无 | dns-server | 指定 DNS 服务地址。 | string 类型 | 默认值为 "123.123.123.123" |
+
+### 使用命令行模式模拟 DNS 故障场景
 
 具体命令如下所示：
 
@@ -382,31 +420,19 @@ Usage:
 
 Flags:
   -d, --dns-domain-name string   map this host to specified IP
-  -i, --dns-ip string         map specified host to this IP address
-      --dns-server string     update the DNS server in /etc/resolv.conf with this value (default "123.123.123.123")
-  -h, --help                  help for dns
+  -i, --dns-ip string            map specified host to this IP address
+      --dns-server string        update the DNS server in /etc/resolv.conf with this value (default "123.123.123.123")
+  -h, --help                     help for dns
 
 Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
+      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
       --uid string         the experiment ID
 ```
-
-#### DNS 故障相关配置说明
-
-相关配置说明如下所示：
-
-| 配置项          | 配置缩写 | 说明                           | 值                                      |
-| :-------------- | :------- | :----------------------------- | :-------------------------------------- |
-| dns-domain-name | d        | 表示影响的域名。               | string 类型，例如："chaos-mesh.org"     |
-| dns-ip          | i        | 表示将影响的域名映射到该地址。 | string 类型，例如 "123.123.123.123"     |
-| dns-server      | 无       | 指定 DNS 服务地址。            | string 类型，默认值为 "123.123.123.123" |
-
-#### DNS 故障示例
 
 通过映射指定的主机名和 IP 地址从而模拟 DNS 故障，运行命令如下所示：
 
 ```bash
-./chaosd attack network dns --dns-ip 123.123.123.123 --dns-domain-name chaos-mesh.org
+chaosd attack network dns --dns-ip 123.123.123.123 --dns-domain-name chaos-mesh.org
 ```
 
 配置错误的 DNS 服务地址从而模拟 DNS 故障，运行命令如下所示：
@@ -415,11 +441,31 @@ Global Flags:
 chaosd attack network dns --dns-server 123.123.123.123
 ```
 
-### 使用命令行模式限制网络带宽
+### 使用服务模式模拟 DNS 故障场景
 
-可以运行限制网络带宽命令，查看该场景支持的配置。
+示例如下：
 
-#### 限制网络带宽命令
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"dns","dns-domain-name":"chaos-mesh.org","dns-ip":"123.123.123.123"}'
+```
+
+## 模拟网络带宽限制场景
+
+### 模拟网络带宽限制相关参数说明
+
+| 配置项 | 配置缩写 | 服务模式字段 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | 实验的行为 | string 类型 | 设置为 "bandwidth" |
+| `buffer` | b | buffer | 能够瞬间发送的最大字节数 | uint32 类型 | 如：`10000`。必须要设置 |
+| `device` | d | device | 影响的网卡设备名称 | string 类型 | 如 `"eth0"`，必须要设置 |
+| `hostname` | H | hostname | 只影响到指定的主机名 | string 类型 | 如 `"chaos-mesh.org"`。`hostname` 与 `ip` 不能同时为空。同时设置 `hostname` 与 `ip` 时，配置项对指定的主机名和 IP 地址均产生影响 |
+| `ip` | i | ip-address | 仅影响到指定的 IP 地址 | string 类型 | 如 `"123.123.123.123"`。`hostname` 与 `ip` 不能同时为空。同时设置 `hostname` 与 `ip` 时，配置项对指定的主机名和 IP 地址均产生影响 |
+| `limit` | l | limit | 在队列中等待的字节数 | uint32 类型 | 如：`10000`。必须要设置 |
+| `minburst` | `m` | minburst | peakrate bucket 的大小 | uint32 类型 | 如：`10000` |
+| `peakrate` | 无 | peakrate | bucket 的最大消耗率 | uint64 类型 | 如：`10000` |
+| `rate` | r | rate | 带宽限制的速率 | string 类型 | 如 `"1mbps"`。必须要设置 |
+
+### 使用命令行模式模拟网络带宽限制场景
 
 具体命令如下所示：
 
@@ -451,32 +497,30 @@ Global Flags:
       --uid string         the experiment ID
 ```
 
-#### 限制网络带宽相关配置说明
-
-相关配置说明如下所示：
-
-| 配置项 | 配置缩写 | 说明 | 值 |
-| :-- | :-- | :-- | :-- |
-| buffer | b | 能够瞬间发送的最大字节数 | uint32 类型，如：`10000`。必须要设置 |
-| device | d | 影响的网卡设备名称 | string 类型，如 `"eth0"`，必须要设置 |
-| hostname | H | 只影响到指定的主机名 | string 类型，如 `"chaos-mesh.org"`。`hostname` 与 `ip` 不能同时为空。同时设置 `hostname` 与 `ip` 时，配置项对指定的主机名和 IP 地址均产生影响 |
-| ip | i | 仅影响到指定的 IP 地址 | string 类型，如 `"123.123.123.123"`。`hostname` 与 `ip` 不能同时为空。同时设置 `hostname` 与 `ip` 时，配置项对指定的主机名和 IP 地址均产生影响 |
-| limit | l | 在队列中等待的字节数 | uint32 类型，如：`10000`。必须要设置 |
-| minburst | `m` | peakrate bucket 的大小 | uint32 类型，如：`10000` |
-| peakrate | 无 | bucket 的最大消耗率 | uint64 类型，如：`10000` |
-| rate | r | 带宽限制的速率 | string 类型，如 `"1mbps"`。必须要设置 |
-
-#### 限制网络带宽示例
+运行以下命令，模拟网络带宽限制：
 
 ```bash
-./chaosd attack network bandwidth --buffer 10000 --device eth0 --limit 10000 --rate 10mbps
+chaosd attack network bandwidth --buffer 10000 --device eth0 --limit 10000 --rate 10mbps
 ```
 
-### 使用命令行模式占用端口
+### 使用服务模式模拟网络带宽限制场景
 
-可以运行占用端口命令，查看该场景支持的配置。
+示例如下：
 
-#### 占用端口命令
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"bandwidth","buffer":10000,"limit":10000,"rate":"10mbps","device":"eth0"}'
+```
+
+## 模拟端口占用场景
+
+### 模拟端口占用相关参数说明
+
+| 配置项   | 配置缩写 | 服务模式字段 | 说明         | 类型        | 值                     |
+| :------- | :------- | :----------- | :----------- | :---------- | :--------------------- |
+| `action` | —        | action       | 实验的行为   | string 类型 | 设置为 "occupied"      |
+| `port`   | p        | port         | 占用的端口号 | int 类型    | 例如：8080。必须要设置 |
+
+### 使用命令行模式模拟端口占用场景
 
 具体命令如下所示：
 
@@ -501,234 +545,16 @@ Global Flags:
       --uid string         the experiment ID
 ```
 
-#### 占用端口相关配置说明
-
-相关配置说明如下所示：
-
-| 配置项 | 配置缩写 | 说明         | 值                               |
-| :----- | :------- | :----------- | :------------------------------- |
-| port   | p        | 占用的端口号 | int 类型，例如：8080。必须要设置 |
-
-#### 占用端口示例
+运行以下命令，模拟端口占用：
 
 ```bash
-./chaosd attack network port --port 8080
+chaosd attack network port --port 8080
 ```
 
-## 使用服务模式创建网络故障实验
+### 使用服务模式模拟端口占用场景
 
-要使用服务模式创建实验，请进行以下操作：
-
-1. 以服务模式运行 chaosd。
-
-   ```bash
-   chaosd server --port 31767
-   ```
-
-2. 向 chaosd 服务的路径 /api/attack/network 发送 HTTP POST 请求：
-
-   ```bash
-   curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{fault-configuration}'
-   ```
-
-   其中 `fault-configuration` 需要按照故障类型进行配置，对应的配置参数请参考下文中各个类型故障的相关参数说明和命令示例。
-
-:::note
-
-在运行实验时，请注意保存实验的 uid 信息，当要结束 uid 对应的实验时，需要向 chaosd 服务的路径 `/api/attack/{uid}` 发送 HTTP DELETE 请求。
-
-:::
-
-### 使用服务模式模拟网络包错误
-
-在使用服务模拟网络包错误时，请参考如下内容。
-
-#### 网络包错误相关参数说明
-
-相关参数说明如下所示：
-
-| 参数 | 说明 | 值 |
-| :-- | :-- | :-- |
-| action | 实验的行为 | 设置为 "corrupt" |
-| correlation | 表示包错误发生的概率与前一次是否发生的相关性 | string 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 0 |
-| device | 影响的网卡设备名称 | string 类型，例如 "eth0"，必须要设置 |
-| egress-port | 仅影响到指定目的端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
-| hostname | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org" |
-| ip-address | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123" |
-| ip-protocol | 只影响指定的 IP 协议 | string 类型，支持协议类型包括：tcp、 udp、icmp、all（表示影响所有网络协议） |
-| source-port | 仅影响到来自指定源端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
-| percent | 网络包错误的比例 | string 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 1 |
-
-#### 使用服务模式模拟网络包错误示例
+示例如下：
 
 ```bash
-curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"corrupt","device":"eth0","ip-address":"172.16.4.4","percent":"50"}'
-```
-
-### 使用服务模式模拟网络包延迟
-
-在使用服务模拟网络包延迟时，请参考如下内容。
-
-#### 网络包延迟相关参数说明
-
-相关参数说明如下所示：
-
-| 参数 | 说明 | 值 |
-| :-- | :-- | :-- |
-| action | 实验的行为 | 设置为 "delay" |
-| correlation | 表示延迟时间的时间长度与前一次延迟时长的相关性 | string 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 0 |
-| device | 影响的网卡设备名称 | string 类型，例如 "eth0"，必须要设置 |
-| egress-port | 仅影响到指定目的端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
-| hostname | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org" |
-| ip-address | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123" |
-| jitter | 延迟时间的变化范围 | string 类型，可使用的时间单位包括：ns、us (µs)、ms、s、m、h，如 "1ms" |
-| latency | 表示延迟的时间长度 | string 类型，可使用的时间单位包括：ns、us (µs)、ms、s、m、h，如 "1ms" |
-| ip-protocol | 只影响指定的 IP 协议 | string 类型，支持协议类型包括：tcp、 udp、icmp、all（表示影响所有网络协议） |
-| source-port | 仅影响到来自指定源端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
-
-#### 使用服务模式模拟网络包延迟示例
-
-```bash
-curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"delay","device":"eth0","ip-address":"172.16.4.4","latency":"10ms"}'
-```
-
-### 使用服务模式模拟网络包重复
-
-在使用服务模拟网络包重复时，请参考如下内容。
-
-#### 网络包重复相关参数说明
-
-相关参数说明如下所示：
-
-| 参数 | 说明 | 值 |
-| :-- | :-- | :-- |
-| action | 实验的行为 | 设置为 "duplicate" |
-| correlation | 表示包重复发生的概率与前一次是否发生的相关性 | string 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 0 |
-| device | 影响的网卡设备名称 | string 类型，例如 "eth0"，必须要设置 |
-| egress-port | 仅影响到指定目的端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
-| hostname | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org" |
-| ip-address | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123" |
-| percent | 网络包重复的比例 | string 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 1 |
-| ip-protocol | 只影响指定的 IP 协议 | string 类型，支持协议类型包括：tcp、 udp、icmp、all（表示影响所有网络协议） |
-| source-port | 仅影响到来自指定源端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
-
-#### 使用服务模式模拟网络包重复示例
-
-```bash
-curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"duplicate","ip-address":"172.16.4.4","device":"eth0","percent":"50"}'
-```
-
-### 使用服务模式模拟网络包丢失
-
-在使用服务模拟网络包丢失时，请参考如下内容。
-
-#### 网络包丢失相关参数说明
-
-相关参数说明如下所示：
-
-| 参数 | 说明 | 值 |
-| :-- | :-- | :-- |
-| action | 实验的行为 | 设置为 "loss" |
-| correlation | 表示丢包发生的概率与前一次是否发生的相关性 | string 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 0 |
-| device | 影响的网卡设备名称 | string 类型，例如 "eth0"，必须要设置 |
-| egress-port | 仅影响到指定目的端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
-| hostname | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org" |
-| ip-address | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123" |
-| percent | 网络丢包的比例 | string 类型，取值范围为 0 到 100，表示百分比（10 表示 10%），默认值为 1 |
-| ip-protocol | 只影响指定的 IP 协议 | string 类型，支持协议类型包括：tcp、 udp、icmp、all（表示影响所有网络协议） |
-| source-port | 仅影响到来自指定源端口的出口流量，仅当 protocol 为 tcp 或 udp 时配置 | string 类型，使用 "," 分隔指定的端口或者端口范围，如 "80,8001:8010" |
-
-#### 使用服务模式模拟网络包丢失示例
-
-```bash
-curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"loss","ip-address":"172.16.4.4","device":"eth0","percent":"50"}'
-```
-
-### 使用服务模式模拟网络分区
-
-在使用服务模式模拟网络分区时，请参考如下内容。
-
-#### 网络分区相关参数说明
-
-相关参数说明如下所示：
-
-| 参数 | 说明 | 值 |
-| :-- | :-- | :-- |
-| action | 实验的行为 | 设置为 "partition" |
-| accept-tcp-flags | 表示接收包含指定标志的 tcp 数据包，其他的则丢弃。具体配置规则参考 iptables 的 tcp-flags。仅当 protocol 为 tcp 时可以配置。 | string 类型，例如："SYN,ACK SYN,ACK" |
-| device | 影响的网卡设备名称 | string 类型，例如 "eth0"，必须要设置 |
-| direction | 指定分区的方向，可选值为 "to"、"from" 或 "both"。"from" 表示来自 "ip-address" 或 "hostname" 指定地址并发往你的服务器的数据包；"to" 表示从你的服务器发出并发往 "ip-address" 或 "hostname" 指定地址的数据包 | string 类型，可选值为 "to"、"from" 或 "both"，默认值为 "both" |
-| hostname | 只影响到指定的主机名 | string 类型，如 "chaos-mesh.org" |
-| ip-address | 只影响到指定的 IP 地址 | string 类型，如 "123.123.123.123" |
-| protocol | 只影响指定的 IP 协议 | string 类型，支持协议类型包括：tcp、udp、icmp、all（表示影响所有网络协议） |
-
-#### 服务模式网络分区命令示例
-
-```bash
-curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"partition","ip-address":"172.16.4.4","device":"eth0","direction":"from"}'
-```
-
-### 使用服务模式模拟 DNS 故障
-
-在使用服务模拟 DNS 故障时，请参考如下内容。
-
-#### DNS 故障相关参数说明
-
-相关参数说明如下所示：
-
-| 参数            | 说明                           | 值                                      |
-| :-------------- | :----------------------------- | :-------------------------------------- |
-| action          | 实验的行为                     | 设置为 "dns"                            |
-| dns-domain-name | 表示影响的域名。               | string 类型，例如："chaos-mesh.org"     |
-| dns-ip          | 表示将影响的域名映射到该地址。 | string 类型，例如 "123.123.123.123"     |
-| dns-server      | 指定 DNS 服务地址。            | string 类型，默认值为 "123.123.123.123" |
-
-#### 使用服务模式模拟 DNS 故障示例
-
-```bash
-curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"dns","dns-ip":"123.123.123.123","dns-domain-name":"chaos-mesh.org"}'
-```
-
-### 使用服务模式限制网络带宽
-
-在使用服务模式限制网络带宽，请参考如下内容。
-
-#### 限制网络带宽相关参数说明
-
-相关参数说明如下所示：
-
-| 参数 | 说明 | 值 |
-| :-- | :-- | :-- |
-| buffer | 能够瞬间发送的最大字节数 | uint32 类型，如：`10000`。必须要设置 |
-| device | 影响的网卡设备名称 | string 类型，如 `"eth0"`，必须要设置 |
-| hostname | 仅影响到指定的主机名 | string 类型，如 `"chaos-mesh.org"`。 `hostname` 与 `ip` 不能同时为空；同时设置 `hostname` 与 `ip` 时，配置项对指定的主机名和 IP 地址均产生影响 |
-| ip-address | 只影响到指定的 IP 地址 | string 类型，如 `"123.123.123.123"`。`hostname` 与 `ip` 不能都为空；同时设置 `hostname` 与 `ip` 时，配置项对指定的主机名和 IP 地址均产生影响 |
-| limit | 在队列中等待的字节数 | uint32 类型，如：`10000`。必须要设置 |
-| minburst | peakrate bucket 的大小 | uint32 类型，如：`10000` |
-| peakrate | bucket 的最大消耗率 | uint64 类型，如：`10000` |
-| rate | 带宽限制的速率 | string 类型，如 `"1mbps"`。必须要设置 |
-
-#### 使用服务模式限制网络带宽示例
-
-```bash
-curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"bandwidth","ip-address": "123.123.123.123", "buffer": 10000, "device": "eth0", "limit": 10000, "rate": "10mbps"}'
-```
-
-### 使用服务模式占用端口
-
-在使用服务模式占用端口，请参考如下内容。
-
-#### 占用端口相关参数说明
-
-相关配置说明如下所示：
-
-| 配置项 | 说明         | 值                               |
-| :----- | :----------- | :------------------------------- |
-| action | 实验的行为 | 设置为 "occupied" |
-| port   | 占用的端口号 | int 类型，例如：8080。必须要设置 |
-
-#### 使用服务模式占用端口示例
-
-```bash
-curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"occupied", "port": 8080}'
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"occupied","port":8080}'
 ```
