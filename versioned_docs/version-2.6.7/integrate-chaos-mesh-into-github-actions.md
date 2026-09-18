@@ -2,21 +2,21 @@
 title: Integrate Chaos Mesh to GitHub Actions
 ---
 
-This document describes how to integrate Chaos Mesh to customize the continuous integration (CI) using chaos-mesh-action. This helps you identify issues that have been introduced into system development before product releases.
+This document describes how to use chaos-mesh-action to integrate Chaos Mesh into the continuous integration (CI) workflow. This helps you identify issues that have been introduced into system development before product releases.
 
-chaos-mesh-action is a GitHub action that has been released on [GitHub Marketplace](https://github.com/marketplace/actions/chaos-mesh). Its source code is on [GitHub](https://github.com/chaos-mesh/chaos-mesh-action) as well.
+chaos-mesh-action is a GitHub action that has been released on [GitHub Marketplace](https://github.com/marketplace/actions/chaos-mesh). Its source code is also available on [GitHub](https://github.com/chaos-mesh/chaos-mesh-action).
 
 ## Design of chaos-mesh-action
 
-[GitHub Action](https://docs.github.com/en/actions) is the continuous integration (CI) and continuous deployment (CD) feature natively supported by GitHub. Using GitHub Action, you can easily automate and customize software development workflows right in your repository with GitHub Actions.
+[GitHub Action](https://docs.github.com/en/actions) is the continuous integration (CI) and continuous deployment (CD) feature natively supported by GitHub. Using GitHub Actions, you can easily automate and customize software development workflows directly in your repository.
 
-Equipped with GitHub Action, Chaos Mesh can be easily integrated into your daily development and tests, which ensures that all code submitted on GitHub is bug-free (to pass tests at least) without affecting the current logic. The image below shows chaos-mesh-action integrated into the CI workflow:
+With GitHub Actions, Chaos Mesh can be easily integrated into your daily development and testing, ensuring that all code submitted on GitHub is bug-free (or at least passes tests) without affecting the existing logic. The image below shows chaos-mesh-action integrated into the CI workflow:
 
 ![chaos-mesh-action-integrate-in-the-ci-workflow](./img/chaos-mesh-action-integrate-in-the-ci-workflow.png)
 
 ## Use chaos-mesh-action in GitHub workflow
 
-chaos-mesh-action works for GitHub workflow. GitHub workflow is a configurable automated process. You can set up GitHub workflows in your repository to build, test, pack, publish or deploy any GitHub project. To integrate Chaos Mesh into your CI, take the following process:
+chaos-mesh-action works with GitHub workflows. A GitHub workflow is a configurable automated process that you can set up in your repository to build, test, package, publish, or deploy any GitHub project. To integrate Chaos Mesh into your CI, follow the steps below:
 
 - Step 1: Design workflow
 - Step 2: Create workflow
@@ -24,7 +24,7 @@ chaos-mesh-action works for GitHub workflow. GitHub workflow is a configurable a
 
 ### Step 1: Design workflow
 
-Before designing a workflow, take the following questions into consideration:
+Before designing a workflow, consider the following questions:
 
 - What features do you want to test in this workflow?
 - What type of fault will be injected?
@@ -33,7 +33,7 @@ Before designing a workflow, take the following questions into consideration:
 For example, we can design a simple workflow for tests. The steps below can be included:
 
 1. Create two Pods in the Kubernetes cluster.
-2. Send ping request from one Pod to another Pod.
+2. Send a ping request from one Pod to another Pod.
 3. Use Chaos Mesh to inject the network latency fault to test whether the ping command is affected.
 
 ### Step 2: Create workflow
@@ -45,11 +45,11 @@ After the workflow is designed, take the following steps to create a workflow.
 
 ![creating-a-workflow](./img/creating-a-workflow.png)
 
-In essence, workflow is a sequentially automated job configuration. Note that the following job is configured in a single file. To provide a clear explanation, the script is split into different working groups, as shown below in:
+In essence, a workflow is a sequentially automated job configuration. Note that the following job is configured in a single file. For clarity, the script is split into different working groups, as shown below:
 
 - Set the workflow name and the trigger rules.
 
-  Name the workflow to "Chaos". When you commit code or create a pull request to a master branch, this workflow is triggered.
+  Name the workflow "Chaos". When you commit code or create a pull request to the master branch, this workflow is triggered.
 
   ```yaml
   name: Chaos
@@ -107,7 +107,7 @@ In essence, workflow is a sequentially automated job configuration. Note that th
         CFG_BASE64: YXBpVmVyc2lvbjogY2hhb3MtbWVzaC5vcmcvdjFhbHBoYTEKa2luZDogTmV0d29ya0NoYW9zCm1ldGFkYXRhOgogIG5hbWU6IG5ldHdvcmstZGVsYXkKICBuYW1lc3BhY2U6IGJ1c3lib3gKc3BlYzoKICBhY3Rpb246IGRlbGF5ICMgdGhlIHNwZWNpZmljIGNoYW9zIGFjdGlvbiB0byBpbmplY3QKICBtb2RlOiBhbGwKICBzZWxlY3RvcjoKICAgIHBvZHM6CiAgICAgIGJ1c3lib3g6CiAgICAgICAgLSBidXN5Ym94LTAKICBkZWxheToKICAgIGxhdGVuY3k6ICIxMG1zIgogIGR1cmF0aW9uOiAiNXMiCiAgc2NoZWR1bGVyOgogICAgY3JvbjogIkBldmVyeSAxMHMiCiAgZGlyZWN0aW9uOiB0bwogIHRhcmdldDoKICAgIHNlbGVjdG9yOgogICAgICBwb2RzOgogICAgICAgIGJ1c3lib3g6CiAgICAgICAgICAtIGJ1c3lib3gtMQogICAgbW9kZTogYWxsCg==
   ```
 
-  Using chaos-mesh-action, Chaos Mesh is be installed and injects faults automatically. You only need to prepare the configuration of the chaos experiment and get its value encoded in base64. If you want to inject network latency to the Pod, you can use the following configuration example:
+  With chaos-mesh-action, Chaos Mesh is installed and faults are injected automatically. You only need to prepare the configuration of the chaos experiment and get its value encoded in base64. If you want to inject network latency to the Pod, you can use the following configuration example:
 
   ```yaml
   apiVersion: chaos-mesh.org/v1alpha1
@@ -150,16 +150,15 @@ In essence, workflow is a sequentially automated job configuration. Note that th
   - name: Verify
        run: |
          echo "do some verification"
-         kubectl exec busybox-0 -it -n busybox -- ping -c 30 busybox-1.busybox.busybox.svc
+         kubectl exec busybox-0 -n busybox -- ping -c 30 busybox-1.busybox.busybox.svc
   ```
 
 ### Step 3: Run workflow
 
-Once a workflow is created, you can trigger it by creating a pull request to a master branch. Once the workflow completes its running process, the output of the job verification is similar to the one below:
+Once a workflow is created, you can trigger it by creating a pull request to the master branch. After the workflow finishes running, the output of the verification job is similar to the following:
 
 ```log
 do some verification
-Unable to use a TTY - input is not a terminal or the right kind of file
 PING busybox-1.busybox.busybox.svc (10.244.0.6): 56 data bytes
 64 bytes from 10.244.0.6: seq=0 ttl=63 time=0.069 ms
 64 bytes from 10.244.0.6: seq=1 ttl=63 time=10.136 ms
@@ -174,12 +173,12 @@ PING busybox-1.busybox.busybox.svc (10.244.0.6): 56 data bytes
 ……
 ```
 
-The output shows a series of 10-milliseconds delays, and each delay lasts for 5 seconds (which is 5 times). This is consistent with the configuration of chaos experiments that are injected using chaos-mesh-action.
+The output shows a series of delays of about 10 milliseconds, lasting for about 5 seconds (5 ping requests). This is consistent with the configuration of the chaos experiment injected using chaos-mesh-action.
 
 ## What's next
 
-Currently, chaos-mesh-action has been applied in [TiDB Operator](https://github.com/pingcap/tidb-operator). By injecting Pod faults into the workflow, you can verify the restart of the Operator instances. This is to ensure that the TiDB Operator can work properly when a Pod of TiDB operator is randomly deleted by the injected fault. For details, see the [TiDB Operator Workflow page](https://github.com/pingcap/tidb-operator/actions?query=workflow%3Achaos).
+Currently, chaos-mesh-action has been applied in [TiDB Operator](https://github.com/pingcap/tidb-operator). By injecting Pod faults into the workflow, you can verify the restart of the Operator instances. This ensures that the TiDB Operator can work properly when a Pod of the TiDB Operator is randomly deleted by the injected fault. For details, see the [TiDB Operator Workflow page](https://github.com/pingcap/tidb-operator/actions?query=workflow%3Achaos).
 
-In the future, chaos-mesh-action will be applied in more TiDB tests to ensure the stability of TiDB and its components. Your are welcome to use chaos-mesh-action to create your own workflow.
+In the future, chaos-mesh-action will be applied in more TiDB tests to ensure the stability of TiDB and its components. You are welcome to use chaos-mesh-action to create your own workflow.
 
-If you find any issue in chaos-mesh-action, or find any information is missing, you are welcome to create an [GitHub issue](https://github.com/pingcap/chaos-mesh/issues) or a [pull request (PR)](https://github.com/chaos-mesh/chaos-mesh/pulls) in the Chaos Mesh repository. You can also join our slack channel [#project-chaos-mesh](https://slack.cncf.io/) in the [CNCF](https://www.cncf.io/) workspace.
+If you find any issue in chaos-mesh-action, or find any information is missing, you are welcome to create a [GitHub issue](https://github.com/chaos-mesh/chaos-mesh/issues) or a [pull request (PR)](https://github.com/chaos-mesh/chaos-mesh/pulls) in the Chaos Mesh repository. You can also join our Slack channel [#project-chaos-mesh](https://slack.cncf.io/) in the [CNCF](https://www.cncf.io/) workspace.

@@ -1,22 +1,22 @@
 ---
-title: 集成 Chaos Mesh 到 GitHub Actions
+title: 将 Chaos Mesh 集成到 GitHub Actions
 ---
 
 本文介绍如何使用 chaos-mesh-action 将 Chaos Mesh 集成到 CI 中，帮助你在产品发布前发现在系统开发过程中引入的问题。
 
-chaos-mesh-action 是一个 GitHub action，已经在 [GitHub 市场](https://github.com/marketplace/actions/chaos-mesh)上发布，源代码也在 [GitHub](https://github.com/chaos-mesh/chaos-mesh-action) 上。
+chaos-mesh-action 是一个 GitHub action，已发布到 [GitHub Marketplace](https://github.com/marketplace/actions/chaos-mesh)，源代码同样托管在 [GitHub](https://github.com/chaos-mesh/chaos-mesh-action) 上。
 
 ## chaos-mesh-action 的设计
 
-[GitHub Action](https://docs.github.com/en/actions) 是 GitHub 原生支持的 CI/CD 功能，通过它你可以轻松地在 GitHub 仓库中构建自动化和自定义的软件开发工作流 (workflow)。
+[GitHub Actions](https://docs.github.com/en/actions) 是 GitHub 原生支持的 CI/CD 功能，借助它，你可以直接在仓库中自动化和自定义软件开发工作流（workflow）。
 
-结合 GitHub Action，Chaos Mesh 可以更容易地融入到系统的日常开发和测试中，从而保证每次在 GitHub 上提交的代码没有 bug（至少可以通过测试），不会破坏现有的逻辑。 下图显示了集成到 CI workflow 中的 chaos-mesh-action：
+借助 GitHub Actions，Chaos Mesh 可以更容易地融入系统的日常开发和测试，确保所有提交到 GitHub 的代码没有 bug（至少能通过测试），且不会影响现有的逻辑。下图显示了集成到 CI workflow 中的 chaos-mesh-action：
 
 ![chaos-mesh-action-integrate-in-the-ci-workflow](./img/chaos-mesh-action-integrate-in-the-ci-workflow.png)
 
 ## 在 GitHub workflow 中使用 chaos-mesh-action
 
-chaos-mesh-action 用于 Github workflow。 GitHub workflow 是一个可配置的自动化流程，你可以在你的仓库中设置它，以构建、测试、打包、发布或部署任何 GitHub 项目。 要将 Chaos Mesh 集成到你的 CI 中，请执行以下操作：
+chaos-mesh-action 用于 GitHub workflow。GitHub workflow 是一个可配置的自动化流程，你可以在仓库中设置它，以构建、测试、打包、发布或部署任何 GitHub 项目。要将 Chaos Mesh 集成到你的 CI 中，请按照以下步骤操作：
 
 - 第 1 步：设计 workflow
 - 第 2 步：创建 workflow
@@ -24,7 +24,7 @@ chaos-mesh-action 用于 Github workflow。 GitHub workflow 是一个可配置�
 
 ### 第 1 步：设计 workflow
 
-在设计 workflow 之前，你必须考虑以下问题：
+在设计 workflow 之前，你需要考虑以下问题：
 
 - 要在此 workflow 中测试哪些功能？
 - 要注入哪些类型的故障？
@@ -34,7 +34,7 @@ chaos-mesh-action 用于 Github workflow。 GitHub workflow 是一个可配置�
 
 1. 在 Kubernetes 集群中创建两个 Pod。
 2. 从一个 Pod ping 另一个 Pod。
-3. 使用 Chaos Mesh 注入网络延迟故障，测试 ping 命令是否收到影响。
+3. 使用 Chaos Mesh 注入网络延迟故障，测试 ping 命令是否受到影响。
 
 ### 第 2 步：创建 workflow
 
@@ -45,7 +45,7 @@ chaos-mesh-action 用于 Github workflow。 GitHub workflow 是一个可配置�
 
 ![creating-a-workflow](./img/creating-a-workflow.png)
 
-workflow 本质上是按顺序自动进行的作业配置。 请注意，以下的作业（job）是在单个文件中配置的。 为了更好地说明，本文将脚本拆分为不同的作业组，如下所示：
+workflow 本质上是按顺序执行的自动化作业配置。请注意，下面的作业（job）是在单个文件中配置的。为了更好地说明，本文将脚本拆分为不同的作业组，如下所示：
 
 - 设置 workflow 名称和触发规则
 
@@ -65,7 +65,7 @@ workflow 本质上是按顺序自动进行的作业配置。 请注意，以下�
 
 - 安装 CI 相关的环境
 
-  此配置指定操作系统 (Ubuntu)，并使用 helm/kind-action 创建 Kind 集群。 然后，它输出集群的相关信息。最后，它会检出该 workflow 要访问的 GitHub 仓库。
+  此配置指定操作系统（Ubuntu），并使用 helm/kind-action 创建 Kind 集群，然后输出集群的相关信息，最后检出该 workflow 要访问的 GitHub 仓库。
 
   ```yaml
   jobs:
@@ -107,7 +107,7 @@ workflow 本质上是按顺序自动进行的作业配置。 请注意，以下�
         CFG_BASE64: YXBpVmVyc2lvbjogY2hhb3MtbWVzaC5vcmcvdjFhbHBoYTEKa2luZDogTmV0d29ya0NoYW9zCm1ldGFkYXRhOgogIG5hbWU6IG5ldHdvcmstZGVsYXkKICBuYW1lc3BhY2U6IGJ1c3lib3gKc3BlYzoKICBhY3Rpb246IGRlbGF5ICMgdGhlIHNwZWNpZmljIGNoYW9zIGFjdGlvbiB0byBpbmplY3QKICBtb2RlOiBhbGwKICBzZWxlY3RvcjoKICAgIHBvZHM6CiAgICAgIGJ1c3lib3g6CiAgICAgICAgLSBidXN5Ym94LTAKICBkZWxheToKICAgIGxhdGVuY3k6ICIxMG1zIgogIGR1cmF0aW9uOiAiNXMiCiAgc2NoZWR1bGVyOgogICAgY3JvbjogIkBldmVyeSAxMHMiCiAgZGlyZWN0aW9uOiB0bwogIHRhcmdldDoKICAgIHNlbGVjdG9yOgogICAgICBwb2RzOgogICAgICAgIGJ1c3lib3g6CiAgICAgICAgICAtIGJ1c3lib3gtMQogICAgbW9kZTogYWxsCg==
   ```
 
-  通过 chaos-mesh-action，Chaos Mesh 的安装和故障的注入会自动完成。你只需要准备好混沌实验的配置，并获取它的 Base64 值。如果想给 Pod 注入网络延迟，可以使用以下示例配置：
+  使用 chaos-mesh-action 后，Chaos Mesh 会被自动安装，并自动注入故障。你只需要准备好混沌实验的配置，并获取其 Base64 值。如果想给 Pod 注入网络延迟，可以使用以下示例配置：
 
   ```yaml
   apiVersion: chaos-mesh.org/v1alpha1
@@ -144,22 +144,21 @@ workflow 本质上是按顺序自动进行的作业配置。 请注意，以下�
 
 - 验证系统正确性
 
-  在此 job 中，workflow 从一个 Pod 中 ping 另一个 Pod。请观察网络延迟的变化。
+  在此 job 中，workflow 会从一个 Pod 向另一个 Pod 发送 ping 请求，并观察网络延迟。
 
   ```yaml
   - name: Verify
        run: |
          echo "do some verification"
-         kubectl exec busybox-0 -it -n busybox -- ping -c 30 busybox-1.busybox.busybox.svc
+         kubectl exec busybox-0 -n busybox -- ping -c 30 busybox-1.busybox.busybox.svc
   ```
 
 ### 第 3 步：运行 workflow
 
-创建好 workflow 后，可以通过向 master 分支提交 pull request 来触发它。workflow 运行完成后，验证 job 中输出的结果类似于以下内容：
+创建好 workflow 后，可以通过向 master 分支提交 pull request 来触发它。workflow 运行完成后，验证 job 的输出结果类似于以下内容：
 
 ```log
 do some verification
-Unable to use a TTY - input is not a terminal or the right kind of file
 PING busybox-1.busybox.busybox.svc (10.244.0.6): 56 data bytes
 64 bytes from 10.244.0.6: seq=0 ttl=63 time=0.069 ms
 64 bytes from 10.244.0.6: seq=1 ttl=63 time=10.136 ms
@@ -174,12 +173,12 @@ PING busybox-1.busybox.busybox.svc (10.244.0.6): 56 data bytes
 ……
 ```
 
-输出显示了一连串的 10 毫秒延迟，每次延迟大约 5 秒（也就是 5 次）。 这与我们使用 chaos-mesh-action 注入的的混沌实验配置一致。
+输出显示了一系列约 10 毫秒的延迟，持续约 5 秒（5 个 ping 请求）。这与使用 chaos-mesh-action 注入的混沌实验配置一致。
 
 ## 探索更多
 
-目前 chaos-mesh-action 已经应用于 [TiDB Operator](https://github.com/pingcap/tidb-operator) 项目，可以在 workflow 中注入 Pod 故障用于验证 Operator 实例的重启功能。 目的是为了保证在注入的故障随机删除 Operator 的 Pod 时，TiDB Operator 能够正常工作。 更多详情可以查看 [TiDB Operator 页面](https://github.com/pingcap/tidb-operator/actions?query=workflow%3Achaos)。
+目前，chaos-mesh-action 已被应用于 [TiDB Operator](https://github.com/pingcap/tidb-operator)。通过在 workflow 中注入 Pod 故障，可以验证 Operator 实例的重启功能。这可以确保当注入的故障随机删除 TiDB Operator 的某个 Pod 时，TiDB Operator 仍能正常工作。更多详情可以查看 [TiDB Operator 页面](https://github.com/pingcap/tidb-operator/actions?query=workflow%3Achaos)。
 
-未来，chaos-mesh-action 将被应用到 TiDB 更多的测试中，以保证 TiDB 及相关组件的稳定性。 欢迎使用 chaos-mesh-action 创建自己的 workflow。
+未来，chaos-mesh-action 将被应用到更多 TiDB 测试中，以保证 TiDB 及相关组件的稳定性。欢迎使用 chaos-mesh-action 创建自己的 workflow。
 
-如果你发现错误，或者认为缺少某些内容，请随时提交 [issue](https://github.com/pingcap/chaos-mesh/issues)、[pull request(PR)](https://github.com/chaos-mesh/chaos-mesh/pulls)，或加入我们的 [CNCF](https://www.cncf.io/) slack 工作区中的 [#project-chaos-mesh](https://slack.cncf.io/) 频道。
+如果你发现任何问题，或者发现缺少某些信息，欢迎在 Chaos Mesh 仓库中创建 [GitHub issue](https://github.com/chaos-mesh/chaos-mesh/issues) 或 [pull request (PR)](https://github.com/chaos-mesh/chaos-mesh/pulls)。你也可以加入 [CNCF](https://www.cncf.io/) 工作区中的 Slack 频道 [#project-chaos-mesh](https://slack.cncf.io/)。
