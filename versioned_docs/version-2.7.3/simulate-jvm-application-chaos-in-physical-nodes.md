@@ -128,6 +128,8 @@ Attack jvm successfully, uid: 26a45ae2-d395-46f5-a126-2b2c6c85ae9d
 
 ### Throw custom exceptions using the service mode
 
+#### Example for throwing custom exceptions using the service mode
+
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"exception","class":"Main","method":"sayhello","exception":"java.io.IOException(\"BOOM\")","pid":1828622}'
 ```
@@ -191,6 +193,8 @@ Attack jvm successfully, uid: f360e70a-5359-49b6-8526-d7e0a3c6f696
 Triggering garbage collection is a one-time operation, and the experiment does not require recovery.
 
 ### Trigger garbage collection using the service mode
+
+#### Example for triggering garbage collection using the service mode
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"gc","pid":1828622}'
@@ -263,6 +267,8 @@ Attack jvm successfully, uid: bbe00c57-ac9d-4113-bf0c-2a6f184be261
 
 ### Increase method latency using the service mode
 
+#### Example for increasing method latency using the service mode
+
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"latency","class":"Main","method":"sayhello","latency":5000,"pid":1828622}'
 ```
@@ -331,6 +337,8 @@ Attack jvm successfully, uid: e2f204f6-4bed-4d92-aade-2b4a47b02e5d
 ```
 
 ### Modify return values of a method using the service mode
+
+#### Example for modifying return values of a method using the service mode
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"return","class":"Main","method":"getnum","value":"999","pid":1828622}'
@@ -419,6 +427,8 @@ Attack jvm successfully, uid: 5ca2e06d-a7c6-421d-bb67-0c9908bac17a
 
 You can set the fault rules according to the Byteman rule configuration. For more information about the Byteman rule configuration, refer to [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language).
 
+#### Example for triggering faults by setting Byteman configuration files using the service mode
+
 First, based on the specific Java program and referring to [the Byteman rule language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language), write a rule configuration file. For example:
 
 ```txt
@@ -502,6 +512,8 @@ Attack jvm successfully, uid: b9b997b5-0a0d-4f1f-9081-d52a32318b84
 ```
 
 ### Increase JVM stress using the service mode
+
+#### Example for increasing JVM stress using the service mode
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"stress","cpu-count":1,"pid":1828622}'
@@ -637,6 +649,8 @@ Global Flags:
 ### Trigger faults in the MySQL Java client using the service mode
 
 Chaosd supports injecting latency or throwing exceptions when the MySQL Java client executes SQL statements of the specified types.
+
+#### Example for triggering faults using the service mode
 
 1. Deploy TiDB (or MySQL) and the demo application
 

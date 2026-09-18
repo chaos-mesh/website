@@ -111,6 +111,8 @@ Global Flags:
       --uid string         the experiment ID
 ```
 
+#### 抛出自定义异常示例
+
 示例如下：
 
 ```bash
@@ -125,6 +127,8 @@ Attack jvm successfully, uid: 26a45ae2-d395-46f5-a126-2b2c6c85ae9d
 ```
 
 ### 使用服务模式抛出自定义异常场景
+
+#### 使用服务模式抛出自定义异常示例
 
 向 Chaosd 服务的路径 `/api/attack/jvm` 发送 `POST` HTTP 请求，并配置如下 `fault-configuration`：
 
@@ -173,6 +177,8 @@ Global Flags:
       --uid string         the experiment ID
 ```
 
+#### 触发垃圾回收示例
+
 示例如下：
 
 ```bash
@@ -189,6 +195,8 @@ Attack jvm successfully, uid: f360e70a-5359-49b6-8526-d7e0a3c6f696
 触发垃圾回收为一次性操作，实验不需要恢复。
 
 ### 使用服务模式触发垃圾回收场景
+
+#### 使用服务模式触发垃圾回收示例
 
 向 Chaosd 服务的路径 `/api/attack/jvm` 发送 `POST` HTTP 请求，并配置如下 `fault-configuration`：
 
@@ -247,6 +255,8 @@ Global Flags:
       --uid string         the experiment ID
 ```
 
+#### 增加方法延迟示例
+
 示例如下：
 
 ```bash
@@ -262,6 +272,8 @@ Attack jvm successfully, uid: bbe00c57-ac9d-4113-bf0c-2a6f184be261
 ```
 
 ### 使用服务模式增加方法延迟场景
+
+#### 使用服务模式增加方法延迟示例
 
 向 Chaosd 服务的路径 `/api/attack/jvm` 发送 `POST` HTTP 请求，并配置如下 `fault-configuration`：
 
@@ -316,6 +328,8 @@ Global Flags:
       --uid string         the experiment ID
 ```
 
+#### 修改方法返回值示例
+
 示例如下：
 
 ```bash
@@ -331,6 +345,8 @@ Attack jvm successfully, uid: e2f204f6-4bed-4d92-aade-2b4a47b02e5d
 ```
 
 ### 使用服务模式修改方法返回值场景
+
+#### 使用服务模式修改方法返回值示例
 
 向 Chaosd 服务的路径 `/api/attack/jvm` 发送 `POST` HTTP 请求，并配置如下 `fault-configuration`：
 
@@ -386,6 +402,8 @@ Global Flags:
       --uid string         the experiment ID
 ```
 
+#### 设置 Byteman 配置文件触发故障示例
+
 首先根据具体的 Java 程序，并参考 [Byteman 规则语言](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language) 编写一个规则配置文件，例如：
 
 ```txt
@@ -416,6 +434,8 @@ Attack jvm successfully, uid: 5ca2e06d-a7c6-421d-bb67-0c9908bac17a
 ### 使用服务模式设置 Byteman 配置文件触发故障场景
 
 通过 Byteman 规则配置来设置故障规则。关于 Byteman 的规则配置，请参考 [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language)。
+
+#### 使用服务模式设置 Byteman 配置文件触发故障示例
 
 首先根据具体的 Java 程序，并参考 [Byteman 规则语言](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language) 编写一个规则配置文件，例如：
 
@@ -483,6 +503,8 @@ Global Flags:
       --uid string         the experiment ID
 ```
 
+#### 增加 JVM 压力示例
+
 示例如下：
 
 ```bash
@@ -498,6 +520,8 @@ Attack jvm successfully, uid: b9b997b5-0a0d-4f1f-9081-d52a32318b84
 ```
 
 ### 使用服务模式增加 JVM 压力场景
+
+#### 使用服务模式增加 JVM 压力示例
 
 向 Chaosd 服务的路径 `/api/attack/jvm` 发送 `POST` HTTP 请求，并配置如下 `fault-configuration`：
 
@@ -533,6 +557,8 @@ Chaosd 支持在 MySQL 的 Java 客户端执行指定类型的 SQL 语句时对�
 ### 使用命令行模式在 MySQL 的 Java 客户端注入故障场景
 
 要触发 MySQL Java 客户端故障，请按照以下步骤操作：
+
+#### 在 MySQL 的 Java 客户端注入故障示例
 
 1. 部署 TiDB（或者 MySQL）
 
@@ -607,6 +633,8 @@ Chaosd 支持在 MySQL 的 Java 客户端执行指定类型的 SQL 语句时对�
 Chaosd 支持在 MySQL 的 Java 客户端执行指定类型的 SQL 语句时对其注入延迟、抛出异常。
 
 要使用服务模式在 MySQL 的 Java 客户端注入故障，请按照以下步骤操作：
+
+#### 使用服务模式在 MySQL 的 Java 客户端注入故障示例
 
 1. 部署 TiDB（或者 MySQL）和 Demo 应用程序
 
