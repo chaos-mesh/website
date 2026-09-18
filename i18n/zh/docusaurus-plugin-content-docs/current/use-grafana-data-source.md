@@ -81,7 +81,7 @@ kubectl port-forward -n chaos-mesh svc/chaos-dashboard 2333:2333
 
 1. 点击 **Add header** 按钮。
 2. 在 **Header** 字段中填写 `Authorization`。
-3. 按照[此章节](./manage-user-permissions.md#get-the-token)获取 token。
+3. 按照[此章节](./manage-user-permissions.md#创建用户并绑定权限)获取 token。
 4. 在 **Value** 字段中填写 `Bearer YOUR_TOKEN`。
 
 然后不要忘记点击 **Save & test** 测试连接。

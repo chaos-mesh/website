@@ -173,7 +173,7 @@ PING busybox-1.busybox.busybox.svc (10.244.0.6): 56 data bytes
 ……
 ```
 
-输出显示了一系列约 10 毫秒的延迟，持续约 5 秒（5 个 ping 请求）。这与使用 chaos-mesh-action 注入的混沌实验配置一致。
+输出显示了一系列约 10 毫秒的延迟，持续约 5 秒。这与使用 chaos-mesh-action 注入的混沌实验配置一致。
 
 ## 探索更多
 

@@ -173,7 +173,7 @@ PING busybox-1.busybox.busybox.svc (10.244.0.6): 56 data bytes
 ……
 ```
 
-The output shows a series of delays of about 10 milliseconds, lasting for about 5 seconds (5 ping requests). This is consistent with the configuration of the chaos experiment injected using chaos-mesh-action.
+The output shows a series of delays of about 10 milliseconds, lasting for about 5 seconds. This is consistent with the configuration of the chaos experiment injected using chaos-mesh-action.
 
 ## What's next
 
