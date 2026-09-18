@@ -337,7 +337,8 @@ You can set the fault rules in the Byteman rule configuration file, and then inj
 | Configuration item | Abbreviation | Service mode field | Description | Type | Value |
 | :-- | :-- | :-- | :-- | :-- | :-- |
 | `action` | — | action | The action of the experiment. | string | Set to "rule-data". |
-| `path` | — | rule-data | Specifies the path of the Byteman configuration file | string | required |
+| `path` | — | — | Specifies the path of the Byteman configuration file | string | required |
+| `rule-data` | — | rule-data | Specifies the Byteman configuration data | string | required |
 | `pid` | — | pid | The Java process ID where the fault is to be injected | int | required |
 | `port` | — | port | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int | The default value is `9288`. |
 | `uid` | — | uid | The experiment ID | string | This item is not required to be configured, because Chaosd randomly creates one. |

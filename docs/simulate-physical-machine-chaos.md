@@ -150,7 +150,7 @@ To simulate a DNS fault scenario, you need to set the action to "network-dns". F
 
 #### Process fault
 
-To simulate a process fault scenario, you need to set the action to "process". For the corresponding configurations, refer to [Parameters for simulating process faults](simulate-process-chaos-in-physical-nodes.md#parameters-for-simulating-process-faults).
+To simulate a process fault scenario, you need to set the action to "process". For the corresponding configurations, refer to [Parameters for killing a process](simulate-process-chaos-in-physical-nodes.md#parameters-for-killing-a-process).
 
 #### Throw custom exceptions for JVM applications
 
@@ -174,4 +174,4 @@ To simulate a scenario that JVM applications trigger faults using Byteman config
 
 #### Time offset
 
-To simulate a time offset scenario, you need to set the action to "clock". For the corresponding configurations, refer to [Configurations of simulating time faults](simulate-time-chaos-on-physical-nodes.md#configurations-of-simulating-time-faults).
+To simulate a time offset scenario, you need to set the action to "clock". For the corresponding configurations, refer to [Parameters for simulating time faults](simulate-time-chaos-on-physical-nodes.md#parameters-for-simulating-time-faults).

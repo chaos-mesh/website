@@ -125,6 +125,7 @@ The result is as follows:
 | Configuration item | Abbreviation | Service mode field | Description | Type | Value |
 | :-- | :-- | :-- | :-- | :-- | :-- |
 | `process` | p | process | The name or the identifier of the process to be stopped | string | The default value is `""`. |
+| `signal` | — | signal | The provided value of the process signal | int | The default value is `9`. |
 
 ### Simulate stopping a process using the command-line mode
 

@@ -349,7 +349,8 @@ curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/js
 | 配置项 | 配置缩写 | 服务模式字段 | 说明 | 类型 | 值 |
 | :-- | :-- | :-- | :-- | :-- | :-- |
 | `action` | — | action | 实验的行为 | string 类型 | 设置为 "rule-data" |
-| `path` | None | rule-data | 指定 Byteman 配置文件的路径 | string 类型 | 必须配置 |
+| `path` | None | — | 指定 Byteman 配置文件的路径 | string 类型 | 必须配置 |
+| `rule-data` | — | rule-data | 指定 Byteman 配置数据 | string 类型 | 必须配置 |
 | `pid` | — | pid | 需要注入故障的 Java 进程号 | int 类型 | 必须配置 |
 | `port` | — | port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型 | 默认为 `9288` |
 | `uid` | — | uid | 实验的编号 | string 类型 | 可以不配置，因为 Chaosd 会随机生成一个 |

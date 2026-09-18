@@ -349,7 +349,8 @@ The result is as follows:
 | Configuration item | Abbreviation | Service mode field | Description | Type | Value |
 | :-- | :-- | :-- | :-- | :-- | :-- |
 | `action` | — | action | The action of the experiment | string | Set to `"rule-data"` |
-| `path` | None | rule-data | Specifies the path of the Byteman configuration file | string | Required |
+| `path` | None | — | Specifies the path of the Byteman configuration file | string | Required |
+| `rule-data` | — | rule-data | Specifies the Byteman configuration data | string | Required |
 | `pid` | — | pid | The Java process ID where the fault is to be injected | int | Required |
 | `port` | — | port | The port number attached to the Java process agent. The fault is injected into the Java process through this port number. | int | Default value: `9288` |
 | `uid` | — | uid | The experiment ID | string | Not required to be configured, because Chaosd randomly creates one. |

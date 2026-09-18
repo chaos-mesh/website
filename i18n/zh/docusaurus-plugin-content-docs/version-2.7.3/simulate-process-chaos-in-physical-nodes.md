@@ -57,7 +57,6 @@ curl -X POST 172.16.112.130:31767/api/attack/process -H "Content-Type:applicatio
 
 | 配置项 | 配置缩写 | 服务模式字段 | 说明 | 类型 | 值 |
 | :-- | :-- | :-- | :-- | :-- | :-- |
-| `action` | — | action | 实验的行为 | string 类型 | 设置为 "kill" |
 | `process` | p | process | 需要注入故障的进程的名字或者进程的标识符 | string 类型 | 默认值为 `""` |
 | `recover-cmd` | r | recover-cmd | 需要在实验恢复时执行的命令 | string 类型 | 默认值为 `""` |
 | `signal` | s | signal | 所提供的进程信号值 | int 类型 | 默认值为 `9`。目前只支持 `SIGKILL`、`SIGTERM` 和 `SIGSTOP` 三种信号值。 |
@@ -125,8 +124,8 @@ curl -X POST 172.16.112.130:31767/api/attack/process -H "Content-Type:applicatio
 
 | 配置项    | 配置缩写 | 服务模式字段 | 说明                                 | 类型        | 值            |
 | :-------- | :------- | :----------- | :----------------------------------- | :---------- | :------------ |
-| `action`  | —        | action       | 实验的行为                           | string 类型 | 设置为 "stop" |
 | `process` | p        | process      | 需要暂停的进程的名字或者进程的标识符 | string 类型 | 默认值为 `""` |
+| `signal`  | —        | signal       | 所提供的进程信号值                   | int 类型    | 默认为 `9`    |
 
 ### 使用命令行模式模拟停止进程场景
 
