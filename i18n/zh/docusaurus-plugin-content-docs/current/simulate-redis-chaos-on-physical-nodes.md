@@ -6,7 +6,7 @@ title: 模拟 Redis 故障
 
 ## 使用命令行模式创建实验
 
-在创建 Redis 故障实验前，可运行以下命令查看 Chaosd 支持的进程故障类型：
+在创建 Redis 故障实验前，可运行以下命令查看 Chaosd 支持的 Redis 故障类型：
 
 ```bash
 chaosd attack redis -h
@@ -321,12 +321,12 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 | `addr` | 需要注入故障的 Redis 服务器的地址以及端口号，如 `127.0.0.1:6379` | string | 默认为 `""` |
 | `password` | 登录 Redis 服务器的密码 | string | 默认为 `""` |
 | `percent` | 指定 `maxmemory` 为原值的百分比 | string | 默认为 `""` |
-| `size` | 指定 `maxmemory` 的大小 | string | 默认为 `0`，`0` 表示不限制内存大小 |
+| `cacheSize` | 指定 `maxmemory` 的大小 | string | 默认为 `0`，`0` 表示不限制内存大小 |
 
 #### 服务模式下模拟缓存限流示例
 
 ```bash
-curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json" -d '{"action":"cacheLimit", ""addr":"127.0.0.1:6379", "percent":"50%"}'
+curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json" -d '{"action":"cacheLimit", "addr":"127.0.0.1:6379", "percent":"50%"}'
 ```
 
 ### 服务模式下模拟缓存穿透
@@ -338,12 +338,12 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 | `action`      | 实验的行为                                                       | string   | 设置为 `"penetration"` |
 | `addr`        | 需要注入故障的 Redis 服务器的地址以及端口号，如 `127.0.0.1:6379` | string   | 默认为 `""`            |
 | `password`    | 登录 Redis 服务器的密码                                          | string   | 默认为 `""`            |
-| `request-num` | 指定向 Redis 服务器发送的无效请求数                              | int 类型 | 默认为 `0`             |
+| `requestNum` | 指定向 Redis 服务器发送的无效请求数                              | int 类型 | 默认为 `0`             |
 
 #### 服务模式下模拟缓存穿透示例
 
 ```bash
-curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json" -d '{"action":"penetration", ""addr":"127.0.0.1:6379", "request-num":"10000"}'
+curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json" -d '{"action":"penetration", "addr":"127.0.0.1:6379", "requestNum":10000}'
 ```
 
 ### 服务模式下模拟哨兵重启
@@ -355,14 +355,14 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 | `action` | 实验的行为 | string | 设置为 `"restart"` |
 | `addr` | 需要注入故障的 Redis Sentinel 的地址以及端口号，如 `127.0.0.1:26379` | string | 默认为 `""` |
 | `conf` | 指定哨兵的配置文件路径，用于恢复哨兵 | string | 默认为 `""` |
-| `flush-config` | 指定在哨兵重启前，是否将内存中的配置更新到配置文件中 | bool 类型 | 默认为 `true` |
+| `flushConfig` | 指定在哨兵重启前，是否将内存中的配置更新到配置文件中 | bool 类型 | 默认为 `true` |
 | `password` | 登录 Redis Sentinel 的密码 | string | 默认为 `""` |
-| `redis-path` | 指定 `redis-server` 命令的路径 | string | 默认为 `""` |
+| `redisPath` | 指定 `redis-server` 命令的路径 | string | 默认为 `""` |
 
 #### 服务模式下模拟哨兵重启示例
 
 ```bash
-curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json" -d '{"action":"restart", ""addr":"127.0.0.1:26379", "conf":"/home/redis-test/sentinel-26379.conf"}'
+curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json" -d '{"action":"restart", "addr":"127.0.0.1:26379", "conf":"/home/redis-test/sentinel-26379.conf"}'
 ```
 
 ### 服务模式下模拟哨兵不可用
@@ -374,12 +374,12 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 | `action`       | 实验的行为                                                           | string    | 设置为 `"stop"` |
 | `addr`         | 需要注入故障的 Redis Sentinel 的地址以及端口号，如 `127.0.0.1:26379` | string    | 默认为 `""`     |
 | `conf`         | 指定哨兵的配置文件路径，用于恢复哨兵                                 | string    | 默认为 `""`     |
-| `flush-config` | 指定在哨兵重启前，是否将内存中的配置更新到配置文件中                 | bool 类型 | 默认为 `true`   |
+| `flushConfig` | 指定在哨兵重启前，是否将内存中的配置更新到配置文件中                 | bool 类型 | 默认为 `true`   |
 | `password`     | 登录 Redis Sentinel 的密码                                           | string    | 默认为 `""`     |
-| `redis-path`   | 指定 `redis-server` 命令的路径                                       | string    | 默认为 `""`     |
+| `redisPath`   | 指定 `redis-server` 命令的路径                                       | string    | 默认为 `""`     |
 
 #### 服务模式下模拟哨兵不可用示例
 
 ```bash
-curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json" -d '{"action":"stop", ""addr":"127.0.0.1:26379", "conf":"/home/redis-test/sentinel-26379.conf"}'
+curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json" -d '{"action":"stop", "addr":"127.0.0.1:26379", "conf":"/home/redis-test/sentinel-26379.conf"}'
 ```

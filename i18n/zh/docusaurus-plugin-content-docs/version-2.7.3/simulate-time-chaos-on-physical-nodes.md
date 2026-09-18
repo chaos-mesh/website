@@ -71,9 +71,9 @@ chaosd attack clock -p $PID -t 11s
 
 | 配置项 | 类型 | 说明 | 默认值 | 必要项 | 例子 |
 | --- | --- | --- | --- | --- | --- |
-| timeOffset | string | 指定时间的偏移量。 | None | 是 | `-5m` |
-| clockIds | []string | 指定时间偏移作用的时钟，详见 [clock_gettime documentation](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) 。 | `["CLOCK_REALTIME"]` | 否 | `["CLOCK_REALTIME", "CLOCK_MONOTONIC"]` |
-| pid | string | 进程的标识符。 | None | 是 | `1` |
+| time-offset | string | 指定时间的偏移量。 | None | 是 | `-5m` |
+| clock-ids-slice | string | 指定时间偏移作用的时钟，多个时钟 ID 以逗号分隔，详见 [clock_gettime documentation](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) 。 | `CLOCK_REALTIME` | 否 | `"CLOCK_REALTIME,CLOCK_MONOTONIC"` |
+| pid | int | 进程的标识符。 | None | 是 | `1` |
 
 ## 使用服务模式创建实验
 
@@ -83,7 +83,7 @@ chaosd attack clock -p $PID -t 11s
 | :-- | :-- | :-- |
 | pid | 进程的标识符。 | int 类型 |
 | time-offset | 指定时间的偏移量。 | string 类型，例如："-5m" |
-| clock-ids-slice | 指定时间偏移作用的时钟，详见 [clock_gettime documentation](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) 。 | string 数组类型，默认为 `["CLOCK_REALTIME"]` |
+| clock-ids-slice | 指定时间偏移作用的时钟，详见 [clock_gettime documentation](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) 。 | string 类型，默认值为 `"CLOCK_REALTIME"` |
 
 ### 使用服务模式模拟时间故障示例
 

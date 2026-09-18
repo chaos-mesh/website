@@ -58,7 +58,7 @@ Before creating PhysicalMachineChaos experiments using Chaos Mesh, you need to d
 
 4. Submit the experiment.
 
-## Create experiments using an YAML file
+## Create experiments using a YAML file
 
 1. Write the experimental configurations to the "physicalmachine.yaml" file. For example:
 
@@ -106,72 +106,72 @@ Each fault action has its own specific configurations. The following section int
 
 #### CPU stress
 
-To simulate a CPU stress scenario, you need to set the action to "stress-cpu". For the corresponding configurations, refer to Parameters of simulating CPU stress.
+To simulate a CPU stress scenario, you need to set the action to "stress-cpu". For the corresponding configurations, refer to [Parameters for simulating CPU stress](simulate-heavy-stress-in-physical-nodes.md#parameters-for-simulating-cpu-stress).
 
 #### Memory stress
 
-To simulate a memory stress scenario, you need to set the action to "stress-mem". For the corresponding configurations, refer to Parameters of simulating memory stress.
+To simulate a memory stress scenario, you need to set the action to "stress-mem". For the corresponding configurations, refer to [Parameters for simulating memory stress](simulate-heavy-stress-in-physical-nodes.md#parameters-for-simulating-memory-stress).
 
 #### Disk read load
 
-To simulate a disk read load scenario, you need to set the action to "disk-read-payload". For the corresponding configurations, refer to Parameters of simulating disk read load.
+To simulate a disk read load scenario, you need to set the action to "disk-read-payload". For the corresponding configurations, refer to [Parameters for simulating disk read load](simulate-disk-pressure-in-physical-nodes.md#parameters-for-simulating-disk-read-load).
 
 #### Disk write load
 
-To simulate a disk write load scenario, you need to set the action to "disk-write-payload". For the corresponding configurations, refer to Parameters of simulating disk write load.
+To simulate a disk write load scenario, you need to set the action to "disk-write-payload". For the corresponding configurations, refer to [Parameters for simulating disk write load](simulate-disk-pressure-in-physical-nodes.md#parameters-for-simulating-disk-write-load).
 
 #### Disk fill
 
-To simulate a disk fill scenario, you need to set the action to "disk-fill". For the corresponding configurations, refer to Parameters of simulating disk fill.
+To simulate a disk fill scenario, you need to set the action to "disk-fill". For the corresponding configurations, refer to [Parameters for simulating disk fill](simulate-disk-pressure-in-physical-nodes.md#parameters-for-simulating-disk-fill).
 
 #### Network corruption
 
-To simulate a network corruption scenario, you need to set the action to "network-corrupt". For the corresponding configurations, refer to Parameters of simulating network corruption.
+To simulate a network corruption scenario, you need to set the action to "network-corrupt". For the corresponding configurations, refer to [Parameters for simulating network corruption](simulate-network-chaos-in-physical-nodes.md#parameters-for-simulating-network-corruption).
 
 #### Network latency
 
-To simulate a network latency scenario, you need to set the action to "network-delay". For the corresponding configurations, refer to Parameters of simulating network latency.
+To simulate a network latency scenario, you need to set the action to "network-delay". For the corresponding configurations, refer to [Parameters for simulating network latency](simulate-network-chaos-in-physical-nodes.md#parameters-for-simulating-network-latency).
 
 #### Network duplication
 
-To simulate a network duplication scenario, you need to set the action to "network-duplicate". For the corresponding configurations, refer to Parameters of simulating network duplication.
+To simulate a network duplication scenario, you need to set the action to "network-duplicate". For the corresponding configurations, refer to [Parameters for simulating network duplication](simulate-network-chaos-in-physical-nodes.md#parameters-for-simulating-network-duplication).
 
 #### Network loss
 
-To simulate a network loss scenario, you need to set the action to "network-loss". For the corresponding configurations, refer to Parameters of simulating network loss.
+To simulate a network loss scenario, you need to set the action to "network-loss". For the corresponding configurations, refer to [Parameters for simulating network loss](simulate-network-chaos-in-physical-nodes.md#parameters-for-simulating-network-loss).
 
 #### Network partition
 
-To simulate a network partition scenario, you need to set the action to "network-partition". For the corresponding configurations, refer to Parameters of simulating network partition.
+To simulate a network partition scenario, you need to set the action to "network-partition". For the corresponding configurations, refer to [Parameters for simulating network partition](simulate-network-chaos-in-physical-nodes.md#parameters-for-simulating-network-partition).
 
 #### DNS fault
 
-To simulate a DNS fault scenario, you need to set the action to "network-dns". For the corresponding configurations, refer to Parameters of simulating DNS fault.
+To simulate a DNS fault scenario, you need to set the action to "network-dns". For the corresponding configurations, refer to [Parameters for simulating DNS fault](simulate-network-chaos-in-physical-nodes.md#parameters-for-simulating-dns-fault).
 
 #### Process fault
 
-To simulate a process fault scenario, you need to set the action to "process". For the corresponding configurations, refer to Parameters of simulating process fault.
+To simulate a process fault scenario, you need to set the action to "process". For the corresponding configurations, refer to [Parameters for simulating process faults](simulate-process-chaos-in-physical-nodes.md#parameters-for-simulating-process-faults).
 
 #### Throw custom exceptions for JVM applications
 
-To simulate a scenario that JVM applications throw custom exceptions, you need to set the action to "jvm-exception". For the corresponding configurations, refer to Parameters for throwing custom exceptions.
+To simulate a scenario that JVM applications throw custom exceptions, you need to set the action to "jvm-exception". For the corresponding configurations, refer to [Parameters for throwing custom exceptions](simulate-jvm-application-chaos-in-physical-nodes.md#parameters-for-throwing-custom-exceptions).
 
 #### Increase method latency for JVM applications
 
-To simulate a scenario that JVM applications increase method latency, you need to set the action to "jvm-latency". For the corresponding configurations, refer to Parameters for increasing method latency.
+To simulate a scenario that JVM applications increase method latency, you need to set the action to "jvm-latency". For the corresponding configurations, refer to [Parameters for increasing method latency](simulate-jvm-application-chaos-in-physical-nodes.md#parameters-for-increasing-method-latency).
 
 #### Modify return values of methods for JVM applications
 
-To simulate a scenario that JVM applications modify return values of methods, you need to set the action to "jvm-return". For the corresponding configurations, refer to Parameters for modifying return values of a method.
+To simulate a scenario that JVM applications modify return values of methods, you need to set the action to "jvm-return". For the corresponding configurations, refer to [Parameters for modifying return values of a method](simulate-jvm-application-chaos-in-physical-nodes.md#parameters-for-modifying-return-values-of-a-method).
 
 #### Trigger garbage collection for JVM applications
 
-To simulate a scenario that JVM applications trigger garbage collection, you need to set the action to "jvm-gc". For the corresponding configurations, refer to Parameters for triggering garbage collection.
+To simulate a scenario that JVM applications trigger garbage collection, you need to set the action to "jvm-gc". For the corresponding configurations, refer to [Parameters for triggering garbage collection](simulate-jvm-application-chaos-in-physical-nodes.md#parameters-for-triggering-garbage-collection).
 
 #### Trigger faults using Byteman configuration files for JVM applications
 
-To simulate a scenario that JVM applications trigger faults using Byteman configuration files, you need to set the action to "jvm-rule-data". For the corresponding configurations, refer to Parameters for triggering faults by setting Byteman configuration files.
+To simulate a scenario that JVM applications trigger faults using Byteman configuration files, you need to set the action to "jvm-rule-data". For the corresponding configurations, refer to [Parameters for triggering faults by setting Byteman configuration files](simulate-jvm-application-chaos-in-physical-nodes.md#parameters-for-triggering-faults-by-setting-byteman-configuration-files).
 
 #### Time offset
 
-To simulate a time offset scenario, you need to set the action to "clock". For the corresponding configurations, refer to Parameters of simulating time offset.
+To simulate a time offset scenario, you need to set the action to "clock". For the corresponding configurations, refer to [Configurations of simulating time faults](simulate-time-chaos-on-physical-nodes.md#configurations-of-simulating-time-faults).
