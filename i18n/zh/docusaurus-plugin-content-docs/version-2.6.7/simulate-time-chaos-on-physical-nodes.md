@@ -4,17 +4,23 @@ title: 模拟时间故障
 
 本文主要介绍如何使用 Chaosd 模拟时间偏移的场景。本功能支持通过命令行模式或服务模式创建实验。
 
-## 使用命令行模式创建实验
+## 模拟时间故障相关参数说明
 
-本节介绍如何在命令行模式中创建时间故障实验。
+| 配置项 | 配置缩写 | 服务模式字段 | 说明 | 类型 | 值 |
+| --- | --- | --- | --- | --- | --- |
+| `time-offset` | — | `time-offset` | 指定时间偏移的时长。 | string 类型 | 例如 `-5m`。必须要设置 |
+| `clock-ids-slice` | — | `clock-ids-slice` | 指定将被偏移的时钟 ID，多个时钟 ID 以逗号分隔。详见 [clock_gettime 文档](https://man7.org/linux/man-pages/man2/clock_gettime.2.html)。 | string 类型 | 默认值为 `"CLOCK_REALTIME"` |
+| `pid` | — | `pid` | 进程的标识符。 | int 类型 | 必须要设置 |
 
-在创建时间故障实验前，可运行以下命令行查看时间故障的相关配置项：
+## 使用命令行模式模拟时间故障场景
 
-```
+在创建时间故障实验前，可运行以下命令查看时间故障的相关配置项：
+
+```bash
 chaosd attack clock -h
 ```
 
-结果如下所示：
+输出如下所示：
 
 ```bash
 $ chaosd attack clock -h
@@ -61,33 +67,15 @@ EOF
 gcc -o get_time ./time.c
 ```
 
-接下来执行 get_time 并且使用 chaosd 尝试创建时间故障如下：
+接下来执行 get_time 并且使用 chaosd 尝试创建时间故障，示例如下：
 
 ```bash
 chaosd attack clock -p $PID -t 11s
 ```
 
-### 模拟时间故障的相关配置
+## 使用服务模式模拟时间故障场景
 
-| 配置项 | 类型 | 说明 | 默认值 | 必要项 | 例子 |
-| --- | --- | --- | --- | --- | --- |
-| time-offset | string | 指定时间的偏移量。 | None | 是 | `-5m` |
-| clock-ids-slice | string | 指定时间偏移作用的时钟，多个时钟 ID 以逗号分隔，详见 [clock_gettime documentation](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) 。 | `CLOCK_REALTIME` | 否 | `"CLOCK_REALTIME,CLOCK_MONOTONIC"` |
-| pid | int | 进程的标识符。 | None | 是 | `1` |
-
-## 使用服务模式创建实验
-
-### 模拟时间故障相关参数说明
-
-| 参数 | 说明 | 值 |
-| :-- | :-- | :-- |
-| pid | 进程的标识符。 | int 类型 |
-| time-offset | 指定时间的偏移量。 | string 类型，例如："-5m" |
-| clock-ids-slice | 指定时间偏移作用的时钟，详见 [clock_gettime documentation](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) 。 | string 类型，默认值为 `"CLOCK_REALTIME"` |
-
-### 使用服务模式模拟时间故障示例
-
-运行[快速使用](#快速使用)中的测试程序，使用以下命令创建时间故障：
+运行 [快速使用](#快速使用) 中的测试程序，然后使用以下命令创建时间故障实验：
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/clock -H "Content-Type:application/json" -d '{"pid":123, "time-offset":"11s"}'
