@@ -57,6 +57,32 @@ roleRef:
 
 The `USER_ACCOUNT` above should be your Google Cloud user email.
 
+**For AWS EKS users:**
+
+If you encounter a similar issue on AWS EKS, with an error message like:
+```
+Error from server (Forbidden): error when creating "test.yaml": admission webhook "vauth.kb.io" denied the request: arn:aws:iam::xxxxxx:user/xxxx is forbidden on namespace xxxxxx
+```
+You can create a `ClusterRoleBinding` to grant the necessary permissions to your IAM user or role. Ensure that you have a `ClusterRole` named `chaos-mesh-admin` with the required permissions, or adjust the `roleRef.name` accordingly.
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: chaos-mesh-admin-binding
+subjects:
+- kind: User
+  name: arn:aws:iam::<AWS_ACCOUNT_ID>:user/<USERNAME>  # Replace with your IAM user ARN
+  # For IAM Roles (e.g., EC2 instance roles):
+  # name: arn:aws:iam::<AWS_ACCOUNT_ID>:role/<ROLE_NAME>
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: chaos-mesh-admin # Ensure this ClusterRole exists and has appropriate permissions
+  apiGroup: rbac.authorization.k8s.io
+```
+Replace `<AWS_ACCOUNT_ID>` and `<USERNAME>` (or `<ROLE_NAME>`) with your specific AWS account ID and IAM user name (or role name).
+
 ### Daemon throws an error similar to `version 1.41 is too new. The maximum supported API version is 1.39`
 
 This indicates that the maximum API version that the Docker daemon can accept is `1.39`, but the client in `chaos-daemon` uses `1.41` by default. You can choose the following options to solve this problem:
