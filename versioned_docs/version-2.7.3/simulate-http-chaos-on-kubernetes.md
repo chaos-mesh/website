@@ -23,7 +23,7 @@ Before injecting the faults supported by HTTPChaos, note the following:
 
 - There is no Control Manager of Chaos Mesh running on the target Pod.
 - By default, the fault rules affect both the client and the server in the Pod. If you want to affect only one side, refer to the [specify side](#specify-side) section.
-- HTTPS access should be disabled, because injecting HTTPS connections is not currently supported.
+- To inject faults into HTTPS connections, configure TLS mode as described in the [TLS](#tls) section.
 - For HTTPChaos injection to take effect, the client should avoid reusing TCP sockets. HTTPChaos does not affect HTTP requests sent over a TCP connection that was established before fault injection.
 - Use non-idempotent requests (such as most POST requests) with caution in production environments. If such requests are used, the target service may not return to normal by simply repeating the requests after fault injection.
 
@@ -140,7 +140,7 @@ Common fields are meaningful when the `target` of fault injection is `Request` o
 | `duration` | string | Specifies the duration of the experiment. |  | yes | 30s |
 | `scheduler` | string | Specifies the scheduling rules for the time of the experiment. |  | no | 5 \* \* \* \* |
 | `tls.secretName` | string | Specifies the name of the required Secret resource. |  | no | "http-tls-scr" |
-| `tls.secretNamespace` | string | Specifies the namespace of the required Secret resource. In most cases, it should be the same namespace as the `chaos-controller-manager` deployment. |  | no | "chaos-mesh" |
+| `tls.secretNamespace` | string | Specifies the namespace of the Secret named by `tls.secretName`. |  | no | "chaos-mesh" |
 | `tls.certName` | string | Specifies the name of the certificate file in the Secret, for example `tls.crt`. |  | no | "tls.crt" |
 | `tls.keyName` | string | Specifies the name of the key file in the Secret, for example `tls.key`. |  | no | "tls.key" |
 | `tls.caName` | string | Specifies the name of the CA file in the Secret, for example `ca.crt`. |  | no | "ca.crt" |
@@ -258,7 +258,15 @@ spec:
 
 ## TLS
 
+:::note
+
+This procedure requires a Chaos Mesh build with [fixes for TLS Secret lookup and TLS data transfer](https://github.com/chaos-mesh/chaos-mesh/pull/5114) and the [upgrade to tproxy v0.5.6](https://github.com/chaos-mesh/chaos-mesh/pull/5113). These fixes are not included in v2.6.7, v2.7.3, or v2.8.4.
+
+:::
+
 To inject faults into TLS connections, enable TLS mode. In TLS mode, the Chaos Mesh proxy acts as both a server and a client, so it needs a trusted CA and the corresponding certificate and key. You need to create the TLS certificate, key, and CA on your own and store them in a Secret, then reference the Secret through the `tls` fields.
+
+Store the certificates in PEM format. The private key must be an unencrypted RSA key in PKCS#1 PEM format, beginning with `-----BEGIN RSA PRIVATE KEY-----`.
 
 To create a new TLS server and inject faults into its connections, do the following:
 
@@ -268,11 +276,12 @@ To create a new TLS server and inject faults into its connections, do the follow
    openssl req -newkey rsa:4096 -x509 -sha512 -days 365 -nodes -out ca.crt -keyout ca.key
    ```
 
-2. Create the server's Certificate Signing Request:
+2. Create the server's Certificate Signing Request and convert the private key to PKCS#1 PEM format:
 
    ```
-   openssl genrsa -out server.key 2048
-   openssl req -new -key server.key -out server.csr
+   openssl genrsa -out server-key.pem 2048
+   openssl req -new -key server-key.pem -out server.csr
+   openssl pkey -in server-key.pem -traditional -out server.key
    ```
 
 3. Write the extension file `server.ext` for the server:
@@ -295,7 +304,25 @@ To create a new TLS server and inject faults into its connections, do the follow
 
 5. Add the CA `ca.crt` to the client.
 
-6. Store `server.key`, `server.crt`, and `ca.crt` in a Secret, and reference the Secret through the `tls` fields.
+6. Store `server.key`, `server.crt`, and `ca.crt` in a Secret:
+
+   ```bash
+   kubectl -n chaos-mesh create secret generic http-tls-scr \
+     --from-file=tls.crt=server.crt \
+     --from-file=tls.key=server.key \
+     --from-file=ca.crt=ca.crt
+   ```
+
+   Add the following `tls` fields under the HTTPChaos `spec`. Set `spec.port` to the target service's TLS port. The `certName`, `keyName`, and `caName` values are the data keys in the Secret.
+
+   ```yaml
+   tls:
+     secretName: http-tls-scr
+     secretNamespace: chaos-mesh
+     certName: tls.crt
+     keyName: tls.key
+     caName: ca.crt
+   ```
 
 To inject faults into a client connection, the Chaos Mesh proxy acts as the remote server. In this case, change the `server.ext` file above to match the target domain.
 

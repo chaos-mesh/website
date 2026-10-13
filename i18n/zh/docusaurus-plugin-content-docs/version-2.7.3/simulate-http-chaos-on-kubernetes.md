@@ -23,7 +23,7 @@ HTTPChaos 支持多种故障类型的组合。如果在创建 HTTPChaos 实验�
 
 - 目标 Pod 上没有运行 Chaos Mesh 的 Control Manager。
 - 故障规则默认会同时作用于 Pod 内的客户端和服务端。如果只想让故障作用于其中一端，请参见[指定生效端](#指定生效端)部分。
-- 确保目标服务禁用了 HTTPS 访问，因为 HTTPChaos 暂不支持注入 HTTPS 连接。
+- 若要对 HTTPS 连接注入故障，请按照 [TLS](#tls) 章节配置 TLS 模式。
 - 为使 HTTPChaos 注入生效，尽量避免复用客户端的 TCP socket。因为在注入故障前建立的 TCP socket 上进行的 HTTP 请求不受 HTTPChaos 影响。
 - 在生产环境下谨慎使用非幂等语义请求（例如大多数 POST 请求）。若使用了这类请求，注入故障后可能无法通过重复请求使目标服务恢复正常状态。
 
@@ -140,7 +140,7 @@ Chaos Mesh 也支持使用 YAML 配置文件创建 HTTPChaos 实验。在 YAML �
 | `duration` | string | 指定实验的持续时间 |  | 是 | 30s |
 | `scheduler` | string | 指定实验的运行时间调度规则 |  | 否 | 5 \* \* \* \* |
 | `tls.secretName` | string | 指定所需的 Secret 资源的名称 |  | 否 | "http-tls-scr" |
-| `tls.secretNamespace` | string | 指定所需的 Secret 资源所在的命名空间。在大多数情况下，应与 `chaos-controller-manager` 部署所在的命名空间一致 |  | 否 | "chaos-mesh" |
+| `tls.secretNamespace` | string | 指定 `tls.secretName` 对应的 Secret 所在的命名空间 |  | 否 | "chaos-mesh" |
 | `tls.certName` | string | 指定 Secret 中证书文件的名称，例如 `tls.crt` |  | 否 | "tls.crt" |
 | `tls.keyName` | string | 指定 Secret 中密钥文件的名称，例如 `tls.key` |  | 否 | "tls.key" |
 | `tls.caName` | string | 指定 Secret 中 CA 文件的名称，例如 `ca.crt` |  | 否 | "ca.crt" |
@@ -258,7 +258,15 @@ spec:
 
 ## TLS
 
+:::note
+
+执行以下步骤需要使用包含 [TLS Secret 查找和 TLS 数据传递修复](https://github.com/chaos-mesh/chaos-mesh/pull/5114)和 [tproxy v0.5.6 升级](https://github.com/chaos-mesh/chaos-mesh/pull/5113)的 Chaos Mesh 构建。v2.6.7、v2.7.3 和 v2.8.4 不包含这些修复。
+
+:::
+
 若要对 TLS 连接注入故障，请启用 TLS 模式。在 TLS 模式下，Chaos Mesh 的代理同时充当服务端和客户端，因此需要一个可信的 CA 以及对应的证书和密钥。你需要自行创建 TLS 证书、密钥和 CA，并将其保存到 Secret 中，然后通过 `tls` 字段引用该 Secret。
+
+证书使用 PEM 格式。私钥必须是未加密的 RSA 私钥，使用 PKCS#1 PEM 格式，并以 `-----BEGIN RSA PRIVATE KEY-----` 开头。
 
 若要创建一个新的 TLS 服务端并对其连接注入故障，请执行以下步骤：
 
@@ -268,11 +276,12 @@ spec:
    openssl req -newkey rsa:4096 -x509 -sha512 -days 365 -nodes -out ca.crt -keyout ca.key
    ```
 
-2. 创建服务端的证书签名请求（Certificate Signing Request）：
+2. 创建服务端的证书签名请求（Certificate Signing Request），并将私钥转换为 PKCS#1 PEM 格式：
 
    ```
-   openssl genrsa -out server.key 2048
-   openssl req -new -key server.key -out server.csr
+   openssl genrsa -out server-key.pem 2048
+   openssl req -new -key server-key.pem -out server.csr
+   openssl pkey -in server-key.pem -traditional -out server.key
    ```
 
 3. 编写服务端的扩展文件 `server.ext`：
@@ -295,7 +304,25 @@ spec:
 
 5. 将 CA `ca.crt` 添加到客户端。
 
-6. 将 `server.key`、`server.crt`、`ca.crt` 保存到 Secret 中，并通过 `tls` 字段引用该 Secret。
+6. 将 `server.key`、`server.crt`、`ca.crt` 保存到 Secret 中：
+
+   ```bash
+   kubectl -n chaos-mesh create secret generic http-tls-scr \
+     --from-file=tls.crt=server.crt \
+     --from-file=tls.key=server.key \
+     --from-file=ca.crt=ca.crt
+   ```
+
+   将以下 `tls` 字段添加到 HTTPChaos 的 `spec` 下，并将 `spec.port` 设为目标服务的 TLS 端口。`certName`、`keyName` 和 `caName` 对应 Secret 的数据键。
+
+   ```yaml
+   tls:
+     secretName: http-tls-scr
+     secretNamespace: chaos-mesh
+     certName: tls.crt
+     keyName: tls.key
+     caName: ca.crt
+   ```
 
 若要对客户端连接注入故障，Chaos Mesh 的代理将充当远端服务端的角色。此时，只需将上面 `server.ext` 中的域名改为目标域名即可。
 
