@@ -2,7 +2,7 @@
 title: Define the Scope of Chaos Experiments
 ---
 
-This document describes how to define the scope of a single Chaos experiment, which helps you accurately control the fault's explosion radius.
+This document describes how to define the scope of a single Chaos experiment, which helps you accurately control the fault's blast radius.
 
 ## An overview of experiment scopes
 
@@ -168,7 +168,7 @@ spec:
 
 :::note
 
-`PhysicalMachine` is a CRD (CustomResourcesDefinition) that represents a physical machine. To create `PhysicalMachine`, Chaos Mesh uses [Chaosctl](chaosctl-tool.md#generate-tls-certificates-for-chaosd).
+`PhysicalMachine` is a CRD (CustomResourceDefinition) that represents a physical machine. To create a `PhysicalMachine`, use the `chaosctl pm create` or `chaosctl pm init` command. For more details, see [Chaosctl](chaosctl-tool.md#generate-tls-certificates-for-chaosd).
 
 :::
 

@@ -33,7 +33,7 @@ Set the version number of Chaos Mesh as the environment variable on the machine 
 
 ### Download Chaos Mesh images
 
-On the machine connected to external network, pull images using the version number that has been set:
+On the machine connected to the external network, pull images using the version number that has been set:
 
 ```bash
 docker pull ghcr.io/chaos-mesh/chaos-mesh:${CHAOS_MESH_VERSION}
@@ -100,7 +100,7 @@ Set the Chaos Mesh version and the Registry address as the environment variable:
 {`export CHAOS_MESH_VERSION=latest; export DOCKER_REGISTRY=localhost:5000`}
 </PickVersion>
 
-Mark the images so that the images point to the Registry:
+Mark the images so that they point to the Registry:
 
 ```bash
 export CHAOS_MESH_IMAGE=$DOCKER_REGISTRY/chaos-mesh/chaos-mesh:${CHAOS_MESH_VERSION}
@@ -139,7 +139,7 @@ Create the namespace:
 kubectl create ns chaos-mesh
 ```
 
-Execute the installation command. When executing the installation command, you need to specify the namespace of Chaos Mesh and the image value of each component:
+Execute the installation command. When executing the installation command, you need to specify the namespace of Chaos Mesh and the image values of each component:
 
 ```bash
 helm install chaos-mesh helm/chaos-mesh -n=chaos-mesh --set images.registry=$DOCKER_REGISTRY

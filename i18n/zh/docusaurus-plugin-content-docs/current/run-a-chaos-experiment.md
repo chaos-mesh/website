@@ -9,7 +9,7 @@ title: 运行实验
 使用 Chaos Mesh，你可以创建以下两类混沌实验：
 
 - 一次性混沌实验：是最小粒度的混沌实验。创建后，实验会立刻向测试目标注入已配置的故障。如果配置了 `duration` 参数，故障在 `duration` 指定的时间结束后会自动恢复。当暂停或者删除混沌实验时，故障会立刻被恢复。
-- 定时或循环混沌实验: 是可以定时运行或循环进行的混沌实验。创建时需要定义实验的时间调度规则。
+- 定时或循环混沌实验：是可以定时运行或循环进行的混沌实验。创建时需要定义实验的时间调度规则。
 
 ### 一次性混沌实验
 
@@ -163,11 +163,7 @@ kubectl delete -f network-delay.yaml
 kubectl delete networkchaos network-delay
 ```
 
-如果删除操作被阻塞，这意味着有一些目标对象的故障行为无法恢复。你可以查看 Chaos Mesh 的日志进行故障排查，或者直接在 GitHub 创建一个 [issue](https://github.com/pingcap/chaos-mesh/issues) 向 Chaos Mesh 团队反馈问题。此外，你也可以通过以下命令强制删除混沌实验：
-
-```yaml
-kubectl annotate networkchaos web-show-network-delay chaos-mesh.chaos-mesh.org/cleanFinalizer=forced
-```
+如果删除操作因为某些目标对象的故障行为无法恢复而被阻塞，请参考[清理混沌实验](clean-up-chaos-experiments.md)了解强制清理的方法。
 
 ### 使用 Dashboard 删除混沌实验
 

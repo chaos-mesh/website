@@ -2,7 +2,7 @@
 title: Simulate GCP Faults
 ---
 
-This document describes how to use Chaos Mesh to inject faults into GCP Pod. Chaos Dashboard and YAML files are provided to create GCPChaos experiments.
+This document describes how to use Chaos Mesh to inject faults into GCP instances. Chaos Dashboard and YAML files are provided to create GCPChaos experiments.
 
 ## GCPChaos introduction
 
@@ -10,7 +10,7 @@ GCPChaos is a fault type in Chaos Mesh. By creating a GCPChaos experiment, you c
 
 - **Node Stop**: stops the specified GCP instance.
 - **Node Reset**: reboots the specified GCP instance.
-- **Disk Loss**: uninstalls the storage volume from the specified GCP instance.
+- **Disk Loss**: detaches the storage volume from the specified GCP instance.
 
 ## `Secret` file
 
@@ -29,8 +29,8 @@ stringData:
   service_account: your-gcp-service-account-base64-encode
 ```
 
-- **name** defines the name of kubernetes secret.
-- **namespace** defines the namespace of kubernetes secret.
+- **name** defines the name of the Kubernetes Secret.
+- **namespace** defines the namespace of the Kubernetes Secret.
 - **service_account** stores the service account key of your GCP cluster. Remember to complete [Base64](https://zh.wikipedia.org/wiki/Base64) encoding for your GCP service account key. To learn more about service account key, see [Creating and managing service account keys](https://cloud.google.com/iam/docs/creating-managing-service-account-keys).
 
 ## Create experiments using Chaos Dashboard
@@ -70,7 +70,7 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
 
 ### A `node-stop` configuration example
 
-1. Write the experiment configuration to the `gcpchaos-node-stop.yaml`， as shown below:
+1. Write the experiment configuration to the `gcpchaos-node-stop.yaml` file, as shown below:
 
    ```yaml
    apiVersion: chaos-mesh.org/v1alpha1
@@ -99,7 +99,7 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
 
 ### A `node-reset` configuration example
 
-1. Write the experiment configuration to the `gcpchaos-node-reset.yaml`, as shown below:
+1. Write the experiment configuration to the `gcpchaos-node-reset.yaml` file, as shown below:
 
    ```yaml
    apiVersion: chaos-mesh.org/v1alpha1
@@ -128,7 +128,7 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
 
 ### A `disk-loss` configuration example
 
-1. Write the experiment configuration to the `gcpchaos-disk-loss.yaml`, as shown below:
+1. Write the experiment configuration to the `gcpchaos-disk-loss.yaml` file, as shown below:
 
    ```yaml
    apiVersion: chaos-mesh.org/v1alpha1
@@ -148,7 +148,7 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
 
    Based on this configuration example, Chaos Mesh will inject a `disk-loss` fault into the specified GCP instance so that the GCP instance is detached from the specified storage volume within 5 minutes.
 
-   For more information about detaching GCP instances, refer to [Detach GCP storage](https://cloud.google.com/compute/docs/reference/rest/v1/instances/detachDisk).
+   For more information about detaching GCP disks, refer to [Detach GCP storage](https://cloud.google.com/compute/docs/reference/rest/v1/instances/detachDisk).
 
 2. After the configuration file is prepared, use `kubectl` to create an experiment:
 
@@ -160,14 +160,14 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
 
 The following table shows the fields in the YAML configuration file.
 
-| Parameter | Type | Descpription | Default value | Required | Example |
+| Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
 | action | string | Indicates the specific type of faults. The available fault types include node-stop, node-reset, and disk-loss. | node-stop | Yes | node-stop |
 | mode | string | Indicates the mode of the experiment. The mode options include `one` (selecting a Pod at random), `all` (selecting all eligible Pods), `fixed` (selecting a specified number of eligible Pods), `fixed-percent` (selecting a specified percentage of the eligible Pods), and `random-max-percent` (selecting the maximum percentage of the eligible Pods). | None | Yes | `one` |
-| value | string | Provides parameters for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of pods. | None | No | 1 |
+| value | string | Provides parameters for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods. | None | No | 1 |
 | secretName | string | Indicates the name of the Kubernetes secret that stores the GCP authentication information. | None | No | cloud-key-secret |
 | project | string | Indicates the ID of GCP project. | None | Yes | real-testing-project |
-| zone | string | Indicates the region of GCP instance. | None | Yes | us-central1-a |
+| zone | string | Indicates the zone of the GCP instance. | None | Yes | us-central1-a |
 | instance | string | Indicates the name of GCP instance. | None | Yes | gke-xxx-cluster--default-pool-xxx-yyy |
-| deviceNames | []string | This is a required field when the `action` is `disk-loss`. This field specifies the machine disk ID. | None | no | ["your-disk-id"] |
+| deviceNames | []string | This is a required field when the `action` is `disk-loss`. This field specifies the device names of the disks to detach. | None | No | ["disk-name"] |
 | duration | string | Indicates the duration of the experiment. | None | Yes | 30s |

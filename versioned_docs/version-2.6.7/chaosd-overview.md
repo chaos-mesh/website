@@ -2,9 +2,9 @@
 title: Chaosd Introduction
 ---
 
-## Chaosd introduction
+## Chaosd Introduction
 
-[Chaosd](https://github.com/chaos-mesh/chaosd) is a Chaos Engineering testing tool provided by Chaos Mesh. You need to download and deploy it separately (see [Download and deploy](#download-and-deploy)). It is used to inject faults into physical machine environments and also recover faults.
+[Chaosd](https://github.com/chaos-mesh/chaosd) is a Chaos Engineering testing tool provided by Chaos Mesh. You need to download and deploy it separately (see [Download and deploy](#download-and-deploy)). It is used to inject faults into physical machine environments and to recover those faults.
 
 Chaosd has the following core strengths:
 
@@ -16,17 +16,17 @@ Chaosd has the following core strengths:
 
 You can use Chaosd to simulate the following fault types:
 
-- Process: Injects faults into the processes. Operations such as killing the process or stopping the process are supported.
-- Network: Injects faults into the network of physical machines. Operations such as increasing network latency, losing packets, and corrupting packets are supported.
-- Pressure: Injects pressure on the CPU or memory of the physical machines.
-- Disk: Injects faults into disks of the physical machines. Operations such as increasing disk load of reads and writes, and filling disks are supported.
-- Host: Injects faults into the physical machine. Operations such as shutdown the physical machine are supported.
+- Process: Injects faults into processes. Operations such as killing or stopping a process are supported.
+- Network: Injects faults into the network of physical machines. Operations such as increasing network latency, dropping packets, and corrupting packets are supported.
+- Pressure: Injects pressure on the CPU or memory of physical machines.
+- Disk: Injects faults into disks of the physical machines. Operations such as adding disk read/write load and filling disks are supported.
+- Host: Injects faults into the physical machine itself. Operations such as shutting down the physical machine are supported.
 
 For details about the introduction and usage of each fault type, refer to the related documentation.
 
 ### Operating environment
 
-Your glibc version must be v2.17 or later versions.
+Your glibc version must be v2.17 or later.
 
 ### Download and deploy
 

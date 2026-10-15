@@ -9,7 +9,7 @@ title: 模拟 Pod 故障
 PodChaos 是 Chaos Mesh 中的一种故障类型，通过创建 PodChaos 类型的混沌实验，你可以模拟指定 Pod 或者容器发生故障的情景。目前，PodChaos 支持模拟以下故障类型：
 
 - Pod Failure：向指定的 Pod 中注入故障，使得该 Pod 在一段时间内处于不可用的状态。
-- Pod Kill：杀死指定的 Pod 。为了保证 Pod 能够成功重启，需要配置 ReplicaSet 或者类似的机制。
+- Pod Kill：杀死指定的 Pod。为了保证 Pod 能够成功重启，需要配置 ReplicaSet 或者类似的机制。
 - Container Kill：杀死位于目标 Pod 中的指定容器。
 
 ## 使用限制
@@ -142,10 +142,10 @@ Chaos Mesh 可以向任一 Pod 注入 PodChaos，无论其 Pod 是否绑定至 D
 | --- | --- | --- | --- | --- | --- |
 | action | string | 指定要注入的故障类型，仅支持 `pod-failure`、`pod-kill`、`container-kill` | 无 | 是 | `pod-kill` |
 | mode | string | 指定实验的运行方式，可选择的方式包括：`one`（表示随机选出一个符合条件的 Pod）、`all`（表示选出所有符合条件的 Pod）、`fixed`（表示选出指定数量且符合条件的 Pod）、`fixed-percent`（表示选出占符合条件的 Pod 中指定百分比的 Pod）、`random-max-percent`（表示选出占符合条件的 Pod 中不超过指定百分比的 Pod） | 无 | 是 | `one` |
-| value | string | 取决与 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 Pod 的百分比。 | 无 | 否 | 1 |
+| value | string | 取决于 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 Pod 的百分比。 | 无 | 否 | 1 |
 | selector | struct | 指定注入故障的目标 Pod，详情请参考[定义实验范围](./define-chaos-experiment-scope.md) | 无 | 是 |  |
 | containerNames | []string | 当你将 `action` 配置为 `container-kill` 时，此配置为必填，用于指定注入故障的目标 container 名 | 无 | 否 | ['prometheus'] |
-| gracePeriod | int64 | 当你将 `action` 配置为 `pod-kill` 时，需要填写此项，用于指定删除 Pod 之前的持续时间 | 0 | 否 | 0 |
+| gracePeriod | int64 | 当你将 `action` 配置为 `pod-kill` 时，可用于指定删除 Pod 之前的宽限期 | 0 | 否 | 0 |
 | duration | string | 指定实验的持续时间 | 无 | 是 | 30s |
 
 ## “Pod Failure” 混沌实验的一些注意事项
@@ -159,4 +159,4 @@ Pod Failure 混沌实验将会改变目标 Pod 中每个容器的 `image` 为 "p
 
 下载 "pause image" 将会消耗时间，并且这个时间将会被计入实验的持续时间中。所以你可能会发现，"实际受影响的时间" 可能会比配置的时间短。这是推荐设置可用的 "pause image" 的另一个原因。
 
-另外一个迷惑的点是，"pause image" 可以在未配置 `command` 的容器中正常工作。所以，如果容器未配置 `command`，`livenessProbe` 和 `readinessProbe`，它将会被视为 `Running` 和 `Ready`，即使它已经被改变为 "pause image"，并且实际上不提供正常功能， 或者被视为不可用。所以建议为容器配置 `livenessProbe` 和 `readinessProbe`。
+另一个容易混淆的点是，"pause image" 可以在未配置 `command` 的容器中正常工作。所以，如果容器未配置 `command`，`livenessProbe` 和 `readinessProbe`，它将会被视为 `Running` 和 `Ready`，即使它已经被改变为 "pause image"，并且实际上不提供正常功能， 或者被视为不可用。所以建议为容器配置 `livenessProbe` 和 `readinessProbe`。

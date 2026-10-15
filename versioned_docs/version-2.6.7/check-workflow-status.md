@@ -14,13 +14,13 @@ title: Check Workflow Status
 
 ## Check workflow status using `kubectl` commands
 
-1. Execute the following command to list the current created workflows in the specified namespace:
+1. Execute the following command to list the workflows currently created in the specified namespace:
 
    ```shell
    kubectl -n <namespace> get workflow
    ```
 
-2. Choose a workflow you want to check and specify the workflow name in the following command. Execute the command to get all workflow nodes of the workflow:
+2. Choose the workflow you want to inspect, then specify its name in the following command to get all of its workflow nodes:
 
    ```shell
    kubectl -n <namespace> get workflownode --selector="chaos-mesh.org/workflow=<workflow-name>"
@@ -28,7 +28,7 @@ title: Check Workflow Status
 
    The steps of the workflow are represented by the names of these workflow nodes.
 
-3. Execute the following command to the get detailed status of the specified workflow node:
+3. Execute the following command to get the detailed status of the specified workflow node:
 
    ```shell
    kubectl -n <namespace> describe workflownode <workflow-node-name>

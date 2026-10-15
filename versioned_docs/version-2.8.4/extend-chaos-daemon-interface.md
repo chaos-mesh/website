@@ -23,7 +23,7 @@ This document covers:
 
 ## Selector
 
-In `api/v1alpha1/helloworldchaos_type.go`, you have defined `HelloWorldSpec`, which includes `ContainerSelector`:
+In `api/v1alpha1/helloworldchaos_types.go`, you have defined `HelloWorldChaosSpec`, which includes `ContainerSelector`:
 
 ```go
 // HelloWorldChaosSpec defines the desired state of HelloWorldChaos
@@ -52,7 +52,7 @@ func (obj *HelloWorldChaos) GetSelectorSpecs() map[string]interface{} {
 
 In Chaos Mesh, Selector is used to define the scope of a chaos experiment, the target namespace, the annotation, the label, etc.
 
-Selector can also be some more specific values (e.g. `AWSSelector` in `AWSChaos`). Normally each chaos experiment needs only one selector, with exceptions like `NetworkChaos` because it sometimes needs two selectors as two objects for network partitioning.
+Selector can also be some more specific values (e.g. `AWSSelector` in `AWSChaos`). Normally each chaos experiment needs only one selector, with `NetworkChaos` as an exception because it sometimes needs two selectors as two objects for network partitioning.
 
 You can refer to [Define the Scope of Chaos Experiments](./define-chaos-experiment-scope.md) for more information about Selector.
 
@@ -238,7 +238,7 @@ Now you can verify the output of `HelloWorldChaos`:
      2023-07-16T08:20:46.867Z INFO chaos-daemon.daemon-server chaosdaemon/server.go:187 cmd output {"namespacedName": "chaos-mesh/hello-busybox", "output": "PID   USER     TIME  COMMAND\n    1 root      0:00 sh -c echo Container is Running ; sleep 3600\n"}
      ```
 
-   You will see two separate lines of `ps aux`, which are corresponding to two different Pods.
+   You will see two separate lines of `ps aux`, which correspond to two different Pods.
 
 ## Next steps
 

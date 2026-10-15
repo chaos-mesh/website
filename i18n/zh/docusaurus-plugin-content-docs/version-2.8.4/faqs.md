@@ -4,27 +4,27 @@ title: 常见问题解答 (FAQ)
 
 import PickHelmVersion from '@site/src/components/PickHelmVersion'
 
-### If I do not have deployed Kubernetes clusters, can I use Chaos Mesh to create chaos experiments?
+### 如果我没有部署 Kubernetes 集群，能否使用 Chaos Mesh 创建混沌实验？
 
-No. Instead, you could use [`chaosd`](https://github.com/chaos-mesh/chaosd/) to inject failures without kubernetes.
+不能。你可以改用 [chaosd](https://github.com/chaos-mesh/chaosd/) 在不依赖 Kubernetes 的情况下注入故障。
 
-### I have deployed Chaos Mesh and created PodChaos experiments successfully, but I still failed in creating NetworkChaos/TimeChaos Experiment. The log is shown as below:
+### 我已经成功部署 Chaos Mesh 并创建了 PodChaos 实验，但创建 NetworkChaos/TimeChaos 实验仍然失败。日志如下：
 
 ```console
 2020-06-18T02:49:15.160Z ERROR controllers.TimeChaos failed to apply chaos on all pods {"reconciler": "timechaos", "error": "rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial tcp xx.xx.xx.xx:xxxx: connect: connection refused\""}
 ```
 
-The reason is that `chaos-controller-manager` failed to connect to `chaos-daemon`. You need to first check the Pod network and its [policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/).
+原因是 `chaos-controller-manager` 无法连接到 `chaos-daemon`。你需要先检查 Pod 网络及其[策略](https://kubernetes.io/docs/concepts/services-networking/network-policies/)。
 
-If everything is in order, maybe you can use the `hostNetwork` parameter to fix this problem as follows:
+如果一切正常，你可以尝试通过以下方式使用 `hostNetwork` 参数解决此问题：
 
 <PickHelmVersion>{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n chaos-mesh --version latest --set chaosDaemon.hostNetwork=true`}</PickHelmVersion>
 
-Reference: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/troubleshooting-kubeadm/#hostport-services-do-not-work
+参考文档：https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/troubleshooting-kubeadm/#hostport-services-do-not-work
 
-### The default administrator Google Cloud user account is forbidden to create chaos experiments. How to fix it?
+### Google Cloud 默认管理员账号无法创建混沌实验。如何解决？
 
-The default administrator Google Cloud user cannot be checked by `AdmissionReview`. You need to create an administrator role and assign the role to your account to grant the privilege of creating chaos experiments to it. For example:
+Google Cloud 默认管理员账号无法通过 `AdmissionReview` 校验。你需要创建一个管理员角色，并将其绑定到你的账号，以授权该账号创建混沌实验。例如：
 
 ```yaml
 kind: ClusterRole
@@ -46,7 +46,7 @@ metadata:
   name: cluster-manager-binding
   namespace: chaos-mesh
 subjects:
-  # Google Cloud user account
+  # Google Cloud 用户账号
   - kind: User
     name: USER_ACCOUNT
 roleRef:
@@ -55,26 +55,26 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 ```
 
-The `USER_ACCOUNT` above should be your Google Cloud user email.
+上述 `USER_ACCOUNT` 应为你的 Google Cloud 用户邮箱。
 
-### Daemon throws an error similar to `version 1.41 is too new. The maximum supported API version is 1.39`
+### 出现类似 `version 1.41 is too new. The maximum supported API version is 1.39` 的错误
 
-This indicates that the maximum API version that the Docker daemon can accept is `1.39`, but the client in `chaos-daemon` uses `1.41` by default. You can choose the following options to solve this problem:
+这表明 Docker daemon 可接受的最大 API 版本为 `1.39`，但 `chaos-daemon` 中的客户端默认使用 `1.41`。你可以选择以下任一方式解决此问题：
 
-1. Upgrade your Docker to a newer version.
-2. Helm install/upgrade with `--set chaosDaemon.env.DOCKER_API_VERSION=1.39`.
+1. 将 Docker 升级到更新的版本。
+2. 使用 `--set chaosDaemon.env.DOCKER_API_VERSION=1.39` 进行 Helm 安装/升级。
 
 ## DNSChaos
 
-### While trying to run DNSChaos in OpenShift, the problems regarding authorization blocked the process
+### 在 OpenShift 中运行 DNSChaos 时，因授权问题导致操作被阻止
 
-If the error message is similar to the following:
+如果错误信息类似以下内容：
 
 ```bash
 Error creating: pods "chaos-dns-server-123aa56123-" is forbidden: unable to validate against any security context constraint: [spec.containers[0].securityContext.capabilities.add: Invalid value: "NET_BIND_SERVICE": capability may not be added]
 ```
 
-You need to add the privileged Security Context Constraints (SCC) to the `chaos-dns-server`.
+你需要为 `chaos-dns-server` 添加特权 Security Context Constraints (SCC)。
 
 ```bash
 oc adm policy add-scc-to-user privileged -n chaos-mesh -z chaos-dns-server
@@ -82,9 +82,9 @@ oc adm policy add-scc-to-user privileged -n chaos-mesh -z chaos-dns-server
 
 ## 安装
 
-### While trying to install Chaos Mesh in OpenShift, the problems regarding authorization blocked the installation process
+### 在 OpenShift 中安装 Chaos Mesh 时，因授权问题导致安装过程被阻止
 
-If the error message is similar to the following:
+如果错误信息类似以下内容：
 
 ```bash
 Error creating: pods "chaos-daemon-" is forbidden: unable
@@ -99,23 +99,23 @@ Error creating: pods "chaos-daemon-" is forbidden: unable
 ......]
 ```
 
-You need to add privileged scc to default.
+你需要为 `chaos-daemon` 服务账号添加特权 SCC。
 
 ```bash
 oc adm policy add-scc-to-user privileged -n chaos-mesh -z chaos-daemon
 ```
 
-### Failed to install Chaos Mesh with the message: no matches for kind "CustomResourceDefinition" in version "apiextensions.k8s.io/v1"
+### 安装 Chaos Mesh 失败，提示信息为：no matches for kind "CustomResourceDefinition" in version "apiextensions.k8s.io/v1"
 
-This issue occurs when you install Chaos Mesh on Kubernetes v1.15 or an earlier version. We use `apiextensions.k8s.io/v1` by default, but it was introduced in Kubernetes v1.16 on 2019-09-19.
+当你将 Chaos Mesh 安装在 Kubernetes v1.15 或更早版本时会出现此问题。我们默认使用 `apiextensions.k8s.io/v1`，但该 API 版本是在 Kubernetes v1.16 中引入的。
 
-When you install Chaos Mesh on Kubernetes lower than v1.16, you need to follow the below process:
+当你将 Chaos Mesh 安装在低于 v1.16 的 Kubernetes 上时，需要遵循以下步骤：
 
-1. Manually create CRD through `https://mirrors.chaos-mesh.org/<chaos-mesh-version>/crd-v1beta1.yaml`.
-2. Add `--validate=false`. If the configuration is not added, compatibility issues with breaking changes with CRD might occur. For example, `kubectl create -f https://mirrors.chaos-mesh.org/v2.1.0/crd-v1beta1.yaml --validate=false`.
-3. Use Helm to finish the rest process of installation, and append `--skip-crds` with `helm install` command.
+1. 通过 `https://mirrors.chaos-mesh.org/<chaos-mesh-version>/crd-v1beta1.yaml` 手动创建 CRD。
+2. 添加 `--validate=false`。如果不设置此标志，可能会因 CRD 的破坏性变更引发兼容性问题。例如，`kubectl create -f https://mirrors.chaos-mesh.org/v2.1.0/crd-v1beta1.yaml --validate=false`。
+3. 使用 Helm 完成剩余的安装流程，并在 `helm install` 命令中追加 `--skip-crds`。
 
-We suggest upgrading your Kubernetes cluster by referencing Kubernetes [Version Skew Policy](https://kubernetes.io/releases/version-skew-policy/).
+我们建议你参考 Kubernetes [版本偏差策略](https://kubernetes.io/releases/version-skew-policy/)升级 Kubernetes 集群。
 
 ## Chaosd
 

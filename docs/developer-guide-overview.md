@@ -8,14 +8,14 @@ The developer manual section may be out of date. If you find any problems or hav
 
 :::
 
-This document describes how to develop Chaos Mesh. Before you start, it is recommended that you read the following documents first:
+This document describes how to develop Chaos Mesh. Before you start, it is recommended that you read the following documents:
 
 - [Chaos Mesh README](https://github.com/chaos-mesh/chaos-mesh/blob/master/README.md)
 - [Chaos Mesh Dashboard README](https://github.com/chaos-mesh/chaos-mesh/blob/master/ui/README.md)
 
 Before starting to develop Chaos Mesh, you need to prepare the development environment. Please refer to [Configure the development environment](configure-development-environment.md) for details.
 
-Then you can start to develop Chaos Mesh. The following documents will help you:
+Then you can start developing Chaos Mesh. The following documents will help you:
 
 - [Add a New Chaos Experiment Type](add-new-chaos-experiment-type.md)
 - [Extend Chaos Daemon Interface](extend-chaos-daemon-interface.md)

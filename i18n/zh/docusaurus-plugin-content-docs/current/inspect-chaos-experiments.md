@@ -87,11 +87,11 @@ Events:
   - `Paused`： 代表混沌实验正处于暂停阶段。
   - `Selected`： 代表混沌实验已经正确选择出待测试目标。
   - `AllInjected`：代表所有测试目标都已经被成功注入故障。
-  - `AllRecoverd`：代表所有测试目标的故障都已经被成功恢复。
+  - `AllRecovered`：代表所有测试目标的故障都已经被成功恢复。
 
   可以通过这四类状态记录推断出当前混沌实验的真实运行情况。例如：
 
-  - 当 `Paused`、`Selected`、`AllRecoverd` 的状态是 `True` 且 `AllInjected` 的状态是 `False`时，说明当前实验处在暂停状态。
+  - 当 `Paused`、`Selected`、`AllRecovered` 的状态是 `True` 且 `AllInjected` 的状态是 `False`时，说明当前实验处在暂停状态。
   - 当 `Paused` 为 `True` 的时，说明当前实验处在暂停状态，但是如果此时的 `Selected` 值为 `False`，那么可以进一步得出此混沌实验无法选出待测试目标。
 
   :::note

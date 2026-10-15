@@ -2,19 +2,19 @@
 title: Uninstall Chaos Mesh
 ---
 
-This document introduces how to uninstall Chaos Mesh, including uninstall Chaos Mesh with Helm and uninstall Chaos Mesh manually. It's also very helpful to manually purge Chaos Mesh installation from Kubernetes cluster if you have to do.
+This document describes how to uninstall Chaos Mesh, using either Helm or a manual approach. It is also helpful to manually purge a Chaos Mesh installation from your Kubernetes cluster if necessary.
 
 ## Uninstall Chaos Mesh with Helm
 
 ### Step 1: Clean Up Chaos Experiments
 
-Before uninstall Chaos Mesh, please make sure that all the chaos experiments are deleted. You could list chaos related objects by executing:
+Before uninstalling Chaos Mesh, make sure that all the chaos experiments are deleted. You can list the chaos-related objects by executing:
 
 ```shell
 for i in $(kubectl api-resources | grep chaos-mesh | awk '{print $1}'); do kubectl get $i -A; done
 ```
 
-Once you make sure that all the chaos experiments are deleted, you can uninstall Chaos Mesh.
+Once you are sure that all the chaos experiments have been deleted, you can uninstall Chaos Mesh.
 
 ### Step 2: List Helm Releases
 
@@ -31,11 +31,11 @@ NAME                    NAMESPACE       REVISION        UPDATED                 
 chaos-mesh-playground   chaos-mesh      1               2021-12-01 22:58:18.037052401 +0800 CST deployed        chaos-mesh-2.1.0        2.1.0
 ```
 
-It means that Chaos Mesh has been installed as a helm release named `chaos-mesh-playground` in namespace `chaos-mesh`. So here is the target release to uninstall.
+This means that Chaos Mesh has been installed as a Helm release named `chaos-mesh-playground` in the `chaos-mesh` namespace. This is the target release to uninstall.
 
 ### Step 3: Delete Helm Releases
 
-After determine the target Helm Release, you could delete the Helm Release by executing:
+After you determine the target Helm release, you can delete it by executing:
 
 ```shell
 helm uninstall chaos-mesh-playground -n chaos-mesh
@@ -43,7 +43,7 @@ helm uninstall chaos-mesh-playground -n chaos-mesh
 
 ### Step 4: Remove CRDs
 
-`helm uninstall` would not remove the CRDs, so you could remove them manually by executing:
+`helm uninstall` does not remove the CRDs, so you can remove them manually by executing:
 
 ```shell
 kubectl delete crd $(kubectl get crd | grep 'chaos-mesh.org' | awk '{print $1}')
@@ -51,30 +51,30 @@ kubectl delete crd $(kubectl get crd | grep 'chaos-mesh.org' | awk '{print $1}')
 
 ## Uninstall Chaos Mesh Manually
 
-If you installed Chaos Mesh by script `install.sh`, or you modified some configurations and components after Chaos Mesh installed, or you meet some troubles when uninstalling Chaos Mesh, here are some steps could help you to uninstall Chaos Mesh manually.
+If you installed Chaos Mesh using the `install.sh` script, modified some configurations or components after installation, or ran into problems when uninstalling Chaos Mesh, the following steps can help you uninstall Chaos Mesh manually.
 
 ### Step 1: Clean Up Chaos Experiments
 
-Before uninstall Chaos Mesh, please make sure that all the chaos experiments are deleted. You could list chaos related objects by executing:
+Before uninstalling Chaos Mesh, make sure that all the chaos experiments are deleted. You can list the chaos-related objects by executing:
 
 ```shell
 for i in $(kubectl api-resources | grep chaos-mesh | awk '{print $1}'); do kubectl get $i -A; done
 ```
 
-Once you make sure that all the chaos experiments are deleted, you can uninstall Chaos Mesh.
+Once you are sure that all the chaos experiments have been deleted, you can uninstall Chaos Mesh.
 
 ### Step 2: Remove Chaos Mesh Workloads
 
-There are usually several kind of components as Chaos Mesh installed:
+A typical Chaos Mesh installation includes several kinds of components:
 
-- A `Deployment` called `chaos-controller-manager`, it is the controller/reconciler for Chaos Mesh.
-- A `DaemonSet` called `chaos-daemon`, it is the agent for Chaos Mesh on each Kubernetes worker node.
-- A `Deployment` called `chaos-dashboard`, the WebUI for Chaos Mesh.
-- A `Deployment` called `chaos-dns-server`, it is the DNS proxy server, only occurs with you enable the DNSChaos feature.
+- A `Deployment` named `chaos-controller-manager`, which serves as the controller and reconciler for Chaos Mesh.
+- A `DaemonSet` named `chaos-daemon`, which acts as the Chaos Mesh agent on each Kubernetes worker node.
+- A `Deployment` named `chaos-dashboard`, which provides the Web UI for Chaos Mesh.
+- A `Deployment` named `chaos-dns-server`, which is a DNS proxy server that is deployed only if you enable the DNSChaos feature.
 
 You should remove these workload objects.
 
-Then delete their corresponding `Service`s:
+Then delete their corresponding `Service` objects:
 
 - chaos-daemon
 - chaos-dashboard
@@ -118,7 +118,7 @@ There are several ConfigMaps and Secrets as Chaos Mesh installed:
 - Secret
   - chaos-mesh-webhook-certs
 
-You should remove these ConfigMaps And Secrets objects.
+You should remove these ConfigMap and Secret objects.
 
 ### Step 5: Remove Webhook
 
@@ -134,7 +134,7 @@ You should remove these webhooks.
 
 ### Step 6: Remove CRDs
 
-At last, you could remove CRds by executing:
+Finally, you can remove the CRDs by executing:
 
 ```shell
 kubectl delete crd $(kubectl get crd | grep 'chaos-mesh.org' | awk '{print $1}')

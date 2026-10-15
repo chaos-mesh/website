@@ -2,19 +2,19 @@
 title: Status Check in Workflow
 ---
 
-In Workflow, the status check could execute specified operations on external systems, such as application systems and monitoring systems, to obtain their statuses, and automatically abort the Workflow when it finds the system is unhealthy. The concept is similar to `Container Probes` in Kubernetes. This article describes how to execute status checks in Workflow using YAML files.
+In Workflow, the status check can execute specified operations on external systems, such as application systems and monitoring systems, to obtain their statuses, and automatically abort the Workflow when it finds the system is unhealthy. The concept is similar to `Container Probes` in Kubernetes. This article describes how to execute status checks in Workflow using YAML files.
 
 :::note
 
-Chaos Mesh does not yet support creating `StatusCheck` nodes on Chaos Dashboard, so you could only create `StatusCheck` nodes using YAML for now.
+Chaos Mesh does not yet support creating `StatusCheck` nodes on Chaos Dashboard, so you can only create `StatusCheck` nodes using YAML for now.
 
 :::
 
 ## Status Check type
 
-Chaos Mesh only support the `HTTP` type to execute a status check.
+Chaos Mesh only supports the `HTTP` type to execute a status check.
 
-### Define a `HTTP` `StatusCheck` node
+### Define an `HTTP` `StatusCheck` node
 
 A `StatusCheck` node sends `GET` or `POST` HTTP requests to the specific URL, with custom headers and body, and then determines the result of the request by the conditions in the `criteria` field.
 
@@ -40,9 +40,9 @@ When Workflow runs to this `StatusCheck` node, the specified status check would 
 
 ## Status Check results
 
-Each execution of the status check will get an `execution result`, either `Success` or `Failure`. Because a single `execution result` may not reflect the real situation of the system, due to fluctuations in certain conditions, the final `status check result` is not determined based on a single `execution result`.
+Each execution of the status check produces an `execution result`, either `Success` or `Failure`. Because a single `execution result` may not reflect the real situation of the system, due to fluctuations in certain conditions, the final `status check result` is not determined based on a single `execution result`.
 
-The `StatusCheck` node has `failureThreshold` and `successThreshold` two fields:
+The `StatusCheck` node has two fields: `failureThreshold` and `successThreshold`:
 
 - When the number of consecutive failed `execution results` exceeds the `failureThreshold`, the `status check result` is considered to be a `Failure`.
 - When the number of consecutive successful `execution results` exceeds the `successThreshold`, the `status check result` is considered to be a `Success`.
@@ -70,7 +70,7 @@ In the configuration, the `StatusCheck` node will execute status checks continuo
 
 :::note
 
-In the following sections, `status check fails` refers to that `status check result` is `Failure`, rather than a single `execution result` is `Failure`.
+In the following sections, `status check fails` refers to the case where the `status check result` is a `Failure`, rather than a single `execution result` being a `Failure`.
 
 :::
 
@@ -78,11 +78,11 @@ In the following sections, `status check fails` refers to that `status check res
 
 :::note
 
-The `StatusCheck` node only supports aborting the workflow automatically when the status check is unsuccessful. It could not pause or resume the workflow.
+The `StatusCheck` node only supports aborting the workflow automatically when the status check is unsuccessful. It cannot pause or resume the workflow.
 
 :::
 
-When executing chaos experiments, the application system might become `unhealthy`, this function can be used to restore the application system by quickly ending chaos experiments. To enable the workflow to abort automatically when the status check fails, you can set the `abortWithStatusCheck` field to `true` on the `StatusCheck` node.
+When executing chaos experiments, the application system might become unhealthy. In that case, you can use this function to restore the application system by quickly ending chaos experiments. To enable the workflow to abort automatically when the status check fails, you can set the `abortWithStatusCheck` field to `true` on the `StatusCheck` node.
 
 ```yaml
 - name: workflow-status-check
@@ -134,7 +134,7 @@ In the configuration, the `StatusCheck` node will execute status checks every se
 
 ### One time Status Check
 
-When the `mode` field is `Synchronous`, it means that this `StatusCheck` node will exit immediately when the `status check result` is clear, or when the node times out.
+When the `mode` field is `Synchronous`, it means that this `StatusCheck` node will exit immediately when the `status check result` is determined, or when the node times out.
 
 ```yaml
 - name: workflow-status-check
@@ -181,13 +181,13 @@ For more information about Workflow and Template, refer to [Create Chaos Mesh Wo
 | --- | --- | --- | --- | --- | --- |
 | mode | `string` | The execution mode of the status check. Support value: `Synchronous`/`Continuous`. | None | Yes | `Synchronous` |
 | type | `string` | The type of the status check. Support value: `HTTP`. | `HTTP` | Yes | `HTTP` |
-| duration | `string` | The duration of the whole status check if the number of failed execution does not exceed the `failureThreshold`. It is available in both `Synchronous` and `Continuous` modes. | None | No | `100s` |
-| timeoutSeconds | `int` | The timeout seconds when the status check fails. | `1` | No | `1` |
-| intervalSeconds | `int` | Defines how often (in seconds) to perform an execution of status check. | `1` | No | `1` |
+| duration | `string` | The duration of the whole status check if the number of failed executions does not exceed the `failureThreshold`. It is available in both `Synchronous` and `Continuous` modes. | None | No | `100s` |
+| timeoutSeconds | `int` | The number of seconds after which an execution of the status check times out. | `1` | No | `1` |
+| intervalSeconds | `int` | Defines how often (in seconds) to perform an execution of status check. | `10` | No | `1` |
 | failureThreshold | `int` | The minimum consecutive failure for the status check to be considered failed. | `3` | No | `3` |
 | successThreshold | `int` | The minimum consecutive successes for the status check to be considered successful. | `1` | No | `1` |
 | recordsHistoryLimit | `int` | The number of records to retain. | `100` | No | `100` |
-| http | `HTTPStatusCheck` | Configure the detail of the HTTP request to execute. | None | No |  |
+| http | `HTTPStatusCheck` | Configure the details of the HTTP request to execute. | None | No |  |
 
 ### HTTPStatusCheck field description
 

@@ -577,5 +577,59 @@
   },
   "home.cncf.name": {
     "message": "云原生计算基金会（CNCF）"
+  },
+  "versions.title": {
+    "message": "Chaos Mesh 的所有版本"
+  },
+  "versions.description": {
+    "message": "Chaos Mesh 的每个版本都有固定的支持周期。随着我们不断地开发和迭代，有些版本会逐渐退出支持。我们将在官方文档中保留最近三个稳定版本和开发版本，其余版本将被归档。"
+  },
+  "versions.supportedReleases": {
+    "message": "你可以通过 {link} 了解有关我们版本支持的更多信息。"
+  },
+  "versions.supportedReleases.link": {
+    "message": "支持的版本"
+  },
+  "versions.development": {
+    "message": "开发版本"
+  },
+  "versions.development.description": {
+    "message": "开发版本是 Chaos Mesh 的最新版本。它正处于积极开发阶段，可能不稳定。{notRecommended}。"
+  },
+  "versions.development.notRecommended": {
+    "message": "不建议将其用于生产环境"
+  },
+  "versions.viewDocumentation": {
+    "message": "查看文档"
+  },
+  "versions.recentCommits": {
+    "message": "最近的提交"
+  },
+  "versions.stable": {
+    "message": "稳定版本"
+  },
+  "versions.stable.description": {
+    "message": "稳定版本是 Chaos Mesh 最近三个版本。它们稳定可靠，推荐在生产环境中使用。"
+  },
+  "versions.unsupported": {
+    "message": "（已不再支持）"
+  },
+  "versions.releaseDate": {
+    "message": "发布日期：{date}。"
+  },
+  "versions.documentation": {
+    "message": "文档"
+  },
+  "versions.releaseNotes": {
+    "message": "发布说明"
+  },
+  "versions.archived": {
+    "message": "归档版本"
+  },
+  "versions.archived.description": {
+    "message": "归档版本是那些不再受支持的 Chaos Mesh 版本。{recommendation}。"
+  },
+  "versions.archived.recommendation": {
+    "message": "如果可能，我们建议你升级到最新的稳定版本"
   }
 }
