@@ -260,7 +260,7 @@ spec:
 
 :::note
 
-This procedure requires a Chaos Mesh build with [fixes for TLS Secret lookup and TLS data transfer](https://github.com/chaos-mesh/chaos-mesh/pull/5114) and the [upgrade to tproxy v0.5.6](https://github.com/chaos-mesh/chaos-mesh/pull/5113). These fixes are not included in v2.6.7, v2.7.3, or v2.8.4.
+This procedure requires Chaos Mesh [v2.8.5](https://github.com/chaos-mesh/chaos-mesh/releases/tag/v2.8.5) or later. The v2.8.5 release includes fixes for TLS Secret lookup and TLS data transfer, plus the upgrade to tproxy v0.5.6. These fixes are not included in v2.6.7, v2.7.3, or v2.8.4.
 
 :::
 
