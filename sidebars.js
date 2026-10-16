@@ -17,6 +17,7 @@ module.exports = {
           items: [
             'quick-start',
             'production-installation-using-helm',
+            'production-installation-using-kubestellar-console',
             'offline-installation',
             'uninstallation',
             {
