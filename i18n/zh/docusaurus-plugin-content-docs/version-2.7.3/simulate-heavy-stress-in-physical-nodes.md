@@ -124,6 +124,7 @@ curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application
 | :-- | :-- | :-- | :-- | :-- | :-- |
 | `action` | — | action | 实验的行为 | string 类型 | 设置为 "mem" |
 | `size` | s | size | 指定每个 VM worker 占用内存的大小 | string 类型 | 支持使用单位 B，KB/KiB，MB/MiB，GB/GiB，TB/TiB 来设置占用的内存大小。如果不设置，则默认占用所有可用的内存。 |
+| `workers` | — | workers | 指定用于生成内存压力的 worker 数量 | int 类型 | 默认值为 `1` |
 | `options` | o | options | stress-ng 的其他参数设置，一般情况下不需要配置 | string 类型 | 默认值为 "" |
 
 ### 使用命令行模式模拟内存压力场景
@@ -154,14 +155,14 @@ Global Flags:
 示例如下：
 
 ```bash
-chaosd attack stress mem --workers 2 --size 100M
+chaosd attack stress mem --size 100M
 ```
 
 输出如下所示：
 
 ```bash
-[2021/05/12 03:37:19.643 +00:00] [INFO] [stress.go:66] ["stressors normalize"] [arguments=" --vm 2 --vm-keep --vm-bytes 100000000"]
-[2021/05/12 03:37:19.654 +00:00] [INFO] [stress.go:82] ["Start stress-ng process successfully"] [command="/usr/bin/stress-ng --vm 2 --vm-keep --vm-bytes 100000000"] [Pid=26799]
+[2021/05/12 03:37:19.643 +00:00] [INFO] [stress.go:88] ["stressors normalize"] [arguments=" --workers 1 --size 100M"]
+[2021/05/12 03:37:19.654 +00:00] [INFO] [stress.go:109] ["Start memStress process successfully"] [command="/usr/local/chaosd-latest-linux-amd64/tools/memStress --workers 1 --size 100M"] [Pid=26799]
 Attack stress mem successfully, uid: c2bff2f5-3aac-4ace-b7a6-322946ae6f13
 ```
 
@@ -182,7 +183,7 @@ Recover c2bff2f5-3aac-4ace-b7a6-322946ae6f13 successfully
 向 Chaosd 服务的路径 `/api/attack/stress` 发送 `POST` HTTP 请求，并配置如下 `fault-configuration`：
 
 ```bash
-curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{"size":"100M", "action":"mem"}'
+curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{"size":"100M", "action":"mem", "workers":2}'
 ```
 
 输出如下所示：
