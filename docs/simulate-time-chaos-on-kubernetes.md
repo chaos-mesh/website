@@ -8,7 +8,7 @@ Chaos Mesh provides the TimeChaos experiment type. You can use this experiment t
 
 :::note
 
-TimeChaos only affects the PID `1` process in the PID namespace of the container, and child processes of the PID `1`. For example, the process started by `kubectl exec` does not be affected.
+TimeChaos only affects the PID `1` process in the PID namespace of the container, and child processes of the PID `1`. For example, the process started by `kubectl exec` is not affected.
 
 :::
 
@@ -48,7 +48,7 @@ You can create experiments in Chaos Dashboard or using the YAML configuration fi
      timeOffset: '-10m100ns'
    ```
 
-   This experiment configuration will shift the time of the processes in the specified Pod forward by 10 minutes and 100 nanoseconds.
+   This experiment configuration will shift the time of the processes in the specified Pod backward by 10 minutes and 100 nanoseconds.
 
 2. After the configuration file is prepared, use `kubectl` to create an experiment:
 
@@ -63,6 +63,6 @@ The fields in the YAML configuration file are described in the following table:
 | timeOffset | string | Specifies the length of time offset. | None | Yes | `-5m` |
 | clockIds | []string | Specifies the ID of clock that will be offset. See the [<clock>clock_gettime</clock> documentation](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) for details. | `["CLOCK_REALTIME"]` | No | `["CLOCK_REALTIME", "CLOCK_MONOTONIC"]` |
 | mode | string | Specifies the mode of the experiment. The mode options include `one` (selecting a random Pod), `all` (selecting all eligible Pods), `fixed` (selecting a specified number of eligible Pods), `fixed-percent` (selecting a specified percentage of Pods from the eligible Pods), and `random-max-percent` (selecting the maximum percentage of Pods from the eligible Pods). | None | Yes | `one` |
-| value | string | Provides parameters for the `mode` configuration, depending on `mode`.For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods. | None | No | 1 |
+| value | string | Provides parameters for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods. | None | No | 1 |
 | containerNames | []string | Specifies the name of the container into which the fault is injected. | None | No | `["nginx"]` |
 | selector | struct | Specifies the target Pod. For details, refer to [Define the experiment scope](./define-chaos-experiment-scope.md). | None | Yes |  |

@@ -1,11 +1,15 @@
 import Link from '@docusaurus/Link'
+import Translate, { translate } from '@docusaurus/Translate'
 import Layout from '@theme/Layout'
 import { clsx } from 'clsx'
 
 import { archivedVersions, stableVersions } from '../data/versions'
 import styles from './versions.module.css'
 
-const allVersionsText = 'All Versions of Chaos Mesh'
+const allVersionsText = translate({
+  id: 'versions.title',
+  message: 'All Versions of Chaos Mesh',
+})
 
 export default function Versions() {
   return (
@@ -14,36 +18,69 @@ export default function Versions() {
         <div className="container">
           <h1>{allVersionsText}</h1>
           <p>
-            Each version of Chaos Mesh will have its fixed support cycle. As we continue to develop and iterate, some
-            versions will be phased out over time. We will keep the last three stable and development versions in the
-            official documentation, and the rest will be archived.
+            <Translate id="versions.description">
+              Each version of Chaos Mesh will have its fixed support cycle. As we continue to develop and iterate, some
+              versions will be phased out over time. We will keep the last three stable and development versions in the
+              official documentation, and the rest will be archived.
+            </Translate>
           </p>
           <p>
-            You can learn more about our version support via <Link to="/supported-releases">Supported Releases</Link>.
+            <Translate
+              id="versions.supportedReleases"
+              values={{
+                link: (
+                  <Link to="/supported-releases">
+                    <Translate id="versions.supportedReleases.link">Supported Releases</Translate>
+                  </Link>
+                ),
+              }}
+            >
+              {'You can learn more about our version support via {link}.'}
+            </Translate>
           </p>
 
-          <h2>Development version</h2>
+          <h2>
+            <Translate id="versions.development">Development version</Translate>
+          </h2>
           <p>
-            The development version is the latest version of Chaos Mesh. It is under active development and may be
-            unstable. <strong>It is not recommended to use it in production</strong>.
+            <Translate
+              id="versions.development.description"
+              values={{
+                notRecommended: (
+                  <strong>
+                    <Translate id="versions.development.notRecommended">
+                      It is not recommended to use it in production
+                    </Translate>
+                  </strong>
+                ),
+              }}
+            >
+              {
+                'The development version is the latest version of Chaos Mesh. It is under active development and may be unstable. {notRecommended}.'
+              }
+            </Translate>
           </p>
           <Link
             to="/docs/next"
             className={clsx('button button--outline button--primary margin-right--sm', styles.viewNextDoc)}
           >
-            View Documentation
+            <Translate id="versions.viewDocumentation">View Documentation</Translate>
           </Link>
           <Link
             to="https://github.com/chaos-mesh/chaos-mesh/commits/master"
             className="button button--outline button--primary"
           >
-            Recent Commits
+            <Translate id="versions.recentCommits">Recent Commits</Translate>
           </Link>
 
-          <h2 className="margin-top--lg">Stable versions</h2>
+          <h2 className="margin-top--lg">
+            <Translate id="versions.stable">Stable versions</Translate>
+          </h2>
           <p>
-            The stable versions are the latest three versions of Chaos Mesh. They are stable and recommended to use in
-            production.
+            <Translate id="versions.stable.description">
+              The stable versions are the latest three versions of Chaos Mesh. They are stable and recommended to use in
+              production.
+            </Translate>
           </p>
 
           <div className="row">
@@ -53,12 +90,16 @@ export default function Versions() {
                   <div className="card__header">
                     <h3>
                       v{version.version}
-                      {i === stableVersions.length - 1 && ' (Unsupported)'}
+                      {i === stableVersions.length - 1 && (
+                        <Translate id="versions.unsupported"> (Unsupported)</Translate>
+                      )}
                     </h3>
                   </div>
                   <div className="card__body">
                     <p>
-                      Release Date: <b>{version.date}</b>.
+                      <Translate id="versions.releaseDate" values={{ date: <b>{version.date}</b> }}>
+                        {'Release Date: {date}.'}
+                      </Translate>
                     </p>
                   </div>
                   <div className="card__footer">
@@ -67,13 +108,13 @@ export default function Versions() {
                         to={`/docs${i === 0 ? '' : '/' + version.version}`}
                         className="button button--outline button--primary"
                       >
-                        Documentation
+                        <Translate id="versions.documentation">Documentation</Translate>
                       </Link>
                       <Link
                         to={`https://github.com/chaos-mesh/chaos-mesh/releases/tag/v${version.version}`}
                         className="button button--outline button--primary"
                       >
-                        Release Notes
+                        <Translate id="versions.releaseNotes">Release Notes</Translate>
                       </Link>
                     </div>
                   </div>
@@ -82,10 +123,24 @@ export default function Versions() {
             ))}
           </div>
 
-          <h2 className="margin-top--lg">Archived versions</h2>
+          <h2 className="margin-top--lg">
+            <Translate id="versions.archived">Archived versions</Translate>
+          </h2>
           <p>
-            The archived versions are the versions of Chaos Mesh that are no longer supported.{' '}
-            <strong>We recommand you to upgrade to the latest stable version if possible</strong>.
+            <Translate
+              id="versions.archived.description"
+              values={{
+                recommendation: (
+                  <strong>
+                    <Translate id="versions.archived.recommendation">
+                      We recommend you to upgrade to the latest stable version if possible
+                    </Translate>
+                  </strong>
+                ),
+              }}
+            >
+              {'The archived versions are the versions of Chaos Mesh that are no longer supported. {recommendation}.'}
+            </Translate>
           </p>
           <table>
             <tbody>
@@ -97,7 +152,7 @@ export default function Versions() {
                       to={`https://chaos-mesh-website-archived.netlify.app/docs${i === 0 ? '' : '/' + version}`}
                       className="button button--outline button--primary"
                     >
-                      Documentation
+                      <Translate id="versions.documentation">Documentation</Translate>
                     </Link>
                   </td>
                   <td>
@@ -105,7 +160,7 @@ export default function Versions() {
                       to={`https://github.com/chaos-mesh/chaos-mesh/releases/tag/v${version}`}
                       className="button button--outline button--primary"
                     >
-                      Release Notes
+                      <Translate id="versions.releaseNotes">Release Notes</Translate>
                     </Link>
                   </td>
                 </tr>

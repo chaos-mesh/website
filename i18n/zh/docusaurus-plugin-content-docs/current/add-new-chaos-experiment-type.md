@@ -36,14 +36,18 @@ title: 新增混沌实验类型
        Status HelloWorldChaosStatus `json:"status,omitempty"`
    }
 
-   // HelloWorldChaosSpec is the content of the specification for a HelloWorldChaos
+   // HelloWorldChaosSpec defines the desired state of HelloWorldChaos
    type HelloWorldChaosSpec struct {
-       // ContainerSelector specifies target
+       // ContainerSelector specifies the target for injection
        ContainerSelector `json:",inline"`
 
-       // Duration represents the duration of the chaos action
+       // Duration represents the duration of the chaos
        // +optional
        Duration *string `json:"duration,omitempty"`
+
+       // RemoteCluster represents the remote cluster where the chaos will be deployed
+       // +optional
+       RemoteCluster string `json:"remoteCluster,omitempty"`
    }
 
    // HelloWorldChaosStatus represents the status of a HelloWorldChaos
@@ -80,7 +84,7 @@ title: 新增混沌实验类型
 
 在 Kubernetes API 中注册 HelloWorldChaos 的 CRD，使 HelloWorldChaos 成为一种 Kubernetes 自定义资源。
 
-1. 在根目录下运行 `make yaml`。
+1. 在根目录下运行 `make generate`。
 
    生成的 YAML 文件位于 `config/crd/bases/chaos-mesh.org_helloworldchaos.yaml`。
 
@@ -94,7 +98,7 @@ title: 新增混沌实验类型
      - bases/chaos-mesh.org_helloworldchaos.yaml # 新增一行
    ```
 
-3. 再次运行 `make yaml`，HelloWorldChaos 的定义就会出现在 `manifests/crd.yaml` 里。 如需确认，你可以使用 `git diff` 命令。
+3. 再次运行 `make generate`，HelloWorldChaos 的定义就会出现在 `manifests/crd.yaml` 里。 如需确认，你可以使用 `git diff` 命令。
 
 ## 第 3 步：注册混沌实验的处理函数
 

@@ -142,9 +142,9 @@ NetworkChaos 用于模拟集群中网络故障的场景，目前支持以下几�
 | target | Selector | 与 direction 组合使用，使得 Chaos 只对部分包生效 | 无 | 否 |  |
 | direction | enum | 值为 `from`，`to` 或 `both`。用于指定选出“来自 target 的包”，“发往 target 的包”，或者“全部选中” | to | 否 | both |
 | mode | string | 指定实验的运行方式，可选择的方式包括：`one`（表示随机选出一个符合条件的 Pod）、`all`（表示选出所有符合条件的 Pod）、`fixed`（表示选出指定数量且符合条件的 Pod）、`fixed-percent`（表示选出占符合条件的 Pod 中指定百分比的 Pod）、`random-max-percent`（表示选出占符合条件的 Pod 中不超过指定百分比的 Pod） | 无 | 是 | `one` |
-| value | string | 取决与 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 Pod 的百分比 | 无 | 否 | 1 |
+| value | string | 取决于 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 Pod 的百分比 | 无 | 否 | 1 |
 | selector | struct | 指定注入故障的目标 Pod，详情请参考[定义实验范围](./define-chaos-experiment-scope.md) | 无 | 是 |  |
-| externalTargets | []string | 表示 Kubernetes 之外的网络目标, 可以是 IPv4 地址或者域名。只能与 `direction: to` 一起工作。 | 无 | 否 | 1.1.1.1, google.com |
+| externalTargets | []string | 表示 Kubernetes 之外的网络目标，可以是 IPv4 地址或者域名。只能与 `direction: to` 一起工作。 | 无 | 否 | 1.1.1.1, google.com |
 | device | string | 指定影响的网络设备 | 无 | 否 | "eth0" |
 
 ## 不同 `action` 的配置项
@@ -162,10 +162,10 @@ NetworkChaos 用于模拟集群中网络故障的场景，目前支持以下几�
 
 | 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
 | --- | --- | --- | --- | --- | --- |
-| latency | string | 表示延迟的时间长度 | 0 | 否 | 2ms |
+| latency | string | 表示延迟的时间长度 | 无 | 是 | 2ms |
 | correlation | string | 表示延迟时间的时间长度与前一次延迟时长的相关性。取值范围：[0, 100] | 0 | 否 | 50 |
-| jitter | string | 表示延迟时间的变化范围 | 0 | 否 | 1ms |
-| reorder | Reorder(#Reorder) | 表示网络包乱序的状态 |  | 否 |  |
+| jitter | string | 表示延迟时间的变化范围 | 0ms | 否 | 1ms |
+| reorder | [reorder](#reorder) | 表示网络包乱序的状态 |  | 否 |  |
 
 `correlation` 的计算模型如下：
 
@@ -226,4 +226,4 @@ NetworkChaos 用于模拟集群中网络故障的场景，目前支持以下几�
 | peakrate | uint64 | `bucket` 的最大消耗率    |        | 否       | 1     |
 | minburst | uint32 | `peakrate bucket` 的大小 |        | 否       | 1     |
 
-其中 `peakrate` 和 `minburst` 通常情况下不需要设置。如果需要进一步了解这些字段的含义，可以参考 [tc-tbf 文档](https://man7.org/linux/man-pages/man8/tc-tbf.8.html).`limit` 建议至少设置为 `2 * rate * latency`，其中 `latency` 为发送者到目标的延迟，可以通过 `ping` 命令估算。过小的 limit 会造成高丢包率，从而影响 TCP 连接的吞吐。
+其中 `peakrate` 和 `minburst` 通常情况下不需要设置。如果需要进一步了解这些字段的含义，可以参考 [tc-tbf 文档](https://man7.org/linux/man-pages/man8/tc-tbf.8.html)。`limit` 建议至少设置为 `2 * rate * latency`，其中 `latency` 为发送者到目标的延迟，可以通过 `ping` 命令估算。过小的 limit 会造成高丢包率，从而影响 TCP 连接的吞吐。

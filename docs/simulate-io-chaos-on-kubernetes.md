@@ -125,7 +125,7 @@ For specific features, refer to [Create experiments using the YAML files](#creat
      duration: '400s'
    ```
 
-   In this configuration example, Chaos Mesh injects `/var/run/etcd` directories `attrOverride` fault, giving a 10% probability that all file system operations in this directory will change the target file permissions to 72 (110 in octal), which will allow files to be executed only by the owner and their group and not authorized to perform other actions.
+   In this configuration example, Chaos Mesh injects an `attrOverride` fault into the `/var/run/etcd` directory, giving a 10% probability that all file system operations in this directory will change the target file permissions to 72 (110 in octal), allowing the files to be executed only by the owner and the owner's group, without permission for any other actions.
 
 2. After the configuration file is prepared, use `kubectl` to create an experiment:
 
@@ -162,7 +162,7 @@ For specific features, refer to [Create experiments using the YAML files](#creat
      duration: '400s'
    ```
 
-   In this configuration example, Chaos Mesh injects read and write faults into the directory `/var/run/etcd`, which gives a 10% probability of failure in the read and write operations under this directory. During this process, one random position with a maximum length of 10 bytes will be replaced with 0 bytes.
+   In this configuration example, Chaos Mesh injects read and write faults into the directory `/var/run/etcd`, giving a 10% probability that the read and write operations in this directory will fail. During the process, one random position with a maximum length of 10 bytes is replaced with 0 bytes.
 
 2. After the configuration file is prepared, use `kubectl` to create an experiment:
 
@@ -251,7 +251,11 @@ The following are specific information about fields corresponding to action:
   | maxOccurrences | int | Maximum number of errors in each operation. |  | Yes | 1 |
   | maxLength | int | Maximum length of each error (in bytes). |  | Yes | 1 |
 
-::warning It is suggested that you only use mistake on READ and WRITE file system calls. Using mistake on other file system calls may lead to unexpected consequences, including but not limited to file system damage and program crashes. :::
+:::warning
+
+It is suggested that you only use mistake on READ and WRITE file system calls. Using mistake on other file system calls may lead to unexpected consequences, including but not limited to file system damage and program crashes.
+
+:::
 
 ## Local debugging
 
@@ -285,7 +289,7 @@ If you are not sure about the effect of a certain Chaos, you can use [toda](http
 - setxattr
 - getxattr
 - listxattr
-- removexatr
+- removexattr
 - access
 - create
 - getlk

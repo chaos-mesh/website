@@ -6,7 +6,7 @@ import PickHelmVersion from '@site/src/components/PickHelmVersion'
 
 This document describes how to manage user permissions in Chaos Mesh, including creating user accounts with different roles, binding permissions to user accounts, managing tokens, and enabling or disabling permission authentication.
 
-Chaos Mesh uses [RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) to manage user permissions. To create, view and manage chaos experiments, users must have the appropriate permissions in the `apiGroups` of `chaos-mesh.org` to refer the resources of chaos experiments.
+Chaos Mesh uses [RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) to manage user permissions. To create, view and manage chaos experiments, users must have the appropriate permissions to access the chaos experiment resources under the `apiGroups` of `chaos-mesh.org`.
 
 :::warning
 
@@ -32,17 +32,17 @@ The steps to create user accounts and bind permissions are as follows:
 
 If you want to give the account the appropriate permissions for all chaos experiments in the cluster, tick the **Cluster scoped** checkbox. If you specify a namespace in the **Namespace** dropdown, the account will only have permissions in the specified namespace.
 
-In summary, there are two options to choose from:
+In summary, you have two options to choose from:
 
-- `Cluster scoped`: the account has permissions for all chaos experiments in cluster.
+- `Cluster scoped`: the account has permissions for all chaos experiments in the cluster.
 - `Namespace scoped`: the account has permissions for all chaos experiments in the specified namespace.
 
 ### Select the role of users
 
-Currently, Chaos Mesh provides the following user roles
+Currently, Chaos Mesh provides the following user roles:
 
-- `Manager`: who has all permissions to create, view, update and delete chaos experiments.
-- `Viewer`: who only has the right to view chaos experiments.
+- `Manager`: has full permissions to create, view, update and delete chaos experiments.
+- `Viewer`: has the permission to view chaos experiments only.
 
 ### Generate the permission
 
@@ -106,7 +106,7 @@ You need to ensure that the local user running `kubectl` has permissions to the 
 
 :::info
 
-Versions of Kubernetes before v1.22 automatically created long term credentials for accessing the Kubernetes API. In recent versions of Kubernetes, you must manually create a service account token Secret.
+Versions of Kubernetes before v1.24 automatically created long-term credentials for accessing the Kubernetes API. In recent versions of Kubernetes, you must manually create a service account token Secret.
 
 For more details, see [Manually create an API token for a ServiceAccount](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#manually-create-an-api-token-for-a-serviceaccount).
 
@@ -162,7 +162,7 @@ At the top of the page you will see the **Logout** button. Click it to log out t
 
 ### Enable or disable permission authentication
 
-When Chaos Mesh is installed using Helm, Permission Authentication is enabled by default. For production environments and other high security scenarios, it is recommended to leave permission authentication enabled. If you are just trying out Chaos Mesh and want to quickly create chaos experiments, you can set `--set dashboard.securityMode=false` in a Helm command to disable authentication. The command looks like this:
+When Chaos Mesh is installed using Helm, permission authentication is enabled by default. For production environments and other high security scenarios, it is recommended to leave permission authentication enabled. If you are just trying out Chaos Mesh and want to quickly create chaos experiments, you can set `--set dashboard.securityMode=false` in a Helm command to disable authentication. The command looks like this:
 
 <PickHelmVersion>
 {`helm upgrade chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-mesh --version latest --set dashboard.securityMode=false`}

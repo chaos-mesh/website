@@ -5,9 +5,15 @@ summary: This document describes how to use Chaosd to simulate a time offset sce
 
 This document describes how to use Chaosd to simulate a time offset scenario. You can create experiments either in command-line mode or service mode.
 
-## Create experiments using command-line mode
+## Parameters for simulating time faults
 
-This section describes how to create time fault experiments using commands.
+| Configuration item | Abbreviation | Service mode field | Description | Type | Value |
+| --- | --- | --- | --- | --- | --- |
+| `time-offset` | — | `time-offset` | Specifies the length of time offset. | string | string type, such as `-5m`. Required. |
+| `clock-ids-slice` | — | `clock-ids-slice` | Specifies the ID of the clock that will be offset. Multiple clock IDs should be separated by a comma. See the [clock_gettime documentation](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) for details. | string | string type. The default value is `"CLOCK_REALTIME"`. |
+| `pid` | — | `pid` | The identifier of the process. | int | int type. Required. |
+
+## Simulate time faults using the command-line mode
 
 Before creating an experiment, you can run the following command to check the options of time faults:
 
@@ -68,14 +74,10 @@ Then execute get_time and try to attack it. The following is an example:
 chaosd attack clock -p $PID -t 11s
 ```
 
-### Configurations of simulating time faults
+## Simulate time faults using the service mode
 
-| Parameter | Type | Note | Default value | Required | Example |
-| --- | --- | --- | --- | --- | --- |
-| timeOffset | string | Specifies the length of time offset. | None | Yes | `-5m` |
-| clockIds | []string | Specifies the ID of clock that will be offset. See the [clock_gettime documentation](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) for details. | `["CLOCK_REALTIME"]` | No | `["CLOCK_REALTIME", "CLOCK_MONOTONIC"]` |
-| pid | string | The identifier of the process. | None | Yes | `1` |
+Run the test program in [Quick Example](#quick-example), and then use the following command to create a time fault experiment:
 
-### Create experiments using service mode
-
-(ongoing update)
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/clock -H "Content-Type:application/json" -d '{"pid":123, "time-offset":"11s"}'
+```

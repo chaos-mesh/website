@@ -10,7 +10,7 @@ The following walks you through an example of `HelloWorldChaos`, a new chaos exp
 
 - [Step 1: Define the schema of HelloWorldChaos](#step-1-define-the-schema-of-helloworldchaos)
 - [Step 2: Register the CRD](#step-2-register-the-crd)
-- [Step 3: Register the event handler for helloworld objects](#step-3-register-the-event-handler-for-helloworldchaos-objects)
+- [Step 3: Register the event handler for helloworldchaos objects](#step-3-register-the-event-handler-for-helloworldchaos-objects)
 - [Step 4: Build Docker images](#step-4-build-docker-images)
 - [Step 5: Run HelloWorldChaos](#step-5-run-helloworldchaos)
 
@@ -80,9 +80,9 @@ The following walks you through an example of `HelloWorldChaos`, a new chaos exp
 
 ## Step 2: Register the CRD
 
-You need to register the CRD (Custom Resource Definition) of `HelloWorldChaos` to interact it with Kubernetes API.
+You need to register the CRD (Custom Resource Definition) of `HelloWorldChaos` so that it can interact with the Kubernetes API.
 
-1. To combine the CRD into manifests/crd.yaml, append `config/crd/bases/chaos-mesh.org_helloworldchaos.yaml` we generated in the previous step to `config/crd/kustomization.yaml`:
+1. To include the CRD in `manifests/crd.yaml`, add `config/crd/bases/chaos-mesh.org_helloworldchaos.yaml` to `config/crd/kustomization.yaml`:
 
    ```yaml
    resources:
@@ -92,7 +92,7 @@ You need to register the CRD (Custom Resource Definition) of `HelloWorldChaos` t
      - bases/chaos-mesh.org_helloworldchaos.yaml # This is the new line
    ```
 
-2. Run `make generate` in the root directory of Chaos Mesh, which generates a boilerplate of `HelloWorldChaos` for Chaos Mesh to compile:
+2. Run `make generate` in the root directory of Chaos Mesh. This generates the boilerplate code of `HelloWorldChaos` and rebuilds `manifests/crd.yaml`:
 
    ```bash
    make generate

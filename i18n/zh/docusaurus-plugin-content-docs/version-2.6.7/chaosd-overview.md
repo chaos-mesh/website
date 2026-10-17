@@ -36,7 +36,7 @@ glibc 必须为 2.17 及以上版本。
    export CHAOSD_VERSION=v1.0.0
    ```
 
-   如果要查看所有已发布的 Chaosd 版本，请参阅 [releases](https://github.com/chaos-mesh/chaosd/releases) 。
+   如果要查看所有已发布的 Chaosd 版本，请参阅 [releases](https://github.com/chaos-mesh/chaosd/releases)。
 
    如果要下载最新的非稳定版本，则使用 `latest`：
 
