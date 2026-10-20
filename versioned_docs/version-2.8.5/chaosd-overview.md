@@ -26,7 +26,7 @@ For details about the introduction and usage of each fault type, refer to the re
 
 ### Operating environment
 
-Your glibc version must be v2.17 or later.
+The current Ubuntu 24.04 release workflows produce `latest` and new tagged archives that require glibc 2.34 or later. Older archives retain their original requirements. Source build requirements depend on the libraries in the chosen build system.
 
 ### Download and deploy
 
