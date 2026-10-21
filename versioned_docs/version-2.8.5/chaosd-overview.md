@@ -4,67 +4,86 @@ title: Chaosd Introduction
 
 ## Chaosd Introduction
 
-[Chaosd](https://github.com/chaos-mesh/chaosd) is a Chaos Engineering testing tool provided by Chaos Mesh. You need to download and deploy it separately (see [Download and deploy](#download-and-deploy)). It is used to inject faults into physical machine environments and to recover those faults.
+[Chaosd](https://github.com/chaos-mesh/chaosd) injects faults into Linux hosts through a command-line tool or an HTTP service. It records experiments and recovery data in SQLite so that you can inspect experiments and recover supported faults.
 
-Chaosd has the following core strengths:
+:::note Chaosd version
 
-- Easy-to-use: You only need to execute simple commands in Chaosd to create and manage Chaos experiments.
-- Various fault types: Chaosd provides various fault types to be injected into physical machines at different levels, including process, network, pressure, disk, host, etc. More fault types are to be added.
-- Multiple work modes: Chaosd can be used both as a command-line tool and as a service to meet the needs of different scenarios.
+This page describes **Chaosd v1.5.0**. Chaosd is released separately from Chaos Mesh. The website's version selector refers to Chaos Mesh, not Chaosd. See the [v1.5.0 release notes](https://github.com/chaos-mesh/chaosd/releases/tag/v1.5.0) for the changes in this release.
+
+:::
 
 ### Supported fault types
 
-You can use Chaosd to simulate the following fault types:
+The CLI supports the following fault types. Run `chaosd attack <command> --help` for available actions and flags.
 
-- Process: Injects faults into processes. Operations such as killing or stopping a process are supported.
-- Network: Injects faults into the network of physical machines. Operations such as increasing network latency, dropping packets, and corrupting packets are supported.
-- Pressure: Injects pressure on the CPU or memory of physical machines.
-- Disk: Injects faults into disks of the physical machines. Operations such as adding disk read/write load and filling disks are supported.
-- Host: Injects faults into the physical machine itself. Operations such as shutting down the physical machine are supported.
+| Command | Faults |
+| :-- | :-- |
+| `process` | Stop or kill processes. |
+| `network` | Delay, loss, corruption, duplication, partition, DNS, bandwidth, port occupation, flood, and interface failure. |
+| `stress` | CPU and memory pressure. |
+| `disk` | Read load, write load, and disk fill. |
+| `host` | Shutdown and reboot. |
+| `jvm` | Method latency, return values, exceptions, stress, garbage collection, and Byteman rules. |
+| `clock` | Time offsets in a target process. |
+| `kafka` | Disk fill, message flood, and broker I/O faults. |
+| `redis` | Sentinel faults and cache faults. |
+| `file` | Create, modify, delete, rename, append, and replace file contents. |
+| `http` | Abort or delay HTTP traffic, apply proxy configuration, and send requests. |
+| `vm` | Stop a virtual machine through libvirt. |
+| `user-defined` | Run custom attack and recovery commands. |
 
-For details about the introduction and usage of each fault type, refer to the related documentation.
+Host and file faults are available through the CLI only. For the other fault types, the HTTP service accepts `POST /api/attack/<kind>`. The custom command endpoint uses `user_defined`. HTTP requests use JSON configuration fields, which can differ from CLI flag names.
 
 ### Operating environment
 
-The current Ubuntu 24.04 release workflows produce `latest` and new tagged archives that require glibc 2.34 or later. Older archives retain their original requirements. Source build requirements depend on the libraries in the chosen build system.
+The Chaosd v1.5.0 prebuilt archives support Linux **amd64** and **arm64**, and require **glibc 2.34 or later**. Older archives retain their original requirements. When building from source, runtime requirements depend on the libraries in the build environment.
+
+Clock injection is unsupported on arm64. Other runtime tools depend on the selected fault. For example, network faults use tools such as `tc`, `ipset`, and `iptables`; CPU stress uses `stress-ng`, and memory stress uses `memStress`. Run experiments with the privileges required by the target operation, often root or Linux capabilities.
 
 ### Download and deploy
 
-1. Set the version of Chaosd to be downloaded as the environment variable. For example, v1.0.0:
+1. Select Chaosd v1.5.0 and the architecture of the Linux host. Use `amd64` for x86-64 or `arm64` for AArch64.
 
    ```bash
-   export CHAOSD_VERSION=v1.0.0
+   export CHAOSD_VERSION=v1.5.0
+   export CHAOSD_ARCH=amd64
    ```
 
-   To view all released versions of Chaosd, refer to [releases](https://github.com/chaos-mesh/chaosd/releases).
+   To view other released versions, see [Chaosd releases](https://github.com/chaos-mesh/chaosd/releases). The `latest` archive follows development builds and is not a stable release.
 
-   To download the latest version (not stable), use `latest`:
+2. Download the archive:
 
    ```bash
-   export CHAOSD_VERSION=latest
+   curl -fsSLO "https://mirrors.chaos-mesh.org/chaosd-${CHAOSD_VERSION}-linux-${CHAOSD_ARCH}.tar.gz"
    ```
 
-2. Download Chaosd:
+3. Extract the archive and move the entire directory, including `tools`, to `/usr/local`:
 
    ```bash
-   curl -fsSLO https://mirrors.chaos-mesh.org/chaosd-$CHAOSD_VERSION-linux-amd64.tar.gz
+   tar -xzf "chaosd-${CHAOSD_VERSION}-linux-${CHAOSD_ARCH}.tar.gz"
+   sudo mv "chaosd-${CHAOSD_VERSION}-linux-${CHAOSD_ARCH}" /usr/local/
    ```
 
-3. Unzip the Chaosd file and move it to the `/usr/local` directory:
+4. Add the directory to `PATH` and check the installed version:
 
    ```bash
-   tar zxvf chaosd-$CHAOSD_VERSION-linux-amd64.tar.gz && sudo mv chaosd-$CHAOSD_VERSION-linux-amd64 /usr/local/
+   export PATH="/usr/local/chaosd-${CHAOSD_VERSION}-linux-${CHAOSD_ARCH}:$PATH"
+   chaosd version
    ```
 
-4. Add the Chaosd directory to the `PATH` environment variable:
-
-   ```bash
-   export PATH=/usr/local/chaosd-$CHAOSD_VERSION-linux-amd64:$PATH
-   ```
+Keep the `tools` directory beside the `chaosd` executable. Chaosd adds the bundled tools to its search path and uses the bundled Byteman unless `BYTEMAN_HOME` is set.
 
 ### Work modes
 
-You can use Chaosd in the following modes:
+- Command-line mode: Run `chaosd attack <command>` to create an experiment and `chaosd recover <UID>` to recover a supported fault.
+- Service mode: Run Chaosd in the background and send HTTP requests to create or recover experiments. See [Deploy Chaosd server](simulate-physical-machine-chaos.md#deploy-chaosd-server) for TLS configuration when connecting from Chaos Mesh.
 
-- Command-line mode: Run Chaosd directly as a command-line tool to inject and recover faults.
-- Service mode: Run Chaosd as a service in the background, to inject and recover faults by sending HTTP requests.
+For local use, start the service on the loopback address:
+
+```bash
+chaosd server --host 127.0.0.1 --port 31767
+```
+
+The default bind address is `0.0.0.0`. Plain HTTP has no authentication. Use TLS with client certificate verification when exposing the service to Chaos Mesh.
+
+Chaosd stores `chaosd.dat` beside its executable. That directory must be writable by the account running stateful commands. Preserve the database and fault-created backups until recovery is complete. Moving the executable changes the database and helper locations. See [Search and recover experiments](chaosd-search-recover.md) for recovery limits and scheduled experiments.
