@@ -105,18 +105,6 @@ You need to add the privileged SCC to the `chaos-daemon` service account.
 oc adm policy add-scc-to-user privileged -n chaos-mesh -z chaos-daemon
 ```
 
-### Failed to install Chaos Mesh with the message: no matches for kind "CustomResourceDefinition" in version "apiextensions.k8s.io/v1"
-
-This issue occurs when you install Chaos Mesh on Kubernetes v1.15 or an earlier version. We use `apiextensions.k8s.io/v1` by default, but it was introduced in Kubernetes v1.16.
-
-When you install Chaos Mesh on Kubernetes earlier than v1.16, you need to follow the process below:
-
-1. Manually create CRD through `https://mirrors.chaos-mesh.org/<chaos-mesh-version>/crd-v1beta1.yaml`.
-2. Add `--validate=false`. If this flag is not set, compatibility issues caused by breaking CRD changes may occur. For example, `kubectl create -f https://mirrors.chaos-mesh.org/v2.1.0/crd-v1beta1.yaml --validate=false`.
-3. Use Helm to complete the rest of the installation, and append `--skip-crds` to the `helm install` command.
-
-We suggest upgrading your Kubernetes cluster by referencing Kubernetes [Version Skew Policy](https://kubernetes.io/releases/version-skew-policy/).
-
 ## Chaosd
 
 ### Failed with error: attempt to write a readonly database
