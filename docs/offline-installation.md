@@ -25,11 +25,14 @@ Before you install Chaos Mesh offline, you need to download all Chaos Mesh image
 
 ### Specify version number
 
-Set the version number of Chaos Mesh as the environment variable on the machine with external network connection:
+Set the Chaos Mesh and DNS image versions as environment variables on the machine with external network connection:
 
 <PickVersion>
-{`export CHAOS_MESH_VERSION=latest`}
+{`export CHAOS_MESH_VERSION=latest
+export CHAOS_DNS_VERSION=v0.3.0`}
 </PickVersion>
+
+The DNS image uses its own version. `CHAOS_DNS_VERSION` matches `dnsServer.image.tag` in this version of the Helm chart.
 
 ### Download Chaos Mesh images
 
@@ -39,6 +42,7 @@ On the machine connected to the external network, pull images using the version 
 docker pull ghcr.io/chaos-mesh/chaos-mesh:${CHAOS_MESH_VERSION}
 docker pull ghcr.io/chaos-mesh/chaos-daemon:${CHAOS_MESH_VERSION}
 docker pull ghcr.io/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION}
+docker pull ghcr.io/chaos-mesh/chaos-coredns:${CHAOS_DNS_VERSION}
 ```
 
 Save images as the tar packages:
@@ -47,11 +51,12 @@ Save images as the tar packages:
 docker save ghcr.io/chaos-mesh/chaos-mesh:${CHAOS_MESH_VERSION} > image-chaos-mesh.tar
 docker save ghcr.io/chaos-mesh/chaos-daemon:${CHAOS_MESH_VERSION} > image-chaos-daemon.tar
 docker save ghcr.io/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION} > image-chaos-dashboard.tar
+docker save ghcr.io/chaos-mesh/chaos-coredns:${CHAOS_DNS_VERSION} > image-chaos-coredns.tar
 ```
 
 :::note
 
-To simulate a DNS fault (for example, make the DNS responses return a random wrong IP address), you need to pull the additional [`chaos-mesh/chaos-coredns`](https://github.com/chaos-mesh/k8s_dns_chaos/pkgs/container/chaos-coredns) image.
+The Helm chart enables the DNS server by default. Include the [`chaos-mesh/chaos-coredns`](https://github.com/chaos-mesh/k8s_dns_chaos/pkgs/container/chaos-coredns) image in the offline files, even if you do not plan to run DNSChaos. If you explicitly set `dnsServer.create=false`, you can omit this image.
 
 :::
 
@@ -70,6 +75,7 @@ After downloading all the files required for installation, you need to copy thes
 - `image-chaos-mesh.tar`
 - `image-chaos-daemon.tar`
 - `image-chaos-dashboard.tar`
+- `image-chaos-coredns.tar`
 - `chaos-mesh.zip`
 
 ## Install Chaos Mesh
@@ -84,6 +90,7 @@ Load images from the tar package:
 docker load < image-chaos-mesh.tar
 docker load < image-chaos-daemon.tar
 docker load < image-chaos-dashboard.tar
+docker load < image-chaos-coredns.tar
 ```
 
 ### Step 2. Push images to Registry
@@ -94,10 +101,12 @@ Before pushing images to Registry, make sure that Registry has been deployed in 
 
 :::
 
-Set the Chaos Mesh version and the Registry address as the environment variable:
+Set the image versions and the Registry address as environment variables:
 
 <PickVersion>
-{`export CHAOS_MESH_VERSION=latest; export DOCKER_REGISTRY=localhost:5000`}
+{`export CHAOS_MESH_VERSION=latest
+export CHAOS_DNS_VERSION=v0.3.0
+export DOCKER_REGISTRY=localhost:5000`}
 </PickVersion>
 
 Mark the images so that they point to the Registry:
@@ -106,9 +115,11 @@ Mark the images so that they point to the Registry:
 export CHAOS_MESH_IMAGE=$DOCKER_REGISTRY/chaos-mesh/chaos-mesh:${CHAOS_MESH_VERSION}
 export CHAOS_DAEMON_IMAGE=$DOCKER_REGISTRY/chaos-mesh/chaos-daemon:${CHAOS_MESH_VERSION}
 export CHAOS_DASHBOARD_IMAGE=$DOCKER_REGISTRY/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION}
+export CHAOS_DNS_IMAGE=$DOCKER_REGISTRY/chaos-mesh/chaos-coredns:${CHAOS_DNS_VERSION}
 docker image tag ghcr.io/chaos-mesh/chaos-mesh:${CHAOS_MESH_VERSION} $CHAOS_MESH_IMAGE
 docker image tag ghcr.io/chaos-mesh/chaos-daemon:${CHAOS_MESH_VERSION} $CHAOS_DAEMON_IMAGE
 docker image tag ghcr.io/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION} $CHAOS_DASHBOARD_IMAGE
+docker image tag ghcr.io/chaos-mesh/chaos-coredns:${CHAOS_DNS_VERSION} $CHAOS_DNS_IMAGE
 ```
 
 Push images to Registry:
@@ -117,6 +128,7 @@ Push images to Registry:
 docker push $CHAOS_MESH_IMAGE
 docker push $CHAOS_DAEMON_IMAGE
 docker push $CHAOS_DASHBOARD_IMAGE
+docker push $CHAOS_DNS_IMAGE
 ```
 
 ### Step 3. Install Chaos Mesh using Helm
@@ -124,7 +136,8 @@ docker push $CHAOS_DASHBOARD_IMAGE
 Unpack the zip package of Chaos Mesh:
 
 ```bash
-unzip chaos-mesh.zip -d chaos-mesh && cd chaos-mesh
+unzip chaos-mesh.zip -d chaos-mesh
+cd chaos-mesh/chaos-mesh-*/
 ```
 
 :::note
