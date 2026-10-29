@@ -81,11 +81,7 @@ For enhancements or bug fixes, we make a new patch release as needed.
 
 After testing the compatibility of various versions of Kubernetes clusters through E2E testing, the Chaos Mesh team determines [Supported Status of Chaos Mesh](#support-status-of-chaos-mesh) based on its test results.
 
-For `master` and the latest stable release, the supported Kubernetes window follows the latest three minor releases maintained upstream. E2E tests cover the oldest and newest minor releases in that window. The middle minor release is not in the E2E matrix.
-
-The E2E matrices for `master` and the latest stable release specify minor versions only. For each minor version, the pinned Minikube version selects the latest known patch from its bundled version table. Patch selections follow updates to Minikube.
-
-As the upstream support window advances, Kubernetes versions outside that window are no longer covered by ongoing E2E tests for `master` or the latest stable release.
+For `master` and the latest stable release, the supported Kubernetes window follows the latest three minor releases maintained upstream. E2E tests cover the oldest and newest minor releases in that window. The middle minor release is not covered by E2E tests.
 
 Below are Kubernetes versions covered by each version of the E2E tests:
 
