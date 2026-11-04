@@ -6,7 +6,7 @@ title: Chaosd 组件简介
 
 [Chaosd](https://github.com/chaos-mesh/chaosd) 通过命令行工具或 HTTP 服务向 Linux 主机注入故障。它使用 SQLite 保存实验和恢复数据，便于后续查询实验，以及恢复支持恢复的故障。
 
-:::note Chaosd 版本
+:::note[Chaosd 版本]
 
 本文适用于 **Chaosd v1.5.0**。Chaosd 与 Chaos Mesh 独立发布，网站的版本选择器对应 Chaos Mesh 版本，不是 Chaosd 版本。本次发布的改动请参阅 [v1.5.0 发布说明](https://github.com/chaos-mesh/chaosd/releases/tag/v1.5.0)。
 

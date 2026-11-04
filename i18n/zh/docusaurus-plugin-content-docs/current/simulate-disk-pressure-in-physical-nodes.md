@@ -4,7 +4,7 @@ title: 模拟磁盘故障
 
 本文主要介绍如何使用 Chaosd 模拟磁盘故障场景。使用该功能，你可以在物理机器上模拟磁盘读写负载（通过 [dd](https://man7.org/linux/man-pages/man1/dd.1.html)），或磁盘填充（通过 [dd](https://man7.org/linux/man-pages/man1/dd.1.html)，或 [fallocate](https://man7.org/linux/man-pages/man1/fallocate.1.html)）。
 
-:::note Chaosd v1.5.0
+:::note[Chaosd v1.5.0]
 
 磁盘读写负载会在完成指定数据量或 `duration` 到期时停止，以先发生者为准。时长可使用 `30s`、`1m` 等格式，空值表示不设置负载截止时间。v1.5.0 修复了这一截止时间行为，命令行和服务模式均适用，磁盘填充不适用。
 
