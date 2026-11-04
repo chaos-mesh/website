@@ -16,33 +16,6 @@ Before creating an experiment, you can run the following command to check the ty
 chaosd attack network --help
 ```
 
-The output is as follows:
-
-```bash
-Network attack related commands
-
-Usage:
-  chaosd attack network [command]
-
-Available Commands:
-  bandwidth   limit network bandwidth
-  corrupt     corrupt network packet
-  delay       delay network
-  dns         attack DNS server or map specified host to specified IP
-  duplicate   duplicate network packet
-  loss        loss network packet
-  partition   partition
-  port        attack network port
-
-Flags:
-  -h, --help   help for network
-
-Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
-
-Use "chaosd attack network [command] --help" for more information about a command.
-```
-
 Currently, you can simulate the following experimental scenarios using Chaosd: network corruption, network latency, network duplication, network loss, network partition, DNS fault, network bandwidth limitation, and port occupation.
 
 To create experiments using the service mode, you need to run Chaosd in the service mode and then send a `POST` HTTP request to the `/api/attack/network` path of the Chaosd service:
@@ -87,39 +60,10 @@ The command is as follows:
 chaosd attack network corrupt --help
 ```
 
-The output is as follows:
-
-```bash
-corrupt network packet
-
-Usage:
-  chaosd attack network corrupt [flags]
-
-Flags:
-  -c, --correlation string   correlation is percentage (10 is 10%) (default "0")
-  -d, --device string        the network interface to impact
-  -e, --egress-port string   only impact egress traffic to these destination ports, use a ',' to separate or to indicate the range, such as 80, 8001:8010. It can only be used in conjunction with -p tcp or -p udp
-  -h, --help                 help for corrupt
-  -H, --hostname string      only impact traffic to these hostnames
-  -i, --ip string            only impact egress traffic to these IP addresses
-      --percent string       percentage of packets to corrupt (10 is 10%) (default "1")
-  -p, --protocol string      only impact traffic using this IP protocol, supported: tcp, udp, icmp, all
-  -s, --source-port string   only impact egress traffic from these source ports, use a ',' to separate or to indicate the range, such as 80, 8001:8010. It can only be used in conjunction with -p tcp or -p udp
-
-Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
-```
-
 Run the following command to simulate network corruption:
 
 ```bash
 chaosd attack network corrupt -d eth0 -i 172.16.4.4 --percent 50
-```
-
-If the command runs successfully, the output is as follows:
-
-```bash
-Attack network successfully, uid: 4eab1e62-8d60-45cb-ac85-3c17b8ac4825
 ```
 
 ### Simulate network corruption using the service mode
@@ -155,40 +99,10 @@ The command is as follows:
 chaosd attack network delay --help
 ```
 
-The output is as follows:
-
-```bash
-delay network
-
-Usage:
-  chaosd attack network delay [flags]
-
-Flags:
-  -c, --correlation string   correlation is percentage (10 is 10%) (default "0")
-  -d, --device string        the network interface to impact
-  -e, --egress-port string   only impact egress traffic to these destination ports, use a ',' to separate or to indicate the range, such as 80, 8001:8010. It can only be used in conjunction with -p tcp or -p udp
-  -h, --help                 help for delay
-  -H, --hostname string      only impact traffic to these hostnames
-  -i, --ip string            only impact egress traffic to these IP addresses
-  -j, --jitter string        jitter time, time units: ns, us (or µs), ms, s, m, h.
-  -l, --latency string       delay egress time, time units: ns, us (or µs), ms, s, m, h.
-  -p, --protocol string      only impact traffic using this IP protocol, supported: tcp, udp, icmp, all
-  -s, --source-port string   only impact egress traffic from these source ports, use a ',' to separate or to indicate the range, such as 80, 8001:8010. It can only be used in conjunction with -p tcp or -p udp
-
-Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
-```
-
 Run the following command to simulate network latency:
 
 ```bash
 chaosd attack network delay -d eth0 -i 172.16.4.4 -l 10ms
-```
-
-If the command runs successfully, the output is as follows:
-
-```bash
-Attack network successfully, uid: 4b23a0b5-e193-4b27-90a7-3e04235f32ab
 ```
 
 ### Simulate network latency using the service mode
@@ -223,39 +137,10 @@ The command is as follows:
 chaosd attack network duplicate --help
 ```
 
-The output is as follows:
-
-```bash
-duplicate network packet
-
-Usage:
-  chaosd attack network duplicate [flags]
-
-Flags:
-  -c, --correlation string   correlation is percentage (10 is 10%) (default "0")
-  -d, --device string        the network interface to impact
-  -e, --egress-port string   only impact egress traffic to these destination ports, use a ',' to separate or to indicate the range, such as 80, 8001:8010. It can only be used in conjunction with -p tcp or -p udp
-  -h, --help                 help for duplicate
-  -H, --hostname string      only impact traffic to these hostnames
-  -i, --ip string            only impact egress traffic to these IP addresses
-      --percent string       percentage of packets to duplicate (10 is 10%) (default "1")
-  -p, --protocol string      only impact traffic using this IP protocol, supported: tcp, udp, icmp, all
-  -s, --source-port string   only impact egress traffic from these source ports, use a ',' to separate or to indicate the range, such as 80, 8001:8010. It can only be used in conjunction with -p tcp or -p udp
-
-Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
-```
-
 Run the following command to simulate network duplication:
 
 ```bash
 chaosd attack network duplicate -d eth0 -i 172.16.4.4 --percent 50
-```
-
-If the command runs successfully, the output is as follows:
-
-```bash
-Attack network successfully, uid: 7bcb74ee-9101-4ae4-82f0-e44c8a7f113c
 ```
 
 ### Simulate network duplication using the service mode
@@ -290,39 +175,10 @@ The command is as follows:
 chaosd attack network loss --help
 ```
 
-The output is as follows:
-
-```bash
-loss network packet
-
-Usage:
-  chaosd attack network loss [flags]
-
-Flags:
-  -c, --correlation string   correlation is percentage (10 is 10%) (default "0")
-  -d, --device string        the network interface to impact
-  -e, --egress-port string   only impact egress traffic to these destination ports, use a ',' to separate or to indicate the range, such as 80, 8001:8010. It can only be used in conjunction with -p tcp or -p udp
-  -h, --help                 help for loss
-  -H, --hostname string      only impact traffic to these hostnames
-  -i, --ip string            only impact egress traffic to these IP addresses
-      --percent string       percentage of packets to drop (10 is 10%) (default "1")
-  -p, --protocol string      only impact traffic using this IP protocol, supported: tcp, udp, icmp, all
-  -s, --source-port string   only impact egress traffic from these source ports, use a ',' to separate or to indicate the range, such as 80, 8001:8010. It can only be used in conjunction with -p tcp or -p udp
-
-Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
-```
-
 Run the following command to simulate network loss:
 
 ```bash
 chaosd attack network loss -d eth0 -i 172.16.4.4 --percent 50
-```
-
-If the command runs successfully, the output is as follows:
-
-```bash
-Attack network successfully, uid: 1e818adf-3942-4de4-949b-c8499f120265
 ```
 
 ### Simulate network loss using the service mode
@@ -353,28 +209,6 @@ The command is as follows:
 
 ```bash
 chaosd attack network partition --help
-```
-
-The output is as follows:
-
-```bash
-partition
-
-Usage:
-  chaosd attack network partition [flags]
-
-Flags:
-      --accept-tcp-flags string   only the packet which match the tcp flag can be accepted, others will be dropped. only set when the protocol is tcp.
-  -d, --device string             the network interface to impact
-      --direction string          specifies the partition direction, values can be 'to', 'from' or 'both'. 'from' means packets coming from the 'IPAddress' or 'Hostname' and going to your server, 'to' means packets originating from your server and going to the 'IPAddress' or 'Hostname'. (default "both")
-  -h, --help                      help for partition
-  -H, --hostname string           only impact traffic to these hostnames
-  -i, --ip string                 only impact egress traffic to these IP addresses
-  -p, --protocol string           only impact traffic using this IP protocol, supported: tcp, udp, icmp, all
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
 ```
 
 Run the following command to simulate network partition:
@@ -408,25 +242,6 @@ The command is as follows:
 
 ```bash
 chaosd attack network dns --help
-```
-
-The output is as follows:
-
-```bash
-attack DNS server or map specified host to specified IP
-
-Usage:
-  chaosd attack network dns [flags]
-
-Flags:
-  -d, --dns-domain-name string   map this host to specified IP
-  -i, --dns-ip string            map specified host to this IP address
-      --dns-server string        update the DNS server in /etc/resolv.conf with this value (default "123.123.123.123")
-  -h, --help                     help for dns
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
 ```
 
 Run the following command to simulate DNS fault by mapping specified host to specified IP:
@@ -473,30 +288,6 @@ The command is as follows:
 chaosd attack network bandwidth --help
 ```
 
-The output is as follows:
-
-```bash
-limit network bandwidth
-
-Usage:
-  chaosd attack network bandwidth [flags]
-
-Flags:
-  -b, --buffer uint32     the maximum amount of bytes that tokens can be available for instantaneously
-  -d, --device string     the network interface to impact
-  -h, --help              help for bandwidth
-  -H, --hostname string   only impact traffic to these hostnames
-  -i, --ip string         only impact egress traffic to these IP addresses
-  -l, --limit uint32      the number of bytes that can be queued waiting for tokens to become available
-  -m, --minburst uint32   specifies the size of the peakrate bucket
-      --peakrate uint64   the maximum depletion rate of the bucket
-  -r, --rate string       the speed knob, allows bps, kbps, mbps, gbps, tbps unit. bps means bytes per second
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
-```
-
 Run the following command to simulate network bandwidth:
 
 ```bash
@@ -526,23 +317,6 @@ The command is as follows:
 
 ```bash
 chaosd attack network port --help
-```
-
-The output is as follows:
-
-```bash
-attack network port
-
-Usage:
-  chaosd attack network port [flags]
-
-Flags:
-  -h, --help          help for port
-  -p, --port string   this specified port is to occupied
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
 ```
 
 Run the following command to simulate port occupation:

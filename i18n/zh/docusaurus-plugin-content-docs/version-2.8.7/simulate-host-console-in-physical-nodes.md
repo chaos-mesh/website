@@ -12,22 +12,6 @@ title: 模拟主机故障
 chaosd attack host shutdown -h
 ```
 
-输出如下所示：
-
-```bash
-shutdowns system, this action will trigger shutdown of the host machine
-
-Usage:
-  chaosd attack host shutdown [flags]
-
-Flags:
-  -h, --help   help for shutdown
-
-Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
-```
-
 ## 创建主机关机实验
 
 要创建主机关机实验，运行以下命令：

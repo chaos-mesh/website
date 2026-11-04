@@ -16,33 +16,6 @@ title: 模拟网络故障
 chaosd attack network --help
 ```
 
-输出结果如下所示：
-
-```bash
-Network attack related commands
-
-Usage:
-  chaosd attack network [command]
-
-Available Commands:
-  bandwidth   limit network bandwidth
-  corrupt     corrupt network packet
-  delay       delay network
-  dns         attack DNS server or map specified host to specified IP
-  duplicate   duplicate network packet
-  loss        loss network packet
-  partition   partition
-  port        attack network port
-
-Flags:
-  -h, --help   help for network
-
-Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
-
-Use "chaosd attack network [command] --help" for more information about a command.
-```
-
 目前 Chaosd 支持模拟以下实验场景：网络包错误（corrupt）、网络延迟（delay）、网络包重复（duplicate）、网络包丢失（loss）、网络分区（partition）、DNS 故障（dns）、网络带宽限制（bandwidth）以及端口占用（port）。
 
 要使用服务模式创建实验，你需要以服务模式运行 Chaosd，然后向 Chaosd 服务的路径 `/api/attack/network` 发送 `POST` HTTP 请求：
@@ -85,29 +58,6 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 
 ```bash
 chaosd attack network corrupt --help
-```
-
-输出结果如下所示：
-
-```bash
-corrupt network packet
-
-Usage:
-  chaosd attack network corrupt [flags]
-
-Flags:
-  -c, --correlation string   correlation is percentage (10 is 10%) (default "0")
-  -d, --device string        the network interface to impact
-  -e, --egress-port string   only impact egress traffic to these destination ports, use a ',' to separate or to indicate the range, such as 80, 8001:8010. It can only be used in conjunction with -p tcp or -p udp
-  -h, --help                 help for corrupt
-  -H, --hostname string      only impact traffic to these hostnames
-  -i, --ip string            only impact egress traffic to these IP addresses
-      --percent string       percentage of packets to corrupt (10 is 10%) (default "1")
-  -p, --protocol string      only impact traffic using this IP protocol, supported: tcp, udp, icmp, all
-  -s, --source-port string   only impact egress traffic from these source ports, use a ',' to separate or to indicate the range, such as 80, 8001:8010. It can only be used in conjunction with -p tcp or -p udp
-
-Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
 ```
 
 运行以下命令，模拟网络包错误：
@@ -155,30 +105,6 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 chaosd attack network delay --help
 ```
 
-输出结果如下所示：
-
-```bash
-delay network
-
-Usage:
-  chaosd attack network delay [flags]
-
-Flags:
-  -c, --correlation string   correlation is percentage (10 is 10%) (default "0")
-  -d, --device string        the network interface to impact
-  -e, --egress-port string   only impact egress traffic to these destination ports, use a ',' to separate or to indicate the range, such as 80, 8001:8010. It can only be used in conjunction with -p tcp or -p udp
-  -h, --help                 help for delay
-  -H, --hostname string      only impact traffic to these hostnames
-  -i, --ip string            only impact egress traffic to these IP addresses
-  -j, --jitter string        jitter time, time units: ns, us (or µs), ms, s, m, h.
-  -l, --latency string       delay egress time, time units: ns, us (or µs), ms, s, m, h.
-  -p, --protocol string      only impact traffic using this IP protocol, supported: tcp, udp, icmp, all
-  -s, --source-port string   only impact egress traffic from these source ports, use a ',' to separate or to indicate the range, such as 80, 8001:8010. It can only be used in conjunction with -p tcp or -p udp
-
-Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
-```
-
 运行以下命令，模拟网络包延迟：
 
 ```bash
@@ -221,29 +147,6 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 
 ```bash
 chaosd attack network duplicate --help
-```
-
-输出结果如下所示：
-
-```bash
-duplicate network packet
-
-Usage:
-  chaosd attack network duplicate [flags]
-
-Flags:
-  -c, --correlation string   correlation is percentage (10 is 10%) (default "0")
-  -d, --device string        the network interface to impact
-  -e, --egress-port string   only impact egress traffic to these destination ports, use a ',' to separate or to indicate the range, such as 80, 8001:8010. It can only be used in conjunction with -p tcp or -p udp
-  -h, --help                 help for duplicate
-  -H, --hostname string      only impact traffic to these hostnames
-  -i, --ip string            only impact egress traffic to these IP addresses
-      --percent string       percentage of packets to duplicate (10 is 10%) (default "1")
-  -p, --protocol string      only impact traffic using this IP protocol, supported: tcp, udp, icmp, all
-  -s, --source-port string   only impact egress traffic from these source ports, use a ',' to separate or to indicate the range, such as 80, 8001:8010. It can only be used in conjunction with -p tcp or -p udp
-
-Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
 ```
 
 运行以下命令，模拟网络包重复：
@@ -290,29 +193,6 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 chaosd attack network loss --help
 ```
 
-输出结果如下所示：
-
-```bash
-loss network packet
-
-Usage:
-  chaosd attack network loss [flags]
-
-Flags:
-  -c, --correlation string   correlation is percentage (10 is 10%) (default "0")
-  -d, --device string        the network interface to impact
-  -e, --egress-port string   only impact egress traffic to these destination ports, use a ',' to separate or to indicate the range, such as 80, 8001:8010. It can only be used in conjunction with -p tcp or -p udp
-  -h, --help                 help for loss
-  -H, --hostname string      only impact traffic to these hostnames
-  -i, --ip string            only impact egress traffic to these IP addresses
-      --percent string       percentage of packets to drop (10 is 10%) (default "1")
-  -p, --protocol string      only impact traffic using this IP protocol, supported: tcp, udp, icmp, all
-  -s, --source-port string   only impact egress traffic from these source ports, use a ',' to separate or to indicate the range, such as 80, 8001:8010. It can only be used in conjunction with -p tcp or -p udp
-
-Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
-```
-
 运行以下命令，模拟网络包丢失：
 
 ```bash
@@ -355,28 +235,6 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 chaosd attack network partition --help
 ```
 
-输出结果如下所示：
-
-```bash
-partition
-
-Usage:
-  chaosd attack network partition [flags]
-
-Flags:
-      --accept-tcp-flags string   only the packet which match the tcp flag can be accepted, others will be dropped. only set when the protocol is tcp.
-  -d, --device string             the network interface to impact
-      --direction string          specifies the partition direction, values can be 'to', 'from' or 'both'. 'from' means packets coming from the 'IPAddress' or 'Hostname' and going to your server, 'to' means packets originating from your server and going to the 'IPAddress' or 'Hostname'. (default "both")
-  -h, --help                      help for partition
-  -H, --hostname string           only impact traffic to these hostnames
-  -i, --ip string                 only impact egress traffic to these IP addresses
-  -p, --protocol string           only impact traffic using this IP protocol, supported: tcp, udp, icmp, all
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
-```
-
 运行以下命令，模拟网络分区：
 
 ```bash
@@ -408,25 +266,6 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 
 ```bash
 chaosd attack network dns --help
-```
-
-输出结果如下所示：
-
-```bash
-attack DNS server or map specified host to specified IP
-
-Usage:
-  chaosd attack network dns [flags]
-
-Flags:
-  -d, --dns-domain-name string   map this host to specified IP
-  -i, --dns-ip string            map specified host to this IP address
-      --dns-server string        update the DNS server in /etc/resolv.conf with this value (default "123.123.123.123")
-  -h, --help                     help for dns
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
 ```
 
 通过映射指定的主机名和 IP 地址从而模拟 DNS 故障，运行命令如下所示：
@@ -473,30 +312,6 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 chaosd attack network bandwidth --help
 ```
 
-输出结果如下所示：
-
-```bash
-limit network bandwidth
-
-Usage:
-  chaosd attack network bandwidth [flags]
-
-Flags:
-  -b, --buffer uint32     the maximum amount of bytes that tokens can be available for instantaneously
-  -d, --device string     the network interface to impact
-  -h, --help              help for bandwidth
-  -H, --hostname string   only impact traffic to these hostnames
-  -i, --ip string         only impact egress traffic to these IP addresses
-  -l, --limit uint32      the number of bytes that can be queued waiting for tokens to become available
-  -m, --minburst uint32   specifies the size of the peakrate bucket
-      --peakrate uint64   the maximum depletion rate of the bucket
-  -r, --rate string       the speed knob, allows bps, kbps, mbps, gbps, tbps unit. bps means bytes per second
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
-```
-
 运行以下命令，模拟网络带宽限制：
 
 ```bash
@@ -526,23 +341,6 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 
 ```bash
 chaosd attack network port --help
-```
-
-输出结果如下所示：
-
-```bash
-attack network port
-
-Usage:
-  chaosd attack network port [flags]
-
-Flags:
-  -h, --help          help for port
-  -p, --port string   this specified port is to occupied
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
 ```
 
 运行以下命令，模拟端口占用：

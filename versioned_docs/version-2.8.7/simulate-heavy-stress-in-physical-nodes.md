@@ -10,27 +10,6 @@ Before creating stress experiments, you can run the following command to view th
 chaosd attack stress --help
 ```
 
-The result is as follows:
-
-```bash
-Stress attack related commands
-
-Usage:
-  chaosd attack stress [command]
-
-Available Commands:
-  cpu         continuously stress CPU out
-  mem         continuously stress virtual memory out
-
-Flags:
-  -h, --help   help for stress
-
-Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
-
-Use "chaosd attack stress [command] --help" for more information about a command.
-```
-
 Currently, Chaosd supports creating CPU stress experiments and memory stress experiments.
 
 To create experiments using the service mode, you need to run Chaosd in the service mode and then send a `POST` HTTP request to the `/api/attack/stress` path of the Chaosd service:
@@ -70,36 +49,10 @@ To view the configuration items supported by the CPU stress simulation, run the 
 chaosd attack stress cpu --help
 ```
 
-The result is as follows:
-
-```bash
-continuously stress CPU out
-
-Usage:
-  chaosd attack stress cpu [options] [flags]
-
-Flags:
-  -h, --help              help for cpu
-  -l, --load int          Load specifies P percent loading per CPU worker. 0 is effectively a sleep (no load) and 100 is full loading. (default 10)
-  -o, --options strings   extend stress-ng options.
-  -w, --workers int       Workers specifies N workers to apply the stressor. (default 1)
-
-Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
-```
-
 An example is as follows:
 
 ```bash
 chaosd attack stress cpu --workers 2 --load 10
-```
-
-The result is as follows:
-
-```bash
-[2021/05/12 03:38:33.698 +00:00] [INFO] [stress.go:66] ["stressors normalize"] [arguments=" --cpu 2 --cpu-load 10"]
-[2021/05/12 03:38:33.702 +00:00] [INFO] [stress.go:82] ["Start stress-ng process successfully"] [command="/usr/bin/stress-ng --cpu 2 --cpu-load 10"] [Pid=27483]
-Attack stress cpu successfully, uid: 4f33b2d4-aee6-43ca-9c43-0f12867e5c9c
 ```
 
 ### Simulate CPU stress using the service mode
@@ -108,12 +61,6 @@ An example is as follows:
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{"load":10, "action":"cpu","workers":1}'
-```
-
-The result is as follows:
-
-```bash
-{"status":200,"message":"attack successfully","uid":"c3c519bf-819a-4a7b-97fb-e3d0814481fa"}
 ```
 
 ## Simulate memory stress
@@ -135,35 +82,10 @@ To view the configuration items supported by the memory stress simulation, run t
 chaosd attack stress mem --help
 ```
 
-The result is as follows:
-
-```bash
-continuously stress virtual memory out
-
-Usage:
-  chaosd attack stress mem [options] [flags]
-
-Flags:
-  -h, --help              help for mem
-  -o, --options strings   extend stress-ng options.
-  -s, --size string       Size specifies N bytes consumed per vm worker, default is the total available memory. One can specify the size as % of total available memory or in units of B, KB/KiB, MB/MiB, GB/GiB, TB/TiB..
-
-Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
-```
-
 An example is as follows:
 
 ```bash
 chaosd attack stress mem --size 100M
-```
-
-The result is as follows:
-
-```bash
-[2021/05/12 03:37:19.643 +00:00] [INFO] [stress.go:88] ["stressors normalize"] [arguments=" --workers 1 --size 100M"]
-[2021/05/12 03:37:19.654 +00:00] [INFO] [stress.go:109] ["Start memStress process successfully"] [command="/usr/local/chaosd-latest-linux-amd64/tools/memStress --workers 1 --size 100M"] [Pid=26799]
-Attack stress mem successfully, uid: c2bff2f5-3aac-4ace-b7a6-322946ae6f13
 ```
 
 When running the experiment, you need to save the uid information of the experiment. When a stress simulation is not needed, you can use `recover` to terminate the uid-related experiment:
@@ -172,22 +94,10 @@ When running the experiment, you need to save the uid information of the experim
 chaosd recover c2bff2f5-3aac-4ace-b7a6-322946ae6f13
 ```
 
-The result is as follows:
-
-```bash
-Recover c2bff2f5-3aac-4ace-b7a6-322946ae6f13 successfully
-```
-
 ### Simulate memory stress using the service mode
 
 An example is as follows:
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{"size":"100M", "action":"mem", "workers":2}'
-```
-
-The result is as follows:
-
-```bash
-{"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
 ```
