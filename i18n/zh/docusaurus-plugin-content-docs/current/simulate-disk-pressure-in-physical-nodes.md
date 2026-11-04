@@ -4,6 +4,12 @@ title: 模拟磁盘故障
 
 本文主要介绍如何使用 Chaosd 模拟磁盘故障场景。使用该功能，你可以在物理机器上模拟磁盘读写负载（通过 [dd](https://man7.org/linux/man-pages/man1/dd.1.html)），或磁盘填充（通过 [dd](https://man7.org/linux/man-pages/man1/dd.1.html)，或 [fallocate](https://man7.org/linux/man-pages/man1/fallocate.1.html)）。
 
+:::note Chaosd v1.5.0
+
+磁盘读写负载会在完成指定数据量或 `duration` 到期时停止，以先发生者为准。时长可使用 `30s`、`1m` 等格式，空值表示不设置负载截止时间。v1.5.0 修复了这一截止时间行为，命令行和服务模式均适用，磁盘填充不适用。
+
+:::
+
 在创建磁盘故障实验前，可运行以下命令行查看 Chaosd 支持的磁盘故障类型：
 
 ```bash
@@ -61,6 +67,7 @@ curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/j
 | `path` | p | path | 指定所读数据的文件路径。如果没有设置此参数，或者设置参数值为空字符串，Chaosd 则从目录 "/" 所挂载的虚拟磁盘文件读取。根据读取文件的权限不同，会需要你使用一定的权限运行本程序 | string 类型 | 默认值为 `""` |
 | `process-num` | n | payload-process-num | 指定使用多少个并发运行的 [dd](https://man7.org/linux/man-pages/man1/dd.1.html) 进程执行程序 | uint8 类型 | 默认值为 `1`，范围为 `1` 至 `255` |
 | `size` | s | size | 指定读取多少数据。该值为多个 dd 读数据的总量 | string 类型 | 默认值为 `""`，**必须**要设置。合法形式为一个整数加一个单位。例如：1M、512kB。支持的单位有 c=1、w=2、b=512、kB=1000、K=1024、MB=1000\*1000,M=1024\*1024、GB=1000\*1000\*1000、G=1024\*1024\*1024 BYTE 等 |
+| `duration` | 无 | duration | 读写负载的最长执行时间，例如 `30s`。完成指定数据量后可提前结束。 | string 类型 | 默认值为 `""`，不设置负载截止时间 |
 
 ### 使用命令行模式模拟磁盘读负载场景
 
@@ -81,13 +88,15 @@ Usage:
   chaosd attack disk add-payload read [flags]
 
 Flags:
+      --duration string     Work duration of attacks.A duration string is a possibly signed sequence of decimal numbers, each with optional fraction and a unit suffix, such as "300ms", "1.5h" or "2h45m".Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
   -h, --help                help for read
   -p, --path string         'path' specifies the location to read data.If path not provided, payload will read from disk mount on "/"
   -n, --process-num uint8   'process-num' specifies the number of process work on reading , default 1, only 1-255 is valid value (default 1)
   -s, --size string         'size' specifies how many units of data will read from the file path.'unit' specifies the unit of data, support c=1, w=2, b=512, kB=1000, K=1024, MB=1000*1000,M=1024*1024, , GB=1000*1000*1000, G=1024*1024*1024 BYTESexample : 1M | 512kB
 
 Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
+      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
+      --uid string         the experiment ID
 ```
 
 运行以下命令，模拟磁盘读负载：
@@ -133,6 +142,7 @@ curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/j
 | `path` | p | path | 指定所写数据的文件路径。如果没有设置此参数，或者设置参数值为空字符串，则会在程序执行目录下创建一个临时文件。根据写入文件的权限不同，会需要你使用一定的权限运行本程序 | string 类型 | 默认值为 `""` |
 | `process-num` | n | payload-process-num | 指定使用多少个并发运行的 [dd](https://man7.org/linux/man-pages/man1/dd.1.html) 进程执行程序 | uint8 类型 | 默认值为 `1`，范围为 `1` 至 `255` |
 | `size` | s | size | 指定写入多少数据，该值为多个 dd 写数据的总量 | string 类型 | 默认值为 `""`，**必须**要设置。合法形式为一个整数加一个单位。例如：1M、512kB。支持的单位有 c=1、w=2、b=512、kB=1000、K=1024、MB=1000\*1000,M=1024\*1024、GB=1000\*1000\*1000、G=1024\*1024\*1024 BYTE 等 |
+| `duration` | 无 | duration | 读写负载的最长执行时间，例如 `30s`。完成指定数据量后可提前结束。 | string 类型 | 默认值为 `""`，不设置负载截止时间 |
 
 ### 使用命令行模式模拟磁盘写负载场景
 
@@ -151,13 +161,15 @@ Usage:
   chaosd attack disk add-payload write [flags]
 
 Flags:
+      --duration string     Work duration of attacks.A duration string is a possibly signed sequence of decimal numbers, each with optional fraction and a unit suffix, such as "300ms", "1.5h" or "2h45m".Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
   -h, --help                help for write
   -p, --path string         'path' specifies the location to fill data in.If path not provided, payload will write into a temp file, temp file will be deleted after writing
   -n, --process-num uint8   'process-num' specifies the number of process work on writing , default 1, only 1-255 is valid value (default 1)
   -s, --size string         'size' specifies how many units of data will write into the file path.'unit' specifies the unit of data, support c=1, w=2, b=512, kB=1000, K=1024, MB=1000*1000,M=1024*1024, , GB=1000*1000*1000, G=1024*1024*1024 BYTESexample : 1M | 512kB
 
 Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
+      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
+      --uid string         the experiment ID
 ```
 
 运行以下命令，模拟磁盘写负载：
@@ -200,8 +212,7 @@ curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/j
 | 配置项 | 配置缩写 | 服务模式字段 | 说明 | 类型 | 值 |
 | :-- | :-- | :-- | :-- | :-- | :-- |
 | `action` | — | action | 实验的行为 | string 类型 | 设置为 "fill" |
-| `destroy` | d | destroy | 如果此参数为 `true`，则在填充文件后立即删除填充文件 | bool 类型 | 默认为 `false` |
-| `fallocate` | f | fill-by-fallocate | 如果此参数为 `true`，Chaosd 则使用 Linux 调用 `fallocate` 来快速申请磁盘空间，此时 size 必须大于 `0`。如果此参数为 `false`，Chaosd 则使用 Linux 调用 dd 以相对较慢速度填充磁盘 | bool 类型 | 默认为 `true` |
+| `fallocate` | f | fallocate | 如果此参数为 `true`，Chaosd 则使用 Linux 调用 `fallocate` 来快速申请磁盘空间，此时 size 必须大于 `0`。如果此参数为 `false`，Chaosd 则使用 Linux 调用 dd 以相对较慢速度填充磁盘 | bool 类型 | 默认为 `true` |
 | `path` | p | path | 指定所写数据的文件路径。如果没有设置此参数，或者设置参数值为空字符串，则会在程序执行目录下创建一个临时文件。根据写入文件的权限不同，会需要你使用一定的权限运行本程序 | string 类型 | 默认值为 `""` |
 | `percent` | c | percent | 指定填充多少百分比磁盘 | string 类型 | 默认值为 ""，可以填入 uint 类型的正整数。必须要设置 `size` 或 `percent` 中的一项，两个配置项的值**不能**同时为 `""` |
 | `size` | s | size | 指定写入多少数据 | string 类型 | 默认值为 `""`，合法形式为一个整数加一个单位。例如：1M、512kB。支持的单位有 c=1、w=2、b=512、kB=1000、K=1024、MB=1000\*1000,M=1024\*1024、GB=1000\*1000\*1000、G=1024\*1024\*1024 BYTE 等。必须要设置 `size` 或 `percent` 中的一项，两个配置项的值**不能**同时为 `""` |
@@ -223,7 +234,6 @@ Usage:
   chaosd attack disk fill [flags]
 
 Flags:
-  -d, --destroy          destroy file after filled in or allocated
   -f, --fallocate        fill disk by fallocate instead of dd (default true)
   -h, --help             help for fill
   -p, --path string      'path' specifies the location to fill data in.If path not provided, a temp file will be generated and deleted immediately after data filled in or allocated
@@ -231,13 +241,14 @@ Flags:
   -s, --size string      'size' specifies how many units of data will fill in the file path.'unit' specifies the unit of data, support c=1, w=2, b=512, kB=1000, K=1024, MB=1000*1000,M=1024*1024, , GB=1000*1000*1000, G=1024*1024*1024 BYTESexample : 1M | 512kB
 
 Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
+      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
+      --uid string         the experiment ID
 ```
 
 运行以下命令，模拟磁盘填充：
 
 ```bash
-chaosd attack disk fill -c 50 -d
+chaosd attack disk fill -c 50
 ```
 
 输出结果如下所示：
@@ -250,7 +261,7 @@ Fill file /home/andrew/chaosd/bin/example623832242 successfully, uid: 097b4214-8
 ### 使用服务模式模拟磁盘填充场景
 
 ```bash
-curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{"action":"fill","path":"/tmp/test", "fill-by-fallocate":true,"percent":"50"}'
+curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{"action":"fill","path":"/tmp/test", "fallocate":true,"percent":"50"}'
 ```
 
 输出结果如下所示：

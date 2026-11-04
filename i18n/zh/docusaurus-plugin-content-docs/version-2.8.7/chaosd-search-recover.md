@@ -5,6 +5,8 @@ summary: 本文档介绍了查找和恢复 Chaosd 实验的操作方法，并提
 
 Chaosd 支持按照条件搜索实验，以及恢复指定的 UID 对应的实验。本文档介绍了查找和恢复 Chaosd 实验的操作方法，并提供了示例。
 
+本页使用 Chaosd v1.5.0。安装和运行要求请参阅 [Chaosd 组件简介](chaosd-overview.md)。
+
 ## 查找 Chaosd 实验
 
 本章节介绍了如何使用命令行模式和服务模式查找 Chaosd 实验。
@@ -24,10 +26,10 @@ Flags:
   -A, --all             list all chaos attacks
       --asc             order by CreateTime, default value is false that means order by CreateTime desc
   -h, --help            help for search
-  -k, --kind string     attack kind, supported value: network, process, stress, disk, host, jvm
+  -k, --kind string     attack kind, supported value: network, process, stress, disk, disk-server, host, jvm, clock, kafka, redis, file, http, vm, userDefined
   -l, --limit uint32    limit the count of attacks
   -o, --offset uint32   starting to search attacks from offset
-  -s, --status string   attack status, supported value: created, success, error, destroyed, revoked
+  -s, --status string   attack status, supported value: created, success, error, scheduled, destroyed, revoked
 
 Global Flags:
       --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
@@ -38,11 +40,11 @@ Global Flags:
 | 配置项 | 配置缩写 | 说明 | 类型 |
 | :-- | :-- | :-- | :-- |
 | `all` | A | 列出所有的实验 | bool 类型 |
-| `asc` | 无 | 按照创建时间的升序对实验进行排列，默认值为 `false` | bool 类型 |
-| `kind` | k | 列出指定类型的实验 | string 类型，支持的类型包括：`network`、`process`、`stress`、`disk`、`host`、`jvm` |
+| `asc` | 无 | 设为 `true` 时按创建时间升序排列，默认值为 `false`，按创建时间降序排列 | bool 类型 |
+| `kind` | k | 列出指定类型的实验 | string 类型，支持的类型包括：`network`、`process`、`stress`、`disk`、`disk-server`、`host`、`jvm`、`clock`、`kafka`、`redis`、`file`、`http`、`vm`、`userDefined` |
 | `limit` | l | 列出实验的数量 | uint32 类型 |
 | `offset` | o | 从指定的偏移量开始搜索 | uint32 类型 |
-| `status` | s | 列出指定状态的实验 | string 类型，支持的状态类型包括：`created`、`success`、`error`、`destroyed`、`revoked` |
+| `status` | s | 列出指定状态的实验 | string 类型，支持的状态类型包括：`created`、`success`、`error`、`scheduled`、`destroyed`、`revoked` |
 
 #### 示例
 
@@ -60,6 +62,12 @@ Global Flags:
                   UID                     KIND     ACTION    STATUS            CREATE TIME                                                                                                                  CONFIGURATION
 --------------------------------------- --------- -------- ----------- --------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   1f6c1253-522a-43d9-83f8-42607102b3b9   network   delay    destroyed   2021-11-02T15:14:07+08:00   {"schedule":"","duration":"","action":"delay","kind":"network","uid":"1f6c1253-522a-43d9-83f8-42607102b3b9","latency":"2s","jitter":"0ms","correlation":"0","device":"eth0","ip-address":"220.181.38.251","ip-protocol":"all"}
+```
+
+从 Chaosd v1.5.0 起，可以按 `scheduled` 状态查找定时实验：
+
+```bash
+chaosd search --status scheduled
 ```
 
 ### 使用服务模式查找实验
@@ -81,6 +89,10 @@ curl -X GET 127.0.0.1:31767/api/experiments/
 ## 恢复 Chaosd 实验
 
 在创建完实验后，如果想撤销实验造成的影响，可以使用实验的恢复功能。
+
+恢复能力取决于故障类型。在 Chaosd v1.5.0 中，恢复主机关机、重启，或未配置 `recover-cmd` 的进程终止故障时，会返回错误。Redis 缓存过期故障无法恢复已过期的键，即使恢复请求报告成功也是如此。恢复后，请同时检查目标的实际状态。
+
+定时任务和恢复计时器只存在于创建它们的运行进程中，重启服务不会从数据库恢复这些任务。取消定时任务时，需要向创建任务的同一个 Chaosd 服务发送 `DELETE /api/attack/{uid}`。命令行恢复使用独立的调度器，无法取消另一个服务进程中的定时任务。当前已启动的实验依赖原有恢复计时器。
 
 ### 使用命令行模式恢复实验
 

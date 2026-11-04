@@ -214,6 +214,36 @@ When creating a Chaos with a duration in the workflow, you need to fill the dura
 | --- | --- | --- | --- | --- | --- |
 | container | object | Defines a customized task container. See [Container field description](#container-field-description) for details. | None | No |  |
 | volumes | array | If you need to mount a volume in a customized task container, you need to declare the volume in this field. For the detailed definition of a volume, see the [Kubernetes documentation - corev1.Volume](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#volume-v1-core). | None | No |  |
+| nodeSelector | map[string]string | Constrains the Task Pod to nodes with all the specified labels. | None | No | `{"disktype": "ssd"}` |
+| tolerations | []corev1.Toleration | Allows the Task Pod to run on nodes with matching taints, without requiring placement on those nodes. | None | No |  |
+
+These optional fields control the Task Pod's placement, not the target nodes of Chaos experiments. For example:
+
+```yaml
+apiVersion: chaos-mesh.org/v1alpha1
+kind: Workflow
+metadata:
+  name: task-scheduling
+spec:
+  entry: task
+  templates:
+    - name: task
+      templateType: Task
+      task:
+        container:
+          name: task
+          image: busybox:latest
+          command: ["echo", "Task completed"]
+        nodeSelector:
+          disktype: ssd
+        tolerations:
+          - key: dedicated
+            operator: Equal
+            value: workflow
+            effect: NoSchedule
+```
+
+This Task Pod requires the `disktype=ssd` node label and tolerates the `dedicated=workflow:NoSchedule` taint. Set these values to match your nodes' labels and taints. Tolerations do not bypass `nodeSelector`. If no suitable node is available, the Pod remains `Pending`.
 
 ### ConditionalBranch field description
 

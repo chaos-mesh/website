@@ -23,11 +23,14 @@ import QuickRun from './common/\_quick-run.md'
 
 ### 指定版本号
 
-在有外网连接的机器上，设置 Chaos Mesh 的版本号为环境变量：
+在有外网连接的机器上，将 Chaos Mesh 和 DNS 镜像的版本号设置为环境变量：
 
 <PickVersion>
-{`export CHAOS_MESH_VERSION=latest`}
+{`export CHAOS_MESH_VERSION=latest
+export CHAOS_DNS_VERSION=v0.2.8`}
 </PickVersion>
+
+DNS 镜像使用独立版本。`CHAOS_DNS_VERSION` 与本版本 Helm Chart 的 `dnsServer.image.tag` 一致。
 
 ### 下载 Chaos Mesh 镜像
 
@@ -37,6 +40,7 @@ import QuickRun from './common/\_quick-run.md'
 docker pull ghcr.io/chaos-mesh/chaos-mesh:${CHAOS_MESH_VERSION}
 docker pull ghcr.io/chaos-mesh/chaos-daemon:${CHAOS_MESH_VERSION}
 docker pull ghcr.io/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION}
+docker pull ghcr.io/chaos-mesh/chaos-coredns:${CHAOS_DNS_VERSION}
 ```
 
 保存镜像为 tar 包：
@@ -45,11 +49,12 @@ docker pull ghcr.io/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION}
 docker save ghcr.io/chaos-mesh/chaos-mesh:${CHAOS_MESH_VERSION} > image-chaos-mesh.tar
 docker save ghcr.io/chaos-mesh/chaos-daemon:${CHAOS_MESH_VERSION} > image-chaos-daemon.tar
 docker save ghcr.io/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION} > image-chaos-dashboard.tar
+docker save ghcr.io/chaos-mesh/chaos-coredns:${CHAOS_DNS_VERSION} > image-chaos-coredns.tar
 ```
 
 :::note
 
-如需模拟 DNS 故障（例如，使 DNS 响应返回随机的错误 IP 地址），请额外拉取 [`chaos-mesh/chaos-coredns`](https://github.com/chaos-mesh/k8s_dns_chaos/pkgs/container/chaos-coredns) 镜像。
+Helm Chart 默认启用 DNS Server。因此，即使不计划运行 DNSChaos，也需要在离线文件中包含 [`chaos-mesh/chaos-coredns`](https://github.com/chaos-mesh/k8s_dns_chaos/pkgs/container/chaos-coredns) 镜像。只有显式设置 `dnsServer.create=false` 时，才可以省略此镜像。
 
 :::
 
@@ -57,7 +62,7 @@ docker save ghcr.io/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION} > image-cha
 
 在有外网连接的机器上，下载 Chaos Mesh 的 zip 包：
 
-<PickVersion>
+<PickVersion isArchive replaced="refs/heads/master">
 {`curl -fsSL -o chaos-mesh.zip https://github.com/chaos-mesh/chaos-mesh/archive/refs/heads/master.zip`}
 </PickVersion>
 
@@ -68,6 +73,7 @@ docker save ghcr.io/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION} > image-cha
 - `image-chaos-mesh.tar`
 - `image-chaos-daemon.tar`
 - `image-chaos-dashboard.tar`
+- `image-chaos-coredns.tar`
 - `chaos-mesh.zip`
 
 ## 安装
@@ -82,6 +88,7 @@ docker save ghcr.io/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION} > image-cha
 docker load < image-chaos-mesh.tar
 docker load < image-chaos-daemon.tar
 docker load < image-chaos-dashboard.tar
+docker load < image-chaos-coredns.tar
 ```
 
 ### 第 2 步：推送镜像至 Registry
@@ -92,10 +99,12 @@ docker load < image-chaos-dashboard.tar
 
 :::
 
-设置 Chaos Mesh 版本和 Registry 地址为环境变量：
+将镜像版本和 Registry 地址设置为环境变量：
 
 <PickVersion>
-{`export CHAOS_MESH_VERSION=latest; export DOCKER_REGISTRY=localhost:5000`}
+{`export CHAOS_MESH_VERSION=latest
+export CHAOS_DNS_VERSION=v0.2.8
+export DOCKER_REGISTRY=localhost:5000`}
 </PickVersion>
 
 标记镜像使其指向 Registry：
@@ -104,9 +113,11 @@ docker load < image-chaos-dashboard.tar
 export CHAOS_MESH_IMAGE=$DOCKER_REGISTRY/chaos-mesh/chaos-mesh:${CHAOS_MESH_VERSION}
 export CHAOS_DAEMON_IMAGE=$DOCKER_REGISTRY/chaos-mesh/chaos-daemon:${CHAOS_MESH_VERSION}
 export CHAOS_DASHBOARD_IMAGE=$DOCKER_REGISTRY/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION}
+export CHAOS_DNS_IMAGE=$DOCKER_REGISTRY/chaos-mesh/chaos-coredns:${CHAOS_DNS_VERSION}
 docker image tag ghcr.io/chaos-mesh/chaos-mesh:${CHAOS_MESH_VERSION} $CHAOS_MESH_IMAGE
 docker image tag ghcr.io/chaos-mesh/chaos-daemon:${CHAOS_MESH_VERSION} $CHAOS_DAEMON_IMAGE
 docker image tag ghcr.io/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION} $CHAOS_DASHBOARD_IMAGE
+docker image tag ghcr.io/chaos-mesh/chaos-coredns:${CHAOS_DNS_VERSION} $CHAOS_DNS_IMAGE
 ```
 
 推送镜像至 Registry：
@@ -115,6 +126,7 @@ docker image tag ghcr.io/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION} $CHAOS
 docker push $CHAOS_MESH_IMAGE
 docker push $CHAOS_DAEMON_IMAGE
 docker push $CHAOS_DASHBOARD_IMAGE
+docker push $CHAOS_DNS_IMAGE
 ```
 
 ### 第 3 步：使用 Helm 安装
@@ -122,7 +134,8 @@ docker push $CHAOS_DASHBOARD_IMAGE
 解压 Chaos Mesh 的 zip 包：
 
 ```bash
-unzip chaos-mesh.zip -d chaos-mesh && cd chaos-mesh
+unzip chaos-mesh.zip -d chaos-mesh
+cd chaos-mesh/chaos-mesh-*/
 ```
 
 :::note

@@ -5,6 +5,8 @@ summary: Describes how to search and recover the experiments of Chaosd, and prov
 
 You can search experiments by conditions and recover the experiments corresponding to specified UIDs using Chaosd. This document describes how to search and recover experiments of Chaosd, and provides related examples.
 
+This page uses Chaosd v1.5.0. See [Chaosd Introduction](chaosd-overview.md) for installation and runtime requirements.
+
 ## Search experiments of Chaosd
 
 This section introduces how to use command-line mode and service mode to find experiments of Chaosd.
@@ -24,10 +26,10 @@ Flags:
   -A, --all             list all chaos attacks
       --asc             order by CreateTime, default value is false that means order by CreateTime desc
   -h, --help            help for search
-  -k, --kind string     attack kind, supported value: network, process, stress, disk, host, jvm
+  -k, --kind string     attack kind, supported value: network, process, stress, disk, disk-server, host, jvm, clock, kafka, redis, file, http, vm, userDefined
   -l, --limit uint32    limit the count of attacks
   -o, --offset uint32   starting to search attacks from offset
-  -s, --status string   attack status, supported value: created, success, error, destroyed, revoked
+  -s, --status string   attack status, supported value: created, success, error, scheduled, destroyed, revoked
 
 Global Flags:
       --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
@@ -38,11 +40,11 @@ Global Flags:
 | Configuration item | Abbreviation | Description | Type |
 | :-- | :-- | :-- | :-- |
 | `all` | A | Lists all experiments | bool |
-| `asc` | None | Sorts the experiments in ascending order of the creation time. The default value is `false`. | bool |
-| `kind` | k | Lists experiments of the specified kind | string. The supported kinds are as follows: `network`, `process`, `stress`, `disk`, `host`, `jvm` |
+| `asc` | None | Set to `true` to sort by creation time in ascending order. The default is `false`, which sorts by creation time in descending order. | bool |
+| `kind` | k | Lists experiments of the specified kind | string. The supported kinds are as follows: `network`, `process`, `stress`, `disk`, `disk-server`, `host`, `jvm`, `clock`, `kafka`, `redis`, `file`, `http`, `vm`, `userDefined` |
 | `limit` | l | The number of listed experiments | uint32 |
 | `offset` | o | Searches from the specified offset | uint32 |
-| `status` | s | Lists experiments with the specified status | string. The supported types are as follows: `created`, `success`, `error`, `destroyed`, `revoked` |
+| `status` | s | Lists experiments with the specified status | string. The supported types are as follows: `created`, `success`, `error`, `scheduled`, `destroyed`, `revoked` |
 
 #### Example
 
@@ -58,6 +60,12 @@ After running the command, only one row of data is output in the result:
                   UID                     KIND     ACTION    STATUS            CREATE TIME                                                                                                                  CONFIGURATION
 --------------------------------------- --------- -------- ----------- --------------------------- ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   1f6c1253-522a-43d9-83f8-42607102b3b9   network   delay    destroyed   2021-11-02T15:14:07+08:00   {"schedule":"","duration":"","action":"delay","kind":"network","uid":"1f6c1253-522a-43d9-83f8-42607102b3b9","latency":"2s","jitter":"0ms","correlation":"0","device":"eth0","ip-address":"220.181.38.251","ip-protocol":"all"}
+```
+
+Starting with Chaosd v1.5.0, you can search for scheduled experiments:
+
+```bash
+chaosd search --status scheduled
 ```
 
 ### Search experiments using the service mode
@@ -79,6 +87,10 @@ The result is as follows:
 ## Recover experiments of Chaosd
 
 After creating an experiment, if you want to withdraw the impact caused by the experiment, you can use the recovery feature of experiments.
+
+Recovery depends on the fault type. In Chaosd v1.5.0, recovering a host shutdown or reboot, or a killed process without `recover-cmd`, returns an error. Redis cache expiration cannot restore expired keys, even if the recovery request reports success. Check the target itself after recovery.
+
+Schedules and recovery timers exist only in the process that created them. Restarting the service does not reload them from the database. To cancel a schedule, send `DELETE /api/attack/{uid}` to the same running Chaosd service that created it. CLI recovery uses a separate scheduler and cannot cancel a schedule in another service process. The current run relies on its existing recovery timer.
 
 ### Recover experiments using the command-line mode
 

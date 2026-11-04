@@ -4,6 +4,12 @@ title: Simulate Disk Faults
 
 This document describes how to use Chaosd to simulate disk faults. This feature helps you simulate disk read/write load (via [dd](https://man7.org/linux/man-pages/man1/dd.1.html)) or disk fill (via [dd](https://man7.org/linux/man-pages/man1/dd.1.html) or [fallocate](https://man7.org/linux/man-pages/man1/fallocate.1.html)).
 
+:::note Chaosd v1.5.0
+
+Disk read and write workloads stop when the requested data size is reached or `duration` expires, whichever happens first. Use a duration such as `30s` or `1m`; an empty value sets no workload deadline. This deadline behavior was fixed in v1.5.0 and applies to both CLI and service mode. It does not apply to disk fill.
+
+:::
+
 Before creating an experiment, you can run the following command to check the types of disk faults that are supported by Chaosd:
 
 ```bash
@@ -63,6 +69,7 @@ Simulating disk read load is a one-time operation, so the experiment does not ne
 | `path` | p | path | Specifies the file path to read the data. If this parameter is not specified, or the parameter value is set to an empty string, Chaosd reads from the virtual disk files mounted in the "/" directory. Depending on the permissions to read the files, you might be required to run this program using certain permissions. | string | Default: `""` |
 | `process-num` | n | payload-process-num | Specifies the number of concurrently running [dd](https://man7.org/linux/man-pages/man1/dd.1.html) programs to be used. | uint8 | Default: `1`; range: `1` to `255` |
 | `size` | s | size | Specifies the volume of data to be read. It is the total size of data that dd reads. | string | Default: `""`; **required**; the legal form is the combination of an integer and a unit, such as `1M` or `512kB`. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. |
+| `duration` | None | duration | Maximum read/write workload duration, such as `30s`. The workload can finish earlier after processing the requested data size. | string | Default: `""`, no workload deadline. |
 
 ### Simulate disk read load using the command-line mode
 
@@ -79,13 +86,15 @@ Usage:
   chaosd attack disk add-payload read [flags]
 
 Flags:
+      --duration string     Work duration of attacks.A duration string is a possibly signed sequence of decimal numbers, each with optional fraction and a unit suffix, such as "300ms", "1.5h" or "2h45m".Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
   -h, --help                help for read
   -p, --path string         'path' specifies the location to read data.If path not provided, payload will read from disk mount on "/"
   -n, --process-num uint8   'process-num' specifies the number of process work on reading , default 1, only 1-255 is valid value (default 1)
   -s, --size string         'size' specifies how many units of data will read from the file path.'unit' specifies the unit of data, support c=1, w=2, b=512, kB=1000, K=1024, MB=1000*1000,M=1024*1024, , GB=1000*1000*1000, G=1024*1024*1024 BYTESexample : 1M | 512kB
 
 Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
+      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
+      --uid string         the experiment ID
 ```
 
 An example is as follows:
@@ -133,6 +142,7 @@ The result is as follows:
 | `path` | p | path | Specifies the file path to write the data. If this parameter is not specified, or the parameter value is set to an empty string, a temporary file will be created in the program execution directory. Depending on the permissions to write the files, you might be required to run this program using certain permissions. | string | Default: `""` |
 | `process-num` | n | payload-process-num | Specifies the number of concurrently running [dd](https://man7.org/linux/man-pages/man1/dd.1.html) programs to be used. | uint8 | Default: `1`; range: `1` to `255` |
 | `size` | s | size | Specifies the volume of data to be written. It is the total size of data that dd writes. | string | Default: `""`; **required**; the legal form is the combination of an integer and a unit, such as `1M` or `512kB`. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. |
+| `duration` | None | duration | Maximum read/write workload duration, such as `30s`. The workload can finish earlier after processing the requested data size. | string | Default: `""`, no workload deadline. |
 
 ### Simulate disk write load using the command-line mode
 
@@ -149,13 +159,15 @@ Usage:
   chaosd attack disk add-payload write [flags]
 
 Flags:
+      --duration string     Work duration of attacks.A duration string is a possibly signed sequence of decimal numbers, each with optional fraction and a unit suffix, such as "300ms", "1.5h" or "2h45m".Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
   -h, --help                help for write
   -p, --path string         'path' specifies the location to fill data in.If path not provided, payload will write into a temp file, temp file will be deleted after writing
   -n, --process-num uint8   'process-num' specifies the number of process work on writing , default 1, only 1-255 is valid value (default 1)
   -s, --size string         'size' specifies how many units of data will write into the file path.'unit' specifies the unit of data, support c=1, w=2, b=512, kB=1000, K=1024, MB=1000*1000,M=1024*1024, , GB=1000*1000*1000, G=1024*1024*1024 BYTESexample : 1M | 512kB
 
 Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
+      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
+      --uid string         the experiment ID
 ```
 
 An example is as follows:
@@ -200,8 +212,7 @@ The result is as follows:
 | Configuration item | Abbreviation | Service mode field | Description | Type | Value |
 | :-- | :-- | :-- | :-- | :-- | :-- |
 | `action` | — | action | Actions of the experiment | string | Set to `"fill"` |
-| `destroy` | d | destroy | If this parameter is set to `true`, the fill file is immediately deleted after being filled. | bool | Default: `false` |
-| `fallocate` | f | fill-by-fallocate | If this parameter is set to `true`, Linux is used to call fallocate to quickly apply for disk space and size must be greater than `0`. If this parameter is set to `false`, Linux is used to call dd to fill disks at a relatively slow pace. | bool | Default: `true` |
+| `fallocate` | f | fallocate | If this parameter is set to `true`, Linux is used to call fallocate to quickly apply for disk space and size must be greater than `0`. If this parameter is set to `false`, Linux is used to call dd to fill disks at a relatively slow pace. | bool | Default: `true` |
 | `path` | p | path | Specifies the file path to write the data. If this parameter is not specified, or the parameter value is set to an empty string, a temporary file will be created in the program execution directory. Depending on the permissions to write the files, you might be required to run this program using certain permissions. | string | Default: `""` |
 | `percent` | c | percent | Specifies the percentage of disk size to be filled. | string | Default: `""`; a positive integer of the uint type is acceptable; you must set one of `size` or `percent` (both items **cannot** be `""` at the same time). |
 | `size` | s | size | Specifies the volume of data to be written. | string | Default: `""`; the legal form is the combination of an integer and a unit, such as `1M` or `512kB`. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. You must set one of `size` or `percent` (both items **cannot** be `""` at the same time). |
@@ -221,7 +232,6 @@ Usage:
   chaosd attack disk fill [flags]
 
 Flags:
-  -d, --destroy          destroy file after filled in or allocated
   -f, --fallocate        fill disk by fallocate instead of dd (default true)
   -h, --help             help for fill
   -p, --path string      'path' specifies the location to fill data in.If path not provided, a temp file will be generated and deleted immediately after data filled in or allocated
@@ -229,13 +239,14 @@ Flags:
   -s, --size string      'size' specifies how many units of data will fill in the file path.'unit' specifies the unit of data, support c=1, w=2, b=512, kB=1000, K=1024, MB=1000*1000,M=1024*1024, , GB=1000*1000*1000, G=1024*1024*1024 BYTESexample : 1M | 512kB
 
 Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
+      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
+      --uid string         the experiment ID
 ```
 
 An example is as follows:
 
 ```bash
-chaosd attack disk fill -c 50 -d
+chaosd attack disk fill -c 50
 ```
 
 The result is as follows:
@@ -250,7 +261,7 @@ Fill file /home/andrew/chaosd/bin/example623832242 successfully, uid: 097b4214-8
 An example is as follows:
 
 ```bash
-curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{"action":"fill","path":"/tmp/test", "fill-by-fallocate":true,"percent":"50"}'
+curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{"action":"fill","path":"/tmp/test", "fallocate":true,"percent":"50"}'
 ```
 
 The result is as follows:
