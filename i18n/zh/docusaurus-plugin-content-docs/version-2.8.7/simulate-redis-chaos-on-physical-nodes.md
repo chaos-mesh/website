@@ -10,31 +10,6 @@ title: 模拟 Redis 故障
 chaosd attack redis -h
 ```
 
-输出结果如下所示：
-
-```bash
-Redis attack related commands
-
-Usage:
-  chaosd attack redis [command]
-
-Available Commands:
-  cache-expiration  expire keys in Redis
-  cache-limit       set maxmemory of Redis
-  cache-penetration penetrate cache
-  sentinel-restart  restart sentinel
-  sentinel-stop     stop sentinel
-
-Flags:
-  -h, --help   help for redis
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
-
-Use "chaosd attack redis [command] --help" for more information about a command.
-```
-
 目前 Chaosd 支持模拟缓存过期、缓存限流、缓存穿透、哨兵重启和哨兵不可用等故障场景。
 
 要使用服务模式创建实验，你需要以服务模式运行 Chaosd，然后向 Chaosd 服务的路径 `/api/attack/redis` 发送 `POST` HTTP 请求：
@@ -82,27 +57,6 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 chaosd attack redis cache-expiration -h
 ```
 
-输出结果如下所示：
-
-```bash
-expire keys in Redis
-
-Usage:
-  chaosd attack redis cache-expiration [flags]
-
-Flags:
-  -a, --addr string         The address of redis server
-      --expiration string   The expiration of the key. A expiration string should be able to be converted to a time duration, such as "5s" or "30m" (default "0")
-  -h, --help                help for cache-expiration
-  -k, --key string          The key to be set a expiration, default expire all keys
-      --option string       The additional options of expiration, only NX, XX, GT, LT supported
-  -p, --password string     The password of server
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
-```
-
 示例如下：
 
 ```bash
@@ -133,26 +87,6 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 
 ```bash
 chaosd attack redis cache-limit -h
-```
-
-输出结果如下所示：
-
-```bash
-set maxmemory of Redis
-
-Usage:
-  chaosd attack redis cache-limit [flags]
-
-Flags:
-  -a, --addr string       The address of redis server
-  -h, --help              help for cache-limit
-  -p, --password string   The password of server
-      --percent string    The percentage of maxmemory
-  -s, --size string       The size of cache (default "0")
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
 ```
 
 示例如下：
@@ -188,25 +122,6 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 chaosd attack redis cache-penetration -h
 ```
 
-输出结果如下所示：
-
-```bash
-penetrate cache
-
-Usage:
-  chaosd attack redis cache-penetration [flags]
-
-Flags:
-  -a, --addr string       The address of redis server
-  -h, --help              help for cache-penetration
-  -p, --password string   The password of server
-      --request-num int   The number of requests
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
-```
-
 示例如下：
 
 ```bash
@@ -240,27 +155,6 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 chaosd attack redis sentinel-restart -h
 ```
 
-输出结果如下所示：
-
-```bash
-restart sentinel
-
-Usage:
-  chaosd attack redis sentinel-restart [flags]
-
-Flags:
-  -a, --addr string         The address of redis server
-  -c, --conf string         The config of Redis server
-      --flush-config         Force Sentinel to rewrite its configuration on disk (default true)
-  -h, --help                help for sentinel-restart
-  -p, --password string     The password of server
-      --redis-path string   The path of the redis-server command
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
-```
-
 示例如下：
 
 ```bash
@@ -292,27 +186,6 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 
 ```bash
 chaosd attack redis sentinel-stop -h
-```
-
-输出结果如下所示：
-
-```bash
-stop sentinel
-
-Usage:
-  chaosd attack redis sentinel-stop [flags]
-
-Flags:
-  -a, --addr string         The address of redis server
-  -c, --conf string         The config path of Redis server
-      --flush-config        Force Sentinel to rewrite its configuration on disk (default true)
-  -h, --help                help for sentinel-stop
-  -p, --password string     The password of server
-      --redis-path string   The path of the redis-server command
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
 ```
 
 示例如下：
