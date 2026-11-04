@@ -10,31 +10,6 @@ Before creating an experiment, you can run the following command to see the Redi
 chaosd attack redis -h
 ```
 
-The result is as follows:
-
-```bash
-Redis attack related commands
-
-Usage:
-  chaosd attack redis [command]
-
-Available Commands:
-  cache-expiration  expire keys in Redis
-  cache-limit       set maxmemory of Redis
-  cache-penetration penetrate cache
-  sentinel-restart  restart sentinel
-  sentinel-stop     stop sentinel
-
-Flags:
-  -h, --help   help for redis
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
-
-Use "chaosd attack redis [command] --help" for more information about a command.
-```
-
 Currently, Chaosd supports simulating cache expiration, cache penetration, cache limit, sentinel restart, and sentinel stop.
 
 To create experiments using the service mode, you need to run Chaosd in the service mode and then send a `POST` HTTP request to the `/api/attack/redis` path of the Chaosd service:
@@ -84,27 +59,6 @@ Currently, Chaosd does not support recovering keys that have executed `cache-exp
 chaosd attack redis cache-expiration -h
 ```
 
-The result is as follows:
-
-```bash
-expire keys in Redis
-
-Usage:
-  chaosd attack redis cache-expiration [flags]
-
-Flags:
-  -a, --addr string         The address of redis server
-      --expiration string   The expiration of the key. A expiration string should be able to be converted to a time duration, such as "5s" or "30m" (default "0")
-  -h, --help                help for cache-expiration
-  -k, --key string          The key to be set a expiration, default expire all keys
-      --option string       The additional options of expiration, only NX, XX, GT, LT supported
-  -p, --password string     The password of server
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
-```
-
 #### Example for simulating cache expiration
 
 ```bash
@@ -135,26 +89,6 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 
 ```bash
 chaosd attack redis cache-limit -h
-```
-
-The result is as follows:
-
-```bash
-set maxmemory of Redis
-
-Usage:
-  chaosd attack redis cache-limit [flags]
-
-Flags:
-  -a, --addr string       The address of redis server
-  -h, --help              help for cache-limit
-  -p, --password string   The password of server
-      --percent string    The percentage of maxmemory
-  -s, --size string       The size of cache (default "0")
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
 ```
 
 #### Example for simulating cache limit
@@ -190,25 +124,6 @@ This command will send the specified number of `GET` requests to the Redis serve
 chaosd attack redis cache-penetration -h
 ```
 
-The result is as follows:
-
-```bash
-penetrate cache
-
-Usage:
-  chaosd attack redis cache-penetration [flags]
-
-Flags:
-  -a, --addr string       The address of redis server
-  -h, --help              help for cache-penetration
-  -p, --password string   The password of server
-      --request-num int   The number of requests
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
-```
-
 #### Example for simulating cache penetration
 
 ```bash
@@ -242,27 +157,6 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 chaosd attack redis sentinel-restart -h
 ```
 
-The result is as follows:
-
-```bash
-restart sentinel
-
-Usage:
-  chaosd attack redis sentinel-restart [flags]
-
-Flags:
-  -a, --addr string         The address of redis server
-  -c, --conf string         The config of Redis server
-      --flush-config         Force Sentinel to rewrite its configuration on disk (default true)
-  -h, --help                help for sentinel-restart
-  -p, --password string     The password of server
-      --redis-path string   The path of the redis-server command
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
-```
-
 #### Example for simulating Sentinel restart
 
 ```bash
@@ -294,27 +188,6 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 
 ```bash
 chaosd attack redis sentinel-stop -h
-```
-
-The result is as follows:
-
-```bash
-stop sentinel
-
-Usage:
-  chaosd attack redis sentinel-stop [flags]
-
-Flags:
-  -a, --addr string         The address of redis server
-  -c, --conf string         The config path of Redis server
-      --flush-config        Force Sentinel to rewrite its configuration on disk (default true)
-  -h, --help                help for sentinel-stop
-  -p, --password string     The password of server
-      --redis-path string   The path of the redis-server command
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
 ```
 
 #### Example for simulating Sentinel stop

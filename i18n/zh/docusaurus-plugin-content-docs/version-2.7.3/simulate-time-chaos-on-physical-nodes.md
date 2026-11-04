@@ -39,28 +39,6 @@ curl -X POST 172.16.112.130:31767/api/attack/clock -H "Content-Type:application/
 chaosd attack clock -h
 ```
 
-输出如下所示：
-
-```bash
-$ chaosd attack clock -h
-
-clock skew
-
-Usage:
-  chaosd attack clock attack [flags]
-
-Flags:
-  -c, --clock-ids-slice string   The identifier of the particular clock on which to act.More clock description in linux kernel can be found in man page of clock_getres, clock_gettime, clock_settime.Muti clock ids should be split with "," (default "CLOCK_REALTIME")
-  -h, --help                     help for clock
-  -p, --pid int                  Pid of target program.
-  -t, --time-offset string       Specifies the length of time offset.
-
-Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
-
-```
-
 ### 快速示例
 
 准备测试程序：

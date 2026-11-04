@@ -21,35 +21,6 @@ Before creating the experiment, you can run the following command line to see th
 chaosd attack jvm -h
 ```
 
-The result is as follows:
-
-```bash
-JVM attack related commands
-
-Usage:
-  chaosd attack jvm [command]
-
-Available Commands:
-  exception   throw specified exception for specified method
-  gc          trigger GC for JVM
-  latency     inject latency to specified method
-  mysql       inject fault into MySQL client
-  return      return specified value for specified method
-  rule-file   inject fault with configured byteman rule file
-  stress      inject stress to JVM
-
-Flags:
-  -h, --help       help for jvm
-      --pid int    the pid of Java process which needs to attach
-      --port int   the port of agent server (default 9288)
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
-
-Use "chaosd attack jvm [command] --help" for more information about a command.
-```
-
 To create experiments using the service mode, you need to run Chaosd in the service mode and then send a `POST` HTTP request to the `/api/attack/jvm` path of the Chaosd service:
 
 ```bash
@@ -90,38 +61,10 @@ To see the usage and configuration items of the command that throws custom excep
 chaosd attack jvm exception --help
 ```
 
-The result is as follows:
-
-```bash
-throw specified exception for specified method
-
-Usage:
-  chaosd attack jvm exception [options] [flags]
-
-Flags:
-  -c, --class string       Java class name
-      --exception string   the exception which needs to throw for action 'exception'
-  -h, --help               help for exception
-  -m, --method string      the method name in Java class
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --pid int            the pid of Java process which needs to attach
-      --port int           the port of agent server (default 9288)
-      --uid string         the experiment ID
-```
-
 #### Example for throwing custom exceptions
 
 ```bash
 chaosd attack jvm exception -c Main -m sayhello --exception 'java.io.IOException("BOOM")' --pid 30045
-```
-
-The result is as follows:
-
-```bash
-[2021/08/05 02:39:39.106 +00:00] [INFO] [jvm.go:208] ["byteman rule"] [rule="\nRULE Main-sayhello-exception-q6nd0\nCLASS Main\nMETHOD sayhello\nAT ENTRY\nIF true\nDO \n\tthrow new java.io.IOException(\"BOOM\");\nENDRULE\n"] [file=/tmp/rule.btm296930759]
-Attack jvm successfully, uid: 26a45ae2-d395-46f5-a126-2b2c6c85ae9d
 ```
 
 ### Throw custom exceptions using the service mode
@@ -132,12 +75,6 @@ Send a `POST` HTTP request to the `/api/attack/jvm` path of the Chaosd service w
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"exception","class":"Main","method":"sayhello","exception":"java.io.IOException(\"BOOM\")","pid":1828622}'
-```
-
-The result is as follows:
-
-```bash
-{"status":200,"message":"attack successfully","uid":"c3c519bf-819a-4a7b-97fb-e3d0814481fa"}
 ```
 
 ## Trigger garbage collection
@@ -181,13 +118,6 @@ Global Flags:
 chaosd attack jvm gc --pid 89345
 ```
 
-The result is as follows:
-
-```bash
-[2021/08/05 02:49:47.850 +00:00] [INFO] [jvm.go:208] ["byteman rule"] [rule="\nRULE --gc-u0mlf\nGC\nENDRULE\n"] [file=/tmp/rule.btm012481052]
-Attack jvm successfully, uid: f360e70a-5359-49b6-8526-d7e0a3c6f696
-```
-
 Triggering garbage collection is a one-time operation, and the experiment does not require recovery.
 
 ### Trigger garbage collection using the service mode
@@ -198,12 +128,6 @@ Send a `POST` HTTP request to the `/api/attack/jvm` path of the Chaosd service w
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"gc","pid":1828622}'
-```
-
-The result is as follows:
-
-```bash
-{"status":200,"message":"attack successfully","uid":"c3c519bf-819a-4a7b-97fb-e3d0814481fa"}
 ```
 
 Triggering garbage collection is a one-time operation. The experiment does not require recovery.
@@ -230,39 +154,10 @@ To see the usage and configuration items of the command that increases method la
 chaosd attack jvm latency --help
 ```
 
-The result is as follows:
-
-```bash
-inject latency to specified method
-
-Usage:
-  chaosd attack jvm latency [options] [flags]
-
-Flags:
-  -c, --class string    Java class name
-  -h, --help            help for latency
-      --latency int     the latency duration, unit ms
-  -m, --method string   the method name in Java class
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --pid int            the pid of Java process which needs to attach
-      --port int           the port of agent server (default 9288)
-      --uid string         the experiment ID
-```
-
 #### Example for increasing method latency
 
 ```bash
 chaosd attack jvm latency --class Main --method sayhello --latency 5000 --pid 100840
-```
-
-The result is as follows:
-
-```bash
-[2021/08/05 03:08:50.716 +00:00] [INFO] [jvm.go:208] ["byteman rule"] [rule="\nRULE Main-sayhello-latency-hlib2\nCLASS Main\nMETHOD sayhello\nAT ENTRY\nIF true\nDO \n\tThread.sleep(5000);\nENDRULE\n"] [file=/tmp/rule.btm359997255]
-[2021/08/05 03:08:51.155 +00:00] [INFO] [jvm.go:94] ["submit rules"] [output="install rule Main-sayhello-latency-hlib2\n\n"]
-Attack jvm successfully, uid: bbe00c57-ac9d-4113-bf0c-2a6f184be261
 ```
 
 ### Increase method latency using the service mode
@@ -273,12 +168,6 @@ Send a `POST` HTTP request to the `/api/attack/jvm` path of the Chaosd service w
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"latency","class":"Main","method":"sayhello","latency":5000,"pid":1828622}'
-```
-
-The result is as follows:
-
-```bash
-{"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
 ```
 
 ## Modify return values of a method
@@ -328,14 +217,6 @@ Global Flags:
 chaosd attack jvm return --class Main --method getnum --value 999 --pid 112694
 ```
 
-The result is as follows:
-
-```bash
-[2021/08/05 03:35:10.603 +00:00] [INFO] [jvm.go:208] ["byteman rule"] [rule="\nRULE Main-getnum-return-i6gb7\nCLASS Main\nMETHOD getnum\nAT ENTRY\nIF true\nDO \n\treturn 999;\nENDRULE\n"] [file=/tmp/rule.btm051982059]
-[2021/08/05 03:35:10.820 +00:00] [INFO] [jvm.go:94] ["submit rules"] [output="install rule Main-getnum-return-i6gb7\n\n"]
-Attack jvm successfully, uid: e2f204f6-4bed-4d92-aade-2b4a47b02e5d
-```
-
 ### Modify return values of a method using the service mode
 
 #### Example for modifying return values of a method using the service mode
@@ -344,12 +225,6 @@ Send a `POST` HTTP request to the `/api/attack/jvm` path of the Chaosd service w
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"return","class":"Main","method":"getnum","value":"999","pid":1828622}'
-```
-
-The result is as follows:
-
-```bash
-{"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
 ```
 
 ## Trigger faults by setting Byteman configuration files
@@ -375,25 +250,6 @@ To see the usage and configuration items of the command that triggers faults by 
 chaosd attack jvm rule-file --help
 ```
 
-The result is as follows:
-
-```bash
-inject fault with configured byteman rule file
-
-Usage:
-  chaosd attack jvm rule-file [options] [flags]
-
-Flags:
-  -h, --help          help for rule-file
-  -p, --path string   the path of configured byteman rule file
-
-Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
-      --pid int            the pid of Java process which needs to attach
-      --port int           the port of agent server (default 9288)
-      --uid string         the experiment ID
-```
-
 #### Example for triggering faults by setting Byteman configuration files
 
 First, based on the specific Java program and referring to [the Byteman rule language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language), write a rule configuration file. For example:
@@ -413,14 +269,6 @@ Then, save the configuration file to the `return.btm` file. After that, run the 
 
 ```bash
 chaosd attack jvm rule-file -p ./return.btm --pid 112694
-```
-
-The result is as follows:
-
-```bash
-[2021/08/05 03:45:40.757 +00:00] [INFO] [jvm.go:152] ["rule file data:RULE modify return value\nCLASS Main\nMETHOD getnum\nAT ENTRY\nIF true\nDO\n    return 9999\nENDRULE\n"]
-[2021/08/05 03:45:41.011 +00:00] [INFO] [jvm.go:94] ["submit rules"] [output="install rule modify return value\n\n"]
-Attack jvm successfully, uid: 5ca2e06d-a7c6-421d-bb67-0c9908bac17a
 ```
 
 ### Trigger faults by setting Byteman configuration files using the service mode
@@ -448,12 +296,6 @@ Then, escape the line breaks in the configuration file to the newline character 
 curl -X POST 127.0.0.1:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"rule-data","pid":30045,"rule-data":"\nRULE modify return value\nCLASS Main\nMETHOD getnum\nAT ENTRY\nIF true\nDO return 9999\nENDRULE\n"}'
 ```
 
-The result is as follows:
-
-```bash
-{"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
-```
-
 ## Increase JVM stress
 
 ### Parameters for increasing JVM stress
@@ -475,40 +317,12 @@ To see the usage and configuration items of the command that increases JVM stres
 chaosd attack jvm stress --help
 ```
 
-The result is as follows:
-
-```bash
-inject stress to JVM
-
-Usage:
-  chaosd attack jvm stress [options] [flags]
-
-Flags:
-      --cpu-count int   the CPU core number
-  -h, --help            help for stress
-      --mem-type int    the memory type to be allocated. The value can be 'stack' or 'heap'.
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --pid int            the pid of Java process which needs to attach
-      --port int           the port of agent server (default 9288)
-      --uid string         the experiment ID
-```
-
 #### Example for increasing JVM stress
 
 The example for increasing JVM stress is as follows:
 
 ```bash
 chaosd attack jvm stress --cpu-count 2 --pid 123546
-```
-
-The result is as follows:
-
-```bash
-[2021/08/05 03:59:51.256 +00:00] [INFO] [jvm.go:208] ["byteman rule"] [rule="\nRULE --stress-jfeiu\nSTRESS CPU\nCPUCOUNT 2\nENDRULE\n"] [file=/tmp/rule.btm773062009]
-[2021/08/05 03:59:51.613 +00:00] [INFO] [jvm.go:94] ["submit rules"] [output="install rule --stress-jfeiu\n\n"]
-Attack jvm successfully, uid: b9b997b5-0a0d-4f1f-9081-d52a32318b84
 ```
 
 ### Increase JVM stress using the service mode
@@ -519,12 +333,6 @@ Send a `POST` HTTP request to the `/api/attack/jvm` path of the Chaosd service w
 
 ```bash
 curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"stress","cpu-count":1,"pid":1828622}'
-```
-
-The result is as follows:
-
-```bash
-{"status":200,"message":"attack successfully","uid":"a551206c-960d-4ac5-9056-518e512d4d0d"}
 ```
 
 ## Trigger faults in the MySQL Java client
@@ -552,30 +360,6 @@ To see the usage and configuration items of the command that triggers faults, ru
 
 ```bash
 chaosd attack jvm mysql --help
-```
-
-The result is as follows:
-
-```bash
-inject fault into MySQL client
-
-Usage:
-  chaosd attack jvm mysql [options] [flags]
-
-Flags:
-  -d, --database string                  the match database
-      --exception string                 the exception message needs to throw
-  -h, --help                             help for mysql
-      --latency int                      the latency duration, unit ms
-  -v, --mysql-connector-version string   the version of mysql-connector-java, only support 5.X.X(set to 5) and 8.X.X(set to 8) (default "8")
-      --sql-type string                  the match sql type
-  -t, --table string                     the match table
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --pid int            the pid of Java process which need to attach
-      --port int           the port of agent server (default 9288)
-      --uid string         the experiment ID
 ```
 
 #### Example for triggering faults
@@ -629,27 +413,6 @@ To trigger faults in the MySQL Java client, follow the instructions below:
    curl -X GET "http://127.0.0.1:8001/query?sql=SELECT%20*%20FROM%20mysql.user"
    ```
 
-   The result is as follows:
-
-   ```log
-   java.sql.SQLException: BOOM
-   at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
-     at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
-   at com.mysql.cj.jdbc.StatementImpl.executeQuery(StatementImpl.java:1206)
-     at com.mysqldemo.App.querySQL(App.java:125)
-     at com.mysqldemo.App$QueryHandler.handle(App.java:95)
-   at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:77)
-     at jdk.httpserver/sun.net.httpserver.AuthFilter.doFilter(AuthFilter.java:82)
-     at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:80)
-     at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange$LinkHandler.handle(ServerImpl.java:692)
-   at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:77)
-     at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange.run(ServerImpl.java:664)
-   at jdk.httpserver/sun.net.httpserver.ServerImpl$DefaultExecutor.execute(ServerImpl.java:159)
-     at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.handle(ServerImpl.java:442)
-     at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.run(ServerImpl.java:408)
-     at java.base/java.lang.Thread.run(Thread.java:832)
-   ```
-
 ### Trigger faults in the MySQL Java client using the service mode
 
 Chaosd supports injecting latency or throwing exceptions when the MySQL Java client executes SQL statements of the specified types.
@@ -668,25 +431,4 @@ To trigger faults in the MySQL Java client using the service mode, follow the in
 
    ```bash
    curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"mysql","database":"mysql", "table":"user", "port":9288, "exception":"boom", "pid":12345}'
-   ```
-
-   The result is as follows:
-
-   ```log
-   java.sql.SQLException: BOOM
-   at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
-     at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
-   at com.mysql.cj.jdbc.StatementImpl.executeQuery(StatementImpl.java:1206)
-     at com.mysqldemo.App.querySQL(App.java:125)
-     at com.mysqldemo.App$QueryHandler.handle(App.java:95)
-   at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:77)
-     at jdk.httpserver/sun.net.httpserver.AuthFilter.doFilter(AuthFilter.java:82)
-     at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:80)
-     at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange$LinkHandler.handle(ServerImpl.java:692)
-   at jdk.httpserver/com.sun.net.httpserver.Filter$Chain.doFilter(Filter.java:77)
-     at jdk.httpserver/sun.net.httpserver.ServerImpl$Exchange.run(ServerImpl.java:664)
-   at jdk.httpserver/com.sun.net.httpserver.ServerImpl$DefaultExecutor.execute(ServerImpl.java:159)
-     at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.handle(ServerImpl.java:442)
-     at jdk.httpserver/sun.net.httpserver.ServerImpl$Dispatcher.run(ServerImpl.java:408)
-     at java.base/java.lang.Thread.run(Thread.java:832)
    ```

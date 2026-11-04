@@ -14,32 +14,6 @@ Before creating a file fault experiment, you can run the following command to ch
 chaosd attack file -h
 ```
 
-The output is as follows:
-
-```bash
-File attack related commands
-
-Usage:
-  chaosd attack file [command]
-
-Available Commands:
-  append      append file
-  create      create file
-  delete      delete file
-  modify      modify file privilege
-  rename      rename file
-  replace     replace data in file
-
-Flags:
-  -h, --help   help for file
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
-
-Use "chaosd attack file [command] --help" for more information about a command.
-```
-
 ### Append data to a file using the command-line mode
 
 This function appends data to the end of a file.
@@ -50,25 +24,6 @@ The command is as follows:
 
 ```bash
 chaosd attack file append -h
-```
-
-The output is as follows:
-
-```bash
-append file
-
-Usage:
-  chaosd attack file append [flags]
-
-Flags:
-  -c, --count int          append count with default value is 1 (default 1)
-  -d, --data string        append data
-  -f, --file-name string   append data to the file
-  -h, --help               help for append
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
 ```
 
 #### Configuration description for appending data
@@ -97,24 +52,6 @@ The command is as follows:
 chaosd attack file create -h
 ```
 
-The output is as follows:
-
-```bash
-create file
-
-Usage:
-  chaosd attack file create [flags]
-
-Flags:
-  -d, --dir-name string    the name of directory to be created
-  -f, --file-name string   the name of file to be created
-  -h, --help               help for create
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
-```
-
 #### Configuration description for creating a file
 
 | Configuration item | Abbreviation | Description | Value |
@@ -138,24 +75,6 @@ The command is as follows:
 
 ```bash
 chaosd attack file delete -h
-```
-
-The output is as follows:
-
-```bash
-delete file
-
-Usage:
-  chaosd attack file delete [flags]
-
-Flags:
-  -d, --dir-name string    the directory to be deleted
-  -f, --file-name string   the file to be deleted
-  -h, --help               help for delete
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
 ```
 
 #### Configuration description for deleting a file
@@ -183,24 +102,6 @@ The command is as follows:
 chaosd attack file modify -h
 ```
 
-The output is as follows:
-
-```bash
-modify file privilege
-
-Usage:
-  chaosd attack file modify [flags]
-
-Flags:
-  -f, --file-name string   file to be change privilege
-  -h, --help               help for modify
-  -p, --privilege uint32   privilege to be update
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
-```
-
 #### Configuration description for modifying file permissions
 
 | Configuration item | Abbreviation | Description | Value |
@@ -226,24 +127,6 @@ The command is as follows:
 chaosd attack file rename -h
 ```
 
-The output is as follows:
-
-```bash
-rename file
-
-Usage:
-  chaosd attack file rename [flags]
-
-Flags:
-  -d, --dest-file string     the destination file/dir of rename
-  -h, --help                 help for rename
-  -s, --source-file string   the source file/dir of rename
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
-```
-
 #### Configuration description for renaming a file
 
 | Configuration item | Abbreviation | Description               | Value                                        |
@@ -267,26 +150,6 @@ The command is as follows:
 
 ```bash
 chaosd attack file replace -h
-```
-
-The output is as follows:
-
-```bash
-replace data in file
-
-Usage:
-  chaosd attack file replace [flags]
-
-Flags:
-  -d, --dest-string string     the destination string to replace the origin string
-  -f, --file-name string       replace data in the file
-  -h, --help                   help for replace
-  -l, --line int               the line number to replace, default is 0, means replace all lines
-  -o, --origin-string string   the origin string to be replaced
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
 ```
 
 #### Configuration description for replacing file data
