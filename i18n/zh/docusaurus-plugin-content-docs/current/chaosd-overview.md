@@ -8,7 +8,7 @@ title: Chaosd 组件简介
 
 :::note
 
-本文适用于 **Chaosd v1.5.0**。Chaosd 与 Chaos Mesh 独立发布，网站的版本选择器对应 Chaos Mesh 版本，不是 Chaosd 版本。本次发布的改动请参阅 [v1.5.0 发布说明](https://github.com/chaos-mesh/chaosd/releases/tag/v1.5.0)。
+Chaosd 文档适用于 **Chaosd v1.5.0 及以上版本**。需要更高版本的功能会在对应章节中注明。Chaosd 与 Chaos Mesh 独立发布，网站的版本选择器对应 Chaos Mesh 版本，不是 Chaosd 版本。各版本的改动请参阅 [Chaosd 发布说明](https://github.com/chaos-mesh/chaosd/releases)。
 
 :::
 
@@ -44,14 +44,14 @@ arm64 不支持时间偏移故障。其他运行工具取决于所选故障。�
 
 ### 下载和部署
 
-1. 选择 Chaosd v1.5.0 和 Linux 主机的架构。x86-64 使用 `amd64`，AArch64 使用 `arm64`。
+1. 选择已发布的 Chaosd 版本和 Linux 主机的架构。x86-64 使用 `amd64`，AArch64 使用 `arm64`。以下示例使用 v1.5.0。
 
    ```bash
    export CHAOSD_VERSION=v1.5.0
    export CHAOSD_ARCH=amd64
    ```
 
-   其他已发布版本请参阅 [Chaosd releases](https://github.com/chaos-mesh/chaosd/releases)。`latest` 压缩包跟随开发构建，不是稳定版本。
+   将 `CHAOSD_VERSION` 设置为 [Chaosd 发布说明](https://github.com/chaos-mesh/chaosd/releases)中列出的版本，并确保该版本满足所需功能的最低版本要求。
 
 2. 下载压缩包：
 
