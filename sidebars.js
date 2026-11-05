@@ -122,6 +122,7 @@ module.exports = {
       items: [
         'developer-guide-overview',
         'configure-development-environment',
+        'setup-dev-env-for-oidc-with-keycloak',
         'add-new-chaos-experiment-type',
         'extend-chaos-daemon-interface',
         'extend-chaosd',
