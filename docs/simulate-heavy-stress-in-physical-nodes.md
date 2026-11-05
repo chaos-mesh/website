@@ -71,6 +71,7 @@ curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application
 | :-- | :-- | :-- | :-- | :-- | :-- |
 | `action` | — | action | Actions of the experiment | string | Set to "mem". |
 | `size` | s | size | Specifies the size of memory per VM worker. | string | The memory size in B, KB/KiB, MB/MiB, GB/GiB, TB/TiB. If the size is not set, all available memory is used by default. |
+| `workers` | — | workers | Specifies the number of workers used to create memory stress. | int | Default value: 1. |
 | `options` | o | options | The extended parameter of stress-ng, usually not configured. | string | Default value: "". |
 
 ### Simulate memory stress using the command-line mode
@@ -84,7 +85,7 @@ chaosd attack stress mem --help
 An example is as follows:
 
 ```bash
-chaosd attack stress mem --workers 2 --size 100M
+chaosd attack stress mem --size 100M
 ```
 
 When running the experiment, you need to save the uid information of the experiment. When a stress simulation is not needed, you can use `recover` to terminate the uid-related experiment:
@@ -98,5 +99,5 @@ chaosd recover c2bff2f5-3aac-4ace-b7a6-322946ae6f13
 Send a `POST` HTTP request to the `/api/attack/stress` path of the Chaosd service with the following `fault-configuration`:
 
 ```bash
-curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{"size":"100M", "action":"mem"}'
+curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{"size":"100M", "action":"mem", "workers":2}'
 ```
