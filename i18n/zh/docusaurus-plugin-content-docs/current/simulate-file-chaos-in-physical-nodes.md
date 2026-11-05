@@ -14,32 +14,6 @@ title: 模拟文件故障
 chaosd attack file -h
 ```
 
-输出结果如下所示：
-
-```bash
-File attack related commands
-
-Usage:
-  chaosd attack file [command]
-
-Available Commands:
-  append      append file
-  create      create file
-  delete      delete file
-  modify      modify file privilege
-  rename      rename file
-  replace     replace data in file
-
-Flags:
-  -h, --help   help for file
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
-
-Use "chaosd attack file [command] --help" for more information about a command.
-```
-
 ### 使用命令行模式向文件追加数据
 
 通过该功能以追加的方式将数据写到文件的末尾。
@@ -50,25 +24,6 @@ Use "chaosd attack file [command] --help" for more information about a command.
 
 ```bash
 chaosd attack file append -h
-```
-
-输出结果如下所示：
-
-```bash
-append file
-
-Usage:
-  chaosd attack file append [flags]
-
-Flags:
-  -c, --count int          append count with default value is 1 (default 1)
-  -d, --data string        append data
-  -f, --file-name string   append data to the file
-  -h, --help               help for append
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
 ```
 
 #### 追加数据相关配置说明
@@ -97,24 +52,6 @@ chaosd attack file append --count 2 --data "test" --file-name /tmp/test.txt
 chaosd attack file create -h
 ```
 
-输出结果如下所示：
-
-```bash
-create file
-
-Usage:
-  chaosd attack file create [flags]
-
-Flags:
-  -d, --dir-name string    the name of directory to be created
-  -f, --file-name string   the name of file to be created
-  -h, --help               help for create
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
-```
-
 #### 创建文件相关配置说明
 
 | 配置项 | 配置缩写 | 说明 | 值 |
@@ -138,24 +75,6 @@ chaosd attack file create --file-name "/tmp/test.txt"
 
 ```bash
 chaosd attack file delete -h
-```
-
-输出结果如下所示：
-
-```bash
-delete file
-
-Usage:
-  chaosd attack file delete [flags]
-
-Flags:
-  -d, --dir-name string    the directory to be deleted
-  -f, --file-name string   the file to be deleted
-  -h, --help               help for delete
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
 ```
 
 #### 删除文件相关配置说明
@@ -183,24 +102,6 @@ chaosd attack file delete --file-name "/tmp/test.txt"
 chaosd attack file modify -h
 ```
 
-输出结果如下所示：
-
-```bash
-modify file privilege
-
-Usage:
-  chaosd attack file modify [flags]
-
-Flags:
-  -f, --file-name string   file to be change privilege
-  -h, --help               help for modify
-  -p, --privilege uint32   privilege to be update
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
-```
-
 #### 修改文件权限相关配置说明
 
 | 配置项      | 配置缩写 | 说明                 | 值                                         |
@@ -226,24 +127,6 @@ chaosd attack file modify --file-name /tmp/test.txt --privilege 777
 chaosd attack file rename -h
 ```
 
-输出结果如下所示：
-
-```bash
-rename file
-
-Usage:
-  chaosd attack file rename [flags]
-
-Flags:
-  -d, --dest-file string     the destination file/dir of rename
-  -h, --help                 help for rename
-  -s, --source-file string   the source file/dir of rename
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
-```
-
 #### 重命名文件相关配置说明
 
 | 配置项        | 配置缩写 | 说明         | 值                                          |
@@ -267,26 +150,6 @@ chaosd attack file rename --source-file /tmp/test.txt --dest-file /tmp/test2.txt
 
 ```bash
 chaosd attack file replace -h
-```
-
-输出结果如下所示：
-
-```bash
-replace data in file
-
-Usage:
-  chaosd attack file replace [flags]
-
-Flags:
-  -d, --dest-string string     the destination string to replace the origin string
-  -f, --file-name string       replace data in the file
-  -h, --help                   help for replace
-  -l, --line int               the line number to replace, default is 0, means replace all lines
-  -o, --origin-string string   the origin string to be replaced
-
-Global Flags:
-      --log-level string   the log level of chaosd. The value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
 ```
 
 #### 替换文件内容相关配置说明

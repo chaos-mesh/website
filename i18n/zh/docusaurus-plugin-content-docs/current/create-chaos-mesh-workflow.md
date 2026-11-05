@@ -214,6 +214,36 @@ podChaos:
 | --- | --- | --- | --- | --- | --- |
 | container | object | 定义自定义任务容器，可参考 [Container 字段说明](#container-字段说明) | 无 | 否 |  |
 | volumes | array | 若需要在自定义任务容器中挂载卷，则需要在该字段声明卷。关于完整定义可参考 [corev1.Volume](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.23/#volume-v1-core) | 无 | 否 |  |
+| nodeSelector | map[string]string | 限制 Task Pod 只能调度到具有所有指定标签的节点。 | 无 | 否 | `{"disktype": "ssd"}` |
+| tolerations | []corev1.Toleration | 允许 Task Pod 调度到具有匹配污点的节点，但不要求调度到这些节点。 | 无 | 否 |  |
+
+这两个可选字段控制 Task Pod 的调度，不影响 Chaos 实验的目标节点。例如：
+
+```yaml
+apiVersion: chaos-mesh.org/v1alpha1
+kind: Workflow
+metadata:
+  name: task-scheduling
+spec:
+  entry: task
+  templates:
+    - name: task
+      templateType: Task
+      task:
+        container:
+          name: task
+          image: busybox:latest
+          command: ["echo", "Task completed"]
+        nodeSelector:
+          disktype: ssd
+        tolerations:
+          - key: dedicated
+            operator: Equal
+            value: workflow
+            effect: NoSchedule
+```
+
+此 Task Pod 要求节点具有 `disktype=ssd` 标签，并容忍 `dedicated=workflow:NoSchedule` 污点。请根据节点的标签和污点设置这些值。容忍度不会绕过 `nodeSelector` 的限制。如果没有合适的节点，Pod 会保持 `Pending` 状态。
 
 ### ConditionalBranch 字段说明
 

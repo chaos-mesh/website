@@ -1,6 +1,0 @@
-tasks:
-  - init: pnpm i
-    command: pnpm start --port 3001
-ports:
-  - port: 3001
-    onOpen: open-preview

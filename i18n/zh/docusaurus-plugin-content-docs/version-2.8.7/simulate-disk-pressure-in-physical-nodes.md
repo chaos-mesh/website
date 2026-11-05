@@ -1,0 +1,137 @@
+---
+title: 模拟磁盘故障
+---
+
+本文主要介绍如何使用 Chaosd 模拟磁盘故障场景。使用该功能，你可以在物理机器上模拟磁盘读写负载（通过 [dd](https://man7.org/linux/man-pages/man1/dd.1.html)），或磁盘填充（通过 [dd](https://man7.org/linux/man-pages/man1/dd.1.html)，或 [fallocate](https://man7.org/linux/man-pages/man1/fallocate.1.html)）。
+
+:::note
+
+**Chaosd v1.5.0**
+
+磁盘读写负载会在完成指定数据量或 `duration` 到期时停止，以先发生者为准。时长可使用 `30s`、`1m` 等格式，空值表示不设置负载截止时间。v1.5.0 修复了这一截止时间行为，命令行和服务模式均适用，磁盘填充不适用。
+
+:::
+
+在创建磁盘故障实验前，可运行以下命令行查看 Chaosd 支持的磁盘故障类型：
+
+```bash
+chaosd attack disk -h
+```
+
+目前 Chaosd 支持创建磁盘读负载实验、磁盘写负载实验、磁盘填充实验。
+
+要使用服务模式创建实验，你需要以服务模式运行 Chaosd，然后向 Chaosd 服务的路径 `/api/attack/disk` 发送 `POST` HTTP 请求：
+
+```bash
+chaosd server --port 31767
+```
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{fault-configuration}'
+```
+
+在上述命令中，你需要按照故障类型在 `fault-configuration` 中进行配置。有关对应的配置参数和示例，请参考下文中各个类型故障的相关参数说明。
+
+:::note
+
+在运行实验时，请注意保存实验的 UID 信息。当要结束 UID 对应的实验时，需要向 Chaosd 服务的路径 `/api/attack/{uid}` 发送 `DELETE` HTTP 请求。
+
+:::
+
+## 模拟磁盘读负载场景
+
+模拟磁盘读负载为一次性操作，因此实验不需要恢复。
+
+### 模拟磁盘读负载相关参数说明
+
+| 配置项 | 配置缩写 | 服务模式字段 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | 实验的行为 | string 类型 | 设置为 "read-payload" |
+| `path` | p | path | 指定所读数据的文件路径。如果没有设置此参数，或者设置参数值为空字符串，Chaosd 则从目录 "/" 所挂载的虚拟磁盘文件读取。根据读取文件的权限不同，会需要你使用一定的权限运行本程序。 | string 类型 | 默认为 `""` |
+| `process-num` | n | payload-process-num | 指定使用多少个并发运行的 [dd](https://man7.org/linux/man-pages/man1/dd.1.html) 进程执行程序。 | uint8 类型 | 默认值为 `1`，范围为 `1` 至 `255` |
+| `size` | s | size | 指定读取多少数据。该值为多个 dd 读数据的总量。 | string 类型 | 默认为 `""`，**必须**要设置。合法形式为一个整数加一个单位。例如：1M、512kB。支持的单位有 c=1、w=2、b=512、kB=1000、K=1024、MB=1000\*1000,M=1024\*1024、GB=1000\*1000\*1000、G=1024\*1024\*1024 BYTE 等。 |
+| `duration` | 无 | duration | 读写负载的最长执行时间，例如 `30s`。完成指定数据量后可提前结束。 | string 类型 | 默认值为 `""`，不设置负载截止时间 |
+
+### 使用命令行模式模拟磁盘读负载场景
+
+```bash
+chaosd attack disk add-payload read -h
+```
+
+示例如下：
+
+```bash
+chaosd attack disk add-payload read -s 1000G -n 7 -p /dev/zero
+```
+
+### 使用服务模式模拟磁盘读负载场景
+
+示例如下：
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{"action":"read-payload","path":"/dev/zero", "payload-process-num":7,"size":"1000G"}'
+```
+
+## 模拟磁盘写负载场景
+
+### 模拟磁盘写负载相关参数说明
+
+| 配置项 | 配置缩写 | 服务模式字段 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | 实验的行为 | string 类型 | 设置为 "write-payload" |
+| `path` | p | path | 指定所写数据的文件路径。如果没有设置此参数，或者设置参数值为空字符串，则会在程序执行目录下创建一个临时文件。根据写入文件的权限不同，会需要你使用一定的权限运行本程序。 | string 类型 | 默认为 `""` |
+| `process-num` | n | payload-process-num | 指定使用多少个并发运行的 [dd](https://man7.org/linux/man-pages/man1/dd.1.html) 进程执行程序。 | uint8 类型 | 默认值为 `1`，范围为 `1` 至 `255` |
+| `size` | s | size | 指定写入多少数据。该值为多个 dd 写数据的总量。 | string 类型 | 默认为 `""`，**必须**要设置。合法形式为一个整数加一个单位。例如：1M、512kB。支持的单位有 c=1、w=2、b=512、kB=1000、K=1024、MB=1000\*1000,M=1024\*1024、GB=1000\*1000\*1000、G=1024\*1024\*1024 BYTE 等。 |
+| `duration` | 无 | duration | 读写负载的最长执行时间，例如 `30s`。完成指定数据量后可提前结束。 | string 类型 | 默认值为 `""`，不设置负载截止时间 |
+
+### 使用命令行模式模拟磁盘写负载场景
+
+```bash
+chaosd attack disk add-payload write -h
+```
+
+示例如下：
+
+```bash
+chaosd attack disk add-payload write -s 2G -n 8
+```
+
+### 使用服务模式模拟磁盘写负载场景
+
+示例如下：
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{"action":"write-payload","path":"/tmp/test", "payload-process-num":7,"size":"1000G"}'
+```
+
+## 模拟磁盘填充场景
+
+### 模拟磁盘填充相关参数说明
+
+| 配置项 | 配置缩写 | 服务模式字段 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | 实验的行为 | string 类型 | 设置为 "fill" |
+| `fallocate` | f | fallocate | 如果此参数为 `true`，Chaosd 则使用 Linux 调用 `fallocate` 来快速申请磁盘空间，此时 size 必须大于 `0`。如果此参数为 `false`，Chaosd 则使用 Linux 调用 dd 以相对较慢速度填充磁盘。 | bool 类型 | 默认为 `true` |
+| `path` | p | path | 指定所写数据的文件路径。如果没有设置此参数，或者设置参数值为空字符串，则会在程序执行目录下创建一个临时文件。根据写入文件的权限不同，会需要你使用一定的权限运行本程序。 | string 类型 | 默认为 `""` |
+| `percent` | c | percent | 指定填充多少百分比磁盘。 | string 类型 | 默认为 ""，可以填入 uint 类型的正整数。必须要设置 `size` 或 `percent` 中的一项，两个配置项的值**不能**同时为 `""`。 |
+| `size` | s | size | 指定写入多少数据。 | string 类型 | 默认为 `""`，合法形式为一个整数加一个单位。例如：1M、512kB。支持的单位有 c=1、w=2、b=512、kB=1000、K=1024、MB=1000\*1000,M=1024\*1024、GB=1000\*1000\*1000、G=1024\*1024\*1024 BYTE 等。必须要设置 `size` 或 `percent` 中的一项，两个配置项的值**不能**同时为 `""`。 |
+
+### 使用命令行模式模拟磁盘填充场景
+
+```bash
+chaosd attack disk fill -h
+```
+
+示例如下：
+
+```bash
+chaosd attack disk fill -c 50
+```
+
+### 使用服务模式模拟磁盘填充场景
+
+示例如下：
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{"action":"fill","path":"/tmp/test", "fallocate":true,"percent":"50"}'
+```
