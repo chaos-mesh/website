@@ -129,7 +129,7 @@ UI=1 make image
 
    为保证高可用，Chaos Mesh 默认启用 leader election，并会创建三个 `chaos-controller-manager` 副本。设置 `controllerManager.leaderElection.enabled=false` 会让 Chaos Mesh 只创建一个 `chaos-controller-manager` 副本，从而更易于调试。
 
-   更多细节请参见 [在不同环境中安装 Chaos Mesh](production-installation-using-helm.mdx#step-4-install-chaos-mesh-in-different-environments)。
+   更多细节请参见 [在不同环境中安装 Chaos Mesh](production-installation-using-helm.mdx#第-4-步在不同环境下安装)。
 
    :::
 

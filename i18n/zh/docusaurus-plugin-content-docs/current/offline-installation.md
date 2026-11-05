@@ -140,7 +140,7 @@ cd chaos-mesh/chaos-mesh-*/
 
 :::note
 
-如果你正在 Kubernetes v1.15（或更低版本）中安装 Chaos Mesh，请通过 `kubectl create -f manifests/crd-v1beta1.yaml` 手动安装 CRD。具体细节，请参考 [FAQ](./faqs.md#failed-to-install-chaos-mesh-with-the-message-no-matches-for-kind-customresourcedefinition-in-version-apiextensionsk8siov1)。
+如果你正在 Kubernetes v1.15（或更低版本）中安装 Chaos Mesh，请通过 `kubectl create -f manifests/crd-v1beta1.yaml` 手动安装 CRD。具体细节，请参考 [FAQ](./faqs.md#安装-chaos-mesh-失败提示信息为no-matches-for-kind-customresourcedefinition-in-version-apiextensionsk8siov1)。
 
 :::
 
