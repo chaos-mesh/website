@@ -1,0 +1,407 @@
+---
+title: 模拟 JVM 应用故障
+---
+
+Chaosd 可以通过 [Byteman](https://github.com/chaos-mesh/byteman) 模拟 JVM 应用故障，主要支持以下几种故障类型：
+
+- 抛出自定义异常
+- 触发垃圾回收
+- 增加方法延迟
+- 修改方法返回值
+- 设置 Byteman 配置文件触发故障
+- 增加 JVM 压力
+
+同时，Chaosd 支持对常用的服务或其 Java 客户端注入上述的故障。比如，当 MySQL Java 客户端执行指定类型的 SQL 语句（`"select"`，`"update"`，`"insert"`，`"replace"` 或 `"delete"`）时，你可以使用 Chaosd 在该客户端注入延迟或抛出异常。
+
+本文主要介绍如何通过 Chaosd 创建以上故障类型的 JVM 实验。
+
+在创建 JVM 应用故障实验前，可运行以下命令行查看 Chaosd 支持的 JVM 应用故障类型：
+
+```bash
+chaosd attack jvm -h
+```
+
+要使用服务模式创建实验，你需要以服务模式运行 Chaosd，然后向 Chaosd 服务的路径 `/api/attack/jvm` 发送 `POST` HTTP 请求：
+
+```bash
+chaosd server --port 31767
+```
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{fault-configuration}'
+```
+
+在上述命令中，你需要按照故障类型在 `fault-configuration` 中进行配置。有关对应的配置参数和示例，请参考下文中各个类型故障的相关参数说明。
+
+:::note
+
+在运行实验时，请注意保存实验的 UID 信息。当要结束 UID 对应的实验时，需要向 Chaosd 服务的路径 `/api/attack/{uid}` 发送 `DELETE` HTTP 请求。
+
+:::
+
+## 模拟抛出自定义异常场景
+
+### 模拟抛出自定义异常相关参数说明
+
+| 配置项 | 配置缩写 | 服务模式字段 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | 实验的行为 | string 类型 | 设置为 "exception" |
+| `class` | `c` | class | Java 类的名称 | string 类型 | 必须配置 |
+| `exception` | 无 | exception | 抛出的自定义异常 | string 类型 | 必须配置 |
+| `method` | `m` | method | 方法名称 | string 类型 | 必须配置 |
+| `pid` | 无 | pid | 需要注入故障的 Java 进程号 | int 类型 | 必须配置 |
+| `port` | 无 | port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型 | 默认为 `9288` |
+| `uid` | 无 | uid | 实验的编号 | string 类型 | 可以不配置，因为 Chaosd 会随机生成一个 |
+
+### 使用命令行模式模拟抛出自定义异常场景
+
+运行以下命令查看抛出自定义异常场景支持的配置：
+
+```bash
+chaosd attack jvm exception --help
+```
+
+#### 模拟抛出自定义异常示例
+
+示例如下：
+
+```bash
+chaosd attack jvm exception -c Main -m sayhello --exception 'java.io.IOException("BOOM")' --pid 30045
+```
+
+### 使用服务模式模拟抛出自定义异常场景
+
+#### 使用服务模式模拟抛出自定义异常示例
+
+示例如下：
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"exception","class":"Main","method":"sayhello","exception":"java.io.IOException(\"BOOM\")","pid":1828622}'
+```
+
+## 模拟触发垃圾回收场景
+
+### 模拟触发垃圾回收相关参数说明
+
+| 配置项 | 配置缩写 | 服务模式字段 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | 实验的行为 | string 类型 | 设置为 "gc" |
+| `pid` | 无 | pid | 需要注入故障的 Java 进程号 | int 类型 | 必须配置 |
+| `port` | 无 | port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型 | 默认为 `9288` |
+| `uid` | 无 | uid | 实验的编号 | string 类型 | 可以不配置，因为 Chaosd 会随机生成一个 |
+
+### 使用命令行模式模拟触发垃圾回收场景
+
+运行以下命令查看触发垃圾回收场景支持的配置：
+
+```bash
+chaosd attack jvm gc --help
+```
+
+#### 模拟触发垃圾回收示例
+
+示例如下：
+
+```bash
+chaosd attack jvm gc --pid 89345
+```
+
+触发垃圾回收为一次性操作，实验不需要恢复。
+
+### 使用服务模式模拟触发垃圾回收场景
+
+#### 使用服务模式模拟触发垃圾回收示例
+
+示例如下：
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"gc","pid":1828622}'
+```
+
+触发垃圾回收为一次性操作，实验不需要恢复。
+
+## 模拟增加方法延迟场景
+
+### 模拟增加方法延迟相关参数说明
+
+| 配置项 | 配置缩写 | 服务模式字段 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | 实验的行为 | string 类型 | 设置为 "latency" |
+| `class` | c | class | Java 类的名称 | string 类型 | 必须配置 |
+| `latency` | 无 | latency | 增加方法的延迟时间 | int 类型 | 必须配置，单位为 ms |
+| `method` | `m` | method | 方法名称 | string 类型 | 必须配置 |
+| `pid` | 无 | pid | 需要注入故障的 Java 进程号 | int 类型 | 必须配置 |
+| `port` | 无 | port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型 | 默认为 `9288` |
+| `uid` | 无 | uid | 实验的编号 | string 类型 | 可以不配置，因为 Chaosd 会随机生成一个 |
+
+### 使用命令行模式模拟增加方法延迟场景
+
+运行以下命令查看增加方法延迟场景支持的配置：
+
+```bash
+chaosd attack jvm latency --help
+```
+
+#### 模拟增加方法延迟示例
+
+示例如下：
+
+```bash
+chaosd attack jvm latency --class Main --method sayhello --latency 5000 --pid 100840
+```
+
+### 使用服务模式模拟增加方法延迟场景
+
+#### 使用服务模式模拟增加方法延迟示例
+
+示例如下：
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"latency","class":"Main","method":"sayhello","latency":5000,"pid":1828622}'
+```
+
+## 模拟修改方法返回值场景
+
+### 模拟修改方法返回值相关参数说明
+
+| 配置项 | 配置缩写 | 服务模式字段 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | 实验的行为 | string 类型 | 设置为 "return" |
+| `class` | c | class | Java 类的名称 | string 类型 | 必须配置 |
+| `method` | `m` | method | 方法名称 | string 类型 | 必须配置 |
+| `value` | 无 | value | 指定方法的返回值 | string 类型 | 必须配置。目前支持数字和字符串类型的返回值，如果为字符串，则需要使用双引号，例如："chaos"。 |
+| `pid` | 无 | pid | 需要注入故障的 Java 进程号 | int 类型 | 必须配置 |
+| `port` | 无 | port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型 | 默认为 `9288` |
+| `uid` | 无 | uid | 实验的编号 | string 类型 | 可以不配置，因为 Chaosd 会随机生成一个 |
+
+### 使用命令行模式模拟修改方法返回值场景
+
+运行以下命令查看修改方法返回值场景支持的配置：
+
+```bash
+chaosd attack jvm return --help
+```
+
+#### 模拟修改方法返回值示例
+
+示例如下：
+
+```bash
+chaosd attack jvm return --class Main --method getnum --value 999 --pid 112694
+```
+
+### 使用服务模式模拟修改方法返回值场景
+
+#### 使用服务模式模拟修改方法返回值示例
+
+示例如下：
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"return","class":"Main","method":"getnum","value":"999","pid":1828622}'
+```
+
+## 模拟设置 Byteman 配置文件触发故障场景
+
+你可以先在 Byteman 规则配置文件中设置故障规则，然后再通过使用 Chaosd 指定该文件路径的方式注入故障。关于 Byteman 的规则配置，请参考 [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language)。
+
+### 模拟设置 Byteman 配置文件触发故障相关参数说明
+
+| 配置项 | 配置缩写 | 服务模式字段 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | 实验的行为 | string 类型 | 设置为 "rule-data" |
+| `path` | 无 | — | 指定 Byteman 配置文件的路径 | string 类型 | 必须配置 |
+| `rule-data` | — | rule-data | 指定 Byteman 配置数据 | string 类型 | 必须配置 |
+| `pid` | 无 | pid | 需要注入故障的 Java 进程号 | int 类型 | 必须配置 |
+| `port` | 无 | port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型 | 默认为 `9288` |
+| `uid` | 无 | uid | 实验的编号 | string 类型 | 可以不配置，因为 Chaosd 会随机生成一个 |
+
+### 使用命令行模式模拟设置 Byteman 配置文件触发故障场景
+
+运行以下命令查看设置 Byteman 配置文件触发故障场景支持的配置：
+
+```bash
+chaosd attack jvm rule-file --help
+```
+
+#### 模拟设置 Byteman 配置文件触发故障示例
+
+首先根据具体的 Java 程序，并参考 [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language) 编写一个规则配置文件，例如：
+
+```txt
+RULE modify return value
+CLASS Main
+METHOD getnum
+AT ENTRY
+IF true
+DO
+    return 9999
+ENDRULE
+```
+
+其次，将该配置文件保存到文件 `return.btm` 后，运行以下命令注入故障：
+
+```bash
+chaosd attack jvm rule-file -p ./return.btm --pid 112694
+```
+
+### 使用服务模式模拟设置 Byteman 配置文件触发故障场景
+
+通过 Byteman 规则配置来设置故障规则。关于 Byteman 的规则配置，请参考 [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language)。
+
+#### 使用服务模式模拟设置 Byteman 配置文件触发故障示例
+
+首先根据具体的 Java 程序，并参考 [byteman-rule-language](https://downloads.jboss.org/byteman/4.0.16/byteman-programmers-guide.html#the-byteman-rule-language) 编写一个规则配置文件，例如：
+
+```txt
+RULE modify return value
+CLASS Main
+METHOD getnum
+AT ENTRY
+IF true
+DO
+    return 9999
+ENDRULE
+```
+
+其次，通过如下命令把配置中的换行转换为换行符 "\n"，并将转换后的数据设置为参数 "rule-data" 的值：
+
+```bash
+curl -X POST 127.0.0.1:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"rule-data","pid":30045,"rule-data":"\nRULE modify return value\nCLASS Main\nMETHOD getnum\nAT ENTRY\nIF true\nDO return 9999\nENDRULE\n"}'
+```
+
+## 模拟增加 JVM 压力场景
+
+### 模拟增加 JVM 压力相关参数说明
+
+| 配置项 | 配置缩写 | 服务模式字段 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | 实验的行为 | string 类型 | 设置为 "stress" |
+| `cpu-count` | 无 | cpu-count | 增加 CPU 压力所使用的 CPU 核的数量 | int 类型 | `cpu-count` 和 `mem-type` 中必须配置一个 |
+| `mem-type` | 无 | mem-type | OOM 的类型 | string 类型 | 目前支持 'stack' 和 'heap' 两种 OOM 类型。`cpu-count` 和 `mem-type` 中必须配置一个。 |
+| `pid` | 无 | pid | 需要注入故障的 Java 进程号 | int 类型 | 必须配置 |
+| `port` | 无 | port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型 | 默认为 `9288` |
+| `uid` | 无 | uid | 实验的编号 | string 类型 | 可以不配置，因为 Chaosd 会随机生成一个 |
+
+### 使用命令行模式模拟增加 JVM 压力场景
+
+运行以下命令查看增加 JVM 压力场景支持的配置：
+
+```bash
+chaosd attack jvm stress --help
+```
+
+#### 模拟增加 JVM 压力示例
+
+示例如下：
+
+```bash
+chaosd attack jvm stress --cpu-count 2 --pid 123546
+```
+
+### 使用服务模式模拟增加 JVM 压力场景
+
+#### 使用服务模式模拟增加 JVM 压力示例
+
+示例如下：
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"stress","cpu-count":1,"pid":1828622}'
+```
+
+## 模拟对 MySQL Java 客户端注入故障场景
+
+Chaosd 支持在 MySQL 的 Java 客户端执行指定类型的 SQL 语句时对其注入延迟、抛出异常。
+
+### 模拟对 MySQL Java 客户端注入故障相关参数说明
+
+| 配置项 | 配置缩写 | 服务模式字段 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | 实验的行为 | string 类型 | 设置为 "mysql" |
+| `database` | `d` | database | 可匹配的指定的数据库名称 | string 类型 | 默认为 `""`（即匹配所有的数据库），如 `"test"` |
+| `exception` | 无 | exception | 抛出的自定义异常信息 | string 类型 | `exception` 和 `latency` 中必须配置一个，如 `"BOOM"` |
+| `latency` | 无 | latency | 执行 SQL 的延迟时间 | int 类型 | 单位为毫秒 (ms)，如 `1000`。`exception` 和 `latency` 中必须配置一个 |
+| `mysql-connector-version` | `v` | mysql-connector-version | 使用的 MySQL 客户端 (mysql-connector-java) 的版本 | string 类型 | 对于 `5.X.X` 版本设置为 `5`，对于 `8.X.X` 版本设置为 `8`。默认值为 `8` |
+| `sql-type` | 无 | sql-type | 可匹配的 SQL 类型 | string 类型 | 可选值为 `"select"`、`"update"`、`"insert"`、`"replace"`、`"delete"`。默认值为 `""`（即匹配所有类型的 SQL） |
+| `table` | `t` | table | 可匹配的指定的表名称 | string 类型 | 默认为 `""`（即匹配所有的表），如 `"t1"` |
+| `pid` | 无 | pid | 需要注入故障的 Java 进程号 | int 类型 | 必须配置 |
+| `port` | 无 | port | 附加到 Java 进程 agent 的端口号，通过该端口号将故障注入到 Java 进程 | int 类型 | 默认为 `9288` |
+| `uid` | 无 | uid | 实验的编号 | string 类型 | 可以不配置，因为 Chaosd 会随机生成一个 |
+
+### 使用命令行模式模拟对 MySQL Java 客户端注入故障场景
+
+Chaosd 支持在 MySQL 的 Java 客户端执行指定类型的 SQL 语句时对其注入延迟、抛出异常。
+
+```bash
+chaosd attack jvm mysql --help
+```
+
+#### 模拟对 MySQL Java 客户端注入故障示例
+
+示例如下：
+
+1. 部署 TiDB（或者 MySQL）
+
+   执行以下命令，部署一个 `mocktikv` 模式的 TiDB：
+
+   ```bash
+   export tidb_dir="tidb-v5.3.0-linux-amd64"
+   curl -fsSL -o ${tidb_dir}.tar.gz https://download.pingcap.org/${tidb_dir}.tar.gz
+   tar zxvf ${tidb_dir}.tar.gz
+   ${tidb_dir}/bin/tidb-server -store mocktikv -P 4000 > tidb.log 2>&1 &
+   ```
+
+2. 部署 Demo 应用程序
+
+   部署一个 Demo 应用程序 `mysqldemo`。该应用程序可以接收 HTTP 请求，并查询 TiDB（或者 MySQL）数据库：
+
+   ```bash
+   git clone https://github.com/WangXiangUSTC/byteman-example.git
+   cd byteman-example/mysqldemo
+   mvn -X package -Dmaven.test.skip=true -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true
+   export MYSQL_DSN=jdbc:"mysql://127.0.0.1:4000/test"
+   export MYSQL_USER=root
+   export MYSQL_CONNECTOR_VERSION=8
+   mvn exec:java -Dexec.mainClass="com.mysqldemo.App" > mysqldemo.log 2>&1 &
+   ```
+
+   执行以下命令，确认应用程序可以正常提供服务：
+
+   ```bash
+   curl -X GET "http://127.0.0.1:8001/query?sql=SELECT%20*%20FROM%20mysql.user"
+   ```
+
+   你可以在命令输出结果中查看用户名为 root 的用户的信息。
+
+3. 注入故障
+
+   假设 `mysqldemo` 的 PID（需要注入故障的 Java 进程号） 为 `12345`，通过以下命令在该应用程序中注入故障：
+
+   ```bash
+   chaosd attack jvm mysql --database mysql --table user --port 9288 --exception "BOOM" --pid 12345
+   ```
+
+   注入故障后，正在执行与 `mysql.user` 表相关的 SQL 语句时，应用程序会返回异常信息 `BOOM`。确认该结果后，再次向 `mysqldemo` 发送查询请求：
+
+   ```bash
+   curl -X GET "http://127.0.0.1:8001/query?sql=SELECT%20*%20FROM%20mysql.user"
+   ```
+
+### 使用服务模式模拟对 MySQL Java 客户端注入故障场景
+
+Chaosd 支持在 MySQL 的 Java 客户端执行指定类型的 SQL 语句时对其注入延迟、抛出异常。
+
+#### 使用服务模式模拟对 MySQL Java 客户端注入故障示例
+
+示例如下：
+
+1. 部署 TiDB（或者 MySQL）和 Demo 应用程序
+
+   在注入故障前，你需要提前部署 TiDB（或者 MySQL）和 Demo 应用程序 `mysqldemo`。具体的部署步骤，请参阅 [使用命令行模式模拟对 MySQL Java 客户端注入故障场景](#使用命令行模式模拟对-mysql-java-客户端注入故障场景) 中的步骤 1 和步骤 2。
+
+2. 注入故障
+
+   假设 `mysqldemo` 的 PID（需要注入故障的 Java 进程号） 为 `12345`，通过以下命令在该应用程序中注入故障：
+
+   ```bash
+   curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/json" -d '{"action":"mysql","database":"mysql", "table":"user", "port":9288, "exception":"boom", "pid":12345}'
+   ```

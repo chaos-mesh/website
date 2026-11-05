@@ -1,0 +1,137 @@
+---
+title: Simulate Disk Faults
+---
+
+This document describes how to use Chaosd to simulate disk faults. This feature helps you simulate disk read/write load (via [dd](https://man7.org/linux/man-pages/man1/dd.1.html)) or disk fill (via [dd](https://man7.org/linux/man-pages/man1/dd.1.html) or [fallocate](https://man7.org/linux/man-pages/man1/fallocate.1.html)).
+
+:::note
+
+**Chaosd v1.5.0**
+
+Disk read and write workloads stop when the requested data size is reached or `duration` expires, whichever happens first. Use a duration such as `30s` or `1m`; an empty value sets no workload deadline. This deadline behavior was fixed in v1.5.0 and applies to both CLI and service mode. It does not apply to disk fill.
+
+:::
+
+Before creating an experiment, you can run the following command to check the types of disk faults that are supported by Chaosd:
+
+```bash
+chaosd attack disk -h
+```
+
+Currently, Chaosd supports creating disk read load experiments, disk write load experiments, and disk fill experiments.
+
+To create experiments using the service mode, you need to run Chaosd in the service mode and then send a `POST` HTTP request to the `/api/attack/disk` path of the Chaosd service:
+
+```bash
+chaosd server --port 31767
+```
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{fault-configuration}'
+```
+
+For the `fault-configuration` part in the above command, you need to configure it according to the fault types. For the corresponding parameters and examples, refer to the parameters of each fault type in the following sections.
+
+:::note
+
+When running an experiment, remember to record the UID of the experiment. When you want to end the experiment corresponding to the UID, you need to send a `DELETE` HTTP request to the `/api/attack/{uid}` path of the Chaosd service.
+
+:::
+
+## Simulate disk read load
+
+Simulating disk read load is a one-time operation, so the experiment does not need to be recovered.
+
+### Parameters for simulating disk read load
+
+| Configuration item | Abbreviation | Service mode field | Description | Type | Value |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | Actions of the experiment | string | Set to `"read-payload"` |
+| `path` | p | path | Specifies the file path to read the data. If this parameter is not specified, or the parameter value is set to an empty string, Chaosd reads from the virtual disk files mounted in the "/" directory. Depending on the permissions to read the files, you might be required to run this program using certain permissions. | string | Default: `""` |
+| `process-num` | n | payload-process-num | Specifies the number of concurrently running [dd](https://man7.org/linux/man-pages/man1/dd.1.html) programs to be used. | uint8 | Default: `1`; range: `1` to `255` |
+| `size` | s | size | Specifies the volume of data to be read. It is the total size of data that dd reads. | string | Default: `""`; **required**; the legal form is the combination of an integer and a unit, such as `1M` or `512kB`. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. |
+| `duration` | None | duration | Maximum read/write workload duration, such as `30s`. The workload can finish earlier after processing the requested data size. | string | Default: `""`, no workload deadline. |
+
+### Simulate disk read load using the command-line mode
+
+```bash
+chaosd attack disk add-payload read -h
+```
+
+An example is as follows:
+
+```bash
+chaosd attack disk add-payload read -s 1000G -n 7 -p /dev/zero
+```
+
+### Simulate disk read load using the service mode
+
+An example is as follows:
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{"action":"read-payload","path":"/dev/zero", "payload-process-num":7,"size":"1000G"}'
+```
+
+## Simulate disk write load
+
+### Parameters for simulating disk write load
+
+| Configuration item | Abbreviation | Service mode field | Description | Type | Value |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | Actions of the experiment | string | Set to `"write-payload"` |
+| `path` | p | path | Specifies the file path to write the data. If this parameter is not specified, or the parameter value is set to an empty string, a temporary file will be created in the program execution directory. Depending on the permissions to write the files, you might be required to run this program using certain permissions. | string | Default: `""` |
+| `process-num` | n | payload-process-num | Specifies the number of concurrently running [dd](https://man7.org/linux/man-pages/man1/dd.1.html) programs to be used. | uint8 | Default: `1`; range: `1` to `255` |
+| `size` | s | size | Specifies the volume of data to be written. It is the total size of data that dd writes. | string | Default: `""`; **required**; the legal form is the combination of an integer and a unit, such as `1M` or `512kB`. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. |
+| `duration` | None | duration | Maximum read/write workload duration, such as `30s`. The workload can finish earlier after processing the requested data size. | string | Default: `""`, no workload deadline. |
+
+### Simulate disk write load using the command-line mode
+
+```bash
+chaosd attack disk add-payload write -h
+```
+
+An example is as follows:
+
+```bash
+chaosd attack disk add-payload write -s 2G -n 8
+```
+
+### Simulate disk write load using the service mode
+
+An example is as follows:
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{"action":"write-payload","path":"/tmp/test", "payload-process-num":7,"size":"1000G"}'
+```
+
+## Simulate disk fill
+
+### Parameters for simulating disk fill
+
+| Configuration item | Abbreviation | Service mode field | Description | Type | Value |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | Actions of the experiment | string | Set to `"fill"` |
+| `fallocate` | f | fallocate | If this parameter is set to `true`, Linux is used to call fallocate to quickly apply for disk space and size must be greater than `0`. If this parameter is set to `false`, Linux is used to call dd to fill disks at a relatively slow pace. | bool | Default: `true` |
+| `path` | p | path | Specifies the file path to write the data. If this parameter is not specified, or the parameter value is set to an empty string, a temporary file will be created in the program execution directory. Depending on the permissions to write the files, you might be required to run this program using certain permissions. | string | Default: `""` |
+| `percent` | c | percent | Specifies the percentage of disk size to be filled. | string | Default: `""`; a positive integer of the uint type is acceptable; you must set one of `size` or `percent` (both items **cannot** be `""` at the same time). |
+| `size` | s | size | Specifies the volume of data to be written. | string | Default: `""`; the legal form is the combination of an integer and a unit, such as `1M` or `512kB`. Supported units are c=1, w=2, b=512, kB=1000, K=1024, MB=1000\*1000, M=1024\*1024, GB=1000\*1000\*1000, G=1024\*1024\*1024\*1024 BYTE and so on. You must set one of `size` or `percent` (both items **cannot** be `""` at the same time). |
+
+### Simulate disk fill using the command-line mode
+
+```bash
+chaosd attack disk fill -h
+```
+
+An example is as follows:
+
+```bash
+chaosd attack disk fill -c 50
+```
+
+### Simulate disk fill using the service mode
+
+An example is as follows:
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/json" -d '{"action":"fill","path":"/tmp/test", "fallocate":true,"percent":"50"}'
+```

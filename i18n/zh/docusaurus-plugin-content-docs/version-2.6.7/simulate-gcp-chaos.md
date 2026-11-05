@@ -2,7 +2,7 @@
 title: 模拟 GCP 故障
 ---
 
-本文档介绍如何使用 Chaos Mesh 为 GCP 节点注入故障，并提供 Dashboard 和 YAML 文件两种方式用于创建 GCPChaos 实验。
+本文档介绍如何使用 Chaos Mesh 为 GCP 实例注入故障，并提供 Dashboard 和 YAML 文件两种方式用于创建 GCPChaos 实验。
 
 ## GCPChaos 介绍
 
@@ -10,7 +10,7 @@ GCPChaos 是 Chaos Mesh 中的一种故障类型。通过创建 GCPChaos 类型�
 
 - **Node Stop**：使指定的 GCP 实例进入停止状态。
 - **Node Reset**：重置指定的 GCP 实例。
-- **Disk Loss**：从指定的 GCP 实例中卸载存储卷。
+- **Disk Loss**：从指定的 GCP 实例中分离存储卷。
 
 ## 创建 Secret 文件
 
@@ -46,7 +46,7 @@ stringData:
    kubectl port-forward -n chaos-mesh svc/chaos-dashboard 2333:2333
    ```
 
-   接着你可以在浏览器通过[`http://localhost:2333`](http://localhost:2333)访问 Dashboard 。
+   接着你可以在浏览器通过[`http://localhost:2333`](http://localhost:2333)访问 Dashboard。
 
 :::
 
@@ -167,7 +167,7 @@ stringData:
 | value | string | 取决与 `mode` 的配置，为 `mode` 提供对应的参数。例如，当你将 `mode` 配置为 `fixed-percent` 时，`value` 用于指定 Pod 的百分比。 | 无 | 否 | 1 |
 | secretName | string | 指定存储 GCP 认证信息的 Kubernetes Secret 名字 | 无 | 否 | cloud-key-secret |
 | project | string | 指定 GCP 项目的 ID | 无 | 是 | real-testing-project |
-| zone | string | 指定 GCP 实例区域 | 无 | 是 | us-central1-a |
+| zone | string | 指定 GCP 实例所属的可用区 | 无 | 是 | us-central1-a |
 | instance | string | 指定 GCP 实例的名称 | 无 | 是 | gke-xxx-cluster--default-pool-xxx-yyy |
-| deviceNames | []string | 当 action 为 disk-loss 必填，指定设备磁盘 ID | 无 | 否 | ["your-disk-id"] |
+| deviceNames | []string | 当 action 为 disk-loss 必填，指定要分离的磁盘设备名称 | 无 | 否 | ["disk-name"] |
 | duration | string | 指定实验的持续时间 | 无 | 是 | 30s |

@@ -10,7 +10,7 @@ AWSChaos can help you simulate fault scenarios on the specified AWS instance. Cu
 
 - **EC2 Stop**: stops the specified EC2 instance.
 - **EC2 Restart**: restarts the specified EC2 instance.
-- **Detach Volume**: uninstalls the storage volume from the specified EC2 instance.
+- **Detach Volume**: detaches the storage volume from the specified EC2 instance.
 
 ## `Secret` file
 
@@ -35,7 +35,7 @@ stringData:
 - **namespace** means the namespace of the Kubernetes Secret object.
 - **aws_access_key_id** stores the ID of the access key to the AWS cluster.
 - **aws_secret_access_key** stores the secret access key to the AWS cluster.
-- **aws_session_token** stores the aws session token to the AWS cluster. (required when using [temporary AWS credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html))
+- **aws_session_token** stores the AWS session token used to access the AWS cluster. This field is required when you use [temporary AWS credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html).
 
 ## Create experiments using Chaos Dashboard
 
@@ -94,9 +94,9 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
    kubectl apply -f awschaos-ec2-stop.yaml
    ```
 
-### An `ec2-start` configuration example
+### An `ec2-restart` configuration example
 
-1. Write the experiment configuration to the `awchaos-ec2-restot.yaml` file:
+1. Write the experiment configuration to the `awschaos-ec2-restart.yaml` file:
 
    ```yaml
    apiVersion: chaos-mesh.org/v1alpha1
@@ -132,7 +132,7 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
      name: ec2-detach-volume-example
      namespace: chaos-mesh
    spec:
-     action: ec2-stop
+     action: detach-volume
      secretName: 'cloud-key-secret'
      awsRegion: 'us-east-2'
      ec2Instance: 'your-ec2-instance-id'
@@ -141,7 +141,7 @@ Before you create an experiment using Chaos Dashboard, make sure the following r
      duration: '5m'
    ```
 
-   Based on this configuration example, Chaos Mesh will inject a `detail-volume` fault into the specified EC2 instance so that the EC2 instance is detached from the specified storage volume within 5 minutes.
+   Based on this configuration example, Chaos Mesh will inject a `detach-volume` fault into the specified EC2 instance so that the EC2 instance is detached from the specified storage volume within 5 minutes.
 
    For more information about detaching Amazon EBS volumes, refer to the [AWS documentation - Detach an Amazon EBS volume from a Linux instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-detaching-volume.html).
 
@@ -157,12 +157,12 @@ The following table shows the fields in the YAML configuration file.
 
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
-| action | string | Indicates the specific type of faults. Only ec2-stop, ec2-restore, and detain-volume are supported. | ec2-stop | Yes | ec2-stop |
+| action | string | Indicates the specific type of faults. Only ec2-stop, ec2-restart, and detach-volume are supported. | ec2-stop | Yes | ec2-stop |
 | mode | string | Specifies the mode of the experiment. The mode options include `one` (selecting a random Pod), `all` (selecting all eligible Pods), `fixed` (selecting a specified number of eligible Pods), `fixed-percent` (selecting a specified percentage of Pods from the eligible Pods), and `random-max-percent` (selecting the maximum percentage of Pods from the eligible Pods). | None | Yes | `one` |
 | value | string | Provides parameters for the `mode` configuration, depending on `mode`.For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods. | None | No | 1 |
 | secretName | string | Specifies the name of the Kubernetes Secret that stores the AWS authentication information. | None | No | cloud-key-secret |
 | awsRegion | string | Specifies the AWS region. | None | Yes | us-east-2 |
 | ec2Instance | string | Specifies the ID of the EC2 instance. | None | Yes | your-ec2-instance-id |
 | volumeID | string | This is a required field when the `action` is `detach-volume`. This field specifies the EBS volume ID. | None | No | your-volume-id |
-| deviceName | string | This is a required field when the `action` is `detach-volume`. This field specifies the machine name. | None | No | /dev/sdf |
+| deviceName | string | This is a required field when the `action` is `detach-volume`. This field specifies the device name. | None | No | /dev/sdf |
 | duration | string | Specifies the duration of the experiment. | None | Yes | 30s |

@@ -14,7 +14,7 @@ You can create experiments using either Chaos Dashboard or the YAML configuratio
 
    ![Create Experiment](./img/create-new-exp.png)
 
-2. In the **Choose a Target** area, choose **STRESS TEST** and fill out the experiment information. For specific configuration fields, refer to the description in [Configuration Description](#fields description).
+2. In the **Choose a Target** area, choose **STRESS TEST** and fill out the experiment information. For specific configuration fields, refer to the description in [Configuration Description](#field-description).
 
    ![StressChaos Experiment](./img/stresschaos-exp.png)
 
@@ -45,7 +45,7 @@ You can create experiments using either Chaos Dashboard or the YAML configuratio
          size: '256MB'
    ```
 
-   This experiment configuration will create a process in the selected container, continuously allocate and read and write in memory, occupying up to 256MB of memory.
+   This experiment configuration creates a process in the selected container that continuously allocates memory and performs read and write operations, occupying up to 256MB of memory.
 
 2. After the configuration file is prepared, use `kubectl` to create an experiment:
 
@@ -60,10 +60,10 @@ The fields in the YAML configuration file are described in the following table:
 | Parameter | Type | Description | Default value | Required | Example |
 | --- | --- | --- | --- | --- | --- |
 | duration | string | Specifies the duration of the experiment. | None | Yes | `30s` |
-| stressors | [Stressors](#stressors) | Specifies the stress of CPU or memory | None | No |  |
-| stressngStressors | string | Specifies the stres-ng parameter to reach richer stress injection | None | No | `--clone 2` |
+| stressors | [Stressors](#stressors) | Specifies the stress on CPU or memory. | None | No |  |
+| stressngStressors | string | Specifies the stress-ng parameter to reach richer stress injection | None | No | `--clone 2` |
 | mode | string | Specifies the mode of the experiment. The mode options include `one` (selecting a random Pod), `all` (selecting all eligible Pods), `fixed` (selecting a specified number of eligible Pods), `fixed-percent` (selecting a specified percentage of Pods from the eligible Pods), and `random-max-percent` (selecting the maximum percentage of Pods from the eligible Pods). | None | Yes | `one` |
-| value | string | Provides a parameter for the `mode` configuration, depending on `mode`.For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods. | None | No | 1 |
+| value | string | Provides a parameter for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods. | None | No | 1 |
 | containerNames | []string | Specifies the name of the container into which the fault is injected. | None | No | `["nginx"]` |
 | selector | struct | Specifies the target Pod. For details, refer to [Define the Scope of Chaos Experiments](./define-chaos-experiment-scope.md). | None | Yes |  |
 
@@ -85,7 +85,7 @@ The fields in the YAML configuration file are described in the following table:
 
 :::note
 
-To avoid the high CPU load caused by the read and write pressure from `stress-ng`, Chaos Mesh uses [memStress](https://github.com/chaos-mesh/memStress) to simulate memory stress. This is because memStress simulates memory stress by consuming actual memory instead of applying the read and write pressure to memory.
+To avoid the high CPU load caused by the read and write pressure from `stress-ng`, Chaos Mesh uses [memStress](https://github.com/chaos-mesh/memStress) to simulate memory stress, because memStress consumes actual memory instead of applying read and write pressure to memory.
 
 :::
 

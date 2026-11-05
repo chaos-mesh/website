@@ -5,36 +5,38 @@ summary: This document describes how to use Chaosd to simulate a time offset sce
 
 This document describes how to use Chaosd to simulate a time offset scenario. You can create experiments either in command-line mode or service mode.
 
-## Create experiments using command-line mode
+To create experiments using the service mode, you need to run Chaosd in the service mode and then send a `POST` HTTP request to the `/api/attack/clock` path of the Chaosd service:
 
-This section describes how to create time fault experiments using commands.
+```bash
+chaosd server --port 31767
+```
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/clock -H "Content-Type:application/json" -d '{fault-configuration}'
+```
+
+For the `fault-configuration` part in the above command, you need to configure it according to the fault types. For the corresponding parameters and examples, refer to the parameters of each fault type in the following sections.
+
+:::note
+
+When running an experiment, remember to record the UID of the experiment. When you want to end the experiment corresponding to the UID, you need to send a `DELETE` HTTP request to the `/api/attack/{uid}` path of the Chaosd service.
+
+:::
+
+## Parameters for simulating time faults
+
+| Configuration item | Abbreviation | Service mode field | Description | Type | Value |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `time-offset` | — | time-offset | Specifies the length of time offset. | string | Default: `None`; Required: **Yes**; Example: `-5m` |
+| `clock-ids-slice` | — | clock-ids-slice | Specifies the ID of the clock that will be offset. Multiple clock IDs should be separated by a comma. See the [clock_gettime documentation](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) for details. | string | Default: `CLOCK_REALTIME`; Required: **No**; Example: `"CLOCK_REALTIME,CLOCK_MONOTONIC"` |
+| `pid` | — | pid | The identifier of the process. | int | Default: `None`; Required: **Yes**; Example: `1` |
+
+## Simulate time faults using the command-line mode
 
 Before creating an experiment, you can run the following command to check the options of time faults:
 
 ```
 chaosd attack clock -h
-```
-
-The result is as follows:
-
-```bash
-$ chaosd attack clock -h
-
-clock skew
-
-Usage:
-  chaosd attack clock attack [flags]
-
-Flags:
-  -c, --clock-ids-slice string   The identifier of the particular clock on which to act.More clock description in linux kernel can be found in man page of clock_getres, clock_gettime, clock_settime.Muti clock ids should be split with "," (default "CLOCK_REALTIME")
-  -h, --help                     help for clock
-  -p, --pid int                  Pid of target program.
-  -t, --time-offset string       Specifies the length of time offset.
-
-Global Flags:
-      --log-level string   the log level of chaosd, the value can be 'debug', 'info', 'warn' and 'error'
-      --uid string         the experiment ID
-
 ```
 
 ### Quick Example
@@ -68,14 +70,10 @@ Then execute get_time and try to attack it. The following is an example:
 chaosd attack clock -p $PID -t 11s
 ```
 
-### Configurations of simulating time faults
+## Simulate time faults using the service mode
 
-| Parameter | Type | Note | Default value | Required | Example |
-| --- | --- | --- | --- | --- | --- |
-| timeOffset | string | Specifies the length of time offset. | None | Yes | `-5m` |
-| clockIds | []string | Specifies the ID of clock that will be offset. See the [clock_gettime documentation](https://man7.org/linux/man-pages/man2/clock_gettime.2.html) for details. | `["CLOCK_REALTIME"]` | No | `["CLOCK_REALTIME", "CLOCK_MONOTONIC"]` |
-| pid | string | The identifier of the process. | None | Yes | `1` |
+Run the test program in [Quick Example](#quick-example), and then use the following command to create a time fault experiment:
 
-### Create experiments using service mode
-
-(ongoing update)
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/clock -H "Content-Type:application/json" -d '{"pid":123, "time-offset":"11s"}'
+```

@@ -10,7 +10,7 @@ AWSChaos 能够帮助你模拟指定的 AWS 实例发生故障的情景。目前
 
 - **EC2 Stop**: 使指定的 EC2 实例进入停止状态。
 - **EC2 Restart**: 重启指定的 EC2 实例。
-- **Detach Volume**: 从指定的 EC2 实例中卸载存储卷。
+- **Detach Volume**: 从指定的 EC2 实例中分离存储卷。
 
 ## `Secret` 文件
 
@@ -28,12 +28,14 @@ type: Opaque
 stringData:
   aws_access_key_id: your-aws-access-key-id
   aws_secret_access_key: your-aws-secret-access-key
+  aws_session_token: your-aws-session-token
 ```
 
 - **name** 表示 Kubernetes Secret 对象的名字。
 - **namespace** 表示 Kubernetes Secret 对象的命名空间。
 - **aws_access_key_id** 存储 AWS 集群的访问密钥 ID。
 - **aws_secret_access_key** 存储 AWS 集群的秘密访问密钥。
+- **aws_session_token** 存储访问 AWS 集群的会话令牌（使用[临时 AWS 凭证](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_use-resources.html)时需要）。
 
 ## 使用 Dashboard 方式创建实验
 
@@ -48,7 +50,7 @@ stringData:
     kubectl port-forward -n chaos-mesh svc/chaos-dashboard 2333:2333
    ```
 
-   接着你可以在浏览器通过 [`http://localhost:2333`](http://localhost:2333)访问 Dashboard 。
+   接着你可以在浏览器通过 [`http://localhost:2333`](http://localhost:2333)访问 Dashboard。
 
 :::
 
@@ -109,7 +111,7 @@ stringData:
      ec2Instance: 'your-ec2-instance-id'
    ```
 
-   依据此配置示例，Chaos Mesh 将向指定的 EC2 实例中注入 ec2-restart 故障，使该 EC2 实例将重启一次。
+   依据此配置示例，Chaos Mesh 将向指定的 EC2 实例中注入 ec2-restart 故障，使该 EC2 实例重启一次。
 
    如需查看更多关于重启 EC2 实例的信息，可以参考[重启实例](https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/ec2-instance-reboot.html)。
 
@@ -130,7 +132,7 @@ stringData:
      name: ec2-detach-volume-example
      namespace: chaos-mesh
    spec:
-     action: ec2-stop
+     action: detach-volume
      secretName: 'cloud-key-secret'
      awsRegion: 'us-east-2'
      ec2Instance: 'your-ec2-instance-id'
@@ -141,7 +143,7 @@ stringData:
 
    依据此配置示例，Chaos Mesh 将向指定的 EC2 实例中注入 detach-volume 故障，使该 EC2 实例在 5 分钟内与指定存储卷分离。
 
-   查看更多关于分离 Amazon EBS 卷的消息, 可以参考[分离 Amazon EBS 卷](https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/ebs-detaching-volume.html)。
+   如需查看更多关于分离 Amazon EBS 卷的信息，可参考[分离 Amazon EBS 卷](https://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/ebs-detaching-volume.html)。
 
 2. 使用 `kubectl` 创建实验，命令如下：
 

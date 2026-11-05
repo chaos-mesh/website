@@ -4,23 +4,23 @@ title: Simulate Block Device Incidents
 
 ## BlockChaos Introduction
 
-Chaos Mesh provides the BlockChaos experiment type. You can use this experiment type to simulate a block device latency or freeze scenario. This document describes how to install the dependencies of a BlockChaos experiment, and create a BlockChaos.
+Chaos Mesh provides the BlockChaos experiment type. You can use this experiment type to simulate a block device latency scenario. This document describes how to install the dependencies for a BlockChaos experiment and create a BlockChaos experiment.
 
 :::note
 
-BlockChaos is in an early stage. The installation and configuration experience of it will continue to improve. If you find any issues, please open an issue in [chaos-mesh/chaos-mesh](https://github.com/chaos-mesh/chaos-mesh) to report.
+BlockChaos is in an early stage. Its installation and configuration experience will continue to improve. If you find any issues, please open an issue in [chaos-mesh/chaos-mesh](https://github.com/chaos-mesh/chaos-mesh) to report them.
 
 :::
 
 :::note
 
-BlockChaos `freeze` action will affect all processes using the block device, not only the target container.
+The BlockChaos `delay` action affects all processes using the block device, not only the target container.
 
 :::
 
 ## Install kernel module
 
-BlockChaos `delay` action depends on the [chaos-driver](https://github.com/chaos-mesh/chaos-driver) kernel module. It can only be injected on a machine with this module installed. Currently, you have to compile and install the module manually.
+The BlockChaos `delay` action depends on the [chaos-driver](https://github.com/chaos-mesh/chaos-driver) kernel module. It can only be injected on a machine where this module is installed. Currently, you have to compile and install the module manually.
 
 1. Download the source code of this module using the following command:
 
@@ -91,7 +91,7 @@ It is recommended to use DKMS or akmod for automatic kernel module compiling or 
 
    :::note
 
-   Only hostpath or localvolume is supported.
+   Only hostPath or local volumes are supported.
 
    :::
 
@@ -101,10 +101,10 @@ It is recommended to use DKMS or akmod for automatic kernel module compiling or 
    kubectl apply -f block-latency.yaml
    ```
 
-You can find the following magic happened:
+After the experiment is created, you can observe the following changes:
 
-1. The elevator of the volume is changed to `ioem` or `ioem-mq`. You can check it through `cat /sys/block/<device>/queue/scheduler`.
-2. The `ioem` or `ioem-mq` scheduler will receive the latency request and delay the request for the specified time.
+1. The elevator (I/O scheduler) of the block device is changed to `ioem` or `ioem-mq`. You can check it by running `cat /sys/block/<device>/queue/scheduler`.
+2. The `ioem` or `ioem-mq` scheduler receives the I/O requests and delays them for the specified time.
 
 The fields in the YAML configuration file are described in the following table:
 
@@ -113,6 +113,6 @@ The fields in the YAML configuration file are described in the following table:
 | `mode` | string | Specifies the mode of the experiment. The mode options include `one` (selecting a random Pod), `all` (selecting all eligible Pods), `fixed` (selecting a specified number of eligible Pods), `fixed-percent` (selecting a specified percentage of Pods from the eligible Pods), and `random-max-percent` (selecting the maximum percentage of Pods from the eligible Pods). | None | Yes | `one` |
 | `value` | string | Provides parameters for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods. | None | No | `1` |
 | `selector` | struct | Specifies the target Pod. For details, refer to [Define the experiment scope](./define-chaos-experiment-scope.md). | None | Yes |  |
-| `volumeName` | string | Specifies the volume to inject in the target pods. There should be a corresponding entry in the pods' `.spec.volumes`. | None | Yes | `hostpath-example` |
-| `action` | string | Indicates the specific type of faults. The available fault types include `delay` and `freeze`. `delay` will simulate the latency of block devices, and `freeze` will simulate that the block device cannot handle any requests | None | Yes | `delay` |
+| `volumeName` | string | Specifies the volume on which to inject faults in the target Pods. There should be a corresponding entry in the Pods' `.spec.volumes`. | None | Yes | `hostpath-example` |
+| `action` | string | Specifies the type of fault. Currently, only `delay` is supported, which simulates latency on block devices. | None | Yes | `delay` |
 | `delay.latency` | string | Specifies the latency of the block device. | None | Yes (if `action` is `delay`) | `500ms` |

@@ -10,7 +10,7 @@ The last upload was at `v2.7.2`.
 
 :::
 
-This document provides detailed instruction for upgrading Chaos Mesh from 1.x to 2.0. Chaos Mesh 2.0 introduced some new features and fixed many issues. Because in Chaos Mesh 2.0, some code has been rebuilt, you need to perform extra actions for the upgrade.
+This document provides detailed instructions for upgrading Chaos Mesh from 1.x to 2.0. Chaos Mesh 2.0 introduced some new features and fixed many issues. Because some code has been rebuilt in Chaos Mesh 2.0, you need to perform extra actions for the upgrade.
 
 ## Upgrade tools
 
@@ -18,7 +18,7 @@ Because CRD has changed in Chaos Mesh 2.0, the YAML files for experiments from a
 
 To simplify the upgrade process, Chaos Mesh 2.0 provides the following upgrade tools:
 
-- `migrate.sh`: used to automatically export and upgrade the YAML files, upgrade CRD, import upgraded YAML files.
+- `migrate.sh`: used to automatically export and upgrade the YAML files, upgrade the CRD, and import the upgraded YAML files.
 - `schedule-migration`: used to update the earlier YAML files to the latest YAML files.
 
 To get the upgrade tools, it is recommended to clone the Chaos Mesh project to your local repository and then execute the command `make schedule-migration.tar.gz`. Or you can download the project from [https://mirrors.chaos-mesh.org/v2.0.0/schedule-migration.tar.gz](https://mirrors.chaos-mesh.org/v2.0.0/schedule-migration.tar.gz). After the `tar.gz` package is downloaded, execute the following command and you can get the above two upgrade tools:
@@ -27,7 +27,7 @@ To get the upgrade tools, it is recommended to clone the Chaos Mesh project to y
 tar xvf ./schedule-migration.tar.gz
 ```
 
-The `schedule-migration` tool in this package applies only to the Linux x86_64 platform. If you are using other operating systems or architectures, you need to compile the code by yourselves.
+The `schedule-migration` tool in this package applies only to the Linux x86_64 platform. If you are using other operating systems or architectures, you need to compile the code yourself.
 
 ## Step 1: Export and upgrade an experiment
 
@@ -75,4 +75,4 @@ bash migrate.sh -i
 
 ## Report issues
 
-If you encounter any problems in the upgrade process, submit the output of your command to [slack](https://cloud-native.slack.com/archives/C0193VAV272) or create an [issue](https://github.com/pingcap/chaos-mesh/issues) on Github. Thanks for your feedback, and the Chaos Mesh team is happy to resolve your problems.
+If you encounter any problems in the upgrade process, submit the output of your command to [slack](https://cloud-native.slack.com/archives/C0193VAV272) or create an [issue](https://github.com/chaos-mesh/chaos-mesh/issues) on GitHub. Thanks for your feedback, and the Chaos Mesh team is happy to resolve your problems.

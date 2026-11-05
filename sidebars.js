@@ -135,14 +135,7 @@ module.exports = {
     {
       type: 'category',
       label: 'Release',
-      items: [
-        'release-cycle',
-        {
-          type: 'category',
-          label: 'Release Tracking',
-          items: ['release-2.5-tracking'],
-        },
-      ],
+      items: ['release-cycle'],
     },
   ],
 }

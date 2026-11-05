@@ -2,7 +2,7 @@
 title: 模拟 JVM 应用故障
 ---
 
-Chaos Mesh 通过 [Byteman](https://github.com/chaos-mesh/byteman) 模拟 JVM 应用故障，主要支持以下类型的故障：：
+Chaos Mesh 通过 [Byteman](https://github.com/chaos-mesh/byteman) 模拟 JVM 应用故障，主要支持以下类型的故障：
 
 - 抛出自定义异常
 - 触发垃圾回收
@@ -162,7 +162,7 @@ kubectl -n helloworld logs -f helloworld
 
 | 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
 | --- | --- | --- | --- | --- | --- |
-| `action` | string | 表示具体的故障类型，支持 `latency`、`return`、`exception`、`stress`、`gc`、`ruleData`。 | 无 | 是 | `return` |
+| `action` | string | 表示具体的故障类型，支持 `latency`、`return`、`exception`、`stress`、`gc`、`ruleData`、`mysql`。 | 无 | 是 | `return` |
 | `mode` | string | 表示选择 Pod 的方式，支持 `one`、`all`、`fixed`、`fixed-percent`、`random-max-percent`。 | 无 | 是 | `one` |
 
 关于 `action` 的取值的含义，可参考以下内容：
