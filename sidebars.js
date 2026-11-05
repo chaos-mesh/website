@@ -54,7 +54,7 @@ module.exports = {
         {
           type: 'category',
           label: 'Chaos Dashboard',
-          items: ['expose-dashboard-with-ingress', 'persistence-dashboard'],
+          items: ['access-dashboard', 'expose-dashboard-with-ingress', 'persistence-dashboard'],
         },
       ],
     },
