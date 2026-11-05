@@ -32,7 +32,9 @@ title: Chaosd 组件简介
 | `vm`           | 通过 libvirt 停止虚拟机。                                                           |
 | `user-defined` | 执行自定义故障注入和恢复命令。                                                      |
 
-主机和文件故障仅支持命令行模式。其他故障类型可通过 HTTP 服务的 `POST /api/attack/<kind>` 创建实验，自定义命令对应的路径使用 `user_defined`。HTTP 请求使用 JSON 配置字段，字段名称可能与命令行参数不同。
+在 Chaosd v1.5.0 中，主机和文件故障仅支持命令行模式。**Chaosd v1.6.0** 新增 `POST /api/attack/host` 和 `POST /api/attack/file` 接口。关机、重启示例及其恢复限制请参阅[模拟主机故障](simulate-host-console-in-physical-nodes.md)。
+
+其他故障类型可通过 HTTP 服务的 `POST /api/attack/<kind>` 创建实验，自定义命令对应的路径使用 `user_defined`。HTTP 请求使用 JSON 配置字段，字段名称可能与命令行参数不同。
 
 ### 运行环境
 

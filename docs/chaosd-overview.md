@@ -32,7 +32,9 @@ The CLI supports the following fault types. Run `chaosd attack <command> --help`
 | `vm` | Stop a virtual machine through libvirt. |
 | `user-defined` | Run custom attack and recovery commands. |
 
-Host and file faults are available through the CLI only. For the other fault types, the HTTP service accepts `POST /api/attack/<kind>`. The custom command endpoint uses `user_defined`. HTTP requests use JSON configuration fields, which can differ from CLI flag names.
+In Chaosd v1.5.0, host and file faults are available through the CLI only. **Chaosd v1.6.0** adds `POST /api/attack/host` and `POST /api/attack/file`. See [Simulate Host Faults](simulate-host-console-in-physical-nodes.md) for shutdown and reboot examples and their recovery limits.
+
+For the other fault types, the HTTP service accepts `POST /api/attack/<kind>`. The custom command endpoint uses `user_defined`. HTTP requests use JSON configuration fields, which can differ from CLI flag names.
 
 ### Operating environment
 
