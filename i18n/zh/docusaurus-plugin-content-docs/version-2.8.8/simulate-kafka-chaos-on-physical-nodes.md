@@ -6,7 +6,13 @@ title: 模拟 Kafka 故障
 
 ## 前置条件
 
-使用本文介绍的 Kafka 故障功能，需要部署 Chaos Mesh 2.8.8 或更高版本，并在目标物理机上运行 Chaosd v1.6.0 或更高版本。部署步骤和目标机器的配置方法请参考[模拟物理机故障](simulate-physical-machine-chaos.md)。
+:::note[版本说明]
+
+使用本文介绍的 Kafka 故障功能，需要部署 Chaos Mesh 2.8.8 或更高版本，并在目标物理机上运行 Chaosd v1.6.0 或更高版本。
+
+:::
+
+部署步骤和目标机器的配置方法请参考[模拟物理机故障](simulate-physical-machine-chaos.md)。
 
 ## 配置
 

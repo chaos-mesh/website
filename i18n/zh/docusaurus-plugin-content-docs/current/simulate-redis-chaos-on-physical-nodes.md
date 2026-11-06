@@ -184,7 +184,13 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 
 ## 使用 Chaos Mesh 创建实验
 
-本节的配置说明适用于 Chaos Mesh 2.8.8 及更高版本。使用前，请先按[模拟物理机故障](simulate-physical-machine-chaos.md)配置 Chaosd 和目标机器。
+:::note[版本说明]
+
+本节的配置说明适用于 Chaos Mesh 2.8.8 及更高版本。
+
+:::
+
+使用前，请先按[模拟物理机故障](simulate-physical-machine-chaos.md)配置 Chaosd 和目标机器。
 
 将 `spec.action` 设置为 `redis-expiration`、`redis-penetration`、`redis-cacheLimit`、`redis-restart` 或 `redis-stop`，并将故障参数填写在同名配置块中。
 

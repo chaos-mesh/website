@@ -204,7 +204,13 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 
 ## Create experiments using Chaos Mesh
 
-This section describes configuration for Chaos Mesh 2.8.8 and later. Before creating an experiment, configure Chaosd and target machines as described in [Simulate faults on physical machines](simulate-physical-machine-chaos.md).
+:::note[Version support]
+
+This section describes configuration for Chaos Mesh 2.8.8 and later.
+
+:::
+
+Before creating an experiment, configure Chaosd and target machines as described in [Simulate faults on physical machines](simulate-physical-machine-chaos.md).
 
 Set `spec.action` to `redis-expiration`, `redis-penetration`, `redis-cacheLimit`, `redis-restart`, or `redis-stop`, and place the fault parameters in the matching configuration block.
 

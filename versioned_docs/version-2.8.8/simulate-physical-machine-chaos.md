@@ -124,7 +124,11 @@ To simulate a disk write load scenario, you need to set the action to "disk-writ
 
 To simulate a disk fill scenario, you need to set the action to "disk-fill". For the corresponding configurations, refer to [Parameters for simulating disk fill](simulate-disk-pressure-in-physical-nodes.md#parameters-for-simulating-disk-fill).
 
+:::note[Version support]
+
 In Chaos Mesh 2.8.8 and later, set `disk-fill.fill-by-fallocate` to `true` to use `fallocate`. Set it to `false` or omit it to use `dd`.
+
+:::
 
 #### Network corruption
 
