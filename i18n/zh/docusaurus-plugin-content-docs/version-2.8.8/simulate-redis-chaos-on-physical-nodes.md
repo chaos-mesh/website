@@ -147,7 +147,7 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 | `conf` | c | conf | 指定哨兵的配置文件路径，用于恢复哨兵 | string 类型 | 默认为 `""` |
 | `flush-config` | 无 | flushConfig | 指定在哨兵重启前，是否将内存中的配置更新到配置文件中 | bool 类型 | 默认为 `true` |
 | `password` | p | password | 登录 Redis Sentinel 的密码 | string 类型 | 默认为 `""` |
-| `redis-path` | 无 | redisPath | 指定 `redis-server` 命令的路径 | string 类型 | 默认为 `""` |
+| `redis-path` | 无 | redisPath | 指定包含 `redis-server` 可执行文件的目录，例如 `/opt/redis/bin`。留空时使用 Chaosd 进程的 `PATH` 查找 | string 类型 | 默认为 `""` |
 
 ### 使用命令行模式模拟哨兵重启场景
 
@@ -180,7 +180,7 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 | `conf` | c | conf | 指定哨兵的配置文件路径，用于恢复哨兵 | string 类型 | 默认为 `""` |
 | `flush-config` | 无 | flushConfig | 指定在哨兵重启前，是否将内存中的配置更新到配置文件中 | bool 类型 | 默认为 `true` |
 | `password` | p | password | 登录 Redis Sentinel 的密码 | string 类型 | 默认为 `""` |
-| `redis-path` | 无 | redisPath | 指定 `redis-server` 命令的路径 | string 类型 | 默认为 `""` |
+| `redis-path` | 无 | redisPath | 指定包含 `redis-server` 可执行文件的目录，例如 `/opt/redis/bin`。留空时使用 Chaosd 进程的 `PATH` 查找 | string 类型 | 默认为 `""` |
 
 ### 使用命令行模式模拟哨兵不可用场景
 
@@ -201,3 +201,27 @@ chaosd attack redis sentinel-stop -a 127.0.0.1:26379 --conf /home/redis-test/sen
 ```bash
 curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json" -d '{"action":"stop", "addr":"127.0.0.1:26379", "conf":"/home/redis-test/sentinel-26379.conf"}'
 ```
+
+## 使用 Chaos Mesh 创建实验
+
+:::note[版本说明]
+
+本节的配置说明适用于 Chaos Mesh 2.8.8 及更高版本。
+
+:::
+
+使用前，请先按[模拟物理机故障](simulate-physical-machine-chaos.md)配置 Chaosd 和目标机器。
+
+将 `spec.action` 设置为 `redis-expiration`、`redis-penetration`、`redis-cacheLimit`、`redis-restart` 或 `redis-stop`，并将故障参数填写在同名配置块中。
+
+对于 `redis-restart` 和 `redis-stop`，`redisPath` 是一个字符串，用于指定 `redis-server` 所在的目录，例如 `/opt/redis/bin`。如果不设置此字段或将它留空，Chaosd 会通过自身进程的 `PATH` 查找 `redis-server`。
+
+:::warning
+
+从早于 2.8.8 的版本升级时，请按以下顺序操作：
+
+1. 升级 CRD 前，移除现有 `PhysicalMachineChaos` 资源以及 `Schedule`、`Workflow`、`WorkflowNode` 资源中物理机实验模板内的布尔类型 `redisPath`。同时移除已保存的清单中的布尔值。
+2. 将 Chaos Mesh 及其 CRD 升级至 2.8.8 或更高版本。
+3. 如需指定 Redis 安装路径，再将 `redisPath` 设置为目录字符串。
+
+:::
