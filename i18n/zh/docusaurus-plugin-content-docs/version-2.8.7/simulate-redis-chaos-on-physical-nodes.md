@@ -147,7 +147,7 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 | `conf` | c | conf | 指定哨兵的配置文件路径，用于恢复哨兵 | string 类型 | 默认为 `""` |
 | `flush-config` | 无 | flushConfig | 指定在哨兵重启前，是否将内存中的配置更新到配置文件中 | bool 类型 | 默认为 `true` |
 | `password` | p | password | 登录 Redis Sentinel 的密码 | string 类型 | 默认为 `""` |
-| `redis-path` | 无 | redisPath | 指定 `redis-server` 命令的路径 | string 类型 | 默认为 `""` |
+| `redis-path` | 无 | redisPath | 指定包含 `redis-server` 可执行文件的目录，例如 `/opt/redis/bin`。留空时使用 Chaosd 进程的 `PATH` 查找 | string 类型 | 默认为 `""` |
 
 ### 使用命令行模式模拟哨兵重启场景
 
@@ -180,7 +180,7 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 | `conf` | c | conf | 指定哨兵的配置文件路径，用于恢复哨兵 | string 类型 | 默认为 `""` |
 | `flush-config` | 无 | flushConfig | 指定在哨兵重启前，是否将内存中的配置更新到配置文件中 | bool 类型 | 默认为 `true` |
 | `password` | p | password | 登录 Redis Sentinel 的密码 | string 类型 | 默认为 `""` |
-| `redis-path` | 无 | redisPath | 指定 `redis-server` 命令的路径 | string 类型 | 默认为 `""` |
+| `redis-path` | 无 | redisPath | 指定包含 `redis-server` 可执行文件的目录，例如 `/opt/redis/bin`。留空时使用 Chaosd 进程的 `PATH` 查找 | string 类型 | 默认为 `""` |
 
 ### 使用命令行模式模拟哨兵不可用场景
 

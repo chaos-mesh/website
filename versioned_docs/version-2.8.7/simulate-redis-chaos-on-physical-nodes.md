@@ -147,7 +147,7 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 | `conf` | c | conf | Specifies the path of Sentinel config file, this file will be used to recover the Sentinel | string | Default value: `""`. |
 | `flush-config` | None | flushConfig | Forces Sentinel to rewrite its configuration on disk, including the current Sentinel state | bool | Default value: `true`. |
 | `password` | p | password | The password to log in to the server | string | Default value: `""`. |
-| `redis-path` | None | redisPath | Specifies the path of `redis-server` command-line tool | string | Default value: `""`. |
+| `redis-path` | None | redisPath | Specifies the directory containing the `redis-server` executable, such as `/opt/redis/bin`. When empty, Chaosd uses its process `PATH` to find `redis-server` | string | Default value: `""`. |
 
 ### Simulate Sentinel restart using the command-line mode
 
@@ -180,7 +180,7 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 | `conf` | c | conf | Specifies the path of Sentinel configuration file, which is used to recover the Sentinel | string | Default value: `""`. |
 | `flush-config` | None | flushConfig | Forces Sentinel to rewrite its configuration on disk, including the current Sentinel state | bool | Default value: `true`. |
 | `password` | p | password | The password to log in to the server | string | Default value: `""`. |
-| `redis-path` | None | redisPath | Specifies the path of `redis-server` command-line tool | string | Default value: `""`. |
+| `redis-path` | None | redisPath | Specifies the directory containing the `redis-server` executable, such as `/opt/redis/bin`. When empty, Chaosd uses its process `PATH` to find `redis-server` | string | Default value: `""`. |
 
 ### Simulate Sentinel stop using the command-line mode
 

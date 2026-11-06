@@ -135,7 +135,7 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 | `conf` | c | conf | 指定 Sentinel 配置文件的路径，该文件将被用于恢复 Sentinel | string 类型 | 默认值为 `""` |
 | `flush-config` | — | flushConfig | 强制 Sentinel 将其配置（包括当前的 Sentinel 状态）重写到磁盘上 | bool 类型 | 默认值为 `true` |
 | `password` | p | password | 登录服务器的密码 | string 类型 | 默认值为 `""` |
-| `redis-path` | — | redisPath | 指定 `redis-server` 命令行工具的路径 | string 类型 | 默认值为 `""` |
+| `redis-path` | — | redisPath | 指定包含 `redis-server` 可执行文件的目录，例如 `/opt/redis/bin`。留空时使用 Chaosd 进程的 `PATH` 查找 | string 类型 | 默认值为 `""` |
 
 ### 使用命令行模式模拟 Sentinel 重启场景
 
@@ -164,7 +164,7 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 | `conf` | c | conf | 指定 Sentinel 配置文件的路径，该文件将被用于恢复 Sentinel | string 类型 | 默认值为 `""` |
 | `flush-config` | — | flushConfig | 强制 Sentinel 将其配置（包括当前的 Sentinel 状态）重写到磁盘上 | bool 类型 | 默认值为 `true` |
 | `password` | p | password | 登录服务器的密码 | string 类型 | 默认值为 `""` |
-| `redis-path` | — | redisPath | 指定 `redis-server` 命令行工具的路径 | string 类型 | 默认值为 `""` |
+| `redis-path` | — | redisPath | 指定包含 `redis-server` 可执行文件的目录，例如 `/opt/redis/bin`。留空时使用 Chaosd 进程的 `PATH` 查找 | string 类型 | 默认值为 `""` |
 
 ### 使用命令行模式模拟 Sentinel 停止场景
 
