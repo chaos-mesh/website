@@ -166,3 +166,35 @@ chaosd attack file replace -h
 ```bash
 chaosd attack file replace --origin-string test --dest-string text --file-name /tmp/test.txt --line 1
 ```
+
+## Create a file fault using the HTTP service
+
+:::note
+
+The file HTTP endpoint is available starting with **Chaosd v1.6.0**. Chaosd v1.5.0 supports file faults through the CLI only.
+
+:::
+
+Start Chaosd on the host that contains the target file:
+
+```bash
+chaosd server --host 127.0.0.1 --port 31767
+```
+
+Use an existing file that Chaosd has permission to modify. The following request changes the permissions of `/tmp/test.txt` to `600`:
+
+```bash
+curl -X POST 'http://127.0.0.1:31767/api/attack/file' \
+  -H 'Content-Type: application/json' \
+  -d '{"action":"modify","file-name":"/tmp/test.txt","privilege":600}'
+```
+
+`file-name` is the path on the Chaosd host. `privilege` is a JSON number containing permission digits without a leading zero, such as `600` or `644`. You do not need to specify `kind`.
+
+Save the UID returned by the request. To restore the previous permissions, replace `<UID>` with that UID and send a recovery request:
+
+```bash
+curl -X DELETE 'http://127.0.0.1:31767/api/attack/<UID>'
+```
+
+For other recovery limits, see [Search and recover experiments](chaosd-search-recover.md).

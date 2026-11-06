@@ -5,7 +5,7 @@ summary: Describes how to search and recover the experiments of Chaosd, and prov
 
 You can search experiments by conditions and recover the experiments corresponding to specified UIDs using Chaosd. This document describes how to search and recover experiments of Chaosd, and provides related examples.
 
-This page uses Chaosd v1.5.0. See [Chaosd Introduction](chaosd-overview.md) for installation and runtime requirements.
+This page applies to Chaosd v1.5.0 and later. See [Chaosd Introduction](chaosd-overview.md) for installation and runtime requirements.
 
 ## Search experiments of Chaosd
 
@@ -58,7 +58,9 @@ curl -X GET 127.0.0.1:31767/api/experiments/
 
 After creating an experiment, if you want to withdraw the impact caused by the experiment, you can use the recovery feature of experiments.
 
-Recovery depends on the fault type. In Chaosd v1.5.0, recovering a host shutdown or reboot, or a killed process without `recover-cmd`, returns an error. Redis cache expiration cannot restore expired keys, even if the recovery request reports success. Check the target itself after recovery.
+Recovery depends on the fault type. Starting with Chaosd v1.5.0, recovering a host shutdown or reboot, or a killed process without `recover-cmd`, returns an error. Redis cache expiration cannot restore expired keys, even if the recovery request reports success. Check the target itself after recovery.
+
+Starting with Chaosd v1.6.0, recovering an experiment already recorded as `destroyed` returns success without running cleanup again. This applies to both `chaosd recover <UID>` and `DELETE /api/attack/{uid}`.
 
 Schedules and recovery timers exist only in the process that created them. Restarting the service does not reload them from the database. To cancel a schedule, send `DELETE /api/attack/{uid}` to the same running Chaosd service that created it. CLI recovery uses a separate scheduler and cannot cancel a schedule in another service process. The current run relies on its existing recovery timer.
 

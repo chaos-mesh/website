@@ -166,3 +166,35 @@ chaosd attack file replace -h
 ```bash
 chaosd attack file replace --origin-string test --dest-string text --file-name /tmp/test.txt --line 1
 ```
+
+## 使用 HTTP 服务创建文件故障
+
+:::note
+
+文件 HTTP 接口从 **Chaosd v1.6.0** 开始提供。Chaosd v1.5.0 的文件故障仅支持命令行模式。
+
+:::
+
+在目标文件所在的主机上启动 Chaosd：
+
+```bash
+chaosd server --host 127.0.0.1 --port 31767
+```
+
+选择一个已存在且 Chaosd 有权修改的文件。以下请求将 `/tmp/test.txt` 的权限修改为 `600`：
+
+```bash
+curl -X POST 'http://127.0.0.1:31767/api/attack/file' \
+  -H 'Content-Type: application/json' \
+  -d '{"action":"modify","file-name":"/tmp/test.txt","privilege":600}'
+```
+
+`file-name` 为 Chaosd 所在主机上的文件路径。`privilege` 为 JSON 数字，使用不带前导零的权限数字，例如 `600` 或 `644`。无需指定 `kind`。
+
+保存请求返回的 UID。恢复原有权限时，将 `<UID>` 替换为该 UID，并发送恢复请求：
+
+```bash
+curl -X DELETE 'http://127.0.0.1:31767/api/attack/<UID>'
+```
+
+其他恢复限制请参阅[查找和恢复实验](chaosd-search-recover.md)。

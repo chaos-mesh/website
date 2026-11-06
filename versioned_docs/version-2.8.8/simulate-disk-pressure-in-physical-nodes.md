@@ -6,7 +6,7 @@ This document describes how to use Chaosd to simulate disk faults. This feature 
 
 :::note
 
-**Chaosd v1.5.0**
+**Chaosd v1.5.0 and later**
 
 Disk read and write workloads stop when the requested data size is reached or `duration` expires, whichever happens first. Use a duration such as `30s` or `1m`; an empty value sets no workload deadline. This deadline behavior was fixed in v1.5.0 and applies to both CLI and service mode. It does not apply to disk fill.
 
