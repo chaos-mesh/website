@@ -184,11 +184,11 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 
 ## Create experiments using Chaos Mesh
 
-To create Redis experiments with PhysicalMachineChaos, first configure Chaosd and target machines as described in [Simulate faults on physical machines](simulate-physical-machine-chaos.md).
+This section describes configuration for Chaos Mesh 2.8.8 and later. Before creating an experiment, configure Chaosd and target machines as described in [Simulate faults on physical machines](simulate-physical-machine-chaos.md).
 
-Set `action` to `redis-expiration`, `redis-penetration`, `redis-cacheLimit`, `redis-restart`, or `redis-stop`.
+Set `spec.action` to `redis-expiration`, `redis-penetration`, `redis-cacheLimit`, `redis-restart`, or `redis-stop`, and place the fault parameters in the matching configuration block.
 
-In Chaos Mesh 2.8.8 and later, `redis-restart.redisPath` and `redis-stop.redisPath` are strings. Set `redisPath` to the directory containing `redis-server`, such as `/opt/redis/bin`. Leave it empty to find `redis-server` through the Chaosd process's `PATH`.
+For `redis-restart` and `redis-stop`, `redisPath` is a string that specifies the directory containing `redis-server`, such as `/opt/redis/bin`. If the field is omitted or empty, Chaosd finds `redis-server` through its process `PATH`.
 
 :::warning
 

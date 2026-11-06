@@ -2,27 +2,29 @@
 title: Simulate Kafka Faults
 ---
 
-Use PhysicalMachineChaos in Chaos Mesh to inject Kafka faults. For Chaosd deployment and target machine configuration, see [Simulate faults on physical machines](simulate-physical-machine-chaos.md).
+This guide describes how to inject Kafka faults on physical machines with PhysicalMachineChaos in Chaos Mesh.
 
 ## Requirements
 
-Kafka faults require Chaosd v1.6.0 or later.
-
-In Chaos Mesh 2.8.8 and later, all Kafka actions accept `authMechanism`. The `kafka-fill` action also accepts `configFile`, and `kafka-io` also accepts `host`, `port`, `username`, and `password`.
+The Kafka fault configurations in this guide require Chaos Mesh 2.8.8 or later, with Chaosd v1.6.0 or later running on the target machines. For deployment instructions and target machine configuration, see [Simulate faults on physical machines](simulate-physical-machine-chaos.md).
 
 ## Configuration
 
-For all Kafka actions, set `topic`, `host`, and a nonzero `port` to connect to the target Kafka broker. If the broker requires authentication, set `username`, `password`, and `authMechanism`. Supported mechanisms are `sasl/plain`, `sasl/scram-sha-256`, and `sasl/scram-sha-512`. Set `authMechanism` whenever you set `username`.
+Set `spec.action` to `kafka-fill`, `kafka-flood`, or `kafka-io`, and place the fault parameters in the matching configuration block. For example, parameters for `kafka-io` belong in `spec.kafka-io`.
+
+All three actions require the Kafka broker's `host` and `port`, and the target `topic`. The `port` must be greater than `0`. If the broker requires authentication, also set `username`, `password`, and `authMechanism`. The supported mechanisms are `sasl/plain`, `sasl/scram-sha-256`, and `sasl/scram-sha-512`. If you set `username`, you must also set `authMechanism`.
+
+Each action also requires the following configuration.
 
 | Action | Additional required configuration |
 | :-- | :-- |
-| `kafka-fill` | A nonzero `messageSize` in bytes, a nonzero `maxBytes`, a `reloadCommand`, and an existing broker `configFile` on the Chaosd machine. |
-| `kafka-flood` | A nonzero `messageSize` in bytes and a nonzero `threads`. |
-| `kafka-io` | An existing broker `configFile` on the Chaosd machine and at least one of `nonReadable` or `nonWritable` set to `true`. |
+| `kafka-fill` | `messageSize` specifies the number of bytes per message and must be greater than `0`. `maxBytes` must also be greater than `0`. Set `reloadCommand` to the command that reloads the Kafka configuration, and `configFile` to an existing broker configuration file on the Chaosd machine. |
+| `kafka-flood` | `messageSize` specifies the number of bytes per message and must be greater than `0`. `threads` specifies the number of worker threads and must also be greater than `0`. |
+| `kafka-io` | `configFile` must point to an existing broker configuration file on the Chaosd machine. Set at least one of `nonReadable` or `nonWritable` to `true`. |
 
 ## Example
 
-For example, the following experiment removes write permissions from the topic's partition directories and log files. Replace the PhysicalMachine name, broker connection details, and configuration path with your values.
+The following example uses `kafka-io` to remove write permissions from the target topic's partition directories and log files. Before using it, replace the namespace and PhysicalMachine name under `selector.physicalMachines`, the broker address, credentials, and configuration file path with your values.
 
 ```yaml
 apiVersion: chaos-mesh.org/v1alpha1

@@ -184,11 +184,11 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 
 ## 使用 Chaos Mesh 创建实验
 
-通过 PhysicalMachineChaos 创建 Redis 实验时，先按[模拟物理机故障](simulate-physical-machine-chaos.md)配置 Chaosd 和目标机器。
+本节的配置说明适用于 Chaos Mesh 2.8.8 及更高版本。使用前，请先按[模拟物理机故障](simulate-physical-machine-chaos.md)配置 Chaosd 和目标机器。
 
-将 `action` 设置为 `redis-expiration`、`redis-penetration`、`redis-cacheLimit`、`redis-restart` 或 `redis-stop`。
+将 `spec.action` 设置为 `redis-expiration`、`redis-penetration`、`redis-cacheLimit`、`redis-restart` 或 `redis-stop`，并将故障参数填写在同名配置块中。
 
-从 Chaos Mesh 2.8.8 开始，`redis-restart.redisPath` 和 `redis-stop.redisPath` 的类型为字符串。将 `redisPath` 设置为包含 `redis-server` 的目录，例如 `/opt/redis/bin`。留空时，Chaosd 使用自身进程的 `PATH` 查找 `redis-server`。
+对于 `redis-restart` 和 `redis-stop`，`redisPath` 是一个字符串，用于指定 `redis-server` 所在的目录，例如 `/opt/redis/bin`。如果不设置此字段或将它留空，Chaosd 会通过自身进程的 `PATH` 查找 `redis-server`。
 
 :::warning
 
