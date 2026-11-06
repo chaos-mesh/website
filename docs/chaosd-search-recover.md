@@ -60,6 +60,8 @@ After creating an experiment, if you want to withdraw the impact caused by the e
 
 Recovery depends on the fault type. Starting with Chaosd v1.5.0, recovering a host shutdown or reboot, or a killed process without `recover-cmd`, returns an error. Redis cache expiration cannot restore expired keys, even if the recovery request reports success. Check the target itself after recovery.
 
+Starting with Chaosd v1.6.0, recovering an experiment already recorded as `destroyed` returns success without running cleanup again. This applies to both `chaosd recover <UID>` and `DELETE /api/attack/{uid}`.
+
 Schedules and recovery timers exist only in the process that created them. Restarting the service does not reload them from the database. To cancel a schedule, send `DELETE /api/attack/{uid}` to the same running Chaosd service that created it. CLI recovery uses a separate scheduler and cannot cancel a schedule in another service process. The current run relies on its existing recovery timer.
 
 ### Recover experiments using the command-line mode

@@ -8,7 +8,7 @@ title: Chaosd 组件简介
 
 :::note
 
-本文适用于 **Chaosd v1.5.0**。Chaosd 与 Chaos Mesh 独立发布，网站的版本选择器对应 Chaos Mesh 版本，不是 Chaosd 版本。本次发布的改动请参阅 [v1.5.0 发布说明](https://github.com/chaos-mesh/chaosd/releases/tag/v1.5.0)。
+Chaosd 文档适用于 **Chaosd v1.5.0 及以上版本**。需要更高版本的功能会在对应章节中注明。Chaosd 与 Chaos Mesh 独立发布，网站的版本选择器对应 Chaos Mesh 版本，不是 Chaosd 版本。各版本的改动请参阅 [Chaosd 发布说明](https://github.com/chaos-mesh/chaosd/releases)。
 
 :::
 
@@ -32,7 +32,9 @@ title: Chaosd 组件简介
 | `vm`           | 通过 libvirt 停止虚拟机。                                                           |
 | `user-defined` | 执行自定义故障注入和恢复命令。                                                      |
 
-主机和文件故障仅支持命令行模式。其他故障类型可通过 HTTP 服务的 `POST /api/attack/<kind>` 创建实验，自定义命令对应的路径使用 `user_defined`。HTTP 请求使用 JSON 配置字段，字段名称可能与命令行参数不同。
+在 Chaosd v1.5.0 中，主机和文件故障仅支持命令行模式。**Chaosd v1.6.0** 新增 `POST /api/attack/host` 和 `POST /api/attack/file` 接口。关机、重启示例及其恢复限制请参阅[模拟主机故障](simulate-host-console-in-physical-nodes.md)。
+
+其他故障类型可通过 HTTP 服务的 `POST /api/attack/<kind>` 创建实验，自定义命令对应的路径使用 `user_defined`。HTTP 请求使用 JSON 配置字段，字段名称可能与命令行参数不同。
 
 ### 运行环境
 
@@ -42,14 +44,20 @@ arm64 不支持时间偏移故障。其他运行工具取决于所选故障。�
 
 ### 下载和部署
 
-1. 选择 Chaosd v1.5.0 和 Linux 主机的架构。x86-64 使用 `amd64`，AArch64 使用 `arm64`。
+:::note
+
+`latest` 压缩包不再从 `main` 分支更新或发布。请使用带版本号的发布压缩包。
+
+:::
+
+1. 选择已发布的 Chaosd 版本和 Linux 主机的架构。x86-64 使用 `amd64`，AArch64 使用 `arm64`。以下示例使用 v1.5.0。
 
    ```bash
    export CHAOSD_VERSION=v1.5.0
    export CHAOSD_ARCH=amd64
    ```
 
-   其他已发布版本请参阅 [Chaosd releases](https://github.com/chaos-mesh/chaosd/releases)。`latest` 压缩包跟随开发构建，不是稳定版本。
+   将 `CHAOSD_VERSION` 设置为 [Chaosd 发布说明](https://github.com/chaos-mesh/chaosd/releases)中列出的版本，并确保该版本满足所需功能的最低版本要求。
 
 2. 下载压缩包：
 

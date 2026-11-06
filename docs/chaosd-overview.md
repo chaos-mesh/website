@@ -44,6 +44,12 @@ Clock injection is unsupported on arm64. Other runtime tools depend on the selec
 
 ### Download and deploy
 
+:::note
+
+The `latest` archives are no longer updated or published from `main`. Use a versioned release archive.
+
+:::
+
 1. Select a released Chaosd version and the architecture of the Linux host. Use `amd64` for x86-64 or `arm64` for AArch64. The following example uses v1.5.0.
 
    ```bash
