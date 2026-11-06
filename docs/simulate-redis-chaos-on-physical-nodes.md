@@ -181,3 +181,21 @@ chaosd attack redis sentinel-stop -a 127.0.0.1:26379 --conf /home/redis-test/sen
 ```bash
 curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json" -d '{"action":"stop", "addr":"127.0.0.1:26379", "conf":"/home/redis-test/sentinel-26379.conf"}'
 ```
+
+## Create experiments using Chaos Mesh
+
+To create Redis experiments with PhysicalMachineChaos, first configure Chaosd and target machines as described in [Simulate faults on physical machines](simulate-physical-machine-chaos.md).
+
+Set `action` to `redis-expiration`, `redis-penetration`, `redis-cacheLimit`, `redis-restart`, or `redis-stop`.
+
+In Chaos Mesh 2.8.8 and later, `redis-restart.redisPath` and `redis-stop.redisPath` are strings. Set `redisPath` to the directory containing `redis-server`, such as `/opt/redis/bin`. Leave it empty to find `redis-server` through the Chaosd process's `PATH`.
+
+:::warning
+
+When upgrading from a version earlier than 2.8.8, follow this order:
+
+1. Before upgrading the CRDs, remove boolean `redisPath` values from existing `PhysicalMachineChaos` resources and from physical machine templates in `Schedule`, `Workflow`, and `WorkflowNode` resources. Remove them from saved manifests too.
+2. Upgrade Chaos Mesh and its CRDs to 2.8.8 or later.
+3. Set `redisPath` to a directory string if you need a custom Redis installation path.
+
+:::
