@@ -4,6 +4,9 @@
       "pattern": "^/img/"
     },
     {
+      "pattern": "^/supported-releases"
+    },
+    {
       "pattern": "run-a-chaos-experiment.md"
     },
     {

@@ -95,7 +95,7 @@ Before creating PhysicalMachineChaos experiments using Chaos Mesh, you need to d
 
 | Configuration item | Type | Description | Default value | Required | Example |
 | :-- | :-- | :-- | :-- | :-- | :-- |
-| `action` | string | Defines the actions of physical machines faults, optional values are as follows: `stress-cpu`, `stress-mem`, `disk-read-payload`, `disk-write-payload`, `disk-fill`, `network-corrupt`, `network-duplicate`, `network-loss`, `network-delay`, `network-partition`, `network-dns`, `process`, `jvm-exception`, `jvm-gc`, `jvm-latency`, `jvm-return`, `jvm-stress`, `jvm-rule-data`, `clock` | None | Yes | `stress-cpu` |
+| `action` | string | Defines the actions of physical machines faults, optional values are as follows: `stress-cpu`, `stress-mem`, `disk-read-payload`, `disk-write-payload`, `disk-fill`, `network-corrupt`, `network-duplicate`, `network-loss`, `network-delay`, `network-partition`, `network-dns`, `process`, `jvm-exception`, `jvm-gc`, `jvm-latency`, `jvm-return`, `jvm-stress`, `jvm-rule-data`, `clock`, `redis-expiration`, `redis-penetration`, `redis-cacheLimit`, `redis-restart`, `redis-stop`, `kafka-fill`, `kafka-flood`, `kafka-io` | None | Yes | `stress-cpu` |
 | `address` | string array | Selects the `address` of Chaosd service to inject faults, only one of `address` or `selector` could be specified | [] | Yes | ["192.168.0.10:31767"] |
 | `selector` | struct | Specifies the target PhysicalMachine. For details, refer to [Define the experiment scope](define-chaos-experiment-scope.md), only one of `address` or `selector` could be specified | None | No |  |
 | `mode` | string | Specifies the mode of the experiment. The mode options include `one` (selecting a random PhysicalMachine), `all` (selecting all eligible PhysicalMachines), `fixed` (selecting a specified number of eligible PhysicalMachines), `fixed-percent` (selecting a specified percentage of PhysicalMachines from the eligible PhysicalMachines), and `random-max-percent` (selecting the maximum percentage of PhysicalMachines from the eligible PhysicalMachines). | None | Yes | `one` |
@@ -123,6 +123,12 @@ To simulate a disk write load scenario, you need to set the action to "disk-writ
 #### Disk fill
 
 To simulate a disk fill scenario, you need to set the action to "disk-fill". For the corresponding configurations, refer to [Parameters for simulating disk fill](simulate-disk-pressure-in-physical-nodes.md#parameters-for-simulating-disk-fill).
+
+:::note[Version support]
+
+In Chaos Mesh 2.8.8 and later, set `disk-fill.fill-by-fallocate` to `true` to use `fallocate`. Set it to `false` or omit it to use `dd`.
+
+:::
 
 #### Network corruption
 
@@ -175,3 +181,11 @@ To simulate a scenario that JVM applications trigger faults using Byteman config
 #### Time offset
 
 To simulate a time offset scenario, you need to set the action to "clock". For the corresponding configurations, refer to [Parameters for simulating time faults](simulate-time-chaos-on-physical-nodes.md#parameters-for-simulating-time-faults).
+
+#### Kafka faults
+
+Set `action` to `kafka-fill`, `kafka-flood`, or `kafka-io`. For configuration and a YAML example, see [Simulate Kafka faults](simulate-kafka-chaos-on-physical-nodes.md).
+
+#### Redis faults
+
+Set `action` to `redis-expiration`, `redis-penetration`, `redis-cacheLimit`, `redis-restart`, or `redis-stop`. For the fault parameters, refer to [Simulate Redis faults](simulate-redis-chaos-on-physical-nodes.md#create-experiments-using-chaos-mesh).

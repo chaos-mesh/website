@@ -95,7 +95,7 @@ PhysicalMachineChaos 用于在物理机或虚拟机中模拟网络、磁盘、�
 
 | 参数 | 类型 | 说明 | 默认值 | 是否必填 | 示例 |
 | :-- | :-- | :-- | :-- | :-- | :-- |
-| `action` | string | 定义物理机故障的行为，可选值为 `stress-cpu`, `stress-mem`, `disk-read-payload`, `disk-write-payload`, `disk-fill`, `network-corrupt`, `network-duplicate`, `network-loss`, `network-delay`, `network-partition`, `network-dns`, `process`, `jvm-exception`, `jvm-gc`, `jvm-latency`, `jvm-return`, `jvm-stress`, `jvm-rule-data`, `clock` | 无 | 是 | `stress-cpu` |
+| `action` | string | 定义物理机故障的行为，可选值为 `stress-cpu`, `stress-mem`, `disk-read-payload`, `disk-write-payload`, `disk-fill`, `network-corrupt`, `network-duplicate`, `network-loss`, `network-delay`, `network-partition`, `network-dns`, `process`, `jvm-exception`, `jvm-gc`, `jvm-latency`, `jvm-return`, `jvm-stress`, `jvm-rule-data`, `clock`, `redis-expiration`, `redis-penetration`, `redis-cacheLimit`, `redis-restart`, `redis-stop`, `kafka-fill`, `kafka-flood`, `kafka-io` | 无 | 是 | `stress-cpu` |
 | `address` | string 数组 | 选择注入故障的 Chaosd 服务地址，`address` 与 `selector` 两者只能选择其中一项 | [] | 是 | ["192.168.0.10:31767"] |
 | `selector` | struct | 指定注入故障的目标 PhysicalMachine，详情请参考[定义实验范围](define-chaos-experiment-scope.md)，`address` 与 `selector` 两者只能选择其中一项 | 无 | 否 |  |
 | `mode` | string | 指定实验的运行方式，可选择的方式包括：`one`（表示随机选出一个符合条件的 PhysicalMachine）、`all`（表示选出所有符合条件的 PhysicalMachine）、`fixed`（表示选出指定数量且符合条件的 PhysicalMachine）、`fixed-percent`（表示选出占符合条件的 PhysicalMachine 中指定百分比的 PhysicalMachine）、`random-max-percent`（表示选出占符合条件的 PhysicalMachine 中不超过指定百分比的 PhysicalMachine） | 无 | 是 | `one` |
@@ -123,6 +123,12 @@ PhysicalMachineChaos 用于在物理机或虚拟机中模拟网络、磁盘、�
 #### 磁盘填充
 
 模拟磁盘填充，将 action 设置为 "disk-fill"，对应的配置可参考[模拟磁盘填充相关参数说明](simulate-disk-pressure-in-physical-nodes.md#模拟磁盘填充相关参数说明)。
+
+:::note[版本说明]
+
+从 Chaos Mesh 2.8.8 开始，将 `disk-fill.fill-by-fallocate` 设置为 `true` 时使用 `fallocate`，设置为 `false` 或省略时使用 `dd`。
+
+:::
 
 #### 网络包错误
 
@@ -175,3 +181,11 @@ JVM 应用使用 Byteman 配置触发故障，将 action 设置为 "jvm-rule-dat
 #### 时间偏移
 
 模拟时间偏移故障，将 action 设置为 "clock"，对应的配置可参考[模拟时间故障相关参数说明](simulate-time-chaos-on-physical-nodes.md#模拟时间故障相关参数说明)。
+
+#### Kafka 故障
+
+将 `action` 设置为 `kafka-fill`、`kafka-flood` 或 `kafka-io`。配置和 YAML 示例请参考[模拟 Kafka 故障](simulate-kafka-chaos-on-physical-nodes.md)。
+
+#### Redis 故障
+
+将 `action` 设置为 `redis-expiration`、`redis-penetration`、`redis-cacheLimit`、`redis-restart` 或 `redis-stop`。故障参数请参考[模拟 Redis 故障](simulate-redis-chaos-on-physical-nodes.md#使用-chaos-mesh-创建实验)。

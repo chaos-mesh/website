@@ -8,7 +8,7 @@ title: Chaosd Introduction
 
 :::note
 
-This page describes **Chaosd v1.5.0**. Chaosd is released separately from Chaos Mesh. The website's version selector refers to Chaos Mesh, not Chaosd. See the [v1.5.0 release notes](https://github.com/chaos-mesh/chaosd/releases/tag/v1.5.0) for the changes in this release.
+The Chaosd guides cover **Chaosd v1.5.0 and later**. Features that require a newer version are marked in the relevant sections. Chaosd is released separately from Chaos Mesh. The website's version selector refers to Chaos Mesh, not Chaosd. See [Chaosd releases](https://github.com/chaos-mesh/chaosd/releases) for version-specific changes.
 
 :::
 
@@ -32,7 +32,9 @@ The CLI supports the following fault types. Run `chaosd attack <command> --help`
 | `vm` | Stop a virtual machine through libvirt. |
 | `user-defined` | Run custom attack and recovery commands. |
 
-Host and file faults are available through the CLI only. For the other fault types, the HTTP service accepts `POST /api/attack/<kind>`. The custom command endpoint uses `user_defined`. HTTP requests use JSON configuration fields, which can differ from CLI flag names.
+In Chaosd v1.5.0, host and file faults are available through the CLI only. **Chaosd v1.6.0** adds `POST /api/attack/host` and `POST /api/attack/file`. See [Simulate Host Faults](simulate-host-console-in-physical-nodes.md) for shutdown and reboot examples and their recovery limits.
+
+For the other fault types, the HTTP service accepts `POST /api/attack/<kind>`. The custom command endpoint uses `user_defined`. HTTP requests use JSON configuration fields, which can differ from CLI flag names.
 
 ### Operating environment
 
@@ -42,14 +44,20 @@ Clock injection is unsupported on arm64. Other runtime tools depend on the selec
 
 ### Download and deploy
 
-1. Select Chaosd v1.5.0 and the architecture of the Linux host. Use `amd64` for x86-64 or `arm64` for AArch64.
+:::note
+
+The `latest` archives are no longer updated or published from `main`. Use a versioned release archive.
+
+:::
+
+1. Select a released Chaosd version and the architecture of the Linux host. Use `amd64` for x86-64 or `arm64` for AArch64. The following example uses v1.5.0.
 
    ```bash
    export CHAOSD_VERSION=v1.5.0
    export CHAOSD_ARCH=amd64
    ```
 
-   To view other released versions, see [Chaosd releases](https://github.com/chaos-mesh/chaosd/releases). The `latest` archive follows development builds and is not a stable release.
+   Set `CHAOSD_VERSION` to a version listed in [Chaosd releases](https://github.com/chaos-mesh/chaosd/releases). Choose a version that meets the minimum requirement of the feature you want to use.
 
 2. Download the archive:
 

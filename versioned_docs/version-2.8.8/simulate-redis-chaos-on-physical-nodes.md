@@ -147,7 +147,7 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 | `conf` | c | conf | Specifies the path of Sentinel config file, this file will be used to recover the Sentinel | string | Default value: `""`. |
 | `flush-config` | None | flushConfig | Forces Sentinel to rewrite its configuration on disk, including the current Sentinel state | bool | Default value: `true`. |
 | `password` | p | password | The password to log in to the server | string | Default value: `""`. |
-| `redis-path` | None | redisPath | Specifies the path of `redis-server` command-line tool | string | Default value: `""`. |
+| `redis-path` | None | redisPath | Specifies the directory containing the `redis-server` executable, such as `/opt/redis/bin`. When empty, Chaosd uses its process `PATH` to find `redis-server` | string | Default value: `""`. |
 
 ### Simulate Sentinel restart using the command-line mode
 
@@ -180,7 +180,7 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 | `conf` | c | conf | Specifies the path of Sentinel configuration file, which is used to recover the Sentinel | string | Default value: `""`. |
 | `flush-config` | None | flushConfig | Forces Sentinel to rewrite its configuration on disk, including the current Sentinel state | bool | Default value: `true`. |
 | `password` | p | password | The password to log in to the server | string | Default value: `""`. |
-| `redis-path` | None | redisPath | Specifies the path of `redis-server` command-line tool | string | Default value: `""`. |
+| `redis-path` | None | redisPath | Specifies the directory containing the `redis-server` executable, such as `/opt/redis/bin`. When empty, Chaosd uses its process `PATH` to find `redis-server` | string | Default value: `""`. |
 
 ### Simulate Sentinel stop using the command-line mode
 
@@ -201,3 +201,27 @@ An example is as follows:
 ```bash
 curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json" -d '{"action":"stop", "addr":"127.0.0.1:26379", "conf":"/home/redis-test/sentinel-26379.conf"}'
 ```
+
+## Create experiments using Chaos Mesh
+
+:::note[Version support]
+
+This section describes configuration for Chaos Mesh 2.8.8 and later.
+
+:::
+
+Before creating an experiment, configure Chaosd and target machines as described in [Simulate faults on physical machines](simulate-physical-machine-chaos.md).
+
+Set `spec.action` to `redis-expiration`, `redis-penetration`, `redis-cacheLimit`, `redis-restart`, or `redis-stop`, and place the fault parameters in the matching configuration block.
+
+For `redis-restart` and `redis-stop`, `redisPath` is a string that specifies the directory containing `redis-server`, such as `/opt/redis/bin`. If the field is omitted or empty, Chaosd finds `redis-server` through its process `PATH`.
+
+:::warning
+
+When upgrading from a version earlier than 2.8.8, follow this order:
+
+1. Before upgrading the CRDs, remove boolean `redisPath` values from existing `PhysicalMachineChaos` resources and from physical machine templates in `Schedule`, `Workflow`, and `WorkflowNode` resources. Remove them from saved manifests too.
+2. Upgrade Chaos Mesh and its CRDs to 2.8.8 or later.
+3. Set `redisPath` to a directory string if you need a custom Redis installation path.
+
+:::
