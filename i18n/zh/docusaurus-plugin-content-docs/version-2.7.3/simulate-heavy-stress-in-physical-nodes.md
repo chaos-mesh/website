@@ -71,7 +71,14 @@ curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application
 | :-- | :-- | :-- | :-- | :-- | :-- |
 | `action` | — | action | 实验的行为 | string 类型 | 设置为 "mem" |
 | `size` | s | size | 指定每个 VM worker 占用内存的大小 | string 类型 | 支持使用单位 B，KB/KiB，MB/MiB，GB/GiB，TB/TiB 来设置占用的内存大小。如果不设置，则默认占用所有可用的内存。 |
+| `workers` | w | workers | 指定用于生成内存压力的 worker 数量 | int 类型 | 默认值为 `1` |
 | `options` | o | options | stress-ng 的其他参数设置，一般情况下不需要配置 | string 类型 | 默认值为 "" |
+
+:::note
+
+`chaosd attack stress mem` 的 `--workers` 参数在 chaosd v1.6.0 中恢复支持。如果使用更早版本的 chaosd，则不支持该参数。
+
+:::
 
 ### 使用命令行模式模拟内存压力场景
 
@@ -98,5 +105,5 @@ chaosd recover c2bff2f5-3aac-4ace-b7a6-322946ae6f13
 向 Chaosd 服务的路径 `/api/attack/stress` 发送 `POST` HTTP 请求，并配置如下 `fault-configuration`：
 
 ```bash
-curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{"size":"100M", "action":"mem"}'
+curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application/json" -d '{"action":"mem", "workers":2, "size":"100M"}'
 ```
