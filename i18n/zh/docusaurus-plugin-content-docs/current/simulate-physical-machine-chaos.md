@@ -6,12 +6,26 @@ title: 使用 Chaos Mesh 创建物理机故障
 
 ## PhysicalMachineChaos 介绍
 
-PhysicalMachineChaos 用于在物理机或虚拟机中模拟网络、磁盘、压力、JVM、时间等故障。在使用 Chaos Mesh 的 PhysicalMachineChaos 功能之前，你需要在物理机或虚拟机上部署 Chaosd。Chaos Mesh 与 Chaosd 的版本对应关系如下：
+PhysicalMachineChaos 用于在物理机或虚拟机中模拟网络、磁盘、压力、JVM、时间等故障。在使用 Chaos Mesh 的 PhysicalMachineChaos 功能之前，你需要在物理机或虚拟机上部署 Chaosd。Chaosd 与 Chaos Mesh 独立发布，下表列出了每个 Chaos Mesh 次版本对应的 Chaosd 版本：
 
-| Chaos Mesh 版本 | Chaosd 版本 |
-| :-------------- | :---------- |
-| v2.1.x          | v1.1.x      |
-| v2.2.x          | v1.2.x      |
+| Chaos Mesh 版本 | Chaosd 版本   |
+| :-------------- | :------------ |
+| v2.1.x          | v1.1.x        |
+| v2.2.x          | v1.2.x        |
+| v2.3.x          | v1.3.x        |
+| v2.4.x – v2.7.x | v1.4.x        |
+| v2.8.x 及之后   | v1.5.x 及之后 |
+
+部分故障需要比上表中对应版本更新的 Chaosd 版本：
+
+- `http-*` 故障需要 Chaosd v1.5.0 或更高版本。
+- `file-*` 故障需要 Chaosd v1.6.0 或更高版本。
+- Kafka 认证需要 Chaosd v1.4.0 或更高版本。
+- 磁盘故障建议使用 Chaosd v1.4.0 或更高版本，该版本修复了 PhysicalMachineChaos 使用的磁盘攻击。
+
+如果环境允许，推荐使用最新的稳定版 Chaosd。新版本包含问题修复，并保持 PhysicalMachineChaos 使用的 HTTP API 向后兼容。有关预编译包所需的 glibc 版本等运行环境要求，请参考 [运行环境](chaosd-overview.md#运行环境)。
+
+各版本的变更详情，请参考 [Chaosd 发布说明](https://github.com/chaos-mesh/chaosd/releases)。
 
 ## 运行 Chaosd Server
 
