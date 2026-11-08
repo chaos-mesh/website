@@ -16,7 +16,7 @@ Before creating an experiment, you can run the following command to check the ty
 chaosd attack network --help
 ```
 
-Currently, you can simulate the following experimental scenarios using Chaosd: network corruption, network latency, network duplication, network loss, network partition, DNS fault, network bandwidth limitation, and port occupation.
+Currently, you can simulate the following experimental scenarios using Chaosd: network corruption, network latency, network duplication, network loss, network partition, DNS fault, network bandwidth limitation, port occupation, NIC down, and network flood.
 
 To create experiments using the service mode, you need to run Chaosd in the service mode and then send a `POST` HTTP request to the `/api/attack/network` path of the Chaosd service:
 
@@ -309,7 +309,7 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 | Configuration item | Abbreviation | Service mode field | Description | Type | Value |
 | :-- | :-- | :-- | :-- | :-- | :-- |
 | `action` | — | `action` | Action of the experiment. | string | Set to `"occupied"` |
-| `port` | p | `port` | The specified port to be occupied | int | Such as `8080`, required |
+| `port` | p | `port` | The specified port to be occupied | string | Such as `"8080"`, required |
 
 ### Simulate port occupation using the command-line mode
 
@@ -330,5 +330,74 @@ chaosd attack network port --port 8080
 Send a `POST` HTTP request to the `/api/attack/network` path of the Chaosd service with the following `fault-configuration`:
 
 ```bash
-curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"occupied","port":8080}'
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"occupied","port":"8080"}'
+```
+
+## Simulate NIC down
+
+### Parameters for simulating NIC down
+
+| Configuration item | Abbreviation | Service mode field | Description | Type | Value |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | Action of the experiment. | string | Set to "down". |
+| device | d | device | Name of the network interface card to bring down. | string | such as "eth0", required. |
+| duration | N/A | duration | Duration before Chaosd automatically brings the NIC back up. | string | such as "30s", required. |
+
+### Simulate NIC down using the command-line mode
+
+You can run the command below to see the configuration of simulated NIC down using Chaosd.
+
+```bash
+chaosd attack network down --help
+```
+
+Run the following command to bring down the NIC:
+
+```bash
+chaosd attack network down -d eth0 --duration 30s
+```
+
+### Simulate NIC down using the service mode
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"down","device":"eth0","duration":"30s"}'
+```
+
+## Simulate network flood
+
+:::info
+
+Network flood requires `iperf`. Make sure that `iperf` is installed on the physical node running Chaosd and that an iperf server is running at the specified IP address and port.
+
+:::
+
+### Parameters for simulating network flood
+
+| Configuration item | Abbreviation | Service mode field | Description | Type | Value |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | Action of the experiment. | string | Set to "flood". |
+| duration | N/A | duration | Duration of the traffic generation, in seconds. | string | such as "30", required. |
+| ip | i | ip-address | IP address of the iperf server that receives the UDP traffic. | string | such as "172.16.4.4", required. |
+| parallel | N/A | parallel | Number of parallel iperf client streams. | int32 | such as `1`. |
+| port | p | port | Port of the iperf server. | string | such as "5001", required. |
+| rate | r | rate | UDP traffic rate in iperf syntax. | string | such as "10M", required. |
+
+### Simulate network flood using the command-line mode
+
+You can run the command below to see the configuration of simulated network flood using Chaosd.
+
+```bash
+chaosd attack network flood --help
+```
+
+Run the following command to generate UDP traffic using iperf:
+
+```bash
+chaosd attack network flood -i 172.16.4.4 -p 5001 -r 10M --duration 30
+```
+
+### Simulate network flood using the service mode
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"flood","ip-address":"172.16.4.4","port":"5001","rate":"10M","parallel":1,"duration":"30"}'
 ```

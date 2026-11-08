@@ -16,7 +16,7 @@ title: 模拟网络故障
 chaosd attack network --help
 ```
 
-目前 Chaosd 支持模拟以下实验场景：网络包错误（corrupt）、网络延迟（delay）、网络包重复（duplicate）、网络包丢失（loss）、网络分区（partition）、DNS 故障（dns）、网络带宽限制（bandwidth）以及端口占用（port）。
+目前 Chaosd 支持模拟以下实验场景：网络包错误（corrupt）、网络延迟（delay）、网络包重复（duplicate）、网络包丢失（loss）、网络分区（partition）、DNS 故障（dns）、网络带宽限制（bandwidth）、端口占用（port）、网卡禁用（down）以及网络流量泛洪（flood）。
 
 要使用服务模式创建实验，你需要以服务模式运行 Chaosd，然后向 Chaosd 服务的路径 `/api/attack/network` 发送 `POST` HTTP 请求：
 
@@ -330,10 +330,10 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 
 ### 模拟端口占用相关参数说明
 
-| 配置项   | 配置缩写 | 服务模式字段 | 说明         | 类型        | 值                     |
-| :------- | :------- | :----------- | :----------- | :---------- | :--------------------- |
-| `action` | —        | action       | 实验的行为   | string 类型 | 设置为 "occupied"      |
-| `port`   | p        | port         | 占用的端口号 | int 类型    | 例如：8080。必须要设置 |
+| 配置项   | 配置缩写 | 服务模式字段 | 说明         | 类型        | 值                       |
+| :------- | :------- | :----------- | :----------- | :---------- | :----------------------- |
+| `action` | —        | action       | 实验的行为   | string 类型 | 设置为 "occupied"        |
+| `port`   | p        | port         | 占用的端口号 | string 类型 | 例如："8080"。必须要设置 |
 
 ### 使用命令行模式模拟端口占用场景
 
@@ -354,5 +354,74 @@ chaosd attack network port --port 8080
 示例如下：
 
 ```bash
-curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"occupied","port":8080}'
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"occupied","port":"8080"}'
+```
+
+## 模拟网卡禁用场景
+
+### 模拟网卡禁用相关参数说明
+
+| 配置项 | 配置缩写 | 服务模式字段 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | 实验的行为 | string 类型 | 设置为 "down" |
+| device | d | device | 禁用的网卡设备名称 | string 类型 | 例如 "eth0"，必须要设置 |
+| duration | — | duration | 网卡禁用的持续时间，到期后 Chaosd 会自动恢复网卡 | string 类型 | 例如 "30s"，必须要设置 |
+
+### 使用命令行模式模拟网卡禁用场景
+
+可以运行以下命令，查看模拟网卡禁用场景支持的配置：
+
+```bash
+chaosd attack network down --help
+```
+
+运行以下命令，禁用指定的网卡：
+
+```bash
+chaosd attack network down -d eth0 --duration 30s
+```
+
+### 使用服务模式模拟网卡禁用场景
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"down","device":"eth0","duration":"30s"}'
+```
+
+## 模拟网络流量泛洪场景
+
+:::info
+
+网络流量泛洪依赖 `iperf`。请确保运行 Chaosd 的物理机上已安装 `iperf`，并在目标 IP 地址和端口上运行 iperf 服务端。
+
+:::
+
+### 模拟网络流量泛洪相关参数说明
+
+| 配置项 | 配置缩写 | 服务模式字段 | 说明 | 类型 | 值 |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| `action` | — | action | 实验的行为 | string 类型 | 设置为 "flood" |
+| duration | — | duration | 泛洪持续时间，单位为秒 | string 类型 | 例如 "30"，必须要设置 |
+| ip | i | ip-address | 接收 UDP 流量的 iperf 服务端 IP 地址 | string 类型 | 例如 "172.16.4.4"，必须要设置 |
+| parallel | — | parallel | iperf 客户端的并行流数量 | int32 类型 | 例如 1 |
+| port | p | port | iperf 服务端的端口 | string 类型 | 例如 "5001"，必须要设置 |
+| rate | r | rate | UDP 流量的速率，使用 iperf 的语法 | string 类型 | 例如 "10M"，必须要设置 |
+
+### 使用命令行模式模拟网络流量泛洪场景
+
+可以运行以下命令，查看模拟网络流量泛洪场景支持的配置：
+
+```bash
+chaosd attack network flood --help
+```
+
+运行以下命令，使用 iperf 生成 UDP 流量：
+
+```bash
+chaosd attack network flood -i 172.16.4.4 -p 5001 -r 10M --duration 30
+```
+
+### 使用服务模式模拟网络流量泛洪场景
+
+```bash
+curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:application/json" -d '{"action":"flood","ip-address":"172.16.4.4","port":"5001","rate":"10M","parallel":1,"duration":"30"}'
 ```
