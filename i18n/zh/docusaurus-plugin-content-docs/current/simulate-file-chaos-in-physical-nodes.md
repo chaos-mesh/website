@@ -169,7 +169,7 @@ chaosd attack file replace --origin-string test --dest-string text --file-name /
 
 ## 使用 HTTP 服务创建文件故障
 
-:::note
+:::info
 
 文件 HTTP 接口从 **Chaosd v1.6.0** 开始提供。Chaosd v1.5.0 的文件故障仅支持命令行模式。
 

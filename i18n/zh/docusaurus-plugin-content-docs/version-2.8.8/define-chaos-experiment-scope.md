@@ -166,7 +166,7 @@ spec:
 - 数据类型：键值对类型。"键"为目标 `PhysicalMachine` 所属的命名空间 (namespace), "值"为目标 `PhysicalMachine` 列表(list)。
 - 只要指定了此 Selector，Chaos Mesh 就会**忽略**其他配置的 Selectors。
 
-:::note
+:::info
 
 `PhysicalMachine` 是一种代表物理机的 CRD (CustomResourceDefinition)。要创建 `PhysicalMachine`，请使用 `chaosctl pm create` 或 `chaosctl pm init` 命令。更多详情，请参见 [Chaosctl](chaosctl-tool.md)。
 

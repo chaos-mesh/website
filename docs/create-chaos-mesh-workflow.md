@@ -42,7 +42,7 @@ Click **NEW WORKFLOW**.
 
    In this example, the "Single" type is selected as the task type.
 
-   :::note
+   :::info
 
    Chaos Dashboard automatically creates a serial node named "entry" as the entry point for this workflow.
 
@@ -202,7 +202,7 @@ It is flexible to create a workflow using a YAML file and `kubectl`. You can nes
 | statusCheck | object | Configures StatusCheck. You need to configure this field when the type is `StatusCheck`. See the [StatusCheck in Workflow](status-check-in-workflow.md) document for details. | None | No |  |
 | abortWithStatusCheck | bool | Configures whether abort the Workflow when StatusCheck is failed. You can configure this field when the type is `StatusCheck`. | `false` | No | `true` |
 
-:::note
+:::info
 
 When creating a Chaos with a duration in the workflow, you need to fill the duration in the outer `deadline` field instead of using the `duration` field in Chaos.
 
@@ -233,7 +233,7 @@ spec:
         container:
           name: task
           image: busybox:latest
-          command: ["echo", "Task completed"]
+          command: ['echo', 'Task completed']
         nodeSelector:
           disktype: ssd
         tolerations:

@@ -255,7 +255,7 @@ title: 新增混沌实验类型
    kubectl get pods --namespace chaos-mesh -l app.kubernetes.io/instance=chaos-mesh
    ```
 
-   :::note
+   :::info
 
    `--set chaosDaemon.runtime=containerd --set chaosDaemon.socketPath=/run/containerd/containerd.sock` 是用来在 kind 上运行 NetworkChaos 的。
 
@@ -308,7 +308,7 @@ title: 新增混沌实验类型
    2021-06-24T06:42:26.858Z        INFO    helloworldchaos Hello World!
    ```
 
-   :::note
+   :::info
 
    `{pod-post-fix}` 是一个随机串。你可以运行 `kubectl get pod -n chaos-mesh` 来查看它。
 

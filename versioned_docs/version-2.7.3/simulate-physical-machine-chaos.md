@@ -30,7 +30,7 @@ Before creating PhysicalMachineChaos experiments using Chaos Mesh, you need to d
      chaosd server --https-port 31768 --CA=/etc/chaosd/pki/ca.crt --cert=/etc/chaosd/pki/chaosd.crt --key=/etc/chaosd/pki/chaosd.key
      ```
 
-     :::note
+     :::info
 
      The TLS certificates are saved to the default output directory of Chaosctl. If you manually specified another directory when generating certificates, replace the directory in the command line with the corresponding one.
 

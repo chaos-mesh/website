@@ -39,7 +39,7 @@ stringData:
 
 ## 使用 Dashboard 方式创建实验
 
-:::note
+:::info
 
 在使用 Dashboard 方式创建实验之前，请确保：
 

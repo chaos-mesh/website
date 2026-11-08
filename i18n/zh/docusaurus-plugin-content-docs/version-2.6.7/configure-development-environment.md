@@ -125,7 +125,7 @@ UI=1 make image
    helm upgrade --install chaos-mesh-debug ./helm/chaos-mesh -n=chaos-mesh-debug --create-namespace --set chaosDlv.enable=true --set controllerManager.leaderElection.enabled=false
    ```
 
-   :::note
+   :::info
 
    为保证高可用，Chaos Mesh 默认启用 leader election，并会创建三个 `chaos-controller-manager` 副本。设置 `controllerManager.leaderElection.enabled=false` 会让 Chaos Mesh 只创建一个 `chaos-controller-manager` 副本，从而更易于调试。
 

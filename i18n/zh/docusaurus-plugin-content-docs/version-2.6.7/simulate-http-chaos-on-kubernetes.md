@@ -145,7 +145,7 @@ Chaos Mesh 也支持使用 YAML 配置文件创建 HTTPChaos 实验。在 YAML �
 | `tls.keyName` | string | 指定 Secret 中密钥文件的名称，例如 `tls.key` |  | 否 | "tls.key" |
 | `tls.caName` | string | 指定 Secret 中 CA 文件的名称，例如 `ca.crt` |  | 否 | "ca.crt" |
 
-:::note
+:::info
 
 - 当使用 YAML 文件创建实验时，`replace.body` 必须为替换内容的 Base64 编码。
 
@@ -258,7 +258,7 @@ spec:
 
 ## TLS
 
-:::note
+:::info
 
 执行以下步骤需要使用 Chaos Mesh [v2.8.5](https://github.com/chaos-mesh/chaos-mesh/releases/tag/v2.8.5) 或更高版本。v2.8.5 包含 TLS Secret 查找和 TLS 数据传递修复，以及 tproxy v0.5.6 升级。v2.6.7、v2.7.3 和 v2.8.4 不包含这些修复。
 

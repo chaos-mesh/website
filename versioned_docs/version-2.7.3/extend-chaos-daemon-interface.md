@@ -169,7 +169,7 @@ Now you can verify the output of `HelloWorldChaos`:
 
 1. Build Docker images as we described in [Add a new chaos experiment type](add-new-chaos-experiment-type.md#step-4-build-docker-images), then load them into your cluster.
 
-   :::note
+   :::info
 
    If you're using minikube, some versions of minikube cannot overwrite the existing images with the same tag. You may delete the existing images before loading the new ones.
 

@@ -4,7 +4,7 @@ title: 使用 Grafana Data Source 插件进行观测
 
 本文档介绍如何在 Grafana 中安装 Data Source 插件，并将其配置为观测 Chaos Mesh 事件。
 
-:::note
+:::info
 
 该插件要求 Chaos Mesh **>= 2.1**、Grafana **>= 10.0**。
 

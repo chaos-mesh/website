@@ -4,7 +4,7 @@ title: Chaosd Introduction
 
 [Chaosd](https://github.com/chaos-mesh/chaosd) injects faults into Linux hosts through a command-line tool or an HTTP service. It records experiments and recovery data in SQLite so that you can inspect experiments and recover supported faults.
 
-:::note
+:::info
 
 The Chaosd guides cover **Chaosd v1.5.0 and later**. Features that require a newer version are marked in the relevant sections. Chaosd is released separately from Chaos Mesh. The website's version selector refers to Chaos Mesh, not Chaosd. See [Chaosd releases](https://github.com/chaos-mesh/chaosd/releases) for version-specific changes.
 
@@ -42,7 +42,7 @@ Clock injection is unsupported on arm64. Other runtime tools depend on the selec
 
 ## Download and deploy
 
-:::note
+:::info
 
 The `latest` archives are no longer updated or published from `main`. Use a versioned release archive.
 

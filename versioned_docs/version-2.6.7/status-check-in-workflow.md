@@ -4,7 +4,7 @@ title: Status Check in Workflow
 
 In Workflow, the status check can execute specified operations on external systems, such as application systems and monitoring systems, to obtain their statuses, and automatically abort the Workflow when it finds the system is unhealthy. The concept is similar to `Container Probes` in Kubernetes. This article describes how to execute status checks in Workflow using YAML files.
 
-:::note
+:::info
 
 Chaos Mesh does not yet support creating `StatusCheck` nodes on Chaos Dashboard, so you can only create `StatusCheck` nodes using YAML for now.
 
@@ -68,7 +68,7 @@ In the configuration, the `StatusCheck` node will execute status checks continuo
 - When the `execution result` is `Success` for 1 or more consecutive times, the `status check result` is considered to be a `Success`.
 - When the `execution result` is `Failure` for 3 or more consecutive times, the `status check result` is considered to be a `Failure`.
 
-:::note
+:::info
 
 In the following sections, `status check fails` refers to the case where the `status check result` is a `Failure`, rather than a single `execution result` being a `Failure`.
 
@@ -76,7 +76,7 @@ In the following sections, `status check fails` refers to the case where the `st
 
 ### When the Status Check is unsuccessful, abort the Workflow
 
-:::note
+:::info
 
 The `StatusCheck` node only supports aborting the workflow automatically when the status check is unsuccessful. It cannot pause or resume the workflow.
 

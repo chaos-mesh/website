@@ -19,7 +19,7 @@ If you have not installed Chaos Mesh yet, you can enable this feature during ins
 
 <PickHelmVersion>{`helm install chaos-mesh chaos-mesh/chaos-mesh -n chaos-mesh --set controllerManager.enableFilterNamespace=true --version latest`}</PickHelmVersion>
 
-:::note
+:::info
 
 When you use Helm for installation, commands and parameters differ for different containers. Refer to [Install Chaos Mesh using Helm](production-installation-using-helm.mdx) for more information.
 

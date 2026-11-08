@@ -35,7 +35,7 @@ stringData:
 
 ## Create experiments using Chaos Dashboard
 
-:::note
+:::info
 
 Before you create an experiment using Chaos Dashboard, make sure the following requirements are met:
 

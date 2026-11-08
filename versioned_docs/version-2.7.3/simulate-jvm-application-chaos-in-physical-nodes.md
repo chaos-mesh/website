@@ -33,7 +33,7 @@ curl -X POST 172.16.112.130:31767/api/attack/jvm -H "Content-Type:application/js
 
 For the `fault-configuration` part in the above command, you need to configure it according to the fault types. For the corresponding parameters and examples, refer to the parameters of each fault type in the following sections.
 
-:::note
+:::info
 
 When running an experiment, remember to save the UID information of the experiment. When you want to end the experiment corresponding to the UID, you need to send an HTTP DELETE request to the `/api/attack/{uid}` path of Chaosd service.
 

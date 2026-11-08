@@ -6,13 +6,13 @@ title: 模拟块设备故障
 
 Chaos Mesh 提供了 BlockChaos 实验类型。你可以使用该实验类型来模拟块设备的延迟场景。本文档介绍如何安装 BlockChaos 实验所需的依赖，以及如何创建 BlockChaos 实验。
 
-:::note
+:::info
 
 BlockChaos 目前仍处于早期阶段，其安装和配置体验会持续改进。如果你发现任何问题，请在 [chaos-mesh/chaos-mesh](https://github.com/chaos-mesh/chaos-mesh) 中提交 issue 进行反馈。
 
 :::
 
-:::note
+:::info
 
 BlockChaos 的 `delay` 操作会影响所有使用该块设备的进程，而不仅仅是目标容器。
 
@@ -63,7 +63,7 @@ BlockChaos 的 `delay` 操作依赖 [chaos-driver](https://github.com/chaos-mesh
 
 如果你升级了内核，则需要重新编译该模块。
 
-:::note
+:::info
 
 建议使用 DKMS 或 akmod 来自动编译或加载内核模块。如果你想帮助我们改进安装体验，欢迎创建 DKMS 或 akmod 包并提交到各个发行版的仓库中。
 
@@ -89,7 +89,7 @@ BlockChaos 的 `delay` 操作依赖 [chaos-driver](https://github.com/chaos-mesh
        latency: 1s
    ```
 
-   :::note
+   :::info
 
    目前仅支持 hostPath 或本地卷（local volume）。
 

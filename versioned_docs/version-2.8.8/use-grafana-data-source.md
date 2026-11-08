@@ -4,7 +4,7 @@ title: Use Grafana Data Source Plugin for Observations
 
 This document describes how to install the Data Source plugin for Grafana and set it up to observe Chaos Mesh events.
 
-:::note
+:::info
 
 This plugin requires Chaos Mesh **>= 2.1** and Grafana **>= 10.0**.
 

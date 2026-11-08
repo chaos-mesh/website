@@ -25,7 +25,7 @@ Before creating PodChaos experiments, ensure the following:
 
 ## Create Experiments Using Chaos Dashboard
 
-:::note
+:::info
 
 Before create experiments using Chaos Dashboard, ensure the following:
 

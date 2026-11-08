@@ -133,7 +133,7 @@ Chaos Mesh 允许关闭权限验证功能，如何关闭请参阅[开启或关�
 
    ![Dashboard 令牌登录 2](img/dashboard_login2.png)
 
-:::note
+:::info
 
 - 需要保证执行 `kubectl` 的本地用户具有集群的相应权限，从而可以创建用户账户、为其他用户绑定权限并生成 token。
 

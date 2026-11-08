@@ -83,7 +83,7 @@ The fields in the YAML configuration file are described in the following table:
 | time | string | Specifies the time to reach the memory `size`. The growth model is a linear model. |  | No | `10min` |
 | oomScoreAdj | int | Specifies the [oom_score_adj](https://man7.org/linux/man-pages/man5/proc.5.html) of the stress process. |  | No | `-1000` |
 
-:::note
+:::info
 
 To avoid the high CPU load caused by the read and write pressure from `stress-ng`, Chaos Mesh uses [memStress](https://github.com/chaos-mesh/memStress) to simulate memory stress, because memStress consumes actual memory instead of applying read and write pressure to memory.
 

@@ -37,7 +37,7 @@ stringData:
 - **client_secret** stores the Application (client) secret value of the Azure app registration.
 - **tenant_id** stores the Directory (tenant) ID of the Azure app registration. For `client_id` and `client_secret`, please refer to [Confidential client application](https://docs.microsoft.com/en-us/azure/healthcare-apis/azure-api-for-fhir/register-confidential-azure-ad-client-app).
 
-:::note
+:::info
 
 Make sure that the app registrations in the Secret file have been added as a contributor or owner to the access control (IAM) of the VM instance.
 

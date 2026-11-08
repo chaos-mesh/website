@@ -125,7 +125,7 @@ We could use [delve](https://github.com/go-delve/delve) with remote debugging to
    helm upgrade --install chaos-mesh-debug ./helm/chaos-mesh -n=chaos-mesh-debug --create-namespace --set chaosDlv.enable=true --set controllerManager.leaderElection.enabled=false
    ```
 
-   :::note
+   :::info
 
    To ensure high availability, Chaos Mesh enables leader election by default and creates three replicas of `chaos-controller-manager`. Setting `controllerManager.leaderElection.enabled=false` makes Chaos Mesh create only one replica of `chaos-controller-manager`, which is easier to debug.
 

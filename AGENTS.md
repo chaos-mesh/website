@@ -18,6 +18,8 @@ Use Node.js 24 to match CI and the pnpm version pinned in `package.json`. Reuse 
 
 Use two spaces and LF line endings. Prettier uses single quotes, omits JavaScript semicolons, and sorts imports. Husky runs `lint-staged` to format staged `.js` and `.md` files. Use kebab-case for new documentation filenames and PascalCase for reusable React components. Preserve existing document IDs and heading anchors. For new React UI strings, use Docusaurus `Translate` or `translate()` and refresh Chinese translation keys with `pnpm write-translations --locale zh`.
 
+For admonitions, use `:::info` for general supplementary information and do not use `:::note`, whose gray styling is easy to confuse with body text. Keep `tip`, `caution`, `warning`, and `danger` for their own emphasis levels.
+
 ## Validation
 
 Run `pnpm build` and review link warnings. Preview changed pages in the affected versions and locales, checking navigation, anchors, images, and rendered examples. CI builds pull requests targeting `master` and checks links in changed Markdown files. The project has no configured unit test suite or coverage threshold.

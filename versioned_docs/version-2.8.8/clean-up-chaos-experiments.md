@@ -52,7 +52,7 @@ Before cleaning up a namespace or uninstalling Chaos Mesh, make sure that all th
 for i in $(kubectl api-resources | grep chaos-mesh | awk '{print $1}'); do kubectl get $i -A; done
 ```
 
-:::note
+:::info
 
 The `Schedule` and the `Workflow` resources, as well as the chaos experiment objects they create, are separate Kubernetes objects. When you clean up the experiments created by a `Schedule` or a `Workflow`, make sure to delete these objects as well.
 
