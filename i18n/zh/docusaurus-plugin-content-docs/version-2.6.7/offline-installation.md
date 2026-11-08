@@ -4,6 +4,8 @@ title: 离线安装
 
 import PickVersion from '@site/src/components/PickVersion'
 
+import PickHelmVersion from '@site/src/components/PickHelmVersion'
+
 import VerifyInstallation from './common/\_verify-installation.md'
 
 import QuickRun from './common/\_quick-run.md'
@@ -12,14 +14,17 @@ import QuickRun from './common/\_quick-run.md'
 
 ## 环境准备
 
-在安装前，请先确保离线环境中已经安装 Docker 并部署了 Kubernetes 集群。如果环境尚未准备好，请参考以下链接安装 Docker 并部署 Kubernetes 集群：
+在安装前，请先确保离线环境中已经安装 Docker、Helm 并部署了 Kubernetes 集群。如果环境尚未准备好，请参考以下链接安装 Docker、Helm 并部署 Kubernetes 集群：
 
 - [Docker](https://www.docker.com/get-started)
 - [Kubernetes](https://kubernetes.io/docs/setup/)
+- [Helm](https://helm.sh/docs/intro/install/)
+
+有外网连接的机器上也需要安装 Helm，因为需要使用 `helm pull` 下载 Helm Chart。
 
 ## 准备安装文件
 
-在离线安装 Chaos Mesh 前，你需要从有外网连接的机器上下载所有 Chaos Mesh 镜像和仓库压缩包，然后将下载的文件拷贝到离线环境中。
+在离线安装 Chaos Mesh 前，你需要从有外网连接的机器上下载 Chaos Mesh 镜像和 Helm Chart，然后将下载的文件拷贝到离线环境中。
 
 ### 指定版本号
 
@@ -58,13 +63,16 @@ Helm Chart 默认启用 DNS Server。因此，即使不计划运行 DNSChaos，�
 
 :::
 
-### 下载 Chaos Mesh 仓库压缩包
+### 下载 Helm Chart
 
-在有外网连接的机器上，下载 Chaos Mesh 的 zip 包：
+在有外网连接的机器上，从 [Chaos Mesh charts 仓库](https://github.com/chaos-mesh/charts) 下载 Chaos Mesh 的 Helm Chart：
 
-<PickVersion isArchive replaced="refs/heads/master">
-{`curl -fsSL -o chaos-mesh.zip https://github.com/chaos-mesh/chaos-mesh/archive/refs/heads/master.zip`}
-</PickVersion>
+<PickHelmVersion>
+{`helm repo add chaos-mesh https://charts.chaos-mesh.org
+helm pull chaos-mesh/chaos-mesh --untar --version latest`}
+</PickHelmVersion>
+
+Chart 会下载并解压到 `chaos-mesh` 目录。
 
 ### 拷贝文件
 
@@ -74,11 +82,11 @@ Helm Chart 默认启用 DNS Server。因此，即使不计划运行 DNSChaos，�
 - `image-chaos-daemon.tar`
 - `image-chaos-dashboard.tar`
 - `image-chaos-coredns.tar`
-- `chaos-mesh.zip`
+- `chaos-mesh`（解压后的 Helm Chart）
 
 ## 安装
 
-将 Chaos Mesh 镜像的 tar 包和仓库的 zip 包拷贝到你的离线环境后，就可以按照以下步骤进行安装。
+将 Chaos Mesh 镜像的 tar 包和 Helm Chart 拷贝到你的离线环境后，就可以按照以下步骤进行安装。
 
 ### 第 1 步：加载 Chaos Mesh 镜像
 
@@ -131,19 +139,6 @@ docker push $CHAOS_DNS_IMAGE
 
 ### 第 3 步：使用 Helm 安装
 
-解压 Chaos Mesh 的 zip 包：
-
-```bash
-unzip chaos-mesh.zip -d chaos-mesh
-cd chaos-mesh/chaos-mesh-*/
-```
-
-:::info
-
-如果你正在 Kubernetes v1.15（或更低版本）中安装 Chaos Mesh，请通过 `kubectl create -f manifests/crd-v1beta1.yaml` 手动安装 CRD。具体细节，请参考 [FAQ](./faqs.md#安装-chaos-mesh-失败提示信息为no-matches-for-kind-customresourcedefinition-in-version-apiextensionsk8siov1)。
-
-:::
-
 创建命名空间：
 
 ```bash
@@ -153,7 +148,9 @@ kubectl create ns chaos-mesh
 执行 Chaos Mesh 安装命令。在安装命令中，你需要指定 Chaos Mesh 的命名空间和各组件的镜像值：
 
 ```bash
-helm install chaos-mesh helm/chaos-mesh -n=chaos-mesh --set images.registry=$DOCKER_REGISTRY --set-string dnsServer.image="$CHAOS_DNS_IMAGE"
+helm install chaos-mesh ./chaos-mesh -n=chaos-mesh \
+  --set images.registry=$DOCKER_REGISTRY \
+  --set-string dnsServer.image="$CHAOS_DNS_IMAGE"
 ```
 
 ## 验证安装
