@@ -12,7 +12,7 @@ import QuickRun from './common/\_quick-run.md'
 
 ## 环境准备
 
-在安装前，请先确保离线环境中已经安装 Docker 并部署了 Kubernetes 集群。如果环境尚未准备好，请参考以下链接安装 Docker 并部署 Kubernetes 集群：
+在安装前，请先确保离线环境中已经安装 Docker 并部署了 Kubernetes 集群。关于支持的 Kubernetes 版本，请参考[支持的版本列表](/supported-releases)。如果环境尚未准备好，请参考以下链接安装 Docker 并部署 Kubernetes 集群：
 
 - [Docker](https://www.docker.com/get-started)
 - [Kubernetes](https://kubernetes.io/docs/setup/)
@@ -137,12 +137,6 @@ docker push $CHAOS_DNS_IMAGE
 unzip chaos-mesh.zip -d chaos-mesh
 cd chaos-mesh/chaos-mesh-*/
 ```
-
-:::note
-
-如果你正在 Kubernetes v1.15（或更低版本）中安装 Chaos Mesh，请通过 `kubectl create -f manifests/crd-v1beta1.yaml` 手动安装 CRD。具体细节，请参考 [FAQ](./faqs.md#安装-chaos-mesh-失败提示信息为no-matches-for-kind-customresourcedefinition-in-version-apiextensionsk8siov1)。
-
-:::
 
 创建命名空间：
 

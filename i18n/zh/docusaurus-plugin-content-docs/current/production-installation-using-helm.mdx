@@ -18,7 +18,10 @@ import QuickRun from './common/\_quick-run.md'
 
 ## 环境准备
 
-在安装之前，请先确保环境中已经安装 [Helm](https://helm.sh/docs/intro/install/)。
+在安装之前，请先确保：
+
+- 你的 Kubernetes 集群运行的是[受支持的 Kubernetes 版本](/supported-releases)。
+- 环境中已经安装 [Helm](https://helm.sh/docs/intro/install/)。
 
 如要查看 Helm 是否已经安装，请执行如下命令：
 
@@ -79,12 +82,6 @@ kubectl create ns chaos-mesh
 ```
 
 ### 第 4 步：在不同环境下安装
-
-:::note
-
-如果你正在 Kubernetes v1.15（或更低版本）中安装 Chaos Mesh，请手动安装 CRD。 具体细节，请参考 [FAQ](./faqs.md#安装-chaos-mesh-失败提示信息为no-matches-for-kind-customresourcedefinition-in-version-apiextensionsk8siov1)。
-
-:::
 
 由于不同容器运行时的守护进程所监听的 socket path 不同，你需要在安装时设置适当的值。你可以根据不同的环境来运行以下的安装命令。
 

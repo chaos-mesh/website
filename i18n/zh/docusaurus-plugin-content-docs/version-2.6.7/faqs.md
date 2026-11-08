@@ -4,81 +4,11 @@ title: 常见问题解答 (FAQ)
 
 import PickHelmVersion from '@site/src/components/PickHelmVersion'
 
+## 通用
+
 ### 如果我没有部署 Kubernetes 集群，能否使用 Chaos Mesh 创建混沌实验？
 
 不能。你可以改用 [chaosd](https://github.com/chaos-mesh/chaosd/) 在不依赖 Kubernetes 的情况下注入故障。
-
-### 我已经成功部署 Chaos Mesh 并创建了 PodChaos 实验，但创建 NetworkChaos/TimeChaos 实验仍然失败。日志如下：
-
-```console
-2020-06-18T02:49:15.160Z ERROR controllers.TimeChaos failed to apply chaos on all pods {"reconciler": "timechaos", "error": "rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial tcp xx.xx.xx.xx:xxxx: connect: connection refused\""}
-```
-
-原因是 `chaos-controller-manager` 无法连接到 `chaos-daemon`。你需要先检查 Pod 网络及其[策略](https://kubernetes.io/docs/concepts/services-networking/network-policies/)。
-
-如果一切正常，你可以尝试通过以下方式使用 `hostNetwork` 参数解决此问题：
-
-<PickHelmVersion>{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n chaos-mesh --version latest --set chaosDaemon.hostNetwork=true`}</PickHelmVersion>
-
-参考文档：https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/troubleshooting-kubeadm/#hostport-services-do-not-work
-
-### Google Cloud 默认管理员账号无法创建混沌实验。如何解决？
-
-Google Cloud 默认管理员账号无法通过 `AdmissionReview` 校验。你需要创建一个管理员角色，并将其绑定到你的账号，以授权该账号创建混沌实验。例如：
-
-```yaml
-kind: ClusterRole
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: role-cluster-manager-pdmas
-rules:
-  - apiGroups: ['']
-    resources: ['pods', 'namespaces']
-    verbs: ['get', 'watch', 'list']
-  - apiGroups:
-      - chaos-mesh.org
-    resources: ['*']
-    verbs: ['get', 'list', 'watch', 'create', 'delete', 'patch', 'update']
----
-kind: ClusterRoleBinding
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: cluster-manager-binding
-  namespace: chaos-mesh
-subjects:
-  # Google Cloud 用户账号
-  - kind: User
-    name: USER_ACCOUNT
-roleRef:
-  kind: ClusterRole
-  name: role-cluster-manager-pdmas
-  apiGroup: rbac.authorization.k8s.io
-```
-
-上述 `USER_ACCOUNT` 应为你的 Google Cloud 用户邮箱。
-
-### 出现类似 `version 1.41 is too new. The maximum supported API version is 1.39` 的错误
-
-这表明 Docker daemon 可接受的最大 API 版本为 `1.39`，但 `chaos-daemon` 中的客户端默认使用 `1.41`。你可以选择以下任一方式解决此问题：
-
-1. 将 Docker 升级到更新的版本。
-2. 使用 `--set chaosDaemon.env.DOCKER_API_VERSION=1.39` 进行 Helm 安装/升级。
-
-## DNSChaos
-
-### 在 OpenShift 中运行 DNSChaos 时，因授权问题导致操作被阻止
-
-如果错误信息类似以下内容：
-
-```bash
-Error creating: pods "chaos-dns-server-123aa56123-" is forbidden: unable to validate against any security context constraint: [spec.containers[0].securityContext.capabilities.add: Invalid value: "NET_BIND_SERVICE": capability may not be added]
-```
-
-你需要为 `chaos-dns-server` 添加特权 Security Context Constraints (SCC)。
-
-```bash
-oc adm policy add-scc-to-user privileged -n chaos-mesh -z chaos-dns-server
-```
 
 ## 安装
 
@@ -132,6 +62,80 @@ kubectl label namespace chaos-mesh pod-security.kubernetes.io/enforce=privileged
 3. 使用 Helm 完成剩余的安装流程，并在 `helm install` 命令中追加 `--skip-crds`。
 
 我们建议你参考 Kubernetes [版本偏差策略](https://kubernetes.io/releases/version-skew-policy/)升级 Kubernetes 集群。
+
+### 出现类似 `version 1.41 is too new. The maximum supported API version is 1.39` 的错误
+
+这表明 Docker daemon 可接受的最大 API 版本为 `1.39`，但 `chaos-daemon` 中的客户端默认使用 `1.41`。你可以选择以下任一方式解决此问题：
+
+1. 将 Docker 升级到更新的版本。
+2. 使用 `--set chaosDaemon.env.DOCKER_API_VERSION=1.39` 进行 Helm 安装/升级。
+
+## 实验
+
+### 我已经成功部署 Chaos Mesh 并创建了 PodChaos 实验，但创建 NetworkChaos/TimeChaos 实验仍然失败
+
+```console
+2020-06-18T02:49:15.160Z ERROR controllers.TimeChaos failed to apply chaos on all pods {"reconciler": "timechaos", "error": "rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial tcp xx.xx.xx.xx:xxxx: connect: connection refused\""}
+```
+
+原因是 `chaos-controller-manager` 无法连接到 `chaos-daemon`。你需要先检查 Pod 网络及其[策略](https://kubernetes.io/docs/concepts/services-networking/network-policies/)。
+
+如果一切正常，你可以尝试通过以下方式使用 `hostNetwork` 参数解决此问题：
+
+<PickHelmVersion>{`helm upgrade chaos-mesh chaos-mesh/chaos-mesh -n chaos-mesh --version latest --set chaosDaemon.hostNetwork=true`}</PickHelmVersion>
+
+参考文档：https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/troubleshooting-kubeadm/#hostport-services-do-not-work
+
+### Google Cloud 默认管理员账号无法创建混沌实验。如何解决？
+
+Google Cloud 默认管理员账号无法通过 `AdmissionReview` 校验。你需要创建一个管理员角色，并将其绑定到你的账号，以授权该账号创建混沌实验。例如：
+
+```yaml
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: role-cluster-manager-pdmas
+rules:
+  - apiGroups: ['']
+    resources: ['pods', 'namespaces']
+    verbs: ['get', 'watch', 'list']
+  - apiGroups:
+      - chaos-mesh.org
+    resources: ['*']
+    verbs: ['get', 'list', 'watch', 'create', 'delete', 'patch', 'update']
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: cluster-manager-binding
+  namespace: chaos-mesh
+subjects:
+  # Google Cloud 用户账号
+  - kind: User
+    name: USER_ACCOUNT
+roleRef:
+  kind: ClusterRole
+  name: role-cluster-manager-pdmas
+  apiGroup: rbac.authorization.k8s.io
+```
+
+上述 `USER_ACCOUNT` 应为你的 Google Cloud 用户邮箱。
+
+## DNSChaos
+
+### 在 OpenShift 中运行 DNSChaos 时，因授权问题导致操作被阻止
+
+如果错误信息类似以下内容：
+
+```bash
+Error creating: pods "chaos-dns-server-123aa56123-" is forbidden: unable to validate against any security context constraint: [spec.containers[0].securityContext.capabilities.add: Invalid value: "NET_BIND_SERVICE": capability may not be added]
+```
+
+你需要为 `chaos-dns-server` 添加特权 Security Context Constraints (SCC)。
+
+```bash
+oc adm policy add-scc-to-user privileged -n chaos-mesh -z chaos-dns-server
+```
 
 ## Chaosd
 
