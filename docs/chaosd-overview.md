@@ -2,8 +2,6 @@
 title: Chaosd Introduction
 ---
 
-## Chaosd Introduction
-
 [Chaosd](https://github.com/chaos-mesh/chaosd) injects faults into Linux hosts through a command-line tool or an HTTP service. It records experiments and recovery data in SQLite so that you can inspect experiments and recover supported faults.
 
 :::note
@@ -12,7 +10,7 @@ The Chaosd guides cover **Chaosd v1.5.0 and later**. Features that require a new
 
 :::
 
-### Supported fault types
+## Supported fault types
 
 The CLI supports the following fault types. Run `chaosd attack <command> --help` for available actions and flags.
 
@@ -36,13 +34,13 @@ In Chaosd v1.5.0, host and file faults are available through the CLI only. **Cha
 
 For the other fault types, the HTTP service accepts `POST /api/attack/<kind>`. The custom command endpoint uses `user_defined`. HTTP requests use JSON configuration fields, which can differ from CLI flag names.
 
-### Operating environment
+## Operating environment
 
 The Chaosd v1.5.0 prebuilt archives support Linux **amd64** and **arm64**, and require **glibc 2.34 or later**. Older archives retain their original requirements. When building from source, runtime requirements depend on the libraries in the build environment.
 
 Clock injection is unsupported on arm64. Other runtime tools depend on the selected fault. For example, network faults use tools such as `tc`, `ipset`, and `iptables`; CPU stress uses `stress-ng`, and memory stress uses `memStress`. Run experiments with the privileges required by the target operation, often root or Linux capabilities.
 
-### Download and deploy
+## Download and deploy
 
 :::note
 
@@ -81,7 +79,7 @@ The `latest` archives are no longer updated or published from `main`. Use a vers
 
 Keep the `tools` directory beside the `chaosd` executable. Chaosd adds the bundled tools to its search path and uses the bundled Byteman unless `BYTEMAN_HOME` is set.
 
-### Work modes
+## Work modes
 
 - Command-line mode: Run `chaosd attack <command>` to create an experiment and `chaosd recover <UID>` to recover a supported fault.
 - Service mode: Run Chaosd in the background and send HTTP requests to create or recover experiments. See [Deploy Chaosd server](simulate-physical-machine-chaos.md#deploy-chaosd-server) for TLS configuration when connecting from Chaos Mesh.

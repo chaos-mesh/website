@@ -6,12 +6,26 @@ This document describes how to create PhysicalMachineChaos (physical machine cha
 
 ## Introduction to PhysicalMachineChaos
 
-You can use PhysicalMachineChaos to simulate the faults of network, disk, pressure, JVM, time, and others in physical or virtual machines. Before using PhysicalMachineChaos provided by Chaos Mesh, you need to deploy Chaosd in your physical or virtual machines. The version mapping between Chaos Mesh and Chaosd is as follows:
+You can use PhysicalMachineChaos to simulate the faults of network, disk, pressure, JVM, time, and others in physical or virtual machines. Before using PhysicalMachineChaos provided by Chaos Mesh, you need to deploy Chaosd in your physical or virtual machines. Chaosd is released separately from Chaos Mesh. The following table lists the corresponding Chaosd version for each Chaos Mesh minor version:
 
-| Chaos Mesh version | Chaosd version |
-| :----------------- | :------------- |
-| v2.1.x             | v1.1.x         |
-| v2.2.x             | v1.2.x         |
+| Chaos Mesh version | Chaosd version   |
+| :----------------- | :--------------- |
+| v2.1.x             | v1.1.x           |
+| v2.2.x             | v1.2.x           |
+| v2.3.x             | v1.3.x           |
+| v2.4.x – v2.7.x    | v1.4.x           |
+| v2.8.x and later   | v1.5.x and later |
+
+Some faults require a newer Chaosd version than the corresponding version in the table above:
+
+- `http-*` faults require Chaosd v1.5.0 or later.
+- `file-*` faults require Chaosd v1.6.0 or later.
+- Kafka authentication requires Chaosd v1.4.0 or later.
+- Disk faults are recommended to use Chaosd v1.4.0 or later, which fixes disk attacks used by PhysicalMachineChaos.
+
+If your environment supports it, use the latest stable Chaosd release. Newer releases include fixes and keep the HTTP API used by PhysicalMachineChaos backward compatible. For runtime requirements, such as the glibc version required by prebuilt archives, see [Operating environment](chaosd-overview.md#operating-environment).
+
+For version-specific changes, see [Chaosd releases](https://github.com/chaos-mesh/chaosd/releases).
 
 ## Deploy Chaosd server
 

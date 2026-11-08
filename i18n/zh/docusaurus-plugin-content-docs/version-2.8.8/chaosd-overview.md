@@ -2,8 +2,6 @@
 title: Chaosd 组件简介
 ---
 
-## Chaosd 组件简介
-
 [Chaosd](https://github.com/chaos-mesh/chaosd) 通过命令行工具或 HTTP 服务向 Linux 主机注入故障。它使用 SQLite 保存实验和恢复数据，便于后续查询实验，以及恢复支持恢复的故障。
 
 :::note
@@ -12,7 +10,7 @@ Chaosd 文档适用于 **Chaosd v1.5.0 及以上版本**。需要更高版本的
 
 :::
 
-### 支持故障类型
+## 支持故障类型
 
 命令行支持以下故障类型。运行 `chaosd attack <command> --help` 可查看可用的操作和参数。
 
@@ -36,13 +34,13 @@ Chaosd 文档适用于 **Chaosd v1.5.0 及以上版本**。需要更高版本的
 
 其他故障类型可通过 HTTP 服务的 `POST /api/attack/<kind>` 创建实验，自定义命令对应的路径使用 `user_defined`。HTTP 请求使用 JSON 配置字段，字段名称可能与命令行参数不同。
 
-### 运行环境
+## 运行环境
 
 Chaosd v1.5.0 的预编译压缩包支持 Linux **amd64** 和 **arm64**，要求 **glibc 2.34 及以上版本**。旧压缩包保留原有要求。从源码构建时，运行要求取决于构建环境使用的库。
 
 arm64 不支持时间偏移故障。其他运行工具取决于所选故障。例如，网络故障使用 `tc`、`ipset` 和 `iptables` 等工具，CPU 压力使用 `stress-ng`，内存压力使用 `memStress`。运行实验时需要具备目标操作所需的权限，通常为 root 或相应的 Linux capabilities。
 
-### 下载和部署
+## 下载和部署
 
 :::note
 
@@ -81,7 +79,7 @@ arm64 不支持时间偏移故障。其他运行工具取决于所选故障。�
 
 请保留 `chaosd` 可执行文件旁的 `tools` 目录。Chaosd 会将这些工具加入搜索路径，并在未设置 `BYTEMAN_HOME` 时使用随包提供的 Byteman。
 
-### 运行模式
+## 运行模式
 
 - 命令行模式：运行 `chaosd attack <command>` 创建实验，运行 `chaosd recover <UID>` 恢复支持恢复的故障。
 - 服务模式：在后台运行 Chaosd，通过 HTTP 请求创建或恢复实验。从 Chaos Mesh 连接时的 TLS 配置请参阅[运行 Chaosd Server](simulate-physical-machine-chaos.md#运行-chaosd-server)。
