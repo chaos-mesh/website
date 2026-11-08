@@ -118,7 +118,7 @@ runAsNonRoot != true, seccompProfile
 To fix this, label the `chaos-mesh` namespace with the `privileged` enforce level before installing Chaos Mesh:
 
 ```bash
-kubectl label namespace chaos-mesh pod-security.kubernetes.io/enforce=privileged
+kubectl label namespace chaos-mesh pod-security.kubernetes.io/enforce=privileged --overwrite
 ```
 
 ## Chaosd

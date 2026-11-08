@@ -118,7 +118,7 @@ runAsNonRoot != true, seccompProfile
 要解决此问题，请在安装 Chaos Mesh 之前，为 `chaos-mesh` namespace 打上 `privileged` 强制级别标签：
 
 ```bash
-kubectl label namespace chaos-mesh pod-security.kubernetes.io/enforce=privileged
+kubectl label namespace chaos-mesh pod-security.kubernetes.io/enforce=privileged --overwrite
 ```
 
 ### 安装 Chaos Mesh 失败，提示信息为：no matches for kind "CustomResourceDefinition" in version "apiextensions.k8s.io/v1"
