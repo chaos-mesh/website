@@ -15,7 +15,6 @@ module.exports = {
           label: 'Installation and Deployment',
           collapsed: false,
           items: [
-            'quick-start',
             'production-installation-using-helm',
             'offline-installation',
             'uninstallation',

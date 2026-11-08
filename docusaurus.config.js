@@ -134,8 +134,8 @@ const config = {
           title: 'Documentation',
           items: [
             {
-              label: 'Quick Start',
-              to: 'docs/quick-start',
+              label: 'Installation using Helm',
+              to: 'docs/production-installation-using-helm',
             },
             {
               label: 'Run a Chaos Experiment',
