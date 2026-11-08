@@ -2,8 +2,6 @@
 title: Chaosd Introduction
 ---
 
-## Chaosd Introduction
-
 [Chaosd](https://github.com/chaos-mesh/chaosd) is a Chaos Engineering testing tool provided by Chaos Mesh. You need to download and deploy it separately (see [Download and deploy](#download-and-deploy)). It is used to inject faults into physical machine environments and to recover those faults.
 
 Chaosd has the following core strengths:
@@ -12,7 +10,7 @@ Chaosd has the following core strengths:
 - Various fault types: Chaosd provides various fault types to be injected into physical machines at different levels, including process, network, pressure, disk, host, etc. More fault types are to be added.
 - Multiple work modes: Chaosd can be used both as a command-line tool and as a service to meet the needs of different scenarios.
 
-### Supported fault types
+## Supported fault types
 
 You can use Chaosd to simulate the following fault types:
 
@@ -24,11 +22,11 @@ You can use Chaosd to simulate the following fault types:
 
 For details about the introduction and usage of each fault type, refer to the related documentation.
 
-### Operating environment
+## Operating environment
 
 Your glibc version must be v2.17 or later.
 
-### Download and deploy
+## Download and deploy
 
 1. Set the version of Chaosd to be downloaded as the environment variable. For example, v1.0.0:
 
@@ -62,7 +60,7 @@ Your glibc version must be v2.17 or later.
    export PATH=/usr/local/chaosd-$CHAOSD_VERSION-linux-amd64:$PATH
    ```
 
-### Work modes
+## Work modes
 
 You can use Chaosd in the following modes:
 
