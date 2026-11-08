@@ -4,11 +4,63 @@ title: 常见问题解答 (FAQ)
 
 import PickHelmVersion from '@site/src/components/PickHelmVersion'
 
+## 通用
+
 ### 如果我没有部署 Kubernetes 集群，能否使用 Chaos Mesh 创建混沌实验？
 
 不能。你可以改用 [chaosd](https://github.com/chaos-mesh/chaosd/) 在不依赖 Kubernetes 的情况下注入故障。
 
-### 我已经成功部署 Chaos Mesh 并创建了 PodChaos 实验，但创建 NetworkChaos/TimeChaos 实验仍然失败。日志如下：
+## 安装
+
+### 在 OpenShift 中安装 Chaos Mesh 时，因授权问题导致安装过程被阻止
+
+如果错误信息类似以下内容：
+
+```bash
+Error creating: pods "chaos-daemon-" is forbidden: unable
+ to validate against any security context constraint: [spec.securityContext.hostNetwork:
+ Invalid value: true: Host network is not allowed to be used spec.securityContext.hostPID:
+ Invalid value: true: Host PID is not allowed to be used spec.securityContext.hostIPC:
+ Invalid value: true: Host IPC is not allowed to be used securityContext.runAsUser:
+ Invalid value: "hostPath": hostPath volumes are not allowed to be used spec.containers[0].securityContext.volumes[1]:
+ Invalid value: true: Host network is not allowed to be used spec.containers[0].securityContext.containers[0].hostPort:
+ Invalid value: 31767: Host ports are not allowed to be used spec.containers[0].securityContext.hostPID:
+ Invalid value: true: Host PID is not allowed to be used spec.containers[0].securityContext.hostIPC:
+......]
+```
+
+你需要为 `chaos-daemon` 服务账号添加特权 SCC。
+
+```bash
+oc adm policy add-scc-to-user privileged -n chaos-mesh -z chaos-daemon
+```
+
+### 因 Pod Security Standards（PSS）限制导致 Chaos Mesh 安装失败
+
+Chaos Daemon 必须以特权（privileged）DaemonSet 的方式运行，才能对目标 Pod 注入故障。如果 `chaos-mesh` namespace 被打上了 `privileged` 以外的 Pod Security Standards（PSS）强制（enforce）级别标签（例如 `baseline` 或 `restricted`），安装时创建 Chaos Daemon Pod 会被拒绝，错误信息类似如下：
+
+```bash
+Error creating: pods "chaos-daemon-" is forbidden: violates PodSecurity
+"restricted:v1.24": allowPrivilegeEscalation != false, unrestricted capabilities,
+runAsNonRoot != true, seccompProfile
+```
+
+要解决此问题，请在安装 Chaos Mesh 之前，为 `chaos-mesh` namespace 打上 `privileged` 强制级别标签：
+
+```bash
+kubectl label namespace chaos-mesh pod-security.kubernetes.io/enforce=privileged --overwrite
+```
+
+### 出现类似 `version 1.41 is too new. The maximum supported API version is 1.39` 的错误
+
+这表明 Docker daemon 可接受的最大 API 版本为 `1.39`，但 `chaos-daemon` 中的客户端默认使用 `1.41`。你可以选择以下任一方式解决此问题：
+
+1. 将 Docker 升级到更新的版本。
+2. 使用 `--set chaosDaemon.env.DOCKER_API_VERSION=1.39` 进行 Helm 安装/升级。
+
+## 实验
+
+### 我已经成功部署 Chaos Mesh 并创建了 PodChaos 实验，但创建 NetworkChaos/TimeChaos 实验仍然失败
 
 ```console
 2020-06-18T02:49:15.160Z ERROR controllers.TimeChaos failed to apply chaos on all pods {"reconciler": "timechaos", "error": "rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial tcp xx.xx.xx.xx:xxxx: connect: connection refused\""}
@@ -57,13 +109,6 @@ roleRef:
 
 上述 `USER_ACCOUNT` 应为你的 Google Cloud 用户邮箱。
 
-### 出现类似 `version 1.41 is too new. The maximum supported API version is 1.39` 的错误
-
-这表明 Docker daemon 可接受的最大 API 版本为 `1.39`，但 `chaos-daemon` 中的客户端默认使用 `1.41`。你可以选择以下任一方式解决此问题：
-
-1. 将 Docker 升级到更新的版本。
-2. 使用 `--set chaosDaemon.env.DOCKER_API_VERSION=1.39` 进行 Helm 安装/升级。
-
 ## DNSChaos
 
 ### 在 OpenShift 中运行 DNSChaos 时，因授权问题导致操作被阻止
@@ -79,59 +124,6 @@ Error creating: pods "chaos-dns-server-123aa56123-" is forbidden: unable to vali
 ```bash
 oc adm policy add-scc-to-user privileged -n chaos-mesh -z chaos-dns-server
 ```
-
-## 安装
-
-### 在 OpenShift 中安装 Chaos Mesh 时，因授权问题导致安装过程被阻止
-
-如果错误信息类似以下内容：
-
-```bash
-Error creating: pods "chaos-daemon-" is forbidden: unable
- to validate against any security context constraint: [spec.securityContext.hostNetwork:
- Invalid value: true: Host network is not allowed to be used spec.securityContext.hostPID:
- Invalid value: true: Host PID is not allowed to be used spec.securityContext.hostIPC:
- Invalid value: true: Host IPC is not allowed to be used securityContext.runAsUser:
- Invalid value: "hostPath": hostPath volumes are not allowed to be used spec.containers[0].securityContext.volumes[1]:
- Invalid value: true: Host network is not allowed to be used spec.containers[0].securityContext.containers[0].hostPort:
- Invalid value: 31767: Host ports are not allowed to be used spec.containers[0].securityContext.hostPID:
- Invalid value: true: Host PID is not allowed to be used spec.containers[0].securityContext.hostIPC:
-......]
-```
-
-你需要为 `chaos-daemon` 服务账号添加特权 SCC。
-
-```bash
-oc adm policy add-scc-to-user privileged -n chaos-mesh -z chaos-daemon
-```
-
-### 因 Pod Security Standards（PSS）限制导致 Chaos Mesh 安装失败
-
-Chaos Daemon 必须以特权（privileged）DaemonSet 的方式运行，才能对目标 Pod 注入故障。如果 `chaos-mesh` namespace 被打上了 `privileged` 以外的 Pod Security Standards（PSS）强制（enforce）级别标签（例如 `baseline` 或 `restricted`），安装时创建 Chaos Daemon Pod 会被拒绝，错误信息类似如下：
-
-```bash
-Error creating: pods "chaos-daemon-" is forbidden: violates PodSecurity
-"restricted:v1.24": allowPrivilegeEscalation != false, unrestricted capabilities,
-runAsNonRoot != true, seccompProfile
-```
-
-要解决此问题，请在安装 Chaos Mesh 之前，为 `chaos-mesh` namespace 打上 `privileged` 强制级别标签：
-
-```bash
-kubectl label namespace chaos-mesh pod-security.kubernetes.io/enforce=privileged --overwrite
-```
-
-### 安装 Chaos Mesh 失败，提示信息为：no matches for kind "CustomResourceDefinition" in version "apiextensions.k8s.io/v1"
-
-当你将 Chaos Mesh 安装在 Kubernetes v1.15 或更早版本时会出现此问题。我们默认使用 `apiextensions.k8s.io/v1`，但该 API 版本是在 Kubernetes v1.16 中引入的。
-
-当你将 Chaos Mesh 安装在低于 v1.16 的 Kubernetes 上时，需要遵循以下步骤：
-
-1. 通过 `https://mirrors.chaos-mesh.org/<chaos-mesh-version>/crd-v1beta1.yaml` 手动创建 CRD。
-2. 添加 `--validate=false`。如果不设置此标志，可能会因 CRD 的破坏性变更引发兼容性问题。例如，`kubectl create -f https://mirrors.chaos-mesh.org/v2.1.0/crd-v1beta1.yaml --validate=false`。
-3. 使用 Helm 完成剩余的安装流程，并在 `helm install` 命令中追加 `--skip-crds`。
-
-我们建议你参考 Kubernetes [版本偏差策略](https://kubernetes.io/releases/version-skew-policy/)升级 Kubernetes 集群。
 
 ## Chaosd
 

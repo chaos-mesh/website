@@ -4,11 +4,63 @@ title: FAQs
 
 import PickHelmVersion from '@site/src/components/PickHelmVersion'
 
+## General
+
 ### If I have not deployed a Kubernetes cluster, can I use Chaos Mesh to create chaos experiments?
 
 No. Instead, you can use [`chaosd`](https://github.com/chaos-mesh/chaosd/) to inject failures without Kubernetes.
 
-### I have deployed Chaos Mesh and created PodChaos experiments successfully, but I still failed to create NetworkChaos/TimeChaos experiments. The log is shown below:
+## Installation
+
+### While trying to install Chaos Mesh in OpenShift, authorization problems blocked the installation process
+
+If the error message is similar to the following:
+
+```bash
+Error creating: pods "chaos-daemon-" is forbidden: unable
+ to validate against any security context constraint: [spec.securityContext.hostNetwork:
+ Invalid value: true: Host network is not allowed to be used spec.securityContext.hostPID:
+ Invalid value: true: Host PID is not allowed to be used spec.securityContext.hostIPC:
+ Invalid value: true: Host IPC is not allowed to be used securityContext.runAsUser:
+ Invalid value: "hostPath": hostPath volumes are not allowed to be used spec.containers[0].securityContext.volumes[1]:
+ Invalid value: true: Host network is not allowed to be used spec.containers[0].securityContext.containers[0].hostPort:
+ Invalid value: 31767: Host ports are not allowed to be used spec.containers[0].securityContext.hostPID:
+ Invalid value: true: Host PID is not allowed to be used spec.containers[0].securityContext.hostIPC:
+......]
+```
+
+You need to add the privileged SCC to the `chaos-daemon` service account.
+
+```bash
+oc adm policy add-scc-to-user privileged -n chaos-mesh -z chaos-daemon
+```
+
+### Installation fails on a cluster with Pod Security Standards (PSS) enabled
+
+Chaos Daemon must run as a privileged DaemonSet to inject faults into target pods. If the `chaos-mesh` namespace is labeled with a Pod Security Standards (PSS) enforce level other than `privileged` (for example, `baseline` or `restricted`), the creation of Chaos Daemon pods is rejected during installation, with an error message similar to:
+
+```bash
+Error creating: pods "chaos-daemon-" is forbidden: violates PodSecurity
+"restricted:v1.24": allowPrivilegeEscalation != false, unrestricted capabilities,
+runAsNonRoot != true, seccompProfile
+```
+
+To fix this, label the `chaos-mesh` namespace with the `privileged` enforce level before installing Chaos Mesh:
+
+```bash
+kubectl label namespace chaos-mesh pod-security.kubernetes.io/enforce=privileged --overwrite
+```
+
+### Daemon throws an error similar to `version 1.41 is too new. The maximum supported API version is 1.39`
+
+This indicates that the maximum API version that the Docker daemon can accept is `1.39`, but the client in `chaos-daemon` uses `1.41` by default. You can choose the following options to solve this problem:
+
+1. Upgrade your Docker to a newer version.
+2. Helm install/upgrade with `--set chaosDaemon.env.DOCKER_API_VERSION=1.39`.
+
+## Experiments
+
+### I have deployed Chaos Mesh and created PodChaos experiments successfully, but I still failed to create NetworkChaos/TimeChaos experiments
 
 ```console
 2020-06-18T02:49:15.160Z ERROR controllers.TimeChaos failed to apply chaos on all pods {"reconciler": "timechaos", "error": "rpc error: code = Unavailable desc = connection error: desc = \"transport: Error while dialing dial tcp xx.xx.xx.xx:xxxx: connect: connection refused\""}
@@ -57,13 +109,6 @@ roleRef:
 
 The `USER_ACCOUNT` above should be your Google Cloud user email.
 
-### Daemon throws an error similar to `version 1.41 is too new. The maximum supported API version is 1.39`
-
-This indicates that the maximum API version that the Docker daemon can accept is `1.39`, but the client in `chaos-daemon` uses `1.41` by default. You can choose the following options to solve this problem:
-
-1. Upgrade your Docker to a newer version.
-2. Helm install/upgrade with `--set chaosDaemon.env.DOCKER_API_VERSION=1.39`.
-
 ## DNSChaos
 
 ### While trying to run DNSChaos in OpenShift, authorization problems blocked the process
@@ -78,47 +123,6 @@ You need to add the privileged Security Context Constraints (SCC) to the `chaos-
 
 ```bash
 oc adm policy add-scc-to-user privileged -n chaos-mesh -z chaos-dns-server
-```
-
-## Installation
-
-### While trying to install Chaos Mesh in OpenShift, authorization problems blocked the installation process
-
-If the error message is similar to the following:
-
-```bash
-Error creating: pods "chaos-daemon-" is forbidden: unable
- to validate against any security context constraint: [spec.securityContext.hostNetwork:
- Invalid value: true: Host network is not allowed to be used spec.securityContext.hostPID:
- Invalid value: true: Host PID is not allowed to be used spec.securityContext.hostIPC:
- Invalid value: true: Host IPC is not allowed to be used securityContext.runAsUser:
- Invalid value: "hostPath": hostPath volumes are not allowed to be used spec.containers[0].securityContext.volumes[1]:
- Invalid value: true: Host network is not allowed to be used spec.containers[0].securityContext.containers[0].hostPort:
- Invalid value: 31767: Host ports are not allowed to be used spec.containers[0].securityContext.hostPID:
- Invalid value: true: Host PID is not allowed to be used spec.containers[0].securityContext.hostIPC:
-......]
-```
-
-You need to add the privileged SCC to the `chaos-daemon` service account.
-
-```bash
-oc adm policy add-scc-to-user privileged -n chaos-mesh -z chaos-daemon
-```
-
-### Installation fails on a cluster with Pod Security Standards (PSS) enabled
-
-Chaos Daemon must run as a privileged DaemonSet to inject faults into target pods. If the `chaos-mesh` namespace is labeled with a Pod Security Standards (PSS) enforce level other than `privileged` (for example, `baseline` or `restricted`), the creation of Chaos Daemon pods is rejected during installation, with an error message similar to:
-
-```bash
-Error creating: pods "chaos-daemon-" is forbidden: violates PodSecurity
-"restricted:v1.24": allowPrivilegeEscalation != false, unrestricted capabilities,
-runAsNonRoot != true, seccompProfile
-```
-
-To fix this, label the `chaos-mesh` namespace with the `privileged` enforce level before installing Chaos Mesh:
-
-```bash
-kubectl label namespace chaos-mesh pod-security.kubernetes.io/enforce=privileged --overwrite
 ```
 
 ## Chaosd
