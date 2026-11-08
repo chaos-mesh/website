@@ -399,7 +399,7 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 
 :::info
 
-Network flood requires `iperf`. Make sure that `iperf` is installed on the physical node running Chaosd and that an iperf server is running at the specified IP address and port.
+Install iperf 2 on the physical node running Chaosd and on the target host. On the target host, run `iperf -s -u -p 5001` to start a UDP server for the examples below.
 
 :::
 

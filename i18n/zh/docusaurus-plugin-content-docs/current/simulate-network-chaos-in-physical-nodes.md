@@ -407,7 +407,7 @@ curl -X POST 172.16.112.130:31767/api/attack/network -H "Content-Type:applicatio
 
 :::info
 
-网络流量泛洪依赖 `iperf`。请确保运行 Chaosd 的物理机上已安装 `iperf`，并在目标 IP 地址和端口上运行 iperf 服务端。
+在运行 Chaosd 的物理机和目标主机上安装 iperf 2。在目标主机上运行 `iperf -s -u -p 5001`，启动下方示例所需的 UDP 服务端。
 
 :::
 
