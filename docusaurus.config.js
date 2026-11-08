@@ -224,7 +224,7 @@ const config = {
     },
   },
 
-  plugins: ['./docusaurus-tailwind', ['./docusaurus-clarity', { projectId: 'lggqck9srz' }]],
+  plugins: ['./plugins/docusaurus-tailwind', ['./plugins/docusaurus-clarity', { projectId: 'lggqck9srz' }]],
 }
 
 export default config
