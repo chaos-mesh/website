@@ -2,15 +2,23 @@
 
 This page lists the status, timeline and policies for currently supported releases.
 
+:::tip[Upgrade to Chaos Mesh 2.8]
+
+We have focused on maintaining the `2.8` series and shipped many fixes to improve its stability. We recommend upgrading to the latest `2.8` patch release when possible.
+
+:::
+
 :::info
 
 ## TL;DR
 
 ~~Each release is supported for a period of **six months**, and we create a new release **every three months**.~~
 
-Updated in 2024-02-01:
+Updated on 2026-11-09:
 
-As we currently haven't had enough maintainers to support the release cycle, we will release new versions from time to time, with a cycle of about **6 months**.
+As we currently haven't had enough maintainers to support the release cycle, we will release new versions from time to time.
+
+Here, new versions are minor releases such as `2.8`. We publish patch releases such as `2.8.1` as needed.
 
 :::
 
@@ -22,7 +30,7 @@ Our naming scheme mostly follows [Semantic Versioning 2.0.0](https://semver.org/
 v<major>.<minor>.<patch>
 ```
 
-where `<minor>` is increased for each release, and `<patch>` counts the number of patches for the current `<minor>` release. A patch is usually a small change relative to the `<minor>` release.
+A minor release increments `<minor>` and resets `<patch>` to `0`. A patch release increments `<patch>` within the same minor release series.
 
 ## Support Status of Chaos Mesh
 
@@ -54,13 +62,9 @@ The `2.6` version also theoretically works fine on the `1.26`, `1.27`, and `1.28
 | 1.1     | No                   | Jan 08, 2021 | Jul 23, 2021 | 1.12, 1.13, 1.14, 1.15                               |
 | 1.0     | No                   | Sep 25, 2020 | Apr 23, 2021 | 1.12, 1.13, 1.14, 1.15                               |
 
-## Upcoming Releases
-
-You could track the upcoming release on [GitHub milestones](https://github.com/chaos-mesh/chaos-mesh/milestones).
-
 ## Support Policies
 
-Our support window covers the **two latest releases**. Given that we produce a new final release **about every six months**, each release branch is typically supported for about a year.
+We support the **two latest minor release series**.
 
 For this, we offer two types of support:
 
@@ -73,7 +77,7 @@ You can request support from the community on CNCF Slack (in the [#project-chaos
 
 ### Security and bug fixes
 
-Security issues are fixed as soon as possible. They get back-ported to the last two releases, and a new patch release is immediately created for them.
+We fix security issues as soon as possible, backport the fixes to both supported minor release series, and publish patch releases immediately.
 
 For enhancements or bug fixes, we make a new patch release as needed.
 
