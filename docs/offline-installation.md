@@ -14,14 +14,17 @@ This document describes how to install Chaos Mesh offline.
 
 ## Prerequisites
 
-Before installing Chaos Mesh, make sure that Docker is installed and the Kubernetes cluster is deployed in the offline environment. For the supported Kubernetes versions, see [Supported Releases](/supported-releases). If the environment is not prepared, refer to the following documents to install Docker and deploy the Kubernetes cluster:
+Before installing Chaos Mesh, make sure that Docker and Helm are installed and the Kubernetes cluster is deployed in the offline environment. For the supported Kubernetes versions, see [Supported Releases](/supported-releases). If the environment is not prepared, refer to the following documents to install Docker, Helm, and deploy the Kubernetes cluster:
 
 - [Docker](https://www.docker.com/get-started)
 - [Kubernetes](https://kubernetes.io/docs/setup/)
+- [Helm](https://helm.sh/docs/intro/install/)
+
+Helm is also required on the machine with external network connection, because the Helm chart is downloaded with `helm pull`.
 
 ## Prepare installation files
 
-Before you install Chaos Mesh offline, you need to download all Chaos Mesh images and repository compression packages from the machines with external network connection, and then copy the downloaded files into your offline environment.
+Before you install Chaos Mesh offline, you need to download the Chaos Mesh images and the Helm chart from the machine with external network connection, and then copy the downloaded files into your offline environment.
 
 ### Specify version number
 
@@ -60,13 +63,16 @@ The Helm chart enables the DNS server by default. Include the [`chaos-mesh/chaos
 
 :::
 
-### Download the repository compression package of Chaos Mesh
+### Download the Helm chart
 
-On the machine connected to the external network, download the zip package of Chaos Mesh:
+On the machine connected to the external network, download the Helm chart from the [Chaos Mesh charts repository](https://github.com/chaos-mesh/charts):
 
-<PickVersion isArchive replaced="refs/heads/master">
-{`curl -fsSL -o chaos-mesh.zip https://github.com/chaos-mesh/chaos-mesh/archive/refs/heads/master.zip`}
-</PickVersion>
+<PickHelmVersion>
+{`helm repo add chaos-mesh https://charts.chaos-mesh.org
+helm pull chaos-mesh/chaos-mesh --untar --version latest`}
+</PickHelmVersion>
+
+The chart is downloaded and extracted to the `chaos-mesh` directory.
 
 ### Copy files
 
@@ -76,11 +82,11 @@ After downloading all the files required for installation, you need to copy thes
 - `image-chaos-daemon.tar`
 - `image-chaos-dashboard.tar`
 - `image-chaos-coredns.tar`
-- `chaos-mesh.zip`
+- `chaos-mesh` (the extracted Helm chart)
 
 ## Install Chaos Mesh
 
-After copying the tar package of the Chaos Mesh images and the zip package of the repository to the offline environment, take the following steps to install Chaos Mesh.
+After copying the image tar packages and the Helm chart to the offline environment, take the following steps to install Chaos Mesh.
 
 ### Step 1. Load Chaos Mesh images
 
@@ -133,13 +139,6 @@ docker push $CHAOS_DNS_IMAGE
 
 ### Step 3. Install Chaos Mesh using Helm
 
-Unpack the zip package of Chaos Mesh:
-
-```bash
-unzip chaos-mesh.zip -d chaos-mesh
-cd chaos-mesh/chaos-mesh-*/
-```
-
 Create the namespace:
 
 ```bash
@@ -149,7 +148,10 @@ kubectl create ns chaos-mesh
 Execute the installation command. When executing the installation command, you need to specify the namespace of Chaos Mesh and the image values of each component:
 
 ```bash
-helm install chaos-mesh helm/chaos-mesh -n=chaos-mesh --set images.registry=$DOCKER_REGISTRY
+helm install chaos-mesh ./chaos-mesh -n=chaos-mesh \
+  --set images.registry=$DOCKER_REGISTRY \
+  --set images.tag=$CHAOS_MESH_VERSION \
+  --set dnsServer.image.tag=$CHAOS_DNS_VERSION
 ```
 
 ## Verify the installation
