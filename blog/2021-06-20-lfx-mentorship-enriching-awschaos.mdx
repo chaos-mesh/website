@@ -3,7 +3,7 @@ slug: /lfx-mentorship-enriching-awschaos
 title: From a Newbie in Software Engineering to a Graduated LFX-Mentee
 authors: debabratapanigrahi
 image: /img/blog/mentorship_experience.png
-tags: [Chaos Mesh, Chaos Engineering, LFX Mentorship, AWS Chaos]
+tags: [Chaos Mesh, Chaos Engineering, LFX Mentorship, AWSChaos]
 ---
 
 ![LFX Mentorship Experience](/img/blog/mentorship_blog.jpeg)
@@ -46,13 +46,13 @@ After the initial days of experimenting and getting to know the project better, 
 
 In one of my contributions, I tried to add multi-container support to stress-chaos, which was not possible before. Though it was successfully implemented, it broke a few other features and couldn’t be merged for the upcoming release. What’s more, for the 2.0.0 release, this refactoring was already done, so this particular contribution was a learning experience for both me and my mentor. After that, we became careful and the next time we tried to implement any new features, we would first submit an [RFC](https://github.com/chaos-mesh/rfcs) and have discussions with the other contributors before starting.
 
-## My contribution to AWS Chaos
+## My contribution to AWSChaos
 
-Initially, I was asked to implement one type of AWS Chaos as part of this project, but as I started exploring more about it, I found [awsssmchaosrunner](https://github.com/amzn/awsssmchaosrunner), and given its functionality, we wanted to integrate it into Chaos Mesh.
+Initially, I was asked to implement one type of AWSChaos as part of this project, but as I started exploring more about it, I found [awsssmchaosrunner](https://github.com/amzn/awsssmchaosrunner), and given its functionality, we wanted to integrate it into Chaos Mesh.
 
 We planned to do it in two parts, one part is the “[runner thing](https://github.com/STRRL/awsssmchaosrunner-cli)” project, which integrates with awsssmchaosrunner, that part should be written in kotlin, and a docker image is to be built out of it.
 
-Another part is the definition of the AWS Chaos and its [controller](https://github.com/chaos-mesh/chaos-mesh/pull/1919), which is to be written in go, the controller of AWS Chaos will create a pod with that “kotlin cli image”, and send commands to AWS.
+Another part is the definition of the AWSChaos and its [controller](https://github.com/chaos-mesh/chaos-mesh/pull/1919), which is to be written in go, the controller of AWSChaos will create a pod with that “kotlin cli image”, and send commands to AWS.
 
 ## Other opportunities
 
