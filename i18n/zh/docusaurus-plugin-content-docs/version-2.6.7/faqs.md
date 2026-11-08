@@ -105,6 +105,22 @@ Error creating: pods "chaos-daemon-" is forbidden: unable
 oc adm policy add-scc-to-user privileged -n chaos-mesh -z chaos-daemon
 ```
 
+### 因 Pod Security Standards（PSS）限制导致 Chaos Mesh 安装失败
+
+Chaos Daemon 必须以特权（privileged）DaemonSet 的方式运行，才能对目标 Pod 注入故障。如果 `chaos-mesh` namespace 被打上了 `privileged` 以外的 Pod Security Standards（PSS）强制（enforce）级别标签（例如 `baseline` 或 `restricted`），安装时创建 Chaos Daemon Pod 会被拒绝，错误信息类似如下：
+
+```bash
+Error creating: pods "chaos-daemon-" is forbidden: violates PodSecurity
+"restricted:v1.24": allowPrivilegeEscalation != false, unrestricted capabilities,
+runAsNonRoot != true, seccompProfile
+```
+
+要解决此问题，请在安装 Chaos Mesh 之前，为 `chaos-mesh` namespace 打上 `privileged` 强制级别标签：
+
+```bash
+kubectl label namespace chaos-mesh pod-security.kubernetes.io/enforce=privileged --overwrite
+```
+
 ### 安装 Chaos Mesh 失败，提示信息为：no matches for kind "CustomResourceDefinition" in version "apiextensions.k8s.io/v1"
 
 当你将 Chaos Mesh 安装在 Kubernetes v1.15 或更早版本时会出现此问题。我们默认使用 `apiextensions.k8s.io/v1`，但该 API 版本是在 Kubernetes v1.16 中引入的。
