@@ -25,6 +25,7 @@ module.exports = {
             },
           ],
         },
+        'chaos-daemon-privileged-mode',
         'manage-user-permissions',
         'configure-enabled-namespace',
         'remote-cluster-management',
