@@ -21,12 +21,12 @@
     "@docusaurus/preset-classic": "3.10.2",
     "@mdx-js/react": "^3.1.1",
     "clsx": "^2.1.1",
-    "gsap": "^3.12.5",
+    "gsap": "^3.15.1",
     "prism-react-renderer": "^2.4.1",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
-    "semver": "^7.7.3",
-    "typewriter-effect": "^2.22.0"
+    "semver": "^7.8.6",
+    "typewriter-effect": "^3.3.0"
   },
   "browserslist": {
     "production": [
@@ -43,15 +43,15 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.10.2",
     "@docusaurus/types": "3.10.2",
-    "@tailwindcss/postcss": "^4.3.3",
+    "@tailwindcss/postcss": "^4.3.5",
     "@trivago/prettier-plugin-sort-imports": "^6.0.2",
     "cross-env": "^10.1.0",
     "daisyui": "^5.7.50",
     "husky": "^9.1.7",
     "lint-staged": "^17.6.0",
-    "postcss": "^8.5.30",
+    "postcss": "^8.5.32",
     "prettier": "^3.9.10",
-    "tailwindcss": "^4.3.3"
+    "tailwindcss": "^4.3.5"
   },
   "engines": {
     "node": ">=22"
