@@ -224,10 +224,7 @@ const config = {
     },
   },
 
-  plugins: [
-    './docusaurus-tailwind',
-    ['@gracefullight/docusaurus-plugin-microsoft-clarity', { projectId: 'lggqck9srz' }],
-  ],
+  plugins: ['./docusaurus-tailwind', ['./docusaurus-clarity', { projectId: 'lggqck9srz' }]],
 }
 
 export default config
