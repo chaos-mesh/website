@@ -189,12 +189,10 @@ export default function Mesh() {
           dotsContainer.querySelectorAll('.wave').forEach((wave) => wave.remove())
         }
 
-        const hideMeshText = motionContext.add('hideMeshText', (top, left) => {
+        const hideMeshText = motionContext.add('hideMeshText', () => {
           textTween = gsap.to(meshText, {
             duration: 0.5,
             opacity: 0,
-            top,
-            left: left + 25,
             overwrite: 'auto',
           })
         })
@@ -210,18 +208,14 @@ export default function Mesh() {
 
           const injectedDotElement = dotElements[injectedDot]
           const injectedDotInner = injectedDotElement.querySelector('.dot-inner')
-          const rect = injectedDotElement.getBoundingClientRect()
-          const top = rect.top + 100
-          const left = rect.left - 250
+          const wideLayout = window.matchMedia('(min-width: 64rem)')
 
           textTween = gsap.fromTo(
             meshText,
-            { top, left },
+            { opacity: 0 },
             {
               duration: 1,
               opacity: 1,
-              top: top - 50,
-              left: left + 25,
               overwrite: 'auto',
             },
           )
@@ -239,7 +233,7 @@ export default function Mesh() {
             .deleteAll()
             .typeString('✅ Done!')
             .pauseFor(1000)
-            .callFunction(() => hideMeshText(top, left))
+            .callFunction(hideMeshText)
             .start()
 
           chaosTween = gsap.to(injectedDotElement, {
@@ -250,6 +244,14 @@ export default function Mesh() {
             yoyo: true,
             onUpdate() {
               percent = this.time()
+              const dotRect = injectedDotInner.getBoundingClientRect()
+              const heroRect = meshText.parentElement.getBoundingClientRect()
+              const below = wideLayout.matches
+              const gap = 12
+              const x = dotRect.left + dotRect.width / 2 - heroRect.left
+              const y = (below ? dotRect.bottom + gap : dotRect.top - gap) - heroRect.top
+
+              meshText.style.transform = `translate(${x}px, ${y}px) translate(-50%, ${below ? 0 : -100}%)`
             },
             onComplete: () => (scaling = false),
           })
@@ -361,6 +363,7 @@ export default function Mesh() {
           percent = 0
           removeWaves()
           meshText.replaceChildren()
+          meshText.style.removeProperty('transform')
           reDraw()
         }
       })
@@ -407,7 +410,7 @@ export default function Mesh() {
       <div
         ref={meshTextEl}
         aria-hidden="true"
-        className="mesh-text tw:absolute tw:px-2 tw:py-1 tw:bg-primary tw:text-primary-content tw:rounded-sm tw:opacity-0"
+        className="mesh-text tw:pointer-events-none tw:absolute tw:top-0 tw:left-0 tw:hidden tw:md:block tw:w-max tw:whitespace-nowrap tw:px-2 tw:py-1 tw:bg-primary tw:text-primary-content tw:rounded-sm tw:opacity-0"
       />
     </>
   )
