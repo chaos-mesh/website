@@ -11,6 +11,14 @@ You can create the following types of Chaos experiments in Chaos Mesh:
 - One-time Chaos experiments: The smallest instance of Chaos experiments. Once a one-time experiment is created, Chaos Mesh immediately injects faults into the target test machine according to the experiment configurations. If the `duration` parameter is configured, injected faults will be restored automatically after a period of time specified by `duration`. When the Chaos experiment is paused or deleted, injected faults will be restored immediately.
 - Scheduled or cyclic Chaos experiments: Chaos experiments that can be run at a regular interval or cyclically. You need to define the scheduling rules for the experiment when creating this type of Chaos experiment.
 
+:::note
+
+Every type of Chaos experiment contains an optional `duration` field, which specifies how long the Chaos experiment affects the targets. The `duration` is counted from the time when the Chaos experiment object is created, not from the time when the fault is actually injected into the targets.
+
+Chaos Mesh uses the creation time to keep the behavior deterministic. Injecting a fault takes time, and the injection might fail at first and succeed after retries, so the time when the fault actually takes effect cannot be determined precisely. As a result, the actual effective time of the fault may be slightly shorter than the configured `duration`.
+
+:::
+
 ### One-time Chaos experiments
 
 To create a one-time Chaos experiment, you can use one of the following methods:
