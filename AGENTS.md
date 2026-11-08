@@ -28,4 +28,4 @@ Run `pnpm build` and review link warnings. Preview changed pages in the affected
 
 Sign off every commit with `git commit -s` to add a `Signed-off-by` trailer. Use concise, imperative subjects. For documentation changes limited to one language, use `docs(<locale>): <summary>`, for example `docs(zh): fix broken anchors`. For documentation changes spanning multiple languages, use `docs: <summary>`.
 
-Target `master`. Explain the change, identify affected versions or locales, link relevant issues, and summarize validation. Include screenshots for visible layout changes.
+Target `master`. Explain the change, identify affected versions or locales, link relevant issues, and summarize validation.
