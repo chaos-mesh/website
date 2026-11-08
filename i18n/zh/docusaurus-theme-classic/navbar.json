@@ -18,5 +18,13 @@
   "item.label.Community Group": {
     "message": "社团",
     "description": "Navbar item with label Community Group"
+  },
+  "item.label.All Versions": {
+    "message": "所有版本",
+    "description": "Navbar item with label All Versions"
+  },
+  "item.label.Supported Releases": {
+    "message": "支持的版本",
+    "description": "Navbar item with label Supported Releases"
   }
 }

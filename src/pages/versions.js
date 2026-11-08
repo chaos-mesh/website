@@ -11,9 +11,14 @@ const allVersionsText = translate({
   message: 'All Versions of Chaos Mesh',
 })
 
+const pageTitle = translate({
+  id: 'versions.pageTitle',
+  message: 'Versions',
+})
+
 export default function Versions() {
   return (
-    <Layout title="Versions" description={allVersionsText}>
+    <Layout title={pageTitle} description={allVersionsText}>
       <div className="hero">
         <div className="container">
           <h1>{allVersionsText}</h1>
@@ -26,11 +31,11 @@ export default function Versions() {
           </p>
           <p>
             <Translate
-              id="versions.supportedReleases"
+              id="versions.supportedReleases.description"
               values={{
                 link: (
                   <Link to="/supported-releases">
-                    <Translate id="versions.supportedReleases.link">Supported Releases</Translate>
+                    <Translate id="versions.supportedReleases">Supported Releases</Translate>
                   </Link>
                 ),
               }}

@@ -578,6 +578,9 @@
   "home.cncf.name": {
     "message": "云原生计算基金会（CNCF）"
   },
+  "versions.pageTitle": {
+    "message": "版本"
+  },
   "versions.title": {
     "message": "Chaos Mesh 的所有版本"
   },
@@ -585,10 +588,10 @@
     "message": "Chaos Mesh 的每个版本都有固定的支持周期。随着我们不断地开发和迭代，有些版本会逐渐退出支持。我们将在官方文档中保留最近三个稳定版本和开发版本，其余版本将被归档。"
   },
   "versions.supportedReleases": {
-    "message": "你可以通过 {link} 了解有关我们版本支持的更多信息。"
-  },
-  "versions.supportedReleases.link": {
     "message": "支持的版本"
+  },
+  "versions.supportedReleases.description": {
+    "message": "你可以通过 {link} 了解有关我们版本支持的更多信息。"
   },
   "versions.development": {
     "message": "开发版本"

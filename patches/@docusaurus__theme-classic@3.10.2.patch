@@ -1,0 +1,92 @@
+diff --git a/lib/translations.js b/lib/translations.js
+index 5b8cba66883c6031a607187a9f59dd1620fb56ef..65dea4b370fff8d9bb241b133ab48eafb8ff6733 100644
+--- a/lib/translations.js
++++ b/lib/translations.js
+@@ -15,7 +15,11 @@ function getNavbarTranslationFile(navbar) {
+     // TODO handle properly all the navbar item types here!
+     function flattenNavbarItems(items) {
+         const subItems = items.flatMap((item) => {
+-            const allSubItems = [item.items ?? []].flat();
++            const allSubItems = [
++                item.items ?? [],
++                item.dropdownItemsBefore ?? [],
++                item.dropdownItemsAfter ?? [],
++            ].flat();
+             return flattenNavbarItems(allSubItems);
+         });
+         return [...items, ...subItems];
+@@ -63,15 +67,20 @@ function translateNavbar(navbar, navbarTranslations) {
+         logo,
+         //  TODO handle properly all the navbar item types here!
+         items: navbar.items.map((item) => {
+-            const subItems = item.items?.map((subItem) => ({
+-                ...subItem,
+-                label: navbarTranslations[`item.label.${subItem.label}`]?.message ??
+-                    subItem.label,
+-            }));
++            const translateItem = (navbarItem) => ({
++                ...navbarItem,
++                label: navbarTranslations[`item.label.${navbarItem.label}`]?.message ??
++                    navbarItem.label,
++            });
++            const subItems = item.items?.map(translateItem);
++            const dropdownItemsBefore = item.dropdownItemsBefore?.map(translateItem);
++            const dropdownItemsAfter = item.dropdownItemsAfter?.map(translateItem);
+             return {
+                 ...item,
+                 label: navbarTranslations[`item.label.${item.label}`]?.message ?? item.label,
+                 ...(subItems ? { items: subItems } : undefined),
++                ...(dropdownItemsBefore ? { dropdownItemsBefore } : undefined),
++                ...(dropdownItemsAfter ? { dropdownItemsAfter } : undefined),
+             };
+         }),
+     };
+diff --git a/src/translations.ts b/src/translations.ts
+index 56258c86eecec100ffc976b4d6c33942cc586432..b8b4346fd05c9f87288f15e15749fced2109323d 100644
+--- a/src/translations.ts
++++ b/src/translations.ts
+@@ -21,7 +21,11 @@ function getNavbarTranslationFile(navbar: Navbar): TranslationFileContent {
+   // TODO handle properly all the navbar item types here!
+   function flattenNavbarItems(items: NavbarItem[]): NavbarItem[] {
+     const subItems = items.flatMap((item) => {
+-      const allSubItems = [item.items ?? []].flat();
++      const allSubItems = [
++        item.items ?? [],
++        (item.dropdownItemsBefore as NavbarItem[] | undefined) ?? [],
++        (item.dropdownItemsAfter as NavbarItem[] | undefined) ?? [],
++      ].flat();
+       return flattenNavbarItems(allSubItems);
+     });
+     return [...items, ...subItems];
+@@ -81,17 +85,26 @@ function translateNavbar(
+     logo,
+     //  TODO handle properly all the navbar item types here!
+     items: navbar.items.map((item) => {
+-      const subItems = item.items?.map((subItem) => ({
+-        ...subItem,
++      const translateItem = (navbarItem: NavbarItem) => ({
++        ...navbarItem,
+         label:
+-          navbarTranslations[`item.label.${subItem.label}`]?.message ??
+-          subItem.label,
+-      }));
++          navbarTranslations[`item.label.${navbarItem.label}`]?.message ??
++          navbarItem.label,
++      });
++      const subItems = item.items?.map(translateItem);
++      const dropdownItemsBefore = (
++        item.dropdownItemsBefore as NavbarItem[] | undefined
++      )?.map(translateItem);
++      const dropdownItemsAfter = (
++        item.dropdownItemsAfter as NavbarItem[] | undefined
++      )?.map(translateItem);
+       return {
+         ...item,
+         label:
+           navbarTranslations[`item.label.${item.label}`]?.message ?? item.label,
+         ...(subItems ? {items: subItems} : undefined),
++        ...(dropdownItemsBefore ? {dropdownItemsBefore} : undefined),
++        ...(dropdownItemsAfter ? {dropdownItemsAfter} : undefined),
+       };
+     }),
+   };
