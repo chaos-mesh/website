@@ -6,13 +6,13 @@ title: Simulate Block Device Incidents
 
 Chaos Mesh provides the BlockChaos experiment type. You can use this experiment type to simulate a block device latency scenario. This document describes how to install the dependencies for a BlockChaos experiment and create a BlockChaos experiment.
 
-:::note
+:::info
 
 BlockChaos is in an early stage. Its installation and configuration experience will continue to improve. If you find any issues, please open an issue in [chaos-mesh/chaos-mesh](https://github.com/chaos-mesh/chaos-mesh) to report them.
 
 :::
 
-:::note
+:::info
 
 The BlockChaos `delay` action affects all processes using the block device, not only the target container.
 
@@ -63,7 +63,7 @@ The `chaos_driver` module has to be installed every time after rebooting. To loa
 
 If you have upgraded the kernel, the module should be recompiled.
 
-:::note
+:::info
 
 It is recommended to use DKMS or akmod for automatic kernel module compiling or loading. If you want to help us improve the installation experience, creating a DKMS or akmod package and submitting it to different distribution repositories is very welcome.
 
@@ -89,7 +89,7 @@ It is recommended to use DKMS or akmod for automatic kernel module compiling or 
        latency: 1s
    ```
 
-   :::note
+   :::info
 
    Only hostPath or local volumes are supported.
 

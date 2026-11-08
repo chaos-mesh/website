@@ -44,7 +44,7 @@ PhysicalMachineChaos 用于在物理机或虚拟机中模拟网络、磁盘、�
      chaosd server --https-port 31768 --CA=/etc/chaosd/pki/ca.crt --cert=/etc/chaosd/pki/chaosd.crt --key=/etc/chaosd/pki/chaosd.key
      ```
 
-     :::note
+     :::info
 
      使用 Chaosctl 生成的 TLS 证书文件的保存路径为 Chaosctl 的默认输出路径。如果在生成证书时手动指定了其他路径，请手动将命令中的路径替换为对应的文件路径。
 
@@ -138,7 +138,7 @@ PhysicalMachineChaos 用于在物理机或虚拟机中模拟网络、磁盘、�
 
 模拟磁盘填充，将 action 设置为 "disk-fill"，对应的配置可参考[模拟磁盘填充相关参数说明](simulate-disk-pressure-in-physical-nodes.md#模拟磁盘填充相关参数说明)。
 
-:::note[版本说明]
+:::info[版本说明]
 
 从 Chaos Mesh 2.8.8 开始，将 `disk-fill.fill-by-fallocate` 设置为 `true` 时使用 `fallocate`，设置为 `false` 或省略时使用 `dd`。
 

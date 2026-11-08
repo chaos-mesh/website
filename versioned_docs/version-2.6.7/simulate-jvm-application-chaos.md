@@ -15,7 +15,7 @@ In addition, Chaos Mesh supports injecting the above faults into commonly used s
 
 This document describes how to use Chaos Mesh to create the above fault types of JVM experiments.
 
-:::note
+:::info
 
 Your Linux kernel must be v4.1 or later.
 

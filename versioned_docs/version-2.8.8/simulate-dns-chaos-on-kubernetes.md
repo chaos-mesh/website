@@ -98,7 +98,7 @@ Make sure that the Pod status is `Running`.
 | `value` | string | Provides parameters for the `mode` configuration, depending on `mode`. For example, when `mode` is set to `fixed-percent`, `value` specifies the percentage of Pods. | None | No | `1` |
 | `selector` | struct | Specifies the target Pod. For details, refer to [Define the Scope of Chaos Experiments](./define-chaos-experiment-scope.md). | None | Yes |  |
 
-:::note
+:::info
 
 - The wildcard in `patterns` configuration must be at the end of the string. For example, `chaos-mes*.org.` is an invalid configuration.
 

@@ -24,7 +24,7 @@ curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application
 
 在上述命令中，你需要按照故障类型在 `fault-configuration` 中进行配置。有关对应的配置参数和示例，请参考下文中各个类型故障的相关参数说明。
 
-:::note
+:::info
 
 在运行实验时，请注意保存实验的 UID 信息。当要结束 UID 对应的实验时，需要向 Chaosd 服务的路径 `/api/attack/{uid}` 发送 `DELETE` HTTP 请求。
 
@@ -74,7 +74,7 @@ curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application
 | `workers` | w | workers | 指定用于生成内存压力的 worker 数量 | int 类型 | 默认值为 `1` |
 | `options` | o | options | stress-ng 的其他参数设置，一般情况下不需要配置 | string 类型 | 默认值为 "" |
 
-:::note
+:::info
 
 `chaosd attack stress mem` 的 `--workers` 参数在 chaosd v1.6.0 中恢复支持。如果使用更早版本的 chaosd，则不支持该参数。
 

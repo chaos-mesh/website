@@ -4,7 +4,7 @@ title: Simulate Disk Faults
 
 This document describes how to use Chaosd to simulate disk faults. This feature helps you simulate disk read/write load (via [dd](https://man7.org/linux/man-pages/man1/dd.1.html)) or disk fill (via [dd](https://man7.org/linux/man-pages/man1/dd.1.html) or [fallocate](https://man7.org/linux/man-pages/man1/fallocate.1.html)).
 
-:::note
+:::info
 
 **Chaosd v1.5.0 and later**
 
@@ -32,7 +32,7 @@ curl -X POST 172.16.112.130:31767/api/attack/disk -H "Content-Type:application/j
 
 For the `fault-configuration` part in the above command, you need to configure it according to the fault types. For the corresponding parameters and examples, refer to the parameters of each fault type in the following sections.
 
-:::note
+:::info
 
 When running an experiment, remember to record the UID of the experiment. When you want to end the experiment corresponding to the UID, you need to send a `DELETE` HTTP request to the `/api/attack/{uid}` path of the Chaosd service.
 

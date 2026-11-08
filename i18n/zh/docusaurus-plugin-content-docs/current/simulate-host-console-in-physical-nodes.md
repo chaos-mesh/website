@@ -40,7 +40,7 @@ Chaosd 会调用系统的 `reboot` 命令。
 
 ## 使用 HTTP 服务创建主机故障
 
-:::note
+:::info
 
 主机 HTTP 接口从 **Chaosd v1.6.0** 开始提供。Chaosd v1.5.0 不提供此接口。
 

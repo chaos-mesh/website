@@ -8,7 +8,7 @@ This document describes how to use Chaos Mesh to create a scheduled task, which 
 
 In Kubernetes, Chaos Mesh uses `Schedule` to describe scheduled tasks.
 
-:::note
+:::info
 
 The name of a `Schedule` object should not exceed 57 characters because the created Chaos experiment will add 6 additional random characters to the end of the name. The name of a `Schedule` object that creates a `Workflow` should not exceed 51 characters because the `Workflow` will also add 6 additional random characters to the end of the name.
 
@@ -69,7 +69,7 @@ spec:
 
 The fields in `Schedule` are described below, mostly similar to fields in Kubernetes `CronJob`. You can refer to the [documentation of Kubernetes CronJob](https://kubernetes.io/zh/docs/concepts/workloads/controllers/cron-jobs/) for more information.
 
-:::note
+:::info
 
 The timezone in the `schedule` field subjects to the timezone of `chaos-controller-manager`.
 
@@ -166,7 +166,7 @@ spec:
 
 Based on this configuration, if you set `concurrencyPolicy: "Allow"`, there will be a delay of 20 milliseconds in 10 seconds every minute. And for the other 50 seconds, there will be a delay of 10 milliseconds. If you set `concurrencyPolicy: "Forbid"`, there will always be a delay of 10 milliseconds.
 
-:::note
+:::info
 
 Not all experiment types support multiple experiments on the same Pod. For details, refer to the documents of the specific experiment types.
 

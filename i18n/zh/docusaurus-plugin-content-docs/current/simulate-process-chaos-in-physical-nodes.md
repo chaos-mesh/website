@@ -24,7 +24,7 @@ curl -X POST 172.16.112.130:31767/api/attack/process -H "Content-Type:applicatio
 
 在上述命令中，你需要按照故障类型在 `fault-configuration` 中进行配置。有关对应的配置参数和示例，请参考下文中各个类型故障的相关参数说明。
 
-:::note
+:::info
 
 在运行实验时，请注意保存实验的 UID 信息。当要结束 UID 对应的实验时，需要向 Chaosd 服务的路径 `/api/attack/{uid}` 发送 `DELETE` HTTP 请求。
 
@@ -50,7 +50,7 @@ chaosd attack process kill -h
 chaosd attack process kill -p python
 ```
 
-:::note
+:::info
 
 只有 `signal` 为 `SIGSTOP`，或配置了 `recover-cmd` 的实验支持被恢复。
 
@@ -87,7 +87,7 @@ chaosd attack process stop -p python
 curl -X POST 172.16.112.130:31767/api/attack/process -H "Content-Type:application/json" -d '{"process":"12345","signal":19}'
 ```
 
-:::note
+:::info
 
 只有 `signal` 为 `SIGSTOP`，或配置了 `recover-cmd` 的实验支持被恢复。
 

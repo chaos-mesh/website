@@ -169,7 +169,7 @@ chaosd attack file replace --origin-string test --dest-string text --file-name /
 
 ## Create a file fault using the HTTP service
 
-:::note
+:::info
 
 The file HTTP endpoint is available starting with **Chaosd v1.6.0**. Chaosd v1.5.0 supports file faults through the CLI only.
 

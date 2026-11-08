@@ -96,7 +96,7 @@ Run the following command in your terminal:
 kubectl apply -f rbac.yaml
 ```
 
-:::note
+:::info
 
 You need to ensure that the local user running `kubectl` has permissions to the cluster so that they can create user accounts, bind permissions for other users and generate tokens.
 

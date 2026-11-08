@@ -40,7 +40,7 @@ Chaosd invokes the system's `reboot` command.
 
 ## Create a host fault using the HTTP service
 
-:::note
+:::info
 
 The host HTTP endpoint is available starting with **Chaosd v1.6.0**. Chaosd v1.5.0 does not expose this endpoint.
 

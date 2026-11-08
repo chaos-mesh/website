@@ -18,7 +18,7 @@ chaos-dns-server-546675d89d-qkjqq          1/1     Running   0          17m
 
 If your actual output is similar to the expected output, then Chaos Mesh has been successfully installed.
 
-:::note
+:::info
 
 If the `STATUS` of your actual output is not `Running`, then execute the following command to check the Pod details, and troubleshoot issues according to the error information.
 
@@ -29,7 +29,7 @@ kubectl describe po -n chaos-mesh chaos-controller-manager-7b8c86cc9-44dzf
 
 :::
 
-:::note
+:::info
 
 If leader election is turned off, `chaos-controller-manager` should only have 1 replication.
 

@@ -4,13 +4,13 @@ title: Send HTTP Requests on Workflow
 
 Chaos Mesh Workflow provides a `Task` node to support any workload, whose function is similar to that of a Kubernetes `Job`. To provide a better user experience, Chaos Dashboard provides a template based on `Task`. With this template, you can easily create HTTP requests in WebUI. This document describes how to create an HTTP request through Chaos Dashboard.
 
-:::note
+:::info
 
 Chaos Mesh does _NOT_ have the workflow node of the type `HTTPRequest`. This feature is based on `Task` node, and you can send HTTP requests more conveniently by using the feature.
 
 :::
 
-:::note
+:::info
 
 This feature is currently an experimental feature, so it is not recommended to use this feature in the production environment. The configuration and behavior of the feature might change in the future.
 

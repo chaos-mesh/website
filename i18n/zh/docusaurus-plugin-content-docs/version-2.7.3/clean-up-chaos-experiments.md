@@ -52,7 +52,7 @@ kubectl annotate networkchaos network-delay chaos-mesh.chaos-mesh.org/cleanFinal
 for i in $(kubectl api-resources | grep chaos-mesh | awk '{print $1}'); do kubectl get $i -A; done
 ```
 
-:::note
+:::info
 
 `Schedule` 和 `Workflow` 资源，以及它们创建的混沌实验对象，都是独立的 Kubernetes 对象。清理由 `Schedule` 或 `Workflow` 创建的实验时，请确保一并删除这些对象。
 

@@ -24,7 +24,7 @@ curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application
 
 For the `fault-configuration` part in the above command, you need to configure it according to the fault types. For the corresponding parameters and examples, refer to the parameters of each fault type in the following sections.
 
-:::note
+:::info
 
 When running an experiment, remember to save the UID information of the experiment. When you want to kill the experiment corresponding to the UID, you need to send a `DELETE` HTTP request to the `/api/attack/{uid}` path of Chaosd service.
 
@@ -72,7 +72,7 @@ curl -X POST 172.16.112.130:31767/api/attack/stress -H "Content-Type:application
 | `workers` | w | workers | Specifies the number of workers used to create memory stress. | int | Default value: 1. |
 | `options` | o | options | The extended parameter of stress-ng, usually not configured. | string | Default value: "". |
 
-:::note
+:::info
 
 The `--workers` flag for `chaosd attack stress mem` was restored in chaosd v1.6.0. If you use an earlier version of chaosd, this flag is not available.
 

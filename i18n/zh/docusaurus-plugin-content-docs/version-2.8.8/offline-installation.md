@@ -52,7 +52,7 @@ docker save ghcr.io/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION} > image-cha
 docker save ghcr.io/chaos-mesh/chaos-coredns:${CHAOS_DNS_VERSION} > image-chaos-coredns.tar
 ```
 
-:::note
+:::info
 
 Helm Chart 默认启用 DNS Server。因此，即使不计划运行 DNSChaos，也需要在离线文件中包含 [`chaos-mesh/chaos-coredns`](https://github.com/chaos-mesh/k8s_dns_chaos/pkgs/container/chaos-coredns) 镜像。只有显式设置 `dnsServer.create=false` 时，才可以省略此镜像。
 
@@ -93,7 +93,7 @@ docker load < image-chaos-coredns.tar
 
 ### 第 2 步：推送镜像至 Registry
 
-:::note
+:::info
 
 在推送镜像前，请确保离线环境中已经部署 Registry。如果尚未部署，请参考 [Docker Registry](https://docs.docker.com/registry/) 进行部署。
 

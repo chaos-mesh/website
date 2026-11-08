@@ -24,7 +24,7 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 
 For the `fault-configuration` part in the above command, you need to configure it according to the fault types. For the corresponding parameters and examples, refer to the parameters of each fault type in the following sections.
 
-:::note
+:::info
 
 When running an experiment, remember to record the UID of the experiment. When you want to end the experiment corresponding to the UID, you need to send a `DELETE` HTTP request to the `/api/attack/{uid}` path of the Chaosd service.
 
@@ -34,7 +34,7 @@ When running an experiment, remember to record the UID of the experiment. When y
 
 The meaning of this command is the same as EXPIRE in Redis. For more details, refer to the [Redis official documentation](https://redis.io/commands/expire/).
 
-:::note
+:::info
 
 Currently, Chaosd does not support recovering keys that have executed `cache-expiration`, so please back them up in advance if you want to recover them.
 
@@ -204,7 +204,7 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 
 ## Create experiments using Chaos Mesh
 
-:::note[Version support]
+:::info[Version support]
 
 This section describes configuration for Chaos Mesh 2.8.8 and later.
 

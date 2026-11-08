@@ -54,7 +54,7 @@ docker save ghcr.io/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION} > image-cha
 docker save ghcr.io/chaos-mesh/chaos-coredns:${CHAOS_DNS_VERSION} > image-chaos-coredns.tar
 ```
 
-:::note
+:::info
 
 The Helm chart enables the DNS server by default. Include the [`chaos-mesh/chaos-coredns`](https://github.com/chaos-mesh/k8s_dns_chaos/pkgs/container/chaos-coredns) image in the offline files, even if you do not plan to run DNSChaos. If you explicitly set `dnsServer.create=false`, you can omit this image.
 
@@ -95,7 +95,7 @@ docker load < image-chaos-coredns.tar
 
 ### Step 2. Push images to Registry
 
-:::note
+:::info
 
 Before pushing images to Registry, make sure that Registry has been deployed in the offline environment. If Registry is not deployed, refer to [Docker Registry](https://docs.docker.com/registry/) for the deployment method.
 

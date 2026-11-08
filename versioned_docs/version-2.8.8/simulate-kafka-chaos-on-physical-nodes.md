@@ -6,7 +6,7 @@ This guide describes how to inject Kafka faults on physical machines with Physic
 
 ## Requirements
 
-:::note[Version support]
+:::info[Version support]
 
 The Kafka fault configurations in this guide require Chaos Mesh 2.8.8 or later, with Chaosd v1.6.0 or later running on the target machines.
 

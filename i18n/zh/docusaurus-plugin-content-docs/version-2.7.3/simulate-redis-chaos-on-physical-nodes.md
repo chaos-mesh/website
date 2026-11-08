@@ -24,7 +24,7 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 
 在上述命令中，你需要按照故障类型在 `fault-configuration` 中进行配置。有关对应的配置参数和示例，请参考下文中各个类型故障的相关参数说明。
 
-:::note
+:::info
 
 在运行实验时，请注意保存实验的 UID 信息。当要结束 UID 对应的实验时，需要向 Chaosd 服务的路径 `/api/attack/{uid}` 发送 `DELETE` HTTP 请求。
 
@@ -34,7 +34,7 @@ curl -X POST 127.0.0.1:31767/api/attack/redis -H "Content-Type:application/json"
 
 该命令的含义与 Redis 中的 EXPIRE 相同。更多详情请参考 [Redis 官方文档](https://redis.io/commands/expire/)。
 
-:::note
+:::info
 
 目前 Chaosd 不支持恢复已经执行了 `cache-expiration` 的键，因此如果你想要恢复它们，请提前备份。
 

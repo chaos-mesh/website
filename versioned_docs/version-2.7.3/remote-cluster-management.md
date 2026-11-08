@@ -6,7 +6,7 @@ title: Remote Cluster Management
 
 Chaos Mesh provides the cluster scoped `RemoteCluster` resource to help you manage and inject faults into remote Kubernetes clusters. This document describes how to create a `RemoteCluster` object and use it to inject faults.
 
-:::note
+:::info
 
 `RemoteCluster` is in an early stage. The configuration and function of it (for example, configuration migration, version management and authentication) will continue to improve. If you encounter any problems, please open an issue in [chaos-mesh/chaos-mesh](https://github.com/chaos-mesh/chaos-mesh) to report them.
 
