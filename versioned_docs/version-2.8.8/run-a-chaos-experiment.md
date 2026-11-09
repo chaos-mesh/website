@@ -8,12 +8,12 @@ This document describes how to create, run, view, pause, update, and delete Chao
 
 You can create the following types of Chaos experiments in Chaos Mesh:
 
-- One-time Chaos experiments: The smallest instance of Chaos experiments. Once a one-time experiment is created, Chaos Mesh immediately injects faults into the target test machine according to the experiment configurations. If the `duration` parameter is configured, injected faults will be restored automatically after a period of time specified by `duration`. When the Chaos experiment is paused or deleted, injected faults will be restored immediately.
+- One-time Chaos experiments: The smallest instance of Chaos experiments. Once a one-time experiment is created, Chaos Mesh immediately injects faults into the target test machine according to the experiment configurations. For an ongoing fault, Chaos Mesh starts recovery when the experiment reaches its configured deadline or when you pause or delete the experiment.
 - Scheduled or cyclic Chaos experiments: Chaos experiments that can be run at a regular interval or cyclically. You need to define the scheduling rules for the experiment when creating this type of Chaos experiment.
 
-:::note
+:::info
 
-Every type of Chaos experiment contains an optional `duration` field, which specifies how long the Chaos experiment affects the targets. The `duration` is counted from the time when the Chaos experiment object is created, not from the time when the fault is actually injected into the targets.
+For experiments that inject an ongoing fault, the optional `duration` field sets a deadline. Chaos Mesh calculates the deadline by adding `duration` to the experiment object's creation time.
 
 Chaos Mesh uses the creation time to keep the behavior deterministic. Injecting a fault takes time, and the injection might fail at first and succeed after retries, so the time when the fault actually takes effect cannot be determined precisely. As a result, the actual effective time of the fault may be slightly shorter than the configured `duration`.
 
@@ -121,6 +121,12 @@ To create this type of Chaos experiments, take the following steps:
 
 ## Pause Chaos experiments
 
+When you pause a running experiment, Chaos Mesh starts recovering the injected fault. Time spent paused counts toward `duration`, so the original deadline still applies. If you resume before the deadline, Chaos Mesh can inject the fault again within the remaining time. After the deadline, resuming the experiment leaves it stopped. If you omit `duration`, you can resume the experiment at any time while the object exists.
+
+For example, create a `NetworkChaos` experiment with `duration: '60s'` and pause it 20 seconds after creation. If the controller processes the resume request at the 40-second mark, 20 seconds remain before the deadline. If it processes the request after the deadline, the experiment's desired phase stays stopped.
+
+One-shot actions such as `pod-kill` and `container-kill` ignore both pause and `duration`.
+
 ### Pause or resume Chaos experiments using commands
 
 For a running Chaos experiment, you can pause the experiment by setting a pause annotation to it using commands.
@@ -131,7 +137,7 @@ For example, you can use the following command to pause a Chaos experiment named
 kubectl annotate networkchaos network-delay experiment.chaos-mesh.org/pause=true
 ```
 
-After this command is executed, Chaos Mesh restores the injected faults immediately. If you want to resume this Chaos experiment from the pause state to the normal running state, use the following command:
+To resume the experiment, remove the pause annotation:
 
 ```sh
 kubectl annotate networkchaos network-delay experiment.chaos-mesh.org/pause-
