@@ -69,31 +69,34 @@ spec:
 
 The fields in `Schedule` are described below, mostly similar to fields in Kubernetes `CronJob`. You can refer to the [documentation of Kubernetes CronJob](https://kubernetes.io/zh/docs/concepts/workloads/controllers/cron-jobs/) for more information.
 
-:::info
-
-The timezone in the `schedule` field subjects to the timezone of `chaos-controller-manager`.
-
-:::
-
 ### `schedule` field
 
-The `schedule` field is used to specify the time when an experiment is to be run. In other words, the alias for a schedule is a cron job:
+The `schedule` field specifies when Chaos Mesh creates an experiment. A five-field cron expression uses the following field order.
 
 ```txt
 # ┌───────────── minute (0 - 59)
 # │ ┌───────────── hour (0 - 23)
 # │ │ ┌───────────── day of the month (1 - 31)
 # │ │ │ ┌───────────── month (1 - 12)
-# │ │ │ │ ┌───────────── day of the week (0 - 6) (Sunday to Saturday; 7 is also Sunday on some systems)
+# │ │ │ │ ┌───────────── day of the week (0 - 6, Sunday to Saturday)
 # │ │ │ │ │
 # │ │ │ │ │
 # │ │ │ │ │
-# * * * * * <command to execute>
+# * * * * *
 ```
 
-> This diagram is taken from https://en.wikipedia.org/wiki/Cron.
+> This diagram is adapted from [Cron on Wikipedia](https://en.wikipedia.org/wiki/Cron).
 
-Chaos Mesh uses [robfig/cron/v3](https://pkg.go.dev/github.com/robfig/cron/v3) to transform the `schedule` field into a cron expression internally.
+The `Schedule` API also accepts an optional seconds field (`0` to `59`) before the minute field. When you omit the seconds field, it defaults to `0`. The day-of-week field is required. Use `*` to match any day of the week.
+
+`chaos-controller-manager` evaluates cron expressions in its own time zone by default. The Helm chart's `timezone` value defaults to `UTC`. To set the time zone for one Chaos Mesh `Schedule`, add `CRON_TZ=<IANA-time-zone>` at the start of the cron expression in `spec.schedule`. See [robfig/cron time zone support](https://pkg.go.dev/github.com/robfig/cron/v3#hdr-Time_zones).
+
+The following expression triggers an experiment every hour from 09:00 through 16:00, Monday through Friday, in Los Angeles local time.
+
+```yaml
+spec:
+  schedule: 'CRON_TZ=America/Los_Angeles 0 9-16 * * MON-FRI'
+```
 
 :::tip
 

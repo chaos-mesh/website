@@ -69,26 +69,31 @@ spec:
 
 在后文中会对 `Schedule` 中的字段进行描述，大多与 Kubernetes `CronJob` 的字段等价。可以参考 Kubernetes CronJob 的[文档](https://kubernetes.io/zh/docs/concepts/workloads/controllers/cron-jobs/)。
 
-:::info
-
-`Schedule` 中 `schedule` 字段对应的时区以 `chaos-controller-manager` 的时区为准。
-
-:::
-
 ### `schedule` 字段
 
-`schedule` 字段用于指定实验发生的时间。
+`schedule` 字段指定 Chaos Mesh 创建实验的时间。五字段 Cron 表达式的字段顺序如下。
 
-```
+```txt
 # ┌───────────── 分钟 (0 - 59)
 # │ ┌───────────── 小时 (0 - 23)
 # │ │ ┌───────────── 月的某天 (1 - 31)
 # │ │ │ ┌───────────── 月份 (1 - 12)
-# │ │ │ │ ┌───────────── 周的某天 (0 - 6) （周日到周一；在某些系统上，7 也是星期日）
+# │ │ │ │ ┌───────────── 星期（0 到 6，周日到周六）
 # │ │ │ │ │
 # │ │ │ │ │
 # │ │ │ │ │
 # * * * * *
+```
+
+`Schedule` API 也支持在分钟字段前加上可选的秒字段（`0` 到 `59`）。省略秒字段时，默认值为 `0`。星期字段必填。如果不限星期，填 `*`。
+
+`chaos-controller-manager` 默认按自身时区计算 Cron 表达式的触发时间。Helm Chart 的 `timezone` 默认值为 `UTC`。要为单个 Chaos Mesh `Schedule` 指定时区，在 `spec.schedule` 的 Cron 表达式开头加上 `CRON_TZ=<IANA 时区名>`。详见 [robfig/cron 的时区说明](https://pkg.go.dev/github.com/robfig/cron/v3#hdr-Time_zones)。
+
+下面的表达式按洛杉矶当地时间，在周一到周五的 09:00 至 16:00 每小时整点触发一次实验。
+
+```yaml
+spec:
+  schedule: 'CRON_TZ=America/Los_Angeles 0 9-16 * * MON-FRI'
 ```
 
 | 输入                   | 描述                         | 等效替代      |
