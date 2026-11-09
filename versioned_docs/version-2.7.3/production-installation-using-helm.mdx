@@ -126,6 +126,26 @@ To ensure high availability, Chaos Mesh turns on `leader-election` feature by de
 
 :::
 
+### Limit experiments to one namespace
+
+By default, `clusterScoped` is `true`, and Chaos Mesh watches for experiments across the cluster. Set `clusterScoped` to `false` to watch for experiments and select their targets in a single namespace. Set that namespace with `controllerManager.targetNamespace`, which defaults to `chaos-mesh` and applies only when `clusterScoped` is `false`.
+
+The Helm `--namespace` flag selects where to install Chaos Mesh. The experiment namespace can be different. Even in namespace-scoped mode, installing the chart requires permission to create cluster-scoped resources such as CRDs and ClusterRoles.
+
+For example, to install Chaos Mesh in `chaos-mesh` and run experiments in `app-ns`, first create the `app-ns` namespace. Save the following values as `namespace-scope.yaml`.
+
+```yaml
+clusterScoped: false
+controllerManager:
+  targetNamespace: app-ns
+dnsServer:
+  targetNamespace: app-ns
+```
+
+When the chart deploys Chaos DNS Server, set `dnsServer.targetNamespace` to the same namespace so the chart grants it permissions there.
+
+Add `-f namespace-scope.yaml` to the [installation command for your container runtime](#step-4-install-chaos-mesh-in-different-environments). Create your experiment resources in `app-ns` and select targets in that namespace.
+
 ## Verify the installation
 
 <VerifyInstallation />
