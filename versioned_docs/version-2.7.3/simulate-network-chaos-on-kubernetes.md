@@ -19,6 +19,14 @@ Before creating NetworkChaos experiments, ensure the following:
 1. During the network injection process, make sure that the connection between Controller Manager and Chaos Daemon works, otherwise the injected network faults cannot be recovered.
 2. If you want to simulate Net Emulation fault, make sure the NET_SCH_NETEM module is installed in the Linux kernel. If you are using CentOS, you can install the module through the kernel-modules-extra package. Most other Linux distributions have installed the module already by default.
 
+:::info
+
+When two NetworkChaos experiments use `target` or `externalTargets` filters that match the same packets on a Pod's network interface, one fault can take precedence.
+
+To combine delay and packet loss, use one NetworkChaos experiment with `action: netem` and configure both `delay` and `loss` in the same `spec`. See the [Network Emulation example](#network-emulation-example).
+
+:::
+
 ## Create experiments using Chaos Dashboard
 
 1. Open Chaos Dashboard, and click **NEW EXPERIMENT** on the page to create a new experiment:
@@ -157,11 +165,12 @@ Before creating NetworkChaos experiments, ensure the following:
        latency: '10ms'
        correlation: '100'
        jitter: '0ms'
-     rate:
-       rate: '10mbps'
+     loss:
+       loss: '10'
+       correlation: '0'
    ```
 
-   This configuration causes a latency of 10 milliseconds and a bandwidth limit of 10mbps in the network connections of the target Pods. In addition to latency and rate, the `netem` action also supports packet loss, reorder and corruption.
+   This configuration applies both a latency of 10 milliseconds and a packet loss rate of 10% to the network connections of the target Pods. The `netem` action also supports packet reordering, duplication, and corruption.
 
 2. After the configuration file is prepared, use `kubectl` to create an experiment:
 
