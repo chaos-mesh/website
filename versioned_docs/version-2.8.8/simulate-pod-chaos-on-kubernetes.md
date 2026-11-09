@@ -67,6 +67,8 @@ Before create experiments using Chaos Dashboard, ensure the following:
 
    Based on this example, Chaos Mesh injects `pod-failure` into the specified Pod and makes the Pod unavailable for 30 seconds.
 
+   To keep the fault active until you pause or delete the experiment, omit `spec.duration` and create the `PodChaos` directly.
+
 2. After the configuration file is prepared, use `kubectl` to create an experiment:
 
    ```bash
@@ -140,7 +142,7 @@ The following table describes the fields in the YAML configuration file.
 | selector | struct | Specifies the target Pod. For details, refer to [Define the experiment scope](./define-chaos-experiment-scope.md). | None | Yes |  |
 | containerNames | []string | When you configure `action` to `container-kill`, this configuration is mandatory to specify the target container name for injecting faults. | None | No | ['prometheus'] |
 | gracePeriod | int64 | When you configure `action` to `pod-kill`, you can specify the grace period before the Pod is deleted. | 0 | No | 0 |
-| duration | string | Specifies the duration of the experiment. | None | Yes | 30s |
+| duration | string | Sets the time limit for a `pod-failure` experiment. | None | No | 30s |
 
 ## Notes on the "Pod Failure" Chaos Experiment
 
