@@ -123,6 +123,26 @@ kubectl create ns chaos-mesh
 
 :::
 
+### 将实验限制在单个命名空间
+
+`clusterScoped` 默认为 `true`，Chaos Mesh 会监听集群中各个命名空间的实验资源。将 `clusterScoped` 设为 `false` 后，Chaos Mesh 只在一个命名空间中监听实验资源和选择实验目标。通过 `controllerManager.targetNamespace` 指定该命名空间。此参数默认为 `chaos-mesh`，仅在 `clusterScoped` 为 `false` 时生效。
+
+Helm 的 `--namespace` 参数指定 Chaos Mesh 的安装命名空间。实验命名空间可以与安装命名空间不同。即使启用了命名空间模式，安装 chart 仍需要有权限创建 CRD 和 ClusterRole 等集群级资源。
+
+例如，要将 Chaos Mesh 安装在 `chaos-mesh` 并在 `app-ns` 中运行实验，先创建 `app-ns` 命名空间。将以下配置保存为 `namespace-scope.yaml`。
+
+```yaml
+clusterScoped: false
+controllerManager:
+  targetNamespace: app-ns
+dnsServer:
+  targetNamespace: app-ns
+```
+
+如果 chart 部署了 Chaos DNS Server，请将 `dnsServer.targetNamespace` 设为同一个命名空间，以便 chart 为它授予该命名空间中的权限。
+
+在[对应容器运行时的安装命令](#第-4-步在不同环境下安装)中添加 `-f namespace-scope.yaml`。在 `app-ns` 中创建实验资源，并选择该命名空间中的目标。
+
 ## 验证安装
 
 <VerifyInstallation />
