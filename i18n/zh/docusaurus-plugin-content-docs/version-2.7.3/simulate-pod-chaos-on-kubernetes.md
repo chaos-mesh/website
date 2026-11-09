@@ -73,6 +73,8 @@ Chaos Mesh 可以向任一 Pod 注入 PodChaos，无论其 Pod 是否绑定至 D
 
    依据此配置示例，Chaos Mesh 将向指定的 Pod 中注入 `pod-failure` 故障，将使该 Pod 在 30 秒内处于不可用的状态。
 
+   如果希望故障持续到暂停或删除实验，请省略 `spec.duration`，直接创建 `PodChaos` 资源。
+
 2. 使用 `kubectl` 创建实验，命令如下：
 
    ```bash
@@ -146,7 +148,7 @@ Chaos Mesh 可以向任一 Pod 注入 PodChaos，无论其 Pod 是否绑定至 D
 | selector | struct | 指定注入故障的目标 Pod，详情请参考[定义实验范围](./define-chaos-experiment-scope.md) | 无 | 是 |  |
 | containerNames | []string | 当你将 `action` 配置为 `container-kill` 时，此配置为必填，用于指定注入故障的目标 container 名 | 无 | 否 | ['prometheus'] |
 | gracePeriod | int64 | 当你将 `action` 配置为 `pod-kill` 时，可用于指定删除 Pod 之前的宽限期 | 0 | 否 | 0 |
-| duration | string | 指定实验的持续时间 | 无 | 是 | 30s |
+| duration | string | 设置 `pod-failure` 实验的持续时间 | 无 | 否 | 30s |
 
 ## “Pod Failure” 混沌实验的一些注意事项
 

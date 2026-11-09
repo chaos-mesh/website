@@ -52,6 +52,8 @@ Chaos Mesh 采用创建时间是为了保证行为具有确定性。注入故障
 
    示例 YAML 文件中定义了一个持续 `12s` 的网络延迟故障，实验目标是 `default namespace` 下带有 `"app": "web-show"` 标签的应用。关于网络故障的更多配置信息，请参考[模拟网络故障](simulate-network-chaos-on-kubernetes.md)。
 
+   如果希望网络延迟持续到暂停或删除实验，请省略此 YAML 中的 `spec.duration`，直接创建 `NetworkChaos` 资源。
+
 2. 使用 `kubectl apply -f` 命令创建并运行此混沌实验：
 
    ```yaml
@@ -100,12 +102,6 @@ Chaos Mesh 提供 `Schedule` 对象，帮助创建定时混沌实验和循环混
    ```
 
    示例 YAML 文件中定义了一个可以在每个小时的第 5 分钟自动运行的网络延迟故障。更详细的调度规则定义，请参考[定义调度规则](define-scheduling-rules.md)。
-
-   :::warning
-
-   如果不设置 `duration` 参数，表示故障行为会一直持续下去，直到暂停或者删除混沌实验。
-
-   :::
 
 2. 使用 `kubectl apply -f` 命令创建并运行混沌实验。
 

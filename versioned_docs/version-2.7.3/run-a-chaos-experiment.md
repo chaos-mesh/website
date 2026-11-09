@@ -50,6 +50,8 @@ To create a one-time Chaos experiment, you can use one of the following methods:
 
    The above YAML example defines a network latency fault lasting for `12 seconds`, targeting applications with the `"app": "web-show"` tag under the `default` namespace. For more configuration information about the NetworkChaos experiment, refer to [Simulate network chaos](simulate-network-chaos-on-kubernetes.md).
 
+   To keep the network delay in effect until you pause or delete the experiment, omit `spec.duration` from this YAML. Apply the `NetworkChaos` resource directly.
+
 2. Execute the following command to create and run this Chaos experiment.
 
    ```sh
@@ -98,12 +100,6 @@ To create this type of Chaos experiments, take the following steps:
    ```
 
    The above YAML example defines a network latency fault that can be automatically triggered at the fifth minute of each hour.For detailed introduction of scheduling rules, refer to [Define scheduling rules](define-scheduling-rules.md).
-
-   :::info
-
-   If you do not set the `duration` parameter, the fault behavior keeps taking effect until you pause or delete the Chaos experiment.
-
-   :::
 
 2. Execute the following command to create and run this Chaos experiment.
 
