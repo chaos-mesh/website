@@ -70,6 +70,26 @@ kubectl label namespace chaos-mesh pod-security.kubernetes.io/enforce=privileged
 1. 将 Docker 升级到更新的版本。
 2. 使用 `--set chaosDaemon.env.DOCKER_API_VERSION=1.39` 进行 Helm 安装/升级。
 
+### 为什么 controller manager 报 `too many open files`？ {/* #controller-manager-too-many-open-files */}
+
+如果 `chaos-controller-manager` Pod 处于 `CrashLoopBackOff` 状态，先找到该 Pod，再查看上一次运行的容器日志：
+
+```bash
+kubectl get pods -n chaos-mesh -o wide
+kubectl logs -n chaos-mesh POD_NAME -c chaos-mesh --previous
+```
+
+将 `POD_NAME` 替换为出问题的 Pod 名称。如果 Chaos Mesh 安装在其他命名空间，请在两条命令中使用对应的命名空间。
+
+如果日志中的 `unable to start manager` 错误包含 `too many open files`，请检查以下 Linux 限制：
+
+- **单个进程的文件描述符上限。** 通过 SSH 登录 Pod 所在节点后，运行 `ulimit -n` 只会显示当前 shell 的上限。要查看 controller manager 的实际上限，请在进程仍在运行时找到它的 PID，然后查看它自己的 `/proc/PID/limits`。比较 `Max open files` 一行的软上限与 `/proc/PID/fd` 中的文件描述符数量。如果 controller manager 达到了上限，请在启动容器的运行时配置中调整该限制，然后重建受影响的 Pod。
+- **kind 环境中的 inotify 实例上限。** 达到单个用户的实例上限时，创建 inotify 实例也会报同样的错误。请在运行 kind 节点容器的 Linux 主机上执行 `sysctl fs.inotify.max_user_instances`。如果容器引擎运行在 Linux 虚拟机中，请在虚拟机内检查。调整 inotify 限制的方法见 [kind 排障指南](https://kind.sigs.k8s.io/docs/user/known-issues/#pod-errors-due-to-too-many-open-files)。
+
+调整后，确认 controller manager Pod 已就绪，并检查当前日志中是否还出现该启动错误。
+
+原始报告和解决方法见 [Chaos Mesh issue #4429](https://github.com/chaos-mesh/chaos-mesh/issues/4429)。
+
 ## 实验
 
 ### 我已经成功部署 Chaos Mesh 并创建了 PodChaos 实验，但创建 NetworkChaos/TimeChaos 实验仍然失败

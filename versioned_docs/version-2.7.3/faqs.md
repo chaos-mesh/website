@@ -70,6 +70,26 @@ This indicates that the maximum API version that the Docker daemon can accept is
 1. Upgrade your Docker to a newer version.
 2. Helm install/upgrade with `--set chaosDaemon.env.DOCKER_API_VERSION=1.39`.
 
+### Why does the controller manager report `too many open files`? {/* #controller-manager-too-many-open-files */}
+
+If a `chaos-controller-manager` Pod is in `CrashLoopBackOff`, find the Pod and check the logs from the previous container instance:
+
+```bash
+kubectl get pods -n chaos-mesh -o wide
+kubectl logs -n chaos-mesh POD_NAME -c chaos-mesh --previous
+```
+
+Replace `POD_NAME` with the name of the affected Pod. If Chaos Mesh is installed in a different namespace, use that namespace in both commands.
+
+If the logs show `unable to start manager` with `too many open files`, check these Linux limits:
+
+- **Open file descriptors per process.** If you SSH into the node running the Pod and run `ulimit -n`, it shows only the limit for your current shell. To check the controller manager's actual limit, find its PID while it is running. Read the soft limit on the `Max open files` line in the controller manager's own `/proc/PID/limits` file. Compare that limit with the number of open file descriptors in `/proc/PID/fd`. If the controller manager reaches its limit, adjust the limit in the runtime configuration that launches the container and recreate the affected Pod.
+- **inotify instances on kind.** Creating an inotify instance can return the same error when the per-user instance limit is reached. Check `sysctl fs.inotify.max_user_instances` on the Linux host that runs the kind node containers. If the container engine runs inside a Linux VM, check inside that VM. To adjust the inotify limits, follow the [kind troubleshooting guide](https://kind.sigs.k8s.io/docs/user/known-issues/#pod-errors-due-to-too-many-open-files).
+
+After applying the change, check that the controller manager Pods become ready and that the current logs no longer show the startup error.
+
+See [Chaos Mesh issue #4429](https://github.com/chaos-mesh/chaos-mesh/issues/4429) for the original report and workarounds.
+
 ## Experiments
 
 ### I have deployed Chaos Mesh and created PodChaos experiments successfully, but I still failed to create NetworkChaos/TimeChaos experiments
