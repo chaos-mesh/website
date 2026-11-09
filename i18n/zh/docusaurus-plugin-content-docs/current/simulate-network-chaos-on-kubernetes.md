@@ -17,6 +17,14 @@ NetworkChaos 用于模拟集群中网络故障的场景，目前支持以下几�
 1. 请在进行网络注入的过程中保证 Controller Manager 与 Chaos Daemon 之间的连接通畅，否则将无法恢复。
 2. 如果使用 Net Emulation 功能，请确保 Linux 内核拥有 NET_SCH_NETEM 模块。对于 CentOS 可以通过 kernel-modules-extra 包安装，大部分其他发行版已默认安装相应模块。
 
+:::info
+
+如果两个 NetworkChaos 实验通过 `target` 或 `externalTargets` 匹配到同一 Pod 网络接口上的同一批数据包，可能只有其中一个故障生效。
+
+如需同时注入延迟和丢包，请在一个 NetworkChaos 实验中设置 `action: netem`，并在同一个 `spec` 中配置 `delay` 和 `loss`，参考 [Net Emulation 示例](#net-emulation-示例)。
+
+:::
+
 ## 使用 Dashboard 方式创建实验
 
 1. 单击实验页面中的**新的实验**按钮创建实验：
@@ -39,15 +47,15 @@ NetworkChaos 用于模拟集群中网络故障的场景，目前支持以下几�
 
 ### Net Emulation 示例
 
-1. 将实验配置写入到文件中 `network-delay.yaml`，内容示例如下：
+1. 将实验配置写入到文件中 `netem.yaml`，内容示例如下：
 
    ```yaml
    apiVersion: chaos-mesh.org/v1alpha1
    kind: NetworkChaos
    metadata:
-     name: delay
+     name: network-emulation
    spec:
-     action: delay
+     action: netem
      mode: one
      selector:
        namespaces:
@@ -58,14 +66,17 @@ NetworkChaos 用于模拟集群中网络故障的场景，目前支持以下几�
        latency: '10ms'
        correlation: '100'
        jitter: '0ms'
+     loss:
+       loss: '10'
+       correlation: '0'
    ```
 
-   该配置将令选中 Pod 内的网络连接产生 10 毫秒的延迟。除了注入延迟以外，Chaos Mesh 还支持注入丢包、乱序等功能，详见[字段说明](#字段说明)
+   该配置将同时为选中 Pod 内的网络连接注入 10 毫秒的延迟和 10% 的丢包率。`netem` 还支持包乱序、包重复和包损坏，详见[字段说明](#字段说明)。
 
 2. 使用 `kubectl` 创建实验，命令如下：
 
    ```bash
-   kubectl apply -f ./network-delay.yaml
+   kubectl apply -f ./netem.yaml
    ```
 
 ### Partition 示例
