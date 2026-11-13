@@ -1,6 +1,3 @@
-import BrowserOnly from '@docusaurus/BrowserOnly'
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
-import { usePluginData } from '@docusaurus/useGlobalData'
 import CodeBlock from '@theme/CodeBlock'
 import semver from 'semver'
 
@@ -18,19 +15,10 @@ const calcHelmChartVersion = (version) => {
 }
 
 const PickHelmVersion = ({ children, className = 'language-bash' }) => {
-  const { siteConfig } = useDocusaurusContext()
-  const { versions } = usePluginData('docusaurus-plugin-content-docs')
+  const version = usePickVersion()
+  const realVersion = version === 'latest' ? '' : `--version ${calcHelmChartVersion(version)}`
 
-  return (
-    <BrowserOnly>
-      {() => {
-        const version = usePickVersion(siteConfig, versions)
-        const realVersion = version === 'latest' ? '' : `--version ${calcHelmChartVersion(version)}`
-
-        return <CodeBlock className={className}>{children.replace('--version latest', realVersion).trim()}</CodeBlock>
-      }}
-    </BrowserOnly>
-  )
+  return <CodeBlock className={className}>{children.replace('--version latest', realVersion).trim()}</CodeBlock>
 }
 
 export default PickHelmVersion

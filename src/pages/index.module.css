@@ -15,6 +15,18 @@
   color: transparent;
 }
 
+.homeHeading {
+  font-size: clamp(2rem, 1rem + 7vw, 3rem);
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 1280px) {
+  .homeHeading {
+    font-size: 3.75rem;
+  }
+}
+
 :global(html[lang='zh']) .heroSubtitle {
   font-size: 1.875rem;
   line-height: 2.25rem;
