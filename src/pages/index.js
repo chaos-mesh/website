@@ -85,15 +85,16 @@ function Home() {
         <title>Chaos Mesh: {homeTagline}</title>
       </Head>
       <main ref={homeRef}>
-        <div className="hero tw:relative tw:h-192 tw:pt-0 tw:overflow-hidden">
+        <div className="hero tw:relative tw:min-h-192 tw:pt-0 tw:overflow-hidden">
           <BrowserOnly>{() => <Mesh />}</BrowserOnly>
           <div className="tw:container tw:mx-auto tw:z-10">
             <div className="tw:flex tw:flex-col tw:lg:flex-row tw:lg:justify-between tw:lg:items-center">
               <div className="tw:flex-[.8] tw:2xl:flex-[.6] tw:p-6 tw:lg:p-3">
                 <h1
                   className={clsx(
-                    'tw:inline-block tw:text-5xl tw:xl:text-6xl tw:text-left tw:rounded-2xl tw:backdrop-blur-sm tw:lg:backdrop-blur',
+                    'tw:inline-block tw:text-left tw:rounded-2xl tw:backdrop-blur-sm tw:lg:backdrop-blur',
                     styles.heroTitle,
+                    styles.homeHeading,
                   )}
                 >
                   <Translate
@@ -244,7 +245,7 @@ helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-mesh --create-namespace`}
                 <Translate id="home.exploremore">Explore More</Translate>
               </Link>
             </div>
-            <div className="tw:grid tw:gap-8 tw:lg:grid-cols-3 tw:my-12">
+            <div className="tw:grid tw:grid-cols-1 tw:gap-8 tw:lg:grid-cols-3 tw:my-12">
               <CodeGrid />
             </div>
           </div>
