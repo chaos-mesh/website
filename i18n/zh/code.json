@@ -585,7 +585,7 @@
     "message": "Chaos Mesh 的所有版本"
   },
   "versions.description": {
-    "message": "Chaos Mesh 的每个版本都有固定的支持周期。随着我们不断地开发和迭代，有些版本会逐渐退出支持。我们将在官方文档中保留最近三个稳定版本和开发版本，其余版本将被归档。"
+    "message": "官方文档保留开发版和最近三个稳定版。更早的版本已归档。"
   },
   "versions.supportedReleases": {
     "message": "支持的版本"
@@ -612,7 +612,7 @@
     "message": "稳定版本"
   },
   "versions.stable.description": {
-    "message": "稳定版本是 Chaos Mesh 最近三个版本。它们稳定可靠，推荐在生产环境中使用。"
+    "message": "生产环境建议使用仍受支持的版本系列中的最新补丁版本。"
   },
   "versions.unsupported": {
     "message": "（已不再支持）"

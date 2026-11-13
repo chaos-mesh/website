@@ -24,9 +24,8 @@ export default function Versions() {
           <h1>{allVersionsText}</h1>
           <p>
             <Translate id="versions.description">
-              Each version of Chaos Mesh will have its fixed support cycle. As we continue to develop and iterate, some
-              versions will be phased out over time. We will keep the last three stable and development versions in the
-              official documentation, and the rest will be archived.
+              The official documentation covers the development version and the three most recent stable releases. Older
+              releases are archived.
             </Translate>
           </p>
           <p>
@@ -83,8 +82,7 @@ export default function Versions() {
           </h2>
           <p>
             <Translate id="versions.stable.description">
-              The stable versions are the latest three versions of Chaos Mesh. They are stable and recommended to use in
-              production.
+              For production, use the latest patch of a supported release series.
             </Translate>
           </p>
 
@@ -95,9 +93,7 @@ export default function Versions() {
                   <div className="card__header">
                     <h3>
                       v{version.version}
-                      {i === stableVersions.length - 1 && (
-                        <Translate id="versions.unsupported"> (Unsupported)</Translate>
-                      )}
+                      {!version.supported && <Translate id="versions.unsupported"> (Unsupported)</Translate>}
                     </h3>
                   </div>
                   <div className="card__body">
