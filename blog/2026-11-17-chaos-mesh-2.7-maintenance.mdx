@@ -1,0 +1,26 @@
+---
+slug: /chaos-mesh-2-7-maintenance
+title: 'Chaos Mesh 2.7.4 and the future of the 2.7 series'
+authors: g1eny0ung
+tags: [Chaos Mesh, Announcement]
+---
+
+Chaos Mesh 2.7 has entered the final phase of its lifecycle. We have released [2.7.4](https://github.com/chaos-mesh/chaos-mesh/releases/tag/v2.7.4) with security updates and bug fixes for teams still running 2.7. No further 2.7 updates are planned unless we find a security issue. We recommend upgrading to the [latest stable version](/versions/) when your cluster is ready.
+
+{/* truncate */}
+
+## What 2.7.4 fixes
+
+Most of our maintenance work now goes into the 2.8 series. For 2.7.4, we brought back fixes that matter to teams still running 2.7.
+
+- **Sensitive data in logs.** HTTPChaos no longer logs proxy configuration that can contain TLS data. PhysicalMachineChaos no longer logs request bodies that can contain credentials. The release also updates Dashboard dependencies and container packages with security fixes.
+- **Experiments and Workflows.** TimeChaos can inject clock offsets on ARM64 again. IOChaos can create the temporary files it needs on newer Linux kernels and reports injection errors when its configuration is rejected. Deleting a Workflow no longer causes the controller to recreate its child resources.
+- **Dashboard and PhysicalMachineChaos.** The Dashboard no longer crashes when you open a Workflow schedule. It also preserves PhysicalMachineChaos UIDs when you submit imported YAML, and the controller rejects an injection request if the UID is missing.
+
+See the [2.7.4 release notes](https://github.com/chaos-mesh/chaos-mesh/releases/tag/v2.7.4) for the full list of changes.
+
+## If you are running 2.7
+
+If you need to stay on 2.7 for now, update to 2.7.4 using the [2.7.4 Helm upgrade guide](/docs/2.7.4/production-installation-using-helm/#upgrade-chaos-mesh). The chart now pulls images from `cr.chaos-mesh.dev` by default. If your cluster pulls directly from GitHub Container Registry, set `images.registry=ghcr.io`.
+
+If you can move to the current stable series, check your Kubernetes version against the [support matrix](/supported-releases/) and plan your upgrade to the [latest stable release](/versions/).
