@@ -6,7 +6,7 @@ Chaosctl 是一个用于辅助调试 Chaos Mesh 的工具。借助 Chaosctl，�
 
 :::info
 
-在 Chaos Mesh 2.7.3 版本中，你需要手动启用 ctrlserver 才能使用 Chaosctl，默认情况下它是禁用的。
+在 Chaos Mesh 2.7.4 版本中，你需要手动启用 ctrlserver 才能使用 Chaosctl，默认情况下它是禁用的。
 
 如果你使用 Helm 部署 Chaos Mesh，可以通过将 `enableCtrlServer` 参数设置为 `true` 来启用 ctrlserver。
 

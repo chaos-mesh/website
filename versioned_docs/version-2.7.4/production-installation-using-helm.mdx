@@ -80,6 +80,8 @@ kubectl create ns chaos-mesh
 
 ### Step 4: Install Chaos Mesh in different environments
 
+The Helm chart pulls images from `cr.chaos-mesh.dev` by default. Add `--set images.registry=ghcr.io` to pull directly from GitHub Container Registry.
+
 :::info
 
 When installing Chaos Mesh on Kubernetes v1.15 (or an earlier version), you need to manually install CRD. For more information, see [FAQ](./faqs.md#failed-to-install-chaos-mesh-with-the-message-no-matches-for-kind-customresourcedefinition-in-version-apiextensionsk8siov1).
