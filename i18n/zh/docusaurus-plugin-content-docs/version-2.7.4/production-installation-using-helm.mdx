@@ -80,6 +80,8 @@ kubectl create ns chaos-mesh
 
 ### 第 4 步：在不同环境下安装
 
+Helm Chart 默认从 `cr.chaos-mesh.dev` 拉取镜像。如需直接从 GitHub Container Registry 拉取，请添加 `--set images.registry=ghcr.io`。
+
 :::info
 
 如果你正在 Kubernetes v1.15（或更低版本）中安装 Chaos Mesh，请手动安装 CRD。 具体细节，请参考 [FAQ](./faqs.md#安装-chaos-mesh-失败提示信息为no-matches-for-kind-customresourcedefinition-in-version-apiextensionsk8siov1)。

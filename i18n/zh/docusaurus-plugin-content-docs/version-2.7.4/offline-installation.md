@@ -32,7 +32,7 @@ import QuickRun from './common/\_quick-run.md'
 
 <PickVersion>
 {`export CHAOS_MESH_VERSION=latest
-export CHAOS_DNS_VERSION=v0.2.6`}
+export CHAOS_DNS_VERSION=v0.2.8`}
 </PickVersion>
 
 DNS 镜像使用独立版本。`CHAOS_DNS_VERSION` 与本版本 Helm Chart 的 `dnsServer.image.tag` 一致。
@@ -42,19 +42,19 @@ DNS 镜像使用独立版本。`CHAOS_DNS_VERSION` 与本版本 Helm Chart 的 `
 在有外网连接的机器上，通过已经设置的版本号拉取镜像：
 
 ```bash
-docker pull ghcr.io/chaos-mesh/chaos-mesh:${CHAOS_MESH_VERSION}
-docker pull ghcr.io/chaos-mesh/chaos-daemon:${CHAOS_MESH_VERSION}
-docker pull ghcr.io/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION}
-docker pull ghcr.io/chaos-mesh/chaos-coredns:${CHAOS_DNS_VERSION}
+docker pull cr.chaos-mesh.dev/chaos-mesh/chaos-mesh:${CHAOS_MESH_VERSION}
+docker pull cr.chaos-mesh.dev/chaos-mesh/chaos-daemon:${CHAOS_MESH_VERSION}
+docker pull cr.chaos-mesh.dev/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION}
+docker pull cr.chaos-mesh.dev/chaos-mesh/chaos-coredns:${CHAOS_DNS_VERSION}
 ```
 
 保存镜像为 tar 包：
 
 ```bash
-docker save ghcr.io/chaos-mesh/chaos-mesh:${CHAOS_MESH_VERSION} > image-chaos-mesh.tar
-docker save ghcr.io/chaos-mesh/chaos-daemon:${CHAOS_MESH_VERSION} > image-chaos-daemon.tar
-docker save ghcr.io/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION} > image-chaos-dashboard.tar
-docker save ghcr.io/chaos-mesh/chaos-coredns:${CHAOS_DNS_VERSION} > image-chaos-coredns.tar
+docker save cr.chaos-mesh.dev/chaos-mesh/chaos-mesh:${CHAOS_MESH_VERSION} > image-chaos-mesh.tar
+docker save cr.chaos-mesh.dev/chaos-mesh/chaos-daemon:${CHAOS_MESH_VERSION} > image-chaos-daemon.tar
+docker save cr.chaos-mesh.dev/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION} > image-chaos-dashboard.tar
+docker save cr.chaos-mesh.dev/chaos-mesh/chaos-coredns:${CHAOS_DNS_VERSION} > image-chaos-coredns.tar
 ```
 
 :::info
@@ -111,7 +111,7 @@ docker load < image-chaos-coredns.tar
 
 <PickVersion>
 {`export CHAOS_MESH_VERSION=latest
-export CHAOS_DNS_VERSION=v0.2.6
+export CHAOS_DNS_VERSION=v0.2.8
 export DOCKER_REGISTRY=localhost:5000`}
 </PickVersion>
 
@@ -122,10 +122,10 @@ export CHAOS_MESH_IMAGE=$DOCKER_REGISTRY/chaos-mesh/chaos-mesh:${CHAOS_MESH_VERS
 export CHAOS_DAEMON_IMAGE=$DOCKER_REGISTRY/chaos-mesh/chaos-daemon:${CHAOS_MESH_VERSION}
 export CHAOS_DASHBOARD_IMAGE=$DOCKER_REGISTRY/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION}
 export CHAOS_DNS_IMAGE=$DOCKER_REGISTRY/chaos-mesh/chaos-coredns:${CHAOS_DNS_VERSION}
-docker image tag ghcr.io/chaos-mesh/chaos-mesh:${CHAOS_MESH_VERSION} $CHAOS_MESH_IMAGE
-docker image tag ghcr.io/chaos-mesh/chaos-daemon:${CHAOS_MESH_VERSION} $CHAOS_DAEMON_IMAGE
-docker image tag ghcr.io/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION} $CHAOS_DASHBOARD_IMAGE
-docker image tag ghcr.io/chaos-mesh/chaos-coredns:${CHAOS_DNS_VERSION} $CHAOS_DNS_IMAGE
+docker image tag cr.chaos-mesh.dev/chaos-mesh/chaos-mesh:${CHAOS_MESH_VERSION} $CHAOS_MESH_IMAGE
+docker image tag cr.chaos-mesh.dev/chaos-mesh/chaos-daemon:${CHAOS_MESH_VERSION} $CHAOS_DAEMON_IMAGE
+docker image tag cr.chaos-mesh.dev/chaos-mesh/chaos-dashboard:${CHAOS_MESH_VERSION} $CHAOS_DASHBOARD_IMAGE
+docker image tag cr.chaos-mesh.dev/chaos-mesh/chaos-coredns:${CHAOS_DNS_VERSION} $CHAOS_DNS_IMAGE
 ```
 
 推送镜像至 Registry：

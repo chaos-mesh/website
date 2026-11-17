@@ -260,7 +260,7 @@ spec:
 
 :::info
 
-执行以下步骤需要使用 Chaos Mesh [v2.8.5](https://github.com/chaos-mesh/chaos-mesh/releases/tag/v2.8.5) 或更高版本。v2.8.5 包含 TLS Secret 查找和 TLS 数据传递修复，以及 tproxy v0.5.6 升级。v2.6.7、v2.7.3 和 v2.8.4 不包含这些修复。
+执行以下步骤需要使用 Chaos Mesh [v2.8.5](https://github.com/chaos-mesh/chaos-mesh/releases/tag/v2.8.5) 或更高版本。v2.8.5 包含 TLS Secret 查找和 TLS 数据传递修复，以及 tproxy v0.5.6 升级。v2.6.7、v2.7.4 和 v2.8.4 不包含这些修复。
 
 :::
 

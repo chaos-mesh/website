@@ -5,8 +5,8 @@ export const stableVersions = [
     supported: true,
   },
   {
-    version: '2.7.3',
-    date: '2025.08.21',
+    version: '2.7.4',
+    date: '2026.11.17',
     supported: true,
   },
   {

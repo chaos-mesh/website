@@ -6,7 +6,7 @@ Chaosctl is a tool to assist in debugging Chaos Mesh. With Chaosctl, you can sim
 
 :::info
 
-In Chaos Mesh version 2.7.3, you need to manually enable ctrlserver to use Chaosctl; it is disabled by default.
+In Chaos Mesh version 2.7.4, you need to manually enable ctrlserver to use Chaosctl; it is disabled by default.
 
 If you are using Helm to deploy Chaos Mesh, you can enable ctrlserver by setting the `enableCtrlServer` parameter to `true`.
 
