@@ -1,0 +1,26 @@
+---
+slug: /chaos-mesh-2-7-maintenance
+title: 'Chaos Mesh 2.7.4 发布及 2.7 系列维护计划'
+authors: g1eny0ung
+tags: [Chaos Mesh, Announcement]
+---
+
+Chaos Mesh 2.7 系列已进入维护的最后阶段。我们发布了 [2.7.4](https://github.com/chaos-mesh/chaos-mesh/releases/tag/v2.7.4)，为仍在使用 2.7 的团队提供安全更新和缺陷修复。除非发现安全问题，否则我们不再计划发布 2.7 系列更新。建议在集群具备升级条件后，升级到[最新稳定版](/versions/)。
+
+{/* truncate */}
+
+## 2.7.4 修复了什么
+
+目前，我们的维护工作主要集中在 2.8 系列。2.7.4 将仍在使用 2.7 的团队所需的修复移植回了这个版本。
+
+- **日志中的敏感数据。** HTTPChaos 不再记录可能包含 TLS 数据的代理配置。PhysicalMachineChaos 不再记录可能包含凭据的请求体。此版本还更新了 Dashboard 依赖和容器软件包，以修复其中的安全问题。
+- **实验和 Workflow。** TimeChaos 恢复了在 ARM64 上注入时钟偏移的能力。IOChaos 可以在较新的 Linux 内核上创建所需的临时文件，并在配置被拒绝时报告注入错误。删除 Workflow 后，控制器不再重新创建它的子资源。
+- **Dashboard 和 PhysicalMachineChaos。** 打开 Workflow 调度时，Dashboard 不再崩溃。提交导入的 YAML 时，Dashboard 会保留 PhysicalMachineChaos 的 UID。注入请求缺少 UID 时，控制器会拒绝该请求。
+
+完整的变更列表见 [2.7.4 发布说明](https://github.com/chaos-mesh/chaos-mesh/releases/tag/v2.7.4)。
+
+## 如果你仍在使用 2.7
+
+如果暂时需要继续使用 2.7，请参照 [2.7.4 Helm 升级指南](/docs/2.7.4/production-installation-using-helm/#升级-chaos-mesh)更新到 2.7.4。Helm Chart 现在默认从 `cr.chaos-mesh.dev` 拉取镜像。如果集群直接从 GitHub Container Registry 拉取镜像，请设置 `images.registry=ghcr.io`。
+
+如果可以迁移到当前稳定系列，请查看[版本支持矩阵](/supported-releases/)，确认你的 Kubernetes 版本是否受支持，并规划升级到[最新稳定版](/versions/)。
