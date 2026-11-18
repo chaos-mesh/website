@@ -80,7 +80,7 @@ Chaos Mesh 提供的 StressChaos 实验类型可用于模拟容器内压力的�
 | --- | --- | --- | --- | --- | --- |
 | workers | int | 指定施加内存压力的线程个数 |  | 否 | `1` |
 | size | string | 指定分配内存的大小或是占总内存的百分比，分配内存的总和为 `size` |  | 否 | `256MB`/`25%` |
-| time | string | 指定达到分配内存大小的时间，增长模型为线性模型 |  | 否 | `10min` |
+| options | 字符串数组 | 向 memStress 传递额外参数。用 `--time` 指定内存用量线性增长到 `size` 所需的时间 |  | 否 | `["--time", "10m"]` |
 | oomScoreAdj | int | 指定占用内存压力进程的 [oom_score_adj](https://man7.org/linux/man-pages/man5/proc.5.html) |  | 否 | `-1000` |
 
 :::info
