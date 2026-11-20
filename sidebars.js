@@ -16,6 +16,7 @@ module.exports = {
           collapsed: false,
           items: [
             'production-installation-using-helm',
+            'production-installation-using-kubestellar-console',
             'offline-installation',
             'uninstallation',
             {
