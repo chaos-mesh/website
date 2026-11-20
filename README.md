@@ -150,4 +150,6 @@ You usually only need to modify the content in the `docs/` directory, but if som
 
 ## License
 
-Distributed under [CC-BY-4.0](https://creativecommons.org/licenses/by/4.0/).
+The website source code is licensed under [Apache-2.0](LICENSE).
+
+The documentation and blog content are licensed under [CC-BY-4.0](LICENSE-docs).
